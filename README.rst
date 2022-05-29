@@ -1,59 +1,47 @@
-A Simple Python Project Skeleton
-================================
-This repo attempts to standardize the structure of the Python-based project's
-repositories using modern Python packaging and configuration techniques. 
-Using this `blog post`_ as inspiration, this repository serves as the base for
-all new Python projects and is mergeable in existing repositories as well.
-
-.. _blog post: https://blog.jaraco.com/a-project-skeleton-for-python-projects/
+python-inspector - inspect Python packages dependencies and metadata
+=====================================================================
 
 
-Usage
-=====
-
-A brand new project
--------------------
-.. code-block:: bash
-
-    git init my-new-repo
-    cd my-new-repo
-    git pull git@github.com:nexB/skeleton
-
-    # Create the new repo on GitHub, then update your remote
-    git remote set-url origin git@github.com:nexB/your-new-repo.git
-
-From here, you can make the appropriate changes to the files for your specific project.
-
-Update an existing project
----------------------------
-.. code-block:: bash
-
-    cd my-existing-project
-    git remote add skeleton git@github.com:nexB/skeleton
-    git fetch skeleton
-    git merge skeleton/main --allow-unrelated-histories
-
-This is also the workflow to use when updating the skeleton files in any given repository.
-
-More usage instructions can be found in ``docs/skeleton-usage.rst``.
+Copyright (c) nexB Inc. and others.
+SPDX-License-Identifier: Apache-2.0
+Homepage: https://github.com/nexB/python-inspector and https://www.aboutcode.org/
 
 
-Release Notes
-=============
+``python-inspector`` is a collection of utilities to:
 
-- 2022-03-04:
-    - Synchronize configure and configure.bat scripts for sanity
-    - Update CI operating system support with latest Azure OS images
-    - Streamline utility scripts in etc/scripts/ to create, fetch and manage third-party dependencies
-      There are now fewer scripts. See etc/scripts/README.rst for details
+- resolve PyPI packages dependencies
 
-- 2021-09-03:
-    - ``configure`` now requires pinned dependencies via the use of ``requirements.txt`` and ``requirements-dev.txt``
-    - ``configure`` can now accept multiple options at once
-    - Add utility scripts from scancode-toolkit/etc/release/ for use in generating project files
-    - Rename virtual environment directory from ``tmp`` to ``venv``
-    - Update README.rst with instructions for generating ``requirements.txt`` and ``requirements-dev.txt``,
-      as well as collecting dependencies as wheels and generating ABOUT files for them.
+- parse various manifests and packages files such as pip requirement files,
+  Pipfile, pyproject.toml, poetry.lock, setup.py and setup.cfg and legacy and
+  current metadata file formats for eggs, wheels and sdist.
 
-- 2021-05-11:
-    - Adopt new configure scripts from ScanCode TK that allows correct configuration of which Python version is used.
+- query PyPI JSON and simple APIs for package information
+
+It grew out of ScanCode toolkit to find and analyze PyPI archives and
+installed Python packages and their files.
+
+The goal of python-inspector is to be a comprehensive library
+that can handle every style of Python package layouts, manifests and lockfiles.
+
+
+Its companion libraries are:
+
+- ``pip-requirements-parser``, a mostly correct pip requirements parsing
+  library extracted from pip.
+
+- ``pkginfo2``, a safer fork of pkginfo to parse various installed and extracted
+  package layouts and their metadata files.
+
+- ``dparse2``, a safer fork of dparse to parse various package manifests
+
+- ``resolvelib``, the library used by pip for dependency resolution
+
+- ``packaging``, the official Python packaging utility library to process
+  versions, specifiers, markers  and other packaging data formats.
+
+- ``importlib_metadata``, the official Python utility library to process
+  installed site-packages and their metadata formats.
+
+- ``packageurl-python`` to use Package URL to reference Python packages
+ 
+ 
