@@ -12,7 +12,7 @@
 
 import pytest
 
-from utils_pypi_supported_tags import validate_platforms_for_pypi
+from python_inspector.utils_pypi_supported_tags import validate_platforms_for_pypi
 
 """
 Wheel platform checking tests
@@ -28,7 +28,7 @@ def validate_wheel_filename_for_pypi(filename):
     with supported platform tags. Return a list of unsupported platform tags or
     an empty list if all tags are supported.
     """
-    from utils_thirdparty import Wheel
+    from python_inspector.utils_pypi import Wheel
 
     wheel = Wheel.from_filename(filename)
     return validate_platforms_for_pypi(wheel.platforms)

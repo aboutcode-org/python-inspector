@@ -5,20 +5,20 @@
 # ScanCode is a trademark of nexB Inc.
 # SPDX-License-Identifier: Apache-2.0
 # See http://www.apache.org/licenses/LICENSE-2.0 for the license text.
-# See https://github.com/nexB/skeleton for support or download.
+# See https://github.com/nexB/python-inspector for support or download.
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
+import json
 import sys
 
 import click
 
+from python_inspector import dependencies
 from python_inspector import utils_pypi
 from python_inspector.cli_utils import FileOptionType
-from python_inspector import dependencies
 
 TRACE = False
-TRACE_DEEP = False
 
 
 @click.command()
@@ -31,7 +31,7 @@ TRACE_DEEP = False
     multiple=True,
     required=False,
     help="Path to pip requirements file listing thirdparty packages. "
-         "This option can be used multiple times.",
+    "This option can be used multiple times.",
 )
 @click.option(
     "--spec",
@@ -41,8 +41,7 @@ TRACE_DEEP = False
     metavar="SPECIFIER",
     multiple=True,
     required=False,
-    help="Package specifier such as django==1.2.3. "
-         "This option can be used multiple times.",
+    help="Package specifier such as django==1.2.3. " "This option can be used multiple times.",
 )
 @click.option(
     "-p",
@@ -51,7 +50,7 @@ TRACE_DEEP = False
     type=click.Choice(utils_pypi.PYTHON_VERSIONS),
     metavar="PYVER",
     # TODO: Make default the current Python version
-    default="38", #utils_pypi.PYTHON_VERSIONS,
+    default="38",  # utils_pypi.PYTHON_VERSIONS,
     show_default=True,
     help="Python version to use for dependency resolution.",
 )
@@ -73,24 +72,31 @@ TRACE_DEEP = False
     default=utils_pypi.PYPI_INDEX_URLS,
     show_default=True,
     multiple=True,
-    help="PyPI index URL(s) to use in order of preference. ",
-         "This option can be used multiple times.",
+    help="PyPI index URL(s) to use in order of preference. "
+    "This option can be used multiple times.",
 )
 @click.option(
     "--json",
     "json_output",
-    type=FileOptionType(mode='w', encoding='utf-8', lazy=True),
+    type=FileOptionType(mode="w", encoding="utf-8", lazy=True),
+    required=True,
     metavar="FILE",
-    help="Write output as pretty-printed JSON to FILE. ",
-         "Use the special " - " file name to print results on screen/stdout.",
+    help="Write output as pretty-printed JSON to FILE. "
+    "Use the special '-' file name to print results on screen/stdout.",
 )
 @click.option(
     "--use-cached-index",
     is_flag=True,
     help="Use cached on-disk PyPI package indexes and do not refetch if present.",
 )
+@click.option(
+    "--debug",
+    is_flag=True,
+    hidden=True,
+    help="Enable debug output.",
+)
 @click.help_option("-h", "--help")
-def fetch_thirdparty(
+def resolve_dependencies(
     requirement_files,
     specifiers,
     python_version,
@@ -98,6 +104,7 @@ def fetch_thirdparty(
     index_urls,
     json_output,
     use_cached_index,
+    debug=TRACE,
 ):
     """
     Resolve the dependencies of the packages listed in REQUIREMENT-FILE(s) file
@@ -108,33 +115,41 @@ def fetch_thirdparty(
 
     Download from the provided PyPI simple --index-url INDEX(s) URLs.
     Error and progress are printed to stderr.
+
+    For example::
+        dad --spec "flask" --requirement etc/scripts/requirements.txt --json -
     """
 
     # FIXME: Use stderr and click.secho
     print(f"Resolving dependencies...")
 
-    required_dependent_packages = set()
+    # TODO: deduplicate me
+    direct_dependencies = []
 
     for req_file in requirement_files:
         deps = dependencies.get_dependencies_from_requirements(requirements_file=req_file)
-        required_dependent_packages.update(deps)
+        direct_dependencies.extend(deps)
 
     for specifier in specifiers:
         dep = dependencies.get_dependency(specifier=specifier)
-        required_dependent_packages.add(dep)
+        direct_dependencies.append(dep)
 
-    if not required_dependent_packages:
+    if not direct_dependencies:
         print("Error: no requirements requested.")
         sys.exit(1)
 
-    if TRACE_DEEP:
-        print("required_dependent_packages:")
-        for dep in required_dependent_packages:
-            print(dep)
+    if debug:
+        print("direct_dependencies:")
+        for dep in direct_dependencies:
+            print(" ", dep)
 
     # create a resolution environments
     environment = utils_pypi.Environment.from_pyver_and_os(
-        python_version=python_version, operating_system=operating_system)
+        python_version=python_version, operating_system=operating_system
+    )
+
+    if debug:
+        print("environment:", environment)
 
     # Collect PyPI repos
     repos = []
@@ -151,7 +166,42 @@ def fetch_thirdparty(
             )
             repos.append(repo)
 
+    if debug:
+        print("repos:")
+        for repo in repos:
+            print(" ", repo)
+
     # resolve dependencies proper
+    resolved_dependencies = resolve(direct_dependencies)
+    write_output(results=resolved_dependencies, json_output=json_output)
+
+    if debug:
+        print("done!")
+
+
+def resolve(direct_dependencies):
+    """
+    Resolve dependencies given a ``direct_dependencies`` list of
+    DependentPackage and return SOMETHING TBD.
+    """
+    from packaging.requirements import Requirement
+
+    reqs = [Requirement(d.extracted_requirement) for d in direct_dependencies]
+
+    return dict(
+        headers=[dict(tool="dad")],
+        dependencies=[d.to_dict() for d in direct_dependencies],
+        requirements=[str(r) for r in reqs],
+    )
+
+
+def write_output(results, json_output):
+    """
+    Write headers, and resolved dependency results to ``output_file``
+    """
+    # TODO : create tree, add headers
+    json.dump(results, json_output, indent=2)
+
 
 if __name__ == "__main__":
-    fetch_thirdparty()
+    resolve_dependencies()

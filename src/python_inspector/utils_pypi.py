@@ -168,7 +168,7 @@ CACHE_THIRDPARTY_DIR = ".cache/thirdparty"
 ################################################################################
 
 PYPI_SIMPLE_URL = "https://pypi.org/simple"
-PYPI_INDEX_URLS = (PYPI_SIMPLE_URL, )
+PYPI_INDEX_URLS = (PYPI_SIMPLE_URL,)
 
 ################################################################################
 
@@ -321,7 +321,7 @@ class NameVer:
 
 @attr.attributes
 class Distribution(NameVer):
-    
+
     """
     A Distribution is either either a Wheel or Sdist and is identified by and
     created from its filename as well as its name and version. A Distribution is
@@ -584,7 +584,6 @@ class Distribution(NameVer):
         """
         return {k: v for k, v in attr.asdict(self).items() if v}
 
-
     def get_checksums(self, dest_dir=CACHE_THIRDPARTY_DIR):
         """
         Return a mapping of computed checksums for this dist filename is
@@ -749,7 +748,7 @@ def get_sdist_name_ver_ext(filename):
     """
     Return a (name, version, extension) if filename is a valid sdist name.
     Return False otherwise.
-    
+
     Note that some legacy binary builds have weird names. In particular some
     older sdists do not use PEP440 compliant versions and/or mix tags, os and
     arch names in tarball names and versions:
@@ -1340,12 +1339,14 @@ class PypiSimpleRepository:
         metadata=dict(
             help="Mapping of {name: {version: PypiPackage, version: PypiPackage, etc} available in this repo"
         ),
+        repr=False,
     )
 
     fetched_package_normalized_names = attr.ib(
         type=set,
         default=attr.Factory(set),
         metadata=dict(help="A set of already fetched package normalized names."),
+        repr=False,
     )
 
     use_cached_index = attr.ib(
@@ -1354,6 +1355,7 @@ class PypiSimpleRepository:
         metadata=dict(
             help="If True, use any existing on-disk cached PyPI index files. Otherwise, fetch and cache."
         ),
+        repr=False,
     )
 
     def _get_package_versions_map(self, name):
@@ -1422,9 +1424,8 @@ class PypiSimpleRepository:
 
 
 PYPI_PUBLIC_REPO = PypiSimpleRepository(index_url=PYPI_SIMPLE_URL)
-DEFAULT_PYPI_REPOS = (PYPI_PUBLIC_REPO, )
+DEFAULT_PYPI_REPOS = (PYPI_PUBLIC_REPO,)
 DEFAULT_PYPI_REPOS_BY_URL = {r.index_url: r for r in DEFAULT_PYPI_REPOS}
-
 
 
 ################################################################################
@@ -1576,4 +1577,3 @@ def fetch_and_save(
     with open(output, wmode) as fo:
         fo.write(content)
     return content
-

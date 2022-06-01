@@ -12,23 +12,21 @@ Originally vendored from scancode-toolkit packagedcode.utils
 """
 
 PLAIN_URLS = (
-    'https://',
-    'http://',
+    "https://",
+    "http://",
 )
 
 VCS_URLS = (
-    'git://',
-    'git+git://',
-    'git+https://',
-    'git+http://',
-
-    'hg://',
-    'hg+http://',
-    'hg+https://',
-
-    'svn://',
-    'svn+https://',
-    'svn+http://',
+    "git://",
+    "git+git://",
+    "git+https://",
+    "git+http://",
+    "hg://",
+    "hg+http://",
+    "hg+https://",
+    "svn://",
+    "svn+https://",
+    "svn+http://",
 )
 
 
@@ -77,34 +75,35 @@ def normalize_vcs_url(repo_url, vcs_tool=None):
     if repo_url.startswith(VCS_URLS + PLAIN_URLS):
         return repo_url
 
-    if repo_url.startswith('git@'):
-        tool, _, right = repo_url.partition('@')
-        if ':' in repo_url:
-            host, _, repo = right.partition(':')
+    if repo_url.startswith("git@"):
+        tool, _, right = repo_url.partition("@")
+        if ":" in repo_url:
+            host, _, repo = right.partition(":")
         else:
             # git@github.com/Filirom1/npm2aur.git
-            host, _, repo = right.partition('/')
+            host, _, repo = right.partition("/")
 
-        if any(r in host for r in ('bitbucket', 'gitlab', 'github')):
-            scheme = 'https'
+        if any(r in host for r in ("bitbucket", "gitlab", "github")):
+            scheme = "https"
         else:
-            scheme = 'git'
+            scheme = "git"
 
-        return '%(scheme)s://%(host)s/%(repo)s' % locals()
+        return "%(scheme)s://%(host)s/%(repo)s" % locals()
 
     # FIXME: where these URL schemes come from??
-    if repo_url.startswith(('bitbucket:', 'gitlab:', 'github:', 'gist:')):
+    if repo_url.startswith(("bitbucket:", "gitlab:", "github:", "gist:")):
         hoster_urls = {
-            'bitbucket': 'https://bitbucket.org/%(repo)s',
-            'github': 'https://github.com/%(repo)s',
-            'gitlab': 'https://gitlab.com/%(repo)s',
-            'gist': 'https://gist.github.com/%(repo)s', }
-        hoster, _, repo = repo_url.partition(':')
+            "bitbucket": "https://bitbucket.org/%(repo)s",
+            "github": "https://github.com/%(repo)s",
+            "gitlab": "https://gitlab.com/%(repo)s",
+            "gist": "https://gist.github.com/%(repo)s",
+        }
+        hoster, _, repo = repo_url.partition(":")
         return hoster_urls[hoster] % locals()
 
-    if len(repo_url.split('/')) == 2:
+    if len(repo_url.split("/")) == 2:
         # implicit github, but that's only on NPM?
-        return f'https://github.com/{repo_url}'
+        return f"https://github.com/{repo_url}"
 
     return repo_url
 
@@ -113,14 +112,14 @@ def build_description(summary, description):
     """
     Return a description string from a summary and description
     """
-    summary = (summary or '').strip()
-    description = (description or '').strip()
+    summary = (summary or "").strip()
+    description = (description or "").strip()
 
     if not description:
         description = summary
     else:
         if summary and summary not in description:
-            description = '\n'.join([summary , description])
+            description = "\n".join([summary, description])
 
     return description
 
@@ -164,7 +163,7 @@ def find_root_resource(path, resource, codebase):
     """
     if not resource.path.endswith(path):
         return
-    for _seg in path.split('/'):
+    for _seg in path.split("/"):
         resource = resource.parent(codebase)
         if not resource:
             return
@@ -176,6 +175,7 @@ def yield_dependencies_from_package_data(package_data, datafile_path, package_ui
     Yield a Dependency for each dependency from ``package_data.dependencies``
     """
     from _packagedcode import models
+
     dependent_packages = package_data.dependencies
     if dependent_packages:
         yield from models.Dependency.from_dependent_packages(
@@ -191,6 +191,7 @@ def yield_dependencies_from_package_resource(resource, package_uid=None):
     Yield a Dependency for each dependency from each package from``resource.package_data``
     """
     from _packagedcode import models
+
     for pkg_data in resource.package_data:
         pkg_data = models.PackageData.from_dict(pkg_data)
         yield from yield_dependencies_from_package_data(pkg_data, resource.path, package_uid)

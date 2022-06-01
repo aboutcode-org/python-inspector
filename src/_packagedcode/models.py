@@ -14,16 +14,16 @@ from fnmatch import fnmatchcase
 
 import attr
 from commoncode import filetype
-from commoncode.datautils import choices
 from commoncode.datautils import Boolean
 from commoncode.datautils import Date
 from commoncode.datautils import Integer
 from commoncode.datautils import List
 from commoncode.datautils import Mapping
 from commoncode.datautils import String
+from commoncode.datautils import choices
 from commoncode.fileutils import as_posixpath
-from packageurl import normalize_qualifiers
 from packageurl import PackageURL
+from packageurl import normalize_qualifiers
 
 """
 Originally vendored from scancode-toolkit packagedcode.models
@@ -105,7 +105,7 @@ Beyond these we have a few secondary models:
 - IdentifiablePackageData: a base class for a Package-like class with a Package URL.
 """
 
-SCANCODE_DEBUG_PACKAGE_API = os.environ.get('SCANCODE_DEBUG_PACKAGE_API', False)
+SCANCODE_DEBUG_PACKAGE_API = os.environ.get("SCANCODE_DEBUG_PACKAGE_API", False)
 
 TRACE = SCANCODE_DEBUG_PACKAGE_API
 TRACE_UPDATE = SCANCODE_DEBUG_PACKAGE_API
@@ -119,13 +119,12 @@ logger = logging.getLogger(__name__)
 
 if TRACE or TRACE_UPDATE:
     import sys
+
     logging.basicConfig(stream=sys.stdout)
     logger.setLevel(logging.DEBUG)
 
     def logger_debug(*args):
-        return logger.debug(
-            ' '.join(isinstance(a, str) and a or repr(a) for a in args)
-        )
+        return logger.debug(" ".join(isinstance(a, str) and a or repr(a) for a in args))
 
 
 class ModelMixin:
@@ -177,11 +176,11 @@ def to_tuple(collection):
     return tuple(results)
 
 
-party_person = 'person'
+party_person = "person"
 # often loosely defined
-party_project = 'project'
+party_project = "project"
 # more formally defined
-party_org = 'organization'
+party_org = "organization"
 PARTY_TYPES = (
     None,
     party_person,
@@ -199,31 +198,23 @@ class Party(ModelMixin):
     type = String(
         repr=True,
         validator=choices(PARTY_TYPES),
-        label='party type',
-        help='the type of this party: One of: '
-            +', '.join(p for p in PARTY_TYPES if p))
+        label="party type",
+        help="the type of this party: One of: " + ", ".join(p for p in PARTY_TYPES if p),
+    )
 
     role = String(
         repr=True,
-        label='party role',
-        help='A role for this party. Something such as author, '
-             'maintainer, contributor, owner, packager, distributor, '
-             'vendor, developer, owner, etc.')
+        label="party role",
+        help="A role for this party. Something such as author, "
+        "maintainer, contributor, owner, packager, distributor, "
+        "vendor, developer, owner, etc.",
+    )
 
-    name = String(
-        repr=True,
-        label='name',
-        help='Name of this party.')
+    name = String(repr=True, label="name", help="Name of this party.")
 
-    email = String(
-        repr=True,
-        label='email',
-        help='Email for this party.')
+    email = String(repr=True, label="email", help="Email for this party.")
 
-    url = String(
-        repr=True,
-        label='url',
-        help='URL to a primary web page for this party.')
+    url = String(repr=True, label="url", help="URL to a primary web page for this party.")
 
 
 @attr.attributes(slots=True)
@@ -234,40 +225,34 @@ class IdentifiablePackageData(ModelMixin):
     This base class is used for all package-like objects be they a manifest
     or an actual package instance.
     """
+
     type = String(
         repr=True,
-        label='package type',
-        help='A short code to identify what is the type of this '
-             'package. For instance gem for a Rubygem, docker for container, '
-             'pypi for Python Wheel or Egg, maven for a Maven Jar, '
-             'deb for a Debian package, etc.')
+        label="package type",
+        help="A short code to identify what is the type of this "
+        "package. For instance gem for a Rubygem, docker for container, "
+        "pypi for Python Wheel or Egg, maven for a Maven Jar, "
+        "deb for a Debian package, etc.",
+    )
 
-    namespace = String(
-        repr=True,
-        label='package namespace',
-        help='Namespace for this package.')
+    namespace = String(repr=True, label="package namespace", help="Namespace for this package.")
 
-    name = String(
-        repr=True,
-        label='package name',
-        help='Name of the package.')
+    name = String(repr=True, label="package name", help="Name of the package.")
 
-    version = String(
-        repr=True,
-        label='package version',
-        help='Version of the package as a string.')
+    version = String(repr=True, label="package version", help="Version of the package as a string.")
 
     qualifiers = Mapping(
         default=None,
         value_type=str,
         converter=lambda v: normalize_qualifiers(v, encode=False),
-        label='package qualifiers',
-        help='Mapping of key=value pairs qualifiers for this package')
+        label="package qualifiers",
+        help="Mapping of key=value pairs qualifiers for this package",
+    )
 
     subpath = String(
-        label='extra package subpath',
-        help='Subpath inside a package and relative to the root '
-             'of this package')
+        label="extra package subpath",
+        help="Subpath inside a package and relative to the root " "of this package",
+    )
 
     @property
     def purl(self):
@@ -302,10 +287,10 @@ class IdentifiablePackageData(ModelMixin):
 
     def to_dict(self, **kwargs):
         mapping = super().to_dict(**kwargs)
-        mapping['purl'] = self.purl
+        mapping["purl"] = self.purl
 
         if self.qualifiers:
-            mapping['qualifiers'] = normalize_qualifiers(
+            mapping["qualifiers"] = normalize_qualifiers(
                 qualifiers=self.qualifiers,
                 encode=False,
             )
@@ -321,49 +306,55 @@ class DependentPackage(ModelMixin):
 
     purl = String(
         repr=True,
-        label='Dependent package URL',
-        help='A compact purl package URL. Typically when there is an '
-             'unresolved requirement, there is no version. '
-             'If the dependency is resolved, the version should be added to '
-             'the purl')
+        label="Dependent package URL",
+        help="A compact purl package URL. Typically when there is an "
+        "unresolved requirement, there is no version. "
+        "If the dependency is resolved, the version should be added to "
+        "the purl",
+    )
 
     extracted_requirement = String(
         repr=True,
-        label='extracted version requirement',
-        help='String for the original version requirements and constraints. '
-             'Package-type specific and as found originally in a datafile.')
+        label="extracted version requirement",
+        help="String for the original version requirements and constraints. "
+        "Package-type specific and as found originally in a datafile.",
+    )
 
     # ToDo: add `vers` support. See https://github.com/nexB/univers/blob/main/src/univers/version_range.py
 
     scope = String(
         repr=True,
-        label='dependency scope',
-        help='The scope of this dependency, such as runtime, install, etc. '
-        'This is package-type specific and is the original scope string.')
+        label="dependency scope",
+        help="The scope of this dependency, such as runtime, install, etc. "
+        "This is package-type specific and is the original scope string.",
+    )
 
     is_runtime = Boolean(
         default=True,
-        label='is runtime flag',
-        help='True if this dependency is a runtime dependency.')
+        label="is runtime flag",
+        help="True if this dependency is a runtime dependency.",
+    )
 
     is_optional = Boolean(
         default=False,
-        label='is optional flag',
-        help='True if this dependency is an optional dependency')
+        label="is optional flag",
+        help="True if this dependency is an optional dependency",
+    )
 
     is_resolved = Boolean(
         default=False,
-        label='is resolved flag',
-        help='True if this dependency version requirement has '
-             'been resolved and this dependency url points to an '
-             'exact version.')
+        label="is resolved flag",
+        help="True if this dependency version requirement has "
+        "been resolved and this dependency url points to an "
+        "exact version.",
+    )
 
     resolved_package = Mapping(
-        label='resolved package data',
-        help='A mapping of resolved package data for this dependent package, '
-             'either from the datafile or collected from another source. Some '
-             'lockfiles for Composer or Cargo contain extra dependency data.'
-         )
+        label="resolved package data",
+        help="A mapping of resolved package data for this dependent package, "
+        "either from the datafile or collected from another source. Some "
+        "lockfiles for Composer or Cargo contain extra dependency data.",
+    )
 
 
 @attr.attributes(slots=True)
@@ -372,29 +363,28 @@ class Dependency(DependentPackage):
     Top-level dependency instance from parsed package data collected from data
     files such as a package manifest or lockfile.
     """
+
     dependency_uid = String(
-        label='Dependency unique id',
-        help='A unique identifier for this dependency instance.'
-             'Consists of the dependency purl with a UUID qualifier.'
+        label="Dependency unique id",
+        help="A unique identifier for this dependency instance."
+        "Consists of the dependency purl with a UUID qualifier.",
     )
 
     # TODO: should we also repeat the purl here: this may be redundant but this
     # would help avoid lookups
     for_package_uid = String(
-        label='A Package unique id',
-        help='The unique id of the package instance to which this dependency '
-             'file belongs. This is the purl with a uuid qualifier.'
+        label="A Package unique id",
+        help="The unique id of the package instance to which this dependency "
+        "file belongs. This is the purl with a uuid qualifier.",
     )
 
     datafile_path = String(
-        label='Path to datafile.',
-        help='A POSIX path string to the package datafile that describes this '
-        'dependency.'
+        label="Path to datafile.",
+        help="A POSIX path string to the package datafile that describes this " "dependency.",
     )
 
     datasource_id = String(
-        label='datasource id',
-        help='Datasource identifier for the source of these package data.'
+        label="datasource id", help="Datasource identifier for the source of these package data."
     )
 
     def __attrs_post_init__(self, *args, **kwargs):
@@ -419,9 +409,9 @@ class Dependency(DependentPackage):
             # make a copy
             dependent_package = dict(dependent_package)
 
-        dependent_package['datafile_path'] = datafile_path
-        dependent_package['datasource_id'] = datasource_id
-        dependent_package['for_package_uid'] = package_uid
+        dependent_package["datafile_path"] = datafile_path
+        dependent_package["datasource_id"] = datasource_id
+        dependent_package["for_package_uid"] = package_uid
 
         return cls.from_dict(dependent_package)
 
@@ -449,7 +439,9 @@ class Dependency(DependentPackage):
                 )
             else:
                 if TRACE:
-                    logger_debug(f' Dependency.from_dependent_packages: dependent_package (does not have purl): {dependent_package}')
+                    logger_debug(
+                        f" Dependency.from_dependent_packages: dependent_package (does not have purl): {dependent_package}"
+                    )
                 pass
 
 
@@ -458,47 +450,48 @@ class FileReference(ModelMixin):
     """
     A reference to a file in a files listing from a manifest or data file.
     """
+
     path = String(
-        label='Path of this file.',
-        help='The file or directory POSIX path. The actual root for this path '
-             'is specific to a datafile format. For instance it is the rootfs '
-             'root for Linux system packages.',
+        label="Path of this file.",
+        help="The file or directory POSIX path. The actual root for this path "
+        "is specific to a datafile format. For instance it is the rootfs "
+        "root for Linux system packages.",
         repr=True,
     )
 
     size = Integer(
-        label='file size',
-        help='size of the file in bytes',
+        label="file size",
+        help="size of the file in bytes",
         repr=False,
     )
 
     sha1 = String(
-        label='SHA1 checksum',
-        help='SHA1 checksum for this file in hexadecimal',
+        label="SHA1 checksum",
+        help="SHA1 checksum for this file in hexadecimal",
         repr=False,
     )
 
     md5 = String(
-        label='MD5 checksum',
-        help='MD5 checksum for this file in hexadecimal',
+        label="MD5 checksum",
+        help="MD5 checksum for this file in hexadecimal",
         repr=False,
     )
 
     sha256 = String(
-        label='SHA256 checksum',
-        help='SHA256 checksum for this file in hexadecimal',
+        label="SHA256 checksum",
+        help="SHA256 checksum for this file in hexadecimal",
         repr=False,
     )
 
     sha512 = String(
-        label='SHA512 checksum',
-        help='SHA512 checksum for this file in hexadecimal',
+        label="SHA512 checksum",
+        help="SHA512 checksum for this file in hexadecimal",
         repr=False,
     )
 
     extra_data = Mapping(
-        label='extra data',
-        help='A mapping of arbitrary extra file reference data.',
+        label="extra data",
+        help="A mapping of arbitrary extra file reference data.",
     )
 
     def update(self, other):
@@ -524,141 +517,131 @@ class PackageData(IdentifiablePackageData):
     """
 
     primary_language = String(
-        label='Primary programming language',
-        help='Primary programming language',)
+        label="Primary programming language",
+        help="Primary programming language",
+    )
 
     description = String(
-        label='Description',
-        help='Description for this package. '
-             'By convention the first should be a summary when available.')
+        label="Description",
+        help="Description for this package. "
+        "By convention the first should be a summary when available.",
+    )
 
-    release_date = Date(
-        label='release date',
-        help='Release date of the package')
+    release_date = Date(label="release date", help="Release date of the package")
 
     parties = List(
         item_type=Party,
-        label='parties',
-        help='A list of parties such as a person, project or organization.')
+        label="parties",
+        help="A list of parties such as a person, project or organization.",
+    )
 
-    keywords = List(
-        item_type=str,
-        label='keywords',
-        help='A list of keywords.')
+    keywords = List(item_type=str, label="keywords", help="A list of keywords.")
 
-    homepage_url = String(
-        label='homepage URL',
-        help='URL to the homepage for this package.')
+    homepage_url = String(label="homepage URL", help="URL to the homepage for this package.")
 
-    download_url = String(
-        label='Download URL',
-        help='A direct download URL.')
+    download_url = String(label="Download URL", help="A direct download URL.")
 
     size = Integer(
-        default=None,
-        label='download size',
-        help='size of the package download in bytes')
+        default=None, label="download size", help="size of the package download in bytes"
+    )
 
     sha1 = String(
-        label='SHA1 checksum',
-        help='SHA1 checksum for this package download in hexadecimal')
+        label="SHA1 checksum", help="SHA1 checksum for this package download in hexadecimal"
+    )
 
-    md5 = String(
-        label='MD5 checksum',
-        help='MD5 checksum for this package download in hexadecimal')
+    md5 = String(label="MD5 checksum", help="MD5 checksum for this package download in hexadecimal")
 
     sha256 = String(
-        label='SHA256 checksum',
-        help='SHA256 checksum for this package download in hexadecimal')
+        label="SHA256 checksum", help="SHA256 checksum for this package download in hexadecimal"
+    )
 
     sha512 = String(
-        label='SHA512 checksum',
-        help='SHA512 checksum for this package download in hexadecimal')
+        label="SHA512 checksum", help="SHA512 checksum for this package download in hexadecimal"
+    )
 
     bug_tracking_url = String(
-        label='bug tracking URL',
-        help='URL to the issue or bug tracker for this package')
+        label="bug tracking URL", help="URL to the issue or bug tracker for this package"
+    )
 
-    code_view_url = String(
-        label='code view URL',
-        help='a URL where the code can be browsed online')
+    code_view_url = String(label="code view URL", help="a URL where the code can be browsed online")
 
     vcs_url = String(
-        help='a URL to the VCS repository in the SPDX form of: '
-             'https://github.com/nexb/scancode-toolkit.git@405aaa4b3 '
-              'See SPDX specification "Package Download Location" '
-              'at https://spdx.org/spdx-specification-21-web-version#h.49x2ik5 ')
+        help="a URL to the VCS repository in the SPDX form of: "
+        "https://github.com/nexb/scancode-toolkit.git@405aaa4b3 "
+        'See SPDX specification "Package Download Location" '
+        "at https://spdx.org/spdx-specification-21-web-version#h.49x2ik5 "
+    )
 
     copyright = String(
-        label='Copyright',
-        help='Copyright statements for this package. Typically one per line.')
+        label="Copyright", help="Copyright statements for this package. Typically one per line."
+    )
 
     license_expression = String(
-        label='license expression',
-        help='The license expression for this package typically derived '
-             'from its declared license or from some other type-specific '
-             'routine or convention.')
+        label="license expression",
+        help="The license expression for this package typically derived "
+        "from its declared license or from some other type-specific "
+        "routine or convention.",
+    )
 
     declared_license = String(
-        label='declared license',
-        help='The declared license mention, tag or text as found in a '
-             'package manifest. This can be a string, a list or dict of '
-             'strings possibly nested, as found originally in the manifest.')
+        label="declared license",
+        help="The declared license mention, tag or text as found in a "
+        "package manifest. This can be a string, a list or dict of "
+        "strings possibly nested, as found originally in the manifest.",
+    )
 
-    notice_text = String(
-        label='notice text',
-        help='A notice text for this package.')
+    notice_text = String(label="notice text", help="A notice text for this package.")
 
     source_packages = List(
         item_type=str,
-        label='List of related source code package purls',
+        label="List of related source code package purls",
         help='A list of related  source code Package URLs (aka. "purl") for '
-             'this package. For instance an SRPM is the "source package" for a '
-             'binary RPM.'
-     )
+        'this package. For instance an SRPM is the "source package" for a '
+        "binary RPM.",
+    )
 
     file_references = List(
         item_type=FileReference,
-        label='referenced files',
-        help='List of file paths and details for files referenced in a package '
-             'manifest. These may not actually exist on the filesystem. '
-             'The exact semantics and base of these paths is specific to a '
-             'package type or datafile format.'
+        label="referenced files",
+        help="List of file paths and details for files referenced in a package "
+        "manifest. These may not actually exist on the filesystem. "
+        "The exact semantics and base of these paths is specific to a "
+        "package type or datafile format.",
     )
 
     extra_data = Mapping(
-        label='extra data',
-        help='A mapping of arbitrary extra package data.',
+        label="extra data",
+        help="A mapping of arbitrary extra package data.",
     )
 
     dependencies = List(
         item_type=DependentPackage,
-        label='dependencies',
-        help='A list of DependentPackage for this package.'
+        label="dependencies",
+        help="A list of DependentPackage for this package.",
     )
 
     repository_homepage_url = String(
-        label='package repository homepage URL.',
-        help='URL to the page for this package in its package repository. '
-             'This is typically different from the package homepage URL proper.'
-     )
+        label="package repository homepage URL.",
+        help="URL to the page for this package in its package repository. "
+        "This is typically different from the package homepage URL proper.",
+    )
 
     repository_download_url = String(
-        label='package repository download URL.',
-        help='download URL to download the actual archive of code of this '
-             'package in its package repository. '
-             'This may be different from the actual download URL.'
-     )
+        label="package repository download URL.",
+        help="download URL to download the actual archive of code of this "
+        "package in its package repository. "
+        "This may be different from the actual download URL.",
+    )
 
     api_data_url = String(
-        label='package repository API URL.',
-        help='API URL to obtain structured data for this package such as the '
-             'URL to a JSON or XML api its package repository.'
-     )
+        label="package repository API URL.",
+        help="API URL to obtain structured data for this package such as the "
+        "URL to a JSON or XML api its package repository.",
+    )
 
     datasource_id = String(
-        label='datasource id',
-        help='Datasource identifier for the source of these package data.',
+        label="datasource id",
+        help="Datasource identifier for the source of these package data.",
         repr=True,
     )
 
@@ -666,9 +649,9 @@ class PackageData(IdentifiablePackageData):
         mapping = super().to_dict(with_details=with_details, **kwargs)
         if not with_details:
             # these are not used in the Package subclass
-            mapping.pop('file_references', None)
-            mapping.pop('dependencies', None)
-            mapping.pop('datasource_id', None)
+            mapping.pop("file_references", None)
+            mapping.pop("dependencies", None)
+            mapping.pop("datasource_id", None)
 
         return mapping
 
@@ -692,17 +675,21 @@ class PackageData(IdentifiablePackageData):
 
         # these are computed attributes serialized on a package
         # that should not be recreated when de-serializing
-        computed_attributes = set(['purl', ])
+        computed_attributes = set(
+            [
+                "purl",
+            ]
+        )
 
         fields_by_name = attr.fields_dict(cls)
 
-        extra_data = mapping.get('extra_data', {}) or {}
+        extra_data = mapping.get("extra_data", {}) or {}
         package_data = {}
 
         list_fields_by_item = {
-            'parties': Party,
-            'dependencies': DependentPackage,
-            'file_references': FileReference,
+            "parties": Party,
+            "dependencies": DependentPackage,
+            "file_references": FileReference,
         }
 
         for name, value in mapping.items():
@@ -721,7 +708,7 @@ class PackageData(IdentifiablePackageData):
                 else:
                     raise Exception(
                         f'Invalid package "scan_data" with duplicated name: {name!r}={value!r} '
-                        f'present both as attribute AND as extra_data: {name!r}={extra_data[name]!r}'
+                        f"present both as attribute AND as extra_data: {name!r}={extra_data[name]!r}"
                     )
 
             # re-hydrate lists of typed objects
@@ -746,13 +733,12 @@ def _rehydrate_list(cls, values):
     base_msg = 'Invalid package "scan_data "with unknown data structure.'
     if not isinstance(values, list) and not all(isinstance(v, dict) for v in values):
         raise Exception(
-            f'{base_msg}. Expected the value to be a list of dicts and not: '
-            f'{type(values)!r} for class: {cls!r}'
+            f"{base_msg}. Expected the value to be a list of dicts and not: "
+            f"{type(values)!r} for class: {cls!r}"
         )
 
     for val in values:
         yield cls.from_dict(val)
-
 
 
 class DatafileHandler:
@@ -841,7 +827,7 @@ def build_package_uid(purl):
     Return a purl string with a UUID qualifier given a ``purl`` string .
     """
     purl = PackageURL.from_string(purl)
-    purl.qualifiers['uuid'] = str(uuid.uuid4())
+    purl.qualifiers["uuid"] = str(uuid.uuid4())
     return str(purl)
 
 
@@ -850,15 +836,15 @@ def build_purl(mapping):
     Return a PackageURL from a ``mapping`` or None if essential type and name
     fields are missing.
     """
-    ptype = mapping.get('type')
-    name = mapping.get('name')
+    ptype = mapping.get("type")
+    name = mapping.get("name")
     if not ptype or not name:
         return
 
-    namespace = mapping.get('namespace')
-    version = mapping.get('version')
-    qualifiers = mapping.get('qualifiers') or {}
-    subpath = mapping.get('subpath')
+    namespace = mapping.get("namespace")
+    version = mapping.get("version")
+    qualifiers = mapping.get("qualifiers") or {}
+    subpath = mapping.get("subpath")
     return PackageURL(
         type=ptype,
         name=name,
@@ -877,21 +863,21 @@ class Package(PackageData):
     """
 
     package_uid = String(
-        label='Package unique id',
-        help='A unique identifier for this package instance.'
-             'Consists of the package purl with a UUID qualifier.'
+        label="Package unique id",
+        help="A unique identifier for this package instance."
+        "Consists of the package purl with a UUID qualifier.",
     )
 
     datafile_paths = List(
         item_type=str,
-        label='List of datafile paths',
-        help='List of datafile paths used to create this package.'
+        label="List of datafile paths",
+        help="List of datafile paths used to create this package.",
     )
 
     datasource_ids = List(
         item_type=str,
-        label='datasource ids',
-        help='List of the datasource ids used to create this package.'
+        label="datasource ids",
+        help="List of the datasource ids used to create this package.",
     )
 
     def __attrs_post_init__(self, *args, **kwargs):
@@ -899,7 +885,7 @@ class Package(PackageData):
             self.package_uid = build_package_uid(self.purl)
 
     def to_dict(self):
-        return  super().to_dict(with_details=False)
+        return super().to_dict(with_details=False)
 
     @classmethod
     def from_package_data(cls, package_data, datafile_path):
@@ -913,12 +899,12 @@ class Package(PackageData):
         elif isinstance(package_data, dict):
             # make a copy
             package_data_mapping = dict(package_data.items())
-            dsid = package_data['datasource_id']
+            dsid = package_data["datasource_id"]
         elif package_data:
-            raise Exception(f'Invalid type: {package_data!r}', package_data)
+            raise Exception(f"Invalid type: {package_data!r}", package_data)
 
-        package_data_mapping['datafile_paths'] = [datafile_path]
-        package_data_mapping['datasource_ids'] = [dsid]
+        package_data_mapping["datafile_paths"] = [datafile_path]
+        package_data_mapping["datasource_ids"] = [dsid]
 
         return cls.from_dict(package_data_mapping)
 
@@ -977,7 +963,7 @@ class Package(PackageData):
 
         if not self.is_compatible(package_data, include_qualifiers=False):
             if TRACE_UPDATE:
-                logger_debug(f'update: {self.purl} not compatible with: {package_data.purl}')
+                logger_debug(f"update: {self.purl} not compatible with: {package_data.purl}")
             return False
 
         # always append these new items
@@ -988,43 +974,50 @@ class Package(PackageData):
         new_package_data = package_data.to_dict()
 
         # update for these means combining lists of items from both sides
-        list_fields = set([
-            'parties',
-            'dependencies',
-            'file_references',
-        ])
+        list_fields = set(
+            [
+                "parties",
+                "dependencies",
+                "file_references",
+            ]
+        )
 
         for name, value in existing.items():
             new_value = new_package_data.get(name)
 
             if TRACE_UPDATE:
-                logger_debug(f'update: {name!r}={value!r} with new_value: {new_value!r}')
+                logger_debug(f"update: {name!r}={value!r} with new_value: {new_value!r}")
 
             if not new_value:
-                if TRACE_UPDATE: logger_debug('  No new value: skipping')
+                if TRACE_UPDATE:
+                    logger_debug("  No new value: skipping")
                 continue
 
             if not value:
-                if TRACE_UPDATE: logger_debug('  set existing value to new')
+                if TRACE_UPDATE:
+                    logger_debug("  set existing value to new")
                 setattr(self, name, new_value)
                 continue
 
             if replace:
-                if TRACE_UPDATE: logger_debug('  replace existing value to new')
+                if TRACE_UPDATE:
+                    logger_debug("  replace existing value to new")
                 setattr(self, name, new_value)
                 continue
 
             # here we do not replace... but we still merge lists/mappings
-            if name == 'extra_data':
+            if name == "extra_data":
                 value.update(new_value)
 
             if name in list_fields:
-                if TRACE_UPDATE: logger_debug('  merge lists of values')
+                if TRACE_UPDATE:
+                    logger_debug("  merge lists of values")
                 merged = merge_sequences(list1=value, list2=new_value)
                 setattr(self, name, merged)
 
             elif TRACE_UPDATE and value != new_value:
-                if TRACE_UPDATE: logger_debug('  skipping update: no replace')
+                if TRACE_UPDATE:
+                    logger_debug("  skipping update: no replace")
 
         return True
 

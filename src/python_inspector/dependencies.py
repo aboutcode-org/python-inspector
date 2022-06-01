@@ -9,15 +9,18 @@
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
+from packageurl import PackageURL
+from packaging.requirements import Requirement
+from pip_requirements_parser import InstallRequirement
+
 from _packagedcode import models
 from _packagedcode.pypi import PipRequirementsFileHandler
-from pip_requirements_parser import InstallRequirement
-from packaging.requirements import Requirement
-from packageurl import PackageURL
 
 """
 Utilities to resolve dependencies .
 """
+
+TRACE = False
 
 
 def get_dependencies_from_requirements(requirements_file="requirements.txt", *args, **kwargs):
@@ -25,10 +28,14 @@ def get_dependencies_from_requirements(requirements_file="requirements.txt", *ar
     Yield DependentPackage for each requirement in a `requirement`
     file.
     """
-    for packages_data in PipRequirementsFileHandler.parse(location=requirements_file):
-        for package_data in packages_data:
-            for dependent_package in package_data.dependencies:
-                yield dependent_package
+    for package_data in PipRequirementsFileHandler.parse(location=requirements_file):
+        for dependent_package in package_data.dependencies:
+            if TRACE:
+                print(
+                    "dependent_package.extracted_requirement:",
+                    dependent_package.extracted_requirement,
+                )
+            yield dependent_package
 
 
 def get_dependency(specifier, *args, **kwargs):
@@ -36,8 +43,8 @@ def get_dependency(specifier, *args, **kwargs):
     Return a DependentPackage given a requirement ``specifier`` string.
 
     For example:
-    >>> assert get_dependency("foo==1.2.3") == ("foo", "1.2.3")
-    >>> assert get_dependency("fooA==1.2.3.DEV1") == ("fooa", "1.2.3.dev1")
+    >>> dep = get_dependency("foo==1.2.3")
+    >>> assert dep.purl == "pkg:pypi/foo@1.2.3"
     """
     specifier = specifier and "".join(specifier.lower().split())
     assert specifier, f"specifier is required but empty:{specifier!r}"
@@ -50,14 +57,14 @@ def get_dependency(specifier, *args, **kwargs):
         requirement_line=specifier,
     )
 
-    scope = 'install'
+    scope = "install"
     is_runtime = True
     is_optional = False
 
     if ir.name:
         # will be None if not pinned
         version = ir.get_pinned_version
-        purl = PackageURL(type='pypi', name=ir.name, version=version)
+        purl = PackageURL(type="pypi", name=ir.name, version=version).to_string()
 
     return models.DependentPackage(
         purl=purl,
