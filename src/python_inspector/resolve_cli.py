@@ -13,10 +13,12 @@ import json
 import sys
 
 import click
+from packaging.requirements import Requirement
 
 from python_inspector import dependencies
 from python_inspector import utils_pypi
 from python_inspector.cli_utils import FileOptionType
+from python_inspector.resolution import resolution
 
 TRACE = False
 
@@ -69,7 +71,6 @@ TRACE = False
     "index_urls",
     type=str,
     metavar="INDEX",
-    default=utils_pypi.PYPI_INDEX_URLS,
     show_default=True,
     multiple=True,
     help="PyPI index URL(s) to use in order of preference. "
@@ -115,6 +116,19 @@ def resolve_dependencies(
 
     Download from the provided PyPI simple --index-url INDEX(s) URLs.
     Error and progress are printed to stderr.
+
+    Default environment is the Python version - 3.8 and OS - linux.
+
+    1) If no index_url is provided, the PyPI JSON API is used and environment will be ignored in that case.
+
+    For example:
+        dad --spec "flask==2.1.2" --json -
+
+    2) If an index_url is provided, the environment will be used to resolve the dependencies.
+    (If no environment is provided default environment will be used.)
+
+    For example:
+        dad --spec "flask==2.1.2" --index-url https://pypi.org/simple --json -
 
     For example::
         dad --spec "flask" --requirement etc/scripts/requirements.txt --json -
@@ -172,26 +186,28 @@ def resolve_dependencies(
             print(" ", repo)
 
     # resolve dependencies proper
-    resolved_dependencies = resolve(direct_dependencies)
+    resolved_dependencies = resolve(direct_dependencies, environment, repos)
     write_output(results=resolved_dependencies, json_output=json_output)
 
     if debug:
         print("done!")
 
 
-def resolve(direct_dependencies):
+def resolve(direct_dependencies, environment, repos):
     """
     Resolve dependencies given a ``direct_dependencies`` list of
     DependentPackage and return SOMETHING TBD.
     """
-    from packaging.requirements import Requirement
 
     reqs = [Requirement(d.extracted_requirement) for d in direct_dependencies]
+    as_parent_children = resolution(reqs, environment, repos)
 
     return dict(
         headers=[dict(tool="dad")],
-        dependencies=[d.to_dict() for d in direct_dependencies],
-        requirements=[str(r) for r in reqs],
+        requirements=[d.to_dict() for d in direct_dependencies],
+        resolved_dependencies=dict(
+            as_parent_children=as_parent_children,
+        ),
     )
 
 
