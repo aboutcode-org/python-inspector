@@ -3,7 +3,7 @@
 # ScanCode is a trademark of nexB Inc.
 # SPDX-License-Identifier: Apache-2.0
 # See http://www.apache.org/licenses/LICENSE-2.0 for the license text.
-# See https://github.com/nexB/scancode-toolkit for support or download.
+# See https://github.com/nexB/python-inspector for support or download.
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
@@ -12,9 +12,7 @@ import operator
 import os
 from typing import List
 
-import packaging.markers
 import packaging.requirements
-import packaging.specifiers
 import packaging.utils
 import packaging.version
 import requests
@@ -80,7 +78,7 @@ class PythonInputProvider(AbstractProvider):
         backtrack_causes,
     ):
         transitive = all(p is not None for _, p in information[identifier])
-        return (transitive, identifier)
+        return transitive, identifier
 
     def get_versions_for_package(self, name, repo=None):
         """
@@ -147,7 +145,7 @@ class PythonInputProvider(AbstractProvider):
         """
         Return a list of candidates for the given identifier.
         """
-        name, _, _ = identifier.partition("[")
+        name, _, _extras = identifier.partition("[")
         bad_versions = {c.version for c in incompatibilities[identifier]}
         extras = {e for r in requirements[identifier] for e in r.extras}
         if not self.repos:
@@ -178,14 +176,17 @@ class PythonInputProvider(AbstractProvider):
         Yield dependencies for the given candidate.
         """
         name = packaging.utils.canonicalize_name(candidate.name)
+        # TODO: handle extras https://github.com/nexB/python-inspector/issues/10
         if candidate.extras:
             r = f"{name}=={candidate.version}"
             yield packaging.requirements.Requirement(r)
+
         purl = PackageURL(
             type="pypi",
             name=name,
             version=str(candidate.version),
         )
+
         for r in self.get_requirements_for_package(purl, candidate):
             if r.marker is None:
                 yield r
@@ -208,7 +209,7 @@ def get_all_srcs(mapping, graph):
 
 def dfs(mapping, graph, src):
     """
-    Return a recursive mapping of dependencies.
+    Return a nested mapping of dependencies.
     """
     children = list(graph.iter_children(src))
     src_purl = PackageURL(
@@ -225,83 +226,69 @@ def dfs(mapping, graph, src):
     )
 
 
-def format_resolution(result):
+def format_resolution(results, as_tree=False):
     """
-    Return a formatted resolution.
+    Return a formatted resolution either as a tree or parent/children.
     """
-    mapping = result.mapping
-    graph = result.graph
-    as_list = [
-        str(
-            PackageURL(
-                type="pypi",
-                name=name,
-                version=str(candidate.version),
-            )
-        )
-        for name, candidate in mapping.items()
-    ]
+    mapping = results.mapping
+    graph = results.graph
 
-    as_parent_children = []
-    parents = mapping.keys()
-    for parent in parents:
-        parent_purl = PackageURL(
-            type="pypi",
-            name=parent,
-            version=str(mapping[parent].version),
-        )
+    if not as_tree:
+        as_parent_children = []
+        parents = mapping.keys()
+        for parent in parents:
+            parent_purl = PackageURL(
+                type="pypi",
+                name=parent,
+                version=str(mapping[parent].version),
+            )
+            dependencies = []
+            for dependency in graph.iter_children(parent):
+                dep_purl = PackageURL(
+                    type="pypi",
+                    name=dependency,
+                    version=str(mapping[dependency].version),
+                )
+                dependencies.append(str(dep_purl))
+            dependencies.sort()
+            parent_children = dict(package=str(parent_purl), dependencies=dependencies)
+            as_parent_children.append(parent_children)
+        as_parent_children.sort(key=lambda d: d["package"])
+        return as_parent_children
+    else:
         dependencies = []
-        for dependency in graph.iter_children(parent):
-            dep_purl = PackageURL(
-                type="pypi",
-                name=dependency,
-                version=str(mapping[dependency].version),
-            )
-            dependencies.append(str(dep_purl))
-        dependencies.sort()
-        parent_children = dict(package=str(parent_purl), dependencies=dependencies)
-        as_parent_children.append(parent_children)
+        for src in get_all_srcs(mapping=mapping, graph=graph):
+            dependencies.append(dfs(mapping=mapping, graph=graph, src=src))
 
-    srcs = list(get_all_srcs(mapping=mapping, graph=graph))
-    dependencies = []
-    for src in srcs:
-        dependencies.append(dfs(mapping=mapping, graph=graph, src=src))
-
-    as_list.sort()
-    as_parent_children.sort(key=lambda d: d["package"])
-    dependencies.sort(key=lambda d: d["package"])
-    as_tree = dict(dependencies=dependencies)
-    return as_list, as_parent_children, as_tree
+        dependencies.sort(key=lambda d: d["package"])
+        return dependencies
 
 
 def pypi_simple_repo_in_repos(repos: PypiSimpleRepository):
     """
     Return True if simple pypi index_url is present in any of the repos
     """
-    for repo in repos:
-        if repo.index_url == PYPI_SIMPLE_URL:
-            return True
-    return False
+    return any(repo.index_url == PYPI_SIMPLE_URL for repo in repos)
 
 
-def resolution(
+def get_resolved_dependencies(
     requirements: List[Requirement],
     environment: Environment = None,
     repos: List[PypiSimpleRepository] = [],
-    return_as_parent_children: bool = True,
-    return_as_tree: bool = False,
-    return_as_list: bool = False,
+    as_tree: bool = False,
 ):
     """
-    Return a resolution for the given requirements.
+    Return resolved dependencies of a ``requirements`` list of Requirement for
+    an ``enviroment`` Environment. The resolved dependencies are formatted as
+    parent/children or a nested tree if ``as_tree`` is True
     """
     if repos and not pypi_simple_repo_in_repos(repos):
         repos.append(PYPI_PUBLIC_REPO)
-    resolver = Resolver(PythonInputProvider(environment, repos), BaseReporter())
-    as_list, as_parent_children, as_tree = format_resolution(resolver.resolve(requirements))
-    if return_as_parent_children:
-        return as_parent_children
-    if return_as_tree:
-        return as_tree
-    if return_as_list:
-        return as_list
+
+    resolver = Resolver(
+        provider=PythonInputProvider(environment, repos),
+        reporter=BaseReporter(),
+    )
+    results = resolver.resolve(requirements=requirements)
+    results = format_resolution(results, as_tree=as_tree)
+    return results
