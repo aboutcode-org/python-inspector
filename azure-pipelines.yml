@@ -15,7 +15,6 @@ jobs:
           test_suites:
               all: |
                 venv/bin/pytest -n 2 -vvs
-                make check
 
     - template: etc/ci/azure-posix.yml
       parameters:
