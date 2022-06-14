@@ -21,11 +21,11 @@ For each dependency, there can be a version "requirement" that can be an
 exact version, a version expression (aka. version specifier) as defined
 in `pep-0440 <https://www.python.org/dev/peps/pep-0440/>`__
 with additional OS and environment tags and constraints as specified in
-`pep-0508 <https://www.python.org/dev/peps/pep-0508/>`__ . 
+`pep-0508 <https://www.python.org/dev/peps/pep-0508/>`__ .
 
-In particular the required Python version of a package (or version specifier) 
-can be set for the whole package (with the``python_requires`` attribute) or as 
-a marker for a given direct or indirect dependency. pip processes requirement 
+In particular the required Python version of a package (or version specifier)
+can be set for the whole package (with the``python_requires`` attribute) or as
+a marker for a given direct or indirect dependency. pip processes requirement
 specifiers and constraints from a "requirements" file and internally resolves
 dependency versions recursively by querying the PyPI Python package
 index repository at https://PyPI.org
@@ -129,7 +129,7 @@ And a flat list of unique dependencies would be:
 -  thing 3.0
 -  shebang 1.0
 
-The implementation may likely be similar to 
+The implementation may likely be similar to
 `pipgrip <https://github.com/ddelange/pipgrip>`__,
 but using the `resolvelib <https://github.com/sarugaku/resolvelib>`__
 library as used and vendored in pip instead of an implementation of
@@ -139,7 +139,7 @@ The expected benefit of this tool is a simpler way to resolve Python
 dependencies that will not require complex installation of a Python toolchain
 specific to a given project environment when the goal is only to resolve
 dependencies. In particular the key new  capability is to run this tool on a
-single Python version and resolve versions for alternative Python versions, 
+single Python version and resolve versions for alternative Python versions,
 operating systems and architectures without having to install all the packages
 in the dependency tree.
 
@@ -158,7 +158,8 @@ The outline of the processing is to:
 -  For each top-level requirement (e.g. name/version):
 
    -  Fetch all the corresponding versions metadata using the PyPI API(s)
-   -  Fetch the packages as needed to further obtain the next-level dependencies, and this recursively
+   -  Fetch the packages as needed to further obtain the next-level
+      dependencies, and this recursively
 
 -  Resolve a correct dependency version for each name.
 -  Dump JSON
@@ -168,7 +169,7 @@ User experience:
 ----------------
 
 The goal of the command line interface and user experience is to be
-obvious and familiar to a pip user. 
+obvious and familiar to a pip user.
 
 Create a new CLI named "dad" short for "dad analyzes dependencies" with
 these key options:
@@ -351,5 +352,4 @@ dependency resolution.
 ScanCode Toolkit can detect the and normalize the declared licenses in package
 metadata and also collect and normalize all the metadata. This could be
 a refinement for later.
-
 
