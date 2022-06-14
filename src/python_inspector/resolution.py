@@ -11,6 +11,7 @@ import collections
 import operator
 import os
 from typing import List
+from typing import Sequence
 
 import packaging.requirements
 import packaging.utils
@@ -51,9 +52,9 @@ def is_valid_version(parsed_version, requirements, identifier, bad_versions):
 
 
 class PythonInputProvider(AbstractProvider):
-    def __init__(self, environment=None, repos=[]):
+    def __init__(self, environment=None, repos=tuple()):
         self.environment = environment
-        self.repos = repos
+        self.repos = repos or []
         self.versions_by_package = {}
         self.dependencies_by_purl = {}
 
@@ -82,21 +83,34 @@ class PythonInputProvider(AbstractProvider):
         """
         Return a list of versions for a package.
         """
-        versions = []
         if repo and self.environment:
-            for version, package in repo._get_package_versions_map(name).items():
-                wheels = package.get_supported_wheels(environment=self.environment)
-                if list(wheels):
-                    versions.append(version)
+            return self.get_versions_for_package_from_repo(name, repo)
         else:
-            if name not in self.versions_by_package:
-                api_url = f"https://pypi.org/pypi/{name}/json"
-                resp = get_response(api_url)
-                if not resp:
-                    self.versions_by_package[name] = []
-                releases = resp.get("releases") or {}
-                self.versions_by_package[name] = releases.keys() or []
-            versions = self.versions_by_package[name]
+            return self.get_versions_for_package_from_pypi_json_api(name)
+
+    def get_versions_for_package_from_repo(self, name, repo):
+        """
+        Return a list of versions for a package name from a repo
+        """
+        versions = []
+        for version, package in repo._get_package_versions_map(name).items():
+            wheels = package.get_supported_wheels(environment=self.environment)
+            if list(wheels):
+                versions.append(version)
+        return versions
+
+    def get_versions_for_package_from_pypi_json_api(self, name):
+        """
+        Return a list of versions for a package name from the PyPI.org JSON API
+        """
+        if name not in self.versions_by_package:
+            api_url = f"https://pypi.org/pypi/{name}/json"
+            resp = get_response(api_url)
+            if not resp:
+                self.versions_by_package[name] = []
+            releases = resp.get("releases") or {}
+            self.versions_by_package[name] = releases.keys() or []
+        versions = self.versions_by_package[name]
         return versions
 
     def get_requirements_for_package(self, purl, candidate):
@@ -104,32 +118,40 @@ class PythonInputProvider(AbstractProvider):
         Yield requirements for a package.
         """
         if self.repos and self.environment:
-            wheels = utils_pypi.download_wheel(
-                name=candidate.name,
-                version=str(candidate.version),
-                environment=self.environment,
-                repos=self.repos,
-            )
-            for wheel in wheels:
-                deps = list(
-                    PypiWheelHandler.parse(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, wheel))
-                )
-                assert len(deps) == 1
-                deps = deps[0].dependencies
-                for dep in deps:
-                    if dep.scope == "install":
-                        yield packaging.requirements.Requirement(str(dep.extracted_requirement))
+            return self.get_requirements_for_package_from_pypi_simple(candidate)
         else:
-            if str(purl) not in self.dependencies_by_purl:
-                api_url = f"https://pypi.org/pypi/{purl.name}/{purl.version}/json"
-                resp = get_response(api_url)
-                if not resp:
-                    self.dependencies_by_purl[str(purl)] = []
-                info = resp.get("info") or {}
-                requires_dist = info.get("requires_dist") or []
-                self.dependencies_by_purl[str(purl)] = requires_dist
-            for dependency in self.dependencies_by_purl[str(purl)]:
-                yield packaging.requirements.Requirement(dependency)
+            return self.get_requirements_for_package_from_pypi_json_api(purl)
+
+    def get_requirements_for_package_from_pypi_simple(self, candidate):
+        wheels = utils_pypi.download_wheel(
+            name=candidate.name,
+            version=str(candidate.version),
+            environment=self.environment,
+            repos=self.repos,
+        )
+        for wheel in wheels:
+            deps = list(
+                PypiWheelHandler.parse(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, wheel))
+            )
+            assert len(deps) == 1
+            deps = deps[0].dependencies
+            for dep in deps:
+                if dep.scope == "install":
+                    yield packaging.requirements.Requirement(str(dep.extracted_requirement))
+
+    def get_requirements_for_package_from_pypi_json_api(self, purl):
+
+        # if no repos are provided use the incorrect but fast JSON API
+        if str(purl) not in self.dependencies_by_purl:
+            api_url = f"https://pypi.org/pypi/{purl.name}/{purl.version}/json"
+            resp = get_response(api_url)
+            if not resp:
+                self.dependencies_by_purl[str(purl)] = []
+            info = resp.get("info") or {}
+            requires_dist = info.get("requires_dist") or []
+            self.dependencies_by_purl[str(purl)] = requires_dist
+        for dependency in self.dependencies_by_purl[str(purl)]:
+            yield packaging.requirements.Requirement(dependency)
 
     def get_candidates(self, all_versions, requirements, identifier, bad_versions, name, extras):
         """
@@ -267,29 +289,22 @@ def format_resolution(results, as_tree=False):
         return dependencies
 
 
-def pypi_simple_repo_in_repos(repos: utils_pypi.PypiSimpleRepository):
-    """
-    Return True if simple pypi index_url is present in any of the repos
-    """
-    return any(repo.index_url == utils_pypi.PYPI_SIMPLE_URL for repo in repos)
-
-
 def get_resolved_dependencies(
     requirements: List[Requirement],
     environment: utils_pypi.Environment = None,
-    repos: List[utils_pypi.PypiSimpleRepository] = [],
+    repos: Sequence[utils_pypi.PypiSimpleRepository] = tuple(),
     as_tree: bool = False,
 ):
     """
     Return resolved dependencies of a ``requirements`` list of Requirement for
     an ``enviroment`` Environment. The resolved dependencies are formatted as
-    parent/children or a nested tree if ``as_tree`` is True
-    """
-    if repos and not pypi_simple_repo_in_repos(repos):
-        repos.append(utils_pypi.PYPI_PUBLIC_REPO)
+    parent/children or a nested tree if ``as_tree`` is True.
 
+    Used the provided ``repos`` list of PypiSimpleRepository.
+    If empty, use instead the PyPI.org JSON API exclusively instead
+    """
     resolver = Resolver(
-        provider=PythonInputProvider(environment, repos),
+        provider=PythonInputProvider(environment=environment, repos=repos),
         reporter=BaseReporter(),
     )
     results = resolver.resolve(requirements=requirements)

@@ -29,9 +29,13 @@ test_env.test_data_dir = os.path.join(os.path.dirname(__file__), "data")
 def test_cli_with_default_urls():
     expected_file = test_env.get_test_loc("default-url-expected.json", must_exist=False)
     specifier = "zipp==3.8.0"
+    extra_options = [
+        "--use-pypi-json-api",
+    ]
     check_specs_resolution(
         specifier=specifier,
         expected_file=expected_file,
+        extra_options=extra_options,
         regen=REGEN_TEST_FIXTURES,
     )
 

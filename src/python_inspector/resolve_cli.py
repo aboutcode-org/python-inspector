@@ -94,7 +94,13 @@ PYPI_SIMPLE_URL = "https://pypi.org/simple"
     "--use-cached-index",
     is_flag=True,
     hidden=True,
-    help="Use cached on-disk PyPI package indexes and do not refetch if present.",
+    help="Use cached on-disk PyPI simple package indexes and do not refetch if present.",
+)
+@click.option(
+    "--use-pypi-json-api",
+    is_flag=True,
+    help="Use PyPI JSON API to fetch dependency data. Faster but not always correct. "
+    "--index-url are ignored when this option is active.",
 )
 @click.option(
     "--debug",
@@ -111,6 +117,7 @@ def resolve_dependencies(
     index_urls,
     json_output,
     use_cached_index=False,
+    use_pypi_json_api=False,
     debug=TRACE,
 ):
     """
@@ -126,16 +133,10 @@ def resolve_dependencies(
 
     Error and progress are printed to stderr.
 
-    1) Without an --index-url is provided, this tool uses the PyPI JSON API.
-
     For example, display the results of resolving the dependencies for flask==2.1.2
     on screen::
 
         dad --spec "flask==2.1.2" --json -
-
-    2) If an --index-url is provided, it is used to resolve the dependencies::
-
-         dad --spec "flask==2.1.2" --index-url https://pypi.org/simple --json -
     """
 
     click.secho(f"Resolving dependencies...")
@@ -158,7 +159,7 @@ def resolve_dependencies(
     if debug:
         click.secho("direct_dependencies:")
         for dep in direct_dependencies:
-            click.secho(" ", dep)
+            click.secho(f" {dep}")
 
     # create a resolution environments
     environment = utils_pypi.Environment.from_pyver_and_os(
@@ -166,27 +167,28 @@ def resolve_dependencies(
     )
 
     if debug:
-        click.secho("environment:", environment)
+        click.secho(f"environment: {environment}")
 
-    # Collect PyPI repos
     repos = []
-    for index_url in index_urls:
-        index_url = index_url.strip("/")
-        existing = utils_pypi.DEFAULT_PYPI_REPOS_BY_URL.get(index_url)
-        if existing:
-            existing.use_cached_index = use_cached_index
-            repos.append(existing)
-        else:
-            repo = utils_pypi.PypiSimpleRepository(
-                index_url=index_url,
-                use_cached_index=use_cached_index,
-            )
-            repos.append(repo)
+    if not use_pypi_json_api:
+        # Collect PyPI repos
+        for index_url in index_urls:
+            index_url = index_url.strip("/")
+            existing = utils_pypi.DEFAULT_PYPI_REPOS_BY_URL.get(index_url)
+            if existing:
+                existing.use_cached_index = use_cached_index
+                repos.append(existing)
+            else:
+                repo = utils_pypi.PypiSimpleRepository(
+                    index_url=index_url,
+                    use_cached_index=use_cached_index,
+                )
+                repos.append(repo)
 
     if debug:
         click.secho("repos:")
         for repo in repos:
-            click.secho(" ", repo)
+            click.secho(f" {repo}")
 
     # resolve dependencies proper
     requirements, resolved_dependencies = resolve(
@@ -230,11 +232,13 @@ def resolve_dependencies(
         click.secho("done!")
 
 
-def resolve(direct_dependencies, environment, repos, as_tree=False):
+def resolve(direct_dependencies, environment, repos=tuple(), as_tree=False):
     """
     Resolve dependencies given a ``direct_dependencies`` list of
     DependentPackage and return a tuple of (initial_requirements,
     resolved_dependencies).
+    Used the provided ``repos`` list of PypiSimpleRepository.
+    If empty, use instead the PyPI.org JSON API exclusively.
     """
 
     requirements = [

@@ -14,7 +14,6 @@ from packaging.requirements import Requirement
 
 from python_inspector.resolution import get_resolved_dependencies
 from python_inspector.resolution import is_valid_version
-from python_inspector.resolution import pypi_simple_repo_in_repos
 from python_inspector.utils_pypi import PYPI_PUBLIC_REPO
 from python_inspector.utils_pypi import Environment
 
@@ -85,14 +84,6 @@ def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
         "pkg:pypi/werkzeug@2.1.2",
         "pkg:pypi/zipp@3.8.0",
     ]
-
-
-def test_pypi_simple_repo_in_repos():
-    assert pypi_simple_repo_in_repos(repos=[PYPI_PUBLIC_REPO])
-
-
-def test_pypi_simple_repo_in_repos_not_present():
-    assert not pypi_simple_repo_in_repos(repos=[])
 
 
 def test_is_valid_version():
