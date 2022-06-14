@@ -1,8 +1,8 @@
 #
-# Copyright (c) nexB Inc. and others. All rights reserved.
-# ScanCode is a trademark of nexB Inc.
-# SPDX-License-Identifier: Apache-2.0
-# See http://www.apache.org/licenses/LICENSE-2.0 for the license text.
+# Copyright (c) Tzu-ping Chung <uranusjr@gmail.com>, nexB Inc. and others.
+# SPDX-License-Identifier: ISC AND Apache-2.0
+# derived and heavily modified from https://github.com/sarugaku/resolvelib
+
 # See https://github.com/nexB/python-inspector for support or download.
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
@@ -23,12 +23,7 @@ from resolvelib import Resolver
 from resolvelib.reporters import BaseReporter
 
 from _packagedcode.pypi import PypiWheelHandler
-from python_inspector.utils_pypi import CACHE_THIRDPARTY_DIR
-from python_inspector.utils_pypi import PYPI_PUBLIC_REPO
-from python_inspector.utils_pypi import PYPI_SIMPLE_URL
-from python_inspector.utils_pypi import Environment
-from python_inspector.utils_pypi import PypiSimpleRepository
-from python_inspector.utils_pypi import download_wheel
+from python_inspector import utils_pypi
 
 Candidate = collections.namedtuple("Candidate", "name version extras")
 
@@ -63,6 +58,7 @@ class PythonInputProvider(AbstractProvider):
         self.dependencies_by_purl = {}
 
     def identify(self, requirement_or_candidate):
+        """Given a requirement, return an identifier for it. Overridden."""
         name = packaging.utils.canonicalize_name(requirement_or_candidate.name)
         if requirement_or_candidate.extras:
             extras_str = ",".join(sorted(requirement_or_candidate.extras))
@@ -77,6 +73,8 @@ class PythonInputProvider(AbstractProvider):
         information,
         backtrack_causes,
     ):
+        """Produce a sort key for given requirement based on preference. Overridden."""
+
         transitive = all(p is not None for _, p in information[identifier])
         return transitive, identifier
 
@@ -106,14 +104,16 @@ class PythonInputProvider(AbstractProvider):
         Yield requirements for a package.
         """
         if self.repos and self.environment:
-            wheels = download_wheel(
+            wheels = utils_pypi.download_wheel(
                 name=candidate.name,
                 version=str(candidate.version),
                 environment=self.environment,
                 repos=self.repos,
             )
             for wheel in wheels:
-                deps = list(PypiWheelHandler.parse(os.path.join(CACHE_THIRDPARTY_DIR, wheel)))
+                deps = list(
+                    PypiWheelHandler.parse(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, wheel))
+                )
                 assert len(deps) == 1
                 deps = deps[0].dependencies
                 for dep in deps:
@@ -133,7 +133,7 @@ class PythonInputProvider(AbstractProvider):
 
     def get_candidates(self, all_versions, requirements, identifier, bad_versions, name, extras):
         """
-        Generate candidates for the given identifier.
+        Generate candidates for the given identifier. Overridden.
         """
         for version in all_versions:
             parsed_version = packaging.version.parse(version)
@@ -143,7 +143,7 @@ class PythonInputProvider(AbstractProvider):
 
     def _iter_matches(self, identifier, requirements, incompatibilities):
         """
-        Return a list of candidates for the given identifier.
+        Yield candidates for the given identifier, requirements and incompatibilities
         """
         name, _, _extras = identifier.partition("[")
         bad_versions = {c.version for c in incompatibilities[identifier]}
@@ -161,6 +161,7 @@ class PythonInputProvider(AbstractProvider):
                 )
 
     def find_matches(self, identifier, requirements, incompatibilities):
+        """Find all possible candidates that satisfy given constraints. Overridden."""
         candidates = sorted(
             self._iter_matches(identifier, requirements, incompatibilities),
             key=operator.attrgetter("version"),
@@ -169,6 +170,7 @@ class PythonInputProvider(AbstractProvider):
         return candidates
 
     def is_satisfied_by(self, requirement, candidate):
+        """Whether the given requirement can be satisfied by a candidate. Overridden."""
         return candidate.version in requirement.specifier
 
     def _iter_dependencies(self, candidate):
@@ -195,6 +197,7 @@ class PythonInputProvider(AbstractProvider):
                     yield r
 
     def get_dependencies(self, candidate):
+        """Get dependencies of a candidate. Overridden."""
         return list(self._iter_dependencies(candidate))
 
 
@@ -264,17 +267,17 @@ def format_resolution(results, as_tree=False):
         return dependencies
 
 
-def pypi_simple_repo_in_repos(repos: PypiSimpleRepository):
+def pypi_simple_repo_in_repos(repos: utils_pypi.PypiSimpleRepository):
     """
     Return True if simple pypi index_url is present in any of the repos
     """
-    return any(repo.index_url == PYPI_SIMPLE_URL for repo in repos)
+    return any(repo.index_url == utils_pypi.PYPI_SIMPLE_URL for repo in repos)
 
 
 def get_resolved_dependencies(
     requirements: List[Requirement],
-    environment: Environment = None,
-    repos: List[PypiSimpleRepository] = [],
+    environment: utils_pypi.Environment = None,
+    repos: List[utils_pypi.PypiSimpleRepository] = [],
     as_tree: bool = False,
 ):
     """
@@ -283,7 +286,7 @@ def get_resolved_dependencies(
     parent/children or a nested tree if ``as_tree`` is True
     """
     if repos and not pypi_simple_repo_in_repos(repos):
-        repos.append(PYPI_PUBLIC_REPO)
+        repos.append(utils_pypi.PYPI_PUBLIC_REPO)
 
     resolver = Resolver(
         provider=PythonInputProvider(environment, repos),
