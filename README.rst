@@ -24,6 +24,19 @@ The goal of python-inspector is to be a comprehensive library
 that can handle every style of Python package layouts, manifests and lockfiles.
 
 
+Usage
+--------
+
+- Install with pip::
+
+    pip install python-inspector
+
+- Run a command line with::
+
+    dad --help
+
+
+
 Its companion libraries are:
 
 - ``pip-requirements-parser``, a mostly correct pip requirements parsing
