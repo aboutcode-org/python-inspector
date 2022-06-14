@@ -119,10 +119,13 @@ def check_requirements_resolution(
     )
 
 
-def check_json_results(result_file, expected_file, regen=REGEN_TEST_FIXTURES):
+def check_json_results(result_file, expected_file, clean=True, regen=REGEN_TEST_FIXTURES):
     """
     Check the ``result_file`` JSON results against the ``expected_file``
     expected JSON results.
+
+    If ``clean`` is True, remove headers data that can change across runs to
+    provide stable test resultys.
 
     If ``regen`` is True the expected_file WILL BE overwritten with the new
     results from ``results_file``. This is convenient for updating tests
@@ -130,6 +133,9 @@ def check_json_results(result_file, expected_file, regen=REGEN_TEST_FIXTURES):
     """
     with open(result_file) as res:
         results = json.load(res)
+
+    if clean:
+        clean_results(results)
 
     if regen:
         with open(expected_file, "w") as reg:
@@ -139,7 +145,21 @@ def check_json_results(result_file, expected_file, regen=REGEN_TEST_FIXTURES):
         with open(expected_file) as res:
             expected = json.load(res)
 
+            if clean:
+                clean_results(expected)
+
     assert results == expected
+
+
+def clean_results(results):
+    """
+    Return cleaned results removing transient values that can change across test
+    runs.
+    """
+    headers = results.get("headers", {})
+    options = headers.get("options", [])
+    headers["options"] = [o for o in options if not o.startswith("--requirement")]
+    return results
 
 
 def run_cli(options, cli=resolve_dependencies, expected_rc=0, env=None):
