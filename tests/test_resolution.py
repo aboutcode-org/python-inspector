@@ -34,12 +34,34 @@ def test_get_resolved_dependencies_with_flask_and_python_310():
     assert as_list == [
         "pkg:pypi/click@8.1.3",
         "pkg:pypi/flask@2.1.2",
-        "pkg:pypi/importlib-metadata@4.11.4",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
         "pkg:pypi/markupsafe@2.1.1",
         "pkg:pypi/werkzeug@2.1.2",
-        "pkg:pypi/zipp@3.8.0",
+    ]
+
+
+@pytest.mark.online
+def test_get_resolved_dependencies_with_flask_and_python_310_windows():
+    req = [Requirement("flask==2.1.2")]
+    results = get_resolved_dependencies(
+        requirements=req,
+        environment=Environment(
+            python_version="310",
+            operating_system="windows",
+        ),
+        repos=[PYPI_PUBLIC_REPO],
+        as_tree=False,
+    )
+    as_list = [p["package"] for p in results]
+    assert as_list == [
+        "pkg:pypi/click@8.1.3",
+        "pkg:pypi/colorama@0.4.4",
+        "pkg:pypi/flask@2.1.2",
+        "pkg:pypi/itsdangerous@2.1.2",
+        "pkg:pypi/jinja2@3.1.2",
+        "pkg:pypi/markupsafe@2.1.1",
+        "pkg:pypi/werkzeug@2.1.2",
     ]
 
 
@@ -64,6 +86,7 @@ def test_get_resolved_dependencies_with_flask_and_python_36():
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
         "pkg:pypi/markupsafe@2.0.1",
+        "pkg:pypi/typing-extensions@4.2.0",
         "pkg:pypi/werkzeug@2.1.2",
         "pkg:pypi/zipp@3.8.0",
     ]
@@ -72,7 +95,14 @@ def test_get_resolved_dependencies_with_flask_and_python_36():
 @pytest.mark.online
 def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
     req = [Requirement("flask~=2.1.2")]
-    results = get_resolved_dependencies(requirements=req, as_tree=False)
+    results = get_resolved_dependencies(
+        requirements=req,
+        as_tree=False,
+        environment=Environment(
+            python_version="38",
+            operating_system="linux",
+        ),
+    )
     as_list = [p["package"] for p in results]
     assert as_list == [
         "pkg:pypi/click@8.1.3",

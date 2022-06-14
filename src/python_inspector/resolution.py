@@ -51,6 +51,17 @@ def is_valid_version(parsed_version, requirements, identifier, bad_versions):
     return True
 
 
+def get_python_version_from_env_tag(python_version: str):
+    """
+    >>> assert get_python_version_from_env_tag("310") == "3.10"
+    >>> assert get_python_version_from_env_tag("39") == "3.9"
+    """
+    elements = list(python_version)
+    elements.insert(1, ".")
+    python_version = "".join(elements)
+    return python_version
+
+
 class PythonInputProvider(AbstractProvider):
     def __init__(self, environment=None, repos=tuple()):
         self.environment = environment
@@ -215,7 +226,15 @@ class PythonInputProvider(AbstractProvider):
             if r.marker is None:
                 yield r
             else:
-                if r.marker.evaluate({"extra": ""}):
+                if r.marker.evaluate(
+                    {
+                        "extra": "",
+                        "python_version": get_python_version_from_env_tag(
+                            self.environment.python_version
+                        ),
+                        "platform_system": self.environment.operating_system.capitalize(),
+                    }
+                ):
                     yield r
 
     def get_dependencies(self, candidate):
