@@ -164,7 +164,6 @@ PLATFORMS_BY_OS = {
 
 CACHE_THIRDPARTY_DIR = ".cache/thirdparty"
 
-
 ################################################################################
 
 PYPI_SIMPLE_URL = "https://pypi.org/simple"
@@ -190,7 +189,15 @@ class DistributionNotFound(Exception):
     pass
 
 
-def download_wheel(name, version, environment, dest_dir=CACHE_THIRDPARTY_DIR, repos=tuple()):
+def download_wheel(
+    name,
+    version,
+    environment,
+    dest_dir=CACHE_THIRDPARTY_DIR,
+    repos=tuple(),
+    verbose=False,
+    echo_func=None,
+):
     """
     Download the wheels binary distribution(s) of package ``name`` and
     ``version`` matching the ``environment`` Environment constraints into the
@@ -226,7 +233,11 @@ def download_wheel(name, version, environment, dest_dir=CACHE_THIRDPARTY_DIR, re
                 print(
                     f"    download_wheel: Getting wheel from index (or cache): {wheel.download_url}"
                 )
-            fetched_wheel_filename = wheel.download(dest_dir=dest_dir)
+            fetched_wheel_filename = wheel.download(
+                dest_dir=dest_dir,
+                verbose=verbose,
+                echo_func=echo_func,
+            )
             fetched_wheel_filenames.append(fetched_wheel_filename)
 
         if fetched_wheel_filenames:
@@ -236,7 +247,14 @@ def download_wheel(name, version, environment, dest_dir=CACHE_THIRDPARTY_DIR, re
     return fetched_wheel_filenames
 
 
-def download_sdist(name, version, dest_dir=CACHE_THIRDPARTY_DIR, repos=tuple()):
+def download_sdist(
+    name,
+    version,
+    dest_dir=CACHE_THIRDPARTY_DIR,
+    repos=tuple(),
+    verbose=False,
+    echo_func=None,
+):
     """
     Download the sdist source distribution of package ``name`` and ``version``
     into the ``dest_dir`` directory. Return a fetched filename or None.
@@ -267,7 +285,11 @@ def download_sdist(name, version, dest_dir=CACHE_THIRDPARTY_DIR, repos=tuple()):
 
         if TRACE_DEEP:
             print(f"    download_sdist: Getting sdist from index (or cache): {sdist.download_url}")
-        fetched_sdist_filename = package.sdist.download(dest_dir=dest_dir)
+        fetched_sdist_filename = package.sdist.download(
+            dest_dir=dest_dir,
+            verbose=verbose,
+            echo_func=echo_func,
+        )
 
         if fetched_sdist_filename:
             # do not futher fetch from other repos if we find in first, typically PyPI
@@ -522,7 +544,12 @@ class Distribution(NameVer):
                         f"     get_best_download_url: {self.filename} not found in {repo.index_url}"
                     )
 
-    def download(self, dest_dir=CACHE_THIRDPARTY_DIR):
+    def download(
+        self,
+        dest_dir=CACHE_THIRDPARTY_DIR,
+        verbose=False,
+        echo_func=None,
+    ):
         """
         Download this distribution into `dest_dir` directory.
         Return the fetched filename.
@@ -540,6 +567,8 @@ class Distribution(NameVer):
             dest_dir=dest_dir,
             filename=self.filename,
             as_text=False,
+            verbose=verbose,
+            echo_func=echo_func,
         )
         return self.filename
 
@@ -1358,7 +1387,12 @@ class PypiSimpleRepository:
         repr=False,
     )
 
-    def _get_package_versions_map(self, name):
+    def _get_package_versions_map(
+        self,
+        name,
+        verbose=False,
+        echo_func=None,
+    ):
         """
         Return a mapping of all available PypiPackage version for this package name.
         The mapping may be empty. It is ordered by version from oldest to newest
@@ -1369,8 +1403,12 @@ class PypiSimpleRepository:
         if not versions and normalized_name not in self.fetched_package_normalized_names:
             self.fetched_package_normalized_names.add(normalized_name)
             try:
-                links = self.fetch_links(normalized_name=normalized_name)
-                # note that thsi is sorted so the mapping is also sorted
+                links = self.fetch_links(
+                    normalized_name=normalized_name,
+                    verbose=verbose,
+                    echo_func=echo_func,
+                )
+                # note that this is sorted so the mapping is also sorted
                 versions = {
                     package.version: package
                     for package in PypiPackage.packages_from_many_paths_or_urls(paths_or_urls=links)
@@ -1385,27 +1423,59 @@ class PypiSimpleRepository:
 
         return versions
 
-    def get_package_versions(self, name):
+    def get_package_versions(
+        self,
+        name,
+        verbose=False,
+        echo_func=None,
+    ):
         """
         Return a mapping of all available PypiPackage version as{version:
         package} for this package name. The mapping may be empty but not None.
         It is sorted by version from oldest to newest.
         """
-        return dict(self._get_package_versions_map(name))
+        return dict(
+            self._get_package_versions_map(
+                name=name,
+                verbose=verbose,
+                echo_func=echo_func,
+            )
+        )
 
-    def get_package_version(self, name, version=None):
+    def get_package_version(
+        self,
+        name,
+        version=None,
+        verbose=False,
+        echo_func=None,
+    ):
         """
         Return the PypiPackage with name and version or None.
         Return the latest PypiPackage version if version is None.
         """
         if not version:
-            versions = list(self._get_package_versions_map(name).values())
+            versions = list(
+                self._get_package_versions_map(
+                    name=name,
+                    verbose=verbose,
+                    echo_func=echo_func,
+                ).values()
+            )
             # return the latest version
             return versions and versions[-1]
         else:
-            return self._get_package_versions_map(name).get(version)
+            return self._get_package_versions_map(
+                name=name,
+                verbose=verbose,
+                echo_func=echo_func,
+            ).get(version)
 
-    def fetch_links(self, normalized_name):
+    def fetch_links(
+        self,
+        normalized_name,
+        verbose=False,
+        echo_func=None,
+    ):
         """
         Return a list of download link URLs found in a PyPI simple index for package
         name using the `index_url` of this repository.
@@ -1415,6 +1485,8 @@ class PypiSimpleRepository:
             path_or_url=package_url,
             as_text=True,
             force=not self.use_cached_index,
+            verbose=verbose,
+            echo_func=echo_func,
         )
         links = collect_urls(text)
         # TODO: keep sha256
@@ -1426,7 +1498,6 @@ class PypiSimpleRepository:
 PYPI_PUBLIC_REPO = PypiSimpleRepository(index_url=PYPI_SIMPLE_URL)
 DEFAULT_PYPI_REPOS = (PYPI_PUBLIC_REPO,)
 DEFAULT_PYPI_REPOS_BY_URL = {r.index_url: r for r in DEFAULT_PYPI_REPOS}
-
 
 ################################################################################
 #
@@ -1447,7 +1518,14 @@ class Cache:
     def __attrs_post_init__(self):
         os.makedirs(self.directory, exist_ok=True)
 
-    def get(self, path_or_url, as_text=True, force=False):
+    def get(
+        self,
+        path_or_url,
+        as_text=True,
+        force=False,
+        verbose=False,
+        echo_func=None,
+    ):
         """
         Return the content fetched from a ``path_or_url`` through the cache.
         Raise an Exception on errors. Treats the content as text if as_text is
@@ -1460,7 +1538,12 @@ class Cache:
         if force or not os.path.exists(cached):
             if TRACE_DEEP:
                 print(f"        FILE CACHE MISS: {path_or_url}")
-            content = get_file_content(path_or_url=path_or_url, as_text=as_text)
+            content = get_file_content(
+                path_or_url=path_or_url,
+                as_text=as_text,
+                verbose=verbose,
+                echo_func=echo_func,
+            )
             wmode = "w" if as_text else "wb"
             with open(cached, wmode) as fo:
                 fo.write(content)
@@ -1474,7 +1557,12 @@ class Cache:
 CACHE = Cache()
 
 
-def get_file_content(path_or_url, as_text=True):
+def get_file_content(
+    path_or_url,
+    as_text=True,
+    verbose=False,
+    echo_func=None,
+):
     """
     Fetch and return the content at `path_or_url` from either a local path or a
     remote URL. Return the content as bytes is `as_text` is False.
@@ -1482,7 +1570,12 @@ def get_file_content(path_or_url, as_text=True):
     if path_or_url.startswith("https://"):
         if TRACE_DEEP:
             print(f"Fetching: {path_or_url}")
-        _headers, content = get_remote_file_content(url=path_or_url, as_text=as_text)
+        _headers, content = get_remote_file_content(
+            url=path_or_url,
+            as_text=as_text,
+            verbose=verbose,
+            echo_func=echo_func,
+        )
         return content
 
     elif path_or_url.startswith("file://") or (
@@ -1517,6 +1610,8 @@ def get_remote_file_content(
     headers_only=False,
     headers=None,
     _delay=0,
+    verbose=False,
+    echo_func=None,
 ):
     """
     Fetch and return a tuple of (headers, content) at `url`. Return content as a
@@ -1532,7 +1627,10 @@ def get_remote_file_content(
     # using a GET with stream=True ensure we get the the final header from
     # several redirects and that we can ignore content there. A HEAD request may
     # not get us this last header
-    print(f"    DOWNLOADING: {url}")
+    if verbose and not echo_func:
+        echo_func = print
+    if verbose:
+        echo_func(f"DOWNLOADING: {url}")
     with requests.get(url, allow_redirects=True, stream=True, headers=headers) as response:
         status = response.status_code
         if status != requests.codes.ok:  # NOQA
@@ -1561,6 +1659,8 @@ def fetch_and_save(
     dest_dir,
     filename,
     as_text=True,
+    verbose=False,
+    echo_func=None,
 ):
     """
     Fetch content at ``path_or_url`` URL or path and save this to
@@ -1571,6 +1671,8 @@ def fetch_and_save(
     content = CACHE.get(
         path_or_url=path_or_url,
         as_text=as_text,
+        verbose=verbose,
+        echo_func=echo_func,
     )
     output = os.path.join(dest_dir, filename)
     wmode = "w" if as_text else "wb"
