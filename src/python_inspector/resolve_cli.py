@@ -18,9 +18,14 @@ from packaging.requirements import Requirement
 from python_inspector import dependencies
 from python_inspector import utils_pypi
 from python_inspector.cli_utils import FileOptionType
-from python_inspector.resolution import resolution
+from python_inspector.resolution import get_resolved_dependencies
 
 TRACE = False
+
+__version__ = "0.5.0"
+
+DEFAULT_PYTHON_VERSION = "38"
+PYPI_SIMPLE_URL = "https://pypi.org/simple"
 
 
 @click.command()
@@ -43,7 +48,7 @@ TRACE = False
     metavar="SPECIFIER",
     multiple=True,
     required=False,
-    help="Package specifier such as django==1.2.3. " "This option can be used multiple times.",
+    help="Package specifier such as django==1.2.3. This option can be used multiple times.",
 )
 @click.option(
     "-p",
@@ -51,8 +56,7 @@ TRACE = False
     "python_version",
     type=click.Choice(utils_pypi.PYTHON_VERSIONS),
     metavar="PYVER",
-    # TODO: Make default the current Python version
-    default="38",  # utils_pypi.PYTHON_VERSIONS,
+    default=DEFAULT_PYTHON_VERSION,
     show_default=True,
     help="Python version to use for dependency resolution.",
 )
@@ -64,7 +68,7 @@ TRACE = False
     metavar="OS",
     default="linux",
     show_default=True,
-    help="OS to use for dependency resolution. ",
+    help="OS to use for dependency resolution.",
 )
 @click.option(
     "--index-url",
@@ -72,8 +76,9 @@ TRACE = False
     type=str,
     metavar="INDEX",
     show_default=True,
+    default=tuple([PYPI_SIMPLE_URL]),
     multiple=True,
-    help="PyPI index URL(s) to use in order of preference. "
+    help="PyPI simple index URL(s) to use in order of preference. "
     "This option can be used multiple times.",
 )
 @click.option(
@@ -88,6 +93,7 @@ TRACE = False
 @click.option(
     "--use-cached-index",
     is_flag=True,
+    hidden=True,
     help="Use cached on-disk PyPI package indexes and do not refetch if present.",
 )
 @click.option(
@@ -104,7 +110,7 @@ def resolve_dependencies(
     operating_system,
     index_urls,
     json_output,
-    use_cached_index,
+    use_cached_index=False,
     debug=TRACE,
 ):
     """
@@ -112,30 +118,27 @@ def resolve_dependencies(
     and SPECIFIER(s) and save the results as JSON to FILE.
 
     Resolve the dependencies for the requested ``--python-version`` PYVER and
-    ``--operating_system`` OS combination defaulting to the current version and OS.
+    ``--operating_system`` OS combination defaulting Python version 3.8 and
+    linux OS.
 
-    Download from the provided PyPI simple --index-url INDEX(s) URLs.
+    Download from the provided PyPI simple --index-url INDEX(s) URLs defaulting
+    to PyPI.org
+
     Error and progress are printed to stderr.
 
-    Default environment is the Python version - 3.8 and OS - linux.
+    1) Without an --index-url is provided, this tool uses the PyPI JSON API.
 
-    1) If no index_url is provided, the PyPI JSON API is used and environment will be ignored in that case.
+    For example, display the results of resolving the dependencies for flask==2.1.2
+    on screen::
 
-    For example:
         dad --spec "flask==2.1.2" --json -
 
-    2) If an index_url is provided, the environment will be used to resolve the dependencies.
-    (If no environment is provided default environment will be used.)
+    2) If an --index-url is provided, it is used to resolve the dependencies::
 
-    For example:
-        dad --spec "flask==2.1.2" --index-url https://pypi.org/simple --json -
-
-    For example::
-        dad --spec "flask" --requirement etc/scripts/requirements.txt --json -
+         dad --spec "flask==2.1.2" --index-url https://pypi.org/simple --json -
     """
 
-    # FIXME: Use stderr and click.secho
-    print(f"Resolving dependencies...")
+    click.secho(f"Resolving dependencies...")
 
     # TODO: deduplicate me
     direct_dependencies = []
@@ -149,13 +152,13 @@ def resolve_dependencies(
         direct_dependencies.append(dep)
 
     if not direct_dependencies:
-        print("Error: no requirements requested.")
+        click.secho("Error: no requirements requested.")
         sys.exit(1)
 
     if debug:
-        print("direct_dependencies:")
+        click.secho("direct_dependencies:")
         for dep in direct_dependencies:
-            print(" ", dep)
+            click.secho(" ", dep)
 
     # create a resolution environments
     environment = utils_pypi.Environment.from_pyver_and_os(
@@ -163,7 +166,7 @@ def resolve_dependencies(
     )
 
     if debug:
-        print("environment:", environment)
+        click.secho("environment:", environment)
 
     # Collect PyPI repos
     repos = []
@@ -181,42 +184,87 @@ def resolve_dependencies(
             repos.append(repo)
 
     if debug:
-        print("repos:")
+        click.secho("repos:")
         for repo in repos:
-            print(" ", repo)
+            click.secho(" ", repo)
 
     # resolve dependencies proper
-    resolved_dependencies = resolve(direct_dependencies, environment, repos)
-    write_output(results=resolved_dependencies, json_output=json_output)
-
-    if debug:
-        print("done!")
-
-
-def resolve(direct_dependencies, environment, repos):
-    """
-    Resolve dependencies given a ``direct_dependencies`` list of
-    DependentPackage and return SOMETHING TBD.
-    """
-
-    reqs = [Requirement(d.extracted_requirement) for d in direct_dependencies]
-    as_parent_children = resolution(reqs, environment, repos)
-
-    return dict(
-        headers=[dict(tool="dad")],
-        requirements=[d.to_dict() for d in direct_dependencies],
-        resolved_dependencies=dict(
-            as_parent_children=as_parent_children,
-        ),
+    requirements, resolved_dependencies = resolve(
+        direct_dependencies=direct_dependencies,
+        environment=environment,
+        repos=repos,
+        as_tree=False,
     )
 
+    cli_options = [f"--requirement {rf}" for rf in requirement_files]
+    cli_options += [f"--specifier {sp}" for sp in specifiers]
+    cli_options += [f"--index-url {iu}" for iu in index_urls]
+    cli_options += [f"--python-version {python_version}"]
+    cli_options += [f"--operating-system {operating_system}"]
+    cli_options += ["--json <file>"]
 
-def write_output(results, json_output):
+    notice = (
+        "Dependency tree generated with python-inspector.\n"
+        "python-inspector is a free software tool from nexB Inc. and others.\n"
+        "Visit https://github.com/nexB/scancode-toolkit/ for support and download."
+    )
+
+    headers = dict(
+        tool_name="dad",
+        tool_homepageurl="https://github.com/nexB/python-inspector",
+        tool_version=__version__,
+        options=cli_options,
+        notice=notice,
+        warnings=[],
+        errors=[],
+    )
+
+    write_output(
+        headers=headers,
+        requirements=requirements,
+        resolved_dependencies=resolved_dependencies,
+        json_output=json_output,
+    )
+
+    if debug:
+        click.secho("done!")
+
+
+def resolve(direct_dependencies, environment, repos, as_tree=False):
     """
-    Write headers, and resolved dependency results to ``output_file``
+    Resolve dependencies given a ``direct_dependencies`` list of
+    DependentPackage and return a tuple of (initial_requirements,
+    resolved_dependencies).
     """
-    # TODO : create tree, add headers
-    json.dump(results, json_output, indent=2)
+
+    requirements = [
+        Requirement(requirement_string=d.extracted_requirement) for d in direct_dependencies
+    ]
+    resolved_dependencies = get_resolved_dependencies(
+        requirements=requirements,
+        environment=environment,
+        repos=repos,
+        as_tree=as_tree,
+    )
+
+    initial_requirements = [d.to_dict() for d in direct_dependencies]
+
+    return initial_requirements, resolved_dependencies
+
+
+def write_output(headers, requirements, resolved_dependencies, json_output):
+    """
+    Write headers, requirements and resolved_dependencies as JSON to ``json_output``.
+    Return the output data.
+    """
+    output = dict(
+        headers=headers,
+        requirements=requirements,
+        resolved_dependencies=resolved_dependencies,
+    )
+
+    json.dump(output, json_output, indent=2)
+    return output
 
 
 if __name__ == "__main__":
