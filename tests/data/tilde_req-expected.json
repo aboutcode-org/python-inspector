@@ -1,0 +1,35 @@
+{
+  "headers": {
+    "tool_name": "dad",
+    "tool_homepageurl": "https://github.com/nexB/python-inspector",
+    "tool_version": "0.5.0",
+    "options": [
+      "--specifier zipp~=3.8.0",
+      "--index-url https://pypi.org/simple",
+      "--index-url https://thirdparty.aboutcode.org/pypi/simple/",
+      "--python-version 38",
+      "--operating-system linux",
+      "--json <file>"
+    ],
+    "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/nexB/scancode-toolkit/ for support and download.",
+    "warnings": [],
+    "errors": []
+  },
+  "requirements": [
+    {
+      "purl": "pkg:pypi/zipp",
+      "extracted_requirement": "zipp~=3.8.0",
+      "scope": "install",
+      "is_runtime": true,
+      "is_optional": false,
+      "is_resolved": false,
+      "resolved_package": {}
+    }
+  ],
+  "resolved_dependencies": [
+    {
+      "package": "pkg:pypi/zipp@3.8.0",
+      "dependencies": []
+    }
+  ]
+}

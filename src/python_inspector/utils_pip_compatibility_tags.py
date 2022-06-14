@@ -49,13 +49,14 @@ def _mac_platforms(arch):
     if match:
         name, major, minor, actual_arch = match.groups()
         mac_version = (int(major), int(minor))
+        len_mac = len("macosx_")
         arches = [
             # Since we have always only checked that the platform starts
             # with "macosx", for backwards-compatibility we extract the
             # actual prefix provided by the user in case they provided
             # something like "macosxcustom_". It may be good to remove
             # this as undocumented or deprecate it in the future.
-            "{}_{}".format(name, arch[len("macosx_") :])
+            "{}_{}".format(name, arch[len_mac:])
             for arch in mac_platforms(mac_version, actual_arch)
         ]
     else:

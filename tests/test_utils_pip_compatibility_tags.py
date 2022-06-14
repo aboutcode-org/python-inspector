@@ -95,7 +95,9 @@ class TestManylinux2010Tags(object):
         Specifying manylinux2010 implies manylinux1.
         """
         groups = {}
-        supported = utils_pip_compatibility_tags.get_supported(platforms=[manylinux2010])
+        supported = utils_pip_compatibility_tags.get_supported(
+            platforms=[manylinux2010],
+        )
         for tag in supported:
             groups.setdefault((tag.interpreter, tag.abi), []).append(tag.platform)
 

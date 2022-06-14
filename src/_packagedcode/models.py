@@ -356,6 +356,12 @@ class DependentPackage(ModelMixin):
         "lockfiles for Composer or Cargo contain extra dependency data.",
     )
 
+    # dependencies = List(
+    #     item_type="DependentPackage",
+    #     label="dependencies",
+    #     help="A list of DependentPackage for this package.",
+    # )
+
 
 @attr.attributes(slots=True)
 class Dependency(DependentPackage):

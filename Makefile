@@ -18,7 +18,7 @@ dev:
 
 isort:
 	@echo "-> Apply isort changes to ensure proper imports ordering"
-	${VENV}/bin/isort --sl src tests
+	${VENV}/bin/isort --sl -l 100 src tests 
 
 black:
 	@echo "-> Apply black code formatter"
@@ -32,9 +32,10 @@ valid: isort black
 
 check:
 	@echo "-> Run pycodestyle (PEP8) validation"
-	@${ACTIVATE} pycodestyle --max-line-length=100 --exclude=venv,lib,thirdparty,docs,migrations,settings.py .
+	@${ACTIVATE} pycodestyle --max-line-length=110 \
+	   --exclude=.eggs,etc/scripts,src/_packagedcode,venv,lib,thirdparty,docs .
 	@echo "-> Run isort imports ordering validation"
-	@${ACTIVATE} isort --sl --check-only .
+	@${ACTIVATE} isort --sl --check-only -l 100 src tests
 	@echo "-> Run black validation"
 	@${ACTIVATE} black --check -l 100
 

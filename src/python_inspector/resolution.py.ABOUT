@@ -1,0 +1,14 @@
+about_resource: resolution.py
+package_url: pkg:github.com/sarugaku/resolvelib/@a5ae68140afac49dd1a1a8e87eff9550db4a586b#tests/functional/python/test_resolvers_python.py
+type: github
+namespace: sarugaku
+name: resolvelib
+version: a5ae68140afac49dd1a1a8e87eff9550db4a586b
+subpath: tests/functional/python/test_resolvers_python.py
+
+download_url: https://github.com/sarugaku/resolvelib/blob/a5ae68140afac49dd1a1a8e87eff9550db4a586b/tests/functional/python/test_resolvers_python.py
+copyright: Copyright (c) 2018, Tzu-ping Chung <uranusjr@gmail.com>
+license_expression: isc
+notes: The PythonInputProvider is copied in part and heavily modified from 
+ resolvelib tests/functional/python/test_resolvers_python.py
+ 
