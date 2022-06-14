@@ -12,26 +12,26 @@ import packaging
 import pytest
 from packaging.requirements import Requirement
 
+from python_inspector.resolution import get_resolved_dependencies
 from python_inspector.resolution import is_valid_version
 from python_inspector.resolution import pypi_simple_repo_in_repos
-from python_inspector.resolution import resolution
 from python_inspector.utils_pypi import PYPI_PUBLIC_REPO
 from python_inspector.utils_pypi import Environment
 
 
 @pytest.mark.online
-def test_resolvelib_with_flask_and_python_310():
+def test_get_resolved_dependencies_with_flask_and_python_310():
     req = [Requirement("flask==2.1.2")]
-    as_list = resolution(
+    results = get_resolved_dependencies(
         requirements=req,
         environment=Environment(
             python_version="310",
             operating_system="linux",
         ),
         repos=[PYPI_PUBLIC_REPO],
-        return_as_parent_children=False,
-        return_as_list=True,
+        as_tree=False,
     )
+    as_list = [p["package"] for p in results]
     assert as_list == [
         "pkg:pypi/click@8.1.3",
         "pkg:pypi/flask@2.1.2",
@@ -45,18 +45,18 @@ def test_resolvelib_with_flask_and_python_310():
 
 
 @pytest.mark.online
-def test_resolvelib_with_flask_and_python_36():
+def test_get_resolved_dependencies_with_flask_and_python_36():
     req = [Requirement("flask==2.1.2")]
-    as_list = resolution(
+    results = get_resolved_dependencies(
         requirements=req,
         environment=Environment(
             python_version="36",
             operating_system="linux",
         ),
         repos=[PYPI_PUBLIC_REPO],
-        return_as_parent_children=False,
-        return_as_list=True,
+        as_tree=False,
     )
+    as_list = [p["package"] for p in results]
 
     assert as_list == [
         "pkg:pypi/click@8.1.3",
@@ -71,14 +71,10 @@ def test_resolvelib_with_flask_and_python_36():
 
 
 @pytest.mark.online
-def test_resolvelib_with_tilde_requirement_using_json_api():
+def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
     req = [Requirement("flask~=2.1.2")]
-    as_list = resolution(
-        requirements=req,
-        return_as_parent_children=False,
-        return_as_list=True,
-    )
-
+    results = get_resolved_dependencies(requirements=req, as_tree=False)
+    as_list = [p["package"] for p in results]
     assert as_list == [
         "pkg:pypi/click@8.1.3",
         "pkg:pypi/flask@2.1.2",
