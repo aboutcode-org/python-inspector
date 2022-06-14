@@ -92,11 +92,11 @@ def test_resolvelib_with_tilde_requirement_using_json_api():
 
 
 def test_pypi_simple_repo_in_repos():
-    assert pypi_simple_repo_in_repos(repos=[PYPI_PUBLIC_REPO]) == True
+    assert pypi_simple_repo_in_repos(repos=[PYPI_PUBLIC_REPO])
 
 
 def test_pypi_simple_repo_in_repos_not_present():
-    assert pypi_simple_repo_in_repos(repos=[]) == False
+    assert not pypi_simple_repo_in_repos(repos=[])
 
 
 def test_is_valid_version():
@@ -104,4 +104,4 @@ def test_is_valid_version():
     requirements = {"flask": [Requirement("flask>2.0.0")]}
     bad_versions = []
     identifier = "flask"
-    assert is_valid_version(parsed_version, requirements, identifier, bad_versions) == True
+    assert is_valid_version(parsed_version, requirements, identifier, bad_versions)

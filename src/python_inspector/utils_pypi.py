@@ -1024,7 +1024,7 @@ class Wheel(Distribution):
 def is_pure_wheel(filename):
     try:
         return Wheel.from_filename(filename).is_pure()
-    except:
+    except Exception:
         return False
 
 
@@ -1418,7 +1418,7 @@ class PypiSimpleRepository:
         )
         links = collect_urls(text)
         # TODO: keep sha256
-        links = [l.partition("#sha256=") for l in links]
+        links = [lnk.partition("#sha256=") for lnk in links]
         links = [url for url, _, _sha256 in links]
         return links
 
