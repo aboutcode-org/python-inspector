@@ -29,7 +29,7 @@ Usage
 
 - Install with pip::
 
-    pip install python-inspector
+    pip install git+https://github.com/nexB/python-inspector
 
 - Run a command line with::
 
