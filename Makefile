@@ -18,11 +18,11 @@ dev:
 
 isort:
 	@echo "-> Apply isort changes to ensure proper imports ordering"
-	${VENV}/bin/isort --sl -l 100 src tests --skip-glob "*/_packagedcode/*"
+	${VENV}/bin/isort --sl -l 100 src tests setup.py --skip-glob "*/_packagedcode/*"
 
 black:
 	@echo "-> Apply black code formatter"
-	${VENV}/bin/black -l 100 src tests --exclude "_packagedcode/.*"
+	${VENV}/bin/black -l 100 src tests setup.py --exclude "_packagedcode/.*"
 
 doc8:
 	@echo "-> Run doc8 validation"
@@ -35,9 +35,9 @@ check:
 	@${ACTIVATE} pycodestyle --max-line-length=110 \
 	   --exclude=.eggs,etc/scripts,src/_packagedcode,venv,lib,thirdparty,docs .
 	@echo "-> Run isort imports ordering validation"
-	@${ACTIVATE} isort --sl --check-only -l 100 src tests --skip-glob "*/_packagedcode/*"
+	@${ACTIVATE} isort --sl --check-only -l 100 setup.py src tests --skip-glob "*/_packagedcode/*"
 	@echo "-> Run black validation"
-	@${ACTIVATE} black --check -l 100 --exclude "_packagedcode/.*"
+	@${ACTIVATE} black --check -l 100 src tests setup.py --exclude "_packagedcode/.*"
 
 clean:
 	@echo "-> Clean the Python env"
