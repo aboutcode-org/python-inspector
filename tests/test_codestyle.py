@@ -16,7 +16,7 @@ class BaseTests(unittest.TestCase):
         """
         This test shouldn't run in proliferated repositories.
         """
-        args = "venv/bin/black --check -l 100 setup.py tests src"
+        args = "make check"
         try:
             subprocess.check_output(args.split())
         except subprocess.CalledProcessError as e:
@@ -24,7 +24,6 @@ class BaseTests(unittest.TestCase):
             print(e.output)
             print("===========================================================")
             raise Exception(
-                "Black style check failed; please format the code using:\n"
-                "  python -m black -l 100 setup.py tests src",
+                "Code style check failed!",
                 e.output,
             ) from e
