@@ -27,7 +27,8 @@ in the codebase.You can use scancode::
 
     scancode --package --info <path/to/development/codebase/dir> --json-pp <path/to/development-scan-output.json> --processes 4
 
-You then need to review the scanc results to assemble a list of of pip requirement files used in development.
+You then need to review the scanc results to assemble a list
+of pip requirement files used in development.
 
 Or a simpler approach is to use the ``find`` command::
 
@@ -43,7 +44,7 @@ Step 2: Build your code
 In this step, you need to run the build of your codebase and obtain the set
 of deployed binaries. Building requires both dependency resolution and installation
 of the resolved packages. The set of installed packages is used to establish the
-ground truth and the expected results. 
+ground truth and the expected results.
 
 As an output, keep the Python version that is used and the directory(ies) where
 the deployed code is built named further down as <path/to/deployed/codebase/dir>.
@@ -63,7 +64,7 @@ For this we will use extractcode and scancode with these commands::
 You can adjust the number of processes up or down based on available CPU cores.
 
 The output is the file <path/to/scan-output.json> that contains all the detected
-packages that were installed during the build. 
+packages that were installed during the build.
 
 
 Step 4: Resolve dependencies using development requirement files
@@ -129,7 +130,7 @@ The possible causes could be:
   the development scan from Step 3. and report each manifest format as enhancement
   request in the python-inspector issue tracker.
 
-- finally it can be a bug in python-inspector proper. Please report an issue 
+- finally it can be a bug in python-inspector proper. Please report an issue
   in the python-inspector issue tracker. Attach the list or JSON output(s)
   from Step 1, Step 3 and Step 4. And the results of the review of Step 5, 6
   and 7. Alternatively you can share these files with python-inspector
