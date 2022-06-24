@@ -494,6 +494,11 @@ class Distribution(NameVer):
         metadata=dict(help="Extra data"),
     )
 
+    credentials = attr.ib(
+        type=dict,
+        default=None,
+    )
+
     @property
     def package_url(self):
         """
@@ -565,6 +570,7 @@ class Distribution(NameVer):
         fetch_and_save(
             path_or_url=self.path_or_url,
             dest_dir=dest_dir,
+            credentials=self.credentials,
             filename=self.filename,
             as_text=False,
             verbose=verbose,
@@ -1387,6 +1393,8 @@ class PypiSimpleRepository:
         repr=False,
     )
 
+    credentials = attr.ib(type=dict, default=None)
+
     def _get_package_versions_map(
         self,
         name,
@@ -1483,6 +1491,7 @@ class PypiSimpleRepository:
         package_url = f"{self.index_url}/{normalized_name}"
         text = CACHE.get(
             path_or_url=package_url,
+            credentials=self.credentials,
             as_text=True,
             force=not self.use_cached_index,
             verbose=verbose,
@@ -1520,6 +1529,7 @@ class Cache:
 
     def get(
         self,
+        credentials,
         path_or_url,
         as_text=True,
         force=False,
@@ -1540,6 +1550,7 @@ class Cache:
                 print(f"        FILE CACHE MISS: {path_or_url}")
             content = get_file_content(
                 path_or_url=path_or_url,
+                credentials=credentials,
                 as_text=as_text,
                 verbose=verbose,
                 echo_func=echo_func,
@@ -1559,6 +1570,7 @@ CACHE = Cache()
 
 def get_file_content(
     path_or_url,
+    credentials,
     as_text=True,
     verbose=False,
     echo_func=None,
@@ -1572,6 +1584,7 @@ def get_file_content(
             print(f"Fetching: {path_or_url}")
         _headers, content = get_remote_file_content(
             url=path_or_url,
+            credentials=credentials,
             as_text=as_text,
             verbose=verbose,
             echo_func=echo_func,
@@ -1606,6 +1619,7 @@ class RemoteNotFetchedException(Exception):
 
 def get_remote_file_content(
     url,
+    credentials,
     as_text=True,
     headers_only=False,
     headers=None,
@@ -1631,7 +1645,20 @@ def get_remote_file_content(
         echo_func = print
     if verbose:
         echo_func(f"DOWNLOADING: {url}")
-    with requests.get(url, allow_redirects=True, stream=True, headers=headers) as response:
+
+    auth = None
+    if credentials:
+        auth = (credentials.get("login"), credentials.get("password"))
+
+    stream = requests.get(
+        url,
+        allow_redirects=True,
+        stream=True,
+        headers=headers,
+        auth=auth,
+    )
+
+    with stream as response:
         status = response.status_code
         if status != requests.codes.ok:  # NOQA
             if status == 429 and _delay < 20:
@@ -1640,6 +1667,7 @@ def get_remote_file_content(
 
                 return get_remote_file_content(
                     url,
+                    credentials=credentials,
                     as_text=as_text,
                     headers_only=headers_only,
                     _delay=increased_delay,
@@ -1658,6 +1686,7 @@ def fetch_and_save(
     path_or_url,
     dest_dir,
     filename,
+    credentials,
     as_text=True,
     verbose=False,
     echo_func=None,
@@ -1670,6 +1699,7 @@ def fetch_and_save(
     """
     content = CACHE.get(
         path_or_url=path_or_url,
+        credentials=credentials,
         as_text=as_text,
         verbose=verbose,
         echo_func=echo_func,
