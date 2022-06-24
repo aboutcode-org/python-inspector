@@ -6,6 +6,7 @@ Welcome to nexb-skeleton's documentation!
    :caption: Contents:
 
    dependencies-design
+   test-protocol
 
 Indices and tables
 ==================
