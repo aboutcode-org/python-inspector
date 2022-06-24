@@ -38,6 +38,15 @@ def get_dependencies_from_requirements(requirements_file="requirements.txt", *ar
             yield dependent_package
 
 
+def get_extra_data_from_requirements(requirements_file="requirements.txt", *args, **kwargs):
+    """
+    Yield extra_data for each requirement in a `requirement`
+    file.
+    """
+    for package_data in PipRequirementsFileHandler.parse(location=requirements_file):
+        yield package_data.extra_data
+
+
 def get_dependency(specifier, *args, **kwargs):
     """
     Return a DependentPackage given a requirement ``specifier`` string.
