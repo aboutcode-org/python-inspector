@@ -14,8 +14,10 @@ import sys
 
 import click
 from packaging.requirements import Requirement
+from tinynetrc import Netrc
 
 from python_inspector import dependencies
+from python_inspector import utils
 from python_inspector import utils_pypi
 from python_inspector.cli_utils import FileOptionType
 from python_inspector.resolution import get_resolved_dependencies
@@ -39,6 +41,15 @@ PYPI_SIMPLE_URL = "https://pypi.org/simple"
     required=False,
     help="Path to pip requirements file listing thirdparty packages. "
     "This option can be used multiple times.",
+)
+@click.option(
+    "-n",
+    "--netrc",
+    "netrc_file",
+    type=click.Path(exists=True, readable=True, path_type=str, dir_okay=False),
+    metavar="NETRC-FILE",
+    required=False,
+    help="Netrc file to use for authentication. ",
 )
 @click.option(
     "--spec",
@@ -111,6 +122,7 @@ PYPI_SIMPLE_URL = "https://pypi.org/simple"
 @click.help_option("-h", "--help")
 def resolve_dependencies(
     requirement_files,
+    netrc_file,
     specifiers,
     python_version,
     operating_system,
@@ -141,6 +153,9 @@ def resolve_dependencies(
 
     click.secho(f"Resolving dependencies...")
 
+    netrc = None
+    if netrc_file:
+        netrc = Netrc(file=netrc_file)
     # TODO: deduplicate me
     direct_dependencies = []
 
@@ -179,9 +194,16 @@ def resolve_dependencies(
                 existing.use_cached_index = use_cached_index
                 repos.append(existing)
             else:
+                credentials = None
+                if netrc:
+                    login, password = utils.get_netrc_auth(index_url, netrc)
+                    credentials = (
+                        dict(login=login, password=password) if login and password else None
+                    )
                 repo = utils_pypi.PypiSimpleRepository(
                     index_url=index_url,
                     use_cached_index=use_cached_index,
+                    credentials=credentials,
                 )
                 repos.append(repo)
 
