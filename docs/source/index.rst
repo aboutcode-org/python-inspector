@@ -1,5 +1,5 @@
-Welcome to nexb-skeleton's documentation!
-=========================================
+Welcome to  python-inspector's documentation!
+================================================
 
 .. toctree::
    :maxdepth: 2
