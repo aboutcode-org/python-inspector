@@ -23,16 +23,18 @@ Step 1: Collect development code details
 --------------------------------------------
 
 In this step, you will collect the list of requirements files that exist
-in the codebase.You can use scancode::
+in the codebase. You can use scancode::
 
-    scancode --package --info <path/to/development/codebase/dir> --json-pp <path/to/development-scan-output.json> --processes 4
+    scancode --package --info <path/to/development/codebase/dir> \
+      --json-pp <path/to/development-scan-output.json> --processes 4
 
-You then need to review the scanc results to assemble a list
-of pip requirement files used in development.
+You then need to review the scanc results to assemble a list of pip
+requirement files used in development.
 
 Or a simpler approach is to use the ``find`` command::
 
-    find <path/to/development/codebase/dir> -name "requirement*.txt" > <path/to/requirements-file-paths.txt>
+    find <path/to/development/codebase/dir> -name "requirement*.txt" \
+      > <path/to/requirements-file-paths.txt>
 
 The output is a list of pip requirement files used in the development codebase.
 
@@ -42,9 +44,9 @@ Step 2: Build your code
 ----------------------------
 
 In this step, you need to run the build of your codebase and obtain the set
-of deployed binaries. Building requires both dependency resolution and installation
-of the resolved packages. The set of installed packages is used to establish the
-ground truth and the expected results.
+of deployed binaries. Building requires both dependency resolution and
+installation of the resolved packages. The set of installed packages is used to
+establish the ground truth and the expected results.
 
 As an output, keep the Python version that is used and the directory(ies) where
 the deployed code is built named further down as <path/to/deployed/codebase/dir>.
@@ -59,7 +61,8 @@ collect existing packages as resolved during the original build.
 For this we will use extractcode and scancode with these commands::
 
     extractcode --shallow <path/to/deployed/codebase/dir>
-    scancode --package --info <path/to/deployed/codebase/dir> --json-pp <path/to/deployed-scan-output.json> --processes 4
+    scancode --package --info <path/to/deployed/codebase/dir> \
+      --json-pp <path/to/deployed-scan-output.json> --processes 4
 
 You can adjust the number of processes up or down based on available CPU cores.
 
@@ -76,7 +79,8 @@ Python version identified in Step 2. Run this command for each requirements
 file, using each time a different output file name. We assume here Python
 version 3.8 (note the absence of dot when passed as a command line option::
 
-    dad --python-version 38 --requirement <path/to/requirements.txt> --json <path/to/resolved-requirements.txt.json>
+    dad --python-version 38 --requirement <path/to/requirements.txt> \
+      --json <path/to/resolved-requirements.txt.json>
 
 The output is a list of JSON files with resolved packages for each of the
 input requirements files.
@@ -135,4 +139,137 @@ The possible causes could be:
   from Step 1, Step 3 and Step 4. And the results of the review of Step 5, 6
   and 7. Alternatively you can share these files with python-inspector
   maintainers if these are private.
+
+
+End-to-end example
+**********************
+
+Setup
+------
+
+
+We use this repo https://github.com/tjcsl/ion as a sample codebase.
+And the reference Python version is 3.8::
+
+    mkdir -p ~/tmp/pyinsp-example/
+    cd ~/tmp/pyinsp-example/
+    git https://github.com/tjcsl/ion
+
+
+Another example could be https://github.com/digitalocean/sample-django
+
+We use the latest main branch from python-inspector and scancode-toolkit 31.0.0rc2
+installed on Linux with Python 3.8 using the release tarball from:
+https://github.com/nexB/scancode-toolkit/releases/tag/v31.0.0rc2
+
+ScanCode setup::
+
+    mkdir -p ~/tmp/pyinsp-example/tools
+    cd ~/tmp/pyinsp-example/tools
+    wget https://github.com/nexB/scancode-toolkit/releases/download/v31.0.0rc2/scancode-toolkit-31.0.0rc2_py38-linux.tar.xz
+    tar -xf scancode-toolkit-31.0.0rc2_py38-linux.tar.xz
+    cd scancode-toolkit-31.0.0rc2/
+    ./scancode --help
+
+python-inspector setup::
+
+    cd ~/tmp/pyinsp-example/tools
+    git clone https://github.com/nexB/python-inspector
+    python3.8 -m venv venv
+    source venv/bin/activate
+    pip install --upgrade pip setuptools wheel
+    cd python-inspector
+    ./configure
+
+We will store all outputs in this directory::
+
+    mkdir -p ~/tmp/pyinsp-example/output
+
+
+Step 1: Collect development code details
+--------------------------------------------
+
+We run a simple find::
+
+    find ~/tmp/pyinsp-example/ion \
+      -name "requirement*.txt" > ~/tmp/pyinsp-example/output/requirements-file-paths.txt
+
+We find these two requirement files in ~/tmp/pyinsp-example/output/requirements-file-paths.txt::
+
+    ~/tmp/pyinsp-example/ion/docs/rtd-requirements.txt
+    ~/tmp/pyinsp-example/ion/requirements.txt
+
+
+Step 2: Build your code
+----------------------------
+
+We perform a simple "editable" build in place::
+
+    cd ~/tmp/pyinsp-example/codebase/ion
+    python3.8 -m venv venv
+    source venv/bin/activate
+    pip install --upgrade pip setuptools wheel
+    pip install --editable .
+    deactivate
+
+
+Step 3: Collect built code details
+---------------------------------------
+
+We extract in place::
+
+    cd ~/tmp/pyinsp-example/tools/scancode-toolkit-31.0.0rc2/
+    ./extractcode --shallow ~/tmp/pyinsp-example/codebase/ion
+
+And collect built details::
+
+    ./scancode --package --info ~/tmp/pyinsp-example/codebase/ion \
+      --json-pp ~/tmp/pyinsp-example/codebase/output/deployed-scan-output.json --processes 4
+
+The output files is::
+
+    ~/tmp/pyinsp-example/codebase/output/deployed-scan-output.json
+
+
+Step 4: Resolve dependencies using development requirement files
+--------------------------------------------------------------------
+
+    cd ~/tmp/pyinsp-example/tools/python-inspector
+    source venv/bin/activate
+
+    dad --requirement ~/tmp/pyinsp-example/ion/docs/rtd-requirements.txt \
+      --json ~/tmp/pyinsp-example/output/resolved-rtd-requirements.txt.json
+
+    dad --requirement ~/tmp/pyinsp-example/ion/requirements.txt \
+      --json ~/tmp/pyinsp-example/output/resolved-requirements.txt.json
+
+    deactivate
+
+The output files are::
+
+    ~/tmp/pyinsp-example/output/resolved-rtd-requirements.txt.json
+    ~/tmp/pyinsp-example/output/resolved-requirements.txt.json
+
+
+Step 5: Collect expected resolved packages
+----------------------------------------------
+
+TODO: explain how to do this in details
+
+The output is a list of expected purl with a version.
+
+
+Step 6: Collect actual resolved packages
+----------------------------------------------
+
+TODO: explain how to do this in details
+
+The output is a list of actual purl with a version.
+
+
+Step 7: Compare expected with actual resolved packages
+---------------------------------------------------------
+
+TODO: explain how to do this in details
+
 
