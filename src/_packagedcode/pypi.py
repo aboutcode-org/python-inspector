@@ -828,8 +828,14 @@ def get_requirements_txt_dependencies(location, include_nested=False):
     # for now we ignore errors
     extra_data = {}
     for opt in req_file.options:
-        extra_data.update(opt.options)
-
+        for name, value in opt.options.items():
+            if name not in extra_data:
+                extra_data[name] = value
+            else:
+                if isinstance(value, list):
+                    extra_data[name].extend(value)
+                else:
+                    extra_data[name] = value    
     dependent_packages = []
     for req in req_file.requirements:
 
