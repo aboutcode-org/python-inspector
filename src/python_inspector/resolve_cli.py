@@ -135,7 +135,7 @@ def resolve_dependencies(
     operating_system,
     index_urls,
     json_output,
-    max_rounds=100,
+    max_rounds,
     use_cached_index=False,
     use_pypi_json_api=False,
     debug=TRACE,
