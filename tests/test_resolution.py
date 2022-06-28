@@ -116,6 +116,21 @@ def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
     ]
 
 
+@pytest.mark.online
+def test_autobahn():
+    req = [Requirement("autobahn==22.3.2")]
+    with pytest.raises(Exception) as e:
+        get_resolved_dependencies(
+            requirements=req,
+            as_tree=False,
+            repos=[PYPI_PUBLIC_REPO],
+            environment=Environment(
+                python_version="38",
+                operating_system="linux",
+            ),
+        )
+
+
 def test_is_valid_version():
     parsed_version = packaging.version.parse("2.1.2")
     requirements = {"flask": [Requirement("flask>2.0.0")]}
