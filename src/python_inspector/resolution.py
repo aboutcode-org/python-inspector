@@ -313,7 +313,7 @@ def get_resolved_dependencies(
     environment: utils_pypi.Environment = None,
     repos: Sequence[utils_pypi.PypiSimpleRepository] = tuple(),
     as_tree: bool = False,
-    max_rounds: int = 100,
+    max_rounds: int = 200000,
 ):
     """
     Return resolved dependencies of a ``requirements`` list of Requirement for

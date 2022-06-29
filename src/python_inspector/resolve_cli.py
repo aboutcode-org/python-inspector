@@ -105,7 +105,7 @@ PYPI_SIMPLE_URL = "https://pypi.org/simple"
     "--max-rounds",
     "max_rounds",
     type=int,
-    default=100,
+    default=200000,
     help="Increase the max rounds whenever the resolution is too deep",
 )
 @click.option(
@@ -265,7 +265,7 @@ def resolve_dependencies(
         click.secho("done!")
 
 
-def resolve(direct_dependencies, environment, repos=tuple(), as_tree=False, max_rounds=100):
+def resolve(direct_dependencies, environment, repos=tuple(), as_tree=False, max_rounds=200000):
     """
     Resolve dependencies given a ``direct_dependencies`` list of
     DependentPackage and return a tuple of (initial_requirements,
