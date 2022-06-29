@@ -102,6 +102,13 @@ PYPI_SIMPLE_URL = "https://pypi.org/simple"
     "Use the special '-' file name to print results on screen/stdout.",
 )
 @click.option(
+    "--max-rounds",
+    "max_rounds",
+    type=int,
+    default=200000,
+    help="Increase the max rounds whenever the resolution is too deep",
+)
+@click.option(
     "--use-cached-index",
     is_flag=True,
     hidden=True,
@@ -128,6 +135,7 @@ def resolve_dependencies(
     operating_system,
     index_urls,
     json_output,
+    max_rounds,
     use_cached_index=False,
     use_pypi_json_api=False,
     debug=TRACE,
@@ -220,6 +228,7 @@ def resolve_dependencies(
         environment=environment,
         repos=repos,
         as_tree=False,
+        max_rounds=max_rounds,
     )
 
     cli_options = [f"--requirement {rf}" for rf in requirement_files]
@@ -256,7 +265,7 @@ def resolve_dependencies(
         click.secho("done!")
 
 
-def resolve(direct_dependencies, environment, repos=tuple(), as_tree=False):
+def resolve(direct_dependencies, environment, repos=tuple(), as_tree=False, max_rounds=200000):
     """
     Resolve dependencies given a ``direct_dependencies`` list of
     DependentPackage and return a tuple of (initial_requirements,
@@ -273,6 +282,7 @@ def resolve(direct_dependencies, environment, repos=tuple(), as_tree=False):
         environment=environment,
         repos=repos,
         as_tree=as_tree,
+        max_rounds=max_rounds,
     )
 
     initial_requirements = [d.to_dict() for d in direct_dependencies]

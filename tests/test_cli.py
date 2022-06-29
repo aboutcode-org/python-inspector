@@ -75,6 +75,26 @@ def test_cli_with_multiple_index_url_and_tilde_req():
 
 
 @pytest.mark.online
+def test_cli_with_multiple_index_url_and_tilde_req_with_max_rounds():
+    expected_file = test_env.get_test_loc("tilde_req-expected.json", must_exist=False)
+    specifier = "zipp~=3.8.0"
+    extra_options = [
+        "--index-url",
+        "https://pypi.org/simple",
+        "--index-url",
+        "https://thirdparty.aboutcode.org/pypi/simple/",
+        "--max-rounds",
+        "100",
+    ]
+    check_specs_resolution(
+        specifier=specifier,
+        expected_file=expected_file,
+        extra_options=extra_options,
+        regen=REGEN_TEST_FIXTURES,
+    )
+
+
+@pytest.mark.online
 def test_cli_with_multiple_index_url_and_tilde_req_and_netrc_file_without_matching_url():
     expected_file = test_env.get_test_loc("tilde_req-expected.json", must_exist=False)
     netrc_file = test_env.get_test_loc("test.netrc", must_exist=False)
