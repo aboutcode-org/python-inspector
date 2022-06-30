@@ -80,7 +80,8 @@ file, using each time a different output file name. We assume here Python
 version 3.8 (note the absence of dot when passed as a command line option::
 
     dad --python-version 38 --requirement <path/to/requirements.txt> \
-      --json <path/to/resolved-requirements.txt.json>
+      --json <path/to/resolved-requirements.txt.json> \
+      --netrc <path/to/.netrc>
 
 The output is a list of JSON files with resolved packages for each of the
 input requirements files.
@@ -92,17 +93,17 @@ Step 5: Collect expected resolved packages
 In this step, you need to collect the list of built packages "purl" found in
 the top level "packages" attribute of the JSON scan output from Step 3.
 
-The output is a list of expected purl with a version.
+The output is a list of expected purls with a version.
 
 
 Step 6: Collect actual resolved packages
 ----------------------------------------------
 
-In this step, you need to collect the list of purl "package" attribute resolved
+In this step, you need to collect the list of purls "package" attribute resolved
 found in the top level "resolved_dependencies" attribute of the python-inspector
 resolution output from Step 4.
 
-The output is a list of actual purl with a version.
+The output is a list of actual purls with a version.
 
 
 Step 7: Compare expected with actual resolved packages
@@ -153,7 +154,7 @@ And the reference Python version is 3.8::
 
     mkdir -p ~/tmp/pyinsp-example/
     cd ~/tmp/pyinsp-example/
-    git https://github.com/tjcsl/ion
+    git clone https://github.com/tjcsl/ion
 
 
 Another example could be https://github.com/digitalocean/sample-django
@@ -256,7 +257,7 @@ Step 5: Collect expected resolved packages
 
 TODO: explain how to do this in details
 
-The output is a list of expected purl with a version.
+The output is a list of expected purls with a version.
 
 
 Step 6: Collect actual resolved packages
@@ -264,7 +265,7 @@ Step 6: Collect actual resolved packages
 
 TODO: explain how to do this in details
 
-The output is a list of actual purl with a version.
+The output is a list of actual purls with a version.
 
 
 Step 7: Compare expected with actual resolved packages
