@@ -21,6 +21,7 @@ from urllib.parse import quote_plus
 import attr
 import packageurl
 import requests
+from bs4 import BeautifulSoup
 from commoncode import fileutils
 from commoncode.hash import multi_checksums
 from packaging import tags as packaging_tags
@@ -579,15 +580,18 @@ class Distribution(NameVer):
         return self.filename
 
     @classmethod
-    def from_path_or_url(cls, path_or_url):
+    def from_path_or_url(cls, path_or_url_with_required_python):
         """
         Return a distribution built from the data found in the filename of a
         ``path_or_url`` string. Raise an exception if this is not a valid
         filename.
         """
+        requires_python = path_or_url_with_required_python[1]
+        path_or_url = path_or_url_with_required_python[0]
         filename = os.path.basename(path_or_url.strip("/"))
         dist = cls.from_filename(filename)
         dist.path_or_url = path_or_url
+        dist.requires_python = requires_python
         return dist
 
     @classmethod
@@ -953,6 +957,12 @@ class Wheel(Distribution):
         metadata=dict(help="List of wheel Python version tags."),
     )
 
+    requires_python = attr.ib(
+        type=str,
+        default="",
+        metadata=dict(help="Python required for wheel."),
+    )
+
     abis = attr.ib(
         type=list,
         default=attr.Factory(list),
@@ -1160,12 +1170,12 @@ class PypiPackage(NameVer):
         return package
 
     @classmethod
-    def packages_from_many_paths_or_urls(cls, paths_or_urls):
+    def packages_from_many_paths_or_urls(cls, paths_or_urls_with_required_python):
         """
         Yield PypiPackages built from a list of paths or URLs.
         These are sorted by name and then by version from oldest to newest.
         """
-        dists = PypiPackage.dists_from_paths_or_urls(paths_or_urls)
+        dists = PypiPackage.dists_from_paths_or_urls(paths_or_urls_with_required_python)
         if TRACE_ULTRA_DEEP:
             print("packages_from_many_paths_or_urls: dists:", dists)
 
@@ -1191,13 +1201,13 @@ class PypiPackage(NameVer):
             - its filename
 
         For example:
-        >>> paths_or_urls ='''
-        ...     /home/foo/bitarray-0.8.1-cp36-cp36m-linux_x86_64.whl
-        ...     bitarray-0.8.1-cp36-cp36m-macosx_10_9_x86_64.macosx_10_10_x86_64.whl
-        ...     bitarray-0.8.1-cp36-cp36m-win_amd64.whl
-        ...     https://example.com/bar/bitarray-0.8.1.tar.gz
-        ...     bitarray-0.8.1.tar.gz.ABOUT
-        ...     bit.LICENSE'''.split()
+        >>> paths_or_urls =[
+        ...     ("/home/foo/bitarray-0.8.1-cp36-cp36m-linux_x86_64.whl", ">=3.7"),
+        ...     ("bitarray-0.8.1-cp36-cp36m-macosx_10_9_x86_64.macosx_10_10_x86_64.whl", ">=3.7"),
+        ...     ("bitarray-0.8.1-cp36-cp36m-win_amd64.whl", ">=3.7"),
+        ...     ("https://example.com/bar/bitarray-0.8.1.tar.gz", ">=3.7"),
+        ...     ("bitarray-0.8.1.tar.gz.ABOUT", ">=3.7"),
+        ...     ("bit.LICENSE", ">=3.7")]
         >>> results = list(PypiPackage.dists_from_paths_or_urls(paths_or_urls))
         >>> for r in results:
         ...    print(r.__class__.__name__, r.name, r.version)
@@ -1214,7 +1224,7 @@ class PypiPackage(NameVer):
         dists = []
         if TRACE_ULTRA_DEEP:
             print("     ###paths_or_urls:", paths_or_urls)
-        installable = [f for f in paths_or_urls if f.endswith(EXTENSIONS)]
+        installable = [(f, pyver) for f, pyver in paths_or_urls if f.endswith(EXTENSIONS)]
         for path_or_url in installable:
             try:
                 dist = Distribution.from_path_or_url(path_or_url)
@@ -1411,15 +1421,18 @@ class PypiSimpleRepository:
         if not versions and normalized_name not in self.fetched_package_normalized_names:
             self.fetched_package_normalized_names.add(normalized_name)
             try:
-                links = self.fetch_links(
+                links_with_required_python = self.fetch_links(
                     normalized_name=normalized_name,
                     verbose=verbose,
                     echo_func=echo_func,
                 )
+                # print(links)
                 # note that this is sorted so the mapping is also sorted
                 versions = {
                     package.version: package
-                    for package in PypiPackage.packages_from_many_paths_or_urls(paths_or_urls=links)
+                    for package in PypiPackage.packages_from_many_paths_or_urls(
+                        paths_or_urls_with_required_python=links_with_required_python
+                    )
                 }
                 self.packages[normalized_name] = versions
             except RemoteNotFetchedException as e:
@@ -1497,11 +1510,18 @@ class PypiSimpleRepository:
             verbose=verbose,
             echo_func=echo_func,
         )
-        links = collect_urls(text)
+        # print(text)
+        soup = BeautifulSoup(text, features="html.parser")
+        anchor_tags = soup.find_all("a")
+        links_with_requires_python = []
+        for anchor_tag in anchor_tags:
+            requires_python = None
+            url, _, _sha256 = anchor_tag["href"].partition("#sha256=")
+            if "data-requires-python" in anchor_tag.attrs:
+                requires_python = anchor_tag.attrs["data-requires-python"]
+            links_with_requires_python.append((url, requires_python))
         # TODO: keep sha256
-        links = [lnk.partition("#sha256=") for lnk in links]
-        links = [url for url, _, _sha256 in links]
-        return links
+        return links_with_requires_python
 
 
 PYPI_PUBLIC_REPO = PypiSimpleRepository(index_url=PYPI_SIMPLE_URL)

@@ -273,7 +273,6 @@ def resolve(direct_dependencies, environment, repos=tuple(), as_tree=False, max_
     Used the provided ``repos`` list of PypiSimpleRepository.
     If empty, use instead the PyPI.org JSON API exclusively.
     """
-
     requirements = [
         Requirement(requirement_string=d.extracted_requirement) for d in direct_dependencies
     ]

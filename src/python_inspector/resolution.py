@@ -10,8 +10,10 @@
 import collections
 import operator
 import os
+import tarfile
 from typing import List
 from typing import Sequence
+from zipfile import ZipFile
 
 import packaging.requirements
 import packaging.utils
@@ -19,11 +21,15 @@ import packaging.version
 import requests
 from packageurl import PackageURL
 from packaging.requirements import Requirement
+from packaging.specifiers import SpecifierSet
 from resolvelib import AbstractProvider
 from resolvelib import Resolver
 from resolvelib.reporters import BaseReporter
 
-from _packagedcode.pypi import PypiWheelHandler
+from _packagedcode.pypi import PipRequirementsFileHandler
+from _packagedcode.pypi import PythonSdistPkgInfoFile
+from _packagedcode.pypi import PythonSetupPyHandler
+from _packagedcode.pypi import SetupCfgHandler
 from python_inspector import utils_pypi
 
 Candidate = collections.namedtuple("Candidate", "name version extras")
@@ -103,12 +109,17 @@ class PythonInputProvider(AbstractProvider):
         """
         Return a list of versions for a package name from a repo
         """
-        versions = []
-        for version, package in repo._get_package_versions_map(name).items():
-            wheels = package.get_supported_wheels(environment=self.environment)
-            if list(wheels):
-                versions.append(version)
-        return versions
+        for version, package in repo.get_package_versions(name).items():
+            if package.sdist:
+                python_version = packaging.version.parse(
+                    get_python_version_from_env_tag(self.environment.python_version)
+                )
+                if package.sdist.requires_python and python_version in SpecifierSet(
+                    package.sdist.requires_python
+                ):
+                    yield version
+                if not package.sdist.requires_python:
+                    yield version
 
     def get_versions_for_package_from_pypi_json_api(self, name):
         """
@@ -134,21 +145,75 @@ class PythonInputProvider(AbstractProvider):
             return self.get_requirements_for_package_from_pypi_json_api(purl)
 
     def get_requirements_for_package_from_pypi_simple(self, candidate):
-        wheels = utils_pypi.download_wheel(
+        sdist = utils_pypi.download_sdist(
             name=candidate.name,
             version=str(candidate.version),
-            environment=self.environment,
             repos=self.repos,
         )
-        for wheel in wheels:
-            deps = list(
-                PypiWheelHandler.parse(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, wheel))
+
+        if sdist.endswith(".tar.gz"):
+            sdist_file = sdist.rstrip(".tar.gz")
+            file = tarfile.open(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist))
+            file.extractall(
+                os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file)
             )
-            assert len(deps) == 1
-            deps = deps[0].dependencies
-            for dep in deps:
-                if dep.scope == "install":
-                    yield packaging.requirements.Requirement(str(dep.extracted_requirement))
+            file.close()
+        if sdist.endswith(".zip"):
+            sdist_file = sdist.rstrip(".zip")
+            with ZipFile(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist), "r") as zip:
+                zip.extractall(
+                    os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file)
+                )
+        setup_py_path = os.path.join(
+            utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file, sdist_file, "setup.py"
+        )
+        setup_cfg_path = os.path.join(
+            utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file, sdist_file, "setup.cfg"
+        )
+        pkg_info_path = os.path.join(
+            utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file
+        )
+        requirement_path = os.path.join(
+            utils_pypi.CACHE_THIRDPARTY_DIR,
+            "extracted_sdists",
+            sdist_file,
+            sdist_file,
+            "requirements.txt",
+        )
+        pyproject_path = os.path.join(
+            utils_pypi.CACHE_THIRDPARTY_DIR,
+            "extracted_sdists",
+            sdist_file,
+            sdist_file,
+            "pyproject.toml",
+        )
+
+        path_by_format = {
+            "pkginfo": pkg_info_path,
+            "setup-py": setup_py_path,
+            "setup-cfg": setup_cfg_path,
+            "requirement": requirement_path,
+        }
+
+        handler_by_format = {
+            "pkginfo": PythonSdistPkgInfoFile,
+            "setup-py": PythonSetupPyHandler,
+            "setup-cfg": SetupCfgHandler,
+            "requirement": PipRequirementsFileHandler,
+        }
+
+        for format in ["pkginfo", "setup-py", "setup-cfg", "requirement"]:
+            path = path_by_format[format]
+            if os.path.exists(path):
+                handler = handler_by_format[format]
+                deps = list(handler.parse(path))
+                assert len(deps) == 1
+                dependencies = deps[0].dependencies
+                for dep in dependencies:
+                    if dep.scope == "install":
+                        yield packaging.requirements.Requirement(str(dep.extracted_requirement))
+                if dependencies:
+                    break
 
     def get_requirements_for_package_from_pypi_json_api(self, purl):
 
