@@ -87,7 +87,9 @@ def test_get_resolved_dependencies_with_flask_and_python_36():
         "pkg:pypi/itsdangerous@2.0.1",
         "pkg:pypi/jinja2@3.0.3",
         "pkg:pypi/markupsafe@2.0.1",
+        "pkg:pypi/typing-extensions@4.1.1",
         "pkg:pypi/werkzeug@2.0.3",
+        "pkg:pypi/zipp@3.6.0",
     ]
 
 
@@ -131,6 +133,7 @@ def test_without_supported_wheels():
 
     assert as_list == [
         "pkg:pypi/autobahn@22.3.2",
+        "pkg:pypi/cffi@1.15.1",
         "pkg:pypi/cryptography@37.0.3",
         "pkg:pypi/hyperlink@21.0.0",
         "pkg:pypi/idna@3.3",

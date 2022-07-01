@@ -201,7 +201,6 @@ class PythonInputProvider(AbstractProvider):
             "setup-cfg": SetupCfgHandler,
             "requirement": PipRequirementsFileHandler,
         }
-
         for format in ["pkginfo", "setup-py", "setup-cfg", "requirement"]:
             path = path_by_format[format]
             if os.path.exists(path):

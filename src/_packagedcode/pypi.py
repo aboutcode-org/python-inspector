@@ -19,6 +19,7 @@ from configparser import ConfigParser
 from pathlib import Path
 
 import dparse2
+import packaging
 import pip_requirements_parser
 import pkginfo2
 from commoncode import fileutils
@@ -684,10 +685,17 @@ class SetupCfgHandler(BaseExtractedPythonLayout):
 
         metadata = {}
         parser = ConfigParser()
+        dependent_packages = []
         with open(location) as f:
             parser.read_file(f)
-
         for section in parser.values():
+            if section.name == 'options':
+                reqs = list(get_requirement_from_section(section=section, sub_section="install_requires"))
+                dependent_packages.extend(cls.parse_reqs(reqs, "install"))
+            if section.name == "options.extras_require":
+                for sub_section in section:
+                    reqs = list(get_requirement_from_section(section=section, sub_section=sub_section))
+                    dependent_packages.extend(cls.parse_reqs(reqs, sub_section))
             if section.name == 'metadata':
                 options = (
                     'name',
@@ -719,10 +727,6 @@ class SetupCfgHandler(BaseExtractedPythonLayout):
         if not dependency_type:
             return
 
-        dependencies = parse_with_dparse2(
-            location=location,
-            file_name=dependency_type,
-        )
         yield models.PackageData(
             datasource_id=cls.datasource_id,
             type=cls.default_package_type,
@@ -731,9 +735,33 @@ class SetupCfgHandler(BaseExtractedPythonLayout):
             parties=parties,
             homepage_url=metadata.get('url'),
             primary_language=cls.default_primary_language,
-            dependencies=dependencies,
+            dependencies=dependent_packages,
         )
 
+    @classmethod
+    def parse_reqs(cls, reqs, scope):
+        dependent_packages = []
+        for req in reqs:
+            is_resolved = False
+            req_parsed = packaging.requirements.Requirement(str(req))
+            purl = PackageURL(type="pypi", name=req_parsed.name)
+            specifiers = req_parsed.specifier._specs
+            if len(specifiers) == 1:
+                specifier = list(specifiers)[0]
+                if specifier.operator in ('==', '==='):
+                    is_resolved = True
+                    purl = purl._replace(version=specifier.version)
+            dependent_packages.append(
+                        models.DependentPackage(
+                        purl=purl,
+                        scope=scope,
+                        is_runtime=True,
+                        is_optional=False,
+                        is_resolved=is_resolved,
+                        extracted_requirement=req
+                    )
+                )
+        return dependent_packages
 
 class PipfileHandler(BaseDependencyFileHandler):
     datasource_id = 'pipfile'
@@ -1017,10 +1045,11 @@ def get_classifiers(metainfo):
     license_classifiers = []
     other_classifiers = []
     for classifier in classifiers:
-        if classifier.startswith('License'):
-            license_classifiers.append(classifier)
-        else:
-            other_classifiers.append(classifier)
+        if classifier:
+            if classifier.startswith('License'):
+                license_classifiers.append(classifier)
+            else:
+                other_classifiers.append(classifier)
     return license_classifiers, other_classifiers
 
 
@@ -1272,6 +1301,7 @@ def parse_with_dparse2(location, file_name=None):
     dependent_packages = []
 
     for dependency in dep_file.dependencies:
+        # print(dependency.serialize())
         name = dependency.name
         is_resolved = False
         purl = PackageURL(type='pypi', name=dependency.name)
@@ -1899,3 +1929,22 @@ def compute_normalized_license(declared_license):
 
     if detected_licenses:
         return combine_expressions(detected_licenses)
+
+
+def get_requirement_from_section(section, sub_section):
+    content = section.get(sub_section)
+    if content:
+        for req in content.splitlines():
+            if req:
+                req = req.replace("; \\", "")
+                if "#" in req:
+                    req , _ = req.rsplit("#")
+                req_split_by_semi_colon = req.split(";")
+                req_split_by_semi_colon = [req.strip() for req in req_split_by_semi_colon]
+                if len(req_split_by_semi_colon) >= 2 and not(req_split_by_semi_colon[1].startswith("python_version") 
+                or req_split_by_semi_colon[1].startswith("sys_platform") 
+                or req_split_by_semi_colon[1].startswith("platform_system")):
+                    for temp_req in req_split_by_semi_colon:
+                        yield temp_req
+                else:
+                    yield req
