@@ -137,6 +137,7 @@ def test_without_supported_wheels():
         "pkg:pypi/cryptography@37.0.3",
         "pkg:pypi/hyperlink@21.0.0",
         "pkg:pypi/idna@3.3",
+        "pkg:pypi/pycparser@2.21",
         "pkg:pypi/setuptools@62.6.0",
         "pkg:pypi/txaio@22.2.1",
     ]

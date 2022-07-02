@@ -453,8 +453,9 @@ def parse_metadata(location, datasource_id, package_type):
         type=package_type,
         primary_language='Python',
         name=name,
-        version=version,
-        description=get_description(meta, location),
+        version=version, #TODO: https://github.com/nexB/scancode-toolkit/issues/3014
+        # description=get_description(meta, location),
+        description = "",
         declared_license=get_declared_license(meta),
         keywords=get_keywords(meta),
         parties=get_parties(meta),
@@ -1301,7 +1302,6 @@ def parse_with_dparse2(location, file_name=None):
     dependent_packages = []
 
     for dependency in dep_file.dependencies:
-        # print(dependency.serialize())
         name = dependency.name
         is_resolved = False
         purl = PackageURL(type='pypi', name=dependency.name)

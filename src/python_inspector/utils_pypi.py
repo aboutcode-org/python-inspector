@@ -1426,7 +1426,6 @@ class PypiSimpleRepository:
                     verbose=verbose,
                     echo_func=echo_func,
                 )
-                # print(links)
                 # note that this is sorted so the mapping is also sorted
                 versions = {
                     package.version: package
@@ -1510,7 +1509,6 @@ class PypiSimpleRepository:
             verbose=verbose,
             echo_func=echo_func,
         )
-        # print(text)
         soup = BeautifulSoup(text, features="html.parser")
         anchor_tags = soup.find_all("a")
         links_with_requires_python = []
