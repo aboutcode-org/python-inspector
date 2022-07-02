@@ -255,7 +255,21 @@ The output files are::
 Step 5: Collect expected resolved packages
 ----------------------------------------------
 
-TODO: explain how to do this in details
+Run this python script to generate text file with expected purls
+
+::
+
+  import json
+  with open("~/tmp/pyinsp-example/codebase/output/deployed-scan-output.json") as f:
+      scancode_data = json.load(f)
+  scancode_purls = []
+  for package in scancode_data["packages"]:
+      if package["purl"] not in scancode_purls:
+          scancode_purls.append(package["purl"])
+  scancode_purls = sorted(scancode_purls)
+  with open("~/tmp/pyinsp-example/codebase/output/scan.txt", "w") as f:
+      f.writelines("\n".join(scancode_purls))
+
 
 The output is a list of expected purls with a version.
 
@@ -263,7 +277,25 @@ The output is a list of expected purls with a version.
 Step 6: Collect actual resolved packages
 ----------------------------------------------
 
-TODO: explain how to do this in details
+Run this python script to generate text file with actual purls
+
+::
+
+  import json
+  py_insp_purls = []
+  for json_file in [
+      "~/tmp/pyinsp-example/output/resolved-rtd-requirements.txt.json",
+      "~/tmp/pyinsp-example/output/resolved-requirements.txt.json",
+  ]:
+      with open(json_file) as f:
+          py_insp_data = json.load(f)
+      for package in py_insp_data["packages"]:
+          if package["purl"] not in py_insp_purls:
+              py_insp_purls.append(package["purl"])
+  py_insp_purls = sorted(py_insp_purls)
+  with open("~/tmp/pyinsp-example/codebase/output/py-insp.txt", "w") as f:
+      f.writelines("\n".join(py_insp_purls))
+
 
 The output is a list of actual purls with a version.
 
@@ -271,6 +303,6 @@ The output is a list of actual purls with a version.
 Step 7: Compare expected with actual resolved packages
 ---------------------------------------------------------
 
-TODO: explain how to do this in details
+We run a sdiff command::
 
-
+    sdiff ~/tmp/pyinsp-example/codebase/output/py-insp.txt ~/tmp/pyinsp-example/codebase/output/scan.txt
