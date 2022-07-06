@@ -20,7 +20,7 @@ from python_inspector.utils_pypi import Environment
 
 @pytest.mark.online
 def test_get_resolved_dependencies_with_flask_and_python_310():
-    req = [Requirement("flask==2.1.2")]
+    req = [dict(requirement=Requirement("flask==2.1.2"), is_requirement_resolved=True)]
     results = get_resolved_dependencies(
         requirements=req,
         environment=Environment(
@@ -43,7 +43,7 @@ def test_get_resolved_dependencies_with_flask_and_python_310():
 
 @pytest.mark.online
 def test_get_resolved_dependencies_with_flask_and_python_310_windows():
-    req = [Requirement("flask==2.1.2")]
+    req = [dict(requirement=Requirement("flask==2.1.2"), is_requirement_resolved=True)]
     results = get_resolved_dependencies(
         requirements=req,
         environment=Environment(
@@ -67,7 +67,7 @@ def test_get_resolved_dependencies_with_flask_and_python_310_windows():
 
 @pytest.mark.online
 def test_get_resolved_dependencies_with_flask_and_python_36():
-    req = [Requirement("flask")]
+    req = [dict(requirement=Requirement("flask"), is_requirement_resolved=False)]
     results = get_resolved_dependencies(
         requirements=req,
         environment=Environment(
@@ -95,7 +95,7 @@ def test_get_resolved_dependencies_with_flask_and_python_36():
 
 @pytest.mark.online
 def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
-    req = [Requirement("flask~=2.1.2")]
+    req = [dict(requirement=Requirement("flask~=2.1.2"), is_requirement_resolved=True)]
     results = get_resolved_dependencies(
         requirements=req,
         as_tree=False,
@@ -119,7 +119,7 @@ def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
 
 @pytest.mark.online
 def test_without_supported_wheels():
-    req = [Requirement("autobahn==22.3.2")]
+    req = [dict(requirement=Requirement("autobahn==22.3.2"), is_requirement_resolved=True)]
     results = get_resolved_dependencies(
         requirements=req,
         as_tree=False,
@@ -134,11 +134,11 @@ def test_without_supported_wheels():
     assert as_list == [
         "pkg:pypi/autobahn@22.3.2",
         "pkg:pypi/cffi@1.15.1",
-        "pkg:pypi/cryptography@37.0.3",
+        "pkg:pypi/cryptography@37.0.4",
         "pkg:pypi/hyperlink@21.0.0",
         "pkg:pypi/idna@3.3",
         "pkg:pypi/pycparser@2.21",
-        "pkg:pypi/setuptools@62.6.0",
+        "pkg:pypi/setuptools@63.1.0",
         "pkg:pypi/txaio@22.2.1",
     ]
 

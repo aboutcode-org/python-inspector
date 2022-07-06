@@ -745,7 +745,8 @@ class SetupCfgHandler(BaseExtractedPythonLayout):
         for req in reqs:
             is_resolved = False
             req_parsed = packaging.requirements.Requirement(str(req))
-            purl = PackageURL(type="pypi", name=req_parsed.name)
+            name = canonicalize_name(req_parsed.name)
+            purl = PackageURL(type="pypi", name=name)
             specifiers = req_parsed.specifier._specs
             if len(specifiers) == 1:
                 specifier = list(specifiers)[0]
@@ -754,7 +755,7 @@ class SetupCfgHandler(BaseExtractedPythonLayout):
                     purl = purl._replace(version=specifier.version)
             dependent_packages.append(
                         models.DependentPackage(
-                        purl=purl,
+                        purl=str(purl),
                         scope=scope,
                         is_runtime=True,
                         is_optional=False,
@@ -1932,18 +1933,24 @@ def compute_normalized_license(declared_license):
 
 
 def get_requirement_from_section(section, sub_section):
+    """
+    Generate requirements from the `sub_section`
+    """
     content = section.get(sub_section)
     if content:
         for req in content.splitlines():
             if req:
+                #pytest-mypy >= 0.9.1; \
                 req = req.replace("; \\", "")
+                # pip>=19.1 # For proper file:// URLs support.
                 if "#" in req:
                     req , _ = req.rsplit("#")
+                #pure-eval; black; tox;
                 req_split_by_semi_colon = req.split(";")
                 req_split_by_semi_colon = [req.strip() for req in req_split_by_semi_colon]
-                if len(req_split_by_semi_colon) >= 2 and not(req_split_by_semi_colon[1].startswith("python_version") 
-                or req_split_by_semi_colon[1].startswith("sys_platform") 
-                or req_split_by_semi_colon[1].startswith("platform_system")):
+                if len(req_split_by_semi_colon) >= 2 and not(req_split_by_semi_colon[1].startswith("python_version") # pip>=19.1 ;python_version > 3.7 
+                or req_split_by_semi_colon[1].startswith("sys_platform") # pip>=19.1 ;sys_platform = "Windows"
+                or req_split_by_semi_colon[1].startswith("platform_system")): # pip>=19.1 ;platform_system = "Windows"
                     for temp_req in req_split_by_semi_colon:
                         yield temp_req
                 else:

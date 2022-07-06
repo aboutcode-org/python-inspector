@@ -70,12 +70,13 @@ def get_python_version_from_env_tag(python_version: str):
 
 
 class PythonInputProvider(AbstractProvider):
-    def __init__(self, environment=None, repos=tuple()):
+    def __init__(self, environment=None, repos=tuple(), resolved_requirements=[]):
         self.environment = environment
         self.repos = repos or []
         self.versions_by_package = {}
         self.dependencies_by_purl = {}
         self.wheel_or_sdist_by_package = {}
+        self.resolved_requirements = resolved_requirements
 
     def identify(self, requirement_or_candidate):
         """Given a requirement, return an identifier for it. Overridden."""
@@ -118,29 +119,31 @@ class PythonInputProvider(AbstractProvider):
             python_version = packaging.version.parse(
                 get_python_version_from_env_tag(self.environment.python_version)
             )
+            formats = []
             wheels = list(package.get_supported_wheels(environment=self.environment))
             if wheels:
                 valid_wheel_present = False
                 for wheel in wheels:
-                    if wheel.requires_python and python_version in SpecifierSet(
+                    if (
                         wheel.requires_python
-                    ):
-                        valid_wheel_present = True
-                    if not wheel.requires_python:
+                        and python_version in SpecifierSet(wheel.requires_python)
+                    ) or not wheel.requires_python:
                         valid_wheel_present = True
                 if valid_wheel_present:
-                    self.wheel_or_sdist_by_package[str(purl)] = "Wheel"
                     versions.append(version)
-                    continue
+                    formats.append("Wheel")
             if package.sdist:
-                if package.sdist.requires_python and python_version in SpecifierSet(
+                valid_sdist_present = False
+                if (
                     package.sdist.requires_python
+                    and python_version in SpecifierSet(package.sdist.requires_python)
+                    or not package.sdist.requires_python
                 ):
-                    self.wheel_or_sdist_by_package[str(purl)] = "Sdist"
+                    valid_sdist_present = True
+                if valid_sdist_present:
                     versions.append(version)
-                if not package.sdist.requires_python:
-                    self.wheel_or_sdist_by_package[str(purl)] = "Sdist"
-                    versions.append(version)
+                    formats.append("Sdist")
+            self.wheel_or_sdist_by_package[str(purl)] = formats
         return versions
 
     def get_versions_for_package_from_pypi_json_api(self, name):
@@ -170,95 +173,113 @@ class PythonInputProvider(AbstractProvider):
 
         purl = PackageURL(type="pypi", name=candidate.name, version=str(candidate.version))
 
-        wheel_or_sdist = self.wheel_or_sdist_by_package[str(purl)]
+        formats = self.wheel_or_sdist_by_package[str(purl)]
 
-        if wheel_or_sdist == "Wheel":
-            wheels = utils_pypi.download_wheel(
-                name=candidate.name,
-                version=str(candidate.version),
-                environment=self.environment,
-                repos=self.repos,
-            )
-            for wheel in wheels:
-                deps = list(
-                    PypiWheelHandler.parse(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, wheel))
+        for format in formats:
+            if format == "Wheel":
+                wheels = utils_pypi.download_wheel(
+                    name=candidate.name,
+                    version=str(candidate.version),
+                    environment=self.environment,
+                    repos=self.repos,
                 )
-                assert len(deps) == 1
-                deps = deps[0].dependencies
-                for dep in deps:
-                    if dep.scope == "install":
-                        yield packaging.requirements.Requirement(str(dep.extracted_requirement))
+                for wheel in wheels:
+                    deps = list(
+                        PypiWheelHandler.parse(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, wheel))
+                    )
+                    assert len(deps) == 1
+                    deps = deps[0].dependencies
+                    for dep in deps:
+                        if dep.scope == "install":
+                            yield packaging.requirements.Requirement(str(dep.extracted_requirement))
 
-        if wheel_or_sdist == "Sdist":
-            sdist = utils_pypi.download_sdist(
-                name=candidate.name,
-                version=str(candidate.version),
-                repos=self.repos,
-            )
-
-            if sdist.endswith(".tar.gz"):
-                sdist_file = sdist.rstrip(".tar.gz")
-                file = tarfile.open(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist))
-                file.extractall(
-                    os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file)
+            if format == "Sdist":
+                sdist = utils_pypi.download_sdist(
+                    name=candidate.name,
+                    version=str(candidate.version),
+                    repos=self.repos,
                 )
-                file.close()
-            if sdist.endswith(".zip"):
-                sdist_file = sdist.rstrip(".zip")
-                with ZipFile(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist), "r") as zip:
-                    zip.extractall(
+                if sdist.endswith(".tar.gz"):
+                    sdist_file = sdist.rstrip(".tar.gz")
+                    file = tarfile.open(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist))
+                    file.extractall(
                         os.path.join(
                             utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file
                         )
                     )
-            setup_py_path = os.path.join(
-                utils_pypi.CACHE_THIRDPARTY_DIR,
-                "extracted_sdists",
-                sdist_file,
-                sdist_file,
-                "setup.py",
-            )
-            setup_cfg_path = os.path.join(
-                utils_pypi.CACHE_THIRDPARTY_DIR,
-                "extracted_sdists",
-                sdist_file,
-                sdist_file,
-                "setup.cfg",
-            )
-            pkg_info_path = os.path.join(
-                utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file
-            )
-            requirement_path = os.path.join(
-                utils_pypi.CACHE_THIRDPARTY_DIR,
-                "extracted_sdists",
-                sdist_file,
-                sdist_file,
-                "requirements.txt",
-            )
+                    file.close()
+                if sdist.endswith(".zip"):
+                    sdist_file = sdist.rstrip(".zip")
+                    with ZipFile(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist), "r") as zip:
+                        zip.extractall(
+                            os.path.join(
+                                utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file
+                            )
+                        )
+                setup_py_path = os.path.join(
+                    utils_pypi.CACHE_THIRDPARTY_DIR,
+                    "extracted_sdists",
+                    sdist_file,
+                    sdist_file,
+                    "setup.py",
+                )
+                setup_cfg_path = os.path.join(
+                    utils_pypi.CACHE_THIRDPARTY_DIR,
+                    "extracted_sdists",
+                    sdist_file,
+                    sdist_file,
+                    "setup.cfg",
+                )
+                pkg_info_path = os.path.join(
+                    utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file
+                )
+                requirement_path = os.path.join(
+                    utils_pypi.CACHE_THIRDPARTY_DIR,
+                    "extracted_sdists",
+                    sdist_file,
+                    sdist_file,
+                    "requirements.txt",
+                )
 
-            path_by_format = {
-                "pkginfo": pkg_info_path,
-                "setup-py": setup_py_path,
-                "setup-cfg": setup_cfg_path,
-                "requirement": requirement_path,
-            }
+                path_by_format = {
+                    "pkginfo": pkg_info_path,
+                    "setup-py": setup_py_path,
+                    "setup-cfg": setup_cfg_path,
+                    "requirement": requirement_path,
+                }
 
-            handler_by_format = {
-                "pkginfo": PythonSdistPkgInfoFile,
-                "setup-py": PythonSetupPyHandler,
-                "setup-cfg": SetupCfgHandler,
-                "requirement": PipRequirementsFileHandler,
-            }
-            for format in ["pkginfo", "setup-py", "setup-cfg", "requirement"]:
-                path = path_by_format[format]
-                if os.path.exists(path):
-                    handler = handler_by_format[format]
-                    deps = list(handler.parse(path))
-                    assert len(deps) == 1
-                    dependencies = deps[0].dependencies
-                    for dep in dependencies:
-                        if dep.scope == "install":
-                            yield packaging.requirements.Requirement(str(dep.extracted_requirement))
+                handler_by_format = {
+                    "pkginfo": PythonSdistPkgInfoFile,
+                    "setup-py": PythonSetupPyHandler,
+                    "setup-cfg": SetupCfgHandler,
+                    "requirement": PipRequirementsFileHandler,
+                }
+                for format in ["pkginfo", "setup-py", "setup-cfg", "requirement"]:
+                    path = path_by_format[format]
+                    if os.path.exists(path):
+                        handler = handler_by_format[format]
+                        deps = list(handler.parse(path))
+                        assert len(deps) == 1
+                        dependencies = deps[0].dependencies
+                        for dep in dependencies:
+                            # skip if no purl can be extracted for dependency
+                            if dep.purl:
+                                dep_purl = PackageURL.from_string(dep.purl)
+                                if dep.scope == "install" and (
+                                    not (dep.is_resolved)
+                                    or (
+                                        dep.is_resolved
+                                        and dep_purl.name not in self.resolved_requirements
+                                    )
+                                ):
+                                    if dep.is_resolved:
+                                        self.resolved_requirements.append(dep_purl)
+                                    # skip the requirement starting with -- like
+                                    # --editable, --requirement
+                                    if not dep.extracted_requirement.startswith("--"):
+                                        yield packaging.requirements.Requirement(
+                                            str(dep.extracted_requirement)
+                                        )
 
     def get_requirements_for_package_from_pypi_json_api(self, purl):
 
@@ -433,8 +454,16 @@ def get_resolved_dependencies(
     Used the provided ``repos`` list of PypiSimpleRepository.
     If empty, use instead the PyPI.org JSON API exclusively instead
     """
+    resolved_requirements = [
+        packaging.utils.canonicalize_name(r["requirement"].name)
+        for r in requirements
+        if r["is_requirement_resolved"]
+    ]
+    requirements = [r["requirement"] for r in requirements]
     resolver = Resolver(
-        provider=PythonInputProvider(environment=environment, repos=repos),
+        provider=PythonInputProvider(
+            environment=environment, repos=repos, resolved_requirements=resolved_requirements
+        ),
         reporter=BaseReporter(),
     )
     results = resolver.resolve(requirements=requirements, max_rounds=max_rounds)

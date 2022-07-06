@@ -274,7 +274,11 @@ def resolve(direct_dependencies, environment, repos=tuple(), as_tree=False, max_
     If empty, use instead the PyPI.org JSON API exclusively.
     """
     requirements = [
-        Requirement(requirement_string=d.extracted_requirement) for d in direct_dependencies
+        dict(
+            requirement=Requirement(requirement_string=d.extracted_requirement),
+            is_requirement_resolved=d.is_resolved,
+        )
+        for d in direct_dependencies
     ]
     resolved_dependencies = get_resolved_dependencies(
         requirements=requirements,
