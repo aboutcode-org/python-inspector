@@ -289,9 +289,9 @@ Run this python script to generate text file with actual purls
   ]:
       with open(json_file) as f:
           py_insp_data = json.load(f)
-      for package in py_insp_data["packages"]:
-          if package["purl"] not in py_insp_purls:
-              py_insp_purls.append(package["purl"])
+      for package in py_insp_data["resolved_dependencies"]:
+          if package["package"] not in py_insp_purls:
+              py_insp_purls.append(package["package"])
   py_insp_purls = sorted(py_insp_purls)
   with open("~/tmp/pyinsp-example/codebase/output/py-insp.txt", "w") as f:
       f.writelines("\n".join(py_insp_purls))
