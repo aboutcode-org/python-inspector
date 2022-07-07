@@ -268,7 +268,7 @@ Run this python script to generate text file with expected purls
           scancode_purls.append(package["purl"])
   scancode_purls = sorted(scancode_purls)
   with open("~/tmp/pyinsp-example/codebase/output/scan.txt", "w") as f:
-      f.writelines("\n".join(scancode_purls))
+      f.write("\n".join(scancode_purls))
 
 
 The output is a list of expected purls with a version.
@@ -294,7 +294,7 @@ Run this python script to generate text file with actual purls
               py_insp_purls.append(package["package"])
   py_insp_purls = sorted(py_insp_purls)
   with open("~/tmp/pyinsp-example/codebase/output/py-insp.txt", "w") as f:
-      f.writelines("\n".join(py_insp_purls))
+      f.write("\n".join(py_insp_purls))
 
 
 The output is a list of actual purls with a version.
