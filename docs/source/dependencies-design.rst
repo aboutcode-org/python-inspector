@@ -1,6 +1,6 @@
-=========================================
-  Resolving Python package dependencies
-=========================================
+====================================================
+  Python package dependencies resolver design
+====================================================
 
 
 This is a design to create a new command line tool to resolve Python

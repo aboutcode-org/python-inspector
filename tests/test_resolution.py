@@ -86,7 +86,7 @@ def test_get_resolved_dependencies_with_flask_and_python_36():
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
         "pkg:pypi/markupsafe@2.0.1",
-        "pkg:pypi/typing-extensions@4.2.0",
+        "pkg:pypi/typing-extensions@4.3.0",
         "pkg:pypi/werkzeug@2.1.2",
         "pkg:pypi/zipp@3.8.0",
     ]

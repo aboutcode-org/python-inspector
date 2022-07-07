@@ -1,11 +1,12 @@
-Welcome to nexb-skeleton's documentation!
-=========================================
+Welcome to  python-inspector's documentation!
+================================================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
    dependencies-design
+   test-protocol
 
 Indices and tables
 ==================
