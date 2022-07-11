@@ -741,6 +741,9 @@ class SetupCfgHandler(BaseExtractedPythonLayout):
 
     @classmethod
     def parse_reqs(cls, reqs, scope):
+        """
+        Parse a list of requirements and return a list of dependencies
+        """ 
         dependent_packages = []
         for req in reqs:
             is_resolved = False
@@ -1303,10 +1306,10 @@ def parse_with_dparse2(location, file_name=None):
     dependent_packages = []
 
     for dependency in dep_file.dependencies:
-        name = dependency.name
+        requirement = dependency.name
         is_resolved = False
         purl = PackageURL(type='pypi', name=dependency.name)
-        extracted_requirement = name
+
         # note: dparse2.dependencies.Dependency.specs comes from
         # packaging.requirements.Requirement.specifier
         # which in turn is a packaging.specifiers.SpecifierSet objects
@@ -1329,8 +1332,6 @@ def parse_with_dparse2(location, file_name=None):
                     is_resolved = True
                     purl = purl._replace(version=specifier.version)
 
-            extracted_requirement =  f"{name}{requirement}"
-
         dependent_packages.append(
             models.DependentPackage(
                 purl=purl.to_string(),
@@ -1339,7 +1340,7 @@ def parse_with_dparse2(location, file_name=None):
                 is_runtime=True,
                 is_optional=False,
                 is_resolved=is_resolved,
-                extracted_requirement=extracted_requirement
+                extracted_requirement=requirement
             )
         )
 
@@ -1936,22 +1937,22 @@ def get_requirement_from_section(section, sub_section):
     """
     Generate requirements from the `sub_section`
     """
-    content = section.get(sub_section)
-    if content:
-        for req in content.splitlines():
-            if req:
-                #pytest-mypy >= 0.9.1; \
-                req = req.replace("; \\", "")
-                # pip>=19.1 # For proper file:// URLs support.
-                if "#" in req:
-                    req , _ = req.rsplit("#")
-                #pure-eval; black; tox;
-                req_split_by_semi_colon = req.split(";")
-                req_split_by_semi_colon = [req.strip() for req in req_split_by_semi_colon]
-                if len(req_split_by_semi_colon) >= 2 and not(req_split_by_semi_colon[1].startswith("python_version") # pip>=19.1 ;python_version > 3.7 
-                or req_split_by_semi_colon[1].startswith("sys_platform") # pip>=19.1 ;sys_platform = "Windows"
-                or req_split_by_semi_colon[1].startswith("platform_system")): # pip>=19.1 ;platform_system = "Windows"
-                    for temp_req in req_split_by_semi_colon:
-                        yield temp_req
-                else:
-                    yield req
+    content = section.get(sub_section) or ""
+    for req in content.splitlines():
+        if req:
+            #pytest-mypy >= 0.9.1; \
+            req = req.replace("; \\", "")
+            # pip>=19.1 # For proper file:// URLs support.
+            if "#" in req:
+                req , _ = req.rsplit("#")
+            #pure-eval; black; tox
+            req_split_by_semi_colon = req.split(";")
+            req_split_by_semi_colon = [req.strip() for req in req_split_by_semi_colon if req]
+            if len(req_split_by_semi_colon) >= 2 and not(req_split_by_semi_colon[1].startswith("python_version") # pip>=19.1 ;python_version > 3.7 
+            or req_split_by_semi_colon[1].startswith("sys_platform") # pip>=19.1 ;sys_platform = "Windows"
+            or req_split_by_semi_colon[1].startswith("platform_system") # pip>=19.1 ;platform_system = "Windows"
+            or req_split_by_semi_colon[1].startswith("platform_python_implementation")):#pytest-black>=0.3.7; platform_python_implementation != "PyPy"
+                for temp_req in req_split_by_semi_colon:
+                    yield temp_req
+            else:
+                yield req

@@ -69,6 +69,35 @@ def get_python_version_from_env_tag(python_version: str):
     return python_version
 
 
+def get_sdist_file(repos, candidate):
+    """
+    Return the sdist file for a candidate.
+    """
+    sdist = utils_pypi.download_sdist(
+        name=candidate.name,
+        version=str(candidate.version),
+        repos=repos,
+    )
+    sdist_file = None
+
+    if sdist.endswith(".tar.gz"):
+        sdist_file = sdist.rstrip(".tar.gz")
+        with tarfile.open(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist)) as file:
+            file.extractall(
+                os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file)
+            )
+    if sdist.endswith(".zip"):
+        sdist_file = sdist.rstrip(".zip")
+        with ZipFile(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist)) as zip:
+            zip.extractall(
+                os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file)
+            )
+
+    if not sdist_file:
+        raise Exception(f"Unable to extract sdist {sdist}")
+    return sdist_file
+
+
 class PythonInputProvider(AbstractProvider):
     def __init__(self, environment=None, repos=tuple(), resolved_requirements=[]):
         self.environment = environment
@@ -170,7 +199,9 @@ class PythonInputProvider(AbstractProvider):
             return self.get_requirements_for_package_from_pypi_json_api(purl)
 
     def get_requirements_for_package_from_pypi_simple(self, candidate):
-
+        """
+        Return requirements for a package from the simple repositories.
+        """
         purl = PackageURL(type="pypi", name=candidate.name, version=str(candidate.version))
 
         formats = self.wheel_or_sdist_by_package[str(purl)]
@@ -194,28 +225,7 @@ class PythonInputProvider(AbstractProvider):
                             yield packaging.requirements.Requirement(str(dep.extracted_requirement))
 
             if format == "Sdist":
-                sdist = utils_pypi.download_sdist(
-                    name=candidate.name,
-                    version=str(candidate.version),
-                    repos=self.repos,
-                )
-                if sdist.endswith(".tar.gz"):
-                    sdist_file = sdist.rstrip(".tar.gz")
-                    file = tarfile.open(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist))
-                    file.extractall(
-                        os.path.join(
-                            utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file
-                        )
-                    )
-                    file.close()
-                if sdist.endswith(".zip"):
-                    sdist_file = sdist.rstrip(".zip")
-                    with ZipFile(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist), "r") as zip:
-                        zip.extractall(
-                            os.path.join(
-                                utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file
-                            )
-                        )
+                sdist_file = get_sdist_file(repos=self.repos, candidate=candidate)
                 setup_py_path = os.path.join(
                     utils_pypi.CACHE_THIRDPARTY_DIR,
                     "extracted_sdists",
@@ -241,48 +251,47 @@ class PythonInputProvider(AbstractProvider):
                     "requirements.txt",
                 )
 
-                path_by_format = {
-                    "pkginfo": pkg_info_path,
-                    "setup-py": setup_py_path,
-                    "setup-cfg": setup_cfg_path,
-                    "requirement": requirement_path,
+                path_by_sdist_parser = {
+                    PythonSdistPkgInfoFile: pkg_info_path,
+                    PythonSetupPyHandler: setup_py_path,
+                    SetupCfgHandler: setup_cfg_path,
+                    PipRequirementsFileHandler: requirement_path,
                 }
 
-                handler_by_format = {
-                    "pkginfo": PythonSdistPkgInfoFile,
-                    "setup-py": PythonSetupPyHandler,
-                    "setup-cfg": SetupCfgHandler,
-                    "requirement": PipRequirementsFileHandler,
-                }
-                for format in ["pkginfo", "setup-py", "setup-cfg", "requirement"]:
-                    path = path_by_format[format]
-                    if os.path.exists(path):
-                        handler = handler_by_format[format]
-                        deps = list(handler.parse(path))
-                        assert len(deps) == 1
-                        dependencies = deps[0].dependencies
-                        for dep in dependencies:
-                            # skip if no purl can be extracted for dependency
-                            if dep.purl:
-                                dep_purl = PackageURL.from_string(dep.purl)
-                                if dep.scope == "install" and (
-                                    not (dep.is_resolved)
-                                    or (
-                                        dep.is_resolved
-                                        and dep_purl.name not in self.resolved_requirements
-                                    )
-                                ):
-                                    if dep.is_resolved:
-                                        self.resolved_requirements.append(dep_purl)
-                                    # skip the requirement starting with -- like
-                                    # --editable, --requirement
-                                    if not dep.extracted_requirement.startswith("--"):
-                                        yield packaging.requirements.Requirement(
-                                            str(dep.extracted_requirement)
-                                        )
+                for handler, path in path_by_sdist_parser.items():
+                    if not os.path.exists(path):
+                        continue
+
+                    deps = list(handler.parse(path))
+                    assert len(deps) == 1
+                    dependencies = deps[0].dependencies
+                    for dep in dependencies:
+                        if not dep.purl:
+                            continue
+
+                        dep_purl = PackageURL.from_string(dep.purl)
+                        if not (
+                            dep.scope == "install"
+                            and (
+                                not (dep.is_resolved)
+                                or (
+                                    dep.is_resolved
+                                    and dep_purl.name not in self.resolved_requirements
+                                )
+                            )
+                        ):
+                            continue
+                        if dep.is_resolved:
+                            self.resolved_requirements.append(dep_purl)
+                        # skip the requirement starting with -- like
+                        # --editable, --requirement
+                        if not dep.extracted_requirement.startswith("--"):
+                            yield packaging.requirements.Requirement(str(dep.extracted_requirement))
 
     def get_requirements_for_package_from_pypi_json_api(self, purl):
-
+        """
+        Return requirements for a package from the PyPI.org JSON API
+        """
         # if no repos are provided use the incorrect but fast JSON API
         if str(purl) not in self.dependencies_by_purl:
             api_url = f"https://pypi.org/pypi/{purl.name}/{purl.version}/json"
@@ -455,11 +464,10 @@ def get_resolved_dependencies(
     If empty, use instead the PyPI.org JSON API exclusively instead
     """
     resolved_requirements = [
-        packaging.utils.canonicalize_name(r["requirement"].name)
+        packaging.utils.canonicalize_name(r.name)
         for r in requirements
-        if r["is_requirement_resolved"]
+        if getattr(r, "is_requirement_resolved", False)
     ]
-    requirements = [r["requirement"] for r in requirements]
     resolver = Resolver(
         provider=PythonInputProvider(
             environment=environment, repos=repos, resolved_requirements=resolved_requirements

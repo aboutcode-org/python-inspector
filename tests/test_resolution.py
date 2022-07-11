@@ -20,9 +20,10 @@ from python_inspector.utils_pypi import Environment
 
 @pytest.mark.online
 def test_get_resolved_dependencies_with_flask_and_python_310():
-    req = [dict(requirement=Requirement("flask==2.1.2"), is_requirement_resolved=True)]
+    req = Requirement("flask==2.1.2")
+    req.is_requirement_resolved = True
     results = get_resolved_dependencies(
-        requirements=req,
+        requirements=[req],
         environment=Environment(
             python_version="310",
             operating_system="linux",
@@ -43,9 +44,10 @@ def test_get_resolved_dependencies_with_flask_and_python_310():
 
 @pytest.mark.online
 def test_get_resolved_dependencies_with_flask_and_python_310_windows():
-    req = [dict(requirement=Requirement("flask==2.1.2"), is_requirement_resolved=True)]
+    req = Requirement("flask==2.1.2")
+    req.is_requirement_resolved = True
     results = get_resolved_dependencies(
-        requirements=req,
+        requirements=[req],
         environment=Environment(
             python_version="310",
             operating_system="windows",
@@ -67,9 +69,10 @@ def test_get_resolved_dependencies_with_flask_and_python_310_windows():
 
 @pytest.mark.online
 def test_get_resolved_dependencies_with_flask_and_python_36():
-    req = [dict(requirement=Requirement("flask"), is_requirement_resolved=False)]
+    req = Requirement("flask")
+    req.is_requirement_resolved = False
     results = get_resolved_dependencies(
-        requirements=req,
+        requirements=[req],
         environment=Environment(
             python_version="36",
             operating_system="linux",
@@ -95,9 +98,10 @@ def test_get_resolved_dependencies_with_flask_and_python_36():
 
 @pytest.mark.online
 def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
-    req = [dict(requirement=Requirement("flask~=2.1.2"), is_requirement_resolved=True)]
+    req = Requirement("flask~=2.1.2")
+    req.is_requirement_resolved = False
     results = get_resolved_dependencies(
-        requirements=req,
+        requirements=[req],
         as_tree=False,
         environment=Environment(
             python_version="38",
@@ -119,9 +123,10 @@ def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
 
 @pytest.mark.online
 def test_without_supported_wheels():
-    req = [dict(requirement=Requirement("autobahn==22.3.2"), is_requirement_resolved=True)]
+    req = Requirement("autobahn==22.3.2")
+    req.is_requirement_resolved = True
     results = get_resolved_dependencies(
-        requirements=req,
+        requirements=[req],
         as_tree=False,
         repos=[PYPI_PUBLIC_REPO],
         environment=Environment(

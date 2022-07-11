@@ -8,15 +8,26 @@
 # See https://github.com/nexB/python-inspector for support or download.
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
+import collections
+import json
 import os
+from unittest import mock
 
 from commoncode.testcase import FileDrivenTesting
+from test_cli import check_json_results
 from tinynetrc import Netrc
 
+from _packagedcode.models import PackageData
+from _packagedcode.pypi import SetupCfgHandler
+from python_inspector.resolution import PythonInputProvider
+from python_inspector.resolution import get_sdist_file
 from python_inspector.utils import get_netrc_auth
+from python_inspector.utils_pypi import PypiSimpleRepository
 
 test_env = FileDrivenTesting()
 test_env.test_data_dir = os.path.join(os.path.dirname(__file__), "data")
+
+Candidate = collections.namedtuple("Candidate", "name version extras")
 
 
 def test_get_netrc_auth():
@@ -29,3 +40,35 @@ def test_get_netrc_auth_with_no_matching_url():
     netrc_file = test_env.get_test_loc("test.netrc")
     netrc = Netrc(netrc_file)
     assert get_netrc_auth(url="https://pypi2.org/simple", netrc=netrc) == (None, None)
+
+
+@mock.patch("python_inspector.utils_pypi.CACHE.get")
+def test_fetch_links(mock_get):
+    file_name = test_env.get_test_loc("psycopg2.html")
+    with open(file_name) as file:
+        mock_get.return_value = file.read()
+    links = PypiSimpleRepository().fetch_links(normalized_name="psycopg2")
+    result_file = test_env.get_temp_file("json")
+    expected_file = test_env.get_test_loc("psycopg2-links-expected.json", must_exist=False)
+    with open(result_file, "w") as file:
+        json.dump(links, file, indent=4)
+    check_json_results(result_file, expected_file, clean=False)
+
+
+def test_parse_reqs():
+    results = [
+        package.to_dict() for package in SetupCfgHandler.parse(test_env.get_test_loc("setup.cfg"))
+    ]
+    result_file = test_env.get_temp_file("json")
+    expected_file = test_env.get_test_loc("parse-reqs.json", must_exist=False)
+    with open(result_file, "w") as file:
+        json.dump(results, file, indent=4)
+    check_json_results(result_file, expected_file, clean=False)
+
+
+def test_get_sdist_file():
+    sdist_file = get_sdist_file(
+        repos=tuple([PypiSimpleRepository()]),
+        candidate=Candidate(name="psycopg2", version="2.7.5", extras=None),
+    )
+    assert sdist_file == "psycopg2-2.7.5"

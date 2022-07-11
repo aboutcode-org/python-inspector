@@ -167,6 +167,9 @@ def resolve_dependencies(
     # TODO: deduplicate me
     direct_dependencies = []
 
+    if PYPI_SIMPLE_URL not in index_urls:
+        index_urls = (*index_urls, PYPI_SIMPLE_URL)
+
     for req_file in requirement_files:
         deps = dependencies.get_dependencies_from_requirements(requirements_file=req_file)
         for extra_data in dependencies.get_extra_data_from_requirements(requirements_file=req_file):
@@ -273,13 +276,14 @@ def resolve(direct_dependencies, environment, repos=tuple(), as_tree=False, max_
     Used the provided ``repos`` list of PypiSimpleRepository.
     If empty, use instead the PyPI.org JSON API exclusively.
     """
-    requirements = [
-        dict(
-            requirement=Requirement(requirement_string=d.extracted_requirement),
-            is_requirement_resolved=d.is_resolved,
-        )
-        for d in direct_dependencies
-    ]
+
+    requirements = []
+
+    for dependency in direct_dependencies:
+        requirement = Requirement(requirement_string=dependency.extracted_requirement)
+        requirement.is_requirement_resolved = dependency.is_resolved
+        requirements.append(requirement)
+
     resolved_dependencies = get_resolved_dependencies(
         requirements=requirements,
         environment=environment,
