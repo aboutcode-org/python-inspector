@@ -454,8 +454,7 @@ def parse_metadata(location, datasource_id, package_type):
         primary_language='Python',
         name=name,
         version=version, #TODO: https://github.com/nexB/scancode-toolkit/issues/3014
-        # description=get_description(meta, location),
-        description = "",
+        description=get_description(meta, str(location)),
         declared_license=get_declared_license(meta),
         keywords=get_keywords(meta),
         parties=get_parties(meta),
@@ -724,9 +723,6 @@ class SetupCfgHandler(BaseExtractedPythonLayout):
                 )
             ]
 
-        dependency_type = get_dparse2_supported_file_name(file_name)
-        if not dependency_type:
-            return
 
         yield models.PackageData(
             datasource_id=cls.datasource_id,
@@ -1282,7 +1278,6 @@ def get_dparse2_supported_file_name(file_name):
         'Pipfile.lock',
         'Pipfile',
         'conda.yml',
-        'setup.cfg',
     )
 
     for dfile_name in dfile_names:

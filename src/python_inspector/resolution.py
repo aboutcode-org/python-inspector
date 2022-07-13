@@ -99,7 +99,7 @@ def get_sdist_file(repos, candidate):
 
 
 class PythonInputProvider(AbstractProvider):
-    def __init__(self, environment=None, repos=tuple(), resolved_requirements=[]):
+    def __init__(self, environment=None, repos=tuple(), resolved_requirements=tuple()):
         self.environment = environment
         self.repos = repos or []
         self.versions_by_package = {}
@@ -263,7 +263,9 @@ class PythonInputProvider(AbstractProvider):
                         continue
 
                     deps = list(handler.parse(path))
-                    assert len(deps) == 1
+                    assert len(deps) == 1, handler
+                    if not deps:
+                        continue
                     dependencies = deps[0].dependencies
                     for dep in dependencies:
                         if not dep.purl:
@@ -282,7 +284,7 @@ class PythonInputProvider(AbstractProvider):
                         ):
                             continue
                         if dep.is_resolved:
-                            self.resolved_requirements.append(dep_purl)
+                            self.resolved_requirements = (*self.resolved_requirements, dep_purl)
                         # skip the requirement starting with -- like
                         # --editable, --requirement
                         if not dep.extracted_requirement.startswith("--"):
@@ -470,7 +472,7 @@ def get_resolved_dependencies(
     ]
     resolver = Resolver(
         provider=PythonInputProvider(
-            environment=environment, repos=repos, resolved_requirements=resolved_requirements
+            environment=environment, repos=repos, resolved_requirements=tuple(resolved_requirements)
         ),
         reporter=BaseReporter(),
     )
