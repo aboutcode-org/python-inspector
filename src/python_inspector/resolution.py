@@ -21,7 +21,6 @@ import packaging.version
 import requests
 from packageurl import PackageURL
 from packaging.requirements import Requirement
-from packaging.specifiers import SpecifierSet
 from resolvelib import AbstractProvider
 from resolvelib import Resolver
 from resolvelib.reporters import BaseReporter
@@ -69,7 +68,7 @@ def get_python_version_from_env_tag(python_version: str):
     return python_version
 
 
-def get_sdist_file(repos, candidate):
+def get_sdist_file(repos, candidate, python_version):
     """
     Return the sdist file for a candidate.
     """
@@ -77,7 +76,12 @@ def get_sdist_file(repos, candidate):
         name=candidate.name,
         version=str(candidate.version),
         repos=repos,
+        python_version=python_version,
     )
+
+    if not sdist:
+        return
+
     sdist_file = None
 
     if sdist.endswith(".tar.gz"):
@@ -95,6 +99,7 @@ def get_sdist_file(repos, candidate):
 
     if not sdist_file:
         raise Exception(f"Unable to extract sdist {sdist}")
+
     return sdist_file
 
 
@@ -143,36 +148,20 @@ class PythonInputProvider(AbstractProvider):
         """
         versions = []
         for version, package in repo.get_package_versions(name).items():
-            name = packaging.utils.canonicalize_name(package.name)
-            purl = PackageURL(type="pypi", name=name, version=version)
             python_version = packaging.version.parse(
                 get_python_version_from_env_tag(self.environment.python_version)
             )
-            formats = []
             wheels = list(package.get_supported_wheels(environment=self.environment))
             if wheels:
                 valid_wheel_present = False
                 for wheel in wheels:
-                    if (
-                        wheel.requires_python
-                        and python_version in SpecifierSet(wheel.requires_python)
-                    ) or not wheel.requires_python:
+                    if utils_pypi.valid_distribution(wheel, python_version):
                         valid_wheel_present = True
                 if valid_wheel_present:
                     versions.append(version)
-                    formats.append("Wheel")
             if package.sdist:
-                valid_sdist_present = False
-                if (
-                    package.sdist.requires_python
-                    and python_version in SpecifierSet(package.sdist.requires_python)
-                    or not package.sdist.requires_python
-                ):
-                    valid_sdist_present = True
-                if valid_sdist_present:
+                if utils_pypi.valid_distribution(package.sdist, python_version):
                     versions.append(version)
-                    formats.append("Sdist")
-            self.wheel_or_sdist_by_package[str(purl)] = formats
         return versions
 
     def get_versions_for_package_from_pypi_json_api(self, name):
@@ -202,93 +191,92 @@ class PythonInputProvider(AbstractProvider):
         """
         Return requirements for a package from the simple repositories.
         """
-        purl = PackageURL(type="pypi", name=candidate.name, version=str(candidate.version))
+        python_version = packaging.version.parse(
+            get_python_version_from_env_tag(self.environment.python_version)
+        )
 
-        formats = self.wheel_or_sdist_by_package[str(purl)]
+        wheels = utils_pypi.download_wheel(
+            name=candidate.name,
+            version=str(candidate.version),
+            environment=self.environment,
+            repos=self.repos,
+            python_version=python_version,
+        )
+        for wheel in wheels:
+            deps = list(
+                PypiWheelHandler.parse(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, wheel))
+            )
+            assert len(deps) == 1
+            deps = deps[0].dependencies
+            for dep in deps:
+                if dep.scope == "install":
+                    yield packaging.requirements.Requirement(str(dep.extracted_requirement))
 
-        for format in formats:
-            if format == "Wheel":
-                wheels = utils_pypi.download_wheel(
-                    name=candidate.name,
-                    version=str(candidate.version),
-                    environment=self.environment,
-                    repos=self.repos,
-                )
-                for wheel in wheels:
-                    deps = list(
-                        PypiWheelHandler.parse(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, wheel))
-                    )
-                    assert len(deps) == 1
-                    deps = deps[0].dependencies
-                    for dep in deps:
-                        if dep.scope == "install":
-                            yield packaging.requirements.Requirement(str(dep.extracted_requirement))
+        sdist_file = get_sdist_file(
+            repos=self.repos, candidate=candidate, python_version=python_version
+        )
 
-            if format == "Sdist":
-                sdist_file = get_sdist_file(repos=self.repos, candidate=candidate)
-                setup_py_path = os.path.join(
-                    utils_pypi.CACHE_THIRDPARTY_DIR,
-                    "extracted_sdists",
-                    sdist_file,
-                    sdist_file,
-                    "setup.py",
-                )
-                setup_cfg_path = os.path.join(
-                    utils_pypi.CACHE_THIRDPARTY_DIR,
-                    "extracted_sdists",
-                    sdist_file,
-                    sdist_file,
-                    "setup.cfg",
-                )
-                pkg_info_path = os.path.join(
-                    utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file
-                )
-                requirement_path = os.path.join(
-                    utils_pypi.CACHE_THIRDPARTY_DIR,
-                    "extracted_sdists",
-                    sdist_file,
-                    sdist_file,
-                    "requirements.txt",
-                )
+        if sdist_file:
+            setup_py_path = os.path.join(
+                utils_pypi.CACHE_THIRDPARTY_DIR,
+                "extracted_sdists",
+                sdist_file,
+                sdist_file,
+                "setup.py",
+            )
+            setup_cfg_path = os.path.join(
+                utils_pypi.CACHE_THIRDPARTY_DIR,
+                "extracted_sdists",
+                sdist_file,
+                sdist_file,
+                "setup.cfg",
+            )
+            pkg_info_path = os.path.join(
+                utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file
+            )
+            requirement_path = os.path.join(
+                utils_pypi.CACHE_THIRDPARTY_DIR,
+                "extracted_sdists",
+                sdist_file,
+                sdist_file,
+                "requirements.txt",
+            )
 
-                path_by_sdist_parser = {
-                    PythonSdistPkgInfoFile: pkg_info_path,
-                    PythonSetupPyHandler: setup_py_path,
-                    SetupCfgHandler: setup_cfg_path,
-                    PipRequirementsFileHandler: requirement_path,
-                }
+            path_by_sdist_parser = {
+                PythonSdistPkgInfoFile: pkg_info_path,
+                PythonSetupPyHandler: setup_py_path,
+                SetupCfgHandler: setup_cfg_path,
+                PipRequirementsFileHandler: requirement_path,
+            }
 
-                for handler, path in path_by_sdist_parser.items():
-                    if not os.path.exists(path):
+            for handler, path in path_by_sdist_parser.items():
+                if not os.path.exists(path):
+                    continue
+
+                deps = list(handler.parse(path))
+                assert len(deps) == 1, handler
+                if not deps:
+                    continue
+                dependencies = deps[0].dependencies
+                for dep in dependencies:
+                    if not dep.purl:
                         continue
 
-                    deps = list(handler.parse(path))
-                    assert len(deps) == 1, handler
-                    if not deps:
+                    dep_purl = PackageURL.from_string(dep.purl)
+                    if not (
+                        dep.scope == "install"
+                        and (
+                            not (dep.is_resolved)
+                            or (dep.is_resolved and dep_purl.name not in self.resolved_requirements)
+                        )
+                    ):
                         continue
-                    dependencies = deps[0].dependencies
-                    for dep in dependencies:
-                        if not dep.purl:
-                            continue
-
-                        dep_purl = PackageURL.from_string(dep.purl)
-                        if not (
-                            dep.scope == "install"
-                            and (
-                                not (dep.is_resolved)
-                                or (
-                                    dep.is_resolved
-                                    and dep_purl.name not in self.resolved_requirements
-                                )
-                            )
-                        ):
-                            continue
-                        if dep.is_resolved:
-                            self.resolved_requirements = (*self.resolved_requirements, dep_purl)
-                        # skip the requirement starting with -- like
-                        # --editable, --requirement
-                        if not dep.extracted_requirement.startswith("--"):
-                            yield packaging.requirements.Requirement(str(dep.extracted_requirement))
+                    if dep.is_resolved:
+                        self.resolved_requirements = (*self.resolved_requirements, dep_purl)
+                    # skip the requirement starting with -- like
+                    # --editable, --requirement
+                    if not dep.extracted_requirement.startswith("--"):
+                        yield packaging.requirements.Requirement(str(dep.extracted_requirement))
 
     def get_requirements_for_package_from_pypi_json_api(self, purl):
         """

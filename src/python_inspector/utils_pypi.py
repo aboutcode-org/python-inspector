@@ -28,6 +28,7 @@ from commoncode import fileutils
 from commoncode.hash import multi_checksums
 from packaging import tags as packaging_tags
 from packaging import version as packaging_version
+from packaging.specifiers import SpecifierSet
 
 from python_inspector import utils_pip_compatibility_tags
 
@@ -200,6 +201,7 @@ def download_wheel(
     repos=tuple(),
     verbose=False,
     echo_func=None,
+    python_version="3.8",
 ):
     """
     Download the wheels binary distribution(s) of package ``name`` and
@@ -232,6 +234,8 @@ def download_wheel(
             continue
 
         for wheel in supported_wheels:
+            if not valid_distribution(wheel, python_version):
+                continue
             if TRACE_DEEP:
                 print(
                     f"    download_wheel: Getting wheel from index (or cache): {wheel.download_url}"
@@ -250,6 +254,16 @@ def download_wheel(
     return fetched_wheel_filenames
 
 
+def valid_distribution(distribution, python_version):
+    """
+    Return True if distribution is a valid distribution for the given Python version.
+    """
+    return (
+        distribution.requires_python
+        and python_version in SpecifierSet(distribution.requires_python)
+    ) or not distribution.requires_python
+
+
 def download_sdist(
     name,
     version,
@@ -257,6 +271,7 @@ def download_sdist(
     repos=tuple(),
     verbose=False,
     echo_func=None,
+    python_version="3.8",
 ):
     """
     Download the sdist source distribution of package ``name`` and ``version``
@@ -285,7 +300,8 @@ def download_sdist(
             if TRACE_DEEP:
                 print(f"    download_sdist: No sdist for {name}=={version}")
             continue
-
+        if not valid_distribution(sdist, python_version):
+            continue
         if TRACE_DEEP:
             print(f"    download_sdist: Getting sdist from index (or cache): {sdist.download_url}")
         fetched_sdist_filename = package.sdist.download(

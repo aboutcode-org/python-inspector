@@ -70,5 +70,6 @@ def test_get_sdist_file():
     sdist_file = get_sdist_file(
         repos=tuple([PypiSimpleRepository()]),
         candidate=Candidate(name="psycopg2", version="2.7.5", extras=None),
+        python_version="3.8",
     )
     assert sdist_file == "psycopg2-2.7.5"
