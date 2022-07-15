@@ -30,6 +30,7 @@ from packaging import tags as packaging_tags
 from packaging import version as packaging_version
 from packaging.specifiers import SpecifierSet
 
+from python_inspector import DEFAULT_PYTHON_VERSION
 from python_inspector import utils_pip_compatibility_tags
 
 """
@@ -201,7 +202,7 @@ def download_wheel(
     repos=tuple(),
     verbose=False,
     echo_func=None,
-    python_version="3.8",
+    python_version=DEFAULT_PYTHON_VERSION,
 ):
     """
     Download the wheels binary distribution(s) of package ``name`` and
@@ -258,10 +259,9 @@ def valid_distribution(distribution, python_version):
     """
     Return True if distribution is a valid distribution for the given Python version.
     """
-    return (
-        distribution.requires_python
-        and python_version in SpecifierSet(distribution.requires_python)
-    ) or not distribution.requires_python
+    if not distribution.python_requires:
+        return True
+    return python_version in SpecifierSet(distribution.python_requires)
 
 
 def download_sdist(
@@ -271,7 +271,7 @@ def download_sdist(
     repos=tuple(),
     verbose=False,
     echo_func=None,
-    python_version="3.8",
+    python_version=DEFAULT_PYTHON_VERSION,
 ):
     """
     Download the sdist source distribution of package ``name`` and ``version``
@@ -366,7 +366,7 @@ class Link(NamedTuple):
     """
 
     url: str
-    required_python: str
+    python_requires: str
 
 
 @attr.attributes
@@ -527,7 +527,7 @@ class Distribution(NameVer):
         default=None,
     )
 
-    requires_python = attr.ib(
+    python_requires = attr.ib(
         type=str,
         default="",
         metadata=dict(help="Python 'specifier' required by this distribution."),
@@ -613,18 +613,18 @@ class Distribution(NameVer):
         return self.filename
 
     @classmethod
-    def from_path_or_url_with_required_python(cls, path_or_url_with_required_python: Link):
+    def from_link(cls, link: Link):
         """
         Return a distribution built from the data found in the filename of a
         ``path_or_url`` string. Raise an exception if this is not a valid
         filename.
         """
-        requires_python = path_or_url_with_required_python.required_python
-        path_or_url = path_or_url_with_required_python.url
+        requires_python = link.python_requires
+        path_or_url = link.url
         filename = os.path.basename(path_or_url.strip("/"))
         dist = cls.from_filename(filename)
         dist.path_or_url = path_or_url
-        dist.requires_python = requires_python
+        dist.python_requires = requires_python
         return dist
 
     @classmethod
@@ -1197,14 +1197,12 @@ class PypiPackage(NameVer):
         return package
 
     @classmethod
-    def packages_from_many_paths_or_urls(cls, paths_or_urls_with_required_python):
+    def packages_from_links(cls, links: List[Link]):
         """
         Yield PypiPackages built from a list of paths or URLs.
         These are sorted by name and then by version from oldest to newest.
         """
-        dists = PypiPackage.dists_from_paths_or_urls_with_required_python(
-            paths_or_urls_with_required_python
-        )
+        dists = PypiPackage.dists_from_links(links)
         if TRACE_ULTRA_DEEP:
             print("packages_from_many_paths_or_urls: dists:", dists)
 
@@ -1220,7 +1218,7 @@ class PypiPackage(NameVer):
             yield package
 
     @classmethod
-    def dists_from_paths_or_urls_with_required_python(cls, links: List[Link]):
+    def dists_from_links(cls, links: List[Link]):
         """
         Return a list of Distribution given a list of
         ``paths_or_urls`` to wheels or source distributions.
@@ -1230,14 +1228,15 @@ class PypiPackage(NameVer):
             - its filename
 
         For example:
-        >>> paths_or_urls =[
-        ...     Link("/home/foo/bitarray-0.8.1-cp36-cp36m-linux_x86_64.whl", ">=3.7"),
-        ...     Link("bitarray-0.8.1-cp36-cp36m-macosx_10_9_x86_64.macosx_10_10_x86_64.whl", ">=3.7"),
-        ...     Link("bitarray-0.8.1-cp36-cp36m-win_amd64.whl", ">=3.7"),
-        ...     Link("https://example.com/bar/bitarray-0.8.1.tar.gz", ">=3.7"),
-        ...     Link("bitarray-0.8.1.tar.gz.ABOUT", ">=3.7"),
-        ...     Link("bit.LICENSE", ">=3.7")]
-        >>> results = list(PypiPackage.dists_from_paths_or_urls_with_required_python(paths_or_urls))
+        >>> links =[
+        ...     Link(url="/home/foo/bitarray-0.8.1-cp36-cp36m-linux_x86_64.whl", python_requires= ">=3.7"),
+        ...     Link(url="bitarray-0.8.1-cp36-cp36m-macosx_10_9_x86_64.macosx_10_10_x86_64.whl",
+        ...         python_requires= ">=3.7"),
+        ...     Link(url="bitarray-0.8.1-cp36-cp36m-win_amd64.whl",python_requires= ">=3.7"),
+        ...     Link(url="https://example.com/bar/bitarray-0.8.1.tar.gz",python_requires= ">=3.7"),
+        ...     Link(url="bitarray-0.8.1.tar.gz.ABOUT",python_requires= ">=3.7"),
+        ...     Link(url="bit.LICENSE", python_requires=">=3.7")]
+        >>> results = list(PypiPackage.dists_from_links(links))
         >>> for r in results:
         ...    print(r.__class__.__name__, r.name, r.version)
         ...    if isinstance(r, Wheel):
@@ -1254,11 +1253,9 @@ class PypiPackage(NameVer):
         if TRACE_ULTRA_DEEP:
             print("     ###paths_or_urls:", links)
         installable: List[Link] = [link for link in links if link.url.endswith(EXTENSIONS)]
-        for path_or_url_with_required_python in installable:
+        for link in installable:
             try:
-                dist = Distribution.from_path_or_url_with_required_python(
-                    path_or_url_with_required_python
-                )
+                dist = Distribution.from_link(link=link)
                 dists.append(dist)
                 if TRACE_DEEP:
                     print(
@@ -1269,13 +1266,11 @@ class PypiPackage(NameVer):
                         dist.download_url,
                         "\n     ",
                         "from URL:",
-                        path_or_url_with_required_python.url,
+                        link.url,
                     )
             except InvalidDistributionFilename:
                 if TRACE_DEEP:
-                    print(
-                        f"     Skipping invalid distribution from: {path_or_url_with_required_python.url}"
-                    )
+                    print(f"     Skipping invalid distribution from: {link.url}")
                 continue
         return dists
 
@@ -1462,9 +1457,7 @@ class PypiSimpleRepository:
                 # note that this is sorted so the mapping is also sorted
                 versions = {
                     package.version: package
-                    for package in PypiPackage.packages_from_many_paths_or_urls(
-                        paths_or_urls_with_required_python=links
-                    )
+                    for package in PypiPackage.packages_from_links(links=links)
                 }
                 self.packages[normalized_name] = versions
             except RemoteNotFetchedException as e:
@@ -1546,11 +1539,11 @@ class PypiSimpleRepository:
         anchor_tags = soup.find_all("a")
         links = []
         for anchor_tag in anchor_tags:
-            requires_python = None
+            python_requires = None
             url, _, _sha256 = anchor_tag["href"].partition("#sha256=")
             if "data-requires-python" in anchor_tag.attrs:
-                requires_python = anchor_tag.attrs["data-requires-python"]
-            links.append(Link(url, requires_python))
+                python_requires = anchor_tag.attrs["data-requires-python"]
+            links.append(Link(url=url, python_requires=python_requires))
         # TODO: keep sha256
         return links
 

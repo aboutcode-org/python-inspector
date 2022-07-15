@@ -168,7 +168,7 @@ def resolve_dependencies(
     direct_dependencies = []
 
     if PYPI_SIMPLE_URL not in index_urls:
-        index_urls = (*index_urls, PYPI_SIMPLE_URL)
+        index_urls = tuple([PYPI_SIMPLE_URL]) + tuple(index_urls)
 
     for req_file in requirement_files:
         deps = dependencies.get_dependencies_from_requirements(requirements_file=req_file)

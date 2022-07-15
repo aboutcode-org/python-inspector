@@ -14,6 +14,7 @@ import logging
 import os
 import re
 import sys
+from typing import NamedTuple
 import zipfile
 from configparser import ConfigParser
 from pathlib import Path
@@ -23,6 +24,7 @@ import packaging
 import pip_requirements_parser
 import pkginfo2
 from commoncode import fileutils
+from packaging.specifiers import SpecifierSet
 from packageurl import PackageURL
 from packaging import markers
 from packaging.requirements import Requirement
@@ -453,8 +455,9 @@ def parse_metadata(location, datasource_id, package_type):
         type=package_type,
         primary_language='Python',
         name=name,
-        version=version, #TODO: https://github.com/nexB/scancode-toolkit/issues/3014
-        description=get_description(meta, str(location)),
+        version=version,
+        description=get_description( metainfo= meta, location= str(location)),
+        #TODO: https://github.com/nexB/scancode-toolkit/issues/3014
         declared_license=get_declared_license(meta),
         keywords=get_keywords(meta),
         parties=get_parties(meta),
@@ -646,6 +649,14 @@ class PythonSetupPyHandler(BaseExtractedPythonLayout):
         )
 
 
+class ResolvedPurl(NamedTuple):
+    """
+    A resolved PURL
+    """
+    purl: PackageURL
+    is_resolved: bool
+
+
 class BaseDependencyFileHandler(BasePypiHandler):
     """
     Base class for a dependency files parsed with the same library
@@ -690,8 +701,35 @@ class SetupCfgHandler(BaseExtractedPythonLayout):
             parser.read_file(f)
         for section in parser.values():
             if section.name == 'options':
-                reqs = list(get_requirement_from_section(section=section, sub_section="install_requires"))
-                dependent_packages.extend(cls.parse_reqs(reqs, "install"))
+                scope_by_sub_section = {
+                    "install_requires": "install",
+                    "tests_require": "test",
+                    "setup_requires": "setup",
+                    "python_requires": "python",
+                }
+                for sub_section in scope_by_sub_section:
+                    if sub_section not in section:
+                        continue
+                    scope = scope_by_sub_section[sub_section]
+                    if scope != "python":
+                        reqs = list(get_requirement_from_section(section=section, sub_section=sub_section))
+                        dependent_packages.extend(cls.parse_reqs(reqs, scope))
+                        continue
+                    python_requires = section[sub_section]
+                    purl = PackageURL(
+                        name="python",
+                        type="generic"
+                    )
+                    resolved_purl = is_purl_resolved(purl = purl, specifiers= SpecifierSet(python_requires))
+                    dependent_packages.append(models.DependentPackage(
+                    purl=str(resolved_purl.purl),
+                    scope=scope,
+                    is_runtime=True,
+                    is_optional=False,
+                    is_resolved=resolved_purl.is_resolved,
+                    extracted_requirement=f"python_requires{python_requires}",
+                    ))
+
             if section.name == "options.extras_require":
                 for sub_section in section:
                     reqs = list(get_requirement_from_section(section=section, sub_section=sub_section))
@@ -742,27 +780,38 @@ class SetupCfgHandler(BaseExtractedPythonLayout):
         """ 
         dependent_packages = []
         for req in reqs:
-            is_resolved = False
             req_parsed = packaging.requirements.Requirement(str(req))
             name = canonicalize_name(req_parsed.name)
             purl = PackageURL(type="pypi", name=name)
             specifiers = req_parsed.specifier._specs
-            if len(specifiers) == 1:
-                specifier = list(specifiers)[0]
-                if specifier.operator in ('==', '==='):
-                    is_resolved = True
-                    purl = purl._replace(version=specifier.version)
+            resolved_purl = is_purl_resolved(purl = purl, specifiers= specifiers)
             dependent_packages.append(
                         models.DependentPackage(
-                        purl=str(purl),
+                        purl=str(resolved_purl.purl),
                         scope=scope,
                         is_runtime=True,
                         is_optional=False,
-                        is_resolved=is_resolved,
+                        is_resolved=resolved_purl.is_resolved,
                         extracted_requirement=req
                     )
                 )
         return dependent_packages
+
+
+def is_purl_resolved(purl: PackageURL, specifiers: SpecifierSet):
+    """
+    Check if the purl is resolved
+    """
+    is_resolved = False
+    if len(specifiers) == 1:
+        specifier = list(specifiers)[0]
+        if specifier.operator in ('==', '==='):
+            is_resolved = True
+            purl = purl._replace(version=specifier.version)
+    return ResolvedPurl(
+        purl=purl,
+        is_resolved=is_resolved,
+    )    
 
 class PipfileHandler(BaseDependencyFileHandler):
     datasource_id = 'pipfile'
@@ -1934,20 +1983,19 @@ def get_requirement_from_section(section, sub_section):
     """
     content = section.get(sub_section) or ""
     for req in content.splitlines():
-        if req:
-            #pytest-mypy >= 0.9.1; \
-            req = req.replace("; \\", "")
-            # pip>=19.1 # For proper file:// URLs support.
-            if "#" in req:
-                req , _ = req.rsplit("#")
+        if not req:
+            continue
+        #pytest-mypy >= 0.9.1; \
+        req = req.replace("; \\", "")
+        # pip>=19.1 # For proper file:// URLs support.
+        if "#" in req:
+            req , _ = req.rsplit("#")
+        try:
+            Requirement(req)
+            yield req
+        except:
             #pure-eval; black; tox
             req_split_by_semi_colon = req.split(";")
             req_split_by_semi_colon = [req.strip() for req in req_split_by_semi_colon if req]
-            if len(req_split_by_semi_colon) >= 2 and not(req_split_by_semi_colon[1].startswith("python_version") # pip>=19.1 ;python_version > 3.7 
-            or req_split_by_semi_colon[1].startswith("sys_platform") # pip>=19.1 ;sys_platform = "Windows"
-            or req_split_by_semi_colon[1].startswith("platform_system") # pip>=19.1 ;platform_system = "Windows"
-            or req_split_by_semi_colon[1].startswith("platform_python_implementation")):#pytest-black>=0.3.7; platform_python_implementation != "PyPy"
-                for temp_req in req_split_by_semi_colon:
-                    yield temp_req
-            else:
+            for req in req_split_by_semi_colon:
                 yield req

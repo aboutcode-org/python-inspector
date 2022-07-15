@@ -7,11 +7,11 @@
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
-import collections
 import operator
 import os
 import tarfile
 from typing import List
+from typing import NamedTuple
 from typing import Sequence
 from zipfile import ZipFile
 
@@ -32,7 +32,15 @@ from _packagedcode.pypi import PythonSetupPyHandler
 from _packagedcode.pypi import SetupCfgHandler
 from python_inspector import utils_pypi
 
-Candidate = collections.namedtuple("Candidate", "name version extras")
+
+class Candidate(NamedTuple):
+    """
+    A candidate is a package that can be installed.
+    """
+
+    name: str
+    version: str
+    extras: str
 
 
 def get_response(url):
@@ -68,9 +76,16 @@ def get_python_version_from_env_tag(python_version: str):
     return python_version
 
 
-def get_sdist_file(repos, candidate, python_version):
+def fetch_and_extract_sdist(repos, candidate, python_version):
     """
-    Return the sdist file for a candidate.
+    Fetch and extract the source distribution (sdist) for the ``candidate`` Candidate
+    from the `repos` list of PyPiRepository
+    and a required ``python_version`` Python version.
+    Return the directory location string where the sdist has been extracted.
+    Return None if the sdist was not fetched either
+    because does not exist in any of the ``repos`` or it does not work with
+    the required ``python_version``.
+    Raise an Exception if extraction fails.
     """
     sdist = utils_pypi.download_sdist(
         name=candidate.name,
@@ -82,25 +97,32 @@ def get_sdist_file(repos, candidate, python_version):
     if not sdist:
         return
 
-    sdist_file = None
-
     if sdist.endswith(".tar.gz"):
         sdist_file = sdist.rstrip(".tar.gz")
         with tarfile.open(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist)) as file:
             file.extractall(
                 os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file)
             )
-    if sdist.endswith(".zip"):
+    elif sdist.endswith(".zip"):
         sdist_file = sdist.rstrip(".zip")
         with ZipFile(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist)) as zip:
             zip.extractall(
                 os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file)
             )
 
-    if not sdist_file:
+    else:
         raise Exception(f"Unable to extract sdist {sdist}")
 
-    return sdist_file
+    return os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file, sdist_file)
+
+
+def remove_extras(identifier):
+    """
+    Return the identifier without extras.
+    >>> assert remove_extras("foo[bar]") == "foo"
+    """
+    name, _, _ = identifier.partition("[")
+    return name
 
 
 class PythonInputProvider(AbstractProvider):
@@ -212,32 +234,21 @@ class PythonInputProvider(AbstractProvider):
                 if dep.scope == "install":
                     yield packaging.requirements.Requirement(str(dep.extracted_requirement))
 
-        sdist_file = get_sdist_file(
+        sdist_file = fetch_and_extract_sdist(
             repos=self.repos, candidate=candidate, python_version=python_version
         )
 
         if sdist_file:
             setup_py_path = os.path.join(
-                utils_pypi.CACHE_THIRDPARTY_DIR,
-                "extracted_sdists",
-                sdist_file,
                 sdist_file,
                 "setup.py",
             )
             setup_cfg_path = os.path.join(
-                utils_pypi.CACHE_THIRDPARTY_DIR,
-                "extracted_sdists",
-                sdist_file,
                 sdist_file,
                 "setup.cfg",
             )
-            pkg_info_path = os.path.join(
-                utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file
-            )
+            pkg_info_path = os.path.dirname(sdist_file)
             requirement_path = os.path.join(
-                utils_pypi.CACHE_THIRDPARTY_DIR,
-                "extracted_sdists",
-                sdist_file,
                 sdist_file,
                 "requirements.txt",
             )
@@ -254,29 +265,30 @@ class PythonInputProvider(AbstractProvider):
                     continue
 
                 deps = list(handler.parse(path))
-                assert len(deps) == 1, handler
-                if not deps:
-                    continue
+                assert len(deps) == 1
+
                 dependencies = deps[0].dependencies
                 for dep in dependencies:
                     if not dep.purl:
                         continue
 
-                    dep_purl = PackageURL.from_string(dep.purl)
-                    if not (
-                        dep.scope == "install"
-                        and (
-                            not (dep.is_resolved)
-                            or (dep.is_resolved and dep_purl.name not in self.resolved_requirements)
-                        )
-                    ):
+                    if dep.scope != "install":
                         continue
+
+                    dep_purl = PackageURL.from_string(dep.purl)
+
+                    if self.is_dep_resolved_and_in_resolved_requirements(dep, dep_purl):
+                        continue
+
                     if dep.is_resolved:
-                        self.resolved_requirements = (*self.resolved_requirements, dep_purl)
+                        self.resolved_requirements.append(dep_purl)
                     # skip the requirement starting with -- like
                     # --editable, --requirement
                     if not dep.extracted_requirement.startswith("--"):
                         yield packaging.requirements.Requirement(str(dep.extracted_requirement))
+
+    def is_dep_resolved_and_in_resolved_requirements(self, dep, dep_purl):
+        return dep.is_resolved and dep_purl.name in self.resolved_requirements
 
     def get_requirements_for_package_from_pypi_json_api(self, purl):
         """
@@ -308,7 +320,7 @@ class PythonInputProvider(AbstractProvider):
         """
         Yield candidates for the given identifier, requirements and incompatibilities
         """
-        name, _, _ = identifier.partition("[")
+        name = remove_extras(identifier)
         bad_versions = {c.version for c in incompatibilities[identifier]}
         extras = {e for r in requirements[identifier] for e in r.extras}
         if not self.repos:
@@ -460,7 +472,7 @@ def get_resolved_dependencies(
     ]
     resolver = Resolver(
         provider=PythonInputProvider(
-            environment=environment, repos=repos, resolved_requirements=tuple(resolved_requirements)
+            environment=environment, repos=repos, resolved_requirements=resolved_requirements
         ),
         reporter=BaseReporter(),
     )

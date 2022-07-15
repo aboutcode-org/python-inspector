@@ -111,7 +111,7 @@ def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
     as_list = [p["package"] for p in results]
     assert as_list == [
         "pkg:pypi/click@8.1.3",
-        "pkg:pypi/flask@2.1.2",
+        "pkg:pypi/flask@2.1.3",
         "pkg:pypi/importlib-metadata@4.12.0",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
@@ -143,7 +143,7 @@ def test_without_supported_wheels():
         "pkg:pypi/hyperlink@21.0.0",
         "pkg:pypi/idna@3.3",
         "pkg:pypi/pycparser@2.21",
-        "pkg:pypi/setuptools@63.1.0",
+        "pkg:pypi/setuptools@63.2.0",
         "pkg:pypi/txaio@22.2.1",
     ]
 

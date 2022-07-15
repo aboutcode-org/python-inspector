@@ -57,6 +57,25 @@ def test_cli_with_single_index_url():
 
 
 @pytest.mark.online
+def test_cli_with_single_index_url_except_pypi_simple():
+    expected_file = test_env.get_test_loc(
+        "single-url-except-simple-expected.json", must_exist=False
+    )
+    # using flask since it's not present in thirdparty
+    specifier = "flask"
+    extra_options = [
+        "--index-url",
+        "https://thirdparty.aboutcode.org/pypi/simple/",
+    ]
+    check_specs_resolution(
+        specifier=specifier,
+        expected_file=expected_file,
+        extra_options=extra_options,
+        regen=REGEN_TEST_FIXTURES,
+    )
+
+
+@pytest.mark.online
 def test_cli_with_multiple_index_url_and_tilde_req():
     expected_file = test_env.get_test_loc("tilde_req-expected.json", must_exist=False)
     specifier = "zipp~=3.8.0"

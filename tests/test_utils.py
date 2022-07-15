@@ -17,10 +17,8 @@ from commoncode.testcase import FileDrivenTesting
 from test_cli import check_json_results
 from tinynetrc import Netrc
 
-from _packagedcode.models import PackageData
 from _packagedcode.pypi import SetupCfgHandler
-from python_inspector.resolution import PythonInputProvider
-from python_inspector.resolution import get_sdist_file
+from python_inspector.resolution import fetch_and_extract_sdist
 from python_inspector.utils import get_netrc_auth
 from python_inspector.utils_pypi import PypiSimpleRepository
 
@@ -67,9 +65,25 @@ def test_parse_reqs():
 
 
 def test_get_sdist_file():
-    sdist_file = get_sdist_file(
+    sdist_file = fetch_and_extract_sdist(
         repos=tuple([PypiSimpleRepository()]),
         candidate=Candidate(name="psycopg2", version="2.7.5", extras=None),
         python_version="3.8",
     )
-    assert sdist_file == "psycopg2-2.7.5"
+    assert os.path.basename(os.path.normpath(sdist_file)) == "psycopg2-2.7.5"
+
+
+def test_parse_reqs_with_setup_requires_and_python_requires():
+    results = [
+        package.to_dict()
+        for package in SetupCfgHandler.parse(
+            test_env.get_test_loc("setup_with_setup_requires_and_python_requires.cfg")
+        )
+    ]
+    result_file = test_env.get_temp_file("json")
+    expected_file = test_env.get_test_loc(
+        "parse-reqs-with-setup_requires-and-python-requires.json", must_exist=False
+    )
+    with open(result_file, "w") as file:
+        json.dump(results, file, indent=4)
+    check_json_results(result_file, expected_file, clean=False)
