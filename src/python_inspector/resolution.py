@@ -384,6 +384,27 @@ class PythonInputProvider(AbstractProvider):
         return list(self._iter_dependencies(candidate))
 
 
+def get_wheel_download_urls(purl, repos, environment, python_version):
+    """
+    Return a list of download urls for the given purl.
+    """
+    for repo in repos:
+        for wheel in utils_pypi.get_supported_and_valid_wheels(
+            repo, purl.name, purl.version, environment, python_version
+        ):
+            yield wheel.download_url
+
+
+def get_sdist_download_url(purl, repos, python_version):
+    """
+    Return a list of download urls for the given purl.
+    """
+    for repo in repos:
+        sdist = utils_pypi.get_valid_sdist(repo, purl.name, purl.version, python_version)
+        if sdist:
+            return sdist.download_url
+
+
 def get_all_srcs(mapping, graph):
     """
     Return a list of all sources in the graph.
@@ -412,7 +433,7 @@ def dfs(mapping, graph, src):
     )
 
 
-def format_resolution(results, as_tree=False):
+def format_resolution(results, environment, repos, as_tree=False):
     """
     Return a formatted resolution either as a tree or parent/children.
     """
@@ -437,7 +458,17 @@ def format_resolution(results, as_tree=False):
                 )
                 dependencies.append(str(dep_purl))
             dependencies.sort()
-            parent_children = dict(package=str(parent_purl), dependencies=dependencies)
+            python_version = get_python_version_from_env_tag(environment.python_version)
+            wheel_urls = list(
+                get_wheel_download_urls(parent_purl, repos, environment, python_version)
+            )
+            sdist_url = get_sdist_download_url(parent_purl, repos, python_version)
+            parent_children = dict(
+                package=str(parent_purl),
+                dependencies=dependencies,
+                wheel_urls=list(dict.fromkeys(wheel_urls)),
+                sdist_url=sdist_url,
+            )
             as_parent_children.append(parent_children)
         as_parent_children.sort(key=lambda d: d["package"])
         return as_parent_children
@@ -477,5 +508,5 @@ def get_resolved_dependencies(
         reporter=BaseReporter(),
     )
     results = resolver.resolve(requirements=requirements, max_rounds=max_rounds)
-    results = format_resolution(results, as_tree=as_tree)
+    results = format_resolution(results, as_tree=as_tree, environment=environment, repos=repos)
     return results
