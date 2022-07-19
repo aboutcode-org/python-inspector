@@ -30,17 +30,8 @@
     "extra_data": {},
     "dependencies": [
       {
-        "purl": "pkg:pypi/pytest-mypy",
-        "extracted_requirement": "pytest-mypy >= 0.9.1",
-        "scope": "install",
-        "is_runtime": true,
-        "is_optional": false,
-        "is_resolved": false,
-        "resolved_package": {}
-      },
-      {
-        "purl": "pkg:pypi/pytest-cov",
-        "extracted_requirement": "pytest-cov >= 2.5.1",
+        "purl": "pkg:pypi/pytest-black",
+        "extracted_requirement": "pytest-black>=0.3.7; platform_python_implementation != \"PyPy\"",
         "scope": "install",
         "is_runtime": true,
         "is_optional": false,
@@ -49,7 +40,7 @@
       },
       {
         "purl": "pkg:pypi/attrs",
-        "extracted_requirement": "attrs >= 18.1, !=20.1.0",
+        "extracted_requirement": "attrs>=18.1,!=20.1.0",
         "scope": "install",
         "is_runtime": true,
         "is_optional": false,
@@ -58,7 +49,7 @@
       },
       {
         "purl": "pkg:pypi/beautifulsoup4",
-        "extracted_requirement": "Beautifulsoup4 >= 4.0.0",
+        "extracted_requirement": "Beautifulsoup4>=4.0.0",
         "scope": "install",
         "is_runtime": true,
         "is_optional": false,
@@ -67,7 +58,7 @@
       },
       {
         "purl": "pkg:pypi/pip",
-        "extracted_requirement": "pip>=19.1 ",
+        "extracted_requirement": "pip>=19.1",
         "scope": "install",
         "is_runtime": true,
         "is_optional": false,
@@ -76,7 +67,7 @@
       },
       {
         "purl": "pkg:pypi/click",
-        "extracted_requirement": "click >= 6.7, !=7.0",
+        "extracted_requirement": "click>=6.7,!=7.0",
         "scope": "install",
         "is_runtime": true,
         "is_optional": false,
@@ -85,7 +76,7 @@
       },
       {
         "purl": "pkg:pypi/intbitset",
-        "extracted_requirement": "intbitset >= 2.3.0",
+        "extracted_requirement": "intbitset>=2.3.0",
         "scope": "install",
         "is_runtime": true,
         "is_optional": false,
@@ -94,7 +85,7 @@
       },
       {
         "purl": "pkg:pypi/requests",
-        "extracted_requirement": "requests >= 2.7.0",
+        "extracted_requirement": "requests>=2.7.0",
         "scope": "install",
         "is_runtime": true,
         "is_optional": false,
@@ -103,7 +94,7 @@
       },
       {
         "purl": "pkg:pypi/saneyaml",
-        "extracted_requirement": "saneyaml >= 0.5.2",
+        "extracted_requirement": "saneyaml>=0.5.2",
         "scope": "install",
         "is_runtime": true,
         "is_optional": false,
@@ -112,34 +103,7 @@
       },
       {
         "purl": "pkg:pypi/text-unidecode",
-        "extracted_requirement": "text_unidecode >= 1.0",
-        "scope": "install",
-        "is_runtime": true,
-        "is_optional": false,
-        "is_resolved": false,
-        "resolved_package": {}
-      },
-      {
-        "purl": "pkg:pypi/pure-eval",
-        "extracted_requirement": "pure-eval",
-        "scope": "install",
-        "is_runtime": true,
-        "is_optional": false,
-        "is_resolved": false,
-        "resolved_package": {}
-      },
-      {
-        "purl": "pkg:pypi/black",
-        "extracted_requirement": "black",
-        "scope": "install",
-        "is_runtime": true,
-        "is_optional": false,
-        "is_resolved": false,
-        "resolved_package": {}
-      },
-      {
-        "purl": "pkg:pypi/tox",
-        "extracted_requirement": "tox",
+        "extracted_requirement": "text_unidecode>=1.0",
         "scope": "install",
         "is_runtime": true,
         "is_optional": false,
@@ -148,7 +112,7 @@
       },
       {
         "purl": "pkg:pypi/typing",
-        "extracted_requirement": "typing >=3.6, < 3.7; python_version < \"3.7\"",
+        "extracted_requirement": "typing>=3.6,<3.7; python_version < \"3.7\"",
         "scope": "install",
         "is_runtime": true,
         "is_optional": false,
@@ -157,7 +121,7 @@
       },
       {
         "purl": "pkg:pypi/pytest",
-        "extracted_requirement": "pytest >= 6, != 7.0.0",
+        "extracted_requirement": "pytest>=6,!=7.0.0",
         "scope": "testing",
         "is_runtime": true,
         "is_optional": false,
@@ -166,7 +130,7 @@
       },
       {
         "purl": "pkg:pypi/pytest-xdist",
-        "extracted_requirement": "pytest-xdist >= 2",
+        "extracted_requirement": "pytest-xdist>=2",
         "scope": "testing",
         "is_runtime": true,
         "is_optional": false,
@@ -175,7 +139,7 @@
       },
       {
         "purl": "pkg:pypi/aboutcode-toolkit",
-        "extracted_requirement": "aboutcode-toolkit >= 6.0.0",
+        "extracted_requirement": "aboutcode-toolkit>=6.0.0",
         "scope": "testing",
         "is_runtime": true,
         "is_optional": false,
@@ -193,7 +157,7 @@
       },
       {
         "purl": "pkg:pypi/sphinx",
-        "extracted_requirement": "Sphinx >= 3.3.1",
+        "extracted_requirement": "Sphinx>=3.3.1",
         "scope": "docs",
         "is_runtime": true,
         "is_optional": false,
@@ -202,7 +166,7 @@
       },
       {
         "purl": "pkg:pypi/sphinx-rtd-theme",
-        "extracted_requirement": "sphinx-rtd-theme >= 0.5.0",
+        "extracted_requirement": "sphinx-rtd-theme>=0.5.0",
         "scope": "docs",
         "is_runtime": true,
         "is_optional": false,
@@ -211,7 +175,7 @@
       },
       {
         "purl": "pkg:pypi/doc8",
-        "extracted_requirement": "doc8 >= 0.8.1",
+        "extracted_requirement": "doc8>=0.8.1",
         "scope": "docs",
         "is_runtime": true,
         "is_optional": false,

@@ -9,15 +9,16 @@
 #
 
 import ast
+from configparser import ConfigParser
 import json
 import logging
+from pathlib import Path
 import os
 import re
 import sys
 from typing import NamedTuple
+import tempfile
 import zipfile
-from configparser import ConfigParser
-from pathlib import Path
 
 import dparse2
 import packaging
@@ -456,7 +457,7 @@ def parse_metadata(location, datasource_id, package_type):
         primary_language='Python',
         name=name,
         version=version,
-        description=get_description( metainfo= meta, location= str(location)),
+        description=get_description(metainfo=meta, location=str(location)),
         #TODO: https://github.com/nexB/scancode-toolkit/issues/3014
         declared_license=get_declared_license(meta),
         keywords=get_keywords(meta),
@@ -707,27 +708,26 @@ class SetupCfgHandler(BaseExtractedPythonLayout):
                     "setup_requires": "setup",
                     "python_requires": "python",
                 }
-                for sub_section in scope_by_sub_section:
+                for sub_section, scope in scope_by_sub_section.items():
                     if sub_section not in section:
                         continue
-                    scope = scope_by_sub_section[sub_section]
                     if scope != "python":
                         reqs = list(get_requirement_from_section(section=section, sub_section=sub_section))
                         dependent_packages.extend(cls.parse_reqs(reqs, scope))
                         continue
-                    python_requires = section[sub_section]
+                    python_requires_specifier = section[sub_section]
                     purl = PackageURL(
+                        type="generic",
                         name="python",
-                        type="generic"
                     )
-                    resolved_purl = is_purl_resolved(purl = purl, specifiers= SpecifierSet(python_requires))
+                    resolved_purl = get_resolved_purl(purl=purl, specifiers=SpecifierSet(python_requires_specifier))
                     dependent_packages.append(models.DependentPackage(
                     purl=str(resolved_purl.purl),
                     scope=scope,
                     is_runtime=True,
                     is_optional=False,
                     is_resolved=resolved_purl.is_resolved,
-                    extracted_requirement=f"python_requires{python_requires}",
+                    extracted_requirement=f"python_requires{python_requires_specifier}",
                     ))
 
             if section.name == "options.extras_require":
@@ -784,7 +784,7 @@ class SetupCfgHandler(BaseExtractedPythonLayout):
             name = canonicalize_name(req_parsed.name)
             purl = PackageURL(type="pypi", name=name)
             specifiers = req_parsed.specifier._specs
-            resolved_purl = is_purl_resolved(purl = purl, specifiers= specifiers)
+            resolved_purl = get_resolved_purl(purl=purl, specifiers=specifiers)
             dependent_packages.append(
                         models.DependentPackage(
                         purl=str(resolved_purl.purl),
@@ -798,9 +798,10 @@ class SetupCfgHandler(BaseExtractedPythonLayout):
         return dependent_packages
 
 
-def is_purl_resolved(purl: PackageURL, specifiers: SpecifierSet):
+def get_resolved_purl(purl: PackageURL, specifiers: SpecifierSet):
     """
-    Check if the purl is resolved
+    Check if the purl is resolved and return a ResolvedPurl.
+    If the purl is resolved, update its version to the pinned version
     """
     is_resolved = False
     if len(specifiers) == 1:
@@ -901,7 +902,7 @@ def get_requirements_txt_dependencies(location, include_nested=False):
         include_nested=include_nested,
     )
     if not req_file or not req_file.requirements:
-        return []
+        return [], {}
 
     # for now we ignore errors
     extra_data = {}
@@ -1979,23 +1980,14 @@ def compute_normalized_license(declared_license):
 
 def get_requirement_from_section(section, sub_section):
     """
-    Generate requirements from the `sub_section`
+    Yield extracted requirement from the ``sub_section`` key of of a ``section``
+    mapping (from a setup.cfg)
     """
-    content = section.get(sub_section) or ""
-    for req in content.splitlines():
-        if not req:
-            continue
-        #pytest-mypy >= 0.9.1; \
-        req = req.replace("; \\", "")
-        # pip>=19.1 # For proper file:// URLs support.
-        if "#" in req:
-            req , _ = req.rsplit("#")
-        try:
-            Requirement(req)
-            yield req
-        except:
-            #pure-eval; black; tox
-            req_split_by_semi_colon = req.split(";")
-            req_split_by_semi_colon = [req.strip() for req in req_split_by_semi_colon if req]
-            for req in req_split_by_semi_colon:
-                yield req
+    content = section.get(sub_section, "")
+    temp = tempfile.NamedTemporaryFile(delete=False)
+    location = temp.name
+    with open(location, "w") as f:
+        f.write(content)
+    packages, _ = get_requirements_txt_dependencies(location=location)
+    for req in packages:
+        yield req.extracted_requirement
