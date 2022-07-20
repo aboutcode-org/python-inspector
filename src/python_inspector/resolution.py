@@ -467,7 +467,9 @@ def format_resolution(results, environment, repos, as_tree=False):
                 )
                 dependencies.append(str(dep_purl))
             dependencies.sort()
-            python_version = get_python_version_from_env_tag(python_version=environment.python_version)
+            python_version = get_python_version_from_env_tag(
+                python_version=environment.python_version
+            )
             wheel_urls = list(
                 get_wheel_download_urls(
                     purl=parent_purl,
