@@ -20,9 +20,10 @@ from python_inspector.utils_pypi import Environment
 
 @pytest.mark.online
 def test_get_resolved_dependencies_with_flask_and_python_310():
-    req = [Requirement("flask==2.1.2")]
+    req = Requirement("flask==2.1.2")
+    req.is_requirement_resolved = True
     results = get_resolved_dependencies(
-        requirements=req,
+        requirements=[req],
         environment=Environment(
             python_version="310",
             operating_system="linux",
@@ -43,9 +44,10 @@ def test_get_resolved_dependencies_with_flask_and_python_310():
 
 @pytest.mark.online
 def test_get_resolved_dependencies_with_flask_and_python_310_windows():
-    req = [Requirement("flask==2.1.2")]
+    req = Requirement("flask==2.1.2")
+    req.is_requirement_resolved = True
     results = get_resolved_dependencies(
-        requirements=req,
+        requirements=[req],
         environment=Environment(
             python_version="310",
             operating_system="windows",
@@ -67,9 +69,10 @@ def test_get_resolved_dependencies_with_flask_and_python_310_windows():
 
 @pytest.mark.online
 def test_get_resolved_dependencies_with_flask_and_python_36():
-    req = [Requirement("flask==2.1.2")]
+    req = Requirement("flask")
+    req.is_requirement_resolved = False
     results = get_resolved_dependencies(
-        requirements=req,
+        requirements=[req],
         environment=Environment(
             python_version="36",
             operating_system="linux",
@@ -80,23 +83,25 @@ def test_get_resolved_dependencies_with_flask_and_python_36():
     as_list = [p["package"] for p in results]
 
     assert as_list == [
-        "pkg:pypi/click@8.1.3",
-        "pkg:pypi/flask@2.1.2",
-        "pkg:pypi/importlib-metadata@4.12.0",
-        "pkg:pypi/itsdangerous@2.1.2",
-        "pkg:pypi/jinja2@3.1.2",
+        "pkg:pypi/click@8.0.4",
+        "pkg:pypi/dataclasses@0.8",
+        "pkg:pypi/flask@2.0.3",
+        "pkg:pypi/importlib-metadata@4.8.3",
+        "pkg:pypi/itsdangerous@2.0.1",
+        "pkg:pypi/jinja2@3.0.3",
         "pkg:pypi/markupsafe@2.0.1",
-        "pkg:pypi/typing-extensions@4.3.0",
-        "pkg:pypi/werkzeug@2.1.2",
-        "pkg:pypi/zipp@3.8.0",
+        "pkg:pypi/typing-extensions@4.1.1",
+        "pkg:pypi/werkzeug@2.0.3",
+        "pkg:pypi/zipp@3.6.0",
     ]
 
 
 @pytest.mark.online
 def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
-    req = [Requirement("flask~=2.1.2")]
+    req = Requirement("flask~=2.1.2")
+    req.is_requirement_resolved = False
     results = get_resolved_dependencies(
-        requirements=req,
+        requirements=[req],
         as_tree=False,
         environment=Environment(
             python_version="38",
@@ -106,13 +111,40 @@ def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
     as_list = [p["package"] for p in results]
     assert as_list == [
         "pkg:pypi/click@8.1.3",
-        "pkg:pypi/flask@2.1.2",
+        "pkg:pypi/flask@2.1.3",
         "pkg:pypi/importlib-metadata@4.12.0",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
         "pkg:pypi/markupsafe@2.1.1",
         "pkg:pypi/werkzeug@2.1.2",
-        "pkg:pypi/zipp@3.8.0",
+        "pkg:pypi/zipp@3.8.1",
+    ]
+
+
+@pytest.mark.online
+def test_without_supported_wheels():
+    req = Requirement("autobahn==22.3.2")
+    req.is_requirement_resolved = True
+    results = get_resolved_dependencies(
+        requirements=[req],
+        as_tree=False,
+        repos=[PYPI_PUBLIC_REPO],
+        environment=Environment(
+            python_version="38",
+            operating_system="linux",
+        ),
+    )
+    as_list = [p["package"] for p in results]
+
+    assert as_list == [
+        "pkg:pypi/autobahn@22.3.2",
+        "pkg:pypi/cffi@1.15.1",
+        "pkg:pypi/cryptography@37.0.4",
+        "pkg:pypi/hyperlink@21.0.0",
+        "pkg:pypi/idna@3.3",
+        "pkg:pypi/pycparser@2.21",
+        "pkg:pypi/setuptools@63.2.0",
+        "pkg:pypi/txaio@22.2.1",
     ]
 
 

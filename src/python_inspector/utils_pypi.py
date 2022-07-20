@@ -16,16 +16,21 @@ import shutil
 import tempfile
 import time
 from collections import defaultdict
+from typing import List
+from typing import NamedTuple
 from urllib.parse import quote_plus
 
 import attr
 import packageurl
 import requests
+from bs4 import BeautifulSoup
 from commoncode import fileutils
 from commoncode.hash import multi_checksums
 from packaging import tags as packaging_tags
 from packaging import version as packaging_version
+from packaging.specifiers import SpecifierSet
 
+from python_inspector import DEFAULT_PYTHON_VERSION
 from python_inspector import utils_pip_compatibility_tags
 
 """
@@ -197,6 +202,7 @@ def download_wheel(
     repos=tuple(),
     verbose=False,
     echo_func=None,
+    python_version=DEFAULT_PYTHON_VERSION,
 ):
     """
     Download the wheels binary distribution(s) of package ``name`` and
@@ -229,6 +235,8 @@ def download_wheel(
             continue
 
         for wheel in supported_wheels:
+            if not valid_distribution(wheel, python_version):
+                continue
             if TRACE_DEEP:
                 print(
                     f"    download_wheel: Getting wheel from index (or cache): {wheel.download_url}"
@@ -247,6 +255,15 @@ def download_wheel(
     return fetched_wheel_filenames
 
 
+def valid_distribution(distribution, python_version):
+    """
+    Return True if distribution is a valid distribution for the given Python version.
+    """
+    if not distribution.python_requires:
+        return True
+    return python_version in SpecifierSet(distribution.python_requires)
+
+
 def download_sdist(
     name,
     version,
@@ -254,6 +271,7 @@ def download_sdist(
     repos=tuple(),
     verbose=False,
     echo_func=None,
+    python_version=DEFAULT_PYTHON_VERSION,
 ):
     """
     Download the sdist source distribution of package ``name`` and ``version``
@@ -282,7 +300,8 @@ def download_sdist(
             if TRACE_DEEP:
                 print(f"    download_sdist: No sdist for {name}=={version}")
             continue
-
+        if not valid_distribution(sdist, python_version):
+            continue
         if TRACE_DEEP:
             print(f"    download_sdist: Getting sdist from index (or cache): {sdist.download_url}")
         fetched_sdist_filename = package.sdist.download(
@@ -339,6 +358,15 @@ class NameVer:
     @classmethod
     def sorted(cls, namevers):
         return sorted(namevers or [], key=cls.sortable_name_version)
+
+
+class Link(NamedTuple):
+    """
+    A link to a sdist/wheel on PyPI.
+    """
+
+    url: str
+    python_requires: str
 
 
 @attr.attributes
@@ -499,6 +527,12 @@ class Distribution(NameVer):
         default=None,
     )
 
+    python_requires = attr.ib(
+        type=str,
+        default="",
+        metadata=dict(help="Python 'specifier' required by this distribution."),
+    )
+
     @property
     def package_url(self):
         """
@@ -579,15 +613,18 @@ class Distribution(NameVer):
         return self.filename
 
     @classmethod
-    def from_path_or_url(cls, path_or_url):
+    def from_link(cls, link: Link):
         """
         Return a distribution built from the data found in the filename of a
         ``path_or_url`` string. Raise an exception if this is not a valid
         filename.
         """
+        requires_python = link.python_requires
+        path_or_url = link.url
         filename = os.path.basename(path_or_url.strip("/"))
         dist = cls.from_filename(filename)
         dist.path_or_url = path_or_url
+        dist.python_requires = requires_python
         return dist
 
     @classmethod
@@ -1160,12 +1197,12 @@ class PypiPackage(NameVer):
         return package
 
     @classmethod
-    def packages_from_many_paths_or_urls(cls, paths_or_urls):
+    def packages_from_links(cls, links: List[Link]):
         """
         Yield PypiPackages built from a list of paths or URLs.
         These are sorted by name and then by version from oldest to newest.
         """
-        dists = PypiPackage.dists_from_paths_or_urls(paths_or_urls)
+        dists = PypiPackage.dists_from_links(links)
         if TRACE_ULTRA_DEEP:
             print("packages_from_many_paths_or_urls: dists:", dists)
 
@@ -1181,7 +1218,7 @@ class PypiPackage(NameVer):
             yield package
 
     @classmethod
-    def dists_from_paths_or_urls(cls, paths_or_urls):
+    def dists_from_links(cls, links: List[Link]):
         """
         Return a list of Distribution given a list of
         ``paths_or_urls`` to wheels or source distributions.
@@ -1191,14 +1228,15 @@ class PypiPackage(NameVer):
             - its filename
 
         For example:
-        >>> paths_or_urls ='''
-        ...     /home/foo/bitarray-0.8.1-cp36-cp36m-linux_x86_64.whl
-        ...     bitarray-0.8.1-cp36-cp36m-macosx_10_9_x86_64.macosx_10_10_x86_64.whl
-        ...     bitarray-0.8.1-cp36-cp36m-win_amd64.whl
-        ...     https://example.com/bar/bitarray-0.8.1.tar.gz
-        ...     bitarray-0.8.1.tar.gz.ABOUT
-        ...     bit.LICENSE'''.split()
-        >>> results = list(PypiPackage.dists_from_paths_or_urls(paths_or_urls))
+        >>> links =[
+        ...     Link(url="/home/foo/bitarray-0.8.1-cp36-cp36m-linux_x86_64.whl", python_requires= ">=3.7"),
+        ...     Link(url="bitarray-0.8.1-cp36-cp36m-macosx_10_9_x86_64.macosx_10_10_x86_64.whl",
+        ...         python_requires= ">=3.7"),
+        ...     Link(url="bitarray-0.8.1-cp36-cp36m-win_amd64.whl",python_requires= ">=3.7"),
+        ...     Link(url="https://example.com/bar/bitarray-0.8.1.tar.gz",python_requires= ">=3.7"),
+        ...     Link(url="bitarray-0.8.1.tar.gz.ABOUT",python_requires= ">=3.7"),
+        ...     Link(url="bit.LICENSE", python_requires=">=3.7")]
+        >>> results = list(PypiPackage.dists_from_links(links))
         >>> for r in results:
         ...    print(r.__class__.__name__, r.name, r.version)
         ...    if isinstance(r, Wheel):
@@ -1213,11 +1251,11 @@ class PypiPackage(NameVer):
         """
         dists = []
         if TRACE_ULTRA_DEEP:
-            print("     ###paths_or_urls:", paths_or_urls)
-        installable = [f for f in paths_or_urls if f.endswith(EXTENSIONS)]
-        for path_or_url in installable:
+            print("     ###paths_or_urls:", links)
+        installable: List[Link] = [link for link in links if link.url.endswith(EXTENSIONS)]
+        for link in installable:
             try:
-                dist = Distribution.from_path_or_url(path_or_url)
+                dist = Distribution.from_link(link=link)
                 dists.append(dist)
                 if TRACE_DEEP:
                     print(
@@ -1228,11 +1266,11 @@ class PypiPackage(NameVer):
                         dist.download_url,
                         "\n     ",
                         "from URL:",
-                        path_or_url,
+                        link.url,
                     )
             except InvalidDistributionFilename:
                 if TRACE_DEEP:
-                    print(f"     Skipping invalid distribution from: {path_or_url}")
+                    print(f"     Skipping invalid distribution from: {link.url}")
                 continue
         return dists
 
@@ -1419,7 +1457,7 @@ class PypiSimpleRepository:
                 # note that this is sorted so the mapping is also sorted
                 versions = {
                     package.version: package
-                    for package in PypiPackage.packages_from_many_paths_or_urls(paths_or_urls=links)
+                    for package in PypiPackage.packages_from_links(links=links)
                 }
                 self.packages[normalized_name] = versions
             except RemoteNotFetchedException as e:
@@ -1497,10 +1535,16 @@ class PypiSimpleRepository:
             verbose=verbose,
             echo_func=echo_func,
         )
-        links = collect_urls(text)
+        soup = BeautifulSoup(text, features="html.parser")
+        anchor_tags = soup.find_all("a")
+        links = []
+        for anchor_tag in anchor_tags:
+            python_requires = None
+            url, _, _sha256 = anchor_tag["href"].partition("#sha256=")
+            if "data-requires-python" in anchor_tag.attrs:
+                python_requires = anchor_tag.attrs["data-requires-python"]
+            links.append(Link(url=url, python_requires=python_requires))
         # TODO: keep sha256
-        links = [lnk.partition("#sha256=") for lnk in links]
-        links = [url for url, _, _sha256 in links]
         return links
 
 
