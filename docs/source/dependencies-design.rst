@@ -73,7 +73,7 @@ Docker images for each of the supported Python versions. It would also
 fail to build native dependencies unless the required toolchain is also
 identified and installed.
 
-The solution approach proposed for this SOW is to use a single Python
+The solution approach designed for this project is to use a single Python
 version to call the underlying version resolution libraries and
 functions to perform the resolution in a well-controlled way without
 invoking pip as a subprocess. This will eventually request resolution of
@@ -83,7 +83,7 @@ Python 3.8, even though the current Python version running the tool may
 be 3.9. The actual Python version running the tool may be different from
 the version used to support the dependency resolution.
 
-The proposed solution will be a new Python package and command line tool
+The designed solution will be a new Python package and command line tool
 that can be installed on one Python version and can resolve dependencies
 from requirements files for any provided Python version as an argument
 (which may not be the same as the installed Python version). The output
