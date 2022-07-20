@@ -390,7 +390,11 @@ def get_wheel_download_urls(purl, repos, environment, python_version):
     """
     for repo in repos:
         for wheel in utils_pypi.get_supported_and_valid_wheels(
-            repo, purl.name, purl.version, environment, python_version
+            repo=repo,
+            name=purl.name,
+            version=purl.version,
+            environment=environment,
+            python_version=python_version,
         ):
             yield wheel.download_url
 
@@ -400,7 +404,12 @@ def get_sdist_download_url(purl, repos, python_version):
     Return a list of download urls for the given purl.
     """
     for repo in repos:
-        sdist = utils_pypi.get_valid_sdist(repo, purl.name, purl.version, python_version)
+        sdist = utils_pypi.get_valid_sdist(
+            repo=repo,
+            name=purl.name,
+            version=purl.version,
+            python_version=python_version,
+        )
         if sdist:
             return sdist.download_url
 
@@ -458,11 +467,20 @@ def format_resolution(results, environment, repos, as_tree=False):
                 )
                 dependencies.append(str(dep_purl))
             dependencies.sort()
-            python_version = get_python_version_from_env_tag(environment.python_version)
+            python_version = get_python_version_from_env_tag(python_version=environment.python_version)
             wheel_urls = list(
-                get_wheel_download_urls(parent_purl, repos, environment, python_version)
+                get_wheel_download_urls(
+                    purl=parent_purl,
+                    repos=repos,
+                    environment=environment,
+                    python_version=python_version,
+                )
             )
-            sdist_url = get_sdist_download_url(parent_purl, repos, python_version)
+            sdist_url = get_sdist_download_url(
+                purl=parent_purl,
+                repos=repos,
+                python_version=python_version,
+            )
             parent_children = dict(
                 package=str(parent_purl),
                 dependencies=dependencies,
