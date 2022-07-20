@@ -28,7 +28,9 @@
   "resolved_dependencies": [
     {
       "package": "pkg:pypi/zipp@3.8.0",
-      "dependencies": []
+      "dependencies": [],
+      "wheel_urls": [],
+      "sdist_url": null
     }
   ]
 }

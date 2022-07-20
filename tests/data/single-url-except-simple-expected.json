@@ -29,7 +29,11 @@
   "resolved_dependencies": [
     {
       "package": "pkg:pypi/click@8.1.3",
-      "dependencies": []
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/c2/f1/df59e28c642d583f7dacffb1e0965d0e00b218e0186d7858ac5233dce840/click-8.1.3-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/59/87/84326af34517fca8c58418d148f2403df25303e02736832403587318e9e8/click-8.1.3.tar.gz"
     },
     {
       "package": "pkg:pypi/flask@2.1.3",
@@ -39,35 +43,63 @@
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
         "pkg:pypi/werkzeug@2.1.2"
-      ]
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/af/6a/00d144ac1626fbb44c4ff36519712e258128985a5d0ae43344778ae5cbb9/Flask-2.1.3-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/5b/77/3accd62b8771954e9584beb03f080385b32ddcad30009d2a4fe4068a05d9/Flask-2.1.3.tar.gz"
     },
     {
       "package": "pkg:pypi/importlib-metadata@4.12.0",
       "dependencies": [
         "pkg:pypi/zipp@3.8.1"
-      ]
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/d2/a2/8c239dc898138f208dd14b441b196e7b3032b94d3137d9d8453e186967fc/importlib_metadata-4.12.0-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/1a/16/441080c907df829016729e71d8bdd42d99b9bdde48b01492ed08912c0aa9/importlib_metadata-4.12.0.tar.gz"
     },
     {
       "package": "pkg:pypi/itsdangerous@2.1.2",
-      "dependencies": []
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/68/5f/447e04e828f47465eeab35b5d408b7ebaaaee207f48b7136c5a7267a30ae/itsdangerous-2.1.2-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/7f/a1/d3fb83e7a61fa0c0d3d08ad0a94ddbeff3731c05212617dff3a94e097f08/itsdangerous-2.1.2.tar.gz"
     },
     {
       "package": "pkg:pypi/jinja2@3.1.2",
       "dependencies": [
         "pkg:pypi/markupsafe@2.1.1"
-      ]
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/bc/c3/f068337a370801f372f2f8f6bad74a5c140f6fda3d9de154052708dd3c65/Jinja2-3.1.2-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/7a/ff/75c28576a1d900e87eb6335b063fab47a8ef3c8b4d88524c4bf78f670cce/Jinja2-3.1.2.tar.gz"
     },
     {
       "package": "pkg:pypi/markupsafe@2.1.1",
-      "dependencies": []
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/fd/f4/524d2e8f5a3727cf309c2b7df7c732038375322df1376c9e9ef3aa92fcaf/MarkupSafe-2.1.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/1d/97/2288fe498044284f39ab8950703e88abbac2abbdf65524d576157af70556/MarkupSafe-2.1.1.tar.gz"
     },
     {
       "package": "pkg:pypi/werkzeug@2.1.2",
-      "dependencies": []
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/c4/44/f50f2d22cdfb6d56c03d1b4cc3cfa03ebee2f21b59a7768f151e43415ba5/Werkzeug-2.1.2-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/10/cf/97eb1a3847c01ae53e8376bc21145555ac95279523a935963dc8ff96c50b/Werkzeug-2.1.2.tar.gz"
     },
     {
       "package": "pkg:pypi/zipp@3.8.1",
-      "dependencies": []
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/f0/36/639d6742bcc3ffdce8b85c31d79fcfae7bb04b95f0e5c4c6f8b206a038cc/zipp-3.8.1-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/3b/e3/fb79a1ea5f3a7e9745f688855d3c673f2ef7921639a380ec76f7d4d83a85/zipp-3.8.1.tar.gz"
     }
   ]
 }

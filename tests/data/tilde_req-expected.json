@@ -29,7 +29,11 @@
   "resolved_dependencies": [
     {
       "package": "pkg:pypi/zipp@3.8.1",
-      "dependencies": []
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/f0/36/639d6742bcc3ffdce8b85c31d79fcfae7bb04b95f0e5c4c6f8b206a038cc/zipp-3.8.1-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/3b/e3/fb79a1ea5f3a7e9745f688855d3c673f2ef7921639a380ec76f7d4d83a85/zipp-3.8.1.tar.gz"
     }
   ]
 }

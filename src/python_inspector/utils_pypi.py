@@ -219,28 +219,17 @@ def download_wheel(
         repos = DEFAULT_PYPI_REPOS
 
     fetched_wheel_filenames = []
-
     for repo in repos:
-        package = repo.get_package_version(name=name, version=version)
-        if not package:
-            if TRACE_DEEP:
-                print(f"    download_wheel: No package in {repo.index_url} for {name}=={version}")
-            continue
-        supported_wheels = list(package.get_supported_wheels(environment=environment))
-        if not supported_wheels:
+        supported_and_valid_wheels = get_supported_and_valid_wheels(
+            repo, name, version, environment, python_version
+        )
+        if not supported_and_valid_wheels:
             if TRACE_DEEP:
                 print(
-                    f"    download_wheel: No supported wheel for {name}=={version}: {environment} "
+                    f"    download_wheel: No supported and valid wheel for {name}=={version}: {environment} "
                 )
             continue
-
-        for wheel in supported_wheels:
-            if not valid_distribution(wheel, python_version):
-                continue
-            if TRACE_DEEP:
-                print(
-                    f"    download_wheel: Getting wheel from index (or cache): {wheel.download_url}"
-                )
+        for wheel in supported_and_valid_wheels:
             fetched_wheel_filename = wheel.download(
                 dest_dir=dest_dir,
                 verbose=verbose,
@@ -251,8 +240,60 @@ def download_wheel(
         if fetched_wheel_filenames:
             # do not futher fetch from other repos if we find in first, typically PyPI
             break
-
     return fetched_wheel_filenames
+
+
+def get_valid_sdist(repo, name, version, python_version=DEFAULT_PYTHON_VERSION):
+    package = repo.get_package_version(name=name, version=version)
+    if not package:
+        if TRACE_DEEP:
+            print(
+                print(f"    get_valid_sdist: No package in {repo.index_url} for {name}=={version}")
+            )
+        return
+    sdist = package.sdist
+    if not sdist:
+        if TRACE_DEEP:
+            print(f"    get_valid_sdist: No sdist for {name}=={version}")
+        return
+    if not valid_distribution(sdist, python_version):
+        return
+    if TRACE_DEEP:
+        print(f"    get_valid_sdist: Getting sdist from index (or cache): {sdist.download_url}")
+    return sdist
+
+
+def get_supported_and_valid_wheels(
+    repo, name, version, environment, python_version=DEFAULT_PYTHON_VERSION
+) -> List:
+    """
+    Return a list of wheels matching the ``environment`` Environment constraints.
+    """
+    package = repo.get_package_version(name=name, version=version)
+    if not package:
+        if TRACE_DEEP:
+            print(
+                f"    get_supported_and_valid_wheels: No package in {repo.index_url} for {name}=={version}"
+            )
+        return []
+    supported_wheels = list(package.get_supported_wheels(environment=environment))
+    if not supported_wheels:
+        if TRACE_DEEP:
+            print(
+                f"    get_supported_and_valid_wheels: No supported wheel for {name}=={version}: {environment}"
+            )
+        return []
+    wheels = []
+    for wheel in supported_wheels:
+        if not valid_distribution(wheel, python_version):
+            continue
+        if TRACE_DEEP:
+            print(
+                f"""    get_supported_and_valid_wheels: Getting wheel from index (or cache):
+                {wheel.download_url}"""
+            )
+        wheels.append(wheel)
+    return wheels
 
 
 def valid_distribution(distribution, python_version):
@@ -289,22 +330,12 @@ def download_sdist(
     fetched_sdist_filename = None
 
     for repo in repos:
-        package = repo.get_package_version(name=name, version=version)
-
-        if not package:
-            if TRACE_DEEP:
-                print(f"    download_sdist: No package in {repo.index_url} for {name}=={version}")
-            continue
-        sdist = package.sdist
+        sdist = get_valid_sdist(repo, name, version, python_version=DEFAULT_PYTHON_VERSION)
         if not sdist:
             if TRACE_DEEP:
-                print(f"    download_sdist: No sdist for {name}=={version}")
+                print(f"    download_sdist: No valid sdist for {name}=={version}")
             continue
-        if not valid_distribution(sdist, python_version):
-            continue
-        if TRACE_DEEP:
-            print(f"    download_sdist: Getting sdist from index (or cache): {sdist.download_url}")
-        fetched_sdist_filename = package.sdist.download(
+        fetched_sdist_filename = sdist.download(
             dest_dir=dest_dir,
             verbose=verbose,
             echo_func=echo_func,
