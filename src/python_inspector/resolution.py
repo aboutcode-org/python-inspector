@@ -633,6 +633,7 @@ def get_resolved_dependencies(
     repos: Sequence[PypiSimpleRepository] = tuple(),
     as_tree: bool = False,
     max_rounds: int = 200000,
+    debug: bool = False,
 ):
     """
     Return resolved dependencies of a ``requirements`` list of Requirement for
@@ -642,10 +643,22 @@ def get_resolved_dependencies(
     Used the provided ``repos`` list of PypiSimpleRepository.
     If empty, use instead the PyPI.org JSON API exclusively instead
     """
-    resolver = Resolver(
-        provider=PythonInputProvider(environment=environment, repos=repos),
-        reporter=BaseReporter(),
-    )
-    results = resolver.resolve(requirements=requirements, max_rounds=max_rounds)
-    results = format_resolution(results, as_tree=as_tree, environment=environment, repos=repos)
-    return results
+    try:
+        resolved_requirements = {
+            packaging.utils.canonicalize_name(r.name): r.specifier
+            for r in requirements
+            if getattr(r, "is_requirement_resolved", False)
+        }
+        resolver = Resolver(
+            provider=PythonInputProvider(
+                environment=environment, repos=repos, resolved_requirements=resolved_requirements
+            ),
+            reporter=BaseReporter(),
+        )
+        results = resolver.resolve(requirements=requirements, max_rounds=max_rounds)
+        results = format_resolution(results, as_tree=as_tree, environment=environment, repos=repos)
+        return results
+    except Exception as e:
+        if debug:
+            click.secho(f"{e!r}", err=True)
+        return None
