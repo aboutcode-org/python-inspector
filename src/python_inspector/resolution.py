@@ -627,6 +627,37 @@ def format_resolution(
         return dependencies
 
 
+def pdt_dfs(mapping, graph, src):
+    """
+    Return a nested mapping of dependencies.
+    """
+    children = list(graph.iter_children(src))
+    if not children:
+        return dict(
+            key=src, package_name=src, installed_version=str(mapping[src].version), dependencies=[]
+        )
+
+    return dict(
+        key=src,
+        package_name=src,
+        installed_version=str(mapping[src].version),
+        dependencies=sorted([pdt_dfs(mapping, graph, c) for c in children], key=lambda d: d["key"]),
+    )
+
+
+def format_pdt_tree(results):
+    """
+    Return a formatted tree of dependencies.
+    """
+    mapping = results.mapping
+    graph = results.graph
+    dependencies = []
+    for src in get_all_srcs(mapping=mapping, graph=graph):
+        dependencies.append(pdt_dfs(mapping=mapping, graph=graph, src=src))
+    dependencies.sort(key=lambda d: d["key"])
+    return dependencies
+
+
 def get_resolved_dependencies(
     requirements: List[Requirement],
     environment: Environment = None,
@@ -634,6 +665,7 @@ def get_resolved_dependencies(
     as_tree: bool = False,
     max_rounds: int = 200000,
     debug: bool = False,
+    pdt_output: bool = False,
 ):
     """
     Return resolved dependencies of a ``requirements`` list of Requirement for
@@ -648,9 +680,12 @@ def get_resolved_dependencies(
             provider=PythonInputProvider(environment=environment, repos=repos),
             reporter=BaseReporter(),
         )
-        results = resolver.resolve(requirements=requirements, max_rounds=max_rounds)
-        results = format_resolution(results, as_tree=as_tree, environment=environment, repos=repos)
-        return results
+        resolver_results = resolver.resolve(requirements=requirements, max_rounds=max_rounds)
+        if pdt_output:
+            return format_pdt_tree(resolver_results)
+        return format_resolution(
+            resolver_results, as_tree=as_tree, environment=environment, repos=repos
+        )
     except Exception as e:
         if debug:
             import click

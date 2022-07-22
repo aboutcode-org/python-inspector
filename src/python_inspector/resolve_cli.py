@@ -105,6 +105,13 @@ PYPI_SIMPLE_URL = "https://pypi.org/simple"
     "Use the special '-' file name to print results on screen/stdout.",
 )
 @click.option(
+    "--json-pdt",
+    "pdt_output",
+    is_flag=True,
+    help="Write output as pretty-printed JSON to FILE. "
+    "Use the special '-' file name to print results on screen/stdout.",
+)
+@click.option(
     "--max-rounds",
     "max_rounds",
     type=int,
@@ -138,6 +145,7 @@ def resolve_dependencies(
     operating_system,
     index_urls,
     json_output,
+    pdt_output,
     max_rounds,
     use_cached_index=False,
     use_pypi_json_api=False,
@@ -237,6 +245,7 @@ def resolve_dependencies(
         as_tree=False,
         max_rounds=max_rounds,
         debug=debug,
+        pdt_output=pdt_output,
     )
 
     cli_options = [f"--requirement {rf}" for rf in requirement_files]
@@ -274,7 +283,13 @@ def resolve_dependencies(
 
 
 def resolve(
-    direct_dependencies, environment, repos=tuple(), as_tree=False, max_rounds=200000, debug=False
+    direct_dependencies,
+    environment,
+    repos=tuple(),
+    as_tree=False,
+    max_rounds=200000,
+    debug=False,
+    pdt_output=False,
 ):
     """
     Resolve dependencies given a ``direct_dependencies`` list of
@@ -293,6 +308,7 @@ def resolve(
         as_tree=as_tree,
         max_rounds=max_rounds,
         debug=debug,
+        pdt_output=pdt_output,
     )
 
     initial_requirements = [d.to_dict() for d in direct_dependencies]
