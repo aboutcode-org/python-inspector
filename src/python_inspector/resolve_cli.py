@@ -280,6 +280,9 @@ def resolve(direct_dependencies, environment, repos=tuple(), as_tree=False, max_
     requirements = []
 
     for dependency in direct_dependencies:
+        # FIXME We are skipping editable requirements for now
+        if dependency.extra_data.get("is_editable"):
+            continue
         requirement = Requirement(requirement_string=dependency.extracted_requirement)
         requirement.is_requirement_resolved = dependency.is_resolved
         requirements.append(requirement)

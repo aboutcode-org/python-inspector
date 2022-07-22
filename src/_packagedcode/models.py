@@ -373,6 +373,11 @@ class DependentPackage(ModelMixin):
              'either from the datafile or collected from another source. Some '
              'lockfiles for Composer or Cargo contain extra dependency data.'
          )
+    
+    extra_data = Mapping(
+        label='extra data',
+        help='A mapping of arbitrary extra data.',
+    )
 
 
 @attr.attributes(slots=True)

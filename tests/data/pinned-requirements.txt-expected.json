@@ -15,13 +15,46 @@
   },
   "requirements": [
     {
+      "purl": "pkg:pypi/aboutcode-toolkit@7.0.2",
+      "extracted_requirement": "aboutcode-toolkit==7.0.2",
+      "scope": "install",
+      "is_runtime": true,
+      "is_optional": false,
+      "is_resolved": true,
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
+    },
+    {
       "purl": "pkg:pypi/attrs@21.4.0",
       "extracted_requirement": "attrs==21.4.0",
       "scope": "install",
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/beautifulsoup4@4.11.1",
@@ -30,7 +63,19 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/certifi@2022.5.18.1",
@@ -39,7 +84,19 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/charset-normalizer@2.0.12",
@@ -48,7 +105,19 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/click@8.0.4",
@@ -57,7 +126,19 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/colorama@0.4.4",
@@ -66,7 +147,19 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/commoncode@30.2.0",
@@ -75,7 +168,19 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/dparse2@0.6.1",
@@ -84,7 +189,19 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/idna@3.3",
@@ -93,7 +210,19 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/importlib-metadata@4.8.3",
@@ -102,7 +231,19 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/intbitset@3.0.1",
@@ -111,7 +252,19 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/packageurl-python@0.9.9",
@@ -120,7 +273,19 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/packaging@21.3",
@@ -129,7 +294,40 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
+    },
+    {
+      "purl": "pkg:pypi/python-inspector",
+      "extracted_requirement": "--editable git+https://github.com/nexB/python-inspector@18baae17824d6bacb4b1d519b10a0d0e50775884#egg=python_inspector",
+      "scope": "install",
+      "is_runtime": true,
+      "is_optional": false,
+      "is_resolved": false,
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": true,
+        "link": "git+https://github.com/nexB/python-inspector@18baae17824d6bacb4b1d519b10a0d0e50775884#egg=python_inspector",
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": false,
+        "is_wheel": false,
+        "is_url": true,
+        "is_vcs_url": true,
+        "is_name_at_url": false,
+        "is_local_path": true
+      }
     },
     {
       "purl": "pkg:pypi/pip-requirements-parser@31.2.0",
@@ -138,7 +336,19 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/pkginfo2@30.0.0",
@@ -147,7 +357,19 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/pyparsing@3.0.9",
@@ -156,7 +378,19 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/pyyaml@6.0",
@@ -165,7 +399,19 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/requests@2.27.1",
@@ -174,7 +420,19 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/resolvelib@0.8.1",
@@ -183,7 +441,19 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/saneyaml@0.5.2",
@@ -192,7 +462,19 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/soupsieve@2.3.2.post1",
@@ -201,7 +483,19 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/text-unidecode@1.3",
@@ -210,7 +504,19 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/toml@0.10.2",
@@ -219,7 +525,19 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/typing@3.6.6",
@@ -228,7 +546,19 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/typing-extensions@4.1.1",
@@ -237,7 +567,19 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/urllib3@1.26.9",
@@ -246,7 +588,19 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     },
     {
       "purl": "pkg:pypi/zipp@3.6.0",
@@ -255,10 +609,112 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": true,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {
+        "is_editable": false,
+        "link": null,
+        "hash_options": [],
+        "is_constraint": false,
+        "is_archive": null,
+        "is_wheel": false,
+        "is_url": null,
+        "is_vcs_url": null,
+        "is_name_at_url": false,
+        "is_local_path": null
+      }
     }
   ],
   "resolved_dependencies": [
+    {
+      "package": "pkg:pypi/aboutcode-toolkit@7.0.2",
+      "dependencies": [
+        "pkg:pypi/attrs@21.4.0",
+        "pkg:pypi/banal@1.0.6",
+        "pkg:pypi/beautifulsoup4@4.11.1",
+        "pkg:pypi/binaryornot@0.4.4",
+        "pkg:pypi/boolean-py@3.8",
+        "pkg:pypi/certifi@2022.5.18.1",
+        "pkg:pypi/cffi@1.15.0",
+        "pkg:pypi/chardet@4.0.0",
+        "pkg:pypi/charset-normalizer@2.0.12",
+        "pkg:pypi/click@8.0.4",
+        "pkg:pypi/colorama@0.4.4",
+        "pkg:pypi/commoncode@30.2.0",
+        "pkg:pypi/construct@2.10.68",
+        "pkg:pypi/container-inspector@31.0.0",
+        "pkg:pypi/cryptography@36.0.2",
+        "pkg:pypi/debian-inspector@30.0.0",
+        "pkg:pypi/dockerfile-parse@1.2.0",
+        "pkg:pypi/dparse2@0.6.1",
+        "pkg:pypi/extractcode-7z@16.5.210531",
+        "pkg:pypi/extractcode-libarchive@3.5.1.210531",
+        "pkg:pypi/extractcode@31.0.0",
+        "pkg:pypi/fasteners@0.17.3",
+        "pkg:pypi/fingerprints@1.0.3",
+        "pkg:pypi/ftfy@6.0.3",
+        "pkg:pypi/future@0.18.2",
+        "pkg:pypi/gemfileparser@0.8.0",
+        "pkg:pypi/html5lib@1.1",
+        "pkg:pypi/idna@3.3",
+        "pkg:pypi/importlib-metadata@4.8.3",
+        "pkg:pypi/inflection@0.5.1",
+        "pkg:pypi/intbitset@3.0.1",
+        "pkg:pypi/isodate@0.6.1",
+        "pkg:pypi/jaraco-functools@3.4.0",
+        "pkg:pypi/javaproperties@0.8.1",
+        "pkg:pypi/jinja2@3.0.3",
+        "pkg:pypi/jsonstreams@0.6.0",
+        "pkg:pypi/license-expression@21.6.14",
+        "pkg:pypi/lxml@4.8.0",
+        "pkg:pypi/markupsafe@2.0.1",
+        "pkg:pypi/more-itertools@8.13.0",
+        "pkg:pypi/normality@2.3.3",
+        "pkg:pypi/openpyxl@3.0.10",
+        "pkg:pypi/packagedcode-msitools@0.101.210706",
+        "pkg:pypi/packageurl-python@0.9.9",
+        "pkg:pypi/packaging@21.3",
+        "pkg:pypi/parameter-expansion-patched@0.3.1",
+        "pkg:pypi/patch@1.16",
+        "pkg:pypi/pdfminer-six@20220506",
+        "pkg:pypi/pefile@2021.9.3",
+        "pkg:pypi/pip-requirements-parser@31.2.0",
+        "pkg:pypi/pkginfo2@30.0.0",
+        "pkg:pypi/pluggy@1.0.0",
+        "pkg:pypi/plugincode@30.0.0",
+        "pkg:pypi/ply@3.11",
+        "pkg:pypi/publicsuffix2@2.20191221",
+        "pkg:pypi/pyahocorasick@2.0.0b1",
+        "pkg:pypi/pycparser@2.21",
+        "pkg:pypi/pygmars@0.7.0",
+        "pkg:pypi/pygments@2.12.0",
+        "pkg:pypi/pymaven-patch@0.3.0",
+        "pkg:pypi/pyparsing@3.0.9",
+        "pkg:pypi/pytz@2022.1",
+        "pkg:pypi/pyyaml@6.0",
+        "pkg:pypi/rdflib@5.0.0",
+        "pkg:pypi/regipy@2.3.1",
+        "pkg:pypi/requests@2.27.1",
+        "pkg:pypi/rpm-inspector-rpm@4.16.1.3.210404",
+        "pkg:pypi/saneyaml@0.5.2",
+        "pkg:pypi/six@1.16.0",
+        "pkg:pypi/soupsieve@2.3.2.post1",
+        "pkg:pypi/spdx-tools@0.7.0a3",
+        "pkg:pypi/text-unidecode@1.3",
+        "pkg:pypi/toml@0.10.2",
+        "pkg:pypi/typecode-libmagic@5.39.210531",
+        "pkg:pypi/typecode@30.0.0",
+        "pkg:pypi/urllib3@1.26.9",
+        "pkg:pypi/urlpy@0.5",
+        "pkg:pypi/wcwidth@0.2.5",
+        "pkg:pypi/webencodings@0.5.1",
+        "pkg:pypi/xmltodict@0.12.0",
+        "pkg:pypi/zipp@3.6.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/e8/94/7b1205e2992ea51e5caa6124e377772b1b538539a879b2d3838e47943087/aboutcode_toolkit-7.0.2-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/22/11/fb1a48393106b470fc05450a01317f22ca128541d5c5f755ce092ffaebd0/aboutcode-toolkit-7.0.2.tar.gz"
+    },
     {
       "package": "pkg:pypi/attrs@21.4.0",
       "dependencies": [],
@@ -266,6 +722,14 @@
         "https://files.pythonhosted.org/packages/be/be/7abce643bfdf8ca01c48afa2ddf8308c2308b0c3b239a44e57d020afa0ef/attrs-21.4.0-py2.py3-none-any.whl"
       ],
       "sdist_url": "https://files.pythonhosted.org/packages/d7/77/ebb15fc26d0f815839ecd897b919ed6d85c050feeb83e100e020df9153d2/attrs-21.4.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/banal@1.0.6",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/ae/c4/7f6e6a539cc6b2da4da3b6a58d5e6f9342c870522ee46d41f8cbd2156953/banal-1.0.6-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/8c/a7/3301a69b4a31f7324b99332d758ae8da691f7f865ccd1b2adcd973c45344/banal-1.0.6.tar.gz"
     },
     {
       "package": "pkg:pypi/beautifulsoup4@4.11.1",
@@ -278,12 +742,40 @@
       "sdist_url": "https://files.pythonhosted.org/packages/e8/b0/cd2b968000577ec5ce6c741a54d846dfa402372369b8b6861720aa9ecea7/beautifulsoup4-4.11.1.tar.gz"
     },
     {
+      "package": "pkg:pypi/binaryornot@0.4.4",
+      "dependencies": [
+        "pkg:pypi/chardet@4.0.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/24/7e/f7b6f453e6481d1e233540262ccbfcf89adcd43606f44a028d7f5fae5eb2/binaryornot-0.4.4-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/a7/fe/7ebfec74d49f97fc55cd38240c7a7d08134002b1e14be8c3897c0dd5e49b/binaryornot-0.4.4.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/boolean-py@3.8",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/eb/5b/f82983127b1a1a4db83ee290e00a94a2b08c566fa6c58466e82ed7b0a76f/boolean.py-3.8-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/a1/eb/b37ef5647243ade8308f7bb46b1a45e6204790c163cbd8cf6df990d5c1c1/boolean.py-3.8.tar.gz"
+    },
+    {
       "package": "pkg:pypi/certifi@2022.5.18.1",
       "dependencies": [],
       "wheel_urls": [
         "https://files.pythonhosted.org/packages/11/dd/e015f3780f42dd9af62cf0107b44ea1298926627ecd70c17b0e484e95bcd/certifi-2022.5.18.1-py3-none-any.whl"
       ],
       "sdist_url": "https://files.pythonhosted.org/packages/07/10/75277f313d13a2b74fc56e29239d5c840c2bf09f17bf25c02b35558812c6/certifi-2022.5.18.1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/cffi@1.15.0",
+      "dependencies": [
+        "pkg:pypi/pycparser@2.21"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/e5/fe/1dac7533ddb73767df8ba26183a9375dde2ee136aec7c92c9fb3038108e3/cffi-1.15.0-cp38-cp38-manylinux_2_12_x86_64.manylinux2010_x86_64.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/00/9e/92de7e1217ccc3d5f352ba21e52398372525765b2e0c4530e6eb2ba9282a/cffi-1.15.0.tar.gz"
     },
     {
       "package": "pkg:pypi/chardet@4.0.0",
@@ -322,18 +814,160 @@
       "dependencies": [
         "pkg:pypi/attrs@21.4.0",
         "pkg:pypi/beautifulsoup4@4.11.1",
+        "pkg:pypi/certifi@2022.5.18.1",
         "pkg:pypi/chardet@4.0.0",
         "pkg:pypi/click@8.0.4",
+        "pkg:pypi/idna@3.3",
         "pkg:pypi/intbitset@3.0.1",
+        "pkg:pypi/pyyaml@6.0",
         "pkg:pypi/requests@2.27.1",
         "pkg:pypi/saneyaml@0.5.2",
         "pkg:pypi/six@1.16.0",
-        "pkg:pypi/text-unidecode@1.3"
+        "pkg:pypi/soupsieve@2.3.2.post1",
+        "pkg:pypi/text-unidecode@1.3",
+        "pkg:pypi/typing@3.6.6",
+        "pkg:pypi/urllib3@1.26.9"
       ],
       "wheel_urls": [
         "https://files.pythonhosted.org/packages/e8/48/dcdad0505371f2e332842945faece60caaf22ce44661a7161710a36312b5/commoncode-30.2.0-py3-none-any.whl"
       ],
       "sdist_url": "https://files.pythonhosted.org/packages/8b/65/99ad49681e8897ab851014f18bf51e8081a492efc1ef0b443209f7a83e0e/commoncode-30.2.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/construct@2.10.68",
+      "dependencies": [],
+      "wheel_urls": [],
+      "sdist_url": "https://files.pythonhosted.org/packages/e0/b7/a4a032e94bcfdff481f2e6fecd472794d9da09f474a2185ed33b2c7cad64/construct-2.10.68.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/container-inspector@31.0.0",
+      "dependencies": [
+        "pkg:pypi/attrs@21.4.0",
+        "pkg:pypi/banal@1.0.6",
+        "pkg:pypi/beautifulsoup4@4.11.1",
+        "pkg:pypi/binaryornot@0.4.4",
+        "pkg:pypi/boolean-py@3.8",
+        "pkg:pypi/certifi@2022.5.18.1",
+        "pkg:pypi/cffi@1.15.0",
+        "pkg:pypi/chardet@4.0.0",
+        "pkg:pypi/charset-normalizer@2.0.12",
+        "pkg:pypi/click@8.0.4",
+        "pkg:pypi/colorama@0.4.4",
+        "pkg:pypi/commoncode@30.2.0",
+        "pkg:pypi/construct@2.10.68",
+        "pkg:pypi/cryptography@36.0.2",
+        "pkg:pypi/debian-inspector@30.0.0",
+        "pkg:pypi/dockerfile-parse@1.2.0",
+        "pkg:pypi/dparse2@0.6.1",
+        "pkg:pypi/extractcode-7z@16.5.210531",
+        "pkg:pypi/extractcode-libarchive@3.5.1.210531",
+        "pkg:pypi/extractcode@31.0.0",
+        "pkg:pypi/fasteners@0.17.3",
+        "pkg:pypi/fingerprints@1.0.3",
+        "pkg:pypi/ftfy@6.0.3",
+        "pkg:pypi/future@0.18.2",
+        "pkg:pypi/gemfileparser@0.8.0",
+        "pkg:pypi/html5lib@1.1",
+        "pkg:pypi/idna@3.3",
+        "pkg:pypi/importlib-metadata@4.8.3",
+        "pkg:pypi/inflection@0.5.1",
+        "pkg:pypi/intbitset@3.0.1",
+        "pkg:pypi/isodate@0.6.1",
+        "pkg:pypi/jaraco-functools@3.4.0",
+        "pkg:pypi/javaproperties@0.8.1",
+        "pkg:pypi/jinja2@3.0.3",
+        "pkg:pypi/jsonstreams@0.6.0",
+        "pkg:pypi/license-expression@21.6.14",
+        "pkg:pypi/lxml@4.8.0",
+        "pkg:pypi/markupsafe@2.0.1",
+        "pkg:pypi/more-itertools@8.13.0",
+        "pkg:pypi/normality@2.3.3",
+        "pkg:pypi/packagedcode-msitools@0.101.210706",
+        "pkg:pypi/packageurl-python@0.9.9",
+        "pkg:pypi/packaging@21.3",
+        "pkg:pypi/parameter-expansion-patched@0.3.1",
+        "pkg:pypi/patch@1.16",
+        "pkg:pypi/pdfminer-six@20220506",
+        "pkg:pypi/pefile@2021.9.3",
+        "pkg:pypi/pip-requirements-parser@31.2.0",
+        "pkg:pypi/pkginfo2@30.0.0",
+        "pkg:pypi/pluggy@1.0.0",
+        "pkg:pypi/plugincode@30.0.0",
+        "pkg:pypi/ply@3.11",
+        "pkg:pypi/publicsuffix2@2.20191221",
+        "pkg:pypi/pyahocorasick@2.0.0b1",
+        "pkg:pypi/pycparser@2.21",
+        "pkg:pypi/pygmars@0.7.0",
+        "pkg:pypi/pygments@2.12.0",
+        "pkg:pypi/pymaven-patch@0.3.0",
+        "pkg:pypi/pyparsing@3.0.9",
+        "pkg:pypi/pytz@2022.1",
+        "pkg:pypi/pyyaml@6.0",
+        "pkg:pypi/rdflib@5.0.0",
+        "pkg:pypi/regipy@2.3.1",
+        "pkg:pypi/requests@2.27.1",
+        "pkg:pypi/rpm-inspector-rpm@4.16.1.3.210404",
+        "pkg:pypi/saneyaml@0.5.2",
+        "pkg:pypi/six@1.16.0",
+        "pkg:pypi/soupsieve@2.3.2.post1",
+        "pkg:pypi/spdx-tools@0.7.0a3",
+        "pkg:pypi/text-unidecode@1.3",
+        "pkg:pypi/toml@0.10.2",
+        "pkg:pypi/typecode-libmagic@5.39.210531",
+        "pkg:pypi/typecode@30.0.0",
+        "pkg:pypi/urllib3@1.26.9",
+        "pkg:pypi/urlpy@0.5",
+        "pkg:pypi/wcwidth@0.2.5",
+        "pkg:pypi/webencodings@0.5.1",
+        "pkg:pypi/xmltodict@0.12.0",
+        "pkg:pypi/zipp@3.6.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/b8/90/5aaad937c721b89906298d4d384654de030854ea9956cce5bf94e835fc0e/container_inspector-31.0.0-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/8e/fb/a08279fa6d0ac3c0c7c2934f56b47bfa9e2224f04e689098f70edfc92d41/container-inspector-31.0.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/cryptography@36.0.2",
+      "dependencies": [
+        "pkg:pypi/cffi@1.15.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/13/70/e35fc8a742bfc030df62e017e9eafb103ac5c2e3cea1ff340fd9af9d365e/cryptography-36.0.2-cp36-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.whl",
+        "https://files.pythonhosted.org/packages/80/fd/19a0f5273141a128926b3564e1ba1e9563a8e38ae9c334bc14bf2e79fc9a/cryptography-36.0.2-cp36-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/10/a7/51953e73828deef2b58ba1604de9167843ee9cd4185d8aaffcb45dd1932d/cryptography-36.0.2.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/cython@0.29.30",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/6e/14/9ce941960f68dd4f530c84b74c176e3020c7b8c9616614f788bcf59c7f00/Cython-0.29.30-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_24_x86_64.whl",
+        "https://files.pythonhosted.org/packages/60/ac/aeb6bf82cffb63aed057bbfb6eb370d3d7993c014e82a9dca3994cfbb8f3/Cython-0.29.30-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.whl",
+        "https://files.pythonhosted.org/packages/80/08/1c007f1d571f8f2a67ed6938cc79117fa5ae9c0d9ff633fbd5e52f212062/Cython-0.29.30-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/d4/ad/7ce0cccd68824ac9623daf4e973c587aa7e2d23418cd028f8860c80651f5/Cython-0.29.30.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/debian-inspector@30.0.0",
+      "dependencies": [
+        "pkg:pypi/attrs@21.4.0",
+        "pkg:pypi/chardet@4.0.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/1e/d3/e890ef003cfe208e1a31024714da3b33e5eeb428e1df90fdca60492938e8/debian_inspector-30.0.0-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/f3/be/8ca52455a0de5d0e9fe10e61c7ab6b5169b9acb80939ad0ea79b6758b496/debian_inspector-30.0.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/dockerfile-parse@1.2.0",
+      "dependencies": [
+        "pkg:pypi/six@1.16.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/53/83/e9579a25c26bc8e1a6033e46e756e18c25caa05bfc421673d99d1af2efab/dockerfile_parse-1.2.0-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/d0/f6/8eb044e3837f6da0a85d9f73158104fecdab68bc86a83625b1e398963ed3/dockerfile-parse-1.2.0.tar.gz"
     },
     {
       "package": "pkg:pypi/dparse2@0.6.1",
@@ -346,6 +980,169 @@
         "https://files.pythonhosted.org/packages/e5/5b/90c06372cdd08821b4fb013aea5248ed0750fea8299e235df29e8d4a28dd/dparse2-0.6.1-py3-none-any.whl"
       ],
       "sdist_url": "https://files.pythonhosted.org/packages/2d/a3/49cd39abdf8b4832cba27d635a775b721388e50671bee7ea0d10afcf0cfd/dparse2-0.6.1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/et-xmlfile@1.1.0",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/96/c2/3dd434b0108730014f1b96fd286040dc3bcb70066346f7e01ec2ac95865f/et_xmlfile-1.1.0-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/3d/5d/0413a31d184a20c763ad741cc7852a659bf15094c24840c5bdd1754765cd/et_xmlfile-1.1.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/extractcode-7z@16.5.210531",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/5a/9e/c27db5aaeb9edaf50727f9b498d57e1c3adaea79ea16b20391a3dceca928/extractcode_7z-16.5.210531-py3-none-manylinux1_x86_64.whl"
+      ],
+      "sdist_url": null
+    },
+    {
+      "package": "pkg:pypi/extractcode-libarchive@3.5.1.210531",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/56/6e/8695d5773679fd05bd1c4e56a7b9ab3d5dc3c89aadfa9c1981a00fc66935/extractcode_libarchive-3.5.1.210531-py3-none-manylinux1_x86_64.whl"
+      ],
+      "sdist_url": null
+    },
+    {
+      "package": "pkg:pypi/extractcode@31.0.0",
+      "dependencies": [
+        "pkg:pypi/attrs@21.4.0",
+        "pkg:pypi/banal@1.0.6",
+        "pkg:pypi/beautifulsoup4@4.11.1",
+        "pkg:pypi/binaryornot@0.4.4",
+        "pkg:pypi/boolean-py@3.8",
+        "pkg:pypi/certifi@2022.5.18.1",
+        "pkg:pypi/cffi@1.15.0",
+        "pkg:pypi/chardet@4.0.0",
+        "pkg:pypi/charset-normalizer@2.0.12",
+        "pkg:pypi/click@8.0.4",
+        "pkg:pypi/colorama@0.4.4",
+        "pkg:pypi/commoncode@30.2.0",
+        "pkg:pypi/construct@2.10.68",
+        "pkg:pypi/container-inspector@31.0.0",
+        "pkg:pypi/cryptography@36.0.2",
+        "pkg:pypi/debian-inspector@30.0.0",
+        "pkg:pypi/dockerfile-parse@1.2.0",
+        "pkg:pypi/dparse2@0.6.1",
+        "pkg:pypi/extractcode-7z@16.5.210531",
+        "pkg:pypi/extractcode-libarchive@3.5.1.210531",
+        "pkg:pypi/fasteners@0.17.3",
+        "pkg:pypi/fingerprints@1.0.3",
+        "pkg:pypi/ftfy@6.0.3",
+        "pkg:pypi/future@0.18.2",
+        "pkg:pypi/gemfileparser@0.8.0",
+        "pkg:pypi/html5lib@1.1",
+        "pkg:pypi/idna@3.3",
+        "pkg:pypi/importlib-metadata@4.8.3",
+        "pkg:pypi/inflection@0.5.1",
+        "pkg:pypi/intbitset@3.0.1",
+        "pkg:pypi/isodate@0.6.1",
+        "pkg:pypi/jaraco-functools@3.4.0",
+        "pkg:pypi/javaproperties@0.8.1",
+        "pkg:pypi/jinja2@3.0.3",
+        "pkg:pypi/jsonstreams@0.6.0",
+        "pkg:pypi/license-expression@21.6.14",
+        "pkg:pypi/lxml@4.8.0",
+        "pkg:pypi/markupsafe@2.0.1",
+        "pkg:pypi/more-itertools@8.13.0",
+        "pkg:pypi/normality@2.3.3",
+        "pkg:pypi/packagedcode-msitools@0.101.210706",
+        "pkg:pypi/packageurl-python@0.9.9",
+        "pkg:pypi/packaging@21.3",
+        "pkg:pypi/parameter-expansion-patched@0.3.1",
+        "pkg:pypi/patch@1.16",
+        "pkg:pypi/pdfminer-six@20220506",
+        "pkg:pypi/pefile@2021.9.3",
+        "pkg:pypi/pip-requirements-parser@31.2.0",
+        "pkg:pypi/pkginfo2@30.0.0",
+        "pkg:pypi/pluggy@1.0.0",
+        "pkg:pypi/plugincode@30.0.0",
+        "pkg:pypi/ply@3.11",
+        "pkg:pypi/publicsuffix2@2.20191221",
+        "pkg:pypi/pyahocorasick@2.0.0b1",
+        "pkg:pypi/pycparser@2.21",
+        "pkg:pypi/pygmars@0.7.0",
+        "pkg:pypi/pygments@2.12.0",
+        "pkg:pypi/pymaven-patch@0.3.0",
+        "pkg:pypi/pyparsing@3.0.9",
+        "pkg:pypi/pytz@2022.1",
+        "pkg:pypi/pyyaml@6.0",
+        "pkg:pypi/rdflib@5.0.0",
+        "pkg:pypi/regipy@2.3.1",
+        "pkg:pypi/requests@2.27.1",
+        "pkg:pypi/rpm-inspector-rpm@4.16.1.3.210404",
+        "pkg:pypi/saneyaml@0.5.2",
+        "pkg:pypi/six@1.16.0",
+        "pkg:pypi/soupsieve@2.3.2.post1",
+        "pkg:pypi/spdx-tools@0.7.0a3",
+        "pkg:pypi/text-unidecode@1.3",
+        "pkg:pypi/toml@0.10.2",
+        "pkg:pypi/typecode-libmagic@5.39.210531",
+        "pkg:pypi/typecode@30.0.0",
+        "pkg:pypi/urllib3@1.26.9",
+        "pkg:pypi/urlpy@0.5",
+        "pkg:pypi/wcwidth@0.2.5",
+        "pkg:pypi/webencodings@0.5.1",
+        "pkg:pypi/xmltodict@0.12.0",
+        "pkg:pypi/zipp@3.6.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/d6/7e/0a60071cc9fdd2ec364d6fe7d6bc77632a36c44e9d467b4921ba84f9c921/extractcode-31.0.0-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/58/24/40848587ae0f03ec6da2ae8a28b7ace7219fcbad0bc74e84c582324208ed/extractcode-31.0.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/fasteners@0.17.3",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/f6/01/274da83334c20dc1ae7a48b1ea4ae50d3571d4e6aea65bb0368f841701ad/fasteners-0.17.3-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/bd/f4/148f44998c1bdb064a508e7cbcf9e50b34572b3d36fcc378a5d61b7dc8c5/fasteners-0.17.3.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/fingerprints@1.0.3",
+      "dependencies": [
+        "pkg:pypi/normality@2.3.3"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/ad/17/309d6bff8ad23902be7a75c8dc7137c608456f09bd999da7f58f2c626be7/fingerprints-1.0.3-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/86/02/64e9cf0f71aca6cd133528c9315732ea8ac8a0011552d91360446d1da411/fingerprints-1.0.3.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/ftfy@6.0.3",
+      "dependencies": [
+        "pkg:pypi/wcwidth@0.2.5"
+      ],
+      "wheel_urls": [],
+      "sdist_url": "https://files.pythonhosted.org/packages/af/da/d215a091986e5f01b80f5145cff6f22e2dc57c6b048aab2e882a07018473/ftfy-6.0.3.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/future@0.18.2",
+      "dependencies": [],
+      "wheel_urls": [],
+      "sdist_url": "https://files.pythonhosted.org/packages/45/0b/38b06fd9b92dc2b68d58b75f900e97884c45bedd2ff83203d933cf5851c9/future-0.18.2.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/gemfileparser@0.8.0",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/ed/b5/c3f4d21e121a65172f43b08b2699e469e3853455b5def48097f40164bb44/gemfileparser-0.8.0-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/08/5f/7277029065a98d7eef536e138a49edb4f551038e4d0ebc312bcf06ea086d/gemfileparser-0.8.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/html5lib@1.1",
+      "dependencies": [
+        "pkg:pypi/six@1.16.0",
+        "pkg:pypi/webencodings@0.5.1"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/6c/dd/a834df6482147d48e225a49515aabc28974ad5a4ca3215c18a882565b028/html5lib-1.1-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/ac/b6/b55c3f49042f1df3dcd422b7f224f939892ee94f22abcf503a9b7339eaf2/html5lib-1.1.tar.gz"
     },
     {
       "package": "pkg:pypi/idna@3.3",
@@ -366,12 +1163,140 @@
       "sdist_url": "https://files.pythonhosted.org/packages/85/ed/e65128cc5cb1580f22ee3009d9187ecdfcc43ffb3b581fe854b24e87d8e7/importlib_metadata-4.8.3.tar.gz"
     },
     {
+      "package": "pkg:pypi/inflection@0.5.1",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/59/91/aa6bde563e0085a02a435aa99b49ef75b0a4b062635e606dab23ce18d720/inflection-0.5.1-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/e1/7e/691d061b7329bc8d54edbf0ec22fbfb2afe61facb681f9aaa9bff7a27d04/inflection-0.5.1.tar.gz"
+    },
+    {
       "package": "pkg:pypi/intbitset@3.0.1",
       "dependencies": [],
       "wheel_urls": [
         "https://files.pythonhosted.org/packages/91/8a/ad3229a13ce2ebb6e642147d2063d0d24010e5b68b526b21c060c169cc5f/intbitset-3.0.1-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.whl"
       ],
       "sdist_url": "https://files.pythonhosted.org/packages/f8/80/81bf8129a2cc012a225ea0dc39cd6e11531a61d115616b1eead33b157164/intbitset-3.0.1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/isodate@0.6.1",
+      "dependencies": [
+        "pkg:pypi/six@1.16.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/b6/85/7882d311924cbcfc70b1890780763e36ff0b140c7e51c110fc59a532f087/isodate-0.6.1-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/db/7a/c0a56c7d56c7fa723988f122fa1f1ccf8c5c4ccc48efad0d214b49e5b1af/isodate-0.6.1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/jaraco-functools@3.4.0",
+      "dependencies": [
+        "pkg:pypi/more-itertools@8.13.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/bc/19/644fb6d99e1a649bc1e427c3028585e659dfef9fe25b2d1b59f959d03164/jaraco.functools-3.4.0-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/84/a4/d51170d05ac4eff15f416dbdb2c046c7cbaa7a9d0ad2d3bf9b27ad97b600/jaraco.functools-3.4.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/javaproperties@0.8.1",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/47/e8/c244dd03cecdebaf8116c93afaa1c72c8d4833f078a5d35e00c3d2c3be64/javaproperties-0.8.1-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/68/52/d7db7b671e2d4596c759fb526864837677c1562462e45f0ba46aef9a28c5/javaproperties-0.8.1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/jinja2@3.0.3",
+      "dependencies": [
+        "pkg:pypi/markupsafe@2.0.1"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/20/9a/e5d9ec41927401e41aea8af6d16e78b5e612bca4699d417f646a9610a076/Jinja2-3.0.3-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/91/a5/429efc6246119e1e3fbf562c00187d04e83e54619249eb732bb423efa6c6/Jinja2-3.0.3.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/jsonstreams@0.6.0",
+      "dependencies": [
+        "pkg:pypi/six@1.16.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/af/be/233b55906cc033b890c2e4593077bc10c7e09257c46f5253dd9b2850f3f4/jsonstreams-0.6.0-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/85/8c/01333839805428590015bb4cbc3b730876609e536954eb1140d24b410bd0/jsonstreams-0.6.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/license-expression@21.6.14",
+      "dependencies": [
+        "pkg:pypi/boolean-py@3.8"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/32/20/84b153347691fb850d3eb96f7836b7f25251657e48456497ded4b63886f9/license_expression-21.6.14-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/3a/ec/755cfd9cf2b78eb3e3e27fe06511df83d9def874d15ecd4d6f23f1519e73/license-expression-21.6.14.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/lxml@4.8.0",
+      "dependencies": [
+        "pkg:pypi/cython@0.29.30"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/d4/a7/21bf8234d3f0bae5219c869c2d34d1ac3fcd0b1907ce2afffb0209b15a7f/lxml-4.8.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_24_x86_64.whl",
+        "https://files.pythonhosted.org/packages/ee/88/136809b38c4e7425752caedce4b052b2d1f03dee25bf75d755e6b908cca5/lxml-4.8.0-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/3b/94/e2b1b3bad91d15526c7e38918795883cee18b93f6785ea8ecf13f8ffa01e/lxml-4.8.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/markupsafe@2.0.1",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/1d/c5/1d1b42c65f96ee7b0c81761260878d1a1dc0afdf259e434b7d7af88a80a3/MarkupSafe-2.0.1-cp38-cp38-manylinux1_x86_64.whl",
+        "https://files.pythonhosted.org/packages/68/ba/7a5ca0f9b4239e6fd846dd54c0b5928187355fa62fbdbd13e1c5942afae7/MarkupSafe-2.0.1-cp38-cp38-manylinux2010_x86_64.whl",
+        "https://files.pythonhosted.org/packages/7a/e8/00c435416c9b0238dca6f883563b01c4cc532b2ba6aaf7268081f6238520/MarkupSafe-2.0.1-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/bf/10/ff66fea6d1788c458663a84d88787bae15d45daa16f6b3ef33322a51fc7e/MarkupSafe-2.0.1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/more-itertools@8.13.0",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/bd/3f/c4b3dbd315e248f84c388bd4a72b131a29f123ecacc37ffb2b3834546e42/more_itertools-8.13.0-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/b4/23/2987c2792c18a211dfe913e2f60e55cde0af6dfc41217e4da74ac7cd68f4/more-itertools-8.13.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/normality@2.3.3",
+      "dependencies": [
+        "pkg:pypi/banal@1.0.6",
+        "pkg:pypi/chardet@4.0.0",
+        "pkg:pypi/charset-normalizer@2.0.12",
+        "pkg:pypi/text-unidecode@1.3"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/a9/bf/09631d02efe946dc998018f611af48cb521f2820fe9cdea58f59710274f1/normality-2.3.3-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/d5/1f/a0b7d6c8040c4b829ae45d84d5cbb847e2faf380a050dae5da681e3225d2/normality-2.3.3.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/openpyxl@3.0.10",
+      "dependencies": [
+        "pkg:pypi/et-xmlfile@1.1.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/7b/60/9afac4fd6feee0ac09339de4101ee452ea643d26e9ce44c7708a0023f503/openpyxl-3.0.10-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/2c/b8/ff77a718173fd73e49f883b4fda88f11af1fc51edb9252af3785b0cad987/openpyxl-3.0.10.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/packagedcode-msitools@0.101.210706",
+      "dependencies": [
+        "pkg:pypi/plugincode@30.0.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/6f/c9/bb5ba90a3eee6706b0ac8b983d081bf03cc6d8545cead72005b38d3cd8db/packagedcode_msitools-0.101.210706-py3-none-manylinux1_x86_64.whl"
+      ],
+      "sdist_url": null
     },
     {
       "package": "pkg:pypi/packageurl-python@0.9.9",
@@ -392,6 +1317,39 @@
       "sdist_url": "https://files.pythonhosted.org/packages/df/9e/d1a7217f69310c1db8fdf8ab396229f55a699ce34a203691794c5d1cad0c/packaging-21.3.tar.gz"
     },
     {
+      "package": "pkg:pypi/parameter-expansion-patched@0.3.1",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/6c/9f/2eb2762808faed5218faba5559415b5bb62b39376cf9a38acc01f9786481/parameter_expansion_patched-0.3.1-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/7e/15/0c6fa115b269418a0d53d4564809afb74684d8afa417323b406be26de08b/parameter-expansion-patched-0.3.1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/patch@1.16",
+      "dependencies": [],
+      "wheel_urls": [],
+      "sdist_url": "https://files.pythonhosted.org/packages/da/74/0815f03c82f4dc738e2bfc5f8966f682bebcc809f30c8e306e6cc7156a99/patch-1.16.zip"
+    },
+    {
+      "package": "pkg:pypi/pdfminer-six@20220506",
+      "dependencies": [
+        "pkg:pypi/charset-normalizer@2.0.12",
+        "pkg:pypi/cryptography@36.0.2"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/21/7e/db52fef817fc569b7a5e157e74519c0debc8b69242c6109a70d67ce031e5/pdfminer.six-20220506-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/d8/df/b2af9773a03f813adb3b17bf82c5195a4894a7416b35a75959408822e076/pdfminer.six-20220506.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/pefile@2021.9.3",
+      "dependencies": [
+        "pkg:pypi/future@0.18.2"
+      ],
+      "wheel_urls": [],
+      "sdist_url": "https://files.pythonhosted.org/packages/ee/e1/a7bd302cf5f74547431b4e9b206dbef782d112df6b531f193bb4a29fb1b9/pefile-2021.9.3.tar.gz"
+    },
+    {
       "package": "pkg:pypi/pip-requirements-parser@31.2.0",
       "dependencies": [
         "pkg:pypi/packaging@21.3"
@@ -410,6 +1368,162 @@
       "sdist_url": "https://files.pythonhosted.org/packages/90/8d/09cc1c99a30ac14050fc4e04e549e024be83ff72a7f63e75023501baf977/pkginfo2-30.0.0.tar.gz"
     },
     {
+      "package": "pkg:pypi/pluggy@1.0.0",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/9e/01/f38e2ff29715251cf25532b9082a1589ab7e4f571ced434f98d0139336dc/pluggy-1.0.0-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/a1/16/db2d7de3474b6e37cbb9c008965ee63835bba517e22cdb8c35b5116b5ce1/pluggy-1.0.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/plugincode@30.0.0",
+      "dependencies": [
+        "pkg:pypi/attrs@21.4.0",
+        "pkg:pypi/banal@1.0.6",
+        "pkg:pypi/beautifulsoup4@4.11.1",
+        "pkg:pypi/binaryornot@0.4.4",
+        "pkg:pypi/boolean-py@3.8",
+        "pkg:pypi/certifi@2022.5.18.1",
+        "pkg:pypi/cffi@1.15.0",
+        "pkg:pypi/chardet@4.0.0",
+        "pkg:pypi/charset-normalizer@2.0.12",
+        "pkg:pypi/click@8.0.4",
+        "pkg:pypi/colorama@0.4.4",
+        "pkg:pypi/commoncode@30.2.0",
+        "pkg:pypi/construct@2.10.68",
+        "pkg:pypi/container-inspector@31.0.0",
+        "pkg:pypi/cryptography@36.0.2",
+        "pkg:pypi/debian-inspector@30.0.0",
+        "pkg:pypi/dockerfile-parse@1.2.0",
+        "pkg:pypi/dparse2@0.6.1",
+        "pkg:pypi/extractcode-7z@16.5.210531",
+        "pkg:pypi/extractcode-libarchive@3.5.1.210531",
+        "pkg:pypi/extractcode@31.0.0",
+        "pkg:pypi/fasteners@0.17.3",
+        "pkg:pypi/fingerprints@1.0.3",
+        "pkg:pypi/ftfy@6.0.3",
+        "pkg:pypi/future@0.18.2",
+        "pkg:pypi/gemfileparser@0.8.0",
+        "pkg:pypi/html5lib@1.1",
+        "pkg:pypi/idna@3.3",
+        "pkg:pypi/importlib-metadata@4.8.3",
+        "pkg:pypi/inflection@0.5.1",
+        "pkg:pypi/intbitset@3.0.1",
+        "pkg:pypi/isodate@0.6.1",
+        "pkg:pypi/jaraco-functools@3.4.0",
+        "pkg:pypi/javaproperties@0.8.1",
+        "pkg:pypi/jinja2@3.0.3",
+        "pkg:pypi/jsonstreams@0.6.0",
+        "pkg:pypi/license-expression@21.6.14",
+        "pkg:pypi/lxml@4.8.0",
+        "pkg:pypi/markupsafe@2.0.1",
+        "pkg:pypi/more-itertools@8.13.0",
+        "pkg:pypi/normality@2.3.3",
+        "pkg:pypi/packagedcode-msitools@0.101.210706",
+        "pkg:pypi/packageurl-python@0.9.9",
+        "pkg:pypi/packaging@21.3",
+        "pkg:pypi/parameter-expansion-patched@0.3.1",
+        "pkg:pypi/patch@1.16",
+        "pkg:pypi/pdfminer-six@20220506",
+        "pkg:pypi/pefile@2021.9.3",
+        "pkg:pypi/pip-requirements-parser@31.2.0",
+        "pkg:pypi/pkginfo2@30.0.0",
+        "pkg:pypi/pluggy@1.0.0",
+        "pkg:pypi/ply@3.11",
+        "pkg:pypi/publicsuffix2@2.20191221",
+        "pkg:pypi/pyahocorasick@2.0.0b1",
+        "pkg:pypi/pycparser@2.21",
+        "pkg:pypi/pygmars@0.7.0",
+        "pkg:pypi/pygments@2.12.0",
+        "pkg:pypi/pymaven-patch@0.3.0",
+        "pkg:pypi/pyparsing@3.0.9",
+        "pkg:pypi/pytz@2022.1",
+        "pkg:pypi/pyyaml@6.0",
+        "pkg:pypi/rdflib@5.0.0",
+        "pkg:pypi/regipy@2.3.1",
+        "pkg:pypi/requests@2.27.1",
+        "pkg:pypi/rpm-inspector-rpm@4.16.1.3.210404",
+        "pkg:pypi/saneyaml@0.5.2",
+        "pkg:pypi/six@1.16.0",
+        "pkg:pypi/soupsieve@2.3.2.post1",
+        "pkg:pypi/spdx-tools@0.7.0a3",
+        "pkg:pypi/text-unidecode@1.3",
+        "pkg:pypi/toml@0.10.2",
+        "pkg:pypi/typecode-libmagic@5.39.210531",
+        "pkg:pypi/typecode@30.0.0",
+        "pkg:pypi/urllib3@1.26.9",
+        "pkg:pypi/urlpy@0.5",
+        "pkg:pypi/wcwidth@0.2.5",
+        "pkg:pypi/webencodings@0.5.1",
+        "pkg:pypi/xmltodict@0.12.0",
+        "pkg:pypi/zipp@3.6.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/2e/7f/b14a8f1a41579fdb127fd39215839795bfbedd6cd3ca905f7ed614be3ca5/plugincode-30.0.0-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/b9/22/a1bcb3f164d0864a435027ddf8a851d9c1c696befc48c24d92679ae0c1d5/plugincode-30.0.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/ply@3.11",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/a3/58/35da89ee790598a0700ea49b2a66594140f44dec458c07e8e3d4979137fc/ply-3.11-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/e5/69/882ee5c9d017149285cab114ebeab373308ef0f874fcdac9beb90e0ac4da/ply-3.11.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/publicsuffix2@2.20191221",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/9d/16/053c2945c5e3aebeefb4ccd5c5e7639e38bc30ad1bdc7ce86c6d01707726/publicsuffix2-2.20191221-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/5a/04/1759906c4c5b67b2903f546de234a824d4028ef24eb0b1122daa43376c20/publicsuffix2-2.20191221.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/pyahocorasick@2.0.0b1",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/b9/31/98b01b0b3cda2975e6c1b2a22bc89949a7a087f546ec5fc9bc6e2aa6df63/pyahocorasick-2.0.0b1-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/06/d7/dd5b3adb4fec7df42db31c33fbe045cc7cf18816c37f0b51c39c3d2461d4/pyahocorasick-2.0.0b1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/pycparser@2.21",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/62/d5/5f610ebe421e85889f2e55e33b7f9a6795bd982198517d912eb1c76e1a53/pycparser-2.21-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/5e/0b/95d387f5f4433cb0f53ff7ad859bd2c6051051cebbb564f139a999ab46de/pycparser-2.21.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/pygmars@0.7.0",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/72/0c/824fa8022574e236c57f241e495e874869cbfb7db510039d80e68dc0de62/pygmars-0.7.0-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/a6/cf/cdb9dc23cae22026485c407cf01dff7fc9e9b4df0831f2214a3e070d1574/pygmars-0.7.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/pygments@2.12.0",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/5c/8e/1d9017950034297fffa336c72e693a5b51bbf85141b24a763882cf1977b5/Pygments-2.12.0-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/59/0f/eb10576eb73b5857bc22610cdfc59e424ced4004fe7132c8f2af2cc168d3/Pygments-2.12.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/pymaven-patch@0.3.0",
+      "dependencies": [
+        "pkg:pypi/lxml@4.8.0",
+        "pkg:pypi/requests@2.27.1",
+        "pkg:pypi/six@1.16.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/f1/42/c7158efe92f105804a8ba570f9b1d0be30ba686ea6fb26ae6bf41a3c058a/pymaven_patch-0.3.0-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/d7/87/1e001f4557bc324401260f66c287de10b5be6e0701f0741e911c3720d325/pymaven-patch-0.3.0.tar.gz"
+    },
+    {
       "package": "pkg:pypi/pyparsing@3.0.9",
       "dependencies": [],
       "wheel_urls": [
@@ -418,12 +1532,43 @@
       "sdist_url": "https://files.pythonhosted.org/packages/71/22/207523d16464c40a0310d2d4d8926daffa00ac1f5b1576170a32db749636/pyparsing-3.0.9.tar.gz"
     },
     {
+      "package": "pkg:pypi/pytz@2022.1",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/60/2e/dec1cc18c51b8df33c7c4d0a321b084cf38e1733b98f9d15018880fb4970/pytz-2022.1-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/2f/5f/a0f653311adff905bbcaa6d3dfaf97edcf4d26138393c6ccd37a484851fb/pytz-2022.1.tar.gz"
+    },
+    {
       "package": "pkg:pypi/pyyaml@6.0",
       "dependencies": [],
       "wheel_urls": [
         "https://files.pythonhosted.org/packages/d7/42/7ad4b6d67a16229496d4f6e74201bdbebcf4bc1e87d5a70c9297d4961bd2/PyYAML-6.0-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl"
       ],
       "sdist_url": "https://files.pythonhosted.org/packages/36/2b/61d51a2c4f25ef062ae3f74576b01638bebad5e045f747ff12643df63844/PyYAML-6.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/rdflib@5.0.0",
+      "dependencies": [
+        "pkg:pypi/isodate@0.6.1",
+        "pkg:pypi/pyparsing@3.0.9",
+        "pkg:pypi/six@1.16.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/d0/6b/6454aa1db753c0f8bc265a5bd5c10b5721a4bb24160fb4faf758cf6be8a1/rdflib-5.0.0-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/2f/ae/a50934a7ed4f9d80bbc0e0cf725c7fd2208f2e433efbf881ed0c0317a7f1/rdflib-5.0.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/regipy@2.3.1",
+      "dependencies": [
+        "pkg:pypi/attrs@21.4.0",
+        "pkg:pypi/construct@2.10.68",
+        "pkg:pypi/inflection@0.5.1",
+        "pkg:pypi/pytz@2022.1"
+      ],
+      "wheel_urls": [],
+      "sdist_url": "https://files.pythonhosted.org/packages/c9/8a/2646dd3e9959a0a9d104ee9b2ea09e4736411a5bb2ee5fbfbff784cd7d85/regipy-2.3.1.tar.gz"
     },
     {
       "package": "pkg:pypi/requests@2.27.1",
@@ -445,6 +1590,16 @@
         "https://files.pythonhosted.org/packages/98/c0/46cfa3f56e43033b705965120058c018375600fa8fdb44c4e53d75820673/resolvelib-0.8.1-py2.py3-none-any.whl"
       ],
       "sdist_url": "https://files.pythonhosted.org/packages/ac/20/9541749d77aebf66dd92e2b803f38a50e3a5c76e7876f45eb2b37e758d82/resolvelib-0.8.1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/rpm-inspector-rpm@4.16.1.3.210404",
+      "dependencies": [
+        "pkg:pypi/plugincode@30.0.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/7a/34/2df7e52c1169370c7a851fe0dc6eb11a7198b501e8b8e2794fd3b04a13f4/rpm_inspector_rpm-4.16.1.3.210404-py3-none-manylinux1_x86_64.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/b1/e1/a329c2928e685e45ec5ec36ce72cb2135d718aa91dfea0392d415473372f/rpm-inspector-rpm-4.16.1.3.210404.tar.gz"
     },
     {
       "package": "pkg:pypi/saneyaml@0.5.2",
@@ -473,6 +1628,20 @@
       "sdist_url": "https://files.pythonhosted.org/packages/f3/03/bac179d539362319b4779a00764e95f7542f4920084163db6b0fd4742d38/soupsieve-2.3.2.post1.tar.gz"
     },
     {
+      "package": "pkg:pypi/spdx-tools@0.7.0a3",
+      "dependencies": [
+        "pkg:pypi/click@8.0.4",
+        "pkg:pypi/ply@3.11",
+        "pkg:pypi/pyyaml@6.0",
+        "pkg:pypi/rdflib@5.0.0",
+        "pkg:pypi/xmltodict@0.12.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/06/e5/9ab9c91240d0276081128d25bda18034dc7e6c48c670e2d9425c8bcb47a0/spdx_tools-0.7.0a3-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/7a/54/50e1cbf2c2870197b098bb464a8e86335de32b8893dbc06d7aa41db4c7ba/spdx-tools-0.7.0a3.tar.gz"
+    },
+    {
       "package": "pkg:pypi/text-unidecode@1.3",
       "dependencies": [],
       "wheel_urls": [
@@ -487,6 +1656,102 @@
         "https://files.pythonhosted.org/packages/44/6f/7120676b6d73228c96e17f1f794d8ab046fc910d781c8d151120c3f1569e/toml-0.10.2-py2.py3-none-any.whl"
       ],
       "sdist_url": "https://files.pythonhosted.org/packages/be/ba/1f744cdc819428fc6b5084ec34d9b30660f6f9daaf70eead706e3203ec3c/toml-0.10.2.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/typecode-libmagic@5.39.210531",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/89/bc/135d2c5a345f1c52431dbc92c181003ba61bcd35e304d36387e33070a9c5/typecode_libmagic-5.39.210531-py3-none-manylinux1_x86_64.whl"
+      ],
+      "sdist_url": null
+    },
+    {
+      "package": "pkg:pypi/typecode@30.0.0",
+      "dependencies": [
+        "pkg:pypi/attrs@21.4.0",
+        "pkg:pypi/banal@1.0.6",
+        "pkg:pypi/beautifulsoup4@4.11.1",
+        "pkg:pypi/binaryornot@0.4.4",
+        "pkg:pypi/boolean-py@3.8",
+        "pkg:pypi/certifi@2022.5.18.1",
+        "pkg:pypi/cffi@1.15.0",
+        "pkg:pypi/chardet@4.0.0",
+        "pkg:pypi/charset-normalizer@2.0.12",
+        "pkg:pypi/click@8.0.4",
+        "pkg:pypi/colorama@0.4.4",
+        "pkg:pypi/commoncode@30.2.0",
+        "pkg:pypi/construct@2.10.68",
+        "pkg:pypi/container-inspector@31.0.0",
+        "pkg:pypi/cryptography@36.0.2",
+        "pkg:pypi/debian-inspector@30.0.0",
+        "pkg:pypi/dockerfile-parse@1.2.0",
+        "pkg:pypi/dparse2@0.6.1",
+        "pkg:pypi/extractcode-7z@16.5.210531",
+        "pkg:pypi/extractcode-libarchive@3.5.1.210531",
+        "pkg:pypi/extractcode@31.0.0",
+        "pkg:pypi/fasteners@0.17.3",
+        "pkg:pypi/fingerprints@1.0.3",
+        "pkg:pypi/ftfy@6.0.3",
+        "pkg:pypi/future@0.18.2",
+        "pkg:pypi/gemfileparser@0.8.0",
+        "pkg:pypi/html5lib@1.1",
+        "pkg:pypi/idna@3.3",
+        "pkg:pypi/importlib-metadata@4.8.3",
+        "pkg:pypi/inflection@0.5.1",
+        "pkg:pypi/intbitset@3.0.1",
+        "pkg:pypi/isodate@0.6.1",
+        "pkg:pypi/jaraco-functools@3.4.0",
+        "pkg:pypi/javaproperties@0.8.1",
+        "pkg:pypi/jinja2@3.0.3",
+        "pkg:pypi/jsonstreams@0.6.0",
+        "pkg:pypi/license-expression@21.6.14",
+        "pkg:pypi/lxml@4.8.0",
+        "pkg:pypi/markupsafe@2.0.1",
+        "pkg:pypi/more-itertools@8.13.0",
+        "pkg:pypi/normality@2.3.3",
+        "pkg:pypi/packagedcode-msitools@0.101.210706",
+        "pkg:pypi/packageurl-python@0.9.9",
+        "pkg:pypi/packaging@21.3",
+        "pkg:pypi/parameter-expansion-patched@0.3.1",
+        "pkg:pypi/patch@1.16",
+        "pkg:pypi/pdfminer-six@20220506",
+        "pkg:pypi/pefile@2021.9.3",
+        "pkg:pypi/pip-requirements-parser@31.2.0",
+        "pkg:pypi/pkginfo2@30.0.0",
+        "pkg:pypi/pluggy@1.0.0",
+        "pkg:pypi/plugincode@30.0.0",
+        "pkg:pypi/ply@3.11",
+        "pkg:pypi/publicsuffix2@2.20191221",
+        "pkg:pypi/pyahocorasick@2.0.0b1",
+        "pkg:pypi/pycparser@2.21",
+        "pkg:pypi/pygmars@0.7.0",
+        "pkg:pypi/pygments@2.12.0",
+        "pkg:pypi/pymaven-patch@0.3.0",
+        "pkg:pypi/pyparsing@3.0.9",
+        "pkg:pypi/pytz@2022.1",
+        "pkg:pypi/pyyaml@6.0",
+        "pkg:pypi/rdflib@5.0.0",
+        "pkg:pypi/regipy@2.3.1",
+        "pkg:pypi/requests@2.27.1",
+        "pkg:pypi/rpm-inspector-rpm@4.16.1.3.210404",
+        "pkg:pypi/saneyaml@0.5.2",
+        "pkg:pypi/six@1.16.0",
+        "pkg:pypi/soupsieve@2.3.2.post1",
+        "pkg:pypi/spdx-tools@0.7.0a3",
+        "pkg:pypi/text-unidecode@1.3",
+        "pkg:pypi/toml@0.10.2",
+        "pkg:pypi/typecode-libmagic@5.39.210531",
+        "pkg:pypi/urllib3@1.26.9",
+        "pkg:pypi/urlpy@0.5",
+        "pkg:pypi/wcwidth@0.2.5",
+        "pkg:pypi/webencodings@0.5.1",
+        "pkg:pypi/xmltodict@0.12.0",
+        "pkg:pypi/zipp@3.6.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/08/df/97235ddeb47a130f412ef05f8ecd6df7c6c8bf57f6bee8723231a65d9bba/typecode-30.0.0-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/a0/ea/6e1432db5c62f903fb84bef8228d6b857f4e79463555d20bc3db3f11b0c9/typecode-30.0.0.tar.gz"
     },
     {
       "package": "pkg:pypi/typing-extensions@4.1.1",
@@ -511,6 +1776,40 @@
         "https://files.pythonhosted.org/packages/ec/03/062e6444ce4baf1eac17a6a0ebfe36bb1ad05e1df0e20b110de59c278498/urllib3-1.26.9-py2.py3-none-any.whl"
       ],
       "sdist_url": "https://files.pythonhosted.org/packages/1b/a5/4eab74853625505725cefdf168f48661b2cd04e7843ab836f3f63abf81da/urllib3-1.26.9.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/urlpy@0.5",
+      "dependencies": [
+        "pkg:pypi/publicsuffix2@2.20191221"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/23/f0/43a8013e888f435c619f82b485ef8cf9fddfcceea7806d824b28d5ef8f76/urlpy-0.5-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/23/21/d176a137e4cc1ec4809534d116e9a06fc5fc0519077530ab5d040e356454/urlpy-0.5.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/wcwidth@0.2.5",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/59/7c/e39aca596badaf1b78e8f547c807b04dae603a433d3e7a7e04d67f2ef3e5/wcwidth-0.2.5-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/89/38/459b727c381504f361832b9e5ace19966de1a235d73cdbdea91c771a1155/wcwidth-0.2.5.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/webencodings@0.5.1",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/f4/24/2a3e3df732393fed8b3ebf2ec078f05546de641fe1b667ee316ec1dcf3b7/webencodings-0.5.1-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/0b/02/ae6ceac1baeda530866a85075641cec12989bd8d31af6d5ab4a3e8c92f47/webencodings-0.5.1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/xmltodict@0.12.0",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/28/fd/30d5c1d3ac29ce229f6bdc40bbc20b28f716e8b363140c26eff19122d8a5/xmltodict-0.12.0-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/58/40/0d783e14112e064127063fbf5d1fe1351723e5dfe9d6daad346a305f6c49/xmltodict-0.12.0.tar.gz"
     },
     {
       "package": "pkg:pypi/zipp@3.6.0",
