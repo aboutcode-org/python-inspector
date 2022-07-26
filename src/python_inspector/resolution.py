@@ -27,7 +27,6 @@ from resolvelib.reporters import BaseReporter
 
 from _packagedcode.pypi import PipRequirementsFileHandler
 from _packagedcode.pypi import PypiWheelHandler
-from _packagedcode.pypi import PythonSdistPkgInfoFile
 from _packagedcode.pypi import PythonSetupPyHandler
 from _packagedcode.pypi import SetupCfgHandler
 from python_inspector import utils_pypi
@@ -51,6 +50,41 @@ def get_response(url):
     if resp.status_code == 200:
         return resp.json()
     return None
+
+
+def get_requirements_from_distribution(handler, path, resolved_requirements):
+    """
+    Return a list of requirements from a distribution.
+    """
+    if not os.path.exists(path):
+        return []
+    deps = list(handler.parse(path))
+    assert len(deps) == 1
+    return list(
+        get_requirements_from_dependencies(
+            deps[0].dependencies, resolved_requirements=resolved_requirements
+        )
+    )
+
+
+def is_dep_resolved_and_in_resolved_requirements(dep, dep_purl_name, resolved_requirements):
+    """
+    Return True if the given ``dep`` is resolved and is in the given ``resolved_requirements``.
+    """
+    return dep.is_resolved and dep_purl_name in resolved_requirements
+
+
+def is_requirements_file_in_setup_files(setup_files):
+    """
+    Return True if the given ``requirements.txt`` is in the given ``setup_files``.
+    """
+    for setup_file in setup_files:
+        if not os.path.exists(setup_file):
+            continue
+        with open(setup_file, encoding="utf-8") as f:
+            if "requirements.txt" in f.read():
+                return True
+    return False
 
 
 def is_valid_version(parsed_version, requirements, identifier, bad_versions):
@@ -114,6 +148,37 @@ def fetch_and_extract_sdist(repos, candidate, python_version):
         raise Exception(f"Unable to extract sdist {sdist}")
 
     return os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file, sdist_file)
+
+
+def get_requirements_from_dependencies(dependencies, resolved_requirements):
+    """
+    Generate parsed requirements for the given ``dependencies``.
+    """
+    for dep in dependencies:
+        if not dep.purl:
+            continue
+
+        if dep.scope != "install":
+            continue
+
+        dep_purl = PackageURL.from_string(dep.purl)
+
+        dep_purl_name = packaging.utils.canonicalize_name(dep_purl.name)
+
+        if is_dep_resolved_and_in_resolved_requirements(
+            dep=dep, dep_purl_name=dep_purl_name, resolved_requirements=resolved_requirements
+        ):
+            yield packaging.requirements.Requirement(
+                f"{str(dep_purl_name)}{str(resolved_requirements[str(dep_purl_name)])}"
+            )
+            continue
+
+        if dep.is_resolved:
+            resolved_requirements[dep_purl_name] = f"=={dep_purl.version}"
+        # skip the requirement starting with -- like
+        # --editable, --requirement
+        if not dep.extracted_requirement.startswith("-"):
+            yield packaging.requirements.Requirement(str(dep.extracted_requirement))
 
 
 def remove_extras(identifier):
@@ -224,76 +289,64 @@ class PythonInputProvider(AbstractProvider):
             repos=self.repos,
             python_version=python_version,
         )
+
+        has_wheels = False
+
         for wheel in wheels:
-            deps = list(
-                PypiWheelHandler.parse(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, wheel))
+            wheel_path = os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, wheel)
+            deps = get_requirements_from_distribution(
+                handler=PypiWheelHandler,
+                path=wheel_path,
+                resolved_requirements=self.resolved_requirements,
             )
-            assert len(deps) == 1
-            deps = deps[0].dependencies
-            for dep in deps:
-                if dep.scope == "install":
-                    yield packaging.requirements.Requirement(str(dep.extracted_requirement))
-
-        sdist_file = fetch_and_extract_sdist(
-            repos=self.repos, candidate=candidate, python_version=python_version
-        )
-
-        if sdist_file:
-            setup_py_path = os.path.join(
-                sdist_file,
-                "setup.py",
-            )
-            setup_cfg_path = os.path.join(
-                sdist_file,
-                "setup.cfg",
-            )
-            pkg_info_path = os.path.dirname(sdist_file)
-            requirement_path = os.path.join(
-                sdist_file,
-                "requirements.txt",
+            if deps:
+                has_wheels = True
+                yield from deps
+        print(has_wheels, candidate)
+        if not has_wheels:
+            sdist_file = fetch_and_extract_sdist(
+                repos=self.repos, candidate=candidate, python_version=python_version
             )
 
-            path_by_sdist_parser = {
-                PythonSdistPkgInfoFile: pkg_info_path,
-                PythonSetupPyHandler: setup_py_path,
-                SetupCfgHandler: setup_cfg_path,
-                PipRequirementsFileHandler: requirement_path,
-            }
+            if sdist_file:
+                setup_py_path = os.path.join(
+                    sdist_file,
+                    "setup.py",
+                )
+                setup_cfg_path = os.path.join(
+                    sdist_file,
+                    "setup.cfg",
+                )
 
-            for handler, path in path_by_sdist_parser.items():
-                if not os.path.exists(path):
-                    continue
+                path_by_sdist_parser = {
+                    PythonSetupPyHandler: setup_py_path,
+                    SetupCfgHandler: setup_cfg_path,
+                }
 
-                deps = list(handler.parse(path))
-                assert len(deps) == 1
+                deps_in_setup = False
 
-                dependencies = deps[0].dependencies
-                for dep in dependencies:
-                    if not dep.purl:
-                        continue
+                for handler, path in path_by_sdist_parser.items():
+                    deps = get_requirements_from_distribution(
+                        handler=handler, path=path, resolved_requirements=self.resolved_requirements
+                    )
+                    if deps:
+                        deps_in_setup = True
+                        yield from deps
 
-                    if dep.scope != "install":
-                        continue
-
-                    dep_purl = PackageURL.from_string(dep.purl)
-
-                    dep_purl_name = packaging.utils.canonicalize_name(dep_purl.name)
-
-                    if self.is_dep_resolved_and_in_resolved_requirements(dep, dep_purl_name):
-                        yield packaging.requirements.Requirement(
-                            f"{str(dep_purl_name)}{str(self.resolved_requirements[str(dep_purl_name)])}"
-                        )
-                        continue
-
-                    if dep.is_resolved:
-                        self.resolved_requirements[dep_purl_name] = f"=={dep_purl.version}"
-                    # skip the requirement starting with -- like
-                    # --editable, --requirement
-                    if not dep.extracted_requirement.startswith("-"):
-                        yield packaging.requirements.Requirement(str(dep.extracted_requirement))
-
-    def is_dep_resolved_and_in_resolved_requirements(self, dep, dep_purl_name):
-        return dep.is_resolved and dep_purl_name in self.resolved_requirements
+                requirement_path = os.path.join(
+                    sdist_file,
+                    "requirements.txt",
+                )
+                if not deps_in_setup and is_requirements_file_in_setup_files(
+                    setup_files=[setup_py_path, setup_cfg_path]
+                ):
+                    deps = get_requirements_from_distribution(
+                        hanlder=PipRequirementsFileHandler,
+                        path=requirement_path,
+                        resolved_requirements=self.resolved_requirements,
+                    )
+                    if deps:
+                        yield from deps
 
     def get_requirements_for_package_from_pypi_json_api(self, purl):
         """
@@ -380,6 +433,7 @@ class PythonInputProvider(AbstractProvider):
                             self.environment.python_version
                         ),
                         "platform_system": self.environment.operating_system.capitalize(),
+                        "sys_platform": self.environment.operating_system,
                     }
                 ):
                     yield r
