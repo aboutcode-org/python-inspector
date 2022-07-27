@@ -52,13 +52,13 @@ def get_response(url):
     return None
 
 
-def get_requirements_from_distribution(handler, path, resolved_requirements):
+def get_requirements_from_distribution(handler, location, resolved_requirements):
     """
     Return a list of requirements from a distribution.
     """
-    if not os.path.exists(path):
+    if not os.path.exists(location):
         return []
-    deps = list(handler.parse(path))
+    deps = list(handler.parse(location))
     assert len(deps) == 1
     return list(
         get_requirements_from_dependencies(
@@ -293,56 +293,58 @@ class PythonInputProvider(AbstractProvider):
         has_wheels = False
 
         for wheel in wheels:
-            wheel_path = os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, wheel)
+            wheel_location = os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, wheel)
             deps = get_requirements_from_distribution(
                 handler=PypiWheelHandler,
-                path=wheel_path,
+                location=wheel_location,
                 resolved_requirements=self.resolved_requirements,
             )
             if deps:
                 has_wheels = True
                 yield from deps
-        print(has_wheels, candidate)
+
         if not has_wheels:
-            sdist_file = fetch_and_extract_sdist(
+            sdist_location = fetch_and_extract_sdist(
                 repos=self.repos, candidate=candidate, python_version=python_version
             )
 
-            if sdist_file:
-                setup_py_path = os.path.join(
-                    sdist_file,
+            if sdist_location:
+                setup_py_location = os.path.join(
+                    sdist_location,
                     "setup.py",
                 )
-                setup_cfg_path = os.path.join(
-                    sdist_file,
+                setup_cfg_location = os.path.join(
+                    sdist_location,
                     "setup.cfg",
                 )
 
-                path_by_sdist_parser = {
-                    PythonSetupPyHandler: setup_py_path,
-                    SetupCfgHandler: setup_cfg_path,
+                location_by_sdist_parser = {
+                    PythonSetupPyHandler: setup_py_location,
+                    SetupCfgHandler: setup_cfg_location,
                 }
 
                 deps_in_setup = False
 
-                for handler, path in path_by_sdist_parser.items():
+                for handler, location in location_by_sdist_parser.items():
                     deps = get_requirements_from_distribution(
-                        handler=handler, path=path, resolved_requirements=self.resolved_requirements
+                        handler=handler,
+                        location=location,
+                        resolved_requirements=self.resolved_requirements,
                     )
                     if deps:
                         deps_in_setup = True
                         yield from deps
 
-                requirement_path = os.path.join(
-                    sdist_file,
+                requirement_location = os.path.join(
+                    sdist_location,
                     "requirements.txt",
                 )
                 if not deps_in_setup and is_requirements_file_in_setup_files(
-                    setup_files=[setup_py_path, setup_cfg_path]
+                    setup_files=[setup_py_location, setup_cfg_location]
                 ):
                     deps = get_requirements_from_distribution(
                         hanlder=PipRequirementsFileHandler,
-                        path=requirement_path,
+                        location=requirement_location,
                         resolved_requirements=self.resolved_requirements,
                     )
                     if deps:

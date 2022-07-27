@@ -281,6 +281,7 @@ def resolve(direct_dependencies, environment, repos=tuple(), as_tree=False, max_
 
     for dependency in direct_dependencies:
         # FIXME We are skipping editable requirements for now
+        # https://github.com/nexB/python-inspector/issues/41
         if dependency.extra_data.get("is_editable"):
             continue
         requirement = Requirement(requirement_string=dependency.extracted_requirement)
