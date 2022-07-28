@@ -285,7 +285,6 @@ def resolve(direct_dependencies, environment, repos=tuple(), as_tree=False, max_
         if dependency.extra_data.get("is_editable"):
             continue
         requirement = Requirement(requirement_string=dependency.extracted_requirement)
-        requirement.is_requirement_resolved = dependency.is_resolved
         requirements.append(requirement)
 
     resolved_dependencies = get_resolved_dependencies(

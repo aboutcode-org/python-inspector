@@ -52,7 +52,7 @@ def get_response(url):
     return None
 
 
-def get_requirements_from_distribution(handler, location, resolved_requirements):
+def get_requirements_from_distribution(handler, location):
     """
     Return a list of requirements from a distribution.
     """
@@ -60,18 +60,7 @@ def get_requirements_from_distribution(handler, location, resolved_requirements)
         return []
     deps = list(handler.parse(location))
     assert len(deps) == 1
-    return list(
-        get_requirements_from_dependencies(
-            deps[0].dependencies, resolved_requirements=resolved_requirements
-        )
-    )
-
-
-def is_dep_resolved_and_in_resolved_requirements(dep, dep_purl_name, resolved_requirements):
-    """
-    Return True if the given ``dep`` is resolved and is in the given ``resolved_requirements``.
-    """
-    return dep.is_resolved and dep_purl_name in resolved_requirements
+    return list(get_requirements_from_dependencies(deps[0].dependencies))
 
 
 def is_requirements_file_in_setup_files(setup_files):
@@ -150,7 +139,7 @@ def fetch_and_extract_sdist(repos, candidate, python_version):
     return os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file, sdist_file)
 
 
-def get_requirements_from_dependencies(dependencies, resolved_requirements):
+def get_requirements_from_dependencies(dependencies):
     """
     Generate parsed requirements for the given ``dependencies``.
     """
@@ -161,20 +150,6 @@ def get_requirements_from_dependencies(dependencies, resolved_requirements):
         if dep.scope != "install":
             continue
 
-        dep_purl = PackageURL.from_string(dep.purl)
-
-        dep_purl_name = packaging.utils.canonicalize_name(dep_purl.name)
-
-        if is_dep_resolved_and_in_resolved_requirements(
-            dep=dep, dep_purl_name=dep_purl_name, resolved_requirements=resolved_requirements
-        ):
-            yield packaging.requirements.Requirement(
-                f"{str(dep_purl_name)}{str(resolved_requirements[str(dep_purl_name)])}"
-            )
-            continue
-
-        if dep.is_resolved:
-            resolved_requirements[dep_purl_name] = f"=={dep_purl.version}"
         # skip the requirement starting with -- like
         # --editable, --requirement
         if not dep.extracted_requirement.startswith("-"):
@@ -191,13 +166,12 @@ def remove_extras(identifier):
 
 
 class PythonInputProvider(AbstractProvider):
-    def __init__(self, environment=None, repos=tuple(), resolved_requirements=tuple()):
+    def __init__(self, environment=None, repos=tuple()):
         self.environment = environment
         self.repos = repos or []
         self.versions_by_package = {}
         self.dependencies_by_purl = {}
         self.wheel_or_sdist_by_package = {}
-        self.resolved_requirements = resolved_requirements
 
     def identify(self, requirement_or_candidate):
         """Given a requirement, return an identifier for it. Overridden."""
@@ -297,7 +271,6 @@ class PythonInputProvider(AbstractProvider):
             deps = get_requirements_from_distribution(
                 handler=PypiWheelHandler,
                 location=wheel_location,
-                resolved_requirements=self.resolved_requirements,
             )
             if deps:
                 has_wheels = True
@@ -329,7 +302,6 @@ class PythonInputProvider(AbstractProvider):
                     deps = get_requirements_from_distribution(
                         handler=handler,
                         location=location,
-                        resolved_requirements=self.resolved_requirements,
                     )
                     if deps:
                         deps_in_setup = True
@@ -345,7 +317,6 @@ class PythonInputProvider(AbstractProvider):
                     deps = get_requirements_from_distribution(
                         hanlder=PipRequirementsFileHandler,
                         location=requirement_location,
-                        resolved_requirements=self.resolved_requirements,
                     )
                     if deps:
                         yield from deps
@@ -577,15 +548,8 @@ def get_resolved_dependencies(
     Used the provided ``repos`` list of PypiSimpleRepository.
     If empty, use instead the PyPI.org JSON API exclusively instead
     """
-    resolved_requirements = {
-        packaging.utils.canonicalize_name(r.name): r.specifier
-        for r in requirements
-        if getattr(r, "is_requirement_resolved", False)
-    }
     resolver = Resolver(
-        provider=PythonInputProvider(
-            environment=environment, repos=repos, resolved_requirements=resolved_requirements
-        ),
+        provider=PythonInputProvider(environment=environment, repos=repos),
         reporter=BaseReporter(),
     )
     results = resolver.resolve(requirements=requirements, max_rounds=max_rounds)
