@@ -60,7 +60,7 @@ def get_requirements_from_distribution(handler, location):
         return []
     deps = list(handler.parse(location))
     assert len(deps) == 1
-    return list(get_requirements_from_dependencies(deps[0].dependencies))
+    return list(get_requirements_from_dependencies(dependencies=deps[0].dependencies))
 
 
 def is_requirements_file_in_setup_files(setup_files):
@@ -210,7 +210,7 @@ class PythonInputProvider(AbstractProvider):
         versions = []
         for version, package in repo.get_package_versions(name).items():
             python_version = packaging.version.parse(
-                get_python_version_from_env_tag(self.environment.python_version)
+                get_python_version_from_env_tag(python_version=self.environment.python_version)
             )
             wheels = list(package.get_supported_wheels(environment=self.environment))
             if wheels:
@@ -253,7 +253,7 @@ class PythonInputProvider(AbstractProvider):
         Return requirements for a package from the simple repositories.
         """
         python_version = packaging.version.parse(
-            get_python_version_from_env_tag(self.environment.python_version)
+            get_python_version_from_env_tag(python_version=self.environment.python_version)
         )
 
         wheels = utils_pypi.download_wheel(
@@ -315,7 +315,7 @@ class PythonInputProvider(AbstractProvider):
                     setup_files=[setup_py_location, setup_cfg_location]
                 ):
                     deps = get_requirements_from_distribution(
-                        hanlder=PipRequirementsFileHandler,
+                        handler=PipRequirementsFileHandler,
                         location=requirement_location,
                     )
                     if deps:
@@ -343,7 +343,12 @@ class PythonInputProvider(AbstractProvider):
         """
         for version in all_versions:
             parsed_version = packaging.version.parse(version)
-            if not is_valid_version(parsed_version, requirements, identifier, bad_versions):
+            if not is_valid_version(
+                parsed_version=parsed_version,
+                requirements=requirements,
+                identifier=identifier,
+                bad_versions=bad_versions,
+            ):
                 continue
             yield Candidate(name=name, version=parsed_version, extras=extras)
 
@@ -351,17 +356,17 @@ class PythonInputProvider(AbstractProvider):
         """
         Yield candidates for the given identifier, requirements and incompatibilities
         """
-        name = remove_extras(identifier)
+        name = remove_extras(identifier=identifier)
         bad_versions = {c.version for c in incompatibilities[identifier]}
         extras = {e for r in requirements[identifier] for e in r.extras}
         if not self.repos:
-            all_versions = self.get_versions_for_package(name)
+            all_versions = self.get_versions_for_package(name=name)
             yield from self.get_candidates(
                 all_versions, requirements, identifier, bad_versions, name, extras
             )
         else:
             for repo in self.repos:
-                all_versions = self.get_versions_for_package(name, repo)
+                all_versions = self.get_versions_for_package(name=name, repo=repo)
                 yield from self.get_candidates(
                     all_versions, requirements, identifier, bad_versions, name, extras
                 )
@@ -395,7 +400,7 @@ class PythonInputProvider(AbstractProvider):
             version=str(candidate.version),
         )
 
-        for r in self.get_requirements_for_package(purl, candidate):
+        for r in self.get_requirements_for_package(purl=purl, candidate=candidate):
             if r.marker is None:
                 yield r
             else:
@@ -403,7 +408,7 @@ class PythonInputProvider(AbstractProvider):
                     {
                         "extra": "",
                         "python_version": get_python_version_from_env_tag(
-                            self.environment.python_version
+                            python_version=self.environment.python_version
                         ),
                         "platform_system": self.environment.operating_system.capitalize(),
                         "sys_platform": self.environment.operating_system,
