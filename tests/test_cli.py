@@ -46,13 +46,12 @@ def test_cli_with_default_urls():
 def test_pdt_output():
     requirements_file = test_env.get_test_loc("pdt.txt")
     expected_file = test_env.get_test_loc("pdt-expected.json", must_exist=False)
-    extra_options = [
-        "--json-pdt",
-    ]
+    extra_options = []
     check_requirements_resolution(
         requirements_file=requirements_file,
         expected_file=expected_file,
         extra_options=extra_options,
+        pdt_output=True,
         regen=REGEN_TEST_FIXTURES,
     )
 
@@ -184,15 +183,17 @@ def check_requirements_resolution(
     expected_file,
     extra_options=tuple(),
     regen=REGEN_TEST_FIXTURES,
+    pdt_output=False,
 ):
     result_file = test_env.get_temp_file("json")
-    options = ["--requirement", requirements_file, "--json", result_file]
+    if pdt_output:
+        options = ["--requirement", requirements_file, "--json-pdt", result_file]
+    else:
+        options = ["--requirement", requirements_file, "--json", result_file]
     options.extend(extra_options)
     run_cli(options=options)
     check_json_results(
-        result_file=result_file,
-        expected_file=expected_file,
-        regen=regen,
+        result_file=result_file, expected_file=expected_file, regen=regen, clean=not pdt_output
     )
 
 

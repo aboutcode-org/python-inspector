@@ -99,7 +99,7 @@ PYPI_SIMPLE_URL = "https://pypi.org/simple"
     "--json",
     "json_output",
     type=FileOptionType(mode="w", encoding="utf-8", lazy=True),
-    required=True,
+    required=False,
     metavar="FILE",
     help="Write output as pretty-printed JSON to FILE. "
     "Use the special '-' file name to print results on screen/stdout.",
@@ -107,7 +107,9 @@ PYPI_SIMPLE_URL = "https://pypi.org/simple"
 @click.option(
     "--json-pdt",
     "pdt_output",
-    is_flag=True,
+    type=FileOptionType(mode="w", encoding="utf-8", lazy=True),
+    required=False,
+    metavar="FILE",
     help="Write output as pretty-printed JSON to FILE. "
     "Use the special '-' file name to print results on screen/stdout.",
 )
@@ -169,6 +171,11 @@ def resolve_dependencies(
 
         dad --spec "flask==2.1.2" --json -
     """
+    if not (json_output or pdt_output):
+        if debug:
+            click.secho("No output file specified. Use --json or --json-pdt.", err=True)
+        return
+
     if debug:
         click.secho(f"Resolving dependencies...")
 
@@ -271,12 +278,22 @@ def resolve_dependencies(
         errors=[],
     )
 
-    write_output(
-        headers=headers,
-        requirements=requirements,
-        resolved_dependencies=resolved_dependencies,
-        json_output=json_output,
-    )
+    if json_output:
+        write_output(
+            headers=headers,
+            requirements=requirements,
+            resolved_dependencies=resolved_dependencies,
+            json_output=json_output,
+        )
+
+    if pdt_output:
+        write_output(
+            headers=headers,
+            requirements=requirements,
+            resolved_dependencies=resolved_dependencies,
+            json_output=pdt_output,
+            pdt_output=True,
+        )
 
     if debug:
         click.secho("done!")
@@ -311,6 +328,8 @@ def resolve(
         pdt_output=pdt_output,
     )
 
+    print(resolved_dependencies)
+
     initial_requirements = [d.to_dict() for d in direct_dependencies]
 
     return initial_requirements, resolved_dependencies
@@ -333,11 +352,14 @@ def write_output(headers, requirements, resolved_dependencies, json_output):
     Write headers, requirements and resolved_dependencies as JSON to ``json_output``.
     Return the output data.
     """
-    output = dict(
-        headers=headers,
-        requirements=requirements,
-        resolved_dependencies=resolved_dependencies,
-    )
+    if not pdt_output:
+        output = dict(
+            headers=headers,
+            requirements=requirements,
+            resolved_dependencies=resolved_dependencies,
+        )
+    else:
+        output = resolved_dependencies
 
     json.dump(output, json_output, indent=2)
     return output

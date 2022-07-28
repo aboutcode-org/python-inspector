@@ -630,6 +630,10 @@ def format_resolution(
 def pdt_dfs(mapping, graph, src):
     """
     Return a nested mapping of dependencies.
+
+    This takes ``mapping`` and ``graph`` as input. And do a dfs
+    on the ``graph`` to get the dependencies of the given ``src``.
+    And use the ``mapping`` to get the version of the given dependency.
     """
     children = list(graph.iter_children(src))
     if not children:
