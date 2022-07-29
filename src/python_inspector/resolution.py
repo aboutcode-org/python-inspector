@@ -644,15 +644,8 @@ def get_resolved_dependencies(
     If empty, use instead the PyPI.org JSON API exclusively instead
     """
     try:
-        resolved_requirements = {
-            packaging.utils.canonicalize_name(r.name): r.specifier
-            for r in requirements
-            if getattr(r, "is_requirement_resolved", False)
-        }
         resolver = Resolver(
-            provider=PythonInputProvider(
-                environment=environment, repos=repos, resolved_requirements=resolved_requirements
-            ),
+            provider=PythonInputProvider(environment=environment, repos=repos),
             reporter=BaseReporter(),
         )
         results = resolver.resolve(requirements=requirements, max_rounds=max_rounds)
@@ -660,5 +653,6 @@ def get_resolved_dependencies(
         return results
     except Exception as e:
         if debug:
+            import click
+
             click.secho(f"{e!r}", err=True)
-        return None
