@@ -11,11 +11,14 @@
 
 import json
 import sys
+from typing import List
 
 import click
 from packaging.requirements import Requirement
 from tinynetrc import Netrc
 
+from _packagedcode.models import DependentPackage
+from _packagedcode.pypi import can_process_dependent_package
 from python_inspector import dependencies
 from python_inspector import utils
 from python_inspector import utils_pypi
@@ -277,15 +280,7 @@ def resolve(direct_dependencies, environment, repos=tuple(), as_tree=False, max_
     If empty, use instead the PyPI.org JSON API exclusively.
     """
 
-    requirements = []
-
-    for dependency in direct_dependencies:
-        # FIXME We are skipping editable requirements for now
-        # https://github.com/nexB/python-inspector/issues/41
-        if dependency.extra_data.get("is_editable"):
-            continue
-        requirement = Requirement(requirement_string=dependency.extracted_requirement)
-        requirements.append(requirement)
+    requirements = list(get_requirements_from_direct_dependencies(direct_dependencies))
 
     resolved_dependencies = get_resolved_dependencies(
         requirements=requirements,
@@ -298,6 +293,18 @@ def resolve(direct_dependencies, environment, repos=tuple(), as_tree=False, max_
     initial_requirements = [d.to_dict() for d in direct_dependencies]
 
     return initial_requirements, resolved_dependencies
+
+
+def get_requirements_from_direct_dependencies(
+    direct_dependencies: List[DependentPackage],
+) -> List[Requirement]:
+    for dependency in direct_dependencies:
+        # FIXME We are skipping editable requirements
+        # and other pip options for now
+        # https://github.com/nexB/python-inspector/issues/41
+        if not can_process_dependent_package(dependency):
+            continue
+        yield Requirement(requirement_string=dependency.extracted_requirement)
 
 
 def write_output(headers, requirements, resolved_dependencies, json_output):

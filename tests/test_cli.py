@@ -16,6 +16,8 @@ import pytest
 from click.testing import CliRunner
 from commoncode.testcase import FileDrivenTesting
 
+from _packagedcode import models
+from python_inspector.resolve_cli import get_requirements_from_direct_dependencies
 from python_inspector.resolve_cli import resolve_dependencies
 
 # Used for tests to regenerate fixtures with regen=True
@@ -244,3 +246,65 @@ output:
 """
         assert result.exit_code == expected_rc, error
     return result
+
+
+def test_get_requirements_from_direct_dependencies():
+    direct_dependencies = [
+        models.DependentPackage(
+            purl="pkg:pypi/django",
+            scope="install",
+            is_runtime=True,
+            is_optional=False,
+            is_resolved=False,
+            extracted_requirement="django>=1.11.11",
+            extra_data=dict(
+                is_editable=False,
+                link=None,
+                hash_options=[],
+                is_constraint=False,
+                is_archive=False,
+                is_wheel=False,
+                is_url=False,
+                is_vcs_url=False,
+                is_name_at_url=False,
+                is_local_path=False,
+            ),
+        )
+    ]
+
+    requirements = [str(r) for r in get_requirements_from_direct_dependencies(direct_dependencies)]
+
+    assert requirements == ["django>=1.11.11"]
+
+
+def test_get_requirements_from_direct_dependencies_with_empty_list():
+    assert list(get_requirements_from_direct_dependencies(direct_dependencies=[])) == []
+
+
+def test_get_requirements_from_direct_dependencies_with_editable_requirements():
+    direct_dependencies = [
+        models.DependentPackage(
+            purl="pkg:pypi/django",
+            scope="install",
+            is_runtime=True,
+            is_optional=False,
+            is_resolved=False,
+            extracted_requirement="django>=1.11.11",
+            extra_data=dict(
+                is_editable=True,
+                link=None,
+                hash_options=[],
+                is_constraint=False,
+                is_archive=False,
+                is_wheel=False,
+                is_url=False,
+                is_vcs_url=False,
+                is_name_at_url=False,
+                is_local_path=False,
+            ),
+        )
+    ]
+
+    requirements = [str(r) for r in get_requirements_from_direct_dependencies(direct_dependencies)]
+
+    assert requirements == []

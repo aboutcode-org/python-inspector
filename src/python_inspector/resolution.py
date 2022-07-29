@@ -10,26 +10,36 @@
 import operator
 import os
 import tarfile
+from typing import Dict
+from typing import Generator
 from typing import List
 from typing import NamedTuple
 from typing import Sequence
+from typing import Union
 from zipfile import ZipFile
 
-import packaging.requirements
 import packaging.utils
-import packaging.version
 import requests
 from packageurl import PackageURL
 from packaging.requirements import Requirement
+from packaging.version import LegacyVersion
+from packaging.version import Version
+from packaging.version import parse as parse_version
 from resolvelib import AbstractProvider
 from resolvelib import Resolver
 from resolvelib.reporters import BaseReporter
+from resolvelib.structs import DirectedGraph
 
+from _packagedcode.models import DependentPackage
+from _packagedcode.pypi import BasePypiHandler
 from _packagedcode.pypi import PipRequirementsFileHandler
 from _packagedcode.pypi import PypiWheelHandler
 from _packagedcode.pypi import PythonSetupPyHandler
 from _packagedcode.pypi import SetupCfgHandler
+from _packagedcode.pypi import can_process_dependent_package
 from python_inspector import utils_pypi
+from python_inspector.utils_pypi import Environment
+from python_inspector.utils_pypi import PypiSimpleRepository
 
 
 class Candidate(NamedTuple):
@@ -42,17 +52,24 @@ class Candidate(NamedTuple):
     extras: str
 
 
-def get_response(url):
+class Result(NamedTuple):
+    mapping: Dict
+    graph: DirectedGraph
+    criteria: Dict
+
+
+def get_response(url: str) -> Dict:
     """
     Return a response for the given url.
     """
     resp = requests.get(url)
     if resp.status_code == 200:
         return resp.json()
-    return None
 
 
-def get_requirements_from_distribution(handler, location):
+def get_requirements_from_distribution(
+    handler: BasePypiHandler, location: str
+) -> List[Requirement]:
     """
     Return a list of requirements from a distribution.
     """
@@ -63,20 +80,27 @@ def get_requirements_from_distribution(handler, location):
     return list(get_requirements_from_dependencies(dependencies=deps[0].dependencies))
 
 
-def is_requirements_file_in_setup_files(setup_files):
+def is_requirements_file_in_setup_files(setup_files: List[str]) -> bool:
     """
-    Return True if the given ``requirements.txt`` is in the given ``setup_files``.
+    Return True if the string ``requirements.txt`` is found in any of the ``setup_files`` location
+    strings to either a setup.py or setup.cfg file.
     """
     for setup_file in setup_files:
         if not os.path.exists(setup_file):
             continue
         with open(setup_file, encoding="utf-8") as f:
+            # TODO also consider other file names
             if "requirements.txt" in f.read():
                 return True
     return False
 
 
-def is_valid_version(parsed_version, requirements, identifier, bad_versions):
+def is_valid_version(
+    parsed_version: Union[LegacyVersion, Version],
+    requirements: Dict,
+    identifier: str,
+    bad_versions: List[Version],
+) -> bool:
     """
     Return True if the parsed_version is valid for the given identifier.
     """
@@ -88,7 +112,7 @@ def is_valid_version(parsed_version, requirements, identifier, bad_versions):
     return True
 
 
-def get_python_version_from_env_tag(python_version: str):
+def get_python_version_from_env_tag(python_version: str) -> str:
     """
     >>> assert get_python_version_from_env_tag("310") == "3.10"
     >>> assert get_python_version_from_env_tag("39") == "3.9"
@@ -99,7 +123,9 @@ def get_python_version_from_env_tag(python_version: str):
     return python_version
 
 
-def fetch_and_extract_sdist(repos, candidate, python_version):
+def fetch_and_extract_sdist(
+    repos: List[PypiSimpleRepository], candidate: Candidate, python_version: str
+) -> Union[str, None]:
     """
     Fetch and extract the source distribution (sdist) for the ``candidate`` Candidate
     from the `repos` list of PyPiRepository
@@ -139,7 +165,7 @@ def fetch_and_extract_sdist(repos, candidate, python_version):
     return os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file, sdist_file)
 
 
-def get_requirements_from_dependencies(dependencies):
+def get_requirements_from_dependencies(dependencies: List[DependentPackage]) -> List[Requirement]:
     """
     Generate parsed requirements for the given ``dependencies``.
     """
@@ -150,13 +176,14 @@ def get_requirements_from_dependencies(dependencies):
         if dep.scope != "install":
             continue
 
-        # skip the requirement starting with -- like
-        # --editable, --requirement
-        if not dep.extracted_requirement.startswith("-"):
-            yield packaging.requirements.Requirement(str(dep.extracted_requirement))
+        # FIXME We are skipping editable requirements
+        # and other pip options for now
+        # https://github.com/nexB/python-inspector/issues/41
+        if can_process_dependent_package(dep):
+            yield Requirement(str(dep.extracted_requirement))
 
 
-def remove_extras(identifier):
+def remove_extras(identifier: str) -> str:
     """
     Return the identifier without extras.
     >>> assert remove_extras("foo[bar]") == "foo"
@@ -173,7 +200,7 @@ class PythonInputProvider(AbstractProvider):
         self.dependencies_by_purl = {}
         self.wheel_or_sdist_by_package = {}
 
-    def identify(self, requirement_or_candidate):
+    def identify(self, requirement_or_candidate: Union[Candidate, Requirement]) -> str:
         """Given a requirement, return an identifier for it. Overridden."""
         name = packaging.utils.canonicalize_name(requirement_or_candidate.name)
         if requirement_or_candidate.extras:
@@ -194,7 +221,9 @@ class PythonInputProvider(AbstractProvider):
         transitive = all(p is not None for _, p in information[identifier])
         return transitive, identifier
 
-    def get_versions_for_package(self, name, repo=None):
+    def get_versions_for_package(
+        self, name: str, repo: Union[List[PypiSimpleRepository], None] = None
+    ) -> List[Version]:
         """
         Return a list of versions for a package.
         """
@@ -203,13 +232,15 @@ class PythonInputProvider(AbstractProvider):
         else:
             return self.get_versions_for_package_from_pypi_json_api(name)
 
-    def get_versions_for_package_from_repo(self, name, repo):
+    def get_versions_for_package_from_repo(
+        self, name: str, repo: PypiSimpleRepository
+    ) -> List[Version]:
         """
         Return a list of versions for a package name from a repo
         """
         versions = []
         for version, package in repo.get_package_versions(name).items():
-            python_version = packaging.version.parse(
+            python_version = parse_version(
                 get_python_version_from_env_tag(python_version=self.environment.python_version)
             )
             wheels = list(package.get_supported_wheels(environment=self.environment))
@@ -225,7 +256,7 @@ class PythonInputProvider(AbstractProvider):
                     versions.append(version)
         return versions
 
-    def get_versions_for_package_from_pypi_json_api(self, name):
+    def get_versions_for_package_from_pypi_json_api(self, name: str) -> List[Version]:
         """
         Return a list of versions for a package name from the PyPI.org JSON API
         """
@@ -239,7 +270,9 @@ class PythonInputProvider(AbstractProvider):
         versions = self.versions_by_package[name]
         return versions
 
-    def get_requirements_for_package(self, purl, candidate):
+    def get_requirements_for_package(
+        self, purl: PackageURL, candidate: Candidate
+    ) -> Generator[Requirement, None, None]:
         """
         Yield requirements for a package.
         """
@@ -248,11 +281,13 @@ class PythonInputProvider(AbstractProvider):
         else:
             return self.get_requirements_for_package_from_pypi_json_api(purl)
 
-    def get_requirements_for_package_from_pypi_simple(self, candidate):
+    def get_requirements_for_package_from_pypi_simple(
+        self, candidate: Candidate
+    ) -> List[Requirement]:
         """
         Return requirements for a package from the simple repositories.
         """
-        python_version = packaging.version.parse(
+        python_version = parse_version(
             get_python_version_from_env_tag(python_version=self.environment.python_version)
         )
 
@@ -321,7 +356,9 @@ class PythonInputProvider(AbstractProvider):
                     if deps:
                         yield from deps
 
-    def get_requirements_for_package_from_pypi_json_api(self, purl):
+    def get_requirements_for_package_from_pypi_json_api(
+        self, purl: PackageURL
+    ) -> List[Requirement]:
         """
         Return requirements for a package from the PyPI.org JSON API
         """
@@ -335,14 +372,22 @@ class PythonInputProvider(AbstractProvider):
             requires_dist = info.get("requires_dist") or []
             self.dependencies_by_purl[str(purl)] = requires_dist
         for dependency in self.dependencies_by_purl[str(purl)]:
-            yield packaging.requirements.Requirement(dependency)
+            yield Requirement(dependency)
 
-    def get_candidates(self, all_versions, requirements, identifier, bad_versions, name, extras):
+    def get_candidates(
+        self,
+        all_versions: List[str],
+        requirements: List[Requirement],
+        identifier: str,
+        bad_versions: List[str],
+        name: str,
+        extras: Dict,
+    ) -> Generator[Candidate, None, None]:
         """
         Generate candidates for the given identifier. Overridden.
         """
         for version in all_versions:
-            parsed_version = packaging.version.parse(version)
+            parsed_version = parse_version(version)
             if not is_valid_version(
                 parsed_version=parsed_version,
                 requirements=requirements,
@@ -352,7 +397,12 @@ class PythonInputProvider(AbstractProvider):
                 continue
             yield Candidate(name=name, version=parsed_version, extras=extras)
 
-    def _iter_matches(self, identifier, requirements, incompatibilities):
+    def _iter_matches(
+        self,
+        identifier: str,
+        requirements: List[Requirement],
+        incompatibilities: Dict,
+    ) -> Generator[Candidate, None, None]:
         """
         Yield candidates for the given identifier, requirements and incompatibilities
         """
@@ -371,7 +421,12 @@ class PythonInputProvider(AbstractProvider):
                     all_versions, requirements, identifier, bad_versions, name, extras
                 )
 
-    def find_matches(self, identifier, requirements, incompatibilities):
+    def find_matches(
+        self,
+        identifier: str,
+        requirements: List[Requirement],
+        incompatibilities: Dict,
+    ) -> List[Candidate]:
         """Find all possible candidates that satisfy given constraints. Overridden."""
         candidates = sorted(
             self._iter_matches(identifier, requirements, incompatibilities),
@@ -380,11 +435,11 @@ class PythonInputProvider(AbstractProvider):
         )
         return candidates
 
-    def is_satisfied_by(self, requirement, candidate):
+    def is_satisfied_by(self, requirement: Requirement, candidate: Candidate) -> bool:
         """Whether the given requirement can be satisfied by a candidate. Overridden."""
         return candidate.version in requirement.specifier
 
-    def _iter_dependencies(self, candidate):
+    def _iter_dependencies(self, candidate: Candidate) -> Generator[Requirement, None, None]:
         """
         Yield dependencies for the given candidate.
         """
@@ -392,7 +447,7 @@ class PythonInputProvider(AbstractProvider):
         # TODO: handle extras https://github.com/nexB/python-inspector/issues/10
         if candidate.extras:
             r = f"{name}=={candidate.version}"
-            yield packaging.requirements.Requirement(r)
+            yield Requirement(r)
 
         purl = PackageURL(
             type="pypi",
@@ -416,12 +471,17 @@ class PythonInputProvider(AbstractProvider):
                 ):
                     yield r
 
-    def get_dependencies(self, candidate):
+    def get_dependencies(self, candidate: Candidate) -> List[Requirement]:
         """Get dependencies of a candidate. Overridden."""
         return list(self._iter_dependencies(candidate))
 
 
-def get_wheel_download_urls(purl, repos, environment, python_version):
+def get_wheel_download_urls(
+    purl: PackageURL,
+    repos: List[PypiSimpleRepository],
+    environment: Environment,
+    python_version: str,
+) -> List[str]:
     """
     Return a list of download urls for the given purl.
     """
@@ -436,7 +496,9 @@ def get_wheel_download_urls(purl, repos, environment, python_version):
             yield wheel.download_url
 
 
-def get_sdist_download_url(purl, repos, python_version):
+def get_sdist_download_url(
+    purl: PackageURL, repos: List[PypiSimpleRepository], python_version: str
+) -> str:
     """
     Return a list of download urls for the given purl.
     """
@@ -451,7 +513,7 @@ def get_sdist_download_url(purl, repos, python_version):
             return sdist.download_url
 
 
-def get_all_srcs(mapping, graph):
+def get_all_srcs(mapping: Dict, graph: DirectedGraph):
     """
     Return a list of all sources in the graph.
     """
@@ -460,7 +522,7 @@ def get_all_srcs(mapping, graph):
             yield name
 
 
-def dfs(mapping, graph, src):
+def dfs(mapping: Dict, graph: DirectedGraph, src: str):
     """
     Return a nested mapping of dependencies.
     """
@@ -479,7 +541,9 @@ def dfs(mapping, graph, src):
     )
 
 
-def format_resolution(results, environment, repos, as_tree=False):
+def format_resolution(
+    results: Result, environment: Environment, repos: List[PypiSimpleRepository], as_tree=False
+):
     """
     Return a formatted resolution either as a tree or parent/children.
     """
@@ -540,8 +604,8 @@ def format_resolution(results, environment, repos, as_tree=False):
 
 def get_resolved_dependencies(
     requirements: List[Requirement],
-    environment: utils_pypi.Environment = None,
-    repos: Sequence[utils_pypi.PypiSimpleRepository] = tuple(),
+    environment: Environment = None,
+    repos: Sequence[PypiSimpleRepository] = tuple(),
     as_tree: bool = False,
     max_rounds: int = 200000,
 ):

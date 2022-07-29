@@ -10,6 +10,7 @@
 
 import ast
 from configparser import ConfigParser
+import copy
 import json
 import logging
 from pathlib import Path
@@ -970,6 +971,23 @@ def get_requirements_txt_dependencies(location, include_nested=False):
         )
 
     return dependent_packages, extra_data
+
+
+def can_process_dependent_package(dep: models.DependentPackage):
+    """
+    Return True if we can process the dependent package
+    typically anything that's not a plain standard specifier
+    can not be processed such as an editable requirement
+    """
+    # copying dep.extra_data to avoid mutating the original
+    requirement_flags = copy.copy(dep.extra_data) or {}
+    requirement_flags.pop("hash_options", None)
+    if not requirement_flags:
+        return True
+    # we can not process the requirement if it has any flag set 
+    # because this means it is not a standard specifier
+    # but rather some pip specific option of sorts
+    return not any(requirement_flags.values())
 
 
 def get_attribute(metainfo, name, multiple=False):
