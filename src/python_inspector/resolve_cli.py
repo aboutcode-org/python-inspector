@@ -347,7 +347,7 @@ def get_requirements_from_direct_dependencies(
         yield Requirement(requirement_string=dependency.extracted_requirement)
 
 
-def write_output(headers, requirements, resolved_dependencies, json_output):
+def write_output(headers, requirements, resolved_dependencies, json_output, pdt_output=False):
     """
     Write headers, requirements and resolved_dependencies as JSON to ``json_output``.
     Return the output data.

@@ -1,0 +1,274 @@
+[
+  {
+    "key": "aboutcode-toolkit",
+    "package_name": "aboutcode-toolkit",
+    "installed_version": "7.0.2",
+    "dependencies": [
+      {
+        "key": "attrs",
+        "package_name": "attrs",
+        "installed_version": "21.4.0",
+        "dependencies": []
+      },
+      {
+        "key": "boolean-py",
+        "package_name": "boolean-py",
+        "installed_version": "4.0",
+        "dependencies": []
+      },
+      {
+        "key": "certifi",
+        "package_name": "certifi",
+        "installed_version": "2022.5.18.1",
+        "dependencies": []
+      },
+      {
+        "key": "click",
+        "package_name": "click",
+        "installed_version": "8.0.4",
+        "dependencies": []
+      },
+      {
+        "key": "jinja2",
+        "package_name": "jinja2",
+        "installed_version": "3.1.2",
+        "dependencies": [
+          {
+            "key": "markupsafe",
+            "package_name": "markupsafe",
+            "installed_version": "2.1.1",
+            "dependencies": []
+          }
+        ]
+      },
+      {
+        "key": "license-expression",
+        "package_name": "license-expression",
+        "installed_version": "30.0.0",
+        "dependencies": [
+          {
+            "key": "boolean-py",
+            "package_name": "boolean-py",
+            "installed_version": "4.0",
+            "dependencies": []
+          }
+        ]
+      },
+      {
+        "key": "openpyxl",
+        "package_name": "openpyxl",
+        "installed_version": "3.0.10",
+        "dependencies": [
+          {
+            "key": "et-xmlfile",
+            "package_name": "et-xmlfile",
+            "installed_version": "1.1.0",
+            "dependencies": []
+          }
+        ]
+      },
+      {
+        "key": "packageurl-python",
+        "package_name": "packageurl-python",
+        "installed_version": "0.9.9",
+        "dependencies": []
+      },
+      {
+        "key": "saneyaml",
+        "package_name": "saneyaml",
+        "installed_version": "0.5.2",
+        "dependencies": [
+          {
+            "key": "pyyaml",
+            "package_name": "pyyaml",
+            "installed_version": "6.0",
+            "dependencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "colorama",
+    "package_name": "colorama",
+    "installed_version": "0.4.4",
+    "dependencies": []
+  },
+  {
+    "key": "commoncode",
+    "package_name": "commoncode",
+    "installed_version": "30.2.0",
+    "dependencies": [
+      {
+        "key": "attrs",
+        "package_name": "attrs",
+        "installed_version": "21.4.0",
+        "dependencies": []
+      },
+      {
+        "key": "beautifulsoup4",
+        "package_name": "beautifulsoup4",
+        "installed_version": "4.11.1",
+        "dependencies": [
+          {
+            "key": "soupsieve",
+            "package_name": "soupsieve",
+            "installed_version": "2.3.2.post1",
+            "dependencies": []
+          }
+        ]
+      },
+      {
+        "key": "click",
+        "package_name": "click",
+        "installed_version": "8.0.4",
+        "dependencies": []
+      },
+      {
+        "key": "intbitset",
+        "package_name": "intbitset",
+        "installed_version": "3.0.1",
+        "dependencies": []
+      },
+      {
+        "key": "requests",
+        "package_name": "requests",
+        "installed_version": "2.27.1",
+        "dependencies": [
+          {
+            "key": "certifi",
+            "package_name": "certifi",
+            "installed_version": "2022.5.18.1",
+            "dependencies": []
+          },
+          {
+            "key": "charset-normalizer",
+            "package_name": "charset-normalizer",
+            "installed_version": "2.0.12",
+            "dependencies": []
+          },
+          {
+            "key": "idna",
+            "package_name": "idna",
+            "installed_version": "3.3",
+            "dependencies": []
+          },
+          {
+            "key": "urllib3",
+            "package_name": "urllib3",
+            "installed_version": "1.26.9",
+            "dependencies": []
+          }
+        ]
+      },
+      {
+        "key": "saneyaml",
+        "package_name": "saneyaml",
+        "installed_version": "0.5.2",
+        "dependencies": [
+          {
+            "key": "pyyaml",
+            "package_name": "pyyaml",
+            "installed_version": "6.0",
+            "dependencies": []
+          }
+        ]
+      },
+      {
+        "key": "text-unidecode",
+        "package_name": "text-unidecode",
+        "installed_version": "1.3",
+        "dependencies": []
+      }
+    ]
+  },
+  {
+    "key": "dparse2",
+    "package_name": "dparse2",
+    "installed_version": "0.6.1",
+    "dependencies": [
+      {
+        "key": "packaging",
+        "package_name": "packaging",
+        "installed_version": "21.3",
+        "dependencies": [
+          {
+            "key": "pyparsing",
+            "package_name": "pyparsing",
+            "installed_version": "3.0.9",
+            "dependencies": []
+          }
+        ]
+      },
+      {
+        "key": "pyyaml",
+        "package_name": "pyyaml",
+        "installed_version": "6.0",
+        "dependencies": []
+      },
+      {
+        "key": "toml",
+        "package_name": "toml",
+        "installed_version": "0.10.2",
+        "dependencies": []
+      }
+    ]
+  },
+  {
+    "key": "importlib-metadata",
+    "package_name": "importlib-metadata",
+    "installed_version": "4.8.3",
+    "dependencies": [
+      {
+        "key": "zipp",
+        "package_name": "zipp",
+        "installed_version": "3.6.0",
+        "dependencies": []
+      }
+    ]
+  },
+  {
+    "key": "pip-requirements-parser",
+    "package_name": "pip-requirements-parser",
+    "installed_version": "31.2.0",
+    "dependencies": [
+      {
+        "key": "packaging",
+        "package_name": "packaging",
+        "installed_version": "21.3",
+        "dependencies": [
+          {
+            "key": "pyparsing",
+            "package_name": "pyparsing",
+            "installed_version": "3.0.9",
+            "dependencies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "pkginfo2",
+    "package_name": "pkginfo2",
+    "installed_version": "30.0.0",
+    "dependencies": []
+  },
+  {
+    "key": "resolvelib",
+    "package_name": "resolvelib",
+    "installed_version": "0.8.1",
+    "dependencies": []
+  },
+  {
+    "key": "typing",
+    "package_name": "typing",
+    "installed_version": "3.6.6",
+    "dependencies": []
+  },
+  {
+    "key": "typing-extensions",
+    "package_name": "typing-extensions",
+    "installed_version": "4.1.1",
+    "dependencies": []
+  }
+]
