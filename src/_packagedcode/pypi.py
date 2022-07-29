@@ -980,7 +980,7 @@ def can_process_dependent_package(dep: models.DependentPackage):
     can not be processed such as an editable requirement
     """
     # copying dep.extra_data to avoid mutating the original
-    requirement_flags = copy.copy(dep.extra_data) or {}
+    requirement_flags = copy.copy(dep.extra_data or {})
     requirement_flags.pop("hash_options", None)
     if not requirement_flags:
         return True

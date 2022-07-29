@@ -53,6 +53,23 @@ class Candidate(NamedTuple):
 
 
 class Result(NamedTuple):
+    """
+    Represent a dependency resolution result from resolvelib.
+    Below is the docstring copied from https://github.com/sarugaku/resolvelib/blob/0e6ed4efa9ca079512ec999b54f2e5175a3b2111/src/resolvelib/resolvers.py#L454
+
+    The return value is a representation to the final resolution result. It
+    is a tuple subclass with three public members:
+    * ``mapping``: A dict of resolved candidates. Each key is an identifier
+       of a requirement (as returned by the provider's `identify` method),
+       and the value is the resolved candidate.
+    * ``graph``: A `DirectedGraph` instance representing the dependency tree.
+       The vertices are keys of `mapping`, and each edge represents *why*
+       a particular package is included. A special vertex `None` is
+       included to represent parents of user-supplied requirements.
+    * ``criteria``: A dict of "criteria" that hold detailed information on
+       how edges in the graph are derived. Each key is an identifier of a
+       requirement, and the value is a `Criterion` instance.
+   """
     mapping: Dict
     graph: DirectedGraph
     criteria: Dict
@@ -60,7 +77,8 @@ class Result(NamedTuple):
 
 def get_response(url: str) -> Dict:
     """
-    Return a response for the given url.
+    Return a mapping of the JSON response from fetching ``url``
+    or None if the ``url`` cannot be fetched..
     """
     resp = requests.get(url)
     if resp.status_code == 200:
@@ -71,7 +89,8 @@ def get_requirements_from_distribution(
     handler: BasePypiHandler, location: str
 ) -> List[Requirement]:
     """
-    Return a list of requirements from a distribution.
+    Return a list of requirements from a source distribution or wheel at
+    ``location`` using the provided ``handler`` DatafileHandler for parsing.
     """
     if not os.path.exists(location):
         return []
@@ -84,6 +103,9 @@ def is_requirements_file_in_setup_files(setup_files: List[str]) -> bool:
     """
     Return True if the string ``requirements.txt`` is found in any of the ``setup_files`` location
     strings to either a setup.py or setup.cfg file.
+    This is an indication that a requirements.txt is likely loaded in the setup.py
+    code and we use this as a hint to treat requirements.txt requirements
+    as being for the setup.py file. 
     """
     for setup_file in setup_files:
         if not os.path.exists(setup_file):
@@ -173,6 +195,7 @@ def get_requirements_from_dependencies(dependencies: List[DependentPackage]) -> 
         if not dep.purl:
             continue
 
+        # TODO: consider other scopes and using the is_runtime flag
         if dep.scope != "install":
             continue
 
