@@ -43,6 +43,48 @@ def test_cli_with_default_urls():
 
 
 @pytest.mark.online
+def test_pdt_output():
+    requirements_file = test_env.get_test_loc("pdt.txt")
+    expected_file = test_env.get_test_loc("pdt-expected.json", must_exist=False)
+    extra_options = []
+    check_requirements_resolution(
+        requirements_file=requirements_file,
+        expected_file=expected_file,
+        extra_options=extra_options,
+        pdt_output=True,
+        regen=REGEN_TEST_FIXTURES,
+    )
+
+
+@pytest.mark.online
+def test_pdt_output_with_pinned_requirements():
+    requirements_file = test_env.get_test_loc("pinned-requirements.txt")
+    expected_file = test_env.get_test_loc("pinned-requirements-pdt-expected.json", must_exist=False)
+    extra_options = []
+    check_requirements_resolution(
+        requirements_file=requirements_file,
+        expected_file=expected_file,
+        extra_options=extra_options,
+        pdt_output=True,
+        regen=REGEN_TEST_FIXTURES,
+    )
+
+
+@pytest.mark.online
+def test_pdt_output_with_frozen_requirements():
+    requirements_file = test_env.get_test_loc("frozen-requirements.txt")
+    expected_file = test_env.get_test_loc("frozen-requirements-pdt-expected.json", must_exist=False)
+    extra_options = []
+    check_requirements_resolution(
+        requirements_file=requirements_file,
+        expected_file=expected_file,
+        extra_options=extra_options,
+        pdt_output=True,
+        regen=REGEN_TEST_FIXTURES,
+    )
+
+
+@pytest.mark.online
 def test_cli_with_single_index_url():
     expected_file = test_env.get_test_loc("single-url-expected.json", must_exist=False)
     specifier = "zipp==3.8.0"
@@ -164,20 +206,33 @@ def check_specs_resolution(
     )
 
 
+def test_passing_of_json_pdt_and_json_flags():
+    result_file = test_env.get_temp_file("json")
+    options = ["--specifier", "foo", "--json", result_file, "--json-pdt", result_file]
+    run_cli(options=options, expected_rc=1)
+
+
+def test_passing_of_no_json_output_flag():
+    options = ["--specifier", "foo"]
+    run_cli(options=options, expected_rc=1)
+
+
 def check_requirements_resolution(
     requirements_file,
     expected_file,
     extra_options=tuple(),
     regen=REGEN_TEST_FIXTURES,
+    pdt_output=False,
 ):
     result_file = test_env.get_temp_file("json")
-    options = ["--requirement", requirements_file, "--json", result_file]
+    if pdt_output:
+        options = ["--requirement", requirements_file, "--json-pdt", result_file]
+    else:
+        options = ["--requirement", requirements_file, "--json", result_file]
     options.extend(extra_options)
     run_cli(options=options)
     check_json_results(
-        result_file=result_file,
-        expected_file=expected_file,
-        regen=regen,
+        result_file=result_file, expected_file=expected_file, regen=regen, clean=not pdt_output
     )
 
 

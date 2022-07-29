@@ -10,7 +10,6 @@
 #
 
 import json
-import sys
 from typing import List
 
 import click
@@ -34,6 +33,7 @@ PYPI_SIMPLE_URL = "https://pypi.org/simple"
 
 
 @click.command()
+@click.pass_context
 @click.option(
     "-r",
     "--requirement",
@@ -99,9 +99,18 @@ PYPI_SIMPLE_URL = "https://pypi.org/simple"
     "--json",
     "json_output",
     type=FileOptionType(mode="w", encoding="utf-8", lazy=True),
-    required=True,
+    required=False,
     metavar="FILE",
     help="Write output as pretty-printed JSON to FILE. "
+    "Use the special '-' file name to print results on screen/stdout.",
+)
+@click.option(
+    "--json-pdt",
+    "pdt_output",
+    type=FileOptionType(mode="w", encoding="utf-8", lazy=True),
+    required=False,
+    metavar="FILE",
+    help="Write output as pretty-printed JSON to FILE as a tree in the style of pipdeptree. "
     "Use the special '-' file name to print results on screen/stdout.",
 )
 @click.option(
@@ -124,13 +133,14 @@ PYPI_SIMPLE_URL = "https://pypi.org/simple"
     "--index-url are ignored when this option is active.",
 )
 @click.option(
-    "--debug",
+    "--verbose",
     is_flag=True,
     hidden=True,
     help="Enable debug output.",
 )
 @click.help_option("-h", "--help")
 def resolve_dependencies(
+    ctx,
     requirement_files,
     netrc_file,
     specifiers,
@@ -138,10 +148,11 @@ def resolve_dependencies(
     operating_system,
     index_urls,
     json_output,
+    pdt_output,
     max_rounds,
     use_cached_index=False,
     use_pypi_json_api=False,
-    debug=TRACE,
+    verbose=TRACE,
 ):
     """
     Resolve the dependencies of the packages listed in REQUIREMENT-FILE(s) file
@@ -161,7 +172,15 @@ def resolve_dependencies(
 
         dad --spec "flask==2.1.2" --json -
     """
-    if debug:
+    if not (json_output or pdt_output):
+        click.secho("No output file specified. Use --json or --json-pdt.", err=True)
+        ctx.exit(1)
+
+    if json_output and pdt_output:
+        click.secho("Only one of --json or --json-pdt can be used.", err=True)
+        ctx.exit(1)
+
+    if verbose:
         click.secho(f"Resolving dependencies...")
 
     netrc = None
@@ -184,11 +203,10 @@ def resolve_dependencies(
         direct_dependencies.append(dep)
 
     if not direct_dependencies:
-        if debug:
-            click.secho("Error: no requirements requested.")
-        sys.exit(1)
+        click.secho("Error: no requirements requested.")
+        ctx.exit(1)
 
-    if debug:
+    if verbose:
         click.secho("direct_dependencies:")
         for dep in direct_dependencies:
             click.secho(f" {dep}")
@@ -198,7 +216,7 @@ def resolve_dependencies(
         python_version=python_version, operating_system=operating_system
     )
 
-    if debug:
+    if verbose:
         click.secho(f"environment: {environment}")
 
     repos = []
@@ -224,7 +242,7 @@ def resolve_dependencies(
                 )
                 repos.append(repo)
 
-    if debug:
+    if verbose:
         click.secho("repos:")
         for repo in repos:
             click.secho(f" {repo}")
@@ -236,7 +254,8 @@ def resolve_dependencies(
         repos=repos,
         as_tree=False,
         max_rounds=max_rounds,
-        debug=debug,
+        verbose=verbose,
+        pdt_output=pdt_output,
     )
 
     cli_options = [f"--requirement {rf}" for rf in requirement_files]
@@ -262,19 +281,35 @@ def resolve_dependencies(
         errors=[],
     )
 
-    write_output(
-        headers=headers,
-        requirements=requirements,
-        resolved_dependencies=resolved_dependencies,
-        json_output=json_output,
-    )
+    if json_output:
+        write_output(
+            headers=headers,
+            requirements=requirements,
+            resolved_dependencies=resolved_dependencies,
+            json_output=json_output,
+        )
 
-    if debug:
+    else:
+        write_output(
+            headers=headers,
+            requirements=requirements,
+            resolved_dependencies=resolved_dependencies,
+            json_output=pdt_output,
+            pdt_output=True,
+        )
+
+    if verbose:
         click.secho("done!")
 
 
 def resolve(
-    direct_dependencies, environment, repos=tuple(), as_tree=False, max_rounds=200000, debug=False
+    direct_dependencies,
+    environment,
+    repos=tuple(),
+    as_tree=False,
+    max_rounds=200000,
+    verbose=False,
+    pdt_output=False,
 ):
     """
     Resolve dependencies given a ``direct_dependencies`` list of
@@ -292,7 +327,8 @@ def resolve(
         repos=repos,
         as_tree=as_tree,
         max_rounds=max_rounds,
-        debug=debug,
+        verbose=verbose,
+        pdt_output=pdt_output,
     )
 
     initial_requirements = [d.to_dict() for d in direct_dependencies]
@@ -312,16 +348,19 @@ def get_requirements_from_direct_dependencies(
         yield Requirement(requirement_string=dependency.extracted_requirement)
 
 
-def write_output(headers, requirements, resolved_dependencies, json_output):
+def write_output(headers, requirements, resolved_dependencies, json_output, pdt_output=False):
     """
     Write headers, requirements and resolved_dependencies as JSON to ``json_output``.
     Return the output data.
     """
-    output = dict(
-        headers=headers,
-        requirements=requirements,
-        resolved_dependencies=resolved_dependencies,
-    )
+    if not pdt_output:
+        output = dict(
+            headers=headers,
+            requirements=requirements,
+            resolved_dependencies=resolved_dependencies,
+        )
+    else:
+        output = resolved_dependencies
 
     json.dump(output, json_output, indent=2)
     return output
