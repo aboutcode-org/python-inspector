@@ -110,7 +110,7 @@ PYPI_SIMPLE_URL = "https://pypi.org/simple"
     type=FileOptionType(mode="w", encoding="utf-8", lazy=True),
     required=False,
     metavar="FILE",
-    help="Write output as pretty-printed JSON to FILE. "
+    help="Write output as pretty-printed JSON to FILE as a tree in the style of pipdeptree. "
     "Use the special '-' file name to print results on screen/stdout.",
 )
 @click.option(
@@ -328,7 +328,6 @@ def resolve(
         pdt_output=pdt_output,
     )
 
-    print(resolved_dependencies)
 
     initial_requirements = [d.to_dict() for d in direct_dependencies]
 

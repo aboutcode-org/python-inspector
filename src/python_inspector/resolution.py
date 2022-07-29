@@ -632,6 +632,7 @@ def pdt_dfs(mapping, graph, src):
     Return a nested mapping of dependencies.
 
     This takes ``mapping`` and ``graph`` as input. And do a dfs
+    (aka. depth-first search see https://en.wikipedia.org/wiki/Depth-first_search)
     on the ``graph`` to get the dependencies of the given ``src``.
     And use the ``mapping`` to get the version of the given dependency.
     """
@@ -640,18 +641,20 @@ def pdt_dfs(mapping, graph, src):
         return dict(
             key=src, package_name=src, installed_version=str(mapping[src].version), dependencies=[]
         )
-
+        # recurse
+        dependencies = [pdt_dfs(mapping, graph, c) for c in children]
+        dependencies.sort(key=lambda d: d["key"])
     return dict(
         key=src,
         package_name=src,
         installed_version=str(mapping[src].version),
-        dependencies=sorted([pdt_dfs(mapping, graph, c) for c in children], key=lambda d: d["key"]),
+        dependencies=dependencies,
     )
 
 
 def format_pdt_tree(results):
     """
-    Return a formatted tree of dependencies.
+    Return a formatted tree of dependencies in the style of pipdeptree.
     """
     mapping = results.mapping
     graph = results.graph
