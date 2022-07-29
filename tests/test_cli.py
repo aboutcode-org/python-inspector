@@ -206,6 +206,17 @@ def check_specs_resolution(
     )
 
 
+def test_passing_of_json_pdt_and_json_flags():
+    result_file = test_env.get_temp_file("json")
+    options = ["--specifier", "foo", "--json", result_file, "--json-pdt", result_file]
+    run_cli(options=options, expected_rc=1)
+
+
+def test_passing_of_no_json_output_flag():
+    options = ["--specifier", "foo"]
+    run_cli(options=options, expected_rc=1)
+
+
 def check_requirements_resolution(
     requirements_file,
     expected_file,

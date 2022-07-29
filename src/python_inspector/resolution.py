@@ -641,9 +641,9 @@ def pdt_dfs(mapping, graph, src):
         return dict(
             key=src, package_name=src, installed_version=str(mapping[src].version), dependencies=[]
         )
-        # recurse
-        dependencies = [pdt_dfs(mapping, graph, c) for c in children]
-        dependencies.sort(key=lambda d: d["key"])
+    # recurse
+    dependencies = [pdt_dfs(mapping, graph, c) for c in children]
+    dependencies.sort(key=lambda d: d["key"])
     return dict(
         key=src,
         package_name=src,
@@ -671,7 +671,7 @@ def get_resolved_dependencies(
     repos: Sequence[PypiSimpleRepository] = tuple(),
     as_tree: bool = False,
     max_rounds: int = 200000,
-    debug: bool = False,
+    verbose: bool = False,
     pdt_output: bool = False,
 ):
     """
@@ -694,7 +694,7 @@ def get_resolved_dependencies(
             resolver_results, as_tree=as_tree, environment=environment, repos=repos
         )
     except Exception as e:
-        if debug:
+        if verbose:
             import click
 
             click.secho(f"{e!r}", err=True)
