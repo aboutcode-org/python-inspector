@@ -55,7 +55,8 @@ class Candidate(NamedTuple):
 class Result(NamedTuple):
     """
     Represent a dependency resolution result from resolvelib.
-    Below is the docstring copied from https://github.com/sarugaku/resolvelib/blob/0e6ed4efa9ca079512ec999b54f2e5175a3b2111/src/resolvelib/resolvers.py#L454
+    Below is the docstring copied from
+    https://github.com/sarugaku/resolvelib/blob/0e6ed4efa9ca079512ec999b54f2e5175a3b2111/src/resolvelib/resolvers.py#L454
 
     The return value is a representation to the final resolution result. It
     is a tuple subclass with three public members:
@@ -69,7 +70,8 @@ class Result(NamedTuple):
     * ``criteria``: A dict of "criteria" that hold detailed information on
        how edges in the graph are derived. Each key is an identifier of a
        requirement, and the value is a `Criterion` instance.
-   """
+    """
+
     mapping: Dict
     graph: DirectedGraph
     criteria: Dict
@@ -105,7 +107,7 @@ def is_requirements_file_in_setup_files(setup_files: List[str]) -> bool:
     strings to either a setup.py or setup.cfg file.
     This is an indication that a requirements.txt is likely loaded in the setup.py
     code and we use this as a hint to treat requirements.txt requirements
-    as being for the setup.py file. 
+    as being for the setup.py file.
     """
     for setup_file in setup_files:
         if not os.path.exists(setup_file):
