@@ -23,7 +23,8 @@
       "is_runtime": true,
       "is_optional": false,
       "is_resolved": false,
-      "resolved_package": {}
+      "resolved_package": {},
+      "extra_data": {}
     }
   ],
   "resolved_dependencies": [
@@ -42,7 +43,7 @@
         "pkg:pypi/importlib-metadata@4.12.0",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
-        "pkg:pypi/werkzeug@2.1.2"
+        "pkg:pypi/werkzeug@2.2.1"
       ],
       "wheel_urls": [
         "https://files.pythonhosted.org/packages/af/6a/00d144ac1626fbb44c4ff36519712e258128985a5d0ae43344778ae5cbb9/Flask-2.1.3-py3-none-any.whl"
@@ -86,12 +87,14 @@
       "sdist_url": "https://files.pythonhosted.org/packages/1d/97/2288fe498044284f39ab8950703e88abbac2abbdf65524d576157af70556/MarkupSafe-2.1.1.tar.gz"
     },
     {
-      "package": "pkg:pypi/werkzeug@2.1.2",
-      "dependencies": [],
-      "wheel_urls": [
-        "https://files.pythonhosted.org/packages/c4/44/f50f2d22cdfb6d56c03d1b4cc3cfa03ebee2f21b59a7768f151e43415ba5/Werkzeug-2.1.2-py3-none-any.whl"
+      "package": "pkg:pypi/werkzeug@2.2.1",
+      "dependencies": [
+        "pkg:pypi/markupsafe@2.1.1"
       ],
-      "sdist_url": "https://files.pythonhosted.org/packages/10/cf/97eb1a3847c01ae53e8376bc21145555ac95279523a935963dc8ff96c50b/Werkzeug-2.1.2.tar.gz"
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/c0/93/d6d60870e47162ea6a1bbdd787649eea776b2a70618dd66ed87cb2238543/Werkzeug-2.2.1-py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/32/19/a92cdbd9fb795928dfca1031278ae8a7f051e78a2c057c224ad2d4cdd95e/Werkzeug-2.2.1.tar.gz"
     },
     {
       "package": "pkg:pypi/zipp@3.8.1",

@@ -1,3 +1,4 @@
+aboutcode-toolkit==7.0.2
 attrs==21.4.0
 beautifulsoup4==4.11.1
 certifi==2022.5.18.1
@@ -11,6 +12,7 @@ importlib-metadata==4.8.3
 intbitset==3.0.1
 packageurl-python==0.9.9
 packaging==21.3
+-e git+https://github.com/nexB/python-inspector@18baae17824d6bacb4b1d519b10a0d0e50775884#egg=python_inspector
 pip-requirements-parser==31.2.0
 pkginfo2==30.0.0
 pyparsing==3.0.9
