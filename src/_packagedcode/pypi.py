@@ -10,6 +10,7 @@
 
 import ast
 from configparser import ConfigParser
+import copy
 import json
 import logging
 from pathlib import Path
@@ -921,7 +922,7 @@ def get_requirements_txt_dependencies(location, include_nested=False):
         if req.name:
             # will be None if not pinned
             version = req.get_pinned_version
-            purl = PackageURL(type='pypi', name=req.name, version=version)
+            purl = PackageURL(type='pypi', name=canonicalize_name(req.name), version=version)
 
         else:
             # this is odd, but this can be null
@@ -954,10 +955,39 @@ def get_requirements_txt_dependencies(location, include_nested=False):
                 is_optional=is_optional,
                 is_resolved=req.is_pinned or False,
                 extracted_requirement=requirement,
+                extra_data=dict(
+                    is_editable=req.is_editable,
+                    link=req.link and req.link.url or None,
+                    hash_options=req.hash_options or [],
+                    is_constraint=req.is_constraint,
+                    is_archive=req.is_archive,
+                    is_wheel=req.is_wheel,
+                    is_url=req.is_url,
+                    is_vcs_url=req.is_vcs_url,
+                    is_name_at_url=req.is_name_at_url,
+                    is_local_path=req.is_local_path,
+                ),
             )
         )
 
     return dependent_packages, extra_data
+
+
+def can_process_dependent_package(dep: models.DependentPackage):
+    """
+    Return True if we can process the dependent package
+    typically anything that's not a plain standard specifier
+    can not be processed such as an editable requirement
+    """
+    # copying dep.extra_data to avoid mutating the original
+    requirement_flags = copy.copy(dep.extra_data or {})
+    requirement_flags.pop("hash_options", None)
+    if not requirement_flags:
+        return True
+    # we can not process the requirement if it has any flag set 
+    # because this means it is not a standard specifier
+    # but rather some pip specific option of sorts
+    return not any(requirement_flags.values())
 
 
 def get_attribute(metainfo, name, multiple=False):

@@ -12,6 +12,8 @@ import packaging
 import pytest
 from packaging.requirements import Requirement
 
+from _packagedcode import models
+from python_inspector.resolution import get_requirements_from_dependencies
 from python_inspector.resolution import get_resolved_dependencies
 from python_inspector.resolution import is_valid_version
 from python_inspector.utils_pypi import PYPI_PUBLIC_REPO
@@ -38,7 +40,7 @@ def test_get_resolved_dependencies_with_flask_and_python_310():
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
         "pkg:pypi/markupsafe@2.1.1",
-        "pkg:pypi/werkzeug@2.1.2",
+        "pkg:pypi/werkzeug@2.2.1",
     ]
 
 
@@ -63,7 +65,7 @@ def test_get_resolved_dependencies_with_flask_and_python_310_windows():
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
         "pkg:pypi/markupsafe@2.1.1",
-        "pkg:pypi/werkzeug@2.1.2",
+        "pkg:pypi/werkzeug@2.2.1",
     ]
 
 
@@ -116,7 +118,7 @@ def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
         "pkg:pypi/markupsafe@2.1.1",
-        "pkg:pypi/werkzeug@2.1.2",
+        "pkg:pypi/werkzeug@2.2.1",
         "pkg:pypi/zipp@3.8.1",
     ]
 
@@ -154,3 +156,65 @@ def test_is_valid_version():
     bad_versions = []
     identifier = "flask"
     assert is_valid_version(parsed_version, requirements, identifier, bad_versions)
+
+
+def test_get_requirements_from_dependencies():
+    dependencies = [
+        models.DependentPackage(
+            purl="pkg:pypi/django",
+            scope="install",
+            is_runtime=True,
+            is_optional=False,
+            is_resolved=False,
+            extracted_requirement="django>=1.11.11",
+            extra_data=dict(
+                is_editable=False,
+                link=None,
+                hash_options=[],
+                is_constraint=False,
+                is_archive=False,
+                is_wheel=False,
+                is_url=False,
+                is_vcs_url=False,
+                is_name_at_url=False,
+                is_local_path=False,
+            ),
+        )
+    ]
+
+    requirements = [str(r) for r in get_requirements_from_dependencies(dependencies)]
+
+    assert requirements == ["django>=1.11.11"]
+
+
+def test_get_requirements_from_dependencies_with_empty_list():
+    assert list(get_requirements_from_dependencies(dependencies=[])) == []
+
+
+def test_get_requirements_from_dependencies_with_editable_requirements():
+    dependencies = [
+        models.DependentPackage(
+            purl="pkg:pypi/django",
+            scope="install",
+            is_runtime=True,
+            is_optional=False,
+            is_resolved=False,
+            extracted_requirement="django>=1.11.11",
+            extra_data=dict(
+                is_editable=True,
+                link=None,
+                hash_options=[],
+                is_constraint=False,
+                is_archive=False,
+                is_wheel=False,
+                is_url=False,
+                is_vcs_url=False,
+                is_name_at_url=False,
+                is_local_path=False,
+            ),
+        )
+    ]
+
+    requirements = [str(r) for r in get_requirements_from_dependencies(dependencies)]
+
+    assert requirements == []

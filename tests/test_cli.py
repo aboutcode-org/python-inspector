@@ -16,6 +16,8 @@ import pytest
 from click.testing import CliRunner
 from commoncode.testcase import FileDrivenTesting
 
+from _packagedcode import models
+from python_inspector.resolve_cli import get_requirements_from_direct_dependencies
 from python_inspector.resolve_cli import resolve_dependencies
 
 # Used for tests to regenerate fixtures with regen=True
@@ -36,6 +38,48 @@ def test_cli_with_default_urls():
         specifier=specifier,
         expected_file=expected_file,
         extra_options=extra_options,
+        regen=REGEN_TEST_FIXTURES,
+    )
+
+
+@pytest.mark.online
+def test_pdt_output():
+    requirements_file = test_env.get_test_loc("pdt.txt")
+    expected_file = test_env.get_test_loc("pdt-expected.json", must_exist=False)
+    extra_options = []
+    check_requirements_resolution(
+        requirements_file=requirements_file,
+        expected_file=expected_file,
+        extra_options=extra_options,
+        pdt_output=True,
+        regen=REGEN_TEST_FIXTURES,
+    )
+
+
+@pytest.mark.online
+def test_pdt_output_with_pinned_requirements():
+    requirements_file = test_env.get_test_loc("pinned-requirements.txt")
+    expected_file = test_env.get_test_loc("pinned-requirements-pdt-expected.json", must_exist=False)
+    extra_options = []
+    check_requirements_resolution(
+        requirements_file=requirements_file,
+        expected_file=expected_file,
+        extra_options=extra_options,
+        pdt_output=True,
+        regen=REGEN_TEST_FIXTURES,
+    )
+
+
+@pytest.mark.online
+def test_pdt_output_with_frozen_requirements():
+    requirements_file = test_env.get_test_loc("frozen-requirements.txt")
+    expected_file = test_env.get_test_loc("frozen-requirements-pdt-expected.json", must_exist=False)
+    extra_options = []
+    check_requirements_resolution(
+        requirements_file=requirements_file,
+        expected_file=expected_file,
+        extra_options=extra_options,
+        pdt_output=True,
         regen=REGEN_TEST_FIXTURES,
     )
 
@@ -162,20 +206,33 @@ def check_specs_resolution(
     )
 
 
+def test_passing_of_json_pdt_and_json_flags():
+    result_file = test_env.get_temp_file("json")
+    options = ["--specifier", "foo", "--json", result_file, "--json-pdt", result_file]
+    run_cli(options=options, expected_rc=1)
+
+
+def test_passing_of_no_json_output_flag():
+    options = ["--specifier", "foo"]
+    run_cli(options=options, expected_rc=1)
+
+
 def check_requirements_resolution(
     requirements_file,
     expected_file,
     extra_options=tuple(),
     regen=REGEN_TEST_FIXTURES,
+    pdt_output=False,
 ):
     result_file = test_env.get_temp_file("json")
-    options = ["--requirement", requirements_file, "--json", result_file]
+    if pdt_output:
+        options = ["--requirement", requirements_file, "--json-pdt", result_file]
+    else:
+        options = ["--requirement", requirements_file, "--json", result_file]
     options.extend(extra_options)
     run_cli(options=options)
     check_json_results(
-        result_file=result_file,
-        expected_file=expected_file,
-        regen=regen,
+        result_file=result_file, expected_file=expected_file, regen=regen, clean=not pdt_output
     )
 
 
@@ -244,3 +301,65 @@ output:
 """
         assert result.exit_code == expected_rc, error
     return result
+
+
+def test_get_requirements_from_direct_dependencies():
+    direct_dependencies = [
+        models.DependentPackage(
+            purl="pkg:pypi/django",
+            scope="install",
+            is_runtime=True,
+            is_optional=False,
+            is_resolved=False,
+            extracted_requirement="django>=1.11.11",
+            extra_data=dict(
+                is_editable=False,
+                link=None,
+                hash_options=[],
+                is_constraint=False,
+                is_archive=False,
+                is_wheel=False,
+                is_url=False,
+                is_vcs_url=False,
+                is_name_at_url=False,
+                is_local_path=False,
+            ),
+        )
+    ]
+
+    requirements = [str(r) for r in get_requirements_from_direct_dependencies(direct_dependencies)]
+
+    assert requirements == ["django>=1.11.11"]
+
+
+def test_get_requirements_from_direct_dependencies_with_empty_list():
+    assert list(get_requirements_from_direct_dependencies(direct_dependencies=[])) == []
+
+
+def test_get_requirements_from_direct_dependencies_with_editable_requirements():
+    direct_dependencies = [
+        models.DependentPackage(
+            purl="pkg:pypi/django",
+            scope="install",
+            is_runtime=True,
+            is_optional=False,
+            is_resolved=False,
+            extracted_requirement="django>=1.11.11",
+            extra_data=dict(
+                is_editable=True,
+                link=None,
+                hash_options=[],
+                is_constraint=False,
+                is_archive=False,
+                is_wheel=False,
+                is_url=False,
+                is_vcs_url=False,
+                is_name_at_url=False,
+                is_local_path=False,
+            ),
+        )
+    ]
+
+    requirements = [str(r) for r in get_requirements_from_direct_dependencies(direct_dependencies)]
+
+    assert requirements == []
