@@ -9,23 +9,27 @@
 #
 
 import ast
-from configparser import ConfigParser
+import base64
 import copy
 import json
 import logging
-from pathlib import Path
 import os
 import re
 import sys
-from typing import NamedTuple
 import tempfile
 import zipfile
+from configparser import ConfigParser
+from pathlib import Path
+from typing import NamedTuple
 
 import dparse2
+# NOTE: we always want to use the external library rather than the built-in for now
+import importlib_metadata
 import packaging
 import pip_requirements_parser
 import pkginfo2
 from commoncode import fileutils
+from commoncode.fileutils import as_posixpath
 from packaging.specifiers import SpecifierSet
 from packageurl import PackageURL
 from packaging import markers
@@ -37,11 +41,6 @@ from _packagedcode.utils import build_description
 from _packagedcode.utils import combine_expressions
 from _packagedcode.utils import yield_dependencies_from_package_data
 from _packagedcode.utils import yield_dependencies_from_package_resource
-
-# FIXME: we always want to use the external library rather than the built-in for now
-import importlib_metadata
-import base64
-from commoncode.fileutils import as_posixpath
 
 try:
     from zipfile import Path as ZipPath
@@ -125,6 +124,16 @@ class PythonEditableInstallationPkgInfoFile(BasePypiHandler):
         return models.DatafileHandler.assign_package_to_parent_tree(package, resource, codebase)
 
 
+def create_package_from_package_data(package_data, datafile_path):
+    package = models.Package.from_package_data(
+        package_data=package_data,
+        datafile_path=datafile_path,
+    )
+    if not package.license_expression:
+        package.license_expression = compute_normalized_license(package.declared_license)
+    return package
+
+
 class BaseExtractedPythonLayout(BasePypiHandler):
     """
     Base class for development repos, sdist tarballs and other related extracted
@@ -157,10 +166,12 @@ class BaseExtractedPythonLayout(BasePypiHandler):
             pkg_data = package_resource.package_data[0]
             pkg_data = models.PackageData.from_dict(pkg_data)
             if pkg_data.purl:
-                package = models.Package.from_package_data(
+                package = create_package_from_package_data(
                     package_data=pkg_data,
-                    datafile_path=package_resource.path,
+                    datafile_path=package_resource.path
                 )
+                yield package
+
                 package_resource.for_packages.append(package.package_uid)
                 package_resource.save(codebase)
                 yield package_resource
@@ -188,10 +199,11 @@ class BaseExtractedPythonLayout(BasePypiHandler):
                 for setup_resource, setup_pkg_data in setup_package_data:
                     if setup_pkg_data.purl:
                         if not package:
-                            package = models.Package.from_package_data(
+                            package = create_package_from_package_data(
                                 package_data=setup_pkg_data,
                                 datafile_path=setup_resource.path,
                             )
+                            yield package
                             package_resource = setup_resource
                         else:
                             package.update(setup_pkg_data, setup_resource.path)
@@ -225,8 +237,6 @@ class BaseExtractedPythonLayout(BasePypiHandler):
                 if package_uid and package_uid not in package_resource.for_packages:
                     package_resource.for_packages.append(package_uid)
                     package_resource.save(codebase)
-
-            yield package
 
         else:
             package_uid = None
@@ -459,7 +469,7 @@ def parse_metadata(location, datasource_id, package_type):
         name=name,
         version=version,
         description=get_description(metainfo=meta, location=str(location)),
-        #TODO: https://github.com/nexB/scancode-toolkit/issues/3014
+        # TODO: https://github.com/nexB/scancode-toolkit/issues/3014
         declared_license=get_declared_license(meta),
         keywords=get_keywords(meta),
         parties=get_parties(meta),
@@ -701,6 +711,7 @@ class SetupCfgHandler(BaseExtractedPythonLayout):
         dependent_packages = []
         with open(location) as f:
             parser.read_file(f)
+
         for section in parser.values():
             if section.name == 'options':
                 scope_by_sub_section = {
@@ -762,7 +773,6 @@ class SetupCfgHandler(BaseExtractedPythonLayout):
                 )
             ]
 
-
         yield models.PackageData(
             datasource_id=cls.datasource_id,
             type=cls.default_package_type,
@@ -778,7 +788,7 @@ class SetupCfgHandler(BaseExtractedPythonLayout):
     def parse_reqs(cls, reqs, scope):
         """
         Parse a list of requirements and return a list of dependencies
-        """ 
+        """
         dependent_packages = []
         for req in reqs:
             req_parsed = packaging.requirements.Requirement(str(req))
@@ -813,7 +823,8 @@ def get_resolved_purl(purl: PackageURL, specifiers: SpecifierSet):
     return ResolvedPurl(
         purl=purl,
         is_resolved=is_resolved,
-    )    
+    )
+
 
 class PipfileHandler(BaseDependencyFileHandler):
     datasource_id = 'pipfile'
@@ -915,7 +926,7 @@ def get_requirements_txt_dependencies(location, include_nested=False):
                 if isinstance(value, list):
                     extra_data[name].extend(value)
                 else:
-                    extra_data[name] = value    
+                    extra_data[name] = value
     dependent_packages = []
     for req in req_file.requirements:
 
@@ -930,7 +941,10 @@ def get_requirements_txt_dependencies(location, include_nested=False):
 
         purl = purl and purl.to_string() or None
 
-        requirement = req.dumps()
+        if req.is_editable:
+            requirement = req.dumps()
+        else:
+            requirement = req.dumps(with_name=False)
 
         if location.endswith(
             (
@@ -984,7 +998,7 @@ def can_process_dependent_package(dep: models.DependentPackage):
     requirement_flags.pop("hash_options", None)
     if not requirement_flags:
         return True
-    # we can not process the requirement if it has any flag set 
+    # we can not process the requirement if it has any flag set
     # because this means it is not a standard specifier
     # but rather some pip specific option of sorts
     return not any(requirement_flags.values())
