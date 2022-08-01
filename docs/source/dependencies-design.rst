@@ -5,7 +5,7 @@
 
 This is a design to create a new command line tool to resolve Python
 dependencies for a given Python version, operating system and
-architecture. Thename for this new tool is “python-inspector”.
+architecture. The name for this new tool is “python-inspector”.
 
 
 ***************
@@ -171,8 +171,7 @@ User experience:
 The goal of the command line interface and user experience is to be
 obvious and familiar to a pip user.
 
-Create a new CLI named "dad" short for "dad analyzes dependencies" with
-these key options:
+We will create a new CLI named "python-inspector" with these key options:
 
 Inputs:
 ~~~~~~~~~
