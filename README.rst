@@ -31,9 +31,9 @@ Usage
 
     pip install git+https://github.com/nexB/python-inspector
 
-- Run a command line with::
+- Run the command line utility with::
 
-    dad --help
+    python-inspector --help
 
 
 

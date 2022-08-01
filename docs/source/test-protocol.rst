@@ -73,13 +73,13 @@ packages that were installed during the build.
 Step 4: Resolve dependencies using development requirement files
 --------------------------------------------------------------------
 
-In this step, you will resolve the dependencies using python-inspector dad
+In this step, you will resolve the dependencies using python-inspector python-inspector
 command for each of the requirements files identified in Step 1 using the
 Python version identified in Step 2. Run this command for each requirements
 file, using each time a different output file name. We assume here Python
 version 3.8 (note the absence of dot when passed as a command line option::
 
-    dad --python-version 38 --requirement <path/to/requirements.txt> \
+    python-inspector --python-version 38 --requirement <path/to/requirements.txt> \
       --json <path/to/resolved-requirements.txt.json> \
       --netrc <path/to/.netrc>
 
@@ -238,10 +238,10 @@ Step 4: Resolve dependencies using development requirement files
     cd ~/tmp/pyinsp-example/tools/python-inspector
     source venv/bin/activate
 
-    dad --requirement ~/tmp/pyinsp-example/ion/docs/rtd-requirements.txt \
+    python-inspector --requirement ~/tmp/pyinsp-example/ion/docs/rtd-requirements.txt \
       --json ~/tmp/pyinsp-example/output/resolved-rtd-requirements.txt.json
 
-    dad --requirement ~/tmp/pyinsp-example/ion/requirements.txt \
+    python-inspector --requirement ~/tmp/pyinsp-example/ion/requirements.txt \
       --json ~/tmp/pyinsp-example/output/resolved-requirements.txt.json
 
     deactivate

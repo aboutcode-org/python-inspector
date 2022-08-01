@@ -1,6 +1,6 @@
 {
   "headers": {
-    "tool_name": "dad",
+    "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
     "tool_version": "0.5.0",
     "options": [

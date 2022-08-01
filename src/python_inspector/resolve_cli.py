@@ -170,7 +170,7 @@ def resolve_dependencies(
     For example, display the results of resolving the dependencies for flask==2.1.2
     on screen::
 
-        dad --spec "flask==2.1.2" --json -
+        python-inspector --spec "flask==2.1.2" --json -
     """
     if not (json_output or pdt_output):
         click.secho("No output file specified. Use --json or --json-pdt.", err=True)
@@ -272,7 +272,7 @@ def resolve_dependencies(
     )
 
     headers = dict(
-        tool_name="dad",
+        tool_name="python-inspector",
         tool_homepageurl="https://github.com/nexB/python-inspector",
         tool_version=__version__,
         options=cli_options,
