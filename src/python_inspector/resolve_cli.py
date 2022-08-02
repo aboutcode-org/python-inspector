@@ -10,6 +10,7 @@
 #
 
 import json
+import os
 from typing import List
 
 import click
@@ -17,6 +18,7 @@ from packaging.requirements import Requirement
 from tinynetrc import Netrc
 
 from _packagedcode.models import DependentPackage
+from _packagedcode.pypi import PipRequirementsFileHandler
 from _packagedcode.pypi import can_process_dependent_package
 from python_inspector import dependencies
 from python_inspector import utils
@@ -183,14 +185,43 @@ def resolve_dependencies(
     if verbose:
         click.secho(f"Resolving dependencies...")
 
-    netrc = None
     if netrc_file:
+        if not os.path.exists(netrc_file):
+            raise Exception(f"Missing netrc file {netrc_file}")
+
+    if not netrc_file:
+        netrc_file = os.path.join(os.path.expanduser("~"), ".netrc")
+        if not os.path.exists(netrc_file):
+            netrc_file = os.path.join(os.path.expanduser("~"), "_netrc")
+            if not os.path.exists(netrc_file):
+                netrc_file = None
+
+    if netrc_file:
+        if verbose:
+            click.secho(f"Using netrc file {netrc_file}")
         netrc = Netrc(file=netrc_file)
+    else:
+        netrc = None
+
     # TODO: deduplicate me
     direct_dependencies = []
 
     if PYPI_SIMPLE_URL not in index_urls:
         index_urls = tuple([PYPI_SIMPLE_URL]) + tuple(index_urls)
+
+    invalid_requirement_files = []
+
+    for req_file in requirement_files:
+        if not PipRequirementsFileHandler.is_datafile(location=req_file):
+            invalid_requirement_files.append(req_file)
+
+    if invalid_requirement_files:
+        click.secho(
+            f"""The following requirement files are not valid pip
+            requirement file names: {invalid_requirement_files}""",
+            err=True,
+        )
+        ctx.exit(1)
 
     for req_file in requirement_files:
         deps = dependencies.get_dependencies_from_requirements(requirements_file=req_file)

@@ -37,7 +37,7 @@
       "sdist_url": "https://files.pythonhosted.org/packages/59/87/84326af34517fca8c58418d148f2403df25303e02736832403587318e9e8/click-8.1.3.tar.gz"
     },
     {
-      "package": "pkg:pypi/flask@2.1.3",
+      "package": "pkg:pypi/flask@2.2.0",
       "dependencies": [
         "pkg:pypi/click@8.1.3",
         "pkg:pypi/importlib-metadata@4.12.0",
@@ -46,9 +46,9 @@
         "pkg:pypi/werkzeug@2.2.1"
       ],
       "wheel_urls": [
-        "https://files.pythonhosted.org/packages/af/6a/00d144ac1626fbb44c4ff36519712e258128985a5d0ae43344778ae5cbb9/Flask-2.1.3-py3-none-any.whl"
+        "https://files.pythonhosted.org/packages/7b/97/3b7716320e560f937e356773a4ec7846c2617b78f6b7d1334cd1725ba834/Flask-2.2.0-py3-none-any.whl"
       ],
-      "sdist_url": "https://files.pythonhosted.org/packages/5b/77/3accd62b8771954e9584beb03f080385b32ddcad30009d2a4fe4068a05d9/Flask-2.1.3.tar.gz"
+      "sdist_url": "https://files.pythonhosted.org/packages/dd/2e/6efff09194bd056e2dc3d4b87028cf835dfbde5b324570db351ef04b868a/Flask-2.2.0.tar.gz"
     },
     {
       "package": "pkg:pypi/importlib-metadata@4.12.0",
