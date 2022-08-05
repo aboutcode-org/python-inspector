@@ -336,7 +336,7 @@
       {
         "key": "pip",
         "package_name": "pip",
-        "installed_version": "22.2.1",
+        "installed_version": "22.2.2",
         "dependencies": []
       }
     ]

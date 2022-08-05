@@ -44,7 +44,7 @@ def test_cli_with_default_urls():
 
 @pytest.mark.online
 def test_pdt_output():
-    requirements_file = test_env.get_test_loc("pdt.txt")
+    requirements_file = test_env.get_test_loc("pdt-requirements.txt")
     expected_file = test_env.get_test_loc("pdt-expected.json", must_exist=False)
     extra_options = []
     check_requirements_resolution(
@@ -210,6 +210,24 @@ def test_passing_of_json_pdt_and_json_flags():
     result_file = test_env.get_temp_file("json")
     options = ["--specifier", "foo", "--json", result_file, "--json-pdt", result_file]
     run_cli(options=options, expected_rc=1)
+
+
+def test_passing_of_netrc_file_that_does_not_exist():
+    options = ["--specifier", "foo", "--netrc", "bar.txt", "--json", "-"]
+    run_cli(options=options, expected_rc=2)
+
+
+def test_passing_of_wrong_requiremts_file():
+    test_file = test_env.get_temp_file(file_name="pdt.txt", extension="")
+    with open(test_file, "w") as f:
+        f.write("")
+    test_file_2 = test_env.get_temp_file(file_name="setup.py", extension="")
+    with open(test_file_2, "w") as f:
+        f.write("")
+    options = ["--requirement", test_file, "--json", "-", "--requirement", test_file_2]
+    result = run_cli(options=options, expected_rc=1)
+    assert "pdt.txt" in result.output
+    assert "setup.py" in result.output
 
 
 def test_passing_of_no_json_output_flag():
