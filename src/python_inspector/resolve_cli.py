@@ -216,9 +216,10 @@ def resolve_dependencies(
             invalid_requirement_files.append(req_file)
 
     if invalid_requirement_files:
+        invalid_requirement_files = "\n".join(invalid_requirement_files)
         click.secho(
-            f"""The following requirement files are not valid pip
-            requirement file names: {invalid_requirement_files}""",
+            "The following requirement files are not valid pip "
+            f"requirement file names: \n{invalid_requirement_files}",
             err=True,
         )
         ctx.exit(1)
