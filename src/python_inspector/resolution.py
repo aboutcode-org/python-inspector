@@ -101,6 +101,17 @@ def get_requirements_from_distribution(
     return list(get_requirements_from_dependencies(dependencies=deps[0].dependencies))
 
 
+def get_environment_marker_from_environment(environment):
+    return {
+        "extra": "",
+        "python_version": get_python_version_from_env_tag(
+            python_version=environment.python_version
+        ),
+        "platform_system": environment.operating_system.capitalize(),
+        "sys_platform": environment.operating_system,
+    }
+
+
 def is_requirements_file_in_setup_files(setup_files: List[str]) -> bool:
     """
     Return True if the string ``requirements.txt`` is found in any of the ``setup_files`` location
@@ -220,6 +231,7 @@ def remove_extras(identifier: str) -> str:
 class PythonInputProvider(AbstractProvider):
     def __init__(self, environment=None, repos=tuple()):
         self.environment = environment
+        self.environment_marker = get_environment_marker_from_environment(environment)
         self.repos = repos or []
         self.versions_by_package = {}
         self.dependencies_by_purl = {}
@@ -484,16 +496,7 @@ class PythonInputProvider(AbstractProvider):
             if r.marker is None:
                 yield r
             else:
-                if r.marker.evaluate(
-                    {
-                        "extra": "",
-                        "python_version": get_python_version_from_env_tag(
-                            python_version=self.environment.python_version
-                        ),
-                        "platform_system": self.environment.operating_system.capitalize(),
-                        "sys_platform": self.environment.operating_system,
-                    }
-                ):
+                if r.marker.evaluate(self.environment_marker):
                     yield r
 
     def get_dependencies(self, candidate: Candidate) -> List[Requirement]:
