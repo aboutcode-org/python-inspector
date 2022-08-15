@@ -211,21 +211,6 @@ def resolve_dependencies(
     if PYPI_SIMPLE_URL not in index_urls:
         index_urls = tuple([PYPI_SIMPLE_URL]) + tuple(index_urls)
 
-    invalid_requirement_files = []
-
-    for req_file in requirement_files:
-        if not PipRequirementsFileHandler.is_datafile(location=req_file):
-            invalid_requirement_files.append(req_file)
-
-    if invalid_requirement_files:
-        invalid_requirement_files = "\n".join(invalid_requirement_files)
-        click.secho(
-            "The following requirement files are not valid pip "
-            f"requirement file names: \n{invalid_requirement_files}",
-            err=True,
-        )
-        ctx.exit(1)
-
     for req_file in requirement_files:
         deps = dependencies.get_dependencies_from_requirements(requirements_file=req_file)
         for extra_data in dependencies.get_extra_data_from_requirements(requirements_file=req_file):
