@@ -368,13 +368,23 @@ def test_get_requirements_from_direct_dependencies():
         )
     ]
 
-    requirements = [str(r) for r in get_requirements_from_direct_dependencies(direct_dependencies)]
+    requirements = [
+        str(r)
+        for r in get_requirements_from_direct_dependencies(
+            direct_dependencies=direct_dependencies, environment_marker={}
+        )
+    ]
 
     assert requirements == ["django>=1.11.11"]
 
 
 def test_get_requirements_from_direct_dependencies_with_empty_list():
-    assert list(get_requirements_from_direct_dependencies(direct_dependencies=[])) == []
+    assert (
+        list(
+            get_requirements_from_direct_dependencies(direct_dependencies=[], environment_marker={})
+        )
+        == []
+    )
 
 
 def test_get_requirements_from_direct_dependencies_with_editable_requirements():
@@ -401,6 +411,11 @@ def test_get_requirements_from_direct_dependencies_with_editable_requirements():
         )
     ]
 
-    requirements = [str(r) for r in get_requirements_from_direct_dependencies(direct_dependencies)]
+    requirements = [
+        str(r)
+        for r in get_requirements_from_direct_dependencies(
+            direct_dependencies=direct_dependencies, environment_marker={}
+        )
+    ]
 
     assert requirements == []

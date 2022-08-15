@@ -377,7 +377,7 @@ def resolve(
 
 
 def get_requirements_from_direct_dependencies(
-    direct_dependencies: List[DependentPackage], environment_marker: Dict = {}
+    direct_dependencies: List[DependentPackage], environment_marker: Dict
 ) -> List[Requirement]:
     for dependency in direct_dependencies:
         # FIXME We are skipping editable requirements
