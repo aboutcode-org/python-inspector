@@ -45,7 +45,7 @@ def test_cli_with_default_urls():
 @pytest.mark.online
 def test_pdt_output():
     requirements_file = test_env.get_test_loc("pdt-requirements.txt")
-    expected_file = test_env.get_test_loc("pdt-expected.json", must_exist=False)
+    expected_file = test_env.get_test_loc("pdt-requirements.txt-expected.json", must_exist=False)
     extra_options = []
     check_requirements_resolution(
         requirements_file=requirements_file,
@@ -58,8 +58,10 @@ def test_pdt_output():
 
 @pytest.mark.online
 def test_pdt_output_with_pinned_requirements():
-    requirements_file = test_env.get_test_loc("pinned-requirements.txt")
-    expected_file = test_env.get_test_loc("pinned-requirements-pdt-expected.json", must_exist=False)
+    requirements_file = test_env.get_test_loc("pinned-pdt-requirements.txt")
+    expected_file = test_env.get_test_loc(
+        "pinned-pdt-requirements.txt-expected.json", must_exist=False
+    )
     extra_options = []
     check_requirements_resolution(
         requirements_file=requirements_file,
@@ -73,7 +75,7 @@ def test_pdt_output_with_pinned_requirements():
 @pytest.mark.online
 def test_pdt_output_with_frozen_requirements():
     requirements_file = test_env.get_test_loc("frozen-requirements.txt")
-    expected_file = test_env.get_test_loc("frozen-requirements-pdt-expected.json", must_exist=False)
+    expected_file = test_env.get_test_loc("frozen-requirements.txt-expected.json", must_exist=False)
     extra_options = []
     check_requirements_resolution(
         requirements_file=requirements_file,
@@ -133,6 +135,27 @@ def test_cli_with_multiple_index_url_and_tilde_req():
         specifier=specifier,
         expected_file=expected_file,
         extra_options=extra_options,
+        regen=REGEN_TEST_FIXTURES,
+    )
+
+
+@pytest.mark.online
+def test_cli_with_environment_marker_and_complex_ranges():
+    requirements_file = test_env.get_test_loc("environment-marker-test-requirements.txt")
+    expected_file = test_env.get_test_loc(
+        "environment-marker-test-requirements.txt-expected.json", must_exist=False
+    )
+    extra_options = [
+        "--operating-system",
+        "linux",
+        "--python-version",
+        "37",
+    ]
+    check_requirements_resolution(
+        requirements_file=requirements_file,
+        expected_file=expected_file,
+        extra_options=extra_options,
+        pdt_output=True,
         regen=REGEN_TEST_FIXTURES,
     )
 
@@ -345,13 +368,23 @@ def test_get_requirements_from_direct_dependencies():
         )
     ]
 
-    requirements = [str(r) for r in get_requirements_from_direct_dependencies(direct_dependencies)]
+    requirements = [
+        str(r)
+        for r in get_requirements_from_direct_dependencies(
+            direct_dependencies=direct_dependencies, environment_marker={}
+        )
+    ]
 
     assert requirements == ["django>=1.11.11"]
 
 
 def test_get_requirements_from_direct_dependencies_with_empty_list():
-    assert list(get_requirements_from_direct_dependencies(direct_dependencies=[])) == []
+    assert (
+        list(
+            get_requirements_from_direct_dependencies(direct_dependencies=[], environment_marker={})
+        )
+        == []
+    )
 
 
 def test_get_requirements_from_direct_dependencies_with_editable_requirements():
@@ -378,6 +411,11 @@ def test_get_requirements_from_direct_dependencies_with_editable_requirements():
         )
     ]
 
-    requirements = [str(r) for r in get_requirements_from_direct_dependencies(direct_dependencies)]
+    requirements = [
+        str(r)
+        for r in get_requirements_from_direct_dependencies(
+            direct_dependencies=direct_dependencies, environment_marker={}
+        )
+    ]
 
     assert requirements == []

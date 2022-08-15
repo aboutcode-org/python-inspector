@@ -11,6 +11,7 @@
 
 import json
 import os
+from typing import Dict
 from typing import List
 
 import click
@@ -24,6 +25,7 @@ from python_inspector import dependencies
 from python_inspector import utils
 from python_inspector import utils_pypi
 from python_inspector.cli_utils import FileOptionType
+from python_inspector.resolution import get_environment_marker_from_environment
 from python_inspector.resolution import get_resolved_dependencies
 
 TRACE = False
@@ -351,7 +353,13 @@ def resolve(
     If empty, use instead the PyPI.org JSON API exclusively.
     """
 
-    requirements = list(get_requirements_from_direct_dependencies(direct_dependencies))
+    environment_marker = get_environment_marker_from_environment(environment)
+
+    requirements = list(
+        get_requirements_from_direct_dependencies(
+            direct_dependencies=direct_dependencies, environment_marker=environment_marker
+        )
+    )
 
     resolved_dependencies = get_resolved_dependencies(
         requirements=requirements,
@@ -369,7 +377,7 @@ def resolve(
 
 
 def get_requirements_from_direct_dependencies(
-    direct_dependencies: List[DependentPackage],
+    direct_dependencies: List[DependentPackage], environment_marker: Dict
 ) -> List[Requirement]:
     for dependency in direct_dependencies:
         # FIXME We are skipping editable requirements
@@ -377,7 +385,12 @@ def get_requirements_from_direct_dependencies(
         # https://github.com/nexB/python-inspector/issues/41
         if not can_process_dependent_package(dependency):
             continue
-        yield Requirement(requirement_string=dependency.extracted_requirement)
+        req = Requirement(requirement_string=dependency.extracted_requirement)
+        if req.marker is None:
+            yield req
+        else:
+            if req.marker.evaluate(environment_marker):
+                yield req
 
 
 def write_output(headers, requirements, resolved_dependencies, json_output, pdt_output=False):
