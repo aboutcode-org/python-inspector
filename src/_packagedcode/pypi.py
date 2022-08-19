@@ -659,6 +659,22 @@ class ResolvedPurl(NamedTuple):
     is_resolved: bool
 
 
+def create_dependency_for_python_requires(python_requires_specifier):
+    """
+    Return a mock python DependentPackage created from a ``python_requires_specifier``.
+    """
+    purl = PackageURL(type="generic", name="python")
+    resolved_purl = get_resolved_purl(purl=purl, specifiers=SpecifierSet(python_requires_specifier))
+    return models.DependentPackage(
+        purl=str(resolved_purl.purl),
+        scope="python",
+        is_runtime=True,
+        is_optional=False,
+        is_resolved=resolved_purl.is_resolved,
+        extracted_requirement=f"python_requires{python_requires_specifier}",
+    )
+
+
 class BaseDependencyFileHandler(BasePypiHandler):
     """
     Base class for a dependency files parsed with the same library
@@ -717,19 +733,8 @@ class SetupCfgHandler(BaseExtractedPythonLayout):
                         dependent_packages.extend(cls.parse_reqs(reqs, scope))
                         continue
                     python_requires_specifier = section[sub_section]
-                    purl = PackageURL(
-                        type="generic",
-                        name="python",
-                    )
-                    resolved_purl = get_resolved_purl(purl=purl, specifiers=SpecifierSet(python_requires_specifier))
-                    dependent_packages.append(models.DependentPackage(
-                    purl=str(resolved_purl.purl),
-                    scope=scope,
-                    is_runtime=True,
-                    is_optional=False,
-                    is_resolved=resolved_purl.is_resolved,
-                    extracted_requirement=f"python_requires{python_requires_specifier}",
-                    ))
+                    pd = create_dependency_for_python_requires(python_requires_specifier)
+                    dependent_packages.append(pd)
 
             if section.name == "options.extras_require":
                 for sub_section in section:

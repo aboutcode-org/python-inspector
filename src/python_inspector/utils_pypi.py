@@ -98,7 +98,7 @@ TRACE_DEEP = False
 TRACE_ULTRA_DEEP = False
 
 # Supported environments
-PYTHON_VERSIONS = "36", "37", "38", "39", "310"
+PYTHON_VERSIONS = "36", "37", "38", "39", "310", "27"
 
 PYTHON_DOT_VERSIONS_BY_VER = {
     "36": "3.6",
@@ -106,6 +106,7 @@ PYTHON_DOT_VERSIONS_BY_VER = {
     "38": "3.8",
     "39": "3.9",
     "310": "3.10",
+    "27": "2.7",
 }
 
 
@@ -122,6 +123,7 @@ ABIS_BY_PYTHON_VERSION = {
     "38": ["cp38", "cp38m", "abi3"],
     "39": ["cp39", "cp39m", "abi3"],
     "310": ["cp310", "cp310m", "abi3"],
+    "27": ["cp27", "cp27m"],
 }
 
 PLATFORMS_BY_OS = {
@@ -256,7 +258,9 @@ def get_valid_sdist(repo, name, version, python_version=DEFAULT_PYTHON_VERSION):
         if TRACE_DEEP:
             print(f"    get_valid_sdist: No sdist for {name}=={version}")
         return
-    if not valid_distribution(sdist, python_version):
+    if not valid_python_version(
+        python_requires=sdist.python_requires, python_version=python_version
+    ):
         return
     if TRACE_DEEP:
         print(f"    get_valid_sdist: Getting sdist from index (or cache): {sdist.download_url}")
@@ -285,7 +289,9 @@ def get_supported_and_valid_wheels(
         return []
     wheels = []
     for wheel in supported_wheels:
-        if not valid_distribution(wheel, python_version):
+        if not valid_python_version(
+            python_requires=wheel.python_requires, python_version=python_version
+        ):
             continue
         if TRACE_DEEP:
             print(
@@ -296,13 +302,13 @@ def get_supported_and_valid_wheels(
     return wheels
 
 
-def valid_distribution(distribution, python_version):
+def valid_python_version(python_version, python_requires):
     """
-    Return True if distribution is a valid distribution for the given Python version.
+    Return True if ``python_version`` is in the ``python_requires``.
     """
-    if not distribution.python_requires:
+    if not python_requires:
         return True
-    return python_version in SpecifierSet(distribution.python_requires)
+    return python_version in SpecifierSet(python_requires)
 
 
 def download_sdist(
