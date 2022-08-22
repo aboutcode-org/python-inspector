@@ -247,7 +247,8 @@ def resolve_dependencies(
             python_requires=python_requires,
         ):
             click.secho(
-                f"Python version {python_version} is not compatible with setup.py {setup_py_file} "
+                f"Python version {get_python_version_from_env_tag(python_version)} "
+                f"is not compatible with setup.py {setup_py_file} "
                 f"python_requires {python_requires}",
                 err=True,
             )

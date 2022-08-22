@@ -1,0 +1,48 @@
+{
+  "headers": {
+    "tool_name": "python-inspector",
+    "tool_homepageurl": "https://github.com/nexB/python-inspector",
+    "tool_version": "0.6.3",
+    "options": [
+      "--index-url https://pypi.org/simple",
+      "--python-version 27",
+      "--operating-system linux",
+      "--json <file>"
+    ],
+    "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/nexB/scancode-toolkit/ for support and download.",
+    "warnings": [],
+    "errors": []
+  },
+  "requirements": [
+    {
+      "purl": "pkg:pypi/license-expression",
+      "extracted_requirement": "license-expression<1.2,>=0.1",
+      "scope": "install",
+      "is_runtime": true,
+      "is_optional": false,
+      "is_resolved": false,
+      "resolved_package": {},
+      "extra_data": {}
+    }
+  ],
+  "resolved_dependencies": [
+    {
+      "package": "pkg:pypi/boolean-py@3.8",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/eb/5b/f82983127b1a1a4db83ee290e00a94a2b08c566fa6c58466e82ed7b0a76f/boolean.py-3.8-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/a1/eb/b37ef5647243ade8308f7bb46b1a45e6204790c163cbd8cf6df990d5c1c1/boolean.py-3.8.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/license-expression@1.0",
+      "dependencies": [
+        "pkg:pypi/boolean-py@3.8"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/12/7a/dd02b8ac8f0cd81557012b8f249ba4d0d32fe8f98e8d951ebc882187fd92/license_expression-1.0-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/27/71/a8d8d78f7866a75f6a940cc53d1557a5edf1ae4a281fe8797cf36077105d/license-expression-1.0.tar.gz"
+    }
+  ]
+}
