@@ -21,6 +21,7 @@ from _packagedcode.pypi import SetupCfgHandler
 from python_inspector.resolution import fetch_and_extract_sdist
 from python_inspector.utils import get_netrc_auth
 from python_inspector.utils_pypi import PypiSimpleRepository
+from python_inspector.utils_pypi import valid_python_version
 
 test_env = FileDrivenTesting()
 test_env.test_data_dir = os.path.join(os.path.dirname(__file__), "data")
@@ -87,3 +88,8 @@ def test_parse_reqs_with_setup_requires_and_python_requires():
     with open(result_file, "w") as file:
         json.dump(results, file, indent=4)
     check_json_results(result_file, expected_file, clean=False)
+
+
+def test_valid_python_version():
+    assert valid_python_version("3.8", ">3.1")
+    assert not valid_python_version("3.8.1", ">3.9")

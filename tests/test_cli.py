@@ -25,6 +25,8 @@ REGEN_TEST_FIXTURES = os.getenv("PYINSP_REGEN_TEST_FIXTURES", False)
 
 test_env = FileDrivenTesting()
 test_env.test_data_dir = os.path.join(os.path.dirname(__file__), "data")
+setup_test_env = FileDrivenTesting()
+setup_test_env.test_data_dir = os.path.join(os.path.dirname(__file__), "data", "setup")
 
 
 @pytest.mark.online
@@ -212,6 +214,31 @@ def test_cli_with_pinned_requirements_file():
     )
 
 
+@pytest.mark.online
+def test_cli_with_setup_py_failure():
+    setup_py_file = setup_test_env.get_test_loc("simple-setup.py")
+    expected_file = setup_test_env.get_test_loc("simple-setup.py-expected.json", must_exist=False)
+    check_setup_py_resolution(
+        setup_py=setup_py_file,
+        expected_file=expected_file,
+        regen=REGEN_TEST_FIXTURES,
+        expected_rc=1,
+        message=f"Python version 3.8 is not compatible with setup.py {setup_py_file} python_requires >2, <=3",
+    )
+
+
+@pytest.mark.online
+def test_cli_with_setup_py():
+    setup_py_file = setup_test_env.get_test_loc("simple-setup.py")
+    expected_file = setup_test_env.get_test_loc("simple-setup.py-expected.json", must_exist=False)
+    check_setup_py_resolution(
+        setup_py=setup_py_file,
+        expected_file=expected_file,
+        regen=REGEN_TEST_FIXTURES,
+        extra_options=["--python-version", "27"],
+    )
+
+
 def check_specs_resolution(
     specifier,
     expected_file,
@@ -274,6 +301,30 @@ def check_requirements_resolution(
     check_json_results(
         result_file=result_file, expected_file=expected_file, regen=regen, clean=not pdt_output
     )
+
+
+def check_setup_py_resolution(
+    setup_py,
+    expected_file,
+    extra_options=tuple(),
+    regen=REGEN_TEST_FIXTURES,
+    pdt_output=False,
+    expected_rc=0,
+    message="",
+):
+    result_file = setup_test_env.get_temp_file(file_name="json")
+    if pdt_output:
+        options = ["--setup-py", setup_py, "--json-pdt", result_file]
+    else:
+        options = ["--setup-py", setup_py, "--json", result_file]
+    options.extend(extra_options)
+    result = run_cli(options=options, expected_rc=expected_rc)
+    if message:
+        assert message in result.output
+    if expected_rc == 0:
+        check_json_results(
+            result_file=result_file, expected_file=expected_file, regen=regen, clean=not pdt_output
+        )
 
 
 def check_json_results(result_file, expected_file, clean=True, regen=REGEN_TEST_FIXTURES):

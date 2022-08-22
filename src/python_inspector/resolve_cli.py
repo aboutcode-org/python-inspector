@@ -19,13 +19,14 @@ from packaging.requirements import Requirement
 from tinynetrc import Netrc
 
 from _packagedcode.models import DependentPackage
-from _packagedcode.pypi import PipRequirementsFileHandler
+from _packagedcode.pypi import PythonSetupPyHandler
 from _packagedcode.pypi import can_process_dependent_package
 from python_inspector import dependencies
 from python_inspector import utils
 from python_inspector import utils_pypi
 from python_inspector.cli_utils import FileOptionType
 from python_inspector.resolution import get_environment_marker_from_environment
+from python_inspector.resolution import get_python_version_from_env_tag
 from python_inspector.resolution import get_resolved_dependencies
 
 TRACE = False
@@ -50,13 +51,14 @@ PYPI_SIMPLE_URL = "https://pypi.org/simple"
     "This option can be used multiple times.",
 )
 @click.option(
-    "-n",
-    "--netrc",
-    "netrc_file",
+    "-s",
+    "--setup-py",
+    "setup_py_file",
     type=click.Path(exists=True, readable=True, path_type=str, dir_okay=False),
-    metavar="NETRC-FILE",
+    metavar="SETUP-PY-FILE",
     required=False,
-    help="Netrc file to use for authentication. ",
+    help="Path to setuptools setup.py file listing dependencies and metadata. "
+    "This option can be used multiple times.",
 )
 @click.option(
     "--spec",
@@ -118,8 +120,19 @@ PYPI_SIMPLE_URL = "https://pypi.org/simple"
     "Use the special '-' file name to print results on screen/stdout.",
 )
 @click.option(
+    "-n",
+    "--netrc",
+    "netrc_file",
+    type=click.Path(exists=True, readable=True, path_type=str, dir_okay=False),
+    metavar="NETRC-FILE",
+    hidden=True,
+    required=False,
+    help="Netrc file to use for authentication. ",
+)
+@click.option(
     "--max-rounds",
     "max_rounds",
+    hidden=True,
     type=int,
     default=200000,
     help="Increase the max rounds whenever the resolution is too deep",
@@ -146,21 +159,23 @@ PYPI_SIMPLE_URL = "https://pypi.org/simple"
 def resolve_dependencies(
     ctx,
     requirement_files,
-    netrc_file,
+    setup_py_file,
     specifiers,
     python_version,
     operating_system,
     index_urls,
     json_output,
     pdt_output,
+    netrc_file,
     max_rounds,
     use_cached_index=False,
     use_pypi_json_api=False,
     verbose=TRACE,
 ):
     """
-    Resolve the dependencies of the packages listed in REQUIREMENT-FILE(s) file
-    and SPECIFIER(s) and save the results as JSON to FILE.
+    Resolve the dependencies for the package requirements listed in one or
+    more REQUIREMENT-FILE file, one or more SPECIFIER and one setuptools
+    SETUP-PY-FILE file and save the results as JSON to FILE.
 
     Resolve the dependencies for the requested ``--python-version`` PYVER and
     ``--operating_system`` OS combination defaulting Python version 3.8 and
@@ -220,6 +235,29 @@ def resolve_dependencies(
     for specifier in specifiers:
         dep = dependencies.get_dependency(specifier=specifier)
         direct_dependencies.append(dep)
+
+    if setup_py_file:
+        package_data = list(PythonSetupPyHandler.parse(location=setup_py_file))
+        assert len(package_data) == 1
+        package_data = package_data[0]
+        # validate if python require matches our current python version
+        python_requires = package_data.extra_data.get("python_requires")
+        if not utils_pypi.valid_python_version(
+            python_version=get_python_version_from_env_tag(python_version),
+            python_requires=python_requires,
+        ):
+            click.secho(
+                f"Python version {get_python_version_from_env_tag(python_version)} "
+                f"is not compatible with setup.py {setup_py_file} "
+                f"python_requires {python_requires}",
+                err=True,
+            )
+            ctx.exit(1)
+
+        for dep in package_data.dependencies:
+            # TODO : we need to handle to all the scopes
+            if dep.scope == "install":
+                direct_dependencies.append(dep)
 
     if not direct_dependencies:
         click.secho("Error: no requirements requested.")

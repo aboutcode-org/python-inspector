@@ -15,6 +15,7 @@ from typing import Generator
 from typing import List
 from typing import NamedTuple
 from typing import Sequence
+from typing import Tuple
 from typing import Union
 from zipfile import ZipFile
 
@@ -88,7 +89,8 @@ def get_response(url: str) -> Dict:
 
 
 def get_requirements_from_distribution(
-    handler: BasePypiHandler, location: str
+    handler: BasePypiHandler,
+    location: str,
 ) -> List[Requirement]:
     """
     Return a list of requirements from a source distribution or wheel at
@@ -96,9 +98,11 @@ def get_requirements_from_distribution(
     """
     if not os.path.exists(location):
         return []
-    deps = list(handler.parse(location))
-    assert len(deps) == 1
-    return list(get_requirements_from_dependencies(dependencies=deps[0].dependencies))
+    deps = []
+    for package_data in handler.parse(location):
+        dependencies = package_data.dependencies
+        deps.extend(get_requirements_from_dependencies(dependencies=dependencies))
+    return deps
 
 
 def get_environment_marker_from_environment(environment):
@@ -200,7 +204,9 @@ def fetch_and_extract_sdist(
     return os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file, sdist_file)
 
 
-def get_requirements_from_dependencies(dependencies: List[DependentPackage]) -> List[Requirement]:
+def get_requirements_from_dependencies(
+    dependencies: List[DependentPackage], scopes: Tuple[str] = ("install",)
+) -> List[Requirement]:
     """
     Generate parsed requirements for the given ``dependencies``.
     """
@@ -209,7 +215,7 @@ def get_requirements_from_dependencies(dependencies: List[DependentPackage]) -> 
             continue
 
         # TODO: consider other scopes and using the is_runtime flag
-        if dep.scope != "install":
+        if dep.scope not in scopes:
             continue
 
         # FIXME We are skipping editable requirements
@@ -284,12 +290,16 @@ class PythonInputProvider(AbstractProvider):
             if wheels:
                 valid_wheel_present = False
                 for wheel in wheels:
-                    if utils_pypi.valid_distribution(wheel, python_version):
+                    if utils_pypi.valid_python_version(
+                        python_requires=wheel.python_requires, python_version=python_version
+                    ):
                         valid_wheel_present = True
                 if valid_wheel_present:
                     versions.append(version)
             if package.sdist:
-                if utils_pypi.valid_distribution(package.sdist, python_version):
+                if utils_pypi.valid_python_version(
+                    python_requires=package.sdist.python_requires, python_version=python_version
+                ):
                     versions.append(version)
         return versions
 
