@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v0.6.4
+------
+
+- Add support for setup.py
+
 v0.6.3
 ------
 
