@@ -31,7 +31,7 @@ from python_inspector.resolution import get_resolved_dependencies
 
 TRACE = False
 
-__version__ = "0.6.4"
+__version__ = "0.6.5"
 
 DEFAULT_PYTHON_VERSION = "38"
 PYPI_SIMPLE_URL = "https://pypi.org/simple"

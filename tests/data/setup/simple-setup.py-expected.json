@@ -2,7 +2,7 @@
   "headers": {
     "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
-    "tool_version": "0.6.4",
+    "tool_version": "0.6.5",
     "options": [
       "--index-url https://pypi.org/simple",
       "--python-version 27",

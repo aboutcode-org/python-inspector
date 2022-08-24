@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v0.6.5
+------
+
+- Add --version option.
+
 v0.6.4
 ------
 
