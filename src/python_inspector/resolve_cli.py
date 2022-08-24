@@ -31,10 +31,17 @@ from python_inspector.resolution import get_resolved_dependencies
 
 TRACE = False
 
-__version__ = "0.6.3"
+__version__ = "0.6.4"
 
 DEFAULT_PYTHON_VERSION = "38"
 PYPI_SIMPLE_URL = "https://pypi.org/simple"
+
+
+def print_version(ctx, param, value):
+    if not value or ctx.resilient_parsing:
+        return
+    click.echo(f"Python-inspector version: {__version__}")
+    ctx.exit()
 
 
 @click.command()
@@ -154,6 +161,15 @@ PYPI_SIMPLE_URL = "https://pypi.org/simple"
     is_flag=True,
     hidden=True,
     help="Enable debug output.",
+)
+@click.option(
+    "-V",
+    "--version",
+    is_flag=True,
+    is_eager=True,
+    expose_value=False,
+    callback=print_version,
+    help="Show the version and exit.",
 )
 @click.help_option("-h", "--help")
 def resolve_dependencies(

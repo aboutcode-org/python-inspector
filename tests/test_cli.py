@@ -262,6 +262,12 @@ def test_passing_of_json_pdt_and_json_flags():
     run_cli(options=options, expected_rc=1)
 
 
+def test_version_option():
+    options = ["--version"]
+    result = run_cli(options=options)
+    assert "0.6.4" in result.output
+
+
 def test_passing_of_netrc_file_that_does_not_exist():
     options = ["--specifier", "foo", "--netrc", "bar.txt", "--json", "-"]
     run_cli(options=options, expected_rc=2)
