@@ -8,16 +8,23 @@
 # See https://github.com/nexB/python-inspector for support or download.
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
+import os
+
 import packaging
 import pytest
+from commoncode.testcase import FileDrivenTesting
 from packaging.requirements import Requirement
 
 from _packagedcode import models
 from python_inspector.resolution import get_requirements_from_dependencies
 from python_inspector.resolution import get_resolved_dependencies
 from python_inspector.resolution import is_valid_version
+from python_inspector.resolution import parse_setup_py_insecurely
 from python_inspector.utils_pypi import PYPI_PUBLIC_REPO
 from python_inspector.utils_pypi import Environment
+
+setup_test_env = FileDrivenTesting()
+setup_test_env.test_data_dir = os.path.join(os.path.dirname(__file__), "data")
 
 
 @pytest.mark.online
@@ -213,3 +220,9 @@ def test_get_requirements_from_dependencies_with_editable_requirements():
     requirements = [str(r) for r in get_requirements_from_dependencies(dependencies)]
 
     assert requirements == []
+
+
+def test_setup_py_parsing_insecure():
+    setup_py_file = setup_test_env.get_test_loc("insecure-setup/setup.py")
+    reqs = [str(req) for req in list(parse_setup_py_insecurely(setup_py=setup_py_file))]
+    assert reqs == ["isodate", "pyparsing", "six"]

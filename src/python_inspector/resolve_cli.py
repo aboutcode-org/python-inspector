@@ -158,6 +158,11 @@ def print_version(ctx, param, value):
     "--index-url are ignored when this option is active.",
 )
 @click.option(
+    "--insecure",
+    is_flag=True,
+    help="Resolve insecurely",
+)
+@click.option(
     "--verbose",
     is_flag=True,
     hidden=True,
@@ -187,6 +192,7 @@ def resolve_dependencies(
     max_rounds,
     use_cached_index=False,
     use_pypi_json_api=False,
+    insecure=False,
     verbose=TRACE,
 ):
     """
@@ -330,6 +336,7 @@ def resolve_dependencies(
         max_rounds=max_rounds,
         verbose=verbose,
         pdt_output=pdt_output,
+        insecure=insecure,
     )
 
     cli_options = [f"--requirement {rf}" for rf in requirement_files]
@@ -393,6 +400,7 @@ def resolve(
     max_rounds=200000,
     verbose=False,
     pdt_output=False,
+    insecure=False,
 ):
     """
     Resolve dependencies given a ``direct_dependencies`` list of
@@ -418,6 +426,7 @@ def resolve(
         max_rounds=max_rounds,
         verbose=verbose,
         pdt_output=pdt_output,
+        insecure=insecure,
     )
 
     initial_requirements = [d.to_dict() for d in direct_dependencies]

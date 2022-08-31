@@ -1,6 +1,10 @@
 Changelog
 =========
 
+v0.6.6
+------
+- Add --insecure option to compute arguments.
+
 v0.6.5
 ------
 

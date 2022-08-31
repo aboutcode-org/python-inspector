@@ -26,6 +26,7 @@ from packaging.requirements import Requirement
 from packaging.version import LegacyVersion
 from packaging.version import Version
 from packaging.version import parse as parse_version
+from requirements_builder.requirements_builder import iter_requirements
 from resolvelib import AbstractProvider
 from resolvelib import Resolver
 from resolvelib.reporters import BaseReporter
@@ -134,6 +135,17 @@ def is_requirements_file_in_setup_files(setup_files: List[str]) -> bool:
     return False
 
 
+def parse_setup_py_insecurely(setup_py):
+    """
+    Yield requirements from the setup.py file at ``setup_py``.
+    """
+    if not os.path.exists(setup_py):
+        return []
+    unparsed_requirements = iter_requirements(level="", extras=[], setup_file=setup_py)
+    for requirement in unparsed_requirements:
+        yield Requirement(requirement)
+
+
 def is_valid_version(
     parsed_version: Union[LegacyVersion, Version],
     requirements: Dict,
@@ -239,13 +251,14 @@ def remove_extras(identifier: str) -> str:
 
 
 class PythonInputProvider(AbstractProvider):
-    def __init__(self, environment=None, repos=tuple()):
+    def __init__(self, environment=None, repos=tuple(), insecure=False):
         self.environment = environment
         self.environment_marker = get_environment_marker_from_environment(environment)
         self.repos = repos or []
         self.versions_by_package = {}
         self.dependencies_by_purl = {}
         self.wheel_or_sdist_by_package = {}
+        self.insecure = insecure
 
     def identify(self, requirement_or_candidate: Union[Candidate, Requirement]) -> str:
         """Given a requirement, return an identifier for it. Overridden."""
@@ -361,12 +374,10 @@ class PythonInputProvider(AbstractProvider):
             if deps:
                 has_wheels = True
                 yield from deps
-
         if not has_wheels:
             sdist_location = fetch_and_extract_sdist(
                 repos=self.repos, candidate=candidate, python_version=python_version
             )
-
             if sdist_location:
                 setup_py_location = os.path.join(
                     sdist_location,
@@ -397,6 +408,8 @@ class PythonInputProvider(AbstractProvider):
                     sdist_location,
                     "requirements.txt",
                 )
+
+                has_deps_yielded = False
                 if not deps_in_setup and is_requirements_file_in_setup_files(
                     setup_files=[setup_py_location, setup_cfg_location]
                 ):
@@ -405,7 +418,11 @@ class PythonInputProvider(AbstractProvider):
                         location=requirement_location,
                     )
                     if deps:
+                        has_deps_yielded = True
                         yield from deps
+
+                if not has_deps_yielded and self.insecure:
+                    yield from parse_setup_py_insecurely(setup_py=setup_py_location)
 
     def get_requirements_for_package_from_pypi_json_api(
         self, purl: PackageURL
@@ -713,6 +730,7 @@ def get_resolved_dependencies(
     max_rounds: int = 200000,
     verbose: bool = False,
     pdt_output: bool = False,
+    insecure: bool = False,
 ):
     """
     Return resolved dependencies of a ``requirements`` list of Requirement for
@@ -724,7 +742,7 @@ def get_resolved_dependencies(
     """
     try:
         resolver = Resolver(
-            provider=PythonInputProvider(environment=environment, repos=repos),
+            provider=PythonInputProvider(environment=environment, repos=repos, insecure=insecure),
             reporter=BaseReporter(),
         )
         resolver_results = resolver.resolve(requirements=requirements, max_rounds=max_rounds)
