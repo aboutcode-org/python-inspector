@@ -26,7 +26,6 @@ from packaging.requirements import Requirement
 from packaging.version import LegacyVersion
 from packaging.version import Version
 from packaging.version import parse as parse_version
-from requirements_builder.requirements_builder import iter_requirements
 from resolvelib import AbstractProvider
 from resolvelib import Resolver
 from resolvelib.reporters import BaseReporter
@@ -40,6 +39,7 @@ from _packagedcode.pypi import PythonSetupPyHandler
 from _packagedcode.pypi import SetupCfgHandler
 from _packagedcode.pypi import can_process_dependent_package
 from python_inspector import utils_pypi
+from python_inspector.setup_py_live_eval import iter_requirements
 from python_inspector.utils_pypi import Environment
 from python_inspector.utils_pypi import PypiSimpleRepository
 
@@ -97,6 +97,8 @@ def get_requirements_from_distribution(
     Return a list of requirements from a source distribution or wheel at
     ``location`` using the provided ``handler`` DatafileHandler for parsing.
     """
+    if not location:
+        return []
     if not os.path.exists(location):
         return []
     deps = []
@@ -137,9 +139,8 @@ def parse_setup_py_insecurely(setup_py):
     """
     if not os.path.exists(setup_py):
         return []
-    unparsed_requirements = iter_requirements(level="", extras=[], setup_file=setup_py)
-    for requirement in unparsed_requirements:
-        yield Requirement(requirement)
+    for req in iter_requirements(level="", extras=[], setup_file=setup_py):
+        yield Requirement(req)
 
 
 def is_valid_version(
@@ -377,61 +378,7 @@ class PythonInputProvider(AbstractProvider):
             )
             if not sdist_location:
                 return
-            setup_py_location = os.path.join(
-                sdist_location,
-                "setup.py",
-            )
-            setup_cfg_location = os.path.join(
-                sdist_location,
-                "setup.cfg",
-            )
-
-            if not os.path.exists(setup_py_location) and not os.path.exists(setup_cfg_location):
-                raise Exception(f"No setup.py or setup.cfg found in pypi sdist {sdist_location}")
-
-            # Some commonon packages like flask may have some dependencies in setup.cfg
-            # and some dependencies in setup.py. We are going to check both.
-            location_by_sdist_parser = {
-                PythonSetupPyHandler: setup_py_location,
-                SetupCfgHandler: setup_cfg_location,
-            }
-
-            # Set to True if we found any dependencies in setup.py or setup.cfg
-            has_deps = False
-
-            for handler, location in location_by_sdist_parser.items():
-                deps = get_requirements_from_distribution(
-                    handler=handler,
-                    location=location,
-                )
-                if deps:
-                    has_deps = True
-                    yield from deps
-
-            if not has_deps and contain_string(
-                string="requirements.txt", files=[setup_py_location, setup_cfg_location]
-            ):
-                # Look in requirements file if and only if thy are refered in setup.py or setup.cfg
-                # And no deps have been yielded by requirements file.
-                requirement_location = os.path.join(
-                    sdist_location,
-                    "requirements.txt",
-                )
-                deps = get_requirements_from_distribution(
-                    handler=PipRequirementsFileHandler,
-                    location=requirement_location,
-                )
-                if deps:
-                    has_deps = True
-                    yield from deps
-
-            if not has_deps and contain_string(
-                string="_require", files=[setup_py_location, setup_cfg_location]
-            ):
-                if self.insecure:
-                    yield from parse_setup_py_insecurely(setup_py=setup_py_location)
-                else:
-                    raise Exception("Unable to collect setup.py dependencies securely")
+            yield from get_setup_dependencies(location=sdist_location, insecure=self.insecure)
 
     def get_requirements_for_package_from_pypi_json_api(
         self, purl: PackageURL
@@ -729,6 +676,70 @@ def get_package_list(results):
             )
             packages.add(str(dep_purl))
     return list(sorted(packages))
+
+
+def get_setup_dependencies(location, insecure=False, use_requirements=True):
+    """
+    Yield dependencies from the given setup.py and setup.cfg location.
+    """
+
+    setup_py_location = os.path.join(
+        location,
+        "setup.py",
+    )
+    setup_cfg_location = os.path.join(
+        location,
+        "setup.cfg",
+    )
+
+    if not os.path.exists(setup_py_location) and not os.path.exists(setup_cfg_location):
+        raise Exception(f"No setup.py or setup.cfg found in pypi sdist {location}")
+
+    # Some commonon packages like flask may have some dependencies in setup.cfg
+    # and some dependencies in setup.py. We are going to check both.
+    location_by_sdist_parser = {
+        PythonSetupPyHandler: setup_py_location,
+        SetupCfgHandler: setup_cfg_location,
+    }
+
+    # Set to True if we found any dependencies in setup.py or setup.cfg
+    has_deps = False
+
+    for handler, location in location_by_sdist_parser.items():
+        deps = get_requirements_from_distribution(
+            handler=handler,
+            location=location,
+        )
+        if deps:
+            has_deps = True
+            yield from deps
+
+    if (
+        use_requirements
+        and not has_deps
+        and contain_string(string="requirements.txt", files=[setup_py_location, setup_cfg_location])
+    ):
+        # Look in requirements file if and only if thy are refered in setup.py or setup.cfg
+        # And no deps have been yielded by requirements file.
+        requirement_location = os.path.join(
+            location,
+            "requirements.txt",
+        )
+        deps = get_requirements_from_distribution(
+            handler=PipRequirementsFileHandler,
+            location=requirement_location,
+        )
+        if deps:
+            has_deps = True
+            yield from deps
+
+    if not has_deps and contain_string(
+        string="_require", files=[setup_py_location, setup_cfg_location]
+    ):
+        if insecure:
+            yield from parse_setup_py_insecurely(setup_py=setup_py_location)
+        else:
+            raise Exception("Unable to collect setup.py dependencies securely")
 
 
 def get_resolved_dependencies(

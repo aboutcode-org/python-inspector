@@ -13,16 +13,16 @@ import testpkh
 from setuptools import setup
 
 requirements = [
-    'click>=5.0.0',
+    "click>=5.0.0",
 ]
 
 extras_require = {
-    'docs': ['Sphinx>=1.4.2'],
+    "docs": ["Sphinx>=1.4.2"],
 }
 
 if __name__ == "__main__":
     setup(
-        name='testpkh',
+        name="testpkh",
         version=testpkh.__version__,
         install_requires=requirements,
         extras_require=extras_require,

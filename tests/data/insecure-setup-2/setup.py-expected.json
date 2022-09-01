@@ -1,0 +1,774 @@
+{
+  "headers": {
+    "tool_name": "python-inspector",
+    "tool_homepageurl": "https://github.com/nexB/python-inspector",
+    "tool_version": "0.6.5",
+    "options": [
+      "--index-url https://pypi.org/simple",
+      "--python-version 27",
+      "--operating-system linux",
+      "--json <file>"
+    ],
+    "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/nexB/scancode-toolkit/ for support and download.",
+    "warnings": [],
+    "errors": []
+  },
+  "requirements": [
+    {
+      "purl": "pkg:pypi/click",
+      "extracted_requirement": "click>=5.0.0",
+      "scope": "install",
+      "is_runtime": true,
+      "is_optional": false,
+      "is_resolved": false,
+      "resolved_package": {},
+      "extra_data": {}
+    },
+    {
+      "purl": "pkg:pypi/mock",
+      "extracted_requirement": "mock>=1.3.0",
+      "scope": "install",
+      "is_runtime": true,
+      "is_optional": false,
+      "is_resolved": false,
+      "resolved_package": {},
+      "extra_data": {}
+    },
+    {
+      "purl": "pkg:pypi/cairosvg",
+      "extracted_requirement": "CairoSVG<2.0.0,>=1.0.20",
+      "scope": "install",
+      "is_runtime": true,
+      "is_optional": false,
+      "is_resolved": false,
+      "resolved_package": {},
+      "extra_data": {}
+    },
+    {
+      "purl": "pkg:pypi/invenio-records",
+      "extracted_requirement": "invenio-records~=1.0.0",
+      "scope": "install",
+      "is_runtime": true,
+      "is_optional": false,
+      "is_resolved": false,
+      "resolved_package": {},
+      "extra_data": {}
+    },
+    {
+      "purl": "pkg:pypi/invenio",
+      "extracted_requirement": "invenio[auth,base,metadata]>=3.0.0",
+      "scope": "install",
+      "is_runtime": true,
+      "is_optional": false,
+      "is_resolved": false,
+      "resolved_package": {},
+      "extra_data": {}
+    }
+  ],
+  "resolved_dependencies": [
+    {
+      "package": "pkg:pypi/amqp@2.6.1",
+      "dependencies": [
+        "pkg:pypi/vine@1.3.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/bc/90/bb5ce93521772f083cb2d7a413bb82eda5afc62b4192adb7ea4c7b4858b9/amqp-2.6.1-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/37/9f/d54494a157d0dcd1673fe7a1bcce7ac70d3eb6d5d6149749450c87a2c959/amqp-2.6.1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/attrs@21.4.0",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/be/be/7abce643bfdf8ca01c48afa2ddf8308c2308b0c3b239a44e57d020afa0ef/attrs-21.4.0-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/d7/77/ebb15fc26d0f815839ecd897b919ed6d85c050feeb83e100e020df9153d2/attrs-21.4.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/babel@2.9.1",
+      "dependencies": [
+        "pkg:pypi/pytz@2022.2.1"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/aa/96/4ba93c5f40459dc850d25f9ba93f869a623e77aaecc7a9344e19c01942cf/Babel-2.9.1-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/17/e6/ec9aa6ac3d00c383a5731cc97ed7c619d3996232c977bb8326bcbb6c687e/Babel-2.9.1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/backports-functools-lru-cache@1.6.4",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/e5/c1/1a48a4bb9b515480d6c666977eeca9243be9fa9e6fb5a34be0ad9627f737/backports.functools_lru_cache-1.6.4-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/95/9f/122a41912932c77d5b8e6cab6bd456e6270211a3ed7248a80c235179a012/backports.functools_lru_cache-1.6.4.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/backports-shutil-get-terminal-size@1.0.0",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/7d/cd/1750d6c35fe86d35f8562091737907f234b78fdffab42b29c72b1dd861f4/backports.shutil_get_terminal_size-1.0.0-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/ec/9c/368086faa9c016efce5da3e0e13ba392c9db79e3ab740b763fe28620b18b/backports.shutil_get_terminal_size-1.0.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/billiard@3.6.4.0",
+      "dependencies": [],
+      "wheel_urls": [],
+      "sdist_url": "https://files.pythonhosted.org/packages/92/91/40de1901da8ec9eeb7c6a22143ba5d55d8aaa790761ca31342cedcd5c793/billiard-3.6.4.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/blinker@1.5",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/30/41/caa5da2dbe6d26029dfe11d31dfa8132b4d6d30b6d6b61a24824075a5f06/blinker-1.5-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/2b/12/82786486cefb68685bb1c151730f510b0f4e5d621d77f245bc0daf9a6c64/blinker-1.5.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/cairocffi@0.9.0",
+      "dependencies": [
+        "pkg:pypi/cffi@1.15.1"
+      ],
+      "wheel_urls": [],
+      "sdist_url": "https://files.pythonhosted.org/packages/62/be/ad4d422b6f38d99b09ad6d046ab725e8ccac5fefd9ca256ca35a80dbf3c6/cairocffi-0.9.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/cairosvg@1.0.22",
+      "dependencies": [
+        "pkg:pypi/cairocffi@0.9.0"
+      ],
+      "wheel_urls": [],
+      "sdist_url": "https://files.pythonhosted.org/packages/d9/9b/c241990c86faa9e52a01f0570bba4247ba0f3d66eae2607e179cb9ae773a/CairoSVG-1.0.22.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/celery@4.4.7",
+      "dependencies": [
+        "pkg:pypi/billiard@3.6.4.0",
+        "pkg:pypi/kombu@4.6.11",
+        "pkg:pypi/pytz@2022.2.1",
+        "pkg:pypi/vine@1.3.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/c8/0c/609e3611d20c9f8d883852d1be5516671f630fb08c8c1e56911567dfba7b/celery-4.4.7-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/fe/58/c7ced9705c2cedf526e183e428d1b145910cb8bc7ea537a2ec9a6552c056/celery-4.4.7.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/cffi@1.15.1",
+      "dependencies": [
+        "pkg:pypi/pycparser@2.21"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/1d/76/bcebbbab689f5f6fc8a91e361038a3001ee2e48c5f9dbad0a3b64a64cc9e/cffi-1.15.1-cp27-cp27m-manylinux1_x86_64.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/2b/a8/050ab4f0c3d4c1b8aaa805f70e26e84d0e27004907c5b8ecc1d31815f92a/cffi-1.15.1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/click@7.1.2",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/d2/3d/fa76db83bf75c4f8d338c2fd15c8d33fdd7ad23a9b5e57eb6c5de26b430e/click-7.1.2-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/27/6f/be940c8b1f1d69daceeb0032fee6c34d7bd70e3e649ccac0951500b4720e/click-7.1.2.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/configparser@4.0.2",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/7a/2a/95ed0501cf5d8709490b1d3a3f9b5cf340da6c433f896bbe9ce08dbe6785/configparser-4.0.2-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/16/4f/48975536bd488d3a272549eb795ac4a13a5f7fcdc8995def77fbef3532ee/configparser-4.0.2.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/contextlib2@0.6.0.post1",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/85/60/370352f7ef6aa96c52fb001831622f50f923c1d575427d021b8ab3311236/contextlib2-0.6.0.post1-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/02/54/669207eb72e3d8ae8b38aa1f0703ee87a0e9f88f30d3c0a47bebdb6de242/contextlib2-0.6.0.post1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/decorator@4.4.2",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/ed/1b/72a1821152d07cf1d8b6fce298aeb06a7eb90f4d6d41acec9861e7cc6df0/decorator-4.4.2-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/da/93/84fa12f2dc341f8cf5f022ee09e109961055749df2d0c75c5f98746cfe6c/decorator-4.4.2.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/enum34@1.1.10",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/6f/2c/a9386903ece2ea85e9807e0e062174dc26fdce8b05f216d00491be29fad5/enum34-1.1.10-py2-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/11/c4/2da1f4952ba476677a42f25cd32ab8aaf0e1c0d0e00b89822b835c7e654c/enum34-1.1.10.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/flask-babelex@0.9.4",
+      "dependencies": [
+        "pkg:pypi/babel@2.9.1",
+        "pkg:pypi/flask@1.1.4",
+        "pkg:pypi/jinja2@2.11.3",
+        "pkg:pypi/speaklater@1.3"
+      ],
+      "wheel_urls": [],
+      "sdist_url": "https://files.pythonhosted.org/packages/85/e7/217fb37ccd4bd93cd0f002028fb7c5fdf6ee0063a6beb83e43cd903da46e/Flask-BabelEx-0.9.4.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/flask-caching@1.9.0",
+      "dependencies": [
+        "pkg:pypi/flask@1.1.4"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/d1/9f/135bcf47fdb585dffcf9f918664ab9d63585aae8e722948b2abca041312f/Flask_Caching-1.9.0-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/41/c9/472486c62f22a1dad273a132b9484189e1a22eb8358883249e4955f8e464/Flask-Caching-1.9.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/flask-celeryext@0.3.4",
+      "dependencies": [
+        "pkg:pypi/celery@4.4.7",
+        "pkg:pypi/flask@1.1.4"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/70/a0/74c30a11f96be5ad3bf5609b00fe91755b9eee2ce6cc0bba59c32614afe8/Flask_CeleryExt-0.3.4-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/3f/67/a048930d1c6349b7cc038738140a258c443c5b8f83043311972a53364833/Flask-CeleryExt-0.3.4.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/flask-limiter@1.1.0",
+      "dependencies": [
+        "pkg:pypi/flask@1.1.4",
+        "pkg:pypi/limits@1.6",
+        "pkg:pypi/six@1.16.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/72/f3/68596cb061e1c7d5a7dfb3694de3f8845b908ea16296e762136f34727a65/Flask_Limiter-1.1.0-py2-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/96/a6/35fe99ef33b44ae33c212da20e8f545354f58cb0c77f8b6cdcfda9f5e9ad/Flask-Limiter-1.1.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/flask-shell-ipython@0.4.1",
+      "dependencies": [
+        "pkg:pypi/click@7.1.2",
+        "pkg:pypi/flask@1.1.4",
+        "pkg:pypi/ipython@5.10.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/10/6b/a45278cbff711cc7b8904bd38679a8cc249c4db825a76ae332302f59d398/flask_shell_ipython-0.4.1-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/48/8e/ba861448b7590282519aea82ae39107c77d001fdc37b7af4c14ed0e0db77/flask-shell-ipython-0.4.1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/flask-talisman@0.8.1",
+      "dependencies": [
+        "pkg:pypi/six@1.16.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/0a/f1/3c2a37a8053149521407bff4573cecca93d86b1f15a027e8cc4463da6261/flask_talisman-0.8.1-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/dd/1a/9f21ccb72a0d09594eb704da7f87a6d373ad7e9d4ac18693d1a3c275afb2/flask-talisman-0.8.1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/flask@1.1.4",
+      "dependencies": [
+        "pkg:pypi/click@7.1.2",
+        "pkg:pypi/itsdangerous@1.1.0",
+        "pkg:pypi/jinja2@2.11.3",
+        "pkg:pypi/werkzeug@1.0.1"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/e8/6d/994208daa354f68fd89a34a8bafbeaab26fda84e7af1e35bdaed02b667e6/Flask-1.1.4-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/4d/5b/2d145f5fe718b2f15ebe69240538f06faa8bbb76488bf962091db1f7a26d/Flask-1.1.4.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/funcsigs@1.0.2",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/69/cb/f5be453359271714c01b9bd06126eaf2e368f1fddfff30818754b5ac2328/funcsigs-1.0.2-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/94/4a/db842e7a0545de1cdb0439bb80e6e42dfe82aaeaadd4072f2263a4fbed23/funcsigs-1.0.2.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/importlib-metadata@2.1.3",
+      "dependencies": [
+        "pkg:pypi/configparser@4.0.2",
+        "pkg:pypi/contextlib2@0.6.0.post1",
+        "pkg:pypi/pathlib2@2.3.7.post1",
+        "pkg:pypi/zipp@1.2.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/cf/b4/877779cd7b5a15536ecbe0655cfb35a0de0ede6d888151fd7356d278c47d/importlib_metadata-2.1.3-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/4c/d8/af92ca59b33366b3b9d230d17772d728d7b064f3de6d6150332d5fa8dae3/importlib_metadata-2.1.3.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/invenio%5bauth%2cbase%2cmetadata%5d@3.4.1",
+      "dependencies": [
+        "pkg:pypi/invenio-app@1.3.3",
+        "pkg:pypi/invenio-base@1.2.5",
+        "pkg:pypi/invenio-cache@1.1.0",
+        "pkg:pypi/invenio-celery@1.2.2",
+        "pkg:pypi/invenio-config@1.0.3",
+        "pkg:pypi/invenio-i18n@1.3.1",
+        "pkg:pypi/invenio@3.4.1"
+      ],
+      "wheel_urls": [],
+      "sdist_url": null
+    },
+    {
+      "package": "pkg:pypi/invenio-app@1.3.3",
+      "dependencies": [
+        "pkg:pypi/flask-celeryext@0.3.4",
+        "pkg:pypi/flask-limiter@1.1.0",
+        "pkg:pypi/flask-shell-ipython@0.4.1",
+        "pkg:pypi/flask-talisman@0.8.1",
+        "pkg:pypi/invenio-base@1.2.5",
+        "pkg:pypi/invenio-cache@1.1.0",
+        "pkg:pypi/invenio-config@1.0.3",
+        "pkg:pypi/limits@1.6",
+        "pkg:pypi/uritools@2.2.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/25/ee/bfe28143e98e24a27ca8d6c4a464591e8006766a60fe8468a9b2061468e2/invenio_app-1.3.3-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/ef/e6/f7e3e2c79520a0046008aa0cb5381734f681d040793e5b8d1b995deaca5d/invenio-app-1.3.3.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/invenio-base@1.2.5",
+      "dependencies": [
+        "pkg:pypi/blinker@1.5",
+        "pkg:pypi/flask@1.1.4",
+        "pkg:pypi/six@1.16.0",
+        "pkg:pypi/werkzeug@1.0.1"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/47/7c/89fe1cd7263c8d67a366c568dcc6f5050518f06ca7695f7b719f3f340229/invenio_base-1.2.5-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/fd/3b/135f8f839f696ec9f163083625b5111310108fd86b0a9668f7da4a0b6f92/invenio-base-1.2.5.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/invenio-cache@1.1.0",
+      "dependencies": [
+        "pkg:pypi/flask-caching@1.9.0",
+        "pkg:pypi/invenio-base@1.2.5"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/04/f0/22b7426ac2b821d93bc6066410fac652c924330bfbd5b64a82e1e36b0ed6/invenio_cache-1.1.0-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/4f/f8/aee6e433a4b94882b8089cf5ff17ab1612a6ecc9231b3103cc4e6a533c98/invenio-cache-1.1.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/invenio-celery@1.2.2",
+      "dependencies": [
+        "pkg:pypi/celery@4.4.7",
+        "pkg:pypi/flask-celeryext@0.3.4",
+        "pkg:pypi/invenio-base@1.2.5",
+        "pkg:pypi/msgpack@1.0.4",
+        "pkg:pypi/redis@3.5.3"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/b8/a7/ec89de1fd4615aebc0e59c25ab8d8152bb04f03fa21b1c50bdd08239e79e/invenio_celery-1.2.2-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/67/db/7d7dffe8f620697461a4f680505c1d04904ca5b6805c10fd9a9677b5e0b6/invenio-celery-1.2.2.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/invenio-config@1.0.3",
+      "dependencies": [
+        "pkg:pypi/flask@1.1.4"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/5a/67/c751f8b8cf6ec5c4415bccaeed7f6b7eab836178ca4faa9f4d7088616735/invenio_config-1.0.3-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/cd/8e/36d33ec84f29bbeed5593ea8e89b421e0cbcc6fafd0d8c300d187f4a6d9d/invenio-config-1.0.3.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/invenio-i18n@1.3.1",
+      "dependencies": [
+        "pkg:pypi/flask-babelex@0.9.4",
+        "pkg:pypi/invenio-base@1.2.5"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/81/56/4398e45ba27c8436e38b8027881d72d1e02ab199d0eb69cb425759173ec4/invenio_i18n-1.3.1-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/06/70/b65b7ffef1daf8c864329af034c06a56ce8c889d887261553aad75ecd3dc/invenio-i18n-1.3.1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/invenio-records@1.0.2",
+      "dependencies": [
+        "pkg:pypi/blinker@1.5",
+        "pkg:pypi/flask-celeryext@0.3.4",
+        "pkg:pypi/flask@1.1.4",
+        "pkg:pypi/jsonpatch@1.32",
+        "pkg:pypi/jsonref@0.2",
+        "pkg:pypi/jsonresolver@0.3.1",
+        "pkg:pypi/jsonschema@4.0.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/50/97/fd03b1bbc220643230bf9e1f621d4043d583043d0cf5506a8ccb0551029c/invenio_records-1.0.2-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/88/8a/b4bd1e9b493fc119d972ac89920c32fa4573205e8fa2e893e53effc51f1c/invenio-records-1.0.2.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/invenio@3.4.1",
+      "dependencies": [
+        "pkg:pypi/invenio-app@1.3.3",
+        "pkg:pypi/invenio-base@1.2.5",
+        "pkg:pypi/invenio-cache@1.1.0",
+        "pkg:pypi/invenio-celery@1.2.2",
+        "pkg:pypi/invenio-config@1.0.3",
+        "pkg:pypi/invenio-i18n@1.3.1"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/31/59/5c20981a3f371b59c0545905a800cc5f3f066cb9a14a126ba6b96a255933/invenio-3.4.1-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/fe/e9/bf37c72c3e231ba5dafefb134b0f2cb6fbfc26d7a504047d7277097b6bb8/invenio-3.4.1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/ipaddress@1.0.23",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/c2/f8/49697181b1651d8347d24c095ce46c7346c37335ddc7d255833e7cde674d/ipaddress-1.0.23-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/b9/9a/3e9da40ea28b8210dd6504d3fe9fe7e013b62bf45902b458d1cdc3c34ed9/ipaddress-1.0.23.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/ipython-genutils@0.2.0",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/fa/bc/9bd3b5c2b4774d5f33b2d544f1460be9df7df2fe42f352135381c347c69a/ipython_genutils-0.2.0-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/e8/69/fbeffffc05236398ebfcfb512b6d2511c622871dca1746361006da310399/ipython_genutils-0.2.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/ipython@5.10.0",
+      "dependencies": [
+        "pkg:pypi/backports-shutil-get-terminal-size@1.0.0",
+        "pkg:pypi/decorator@4.4.2",
+        "pkg:pypi/pathlib2@2.3.7.post1",
+        "pkg:pypi/pexpect@4.8.0",
+        "pkg:pypi/pickleshare@0.7.5",
+        "pkg:pypi/prompt-toolkit@1.0.18",
+        "pkg:pypi/pygments@2.5.2",
+        "pkg:pypi/setuptools@44.1.1",
+        "pkg:pypi/simplegeneric@0.8.1",
+        "pkg:pypi/traitlets@4.3.3"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/ce/2c/2849a2b37024a01a847c87d81825c0489eb22ffc6416cac009bf281ea838/ipython-5.10.0-py2-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/b6/73/c8f68b3a7d0deece3d2f7ab727fbf262bfca7475330b44043a5503b3aa7a/ipython-5.10.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/itsdangerous@1.1.0",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/76/ae/44b03b253d6fade317f32c24d100b3b35c2239807046a4c953c7b89fa49e/itsdangerous-1.1.0-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/68/1a/f27de07a8a304ad5fa817bbe383d1238ac4396da447fa11ed937039fa04b/itsdangerous-1.1.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/jinja2@2.11.3",
+      "dependencies": [
+        "pkg:pypi/markupsafe@1.1.1"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/7e/c2/1eece8c95ddbc9b1aeb64f5783a9e07a286de42191b7204d67b7496ddf35/Jinja2-2.11.3-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/4f/e7/65300e6b32e69768ded990494809106f87da1d436418d5f1367ed3966fd7/Jinja2-2.11.3.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/jsonpatch@1.32",
+      "dependencies": [
+        "pkg:pypi/jsonpointer@2.3"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/a3/55/f7c93bae36d869292aedfbcbae8b091386194874f16390d680136edd2b28/jsonpatch-1.32-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/21/67/83452af2a6db7c4596d1e2ecaa841b9a900980103013b867f2865e5e1cf0/jsonpatch-1.32.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/jsonpointer@2.3",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/a3/be/8dc9d31b50e38172c8020c40f497ce8debdb721545ddb9fcb7cca89ea9e6/jsonpointer-2.3-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/a0/6c/c52556b957a0f904e7c45585444feef206fe5cb1ff656303a1d6d922a53b/jsonpointer-2.3.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/jsonref@0.2",
+      "dependencies": [],
+      "wheel_urls": [],
+      "sdist_url": "https://files.pythonhosted.org/packages/b3/cf/93d4f34d76863d4fb995cb8e3e4f29908304065ce6381e0349700c44ad0c/jsonref-0.2.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/jsonresolver@0.3.1",
+      "dependencies": [
+        "pkg:pypi/pluggy@0.13.1",
+        "pkg:pypi/six@1.16.0",
+        "pkg:pypi/werkzeug@1.0.1"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/0d/8e/e63fba33303e2062eb1fbd38a5483538ad1b5eee73e04ac1d1f632ac2b76/jsonresolver-0.3.1-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/2c/45/30a9704607f4f868bb44a1f04d133157b8355cc1b99e083e9d7d47df3d24/jsonresolver-0.3.1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/jsonschema@4.0.0",
+      "dependencies": [
+        "pkg:pypi/attrs@21.4.0",
+        "pkg:pypi/importlib-metadata@2.1.3",
+        "pkg:pypi/pyrsistent@0.16.1"
+      ],
+      "wheel_urls": [],
+      "sdist_url": "https://files.pythonhosted.org/packages/9c/99/9789c7fd0bb8876a7d624d903195ce11e5618b421bdb1bf7c975d17a9bc3/jsonschema-4.0.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/kombu@4.6.11",
+      "dependencies": [
+        "pkg:pypi/amqp@2.6.1",
+        "pkg:pypi/importlib-metadata@2.1.3"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/9e/34/3eea6a3a9ff81b0c7ddbdceb22a1ffc1b5907d863f27ca19a68777d2211d/kombu-4.6.11-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/45/e1/00f2e3f6f5575aa2f7ee41e2fd884ce573f8146e136bde37daf45ef7ca5e/kombu-4.6.11.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/limits@1.6",
+      "dependencies": [
+        "pkg:pypi/six@1.16.0"
+      ],
+      "wheel_urls": [],
+      "sdist_url": "https://files.pythonhosted.org/packages/f8/80/3e208b8cfdcf9bf85006097a53c93f53a0c23bc711f1e6abfc180ebb4bca/limits-1.6.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/markupsafe@1.1.1",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/d8/1f/e97c4c6b182e59562f99c207f0f621d15a42fc82a6532a98e0b2d38b7c4e/MarkupSafe-1.1.1-cp27-cp27m-manylinux1_x86_64.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/b9/2e/64db92e53b86efccfaea71321f597fa2e1b2bd3853d8ce658568f7a13094/MarkupSafe-1.1.1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/mock@3.0.5",
+      "dependencies": [
+        "pkg:pypi/funcsigs@1.0.2",
+        "pkg:pypi/six@1.16.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/05/d2/f94e68be6b17f46d2c353564da56e6fb89ef09faeeff3313a046cb810ca9/mock-3.0.5-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/2e/ab/4fe657d78b270aa6a32f027849513b829b41b0f28d9d8d7f8c3d29ea559a/mock-3.0.5.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/msgpack@1.0.4",
+      "dependencies": [],
+      "wheel_urls": [],
+      "sdist_url": "https://files.pythonhosted.org/packages/22/44/0829b19ac243211d1d2bd759999aa92196c546518b0be91de9cacc98122a/msgpack-1.0.4.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/pathlib2@2.3.7.post1",
+      "dependencies": [
+        "pkg:pypi/scandir@1.10.0",
+        "pkg:pypi/six@1.16.0",
+        "pkg:pypi/typing@3.10.0.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/09/eb/4af4bcd5b8731366b676192675221c5324394a580dfae469d498313b5c4a/pathlib2-2.3.7.post1-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/31/51/99caf463dc7c18eb18dad1fffe465a3cf3ee50ac3d1dccbd1781336fe9c7/pathlib2-2.3.7.post1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/pexpect@4.8.0",
+      "dependencies": [
+        "pkg:pypi/ptyprocess@0.7.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/39/7b/88dbb785881c28a102619d46423cb853b46dbccc70d3ac362d99773a78ce/pexpect-4.8.0-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/e5/9b/ff402e0e930e70467a7178abb7c128709a30dfb22d8777c043e501bc1b10/pexpect-4.8.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/pickleshare@0.7.5",
+      "dependencies": [
+        "pkg:pypi/pathlib2@2.3.7.post1"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/9a/41/220f49aaea88bc6fa6cba8d05ecf24676326156c23b991e80b3f2fc24c77/pickleshare-0.7.5-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/d8/b6/df3c1c9b616e9c0edbc4fbab6ddd09df9535849c64ba51fcb6531c32d4d8/pickleshare-0.7.5.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/pluggy@0.13.1",
+      "dependencies": [
+        "pkg:pypi/importlib-metadata@2.1.3"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/a0/28/85c7aa31b80d150b772fbe4a229487bc6644da9ccb7e427dd8cc60cb8a62/pluggy-0.13.1-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/f8/04/7a8542bed4b16a65c2714bf76cf5a0b026157da7f75e87cc88774aa10b14/pluggy-0.13.1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/prompt-toolkit@1.0.18",
+      "dependencies": [
+        "pkg:pypi/six@1.16.0",
+        "pkg:pypi/wcwidth@0.2.5"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/9d/d2/2f099b5cd62dab819ce7a9f1431c09a9032fbfbb6474f442722e88935376/prompt_toolkit-1.0.18-py2-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/c5/64/c170e5b1913b540bf0c8ab7676b21fdd1d25b65ddeb10025c6ca43cccd4c/prompt_toolkit-1.0.18.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/ptyprocess@0.7.0",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/22/a6/858897256d0deac81a172289110f31629fc4cee19b6f01283303e18c8db3/ptyprocess-0.7.0-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/20/e5/16ff212c1e452235a90aeb09066144d0c5a6a8c0834397e03f5224495c4e/ptyprocess-0.7.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/pycparser@2.21",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/62/d5/5f610ebe421e85889f2e55e33b7f9a6795bd982198517d912eb1c76e1a53/pycparser-2.21-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/5e/0b/95d387f5f4433cb0f53ff7ad859bd2c6051051cebbb564f139a999ab46de/pycparser-2.21.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/pygments@2.5.2",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/be/39/32da3184734730c0e4d3fa3b2b5872104668ad6dc1b5a73d8e477e5fe967/Pygments-2.5.2-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/cb/9f/27d4844ac5bf158a33900dbad7985951e2910397998e85712da03ce125f0/Pygments-2.5.2.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/pyrsistent@0.16.1",
+      "dependencies": [
+        "pkg:pypi/six@1.16.0"
+      ],
+      "wheel_urls": [],
+      "sdist_url": "https://files.pythonhosted.org/packages/80/18/1492d651693ef7d40e0a40377ed56a8cc5c5fe86073eb6c56e53513f4480/pyrsistent-0.16.1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/pytz@2022.2.1",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/d5/50/54451e88e3da4616286029a3a17fc377de817f66a0f50e1faaee90161724/pytz-2022.2.1-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/24/0c/401283bb1499768e33ddd2e1a35817c775405c1f047a9dc088a29ce2ea5d/pytz-2022.2.1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/redis@3.5.3",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/a7/7c/24fb0511df653cf1a5d938d8f5d19802a88cef255706fdda242ff97e91b7/redis-3.5.3-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/b3/17/1e567ff78c83854e16b98694411fe6e08c3426af866ad11397cddceb80d3/redis-3.5.3.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/scandir@1.10.0",
+      "dependencies": [],
+      "wheel_urls": [],
+      "sdist_url": "https://files.pythonhosted.org/packages/df/f5/9c052db7bd54d0cbf1bc0bb6554362bba1012d03e5888950a4f5c5dadc4e/scandir-1.10.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/setuptools@44.1.1",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/e1/b7/182161210a13158cd3ccc41ee19aadef54496b74f2817cc147006ec932b4/setuptools-44.1.1-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/b2/40/4e00501c204b457f10fe410da0c97537214b2265247bc9a5bc6edd55b9e4/setuptools-44.1.1.zip"
+    },
+    {
+      "package": "pkg:pypi/simplegeneric@0.8.1",
+      "dependencies": [],
+      "wheel_urls": [],
+      "sdist_url": "https://files.pythonhosted.org/packages/3d/57/4d9c9e3ae9a255cd4e1106bb57e24056d3d0709fc01b2e3e345898e49d5b/simplegeneric-0.8.1.zip"
+    },
+    {
+      "package": "pkg:pypi/six@1.16.0",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/d9/5a/e7c31adbe875f2abbb91bd84cf2dc52d792b5a01506781dbcf25c91daf11/six-1.16.0-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/71/39/171f1c67cd00715f190ba0b100d606d440a28c93c7714febeca8b79af85e/six-1.16.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/speaklater@1.3",
+      "dependencies": [],
+      "wheel_urls": [],
+      "sdist_url": "https://files.pythonhosted.org/packages/11/92/5ae1effe0ccb8561c034a0111d53c8788660ddb7ed4992f0da1bb5c525e5/speaklater-1.3.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/traitlets@4.3.3",
+      "dependencies": [
+        "pkg:pypi/decorator@4.4.2",
+        "pkg:pypi/enum34@1.1.10",
+        "pkg:pypi/ipython-genutils@0.2.0",
+        "pkg:pypi/six@1.16.0"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/ca/ab/872a23e29cec3cf2594af7e857f18b687ad21039c1f9b922fac5b9b142d5/traitlets-4.3.3-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/75/b0/43deb021bc943f18f07cbe3dac1d681626a48997b7ffa1e7fb14ef922b21/traitlets-4.3.3.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/typing@3.10.0.0",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/0b/cb/da856e81731833b94da70a08712f658416266a5fb2a9d9e426c8061becef/typing-3.10.0.0-py2-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/b0/1b/835d4431805939d2996f8772aca1d2313a57e8860fec0e48e8e7dfe3a477/typing-3.10.0.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/uritools@2.2.0",
+      "dependencies": [
+        "pkg:pypi/ipaddress@1.0.23"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/8c/5d/ef3cd3c40b4b97f0cb50cee8e4c5a8a4abc30953e1c7ce7e0d25cb2534c3/uritools-2.2.0-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/ab/1c/e9aa4a907806743298171510042447adc20cd5cf5b95436206a067e14496/uritools-2.2.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/vine@1.3.0",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/7f/60/82c03047396126c8331ceb64da1dc52d4f1317209f32e8fe286d0c07365a/vine-1.3.0-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/1c/e1/79fb8046e607dd6c2ad05c9b8ebac9d0bd31d086a08f02699e96fc5b3046/vine-1.3.0.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/wcwidth@0.2.5",
+      "dependencies": [
+        "pkg:pypi/backports-functools-lru-cache@1.6.4"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/59/7c/e39aca596badaf1b78e8f547c807b04dae603a433d3e7a7e04d67f2ef3e5/wcwidth-0.2.5-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/89/38/459b727c381504f361832b9e5ace19966de1a235d73cdbdea91c771a1155/wcwidth-0.2.5.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/werkzeug@1.0.1",
+      "dependencies": [],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/cc/94/5f7079a0e00bd6863ef8f1da638721e9da21e5bacee597595b318f71d62e/Werkzeug-1.0.1-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/10/27/a33329150147594eff0ea4c33c2036c0eadd933141055be0ff911f7f8d04/Werkzeug-1.0.1.tar.gz"
+    },
+    {
+      "package": "pkg:pypi/zipp@1.2.0",
+      "dependencies": [
+        "pkg:pypi/contextlib2@0.6.0.post1"
+      ],
+      "wheel_urls": [
+        "https://files.pythonhosted.org/packages/96/0a/67556e9b7782df7118c1f49bdc494da5e5e429c93aa77965f33e81287c8c/zipp-1.2.0-py2.py3-none-any.whl"
+      ],
+      "sdist_url": "https://files.pythonhosted.org/packages/78/08/d52f0ea643bc1068d6dc98b412f4966a9b63255d20911a23ac3220c033c4/zipp-1.2.0.tar.gz"
+    }
+  ]
+}

@@ -226,3 +226,15 @@ def test_setup_py_parsing_insecure():
     setup_py_file = setup_test_env.get_test_loc("insecure-setup/setup.py")
     reqs = [str(req) for req in list(parse_setup_py_insecurely(setup_py=setup_py_file))]
     assert reqs == ["isodate", "pyparsing", "six"]
+
+
+def test_setup_py_parsing_insecure_testpkh():
+    setup_py_file = setup_test_env.get_test_loc("insecure-setup-2/setup.py")
+    reqs = [str(req) for req in list(parse_setup_py_insecurely(setup_py=setup_py_file))]
+    assert reqs == [
+        "CairoSVG<2.0.0,>=1.0.20",
+        "click>=5.0.0",
+        "invenio[auth,base,metadata]>=3.0.0",
+        "invenio-records==1.0.*,>=1.0.0",
+        "mock>=1.3.0",
+    ]

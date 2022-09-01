@@ -15,15 +15,6 @@ from setuptools import setup
 
 # Get the version string.  Cannot be done with import!
 g = {}
-with open(os.path.join('requirements_builder', 'version.py'), 'rt') as fp:
-    exec(fp.read(), g)
-    version = g['__version__']
-
-with open('README.rst') as readme_file:
-    readme = readme_file.read()
-
-with open('CHANGES.rst') as history_file:
-    history = history_file.read().replace('.. :changes:', '')
 
 install_requires = [
     'click>=6.1.0',
@@ -54,9 +45,9 @@ setup_requires = ['pytest-runner>=2.6.2', ]
 
 setup(
     name='requirements-builder',
-    version=version,
+    version="0.1.0",
     description=__doc__,
-    long_description=readme + '\n\n' + history,
+    long_description='\n\n',
     author="Invenio Collaboration",
     author_email='info@inveniosoftware.org',
     url='https://github.com/inveniosoftware/requirements-builder',
