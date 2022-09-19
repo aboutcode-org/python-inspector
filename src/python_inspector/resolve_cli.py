@@ -25,6 +25,7 @@ from python_inspector import dependencies
 from python_inspector import utils
 from python_inspector import utils_pypi
 from python_inspector.cli_utils import FileOptionType
+from python_inspector.package_data import get_pypi_data_from_purl
 from python_inspector.resolution import get_environment_marker_from_environment
 from python_inspector.resolution import get_python_version_from_env_tag
 from python_inspector.resolution import get_resolved_dependencies
@@ -321,7 +322,7 @@ def resolve_dependencies(
             click.secho(f" {repo}")
 
     # resolve dependencies proper
-    requirements, resolved_dependencies = resolve(
+    requirements, resolved_dependencies, packages = resolve(
         direct_dependencies=direct_dependencies,
         environment=environment,
         repos=repos,
@@ -354,12 +355,20 @@ def resolve_dependencies(
         errors=[],
     )
 
+    metadata = []
+
+    for package in packages:
+        metadata.extend(
+            list(get_pypi_data_from_purl(package, repos=repos, environment=environment)),
+        )
+
     if json_output:
         write_output(
             headers=headers,
             requirements=requirements,
             resolved_dependencies=resolved_dependencies,
             json_output=json_output,
+            metadata=metadata,
         )
 
     else:
@@ -368,6 +377,7 @@ def resolve_dependencies(
             requirements=requirements,
             resolved_dependencies=resolved_dependencies,
             json_output=pdt_output,
+            metadata=metadata,
             pdt_output=True,
         )
 
@@ -400,7 +410,7 @@ def resolve(
         )
     )
 
-    resolved_dependencies = get_resolved_dependencies(
+    resolved_dependencies, packages = get_resolved_dependencies(
         requirements=requirements,
         environment=environment,
         repos=repos,
@@ -412,7 +422,7 @@ def resolve(
 
     initial_requirements = [d.to_dict() for d in direct_dependencies]
 
-    return initial_requirements, resolved_dependencies
+    return initial_requirements, resolved_dependencies, packages
 
 
 def get_requirements_from_direct_dependencies(
@@ -432,19 +442,26 @@ def get_requirements_from_direct_dependencies(
                 yield req
 
 
-def write_output(headers, requirements, resolved_dependencies, json_output, pdt_output=False):
+def write_output(
+    headers, requirements, resolved_dependencies, json_output, metadata, pdt_output=False
+):
     """
     Write headers, requirements and resolved_dependencies as JSON to ``json_output``.
     Return the output data.
     """
+
     if not pdt_output:
         output = dict(
             headers=headers,
             requirements=requirements,
             resolved_dependencies=resolved_dependencies,
+            metadata=metadata,
         )
     else:
-        output = resolved_dependencies
+        output = dict(
+            resolved_dependencies=resolved_dependencies,
+            metadata=metadata,
+        )
 
     json.dump(output, json_output, indent=2)
     return output
