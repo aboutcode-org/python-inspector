@@ -101,10 +101,29 @@ def get_requirements_from_distribution(
         return []
     if not os.path.exists(location):
         return []
+    reqs = []
+    for package_data in handler.parse(location):
+        dependencies = package_data.dependencies
+        reqs.extend(get_requirements_from_dependencies(dependencies=dependencies))
+    return reqs
+
+
+def get_deps_from_distribution(
+    handler: BasePypiHandler,
+    location: str,
+) -> List[DependentPackage]:
+    """
+    Return a list of requirements from a source distribution or wheel at
+    ``location`` using the provided ``handler`` DatafileHandler for parsing.
+    """
+    if not location:
+        return []
+    if not os.path.exists(location):
+        return []
     deps = []
     for package_data in handler.parse(location):
         dependencies = package_data.dependencies
-        deps.extend(get_requirements_from_dependencies(dependencies=dependencies))
+        deps.extend(dependencies=dependencies)
     return deps
 
 
@@ -133,7 +152,7 @@ def contain_string(string: str, files: List) -> bool:
     return False
 
 
-def parse_setup_py_insecurely(setup_py):
+def parse_reqs_from_setup_py_insecurely(setup_py):
     """
     Yield requirements from the setup.py file at ``setup_py``.
     """
@@ -141,6 +160,27 @@ def parse_setup_py_insecurely(setup_py):
         return []
     for req in iter_requirements(level="", extras=[], setup_file=setup_py):
         yield Requirement(req)
+
+
+def parse_deps_from_setup_py_insecurely(setup_py):
+    """
+    Yield requirements from the setup.py file at ``setup_py``.
+    """
+    if not os.path.exists(setup_py):
+        return []
+    for req in iter_requirements(level="", extras=[], setup_file=setup_py):
+        parsed_req = Requirement(req)
+        yield DependentPackage(
+            purl=str(
+                PackageURL(
+                    type="pypi",
+                    name=parsed_req.name,
+                )
+            ),
+            extracted_requirement=req,
+            scope="install",
+            is_runtime=False,
+        )
 
 
 def is_valid_version(
@@ -685,7 +725,7 @@ def get_setup_dependencies(location, analyze_setup_py_insecurely=False, use_requ
         string="_require", files=[setup_py_location, setup_cfg_location]
     ):
         if analyze_setup_py_insecurely:
-            yield from parse_setup_py_insecurely(setup_py=setup_py_location)
+            yield from parse_reqs_from_setup_py_insecurely(setup_py=setup_py_location)
         else:
             raise Exception("Unable to collect setup.py dependencies securely")
 

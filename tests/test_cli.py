@@ -255,6 +255,18 @@ def test_cli_with_insecure_option_testpkh():
 
 
 @pytest.mark.online
+def test_cli_with_insecure_option_testrdflib():
+    setup_py_file = test_env.get_test_loc("insecure-setup/setup.py")
+    expected_file = test_env.get_test_loc("insecure-setup/setup.py-expected.json", must_exist=False)
+    check_setup_py_resolution(
+        setup_py=setup_py_file,
+        expected_file=expected_file,
+        regen=REGEN_TEST_FIXTURES,
+        extra_options=["--python-version", "27", "--analyze-setup-py-insecurely"],
+    )
+
+
+@pytest.mark.online
 def test_cli_with_setup_py():
     setup_py_file = setup_test_env.get_test_loc("simple-setup.py")
     expected_file = setup_test_env.get_test_loc("simple-setup.py-expected.json", must_exist=False)

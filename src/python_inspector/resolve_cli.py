@@ -19,6 +19,7 @@ from packaging.requirements import Requirement
 from tinynetrc import Netrc
 
 from _packagedcode.models import DependentPackage
+from _packagedcode.pypi import PipRequirementsFileHandler
 from _packagedcode.pypi import PythonSetupPyHandler
 from _packagedcode.pypi import can_process_dependent_package
 from python_inspector import dependencies
@@ -26,9 +27,12 @@ from python_inspector import utils
 from python_inspector import utils_pypi
 from python_inspector.cli_utils import FileOptionType
 from python_inspector.package_data import get_pypi_data_from_purl
+from python_inspector.resolution import contain_string
+from python_inspector.resolution import get_deps_from_distribution
 from python_inspector.resolution import get_environment_marker_from_environment
 from python_inspector.resolution import get_python_version_from_env_tag
 from python_inspector.resolution import get_resolved_dependencies
+from python_inspector.resolution import parse_deps_from_setup_py_insecurely
 
 TRACE = False
 
@@ -282,6 +286,33 @@ def resolve_dependencies(
             # TODO : we need to handle to all the scopes
             if dep.scope == "install":
                 direct_dependencies.append(dep)
+
+        if not package_data.dependencies:
+            has_deps = False
+            if contain_string(string="requirements.txt", files=[setup_py_file]):
+                # Look in requirements file if and only if thy are refered in setup.py or setup.cfg
+                # And no deps have been yielded by requirements file.
+
+                location = os.path.dirname(setup_py_file)
+                requirement_location = os.path.join(
+                    location,
+                    "requirements.txt",
+                )
+                deps = get_deps_from_distribution(
+                    handler=PipRequirementsFileHandler,
+                    location=requirement_location,
+                )
+                if deps:
+                    has_deps = True
+                    direct_dependencies.extend(deps)
+
+            if not has_deps and contain_string(string="_require", files=[setup_py_file]):
+                if analyze_setup_py_insecurely:
+                    direct_dependencies.extend(
+                        parse_deps_from_setup_py_insecurely(setup_py=setup_py_file)
+                    )
+                else:
+                    raise Exception("Unable to collect setup.py dependencies securely")
 
     if not direct_dependencies:
         click.secho("Error: no requirements requested.")
