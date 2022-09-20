@@ -185,6 +185,10 @@ def fetch_and_extract_sdist(
     if not sdist:
         return
 
+    return get_sdist_file_path_from_filename(sdist)
+
+
+def get_sdist_file_path_from_filename(sdist):
     if sdist.endswith(".tar.gz"):
         sdist_file = sdist.rstrip(".tar.gz")
         with tarfile.open(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist)) as file:
@@ -625,8 +629,6 @@ def format_resolution(
             parent_children = dict(
                 package=str(parent_purl),
                 dependencies=dependencies,
-                wheel_urls=list(dict.fromkeys(wheel_urls)),
-                sdist_url=sdist_url,
             )
             as_parent_children.append(parent_children)
         as_parent_children.sort(key=lambda d: d["package"])
@@ -678,6 +680,31 @@ def format_pdt_tree(results):
     return dependencies
 
 
+def get_package_list(results):
+    """
+    Return a list of packages in the resolution.
+    """
+    mapping = results.mapping
+    graph = results.graph
+    parents = mapping.keys()
+    packages = set()
+    for parent in parents:
+        parent_purl = PackageURL(
+            type="pypi",
+            name=parent,
+            version=str(mapping[parent].version),
+        )
+        packages.add(str(parent_purl))
+        for dependency in graph.iter_children(parent):
+            dep_purl = PackageURL(
+                type="pypi",
+                name=dependency,
+                version=str(mapping[dependency].version),
+            )
+            packages.add(str(dep_purl))
+    return list(sorted(packages))
+
+
 def get_resolved_dependencies(
     requirements: List[Requirement],
     environment: Environment = None,
@@ -701,10 +728,14 @@ def get_resolved_dependencies(
             reporter=BaseReporter(),
         )
         resolver_results = resolver.resolve(requirements=requirements, max_rounds=max_rounds)
+        package_list = get_package_list(results=resolver_results)
         if pdt_output:
-            return format_pdt_tree(resolver_results)
-        return format_resolution(
-            resolver_results, as_tree=as_tree, environment=environment, repos=repos
+            return (format_pdt_tree(resolver_results), package_list)
+        return (
+            format_resolution(
+                resolver_results, as_tree=as_tree, environment=environment, repos=repos
+            ),
+            package_list,
         )
     except Exception as e:
         if verbose:

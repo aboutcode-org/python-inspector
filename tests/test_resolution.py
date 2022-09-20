@@ -24,7 +24,7 @@ from python_inspector.utils_pypi import Environment
 def test_get_resolved_dependencies_with_flask_and_python_310():
     req = Requirement("flask==2.1.2")
     req.is_requirement_resolved = True
-    results = get_resolved_dependencies(
+    _, plist = get_resolved_dependencies(
         requirements=[req],
         environment=Environment(
             python_version="310",
@@ -33,8 +33,7 @@ def test_get_resolved_dependencies_with_flask_and_python_310():
         repos=[PYPI_PUBLIC_REPO],
         as_tree=False,
     )
-    as_list = [p["package"] for p in results]
-    assert as_list == [
+    assert plist == [
         "pkg:pypi/click@8.1.3",
         "pkg:pypi/flask@2.1.2",
         "pkg:pypi/itsdangerous@2.1.2",
@@ -48,7 +47,7 @@ def test_get_resolved_dependencies_with_flask_and_python_310():
 def test_get_resolved_dependencies_with_flask_and_python_310_windows():
     req = Requirement("flask==2.1.2")
     req.is_requirement_resolved = True
-    results = get_resolved_dependencies(
+    _, plist = get_resolved_dependencies(
         requirements=[req],
         environment=Environment(
             python_version="310",
@@ -57,8 +56,7 @@ def test_get_resolved_dependencies_with_flask_and_python_310_windows():
         repos=[PYPI_PUBLIC_REPO],
         as_tree=False,
     )
-    as_list = [p["package"] for p in results]
-    assert as_list == [
+    assert plist == [
         "pkg:pypi/click@8.1.3",
         "pkg:pypi/colorama@0.4.5",
         "pkg:pypi/flask@2.1.2",
@@ -73,7 +71,7 @@ def test_get_resolved_dependencies_with_flask_and_python_310_windows():
 def test_get_resolved_dependencies_with_flask_and_python_36():
     req = Requirement("flask")
     req.is_requirement_resolved = False
-    results = get_resolved_dependencies(
+    _, plist = get_resolved_dependencies(
         requirements=[req],
         environment=Environment(
             python_version="36",
@@ -82,9 +80,8 @@ def test_get_resolved_dependencies_with_flask_and_python_36():
         repos=[PYPI_PUBLIC_REPO],
         as_tree=False,
     )
-    as_list = [p["package"] for p in results]
 
-    assert as_list == [
+    assert plist == [
         "pkg:pypi/click@8.0.4",
         "pkg:pypi/dataclasses@0.8",
         "pkg:pypi/flask@2.0.3",
@@ -102,7 +99,7 @@ def test_get_resolved_dependencies_with_flask_and_python_36():
 def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
     req = Requirement("flask~=2.1.2")
     req.is_requirement_resolved = False
-    results = get_resolved_dependencies(
+    _, plist = get_resolved_dependencies(
         requirements=[req],
         as_tree=False,
         environment=Environment(
@@ -110,8 +107,7 @@ def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
             operating_system="linux",
         ),
     )
-    as_list = [p["package"] for p in results]
-    assert as_list == [
+    assert plist == [
         "pkg:pypi/click@8.1.3",
         "pkg:pypi/flask@2.1.3",
         "pkg:pypi/importlib-metadata@4.12.0",
@@ -127,7 +123,7 @@ def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
 def test_without_supported_wheels():
     req = Requirement("autobahn==22.3.2")
     req.is_requirement_resolved = True
-    results = get_resolved_dependencies(
+    _, plist = get_resolved_dependencies(
         requirements=[req],
         as_tree=False,
         repos=[PYPI_PUBLIC_REPO],
@@ -136,14 +132,13 @@ def test_without_supported_wheels():
             operating_system="linux",
         ),
     )
-    as_list = [p["package"] for p in results]
 
-    assert as_list == [
+    assert plist == [
         "pkg:pypi/autobahn@22.3.2",
         "pkg:pypi/cffi@1.15.1",
-        "pkg:pypi/cryptography@37.0.4",
+        "pkg:pypi/cryptography@38.0.1",
         "pkg:pypi/hyperlink@21.0.0",
-        "pkg:pypi/idna@3.3",
+        "pkg:pypi/idna@3.4",
         "pkg:pypi/pycparser@2.21",
         "pkg:pypi/setuptools@65.3.0",
         "pkg:pypi/txaio@22.2.1",

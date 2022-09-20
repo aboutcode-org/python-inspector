@@ -30,11 +30,7 @@
   "resolved_dependencies": [
     {
       "package": "pkg:pypi/click@8.1.3",
-      "dependencies": [],
-      "wheel_urls": [
-        "https://files.pythonhosted.org/packages/c2/f1/df59e28c642d583f7dacffb1e0965d0e00b218e0186d7858ac5233dce840/click-8.1.3-py3-none-any.whl"
-      ],
-      "sdist_url": "https://files.pythonhosted.org/packages/59/87/84326af34517fca8c58418d148f2403df25303e02736832403587318e9e8/click-8.1.3.tar.gz"
+      "dependencies": []
     },
     {
       "package": "pkg:pypi/flask@2.2.2",
@@ -44,65 +40,855 @@
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
         "pkg:pypi/werkzeug@2.2.2"
-      ],
-      "wheel_urls": [
-        "https://files.pythonhosted.org/packages/0f/43/15f4f9ab225b0b25352412e8daa3d0e3d135fcf5e127070c74c3632c8b4c/Flask-2.2.2-py3-none-any.whl"
-      ],
-      "sdist_url": "https://files.pythonhosted.org/packages/69/b6/53cfa30eed5aa7343daff36622843688ba8c6fe9829bb2b92e193ab1163f/Flask-2.2.2.tar.gz"
+      ]
     },
     {
       "package": "pkg:pypi/importlib-metadata@4.12.0",
       "dependencies": [
         "pkg:pypi/zipp@3.8.1"
-      ],
-      "wheel_urls": [
-        "https://files.pythonhosted.org/packages/d2/a2/8c239dc898138f208dd14b441b196e7b3032b94d3137d9d8453e186967fc/importlib_metadata-4.12.0-py3-none-any.whl"
-      ],
-      "sdist_url": "https://files.pythonhosted.org/packages/1a/16/441080c907df829016729e71d8bdd42d99b9bdde48b01492ed08912c0aa9/importlib_metadata-4.12.0.tar.gz"
+      ]
     },
     {
       "package": "pkg:pypi/itsdangerous@2.1.2",
-      "dependencies": [],
-      "wheel_urls": [
-        "https://files.pythonhosted.org/packages/68/5f/447e04e828f47465eeab35b5d408b7ebaaaee207f48b7136c5a7267a30ae/itsdangerous-2.1.2-py3-none-any.whl"
-      ],
-      "sdist_url": "https://files.pythonhosted.org/packages/7f/a1/d3fb83e7a61fa0c0d3d08ad0a94ddbeff3731c05212617dff3a94e097f08/itsdangerous-2.1.2.tar.gz"
+      "dependencies": []
     },
     {
       "package": "pkg:pypi/jinja2@3.1.2",
       "dependencies": [
         "pkg:pypi/markupsafe@2.1.1"
-      ],
-      "wheel_urls": [
-        "https://files.pythonhosted.org/packages/bc/c3/f068337a370801f372f2f8f6bad74a5c140f6fda3d9de154052708dd3c65/Jinja2-3.1.2-py3-none-any.whl"
-      ],
-      "sdist_url": "https://files.pythonhosted.org/packages/7a/ff/75c28576a1d900e87eb6335b063fab47a8ef3c8b4d88524c4bf78f670cce/Jinja2-3.1.2.tar.gz"
+      ]
     },
     {
       "package": "pkg:pypi/markupsafe@2.1.1",
-      "dependencies": [],
-      "wheel_urls": [
-        "https://files.pythonhosted.org/packages/fd/f4/524d2e8f5a3727cf309c2b7df7c732038375322df1376c9e9ef3aa92fcaf/MarkupSafe-2.1.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
-      ],
-      "sdist_url": "https://files.pythonhosted.org/packages/1d/97/2288fe498044284f39ab8950703e88abbac2abbdf65524d576157af70556/MarkupSafe-2.1.1.tar.gz"
+      "dependencies": []
     },
     {
       "package": "pkg:pypi/werkzeug@2.2.2",
       "dependencies": [
         "pkg:pypi/markupsafe@2.1.1"
-      ],
-      "wheel_urls": [
-        "https://files.pythonhosted.org/packages/c8/27/be6ddbcf60115305205de79c29004a0c6bc53cec814f733467b1bb89386d/Werkzeug-2.2.2-py3-none-any.whl"
-      ],
-      "sdist_url": "https://files.pythonhosted.org/packages/f8/c1/1c8e539f040acd80f844c69a5ef8e2fccdf8b442dabb969e497b55d544e1/Werkzeug-2.2.2.tar.gz"
+      ]
     },
     {
       "package": "pkg:pypi/zipp@3.8.1",
-      "dependencies": [],
-      "wheel_urls": [
-        "https://files.pythonhosted.org/packages/f0/36/639d6742bcc3ffdce8b85c31d79fcfae7bb04b95f0e5c4c6f8b206a038cc/zipp-3.8.1-py3-none-any.whl"
+      "dependencies": []
+    }
+  ],
+  "packages": [
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "click",
+      "version": "8.1.3",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "\\$ click\\_\n==========\n\nClick is a Python package for creating beautiful command line interfaces\nin a composable way with as little code as necessary. It's the \"Command\nLine Interface Creation Kit\". It's highly configurable but comes with\nsensible defaults out of the box.\n\nIt aims to make the process of writing command line tools quick and fun\nwhile also preventing any frustration caused by the inability to\nimplement an intended CLI API.\n\nClick in three points:\n\n-   Arbitrary nesting of commands\n-   Automatic help page generation\n-   Supports lazy loading of subcommands at runtime\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    $ pip install -U click\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    import click\n\n    @click.command()\n    @click.option(\"--count\", default=1, help=\"Number of greetings.\")\n    @click.option(\"--name\", prompt=\"Your name\", help=\"The person to greet.\")\n    def hello(count, name):\n        \"\"\"Simple program that greets NAME for a total of COUNT times.\"\"\"\n        for _ in range(count):\n            click.echo(f\"Hello, {name}!\")\n\n    if __name__ == '__main__':\n        hello()\n\n.. code-block:: text\n\n    $ python hello.py --count=3\n    Your name: Click\n    Hello, Click!\n    Hello, Click!\n    Hello, Click!\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Click and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, `please\ndonate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://click.palletsprojects.com/\n-   Changes: https://click.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/click/\n-   Source Code: https://github.com/pallets/click\n-   Issue Tracker: https://github.com/pallets/click/issues\n-   Website: https://palletsprojects.com/p/click\n-   Twitter: https://twitter.com/PalletsTeam\n-   Chat: https://discord.gg/pallets\n\n\n",
+      "release_date": "2022-04-28T17:36:06",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Armin Ronacher",
+          "email": "armin.ronacher@active-4.com",
+          "url": null
+        },
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": "Pallets",
+          "email": "contact@palletsprojects.com",
+          "url": null
+        }
       ],
-      "sdist_url": "https://files.pythonhosted.org/packages/3b/e3/fb79a1ea5f3a7e9745f688855d3c673f2ef7921639a380ec76f7d4d83a85/zipp-3.8.1.tar.gz"
+      "keywords": [],
+      "homepage_url": "https://palletsprojects.com/p/click/",
+      "download_url": "https://files.pythonhosted.org/packages/c2/f1/df59e28c642d583f7dacffb1e0965d0e00b218e0186d7858ac5233dce840/click-8.1.3-py3-none-any.whl",
+      "size": 96588,
+      "sha1": null,
+      "md5": "7a8260e7bdac219be27f0bdda48e79ce",
+      "sha256": "bb4d8133cb15a609f44e8213d9b391b0809795062913b383c62be0ee95b1db48",
+      "sha512": null,
+      "bug_tracking_url": "https://github.com/pallets/click/issues/",
+      "code_view_url": "https://github.com/pallets/click/",
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": "BSD-3-Clause",
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/click/8.1.3/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/click@8.1.3"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "click",
+      "version": "8.1.3",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "\\$ click\\_\n==========\n\nClick is a Python package for creating beautiful command line interfaces\nin a composable way with as little code as necessary. It's the \"Command\nLine Interface Creation Kit\". It's highly configurable but comes with\nsensible defaults out of the box.\n\nIt aims to make the process of writing command line tools quick and fun\nwhile also preventing any frustration caused by the inability to\nimplement an intended CLI API.\n\nClick in three points:\n\n-   Arbitrary nesting of commands\n-   Automatic help page generation\n-   Supports lazy loading of subcommands at runtime\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    $ pip install -U click\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    import click\n\n    @click.command()\n    @click.option(\"--count\", default=1, help=\"Number of greetings.\")\n    @click.option(\"--name\", prompt=\"Your name\", help=\"The person to greet.\")\n    def hello(count, name):\n        \"\"\"Simple program that greets NAME for a total of COUNT times.\"\"\"\n        for _ in range(count):\n            click.echo(f\"Hello, {name}!\")\n\n    if __name__ == '__main__':\n        hello()\n\n.. code-block:: text\n\n    $ python hello.py --count=3\n    Your name: Click\n    Hello, Click!\n    Hello, Click!\n    Hello, Click!\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Click and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, `please\ndonate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://click.palletsprojects.com/\n-   Changes: https://click.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/click/\n-   Source Code: https://github.com/pallets/click\n-   Issue Tracker: https://github.com/pallets/click/issues\n-   Website: https://palletsprojects.com/p/click\n-   Twitter: https://twitter.com/PalletsTeam\n-   Chat: https://discord.gg/pallets\n\n\n",
+      "release_date": "2022-04-28T17:36:09",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Armin Ronacher",
+          "email": "armin.ronacher@active-4.com",
+          "url": null
+        },
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": "Pallets",
+          "email": "contact@palletsprojects.com",
+          "url": null
+        }
+      ],
+      "keywords": [],
+      "homepage_url": "https://palletsprojects.com/p/click/",
+      "download_url": "https://files.pythonhosted.org/packages/59/87/84326af34517fca8c58418d148f2403df25303e02736832403587318e9e8/click-8.1.3.tar.gz",
+      "size": 331147,
+      "sha1": null,
+      "md5": "a804b085de7a3ff96968e38e0f6f2e05",
+      "sha256": "7682dc8afb30297001674575ea00d1814d808d6a36af415a82bd481d37ba7b8e",
+      "sha512": null,
+      "bug_tracking_url": "https://github.com/pallets/click/issues/",
+      "code_view_url": "https://github.com/pallets/click/",
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": "BSD-3-Clause",
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/click/8.1.3/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/click@8.1.3"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "flask",
+      "version": "2.2.2",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Flask\n=====\n\nFlask is a lightweight `WSGI`_ web application framework. It is designed\nto make getting started quick and easy, with the ability to scale up to\ncomplex applications. It began as a simple wrapper around `Werkzeug`_\nand `Jinja`_ and has become one of the most popular Python web\napplication frameworks.\n\nFlask offers suggestions, but doesn't enforce any dependencies or\nproject layout. It is up to the developer to choose the tools and\nlibraries they want to use. There are many extensions provided by the\ncommunity that make adding new functionality easy.\n\n.. _WSGI: https://wsgi.readthedocs.io/\n.. _Werkzeug: https://werkzeug.palletsprojects.com/\n.. _Jinja: https://jinja.palletsprojects.com/\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    $ pip install -U Flask\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    # save this as app.py\n    from flask import Flask\n\n    app = Flask(__name__)\n\n    @app.route(\"/\")\n    def hello():\n        return \"Hello, World!\"\n\n.. code-block:: text\n\n    $ flask run\n      * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)\n\n\nContributing\n------------\n\nFor guidance on setting up a development environment and how to make a\ncontribution to Flask, see the `contributing guidelines`_.\n\n.. _contributing guidelines: https://github.com/pallets/flask/blob/main/CONTRIBUTING.rst\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Flask and the libraries\nit uses. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, `please\ndonate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://flask.palletsprojects.com/\n-   Changes: https://flask.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/Flask/\n-   Source Code: https://github.com/pallets/flask/\n-   Issue Tracker: https://github.com/pallets/flask/issues/\n-   Website: https://palletsprojects.com/p/flask/\n-   Twitter: https://twitter.com/PalletsTeam\n-   Chat: https://discord.gg/pallets\n",
+      "release_date": "2022-08-08T23:26:30",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Armin Ronacher",
+          "email": "armin.ronacher@active-4.com",
+          "url": null
+        },
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": "Pallets",
+          "email": "contact@palletsprojects.com",
+          "url": null
+        }
+      ],
+      "keywords": [],
+      "homepage_url": "https://palletsprojects.com/p/flask",
+      "download_url": "https://files.pythonhosted.org/packages/0f/43/15f4f9ab225b0b25352412e8daa3d0e3d135fcf5e127070c74c3632c8b4c/Flask-2.2.2-py3-none-any.whl",
+      "size": 101477,
+      "sha1": null,
+      "md5": "e737537775d400ad00adf8f59358f7ab",
+      "sha256": "b9c46cc36662a7949f34b52d8ec7bb59c0d74ba08ba6cb9ce9adc1d8676d9526",
+      "sha512": null,
+      "bug_tracking_url": "https://github.com/pallets/flask/issues/",
+      "code_view_url": "https://github.com/pallets/flask/",
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": "BSD-3-Clause",
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/flask/2.2.2/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/flask@2.2.2"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "flask",
+      "version": "2.2.2",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Flask\n=====\n\nFlask is a lightweight `WSGI`_ web application framework. It is designed\nto make getting started quick and easy, with the ability to scale up to\ncomplex applications. It began as a simple wrapper around `Werkzeug`_\nand `Jinja`_ and has become one of the most popular Python web\napplication frameworks.\n\nFlask offers suggestions, but doesn't enforce any dependencies or\nproject layout. It is up to the developer to choose the tools and\nlibraries they want to use. There are many extensions provided by the\ncommunity that make adding new functionality easy.\n\n.. _WSGI: https://wsgi.readthedocs.io/\n.. _Werkzeug: https://werkzeug.palletsprojects.com/\n.. _Jinja: https://jinja.palletsprojects.com/\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    $ pip install -U Flask\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    # save this as app.py\n    from flask import Flask\n\n    app = Flask(__name__)\n\n    @app.route(\"/\")\n    def hello():\n        return \"Hello, World!\"\n\n.. code-block:: text\n\n    $ flask run\n      * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)\n\n\nContributing\n------------\n\nFor guidance on setting up a development environment and how to make a\ncontribution to Flask, see the `contributing guidelines`_.\n\n.. _contributing guidelines: https://github.com/pallets/flask/blob/main/CONTRIBUTING.rst\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Flask and the libraries\nit uses. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, `please\ndonate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://flask.palletsprojects.com/\n-   Changes: https://flask.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/Flask/\n-   Source Code: https://github.com/pallets/flask/\n-   Issue Tracker: https://github.com/pallets/flask/issues/\n-   Website: https://palletsprojects.com/p/flask/\n-   Twitter: https://twitter.com/PalletsTeam\n-   Chat: https://discord.gg/pallets\n",
+      "release_date": "2022-08-08T23:26:33",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Armin Ronacher",
+          "email": "armin.ronacher@active-4.com",
+          "url": null
+        },
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": "Pallets",
+          "email": "contact@palletsprojects.com",
+          "url": null
+        }
+      ],
+      "keywords": [],
+      "homepage_url": "https://palletsprojects.com/p/flask",
+      "download_url": "https://files.pythonhosted.org/packages/69/b6/53cfa30eed5aa7343daff36622843688ba8c6fe9829bb2b92e193ab1163f/Flask-2.2.2.tar.gz",
+      "size": 677389,
+      "sha1": null,
+      "md5": "c0d2276cb7d59a06d62c915da9c77ba6",
+      "sha256": "642c450d19c4ad482f96729bd2a8f6d32554aa1e231f4f6b4e7e5264b16cca2b",
+      "sha512": null,
+      "bug_tracking_url": "https://github.com/pallets/flask/issues/",
+      "code_view_url": "https://github.com/pallets/flask/",
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": "BSD-3-Clause",
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/flask/2.2.2/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/flask@2.2.2"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "importlib-metadata",
+      "version": "4.12.0",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": ".. image:: https://img.shields.io/pypi/v/importlib_metadata.svg\n   :target: `PyPI link`_\n\n.. image:: https://img.shields.io/pypi/pyversions/importlib_metadata.svg\n   :target: `PyPI link`_\n\n.. _PyPI link: https://pypi.org/project/importlib_metadata\n\n.. image:: https://github.com/python/importlib_metadata/workflows/tests/badge.svg\n   :target: https://github.com/python/importlib_metadata/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. image:: https://readthedocs.org/projects/importlib-metadata/badge/?version=latest\n   :target: https://importlib-metadata.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2022-informational\n   :target: https://blog.jaraco.com/skeleton\n\n\nLibrary to access the metadata for a Python package.\n\nThis package supplies third-party access to the functionality of\n`importlib.metadata <https://docs.python.org/3/library/importlib.metadata.html>`_\nincluding improvements added to subsequent Python versions.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - importlib_metadata\n     - stdlib\n   * - 4.8\n     - 3.11\n   * - 4.4\n     - 3.10\n   * - 1.4\n     - 3.8\n\n\nUsage\n=====\n\nSee the `online documentation <https://importlib_metadata.readthedocs.io/>`_\nfor usage details.\n\n`Finder authors\n<https://docs.python.org/3/reference/import.html#finders-and-loaders>`_ can\nalso add support for custom package installers.  See the above documentation\nfor details.\n\n\nCaveats\n=======\n\nThis project primarily supports third-party packages installed by PyPA\ntools (or other conforming packages). It does not support:\n\n- Packages in the stdlib.\n- Packages installed without metadata.\n\nProject details\n===============\n\n * Project home: https://github.com/python/importlib_metadata\n * Report bugs at: https://github.com/python/importlib_metadata/issues\n * Code hosting: https://github.com/python/importlib_metadata\n * Documentation: https://importlib_metadata.readthedocs.io/\n",
+      "release_date": "2022-06-25T17:01:22",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Jason R. Coombs",
+          "email": "jaraco@jaraco.com",
+          "url": null
+        },
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": "",
+          "email": "",
+          "url": null
+        }
+      ],
+      "keywords": [],
+      "homepage_url": "https://github.com/python/importlib_metadata",
+      "download_url": "https://files.pythonhosted.org/packages/d2/a2/8c239dc898138f208dd14b441b196e7b3032b94d3137d9d8453e186967fc/importlib_metadata-4.12.0-py3-none-any.whl",
+      "size": 21704,
+      "sha1": null,
+      "md5": "1e7ee4220dec07980ecb9acc7bd7bd5b",
+      "sha256": "7401a975809ea1fdc658c3aa4f78cc2195a0e019c5cbc4c06122884e9ae80c23",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": null,
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": "",
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/importlib-metadata/4.12.0/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/importlib-metadata@4.12.0"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "importlib-metadata",
+      "version": "4.12.0",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": ".. image:: https://img.shields.io/pypi/v/importlib_metadata.svg\n   :target: `PyPI link`_\n\n.. image:: https://img.shields.io/pypi/pyversions/importlib_metadata.svg\n   :target: `PyPI link`_\n\n.. _PyPI link: https://pypi.org/project/importlib_metadata\n\n.. image:: https://github.com/python/importlib_metadata/workflows/tests/badge.svg\n   :target: https://github.com/python/importlib_metadata/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. image:: https://readthedocs.org/projects/importlib-metadata/badge/?version=latest\n   :target: https://importlib-metadata.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2022-informational\n   :target: https://blog.jaraco.com/skeleton\n\n\nLibrary to access the metadata for a Python package.\n\nThis package supplies third-party access to the functionality of\n`importlib.metadata <https://docs.python.org/3/library/importlib.metadata.html>`_\nincluding improvements added to subsequent Python versions.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - importlib_metadata\n     - stdlib\n   * - 4.8\n     - 3.11\n   * - 4.4\n     - 3.10\n   * - 1.4\n     - 3.8\n\n\nUsage\n=====\n\nSee the `online documentation <https://importlib_metadata.readthedocs.io/>`_\nfor usage details.\n\n`Finder authors\n<https://docs.python.org/3/reference/import.html#finders-and-loaders>`_ can\nalso add support for custom package installers.  See the above documentation\nfor details.\n\n\nCaveats\n=======\n\nThis project primarily supports third-party packages installed by PyPA\ntools (or other conforming packages). It does not support:\n\n- Packages in the stdlib.\n- Packages installed without metadata.\n\nProject details\n===============\n\n * Project home: https://github.com/python/importlib_metadata\n * Report bugs at: https://github.com/python/importlib_metadata/issues\n * Code hosting: https://github.com/python/importlib_metadata\n * Documentation: https://importlib_metadata.readthedocs.io/\n",
+      "release_date": "2022-06-25T17:01:24",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Jason R. Coombs",
+          "email": "jaraco@jaraco.com",
+          "url": null
+        },
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": "",
+          "email": "",
+          "url": null
+        }
+      ],
+      "keywords": [],
+      "homepage_url": "https://github.com/python/importlib_metadata",
+      "download_url": "https://files.pythonhosted.org/packages/1a/16/441080c907df829016729e71d8bdd42d99b9bdde48b01492ed08912c0aa9/importlib_metadata-4.12.0.tar.gz",
+      "size": 48153,
+      "sha1": null,
+      "md5": "cfcf29185e13439c76d09c94bc8d81f4",
+      "sha256": "637245b8bab2b6502fcbc752cc4b7a6f6243bb02b31c5c26156ad103d3d45670",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": null,
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": "",
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/importlib-metadata/4.12.0/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/importlib-metadata@4.12.0"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "itsdangerous",
+      "version": "2.1.2",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "ItsDangerous\n============\n\n... so better sign this\n\nVarious helpers to pass data to untrusted environments and to get it\nback safe and sound. Data is cryptographically signed to ensure that a\ntoken has not been tampered with.\n\nIt's possible to customize how data is serialized. Data is compressed as\nneeded. A timestamp can be added and verified automatically while\nloading a token.\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    pip install -U itsdangerous\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\nHere's how you could generate a token for transmitting a user's id and\nname between web requests.\n\n.. code-block:: python\n\n    from itsdangerous import URLSafeSerializer\n    auth_s = URLSafeSerializer(\"secret key\", \"auth\")\n    token = auth_s.dumps({\"id\": 5, \"name\": \"itsdangerous\"})\n\n    print(token)\n    # eyJpZCI6NSwibmFtZSI6Iml0c2Rhbmdlcm91cyJ9.6YP6T0BaO67XP--9UzTrmurXSmg\n\n    data = auth_s.loads(token)\n    print(data[\"name\"])\n    # itsdangerous\n\n\nDonate\n------\n\nThe Pallets organization develops and supports ItsDangerous and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n`please donate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://itsdangerous.palletsprojects.com/\n-   Changes: https://itsdangerous.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/ItsDangerous/\n-   Source Code: https://github.com/pallets/itsdangerous/\n-   Issue Tracker: https://github.com/pallets/itsdangerous/issues/\n-   Website: https://palletsprojects.com/p/itsdangerous/\n-   Twitter: https://twitter.com/PalletsTeam\n-   Chat: https://discord.gg/pallets\n\n\n",
+      "release_date": "2022-03-24T15:12:13",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Armin Ronacher",
+          "email": "armin.ronacher@active-4.com",
+          "url": null
+        },
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": "Pallets",
+          "email": "contact@palletsprojects.com",
+          "url": null
+        }
+      ],
+      "keywords": [],
+      "homepage_url": "https://palletsprojects.com/p/itsdangerous/",
+      "download_url": "https://files.pythonhosted.org/packages/68/5f/447e04e828f47465eeab35b5d408b7ebaaaee207f48b7136c5a7267a30ae/itsdangerous-2.1.2-py3-none-any.whl",
+      "size": 15749,
+      "sha1": null,
+      "md5": "efb0813a44f2abd3b7b375cfcb8b95c2",
+      "sha256": "2c2349112351b88699d8d4b6b075022c0808887cb7ad10069318a8b0bc88db44",
+      "sha512": null,
+      "bug_tracking_url": "https://github.com/pallets/itsdangerous/issues/",
+      "code_view_url": "https://github.com/pallets/itsdangerous/",
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": "BSD-3-Clause",
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/itsdangerous/2.1.2/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/itsdangerous@2.1.2"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "itsdangerous",
+      "version": "2.1.2",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "ItsDangerous\n============\n\n... so better sign this\n\nVarious helpers to pass data to untrusted environments and to get it\nback safe and sound. Data is cryptographically signed to ensure that a\ntoken has not been tampered with.\n\nIt's possible to customize how data is serialized. Data is compressed as\nneeded. A timestamp can be added and verified automatically while\nloading a token.\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    pip install -U itsdangerous\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\nHere's how you could generate a token for transmitting a user's id and\nname between web requests.\n\n.. code-block:: python\n\n    from itsdangerous import URLSafeSerializer\n    auth_s = URLSafeSerializer(\"secret key\", \"auth\")\n    token = auth_s.dumps({\"id\": 5, \"name\": \"itsdangerous\"})\n\n    print(token)\n    # eyJpZCI6NSwibmFtZSI6Iml0c2Rhbmdlcm91cyJ9.6YP6T0BaO67XP--9UzTrmurXSmg\n\n    data = auth_s.loads(token)\n    print(data[\"name\"])\n    # itsdangerous\n\n\nDonate\n------\n\nThe Pallets organization develops and supports ItsDangerous and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n`please donate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://itsdangerous.palletsprojects.com/\n-   Changes: https://itsdangerous.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/ItsDangerous/\n-   Source Code: https://github.com/pallets/itsdangerous/\n-   Issue Tracker: https://github.com/pallets/itsdangerous/issues/\n-   Website: https://palletsprojects.com/p/itsdangerous/\n-   Twitter: https://twitter.com/PalletsTeam\n-   Chat: https://discord.gg/pallets\n\n\n",
+      "release_date": "2022-03-24T15:12:15",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Armin Ronacher",
+          "email": "armin.ronacher@active-4.com",
+          "url": null
+        },
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": "Pallets",
+          "email": "contact@palletsprojects.com",
+          "url": null
+        }
+      ],
+      "keywords": [],
+      "homepage_url": "https://palletsprojects.com/p/itsdangerous/",
+      "download_url": "https://files.pythonhosted.org/packages/7f/a1/d3fb83e7a61fa0c0d3d08ad0a94ddbeff3731c05212617dff3a94e097f08/itsdangerous-2.1.2.tar.gz",
+      "size": 56143,
+      "sha1": null,
+      "md5": "c1bc730ddf53b8374eaa823f24eb6438",
+      "sha256": "5dbbc68b317e5e42f327f9021763545dc3fc3bfe22e6deb96aaf1fc38874156a",
+      "sha512": null,
+      "bug_tracking_url": "https://github.com/pallets/itsdangerous/issues/",
+      "code_view_url": "https://github.com/pallets/itsdangerous/",
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": "BSD-3-Clause",
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/itsdangerous/2.1.2/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/itsdangerous@2.1.2"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "jinja2",
+      "version": "3.1.2",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Jinja\n=====\n\nJinja is a fast, expressive, extensible templating engine. Special\nplaceholders in the template allow writing code similar to Python\nsyntax. Then the template is passed data to render the final document.\n\nIt includes:\n\n-   Template inheritance and inclusion.\n-   Define and import macros within templates.\n-   HTML templates can use autoescaping to prevent XSS from untrusted\n    user input.\n-   A sandboxed environment can safely render untrusted templates.\n-   AsyncIO support for generating templates and calling async\n    functions.\n-   I18N support with Babel.\n-   Templates are compiled to optimized Python code just-in-time and\n    cached, or can be compiled ahead-of-time.\n-   Exceptions point to the correct line in templates to make debugging\n    easier.\n-   Extensible filters, tests, functions, and even syntax.\n\nJinja's philosophy is that while application logic belongs in Python if\npossible, it shouldn't make the template designer's job difficult by\nrestricting functionality too much.\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    $ pip install -U Jinja2\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nIn A Nutshell\n-------------\n\n.. code-block:: jinja\n\n    {% extends \"base.html\" %}\n    {% block title %}Members{% endblock %}\n    {% block content %}\n      <ul>\n      {% for user in users %}\n        <li><a href=\"{{ user.url }}\">{{ user.username }}</a></li>\n      {% endfor %}\n      </ul>\n    {% endblock %}\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Jinja and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, `please\ndonate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://jinja.palletsprojects.com/\n-   Changes: https://jinja.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/Jinja2/\n-   Source Code: https://github.com/pallets/jinja/\n-   Issue Tracker: https://github.com/pallets/jinja/issues/\n-   Website: https://palletsprojects.com/p/jinja/\n-   Twitter: https://twitter.com/PalletsTeam\n-   Chat: https://discord.gg/pallets\n\n\n",
+      "release_date": "2022-04-28T17:21:25",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Armin Ronacher",
+          "email": "armin.ronacher@active-4.com",
+          "url": null
+        },
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": "Pallets",
+          "email": "contact@palletsprojects.com",
+          "url": null
+        }
+      ],
+      "keywords": [],
+      "homepage_url": "https://palletsprojects.com/p/jinja/",
+      "download_url": "https://files.pythonhosted.org/packages/bc/c3/f068337a370801f372f2f8f6bad74a5c140f6fda3d9de154052708dd3c65/Jinja2-3.1.2-py3-none-any.whl",
+      "size": 133101,
+      "sha1": null,
+      "md5": "00ccdb509d3592cc2163b286177d75c8",
+      "sha256": "6088930bfe239f0e6710546ab9c19c9ef35e29792895fed6e6e31a023a182a61",
+      "sha512": null,
+      "bug_tracking_url": "https://github.com/pallets/jinja/issues/",
+      "code_view_url": "https://github.com/pallets/jinja/",
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": "BSD-3-Clause",
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/jinja2/3.1.2/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/jinja2@3.1.2"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "jinja2",
+      "version": "3.1.2",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Jinja\n=====\n\nJinja is a fast, expressive, extensible templating engine. Special\nplaceholders in the template allow writing code similar to Python\nsyntax. Then the template is passed data to render the final document.\n\nIt includes:\n\n-   Template inheritance and inclusion.\n-   Define and import macros within templates.\n-   HTML templates can use autoescaping to prevent XSS from untrusted\n    user input.\n-   A sandboxed environment can safely render untrusted templates.\n-   AsyncIO support for generating templates and calling async\n    functions.\n-   I18N support with Babel.\n-   Templates are compiled to optimized Python code just-in-time and\n    cached, or can be compiled ahead-of-time.\n-   Exceptions point to the correct line in templates to make debugging\n    easier.\n-   Extensible filters, tests, functions, and even syntax.\n\nJinja's philosophy is that while application logic belongs in Python if\npossible, it shouldn't make the template designer's job difficult by\nrestricting functionality too much.\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    $ pip install -U Jinja2\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nIn A Nutshell\n-------------\n\n.. code-block:: jinja\n\n    {% extends \"base.html\" %}\n    {% block title %}Members{% endblock %}\n    {% block content %}\n      <ul>\n      {% for user in users %}\n        <li><a href=\"{{ user.url }}\">{{ user.username }}</a></li>\n      {% endfor %}\n      </ul>\n    {% endblock %}\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Jinja and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, `please\ndonate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://jinja.palletsprojects.com/\n-   Changes: https://jinja.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/Jinja2/\n-   Source Code: https://github.com/pallets/jinja/\n-   Issue Tracker: https://github.com/pallets/jinja/issues/\n-   Website: https://palletsprojects.com/p/jinja/\n-   Twitter: https://twitter.com/PalletsTeam\n-   Chat: https://discord.gg/pallets\n\n\n",
+      "release_date": "2022-04-28T17:21:27",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Armin Ronacher",
+          "email": "armin.ronacher@active-4.com",
+          "url": null
+        },
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": "Pallets",
+          "email": "contact@palletsprojects.com",
+          "url": null
+        }
+      ],
+      "keywords": [],
+      "homepage_url": "https://palletsprojects.com/p/jinja/",
+      "download_url": "https://files.pythonhosted.org/packages/7a/ff/75c28576a1d900e87eb6335b063fab47a8ef3c8b4d88524c4bf78f670cce/Jinja2-3.1.2.tar.gz",
+      "size": 268239,
+      "sha1": null,
+      "md5": "d31148abd89c1df1cdb077a55db27d02",
+      "sha256": "31351a702a408a9e7595a8fc6150fc3f43bb6bf7e319770cbc0db9df9437e852",
+      "sha512": null,
+      "bug_tracking_url": "https://github.com/pallets/jinja/issues/",
+      "code_view_url": "https://github.com/pallets/jinja/",
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": "BSD-3-Clause",
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/jinja2/3.1.2/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/jinja2@3.1.2"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "markupsafe",
+      "version": "2.1.1",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "MarkupSafe\n==========\n\nMarkupSafe implements a text object that escapes characters so it is\nsafe to use in HTML and XML. Characters that have special meanings are\nreplaced so that they display as the actual characters. This mitigates\ninjection attacks, meaning untrusted user input can safely be displayed\non a page.\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    pip install -U MarkupSafe\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nExamples\n--------\n\n.. code-block:: pycon\n\n    >>> from markupsafe import Markup, escape\n\n    >>> # escape replaces special characters and wraps in Markup\n    >>> escape(\"<script>alert(document.cookie);</script>\")\n    Markup('&lt;script&gt;alert(document.cookie);&lt;/script&gt;')\n\n    >>> # wrap in Markup to mark text \"safe\" and prevent escaping\n    >>> Markup(\"<strong>Hello</strong>\")\n    Markup('<strong>hello</strong>')\n\n    >>> escape(Markup(\"<strong>Hello</strong>\"))\n    Markup('<strong>hello</strong>')\n\n    >>> # Markup is a str subclass\n    >>> # methods and operators escape their arguments\n    >>> template = Markup(\"Hello <em>{name}</em>\")\n    >>> template.format(name='\"World\"')\n    Markup('Hello <em>&#34;World&#34;</em>')\n\n\nDonate\n------\n\nThe Pallets organization develops and supports MarkupSafe and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n`please donate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://markupsafe.palletsprojects.com/\n-   Changes: https://markupsafe.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/MarkupSafe/\n-   Source Code: https://github.com/pallets/markupsafe/\n-   Issue Tracker: https://github.com/pallets/markupsafe/issues/\n-   Website: https://palletsprojects.com/p/markupsafe/\n-   Twitter: https://twitter.com/PalletsTeam\n-   Chat: https://discord.gg/pallets\n\n\n",
+      "release_date": "2022-03-15T13:22:49",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Armin Ronacher",
+          "email": "armin.ronacher@active-4.com",
+          "url": null
+        },
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": "Pallets",
+          "email": "contact@palletsprojects.com",
+          "url": null
+        }
+      ],
+      "keywords": [],
+      "homepage_url": "https://palletsprojects.com/p/markupsafe/",
+      "download_url": "https://files.pythonhosted.org/packages/fd/f4/524d2e8f5a3727cf309c2b7df7c732038375322df1376c9e9ef3aa92fcaf/MarkupSafe-2.1.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "size": 25883,
+      "sha1": null,
+      "md5": "e39aa307fb183aacd8bcdb81f5a1ca69",
+      "sha256": "4b9fe39a2ccc108a4accc2676e77da025ce383c108593d65cc909add5c3bd601",
+      "sha512": null,
+      "bug_tracking_url": "https://github.com/pallets/markupsafe/issues/",
+      "code_view_url": "https://github.com/pallets/markupsafe/",
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": "BSD-3-Clause",
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/markupsafe/2.1.1/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/markupsafe@2.1.1"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "markupsafe",
+      "version": "2.1.1",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "MarkupSafe\n==========\n\nMarkupSafe implements a text object that escapes characters so it is\nsafe to use in HTML and XML. Characters that have special meanings are\nreplaced so that they display as the actual characters. This mitigates\ninjection attacks, meaning untrusted user input can safely be displayed\non a page.\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    pip install -U MarkupSafe\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nExamples\n--------\n\n.. code-block:: pycon\n\n    >>> from markupsafe import Markup, escape\n\n    >>> # escape replaces special characters and wraps in Markup\n    >>> escape(\"<script>alert(document.cookie);</script>\")\n    Markup('&lt;script&gt;alert(document.cookie);&lt;/script&gt;')\n\n    >>> # wrap in Markup to mark text \"safe\" and prevent escaping\n    >>> Markup(\"<strong>Hello</strong>\")\n    Markup('<strong>hello</strong>')\n\n    >>> escape(Markup(\"<strong>Hello</strong>\"))\n    Markup('<strong>hello</strong>')\n\n    >>> # Markup is a str subclass\n    >>> # methods and operators escape their arguments\n    >>> template = Markup(\"Hello <em>{name}</em>\")\n    >>> template.format(name='\"World\"')\n    Markup('Hello <em>&#34;World&#34;</em>')\n\n\nDonate\n------\n\nThe Pallets organization develops and supports MarkupSafe and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n`please donate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://markupsafe.palletsprojects.com/\n-   Changes: https://markupsafe.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/MarkupSafe/\n-   Source Code: https://github.com/pallets/markupsafe/\n-   Issue Tracker: https://github.com/pallets/markupsafe/issues/\n-   Website: https://palletsprojects.com/p/markupsafe/\n-   Twitter: https://twitter.com/PalletsTeam\n-   Chat: https://discord.gg/pallets\n\n\n",
+      "release_date": "2022-03-15T13:23:27",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Armin Ronacher",
+          "email": "armin.ronacher@active-4.com",
+          "url": null
+        },
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": "Pallets",
+          "email": "contact@palletsprojects.com",
+          "url": null
+        }
+      ],
+      "keywords": [],
+      "homepage_url": "https://palletsprojects.com/p/markupsafe/",
+      "download_url": "https://files.pythonhosted.org/packages/1d/97/2288fe498044284f39ab8950703e88abbac2abbdf65524d576157af70556/MarkupSafe-2.1.1.tar.gz",
+      "size": 18668,
+      "sha1": null,
+      "md5": "9809f9fdd98bc835b0c21aa8f79cbf30",
+      "sha256": "7f91197cc9e48f989d12e4e6fbc46495c446636dfc81b9ccf50bb0ec74b91d4b",
+      "sha512": null,
+      "bug_tracking_url": "https://github.com/pallets/markupsafe/issues/",
+      "code_view_url": "https://github.com/pallets/markupsafe/",
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": "BSD-3-Clause",
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/markupsafe/2.1.1/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/markupsafe@2.1.1"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "werkzeug",
+      "version": "2.2.2",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Werkzeug\n========\n\n*werkzeug* German noun: \"tool\". Etymology: *werk* (\"work\"), *zeug* (\"stuff\")\n\nWerkzeug is a comprehensive `WSGI`_ web application library. It began as\na simple collection of various utilities for WSGI applications and has\nbecome one of the most advanced WSGI utility libraries.\n\nIt includes:\n\n-   An interactive debugger that allows inspecting stack traces and\n    source code in the browser with an interactive interpreter for any\n    frame in the stack.\n-   A full-featured request object with objects to interact with\n    headers, query args, form data, files, and cookies.\n-   A response object that can wrap other WSGI applications and handle\n    streaming data.\n-   A routing system for matching URLs to endpoints and generating URLs\n    for endpoints, with an extensible system for capturing variables\n    from URLs.\n-   HTTP utilities to handle entity tags, cache control, dates, user\n    agents, cookies, files, and more.\n-   A threaded WSGI server for use while developing applications\n    locally.\n-   A test client for simulating HTTP requests during testing without\n    requiring running a server.\n\nWerkzeug doesn't enforce any dependencies. It is up to the developer to\nchoose a template engine, database adapter, and even how to handle\nrequests. It can be used to build all sorts of end user applications\nsuch as blogs, wikis, or bulletin boards.\n\n`Flask`_ wraps Werkzeug, using it to handle the details of WSGI while\nproviding more structure and patterns for defining powerful\napplications.\n\n.. _WSGI: https://wsgi.readthedocs.io/en/latest/\n.. _Flask: https://www.palletsprojects.com/p/flask/\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    pip install -U Werkzeug\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    from werkzeug.wrappers import Request, Response\n\n    @Request.application\n    def application(request):\n        return Response('Hello, World!')\n\n    if __name__ == '__main__':\n        from werkzeug.serving import run_simple\n        run_simple('localhost', 4000, application)\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Werkzeug and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n`please donate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://werkzeug.palletsprojects.com/\n-   Changes: https://werkzeug.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/Werkzeug/\n-   Source Code: https://github.com/pallets/werkzeug/\n-   Issue Tracker: https://github.com/pallets/werkzeug/issues/\n-   Website: https://palletsprojects.com/p/werkzeug/\n-   Twitter: https://twitter.com/PalletsTeam\n-   Chat: https://discord.gg/pallets\n",
+      "release_date": "2022-08-08T21:44:13",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Armin Ronacher",
+          "email": "armin.ronacher@active-4.com",
+          "url": null
+        },
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": "Pallets",
+          "email": "contact@palletsprojects.com",
+          "url": null
+        }
+      ],
+      "keywords": [],
+      "homepage_url": "https://palletsprojects.com/p/werkzeug/",
+      "download_url": "https://files.pythonhosted.org/packages/c8/27/be6ddbcf60115305205de79c29004a0c6bc53cec814f733467b1bb89386d/Werkzeug-2.2.2-py3-none-any.whl",
+      "size": 232700,
+      "sha1": null,
+      "md5": "7d1583943fb626014027b4fbd75507a0",
+      "sha256": "f979ab81f58d7318e064e99c4506445d60135ac5cd2e177a2de0089bfd4c9bd5",
+      "sha512": null,
+      "bug_tracking_url": "https://github.com/pallets/werkzeug/issues/",
+      "code_view_url": "https://github.com/pallets/werkzeug/",
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": "BSD-3-Clause",
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/werkzeug/2.2.2/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/werkzeug@2.2.2"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "werkzeug",
+      "version": "2.2.2",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Werkzeug\n========\n\n*werkzeug* German noun: \"tool\". Etymology: *werk* (\"work\"), *zeug* (\"stuff\")\n\nWerkzeug is a comprehensive `WSGI`_ web application library. It began as\na simple collection of various utilities for WSGI applications and has\nbecome one of the most advanced WSGI utility libraries.\n\nIt includes:\n\n-   An interactive debugger that allows inspecting stack traces and\n    source code in the browser with an interactive interpreter for any\n    frame in the stack.\n-   A full-featured request object with objects to interact with\n    headers, query args, form data, files, and cookies.\n-   A response object that can wrap other WSGI applications and handle\n    streaming data.\n-   A routing system for matching URLs to endpoints and generating URLs\n    for endpoints, with an extensible system for capturing variables\n    from URLs.\n-   HTTP utilities to handle entity tags, cache control, dates, user\n    agents, cookies, files, and more.\n-   A threaded WSGI server for use while developing applications\n    locally.\n-   A test client for simulating HTTP requests during testing without\n    requiring running a server.\n\nWerkzeug doesn't enforce any dependencies. It is up to the developer to\nchoose a template engine, database adapter, and even how to handle\nrequests. It can be used to build all sorts of end user applications\nsuch as blogs, wikis, or bulletin boards.\n\n`Flask`_ wraps Werkzeug, using it to handle the details of WSGI while\nproviding more structure and patterns for defining powerful\napplications.\n\n.. _WSGI: https://wsgi.readthedocs.io/en/latest/\n.. _Flask: https://www.palletsprojects.com/p/flask/\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    pip install -U Werkzeug\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    from werkzeug.wrappers import Request, Response\n\n    @Request.application\n    def application(request):\n        return Response('Hello, World!')\n\n    if __name__ == '__main__':\n        from werkzeug.serving import run_simple\n        run_simple('localhost', 4000, application)\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Werkzeug and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n`please donate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://werkzeug.palletsprojects.com/\n-   Changes: https://werkzeug.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/Werkzeug/\n-   Source Code: https://github.com/pallets/werkzeug/\n-   Issue Tracker: https://github.com/pallets/werkzeug/issues/\n-   Website: https://palletsprojects.com/p/werkzeug/\n-   Twitter: https://twitter.com/PalletsTeam\n-   Chat: https://discord.gg/pallets\n",
+      "release_date": "2022-08-08T21:44:15",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Armin Ronacher",
+          "email": "armin.ronacher@active-4.com",
+          "url": null
+        },
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": "Pallets",
+          "email": "contact@palletsprojects.com",
+          "url": null
+        }
+      ],
+      "keywords": [],
+      "homepage_url": "https://palletsprojects.com/p/werkzeug/",
+      "download_url": "https://files.pythonhosted.org/packages/f8/c1/1c8e539f040acd80f844c69a5ef8e2fccdf8b442dabb969e497b55d544e1/Werkzeug-2.2.2.tar.gz",
+      "size": 844378,
+      "sha1": null,
+      "md5": "9d7e50c5bb3a9fc12823b5faf374b90e",
+      "sha256": "7ea2d48322cc7c0f8b3a215ed73eabd7b5d75d0b50e31ab006286ccff9e00b8f",
+      "sha512": null,
+      "bug_tracking_url": "https://github.com/pallets/werkzeug/issues/",
+      "code_view_url": "https://github.com/pallets/werkzeug/",
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": "BSD-3-Clause",
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/werkzeug/2.2.2/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/werkzeug@2.2.2"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "zipp",
+      "version": "3.8.1",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": ".. image:: https://img.shields.io/pypi/v/zipp.svg\n   :target: `PyPI link`_\n\n.. image:: https://img.shields.io/pypi/pyversions/zipp.svg\n   :target: `PyPI link`_\n\n.. _PyPI link: https://pypi.org/project/zipp\n\n.. image:: https://github.com/jaraco/zipp/workflows/tests/badge.svg\n   :target: https://github.com/jaraco/zipp/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. .. image:: https://readthedocs.org/projects/skeleton/badge/?version=latest\n..    :target: https://skeleton.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2022-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/zipp\n   :target: https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=readme\n\n\nA pathlib-compatible Zipfile object wrapper. Official backport of the standard library\n`Path object <https://docs.python.org/3.8/library/zipfile.html#path-objects>`_.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - zipp\n     - stdlib\n   * - 3.5\n     - 3.11\n   * - 3.3\n     - 3.9\n   * - 1.0\n     - 3.8\n\n\nUsage\n=====\n\nUse ``zipp.Path`` in place of ``zipfile.Path`` on any Python.\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=referral&utm_campaign=github>`_.\n\nSecurity Contact\n================\n\nTo report a security vulnerability, please use the\n`Tidelift security contact <https://tidelift.com/security>`_.\nTidelift will coordinate the fix and disclosure.\n",
+      "release_date": "2022-07-12T14:21:20",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Jason R. Coombs",
+          "email": "jaraco@jaraco.com",
+          "url": null
+        },
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": "",
+          "email": "",
+          "url": null
+        }
+      ],
+      "keywords": [],
+      "homepage_url": "https://github.com/jaraco/zipp",
+      "download_url": "https://files.pythonhosted.org/packages/f0/36/639d6742bcc3ffdce8b85c31d79fcfae7bb04b95f0e5c4c6f8b206a038cc/zipp-3.8.1-py3-none-any.whl",
+      "size": 5645,
+      "sha1": null,
+      "md5": "300aa262796e7ebfb57b4d6731821c29",
+      "sha256": "47c40d7fe183a6f21403a199b3e4192cca5774656965b0a4988ad2f8feb5f009",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": null,
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": "",
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/zipp/3.8.1/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/zipp@3.8.1"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "zipp",
+      "version": "3.8.1",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": ".. image:: https://img.shields.io/pypi/v/zipp.svg\n   :target: `PyPI link`_\n\n.. image:: https://img.shields.io/pypi/pyversions/zipp.svg\n   :target: `PyPI link`_\n\n.. _PyPI link: https://pypi.org/project/zipp\n\n.. image:: https://github.com/jaraco/zipp/workflows/tests/badge.svg\n   :target: https://github.com/jaraco/zipp/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. .. image:: https://readthedocs.org/projects/skeleton/badge/?version=latest\n..    :target: https://skeleton.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2022-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/zipp\n   :target: https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=readme\n\n\nA pathlib-compatible Zipfile object wrapper. Official backport of the standard library\n`Path object <https://docs.python.org/3.8/library/zipfile.html#path-objects>`_.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - zipp\n     - stdlib\n   * - 3.5\n     - 3.11\n   * - 3.3\n     - 3.9\n   * - 1.0\n     - 3.8\n\n\nUsage\n=====\n\nUse ``zipp.Path`` in place of ``zipfile.Path`` on any Python.\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=referral&utm_campaign=github>`_.\n\nSecurity Contact\n================\n\nTo report a security vulnerability, please use the\n`Tidelift security contact <https://tidelift.com/security>`_.\nTidelift will coordinate the fix and disclosure.\n",
+      "release_date": "2022-07-12T14:21:21",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Jason R. Coombs",
+          "email": "jaraco@jaraco.com",
+          "url": null
+        },
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": "",
+          "email": "",
+          "url": null
+        }
+      ],
+      "keywords": [],
+      "homepage_url": "https://github.com/jaraco/zipp",
+      "download_url": "https://files.pythonhosted.org/packages/3b/e3/fb79a1ea5f3a7e9745f688855d3c673f2ef7921639a380ec76f7d4d83a85/zipp-3.8.1.tar.gz",
+      "size": 14189,
+      "sha1": null,
+      "md5": "6f15c3e3c78919f8936749b0033e0cea",
+      "sha256": "05b45f1ee8f807d0cc928485ca40a07cb491cf092ff587c0df9cb1fd154848d2",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": null,
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": "",
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/zipp/3.8.1/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/zipp@3.8.1"
     }
   ]
 }
