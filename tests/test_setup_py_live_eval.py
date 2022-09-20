@@ -15,8 +15,8 @@ from os.path import join
 
 from python_inspector.setup_py_live_eval import iter_requirements
 
-REQ = abspath(join(dirname(__file__), "./fixtures/requirements.devel.txt"))
-SETUP = abspath(join(dirname(__file__), "./fixtures/setup.txt"))
+REQ = abspath(join(dirname(__file__), "./data/requirements.devel.txt"))
+SETUP = abspath(join(dirname(__file__), "./data/setup.txt"))
 
 
 def test_iter_requirements_with_setup_py():
