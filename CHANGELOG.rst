@@ -10,6 +10,7 @@ v0.7.0
   solution short of a full installation. Because this can be a security issue,
   there is a new "--analyze-setup-py-insecurely" command line option to enable this feature.
   Note that this not more insecure than actually installing a PyPI package.
+- Add metadata for packages.
 
 
 v0.6.5

@@ -494,43 +494,6 @@ class PythonInputProvider(AbstractProvider):
         return list(self._iter_dependencies(candidate))
 
 
-def get_wheel_download_urls(
-    purl: PackageURL,
-    repos: List[PypiSimpleRepository],
-    environment: Environment,
-    python_version: str,
-) -> List[str]:
-    """
-    Return a list of download urls for the given purl.
-    """
-    for repo in repos:
-        for wheel in utils_pypi.get_supported_and_valid_wheels(
-            repo=repo,
-            name=purl.name,
-            version=purl.version,
-            environment=environment,
-            python_version=python_version,
-        ):
-            yield wheel.download_url
-
-
-def get_sdist_download_url(
-    purl: PackageURL, repos: List[PypiSimpleRepository], python_version: str
-) -> str:
-    """
-    Return a list of download urls for the given purl.
-    """
-    for repo in repos:
-        sdist = utils_pypi.get_valid_sdist(
-            repo=repo,
-            name=purl.name,
-            version=purl.version,
-            python_version=python_version,
-        )
-        if sdist:
-            return sdist.download_url
-
-
 def get_all_srcs(mapping: Dict, graph: DirectedGraph):
     """
     Return a list of all sources in the graph.
@@ -559,9 +522,7 @@ def dfs(mapping: Dict, graph: DirectedGraph, src: str):
     )
 
 
-def format_resolution(
-    results: Result, environment: Environment, repos: List[PypiSimpleRepository], as_tree=False
-):
+def format_resolution(results: Result, as_tree=False):
     """
     Return a formatted resolution either as a tree or parent/children.
     """
@@ -586,22 +547,6 @@ def format_resolution(
                 )
                 dependencies.append(str(dep_purl))
             dependencies.sort()
-            python_version = get_python_version_from_env_tag(
-                python_version=environment.python_version
-            )
-            wheel_urls = list(
-                get_wheel_download_urls(
-                    purl=parent_purl,
-                    repos=repos,
-                    environment=environment,
-                    python_version=python_version,
-                )
-            )
-            sdist_url = get_sdist_download_url(
-                purl=parent_purl,
-                repos=repos,
-                python_version=python_version,
-            )
             parent_children = dict(
                 package=str(parent_purl),
                 dependencies=dependencies,
@@ -777,9 +722,7 @@ def get_resolved_dependencies(
         if pdt_output:
             return (format_pdt_tree(resolver_results), package_list)
         return (
-            format_resolution(
-                resolver_results, as_tree=as_tree, environment=environment, repos=repos
-            ),
+            format_resolution(resolver_results, as_tree=as_tree),
             package_list,
         )
     except Exception as e:
