@@ -322,7 +322,7 @@ def resolve_dependencies(
             click.secho(f" {repo}")
 
     # resolve dependencies proper
-    requirements, resolved_dependencies, packages = resolve(
+    requirements, resolved_dependencies, purls = resolve(
         direct_dependencies=direct_dependencies,
         environment=environment,
         repos=repos,
@@ -355,10 +355,10 @@ def resolve_dependencies(
         errors=[],
     )
 
-    metadata = []
+    packages = []
 
-    for package in packages:
-        metadata.extend(
+    for package in purls:
+        packages.extend(
             list(get_pypi_data_from_purl(package, repos=repos, environment=environment)),
         )
 
@@ -368,7 +368,7 @@ def resolve_dependencies(
             requirements=requirements,
             resolved_dependencies=resolved_dependencies,
             json_output=json_output,
-            metadata=metadata,
+            packages=packages,
         )
 
     else:
@@ -377,7 +377,7 @@ def resolve_dependencies(
             requirements=requirements,
             resolved_dependencies=resolved_dependencies,
             json_output=pdt_output,
-            metadata=metadata,
+            packages=packages,
             pdt_output=True,
         )
 
@@ -443,7 +443,7 @@ def get_requirements_from_direct_dependencies(
 
 
 def write_output(
-    headers, requirements, resolved_dependencies, json_output, metadata, pdt_output=False
+    headers, requirements, resolved_dependencies, json_output, packages, pdt_output=False
 ):
     """
     Write headers, requirements and resolved_dependencies as JSON to ``json_output``.
@@ -455,12 +455,12 @@ def write_output(
             headers=headers,
             requirements=requirements,
             resolved_dependencies=resolved_dependencies,
-            metadata=metadata,
+            packages=packages,
         )
     else:
         output = dict(
             resolved_dependencies=resolved_dependencies,
-            metadata=metadata,
+            packages=packages,
         )
 
     json.dump(output, json_output, indent=2)

@@ -39,7 +39,7 @@
       ]
     }
   ],
-  "metadata": [
+  "packages": [
     {
       "type": "pypi",
       "namespace": null,
