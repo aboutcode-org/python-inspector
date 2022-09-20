@@ -248,14 +248,14 @@ def remove_extras(identifier: str) -> str:
 
 
 class PythonInputProvider(AbstractProvider):
-    def __init__(self, environment=None, repos=tuple(), insecure=False):
+    def __init__(self, environment=None, repos=tuple(), analyze_setup_py_insecurely=False):
         self.environment = environment
         self.environment_marker = get_environment_marker_from_environment(environment)
         self.repos = repos or []
         self.versions_by_package = {}
         self.dependencies_by_purl = {}
         self.wheel_or_sdist_by_package = {}
-        self.insecure = insecure
+        self.analyze_setup_py_insecurely = analyze_setup_py_insecurely
 
     def identify(self, requirement_or_candidate: Union[Candidate, Requirement]) -> str:
         """Given a requirement, return an identifier for it. Overridden."""
@@ -378,7 +378,10 @@ class PythonInputProvider(AbstractProvider):
             )
             if not sdist_location:
                 return
-            yield from get_setup_dependencies(location=sdist_location, insecure=self.insecure)
+            yield from get_setup_dependencies(
+                location=sdist_location,
+                analyze_setup_py_insecurely=self.analyze_setup_py_insecurely,
+            )
 
     def get_requirements_for_package_from_pypi_json_api(
         self, purl: PackageURL
@@ -678,7 +681,7 @@ def get_package_list(results):
     return list(sorted(packages))
 
 
-def get_setup_dependencies(location, insecure=False, use_requirements=True):
+def get_setup_dependencies(location, analyze_setup_py_insecurely=False, use_requirements=True):
     """
     Yield dependencies from the given setup.py and setup.cfg location.
     """
@@ -736,7 +739,7 @@ def get_setup_dependencies(location, insecure=False, use_requirements=True):
     if not has_deps and contain_string(
         string="_require", files=[setup_py_location, setup_cfg_location]
     ):
-        if insecure:
+        if analyze_setup_py_insecurely:
             yield from parse_setup_py_insecurely(setup_py=setup_py_location)
         else:
             raise Exception("Unable to collect setup.py dependencies securely")
@@ -750,7 +753,7 @@ def get_resolved_dependencies(
     max_rounds: int = 200000,
     verbose: bool = False,
     pdt_output: bool = False,
-    insecure: bool = False,
+    analyze_setup_py_insecurely: bool = False,
 ):
     """
     Return resolved dependencies of a ``requirements`` list of Requirement for
@@ -762,7 +765,11 @@ def get_resolved_dependencies(
     """
     try:
         resolver = Resolver(
-            provider=PythonInputProvider(environment=environment, repos=repos, insecure=insecure),
+            provider=PythonInputProvider(
+                environment=environment,
+                repos=repos,
+                analyze_setup_py_insecurely=analyze_setup_py_insecurely,
+            ),
             reporter=BaseReporter(),
         )
         resolver_results = resolver.resolve(requirements=requirements, max_rounds=max_rounds)
