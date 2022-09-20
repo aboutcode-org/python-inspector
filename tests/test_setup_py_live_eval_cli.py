@@ -235,7 +235,7 @@ def test_cli_with_insecure_option():
         setup_py=setup_py_file,
         expected_file=expected_file,
         regen=REGEN_TEST_FIXTURES,
-        extra_options=["--python-version", "27", "--insecure"],
+        extra_options=["--python-version", "27", "--analyze-setup-py-insecurely"],
         pdt_output=True,
     )
 

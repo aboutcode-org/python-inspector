@@ -158,9 +158,10 @@ def print_version(ctx, param, value):
     "--index-url are ignored when this option is active.",
 )
 @click.option(
-    "--insecure",
+    "--analyze-setup-py-insecurely",
     is_flag=True,
-    help="Resolve insecurely",
+    help="Enable collection of requirements in setup.py that compute these"
+    " dynamically. This is an insecure operation as it can run arbitrary code.",
 )
 @click.option(
     "--verbose",
