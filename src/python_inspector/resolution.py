@@ -140,7 +140,7 @@ def get_environment_marker_from_environment(environment):
 
 def contain_string(string: str, files: List) -> bool:
     """
-    Return True if the string is contains in any of the files.
+    Return True if the ``string`` is contained in any of the ``files`` list of file paths.
     """
     for file in files:
         if not os.path.exists(file):
@@ -154,7 +154,7 @@ def contain_string(string: str, files: List) -> bool:
 
 def parse_reqs_from_setup_py_insecurely(setup_py):
     """
-    Yield requirements from the setup.py file at ``setup_py``.
+    Yield  Requirement(s) from a ``setup_py`` setup.py file location .
     """
     if not os.path.exists(setup_py):
         return []
@@ -164,7 +164,7 @@ def parse_reqs_from_setup_py_insecurely(setup_py):
 
 def parse_deps_from_setup_py_insecurely(setup_py):
     """
-    Yield requirements from the setup.py file at ``setup_py``.
+    Yield DependentPackage(s) from the ``setup_py`` setup.py file location .
     """
     if not os.path.exists(setup_py):
         return []
@@ -668,7 +668,11 @@ def get_package_list(results):
 
 def get_setup_dependencies(location, analyze_setup_py_insecurely=False, use_requirements=True):
     """
-    Yield dependencies from the given setup.py and setup.cfg location.
+    Yield Requirement(s) from Pypi in the ``location`` directory that contains
+    a setup.py and/or a setup.cfg and optionally a requirements.txt file if
+    ``use_requirements`` is True and this file is used in the setup.py or setup.cfg.
+    Perform an insecure live evaluation of the Python code if needed and if
+    ``analyze_setup_py_insecurely`` is True.
     """
 
     setup_py_location = os.path.join(

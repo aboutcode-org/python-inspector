@@ -9,9 +9,6 @@
 #
 """Generate requirements from `setup.py` and `requirements-devel.txt`."""
 
-from __future__ import absolute_import
-from __future__ import print_function
-
 import os
 import re
 import sys
@@ -22,17 +19,9 @@ except ImportError:  # pragma: no cover
     import ConfigParser as configparser
 
 import mock
-import pkg_resources
 import setuptools
-
-
-def parse_set(string):
-    """Parse set from comma separated string."""
-    string = string.strip()
-    if string:
-        return set(string.split(","))
-    else:
-        return set()
+from commoncode.command import pushd
+from packaging.requirements import Requirement
 
 
 def minver_error(pkg_name):
@@ -47,49 +36,8 @@ def minver_error(pkg_name):
 def build_pkg_name(pkg):
     """Build package name, including extras if present."""
     if pkg.extras:
-        return "{0}[{1}]".format(pkg.project_name, ",".join(sorted(pkg.extras)))
-    return pkg.project_name
-
-
-def parse_pip_file(path):
-    """Parse pip requirements file."""
-    # requirement lines sorted by importance
-    # also collect other pip commands
-    rdev = {}
-    rnormal = []
-    stuff = []
-
-    try:
-        with open(path) as f:
-            for line in f:
-                line = line.strip()
-
-                # see https://pip.readthedocs.io/en/1.1/requirements.html
-                if line.startswith("-e"):
-                    # devel requirement
-                    splitted = line.split("#egg=")
-                    rdev[splitted[1].lower()] = line
-
-                elif line.startswith("-r"):
-                    # recursive file command
-                    splitted = re.split("-r\\s+", line)
-                    subrdev, subrnormal, substuff = parse_pip_file(
-                        os.path.join(os.path.dirname(path), splitted[1])
-                    )
-                    for k, v in subrdev.items():
-                        if k not in rdev:
-                            rdev[k] = v
-                    rnormal.extend(subrnormal)
-                elif line.startswith("-"):
-                    # another special command we don't recognize
-                    stuff.append(line)
-                else:
-                    # ordinary requirement, similarly to them used in setup.py
-                    rnormal.append(line)
-    except IOError:
-        print('Warning: could not parse requirements file "{0}"!'.format(path), file=sys.stderr)
-
-    return rdev, rnormal, stuff
+        return "{0}[{1}]".format(str(pkg.name), ",".join(sorted(pkg.extras)))
+    return str(pkg.name)
 
 
 def iter_requirements(level, extras, setup_file):
@@ -100,24 +48,26 @@ def iter_requirements(level, extras, setup_file):
     result = dict()
     requires = []
     stuff = []
-    cd = os.getcwd()
-    os.chdir(os.path.dirname(setup_file))
     install_requires = []
     requires_extras = {}
+    test_requires = {}
+    setup_requires = {}
     # change directory to setup.py path
-    with mock.patch.object(setuptools, "setup") as mock_setup:
-        sys.path.append(os.path.dirname(setup_file))
-        g = {"__file__": setup_file, "__name__": "__main__"}
-        with open(setup_file) as sf:
-            exec(sf.read(), g)
-        sys.path.pop()
-        assert g["setup"]  # silence warning about unused imports
+    with pushd(os.path.dirname(setup_file)):
+        with mock.patch.object(setuptools, "setup") as mock_setup:
+            sys.path.append(os.path.dirname(setup_file))
+            g = {"__file__": setup_file, "__name__": "__main__"}
+            with open(setup_file) as sf:
+                exec(sf.read(), g)
+            sys.path.pop()
+            assert g["setup"]  # silence warning about unused imports
     # called arguments are in `mock_setup.call_args`
-    os.chdir(cd)
     mock_args, mock_kwargs = mock_setup.call_args
     install_requires = mock_kwargs.get("install_requires", install_requires)
 
     requires_extras = mock_kwargs.get("extras_require", requires_extras)
+    test_requires = mock_kwargs.get("test_requires", test_requires)
+    setup_requires = mock_kwargs.get("setup_requires", setup_requires)
 
     for e, reqs in requires_extras.items():
         # Handle conditions on extras. See pkginfo_to_metadata function
@@ -130,10 +80,18 @@ def iter_requirements(level, extras, setup_file):
                 reqs = ["{0}; {1}".format(r, condition) for r in reqs]
             install_requires.extend(reqs)
 
-    for pkg in pkg_resources.parse_requirements(install_requires):
+    for reqs in test_requires:
+        if "test" in extras:
+            install_requires.extend(reqs)
+
+    for reqs in setup_requires:
+        if "setup" in extras:
+            install_requires.extend(reqs)
+
+    for req in install_requires:
         # skip things we already know
         # FIXME be smarter about merging things
-
+        pkg = Requirement(req)
         # Evaluate environment markers skip if not applicable
         if hasattr(pkg, "marker") and pkg.marker is not None:
             if not pkg.marker.evaluate():
@@ -142,10 +100,11 @@ def iter_requirements(level, extras, setup_file):
                 # Remove markers from the output
                 pkg.marker = None
 
-        if pkg.key in result:
+        if pkg.name in result:
             continue
 
-        specs = dict(pkg.specs)
+        specs = pkg.specifier
+        specs = {s.operator: s.version for s in specs._specs}
         if ((">=" in specs) and (">" in specs)) or (("<=" in specs) and ("<" in specs)):
             print(
                 "ERROR: Do not specify such weird constraints! " '("{0}")'.format(pkg),
@@ -154,32 +113,32 @@ def iter_requirements(level, extras, setup_file):
             sys.exit(1)
 
         if "==" in specs:
-            result[pkg.key] = "{0}=={1}".format(build_pkg_name(pkg), specs["=="])
+            result[pkg.name] = "{0}=={1}".format(build_pkg_name(pkg), specs["=="])
 
         elif ">=" in specs:
             if level == "min":
-                result[pkg.key] = "{0}=={1}".format(build_pkg_name(pkg), specs[">="])
+                result[pkg.name] = "{0}=={1}".format(build_pkg_name(pkg), specs[">="])
             else:
-                result[pkg.key] = pkg
+                result[pkg.name] = pkg
 
         elif ">" in specs:
             if level == "min":
                 minver_error(build_pkg_name(pkg))
             else:
-                result[pkg.key] = pkg
+                result[pkg.name] = pkg
 
         elif "~=" in specs:
             if level == "min":
-                result[pkg.key] = "{0}=={1}".format(build_pkg_name(pkg), specs["~="])
+                result[pkg.name] = "{0}=={1}".format(build_pkg_name(pkg), specs["~="])
             else:
                 ver, _ = os.path.splitext(specs["~="])
-                result[pkg.key] = "{0}>={1},=={2}.*".format(build_pkg_name(pkg), specs["~="], ver)
+                result[pkg.name] = "{0}>={1},=={2}.*".format(build_pkg_name(pkg), specs["~="], ver)
 
         else:
             if level == "min":
                 minver_error(build_pkg_name(pkg))
             else:
-                result[pkg.key] = build_pkg_name(pkg)
+                result[pkg.name] = build_pkg_name(pkg)
 
     for s in stuff:
         yield s
