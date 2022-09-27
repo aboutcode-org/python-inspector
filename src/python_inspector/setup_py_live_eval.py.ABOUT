@@ -1,0 +1,8 @@
+name: requirements-builder
+version: 597340d1e84138af64786d45e74fc9f03315bf2d
+copyright: Copyright (C) CERN.
+homepage_url: https://github.com/inveniosoftware/requirements-builder/
+description: Build requirements files from setup.py requirements.
+license_expression: bsd-new
+license_file: requirements_builder.LICENSE
+notes: this is a subset of requirements-builder that has been heavily modified.

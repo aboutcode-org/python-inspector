@@ -1,15 +1,29 @@
 Changelog
 =========
 
+
+v0.7.0
+------
+
+- Enable live evaluation of the "setup.py" that use computed arguments.
+  When this occurs, a live evaluation of the Python code is the only working
+  solution short of a full installation. Because this can be a security issue,
+  there is a new "--analyze-setup-py-insecurely" command line option to enable this feature.
+  Note that this not more insecure than actually installing a PyPI package.
+- Add metadata for packages.
+
+
 v0.6.5
 ------
 
 - Add --version option.
 
+
 v0.6.4
 ------
 
 - Add support for setup.py
+
 
 v0.6.3
 ------
@@ -17,11 +31,13 @@ v0.6.3
 - Ensure to filter out top level dependencies on the basis of their environment markers
 - Do not ignore files on basis of name 
 
+
 v0.6.2
 ------
 
 - Ignore invalid requirement files on basis of name
 - Use netrc file from home directory if not present
+
 
 v0.6.1
 ------

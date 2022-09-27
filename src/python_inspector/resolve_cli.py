@@ -19,6 +19,7 @@ from packaging.requirements import Requirement
 from tinynetrc import Netrc
 
 from _packagedcode.models import DependentPackage
+from _packagedcode.pypi import PipRequirementsFileHandler
 from _packagedcode.pypi import PythonSetupPyHandler
 from _packagedcode.pypi import can_process_dependent_package
 from python_inspector import dependencies
@@ -26,9 +27,12 @@ from python_inspector import utils
 from python_inspector import utils_pypi
 from python_inspector.cli_utils import FileOptionType
 from python_inspector.package_data import get_pypi_data_from_purl
+from python_inspector.resolution import contain_string
+from python_inspector.resolution import get_deps_from_distribution
 from python_inspector.resolution import get_environment_marker_from_environment
 from python_inspector.resolution import get_python_version_from_env_tag
 from python_inspector.resolution import get_resolved_dependencies
+from python_inspector.resolution import parse_deps_from_setup_py_insecurely
 
 TRACE = False
 
@@ -158,6 +162,12 @@ def print_version(ctx, param, value):
     "--index-url are ignored when this option is active.",
 )
 @click.option(
+    "--analyze-setup-py-insecurely",
+    is_flag=True,
+    help="Enable collection of requirements in setup.py that compute these"
+    " dynamically. This is an insecure operation as it can run arbitrary code.",
+)
+@click.option(
     "--verbose",
     is_flag=True,
     hidden=True,
@@ -187,6 +197,7 @@ def resolve_dependencies(
     max_rounds,
     use_cached_index=False,
     use_pypi_json_api=False,
+    analyze_setup_py_insecurely=False,
     verbose=TRACE,
 ):
     """
@@ -276,6 +287,33 @@ def resolve_dependencies(
             if dep.scope == "install":
                 direct_dependencies.append(dep)
 
+        if not package_data.dependencies:
+            has_deps = False
+            if contain_string(string="requirements.txt", files=[setup_py_file]):
+                # Look in requirements file if and only if thy are refered in setup.py or setup.cfg
+                # And no deps have been yielded by requirements file.
+
+                location = os.path.dirname(setup_py_file)
+                requirement_location = os.path.join(
+                    location,
+                    "requirements.txt",
+                )
+                deps = get_deps_from_distribution(
+                    handler=PipRequirementsFileHandler,
+                    location=requirement_location,
+                )
+                if deps:
+                    has_deps = True
+                    direct_dependencies.extend(deps)
+
+            if not has_deps and contain_string(string="_require", files=[setup_py_file]):
+                if analyze_setup_py_insecurely:
+                    direct_dependencies.extend(
+                        parse_deps_from_setup_py_insecurely(setup_py=setup_py_file)
+                    )
+                else:
+                    raise Exception("Unable to collect setup.py dependencies securely")
+
     if not direct_dependencies:
         click.secho("Error: no requirements requested.")
         ctx.exit(1)
@@ -330,6 +368,7 @@ def resolve_dependencies(
         max_rounds=max_rounds,
         verbose=verbose,
         pdt_output=pdt_output,
+        analyze_setup_py_insecurely=analyze_setup_py_insecurely,
     )
 
     cli_options = [f"--requirement {rf}" for rf in requirement_files]
@@ -393,6 +432,7 @@ def resolve(
     max_rounds=200000,
     verbose=False,
     pdt_output=False,
+    analyze_setup_py_insecurely=False,
 ):
     """
     Resolve dependencies given a ``direct_dependencies`` list of
@@ -418,6 +458,7 @@ def resolve(
         max_rounds=max_rounds,
         verbose=verbose,
         pdt_output=pdt_output,
+        analyze_setup_py_insecurely=analyze_setup_py_insecurely,
     )
 
     initial_requirements = [d.to_dict() for d in direct_dependencies]

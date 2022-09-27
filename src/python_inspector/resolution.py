@@ -39,6 +39,7 @@ from _packagedcode.pypi import PythonSetupPyHandler
 from _packagedcode.pypi import SetupCfgHandler
 from _packagedcode.pypi import can_process_dependent_package
 from python_inspector import utils_pypi
+from python_inspector.setup_py_live_eval import iter_requirements
 from python_inspector.utils_pypi import Environment
 from python_inspector.utils_pypi import PypiSimpleRepository
 
@@ -96,12 +97,33 @@ def get_requirements_from_distribution(
     Return a list of requirements from a source distribution or wheel at
     ``location`` using the provided ``handler`` DatafileHandler for parsing.
     """
+    if not location:
+        return []
+    if not os.path.exists(location):
+        return []
+    reqs = []
+    for package_data in handler.parse(location):
+        dependencies = package_data.dependencies
+        reqs.extend(get_requirements_from_dependencies(dependencies=dependencies))
+    return reqs
+
+
+def get_deps_from_distribution(
+    handler: BasePypiHandler,
+    location: str,
+) -> List[DependentPackage]:
+    """
+    Return a list of requirements from a source distribution or wheel at
+    ``location`` using the provided ``handler`` DatafileHandler for parsing.
+    """
+    if not location:
+        return []
     if not os.path.exists(location):
         return []
     deps = []
     for package_data in handler.parse(location):
         dependencies = package_data.dependencies
-        deps.extend(get_requirements_from_dependencies(dependencies=dependencies))
+        deps.extend(dependencies=dependencies)
     return deps
 
 
@@ -116,22 +138,49 @@ def get_environment_marker_from_environment(environment):
     }
 
 
-def is_requirements_file_in_setup_files(setup_files: List[str]) -> bool:
+def contain_string(string: str, files: List) -> bool:
     """
-    Return True if the string ``requirements.txt`` is found in any of the ``setup_files`` location
-    strings to either a setup.py or setup.cfg file.
-    This is an indication that a requirements.txt is likely loaded in the setup.py
-    code and we use this as a hint to treat requirements.txt requirements
-    as being for the setup.py file.
+    Return True if the ``string`` is contained in any of the ``files`` list of file paths.
     """
-    for setup_file in setup_files:
-        if not os.path.exists(setup_file):
+    for file in files:
+        if not os.path.exists(file):
             continue
-        with open(setup_file, encoding="utf-8") as f:
+        with open(file, encoding="utf-8") as f:
             # TODO also consider other file names
-            if "requirements.txt" in f.read():
+            if string in f.read():
                 return True
     return False
+
+
+def parse_reqs_from_setup_py_insecurely(setup_py):
+    """
+    Yield  Requirement(s) from a ``setup_py`` setup.py file location .
+    """
+    if not os.path.exists(setup_py):
+        return []
+    for req in iter_requirements(level="", extras=[], setup_file=setup_py):
+        yield Requirement(req)
+
+
+def parse_deps_from_setup_py_insecurely(setup_py):
+    """
+    Yield DependentPackage(s) from the ``setup_py`` setup.py file location .
+    """
+    if not os.path.exists(setup_py):
+        return []
+    for req in iter_requirements(level="", extras=[], setup_file=setup_py):
+        parsed_req = Requirement(req)
+        yield DependentPackage(
+            purl=str(
+                PackageURL(
+                    type="pypi",
+                    name=parsed_req.name,
+                )
+            ),
+            extracted_requirement=req,
+            scope="install",
+            is_runtime=False,
+        )
 
 
 def is_valid_version(
@@ -239,13 +288,14 @@ def remove_extras(identifier: str) -> str:
 
 
 class PythonInputProvider(AbstractProvider):
-    def __init__(self, environment=None, repos=tuple()):
+    def __init__(self, environment=None, repos=tuple(), analyze_setup_py_insecurely=False):
         self.environment = environment
         self.environment_marker = get_environment_marker_from_environment(environment)
         self.repos = repos or []
         self.versions_by_package = {}
         self.dependencies_by_purl = {}
         self.wheel_or_sdist_by_package = {}
+        self.analyze_setup_py_insecurely = analyze_setup_py_insecurely
 
     def identify(self, requirement_or_candidate: Union[Candidate, Requirement]) -> str:
         """Given a requirement, return an identifier for it. Overridden."""
@@ -350,62 +400,28 @@ class PythonInputProvider(AbstractProvider):
             python_version=python_version,
         )
 
-        has_wheels = False
+        if wheels:
+            for wheel in wheels:
+                wheel_location = os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, wheel)
+                deps = get_requirements_from_distribution(
+                    handler=PypiWheelHandler,
+                    location=wheel_location,
+                )
+                if deps:
+                    yield from deps
+                # We are only looking at the first wheel and not other wheels
+                break
 
-        for wheel in wheels:
-            wheel_location = os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, wheel)
-            deps = get_requirements_from_distribution(
-                handler=PypiWheelHandler,
-                location=wheel_location,
-            )
-            if deps:
-                has_wheels = True
-                yield from deps
-
-        if not has_wheels:
+        else:
             sdist_location = fetch_and_extract_sdist(
                 repos=self.repos, candidate=candidate, python_version=python_version
             )
-
-            if sdist_location:
-                setup_py_location = os.path.join(
-                    sdist_location,
-                    "setup.py",
-                )
-                setup_cfg_location = os.path.join(
-                    sdist_location,
-                    "setup.cfg",
-                )
-
-                location_by_sdist_parser = {
-                    PythonSetupPyHandler: setup_py_location,
-                    SetupCfgHandler: setup_cfg_location,
-                }
-
-                deps_in_setup = False
-
-                for handler, location in location_by_sdist_parser.items():
-                    deps = get_requirements_from_distribution(
-                        handler=handler,
-                        location=location,
-                    )
-                    if deps:
-                        deps_in_setup = True
-                        yield from deps
-
-                requirement_location = os.path.join(
-                    sdist_location,
-                    "requirements.txt",
-                )
-                if not deps_in_setup and is_requirements_file_in_setup_files(
-                    setup_files=[setup_py_location, setup_cfg_location]
-                ):
-                    deps = get_requirements_from_distribution(
-                        handler=PipRequirementsFileHandler,
-                        location=requirement_location,
-                    )
-                    if deps:
-                        yield from deps
+            if not sdist_location:
+                return
+            yield from get_setup_dependencies(
+                location=sdist_location,
+                analyze_setup_py_insecurely=self.analyze_setup_py_insecurely,
+            )
 
     def get_requirements_for_package_from_pypi_json_api(
         self, purl: PackageURL
@@ -518,43 +534,6 @@ class PythonInputProvider(AbstractProvider):
         return list(self._iter_dependencies(candidate))
 
 
-def get_wheel_download_urls(
-    purl: PackageURL,
-    repos: List[PypiSimpleRepository],
-    environment: Environment,
-    python_version: str,
-) -> List[str]:
-    """
-    Return a list of download urls for the given purl.
-    """
-    for repo in repos:
-        for wheel in utils_pypi.get_supported_and_valid_wheels(
-            repo=repo,
-            name=purl.name,
-            version=purl.version,
-            environment=environment,
-            python_version=python_version,
-        ):
-            yield wheel.download_url
-
-
-def get_sdist_download_url(
-    purl: PackageURL, repos: List[PypiSimpleRepository], python_version: str
-) -> str:
-    """
-    Return a list of download urls for the given purl.
-    """
-    for repo in repos:
-        sdist = utils_pypi.get_valid_sdist(
-            repo=repo,
-            name=purl.name,
-            version=purl.version,
-            python_version=python_version,
-        )
-        if sdist:
-            return sdist.download_url
-
-
 def get_all_srcs(mapping: Dict, graph: DirectedGraph):
     """
     Return a list of all sources in the graph.
@@ -583,9 +562,7 @@ def dfs(mapping: Dict, graph: DirectedGraph, src: str):
     )
 
 
-def format_resolution(
-    results: Result, environment: Environment, repos: List[PypiSimpleRepository], as_tree=False
-):
+def format_resolution(results: Result, as_tree=False):
     """
     Return a formatted resolution either as a tree or parent/children.
     """
@@ -610,22 +587,6 @@ def format_resolution(
                 )
                 dependencies.append(str(dep_purl))
             dependencies.sort()
-            python_version = get_python_version_from_env_tag(
-                python_version=environment.python_version
-            )
-            wheel_urls = list(
-                get_wheel_download_urls(
-                    purl=parent_purl,
-                    repos=repos,
-                    environment=environment,
-                    python_version=python_version,
-                )
-            )
-            sdist_url = get_sdist_download_url(
-                purl=parent_purl,
-                repos=repos,
-                python_version=python_version,
-            )
             parent_children = dict(
                 package=str(parent_purl),
                 dependencies=dependencies,
@@ -705,6 +666,74 @@ def get_package_list(results):
     return list(sorted(packages))
 
 
+def get_setup_dependencies(location, analyze_setup_py_insecurely=False, use_requirements=True):
+    """
+    Yield Requirement(s) from Pypi in the ``location`` directory that contains
+    a setup.py and/or a setup.cfg and optionally a requirements.txt file if
+    ``use_requirements`` is True and this file is used in the setup.py or setup.cfg.
+    Perform an insecure live evaluation of the Python code if needed and if
+    ``analyze_setup_py_insecurely`` is True.
+    """
+
+    setup_py_location = os.path.join(
+        location,
+        "setup.py",
+    )
+    setup_cfg_location = os.path.join(
+        location,
+        "setup.cfg",
+    )
+
+    if not os.path.exists(setup_py_location) and not os.path.exists(setup_cfg_location):
+        raise Exception(f"No setup.py or setup.cfg found in pypi sdist {location}")
+
+    # Some commonon packages like flask may have some dependencies in setup.cfg
+    # and some dependencies in setup.py. We are going to check both.
+    location_by_sdist_parser = {
+        PythonSetupPyHandler: setup_py_location,
+        SetupCfgHandler: setup_cfg_location,
+    }
+
+    # Set to True if we found any dependencies in setup.py or setup.cfg
+    has_deps = False
+
+    for handler, location in location_by_sdist_parser.items():
+        deps = get_requirements_from_distribution(
+            handler=handler,
+            location=location,
+        )
+        if deps:
+            has_deps = True
+            yield from deps
+
+    if (
+        use_requirements
+        and not has_deps
+        and contain_string(string="requirements.txt", files=[setup_py_location, setup_cfg_location])
+    ):
+        # Look in requirements file if and only if thy are refered in setup.py or setup.cfg
+        # And no deps have been yielded by requirements file.
+        requirement_location = os.path.join(
+            location,
+            "requirements.txt",
+        )
+        deps = get_requirements_from_distribution(
+            handler=PipRequirementsFileHandler,
+            location=requirement_location,
+        )
+        if deps:
+            has_deps = True
+            yield from deps
+
+    if not has_deps and contain_string(
+        string="_require", files=[setup_py_location, setup_cfg_location]
+    ):
+        if analyze_setup_py_insecurely:
+            yield from parse_reqs_from_setup_py_insecurely(setup_py=setup_py_location)
+        else:
+            raise Exception("Unable to collect setup.py dependencies securely")
+
+
 def get_resolved_dependencies(
     requirements: List[Requirement],
     environment: Environment = None,
@@ -713,6 +742,7 @@ def get_resolved_dependencies(
     max_rounds: int = 200000,
     verbose: bool = False,
     pdt_output: bool = False,
+    analyze_setup_py_insecurely: bool = False,
 ):
     """
     Return resolved dependencies of a ``requirements`` list of Requirement for
@@ -724,7 +754,11 @@ def get_resolved_dependencies(
     """
     try:
         resolver = Resolver(
-            provider=PythonInputProvider(environment=environment, repos=repos),
+            provider=PythonInputProvider(
+                environment=environment,
+                repos=repos,
+                analyze_setup_py_insecurely=analyze_setup_py_insecurely,
+            ),
             reporter=BaseReporter(),
         )
         resolver_results = resolver.resolve(requirements=requirements, max_rounds=max_rounds)
@@ -732,9 +766,7 @@ def get_resolved_dependencies(
         if pdt_output:
             return (format_pdt_tree(resolver_results), package_list)
         return (
-            format_resolution(
-                resolver_results, as_tree=as_tree, environment=environment, repos=repos
-            ),
+            format_resolution(resolver_results, as_tree=as_tree),
             package_list,
         )
     except Exception as e:

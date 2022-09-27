@@ -92,6 +92,8 @@ def get_pypi_data_from_purl(
     from python_inspector.resolution import get_response
 
     response = get_response(api_url)
+    if not response:
+        return []
     info = response.get("info") or {}
     homepage_url = info.get("home_page")
     license = info.get("license")

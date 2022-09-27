@@ -8,16 +8,23 @@
 # See https://github.com/nexB/python-inspector for support or download.
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
+import os
+
 import packaging
 import pytest
+from commoncode.testcase import FileDrivenTesting
 from packaging.requirements import Requirement
 
 from _packagedcode import models
 from python_inspector.resolution import get_requirements_from_dependencies
 from python_inspector.resolution import get_resolved_dependencies
 from python_inspector.resolution import is_valid_version
+from python_inspector.resolution import parse_reqs_from_setup_py_insecurely
 from python_inspector.utils_pypi import PYPI_PUBLIC_REPO
 from python_inspector.utils_pypi import Environment
+
+setup_test_env = FileDrivenTesting()
+setup_test_env.test_data_dir = os.path.join(os.path.dirname(__file__), "data")
 
 
 @pytest.mark.online
@@ -140,7 +147,7 @@ def test_without_supported_wheels():
         "pkg:pypi/hyperlink@21.0.0",
         "pkg:pypi/idna@3.4",
         "pkg:pypi/pycparser@2.21",
-        "pkg:pypi/setuptools@65.3.0",
+        "pkg:pypi/setuptools@65.4.0",
         "pkg:pypi/txaio@22.2.1",
     ]
 
@@ -213,3 +220,21 @@ def test_get_requirements_from_dependencies_with_editable_requirements():
     requirements = [str(r) for r in get_requirements_from_dependencies(dependencies)]
 
     assert requirements == []
+
+
+def test_setup_py_parsing_insecure():
+    setup_py_file = setup_test_env.get_test_loc("insecure-setup/setup.py")
+    reqs = [str(req) for req in list(parse_reqs_from_setup_py_insecurely(setup_py=setup_py_file))]
+    assert reqs == ["isodate", "pyparsing", "six"]
+
+
+def test_setup_py_parsing_insecure_testpkh():
+    setup_py_file = setup_test_env.get_test_loc("insecure-setup-2/setup.py")
+    reqs = [str(req) for req in list(parse_reqs_from_setup_py_insecurely(setup_py=setup_py_file))]
+    assert reqs == [
+        "CairoSVG<2.0.0,>=1.0.20",
+        "click>=5.0.0",
+        "invenio[auth,base,metadata]>=3.0.0",
+        "invenio-records==1.0.*,>=1.0.0",
+        "mock>=1.3.0",
+    ]

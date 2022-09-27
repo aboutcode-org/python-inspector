@@ -241,32 +241,6 @@ def test_cli_with_insecure_option():
 
 
 @pytest.mark.online
-def test_cli_with_insecure_option_testpkh():
-    setup_py_file = test_env.get_test_loc("insecure-setup-2/setup.py")
-    expected_file = test_env.get_test_loc(
-        "insecure-setup-2/setup.py-expected.json", must_exist=False
-    )
-    check_setup_py_resolution(
-        setup_py=setup_py_file,
-        expected_file=expected_file,
-        regen=REGEN_TEST_FIXTURES,
-        extra_options=["--python-version", "27", "--analyze-setup-py-insecurely"],
-    )
-
-
-@pytest.mark.online
-def test_cli_with_insecure_option_testrdflib():
-    setup_py_file = test_env.get_test_loc("insecure-setup/setup.py")
-    expected_file = test_env.get_test_loc("insecure-setup/setup.py-expected.json", must_exist=False)
-    check_setup_py_resolution(
-        setup_py=setup_py_file,
-        expected_file=expected_file,
-        regen=REGEN_TEST_FIXTURES,
-        extra_options=["--python-version", "27", "--analyze-setup-py-insecurely"],
-    )
-
-
-@pytest.mark.online
 def test_cli_with_setup_py():
     setup_py_file = setup_test_env.get_test_loc("simple-setup.py")
     expected_file = setup_test_env.get_test_loc("simple-setup.py-expected.json", must_exist=False)
@@ -437,3 +411,80 @@ output:
 """
         assert result.exit_code == expected_rc, error
     return result
+
+
+def test_get_requirements_from_direct_dependencies():
+    direct_dependencies = [
+        models.DependentPackage(
+            purl="pkg:pypi/django",
+            scope="install",
+            is_runtime=True,
+            is_optional=False,
+            is_resolved=False,
+            extracted_requirement="django>=1.11.11",
+            extra_data=dict(
+                is_editable=False,
+                link=None,
+                hash_options=[],
+                is_constraint=False,
+                is_archive=False,
+                is_wheel=False,
+                is_url=False,
+                is_vcs_url=False,
+                is_name_at_url=False,
+                is_local_path=False,
+            ),
+        )
+    ]
+
+    requirements = [
+        str(r)
+        for r in get_requirements_from_direct_dependencies(
+            direct_dependencies=direct_dependencies, environment_marker={}
+        )
+    ]
+
+    assert requirements == ["django>=1.11.11"]
+
+
+def test_get_requirements_from_direct_dependencies_with_empty_list():
+    assert (
+        list(
+            get_requirements_from_direct_dependencies(direct_dependencies=[], environment_marker={})
+        )
+        == []
+    )
+
+
+def test_get_requirements_from_direct_dependencies_with_editable_requirements():
+    direct_dependencies = [
+        models.DependentPackage(
+            purl="pkg:pypi/django",
+            scope="install",
+            is_runtime=True,
+            is_optional=False,
+            is_resolved=False,
+            extracted_requirement="django>=1.11.11",
+            extra_data=dict(
+                is_editable=True,
+                link=None,
+                hash_options=[],
+                is_constraint=False,
+                is_archive=False,
+                is_wheel=False,
+                is_url=False,
+                is_vcs_url=False,
+                is_name_at_url=False,
+                is_local_path=False,
+            ),
+        )
+    ]
+
+    requirements = [
+        str(r)
+        for r in get_requirements_from_direct_dependencies(
+            direct_dependencies=direct_dependencies, environment_marker={}
+        )
+    ]
+
+    assert requirements == []
