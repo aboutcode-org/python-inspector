@@ -254,8 +254,20 @@ def resolve_dependencies(
     if PYPI_SIMPLE_URL not in index_urls:
         index_urls = tuple([PYPI_SIMPLE_URL]) + tuple(index_urls)
 
+    files = []
+
     for req_file in requirement_files:
         deps = dependencies.get_dependencies_from_requirements(requirements_file=req_file)
+        files.append(
+            dict(
+                type="file",
+                path=req_file,
+                package_data=[
+                    pkg_data.to_dict()
+                    for pkg_data in PipRequirementsFileHandler.parse(location=req_file)
+                ],
+            )
+        )
         for extra_data in dependencies.get_extra_data_from_requirements(requirements_file=req_file):
             index_urls = (*index_urls, *tuple(extra_data.get("extra_index_urls") or []))
         direct_dependencies.extend(deps)
@@ -267,6 +279,13 @@ def resolve_dependencies(
     if setup_py_file:
         package_data = list(PythonSetupPyHandler.parse(location=setup_py_file))
         assert len(package_data) == 1
+        files.append(
+            dict(
+                type="file",
+                path=setup_py_file,
+                package_data=package_data[0].to_dict(),
+            )
+        )
         package_data = package_data[0]
         # validate if python require matches our current python version
         python_requires = package_data.extra_data.get("python_requires")
@@ -360,7 +379,7 @@ def resolve_dependencies(
             click.secho(f" {repo}")
 
     # resolve dependencies proper
-    requirements, resolved_dependencies, purls = resolve(
+    resolved_dependencies, purls = resolve(
         direct_dependencies=direct_dependencies,
         environment=environment,
         repos=repos,
@@ -404,19 +423,19 @@ def resolve_dependencies(
     if json_output:
         write_output(
             headers=headers,
-            requirements=requirements,
             resolved_dependencies=resolved_dependencies,
             json_output=json_output,
             packages=packages,
+            files=files,
         )
 
     else:
         write_output(
             headers=headers,
-            requirements=requirements,
             resolved_dependencies=resolved_dependencies,
             json_output=pdt_output,
             packages=packages,
+            files=files,
             pdt_output=True,
         )
 
@@ -461,9 +480,7 @@ def resolve(
         analyze_setup_py_insecurely=analyze_setup_py_insecurely,
     )
 
-    initial_requirements = [d.to_dict() for d in direct_dependencies]
-
-    return initial_requirements, resolved_dependencies, packages
+    return resolved_dependencies, packages
 
 
 def get_requirements_from_direct_dependencies(
@@ -484,7 +501,12 @@ def get_requirements_from_direct_dependencies(
 
 
 def write_output(
-    headers, requirements, resolved_dependencies, json_output, packages, pdt_output=False
+    headers,
+    resolved_dependencies,
+    json_output,
+    packages,
+    files,
+    pdt_output=False,
 ):
     """
     Write headers, requirements and resolved_dependencies as JSON to ``json_output``.
@@ -494,14 +516,16 @@ def write_output(
     if not pdt_output:
         output = dict(
             headers=headers,
-            requirements=requirements,
-            resolved_dependencies=resolved_dependencies,
+            files=files,
+            resolved_dependencies_graph=resolved_dependencies,
             packages=packages,
         )
     else:
         output = dict(
-            resolved_dependencies=resolved_dependencies,
+            headers=headers,
+            files=files,
             packages=packages,
+            resolved_dependencies_graph=resolved_dependencies,
         )
 
     json.dump(output, json_output, indent=2)

@@ -1,40 +1,186 @@
 {
-  "resolved_dependencies": [
+  "headers": {
+    "tool_name": "python-inspector",
+    "tool_homepageurl": "https://github.com/nexB/python-inspector",
+    "tool_version": "0.6.5",
+    "options": [
+      "--requirement /home/tg1999/Desktop/python-inspector/tests/data/pdt-requirements.txt",
+      "--index-url https://pypi.org/simple",
+      "--python-version 38",
+      "--operating-system linux",
+      "--json <file>"
+    ],
+    "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/nexB/scancode-toolkit/ for support and download.",
+    "warnings": [],
+    "errors": []
+  },
+  "files": [
     {
-      "key": "flask",
-      "package_name": "flask",
-      "installed_version": "1.0",
-      "dependencies": [
+      "type": "file",
+      "path": "/home/tg1999/Desktop/python-inspector/tests/data/pdt-requirements.txt",
+      "package_data": [
         {
-          "key": "click",
-          "package_name": "click",
-          "installed_version": "6.7",
-          "dependencies": []
-        },
-        {
-          "key": "itsdangerous",
-          "package_name": "itsdangerous",
-          "installed_version": "0.24",
-          "dependencies": []
-        },
-        {
-          "key": "jinja2",
-          "package_name": "jinja2",
-          "installed_version": "2.11.3",
+          "type": "pypi",
+          "namespace": null,
+          "name": null,
+          "version": null,
+          "qualifiers": {},
+          "subpath": null,
+          "primary_language": "Python",
+          "description": null,
+          "release_date": null,
+          "parties": [],
+          "keywords": [],
+          "homepage_url": null,
+          "download_url": null,
+          "size": null,
+          "sha1": null,
+          "md5": null,
+          "sha256": null,
+          "sha512": null,
+          "bug_tracking_url": null,
+          "code_view_url": null,
+          "vcs_url": null,
+          "copyright": null,
+          "license_expression": null,
+          "declared_license": null,
+          "notice_text": null,
+          "source_packages": [],
+          "file_references": [],
+          "extra_data": {},
           "dependencies": [
             {
-              "key": "markupsafe",
-              "package_name": "markupsafe",
-              "installed_version": "1.0",
-              "dependencies": []
+              "purl": "pkg:pypi/click@6.7",
+              "extracted_requirement": "click==6.7",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/flask@1.0",
+              "extracted_requirement": "Flask==1.0",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/itsdangerous@0.24",
+              "extracted_requirement": "itsdangerous==0.24",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/jinja2@2.11.3",
+              "extracted_requirement": "Jinja2==2.11.3",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/markupsafe@1.0",
+              "extracted_requirement": "MarkupSafe==1.0",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/werkzeug@0.15.3",
+              "extracted_requirement": "Werkzeug==0.15.3",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
             }
-          ]
-        },
-        {
-          "key": "werkzeug",
-          "package_name": "werkzeug",
-          "installed_version": "0.15.3",
-          "dependencies": []
+          ],
+          "repository_homepage_url": null,
+          "repository_download_url": null,
+          "api_data_url": null,
+          "datasource_id": "pip_requirements",
+          "purl": null
         }
       ]
     }
@@ -549,6 +695,46 @@
       "api_data_url": "https://pypi.org/pypi/werkzeug/0.15.3/json",
       "datasource_id": null,
       "purl": "pkg:pypi/werkzeug@0.15.3"
+    }
+  ],
+  "resolved_dependencies_graph": [
+    {
+      "key": "flask",
+      "package_name": "flask",
+      "installed_version": "1.0",
+      "dependencies": [
+        {
+          "key": "click",
+          "package_name": "click",
+          "installed_version": "6.7",
+          "dependencies": []
+        },
+        {
+          "key": "itsdangerous",
+          "package_name": "itsdangerous",
+          "installed_version": "0.24",
+          "dependencies": []
+        },
+        {
+          "key": "jinja2",
+          "package_name": "jinja2",
+          "installed_version": "2.11.3",
+          "dependencies": [
+            {
+              "key": "markupsafe",
+              "package_name": "markupsafe",
+              "installed_version": "1.0",
+              "dependencies": []
+            }
+          ]
+        },
+        {
+          "key": "werkzeug",
+          "package_name": "werkzeug",
+          "installed_version": "0.15.3",
+          "dependencies": []
+        }
+      ]
     }
   ]
 }

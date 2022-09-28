@@ -1,276 +1,671 @@
 {
-  "resolved_dependencies": [
+  "headers": {
+    "tool_name": "python-inspector",
+    "tool_homepageurl": "https://github.com/nexB/python-inspector",
+    "tool_version": "0.6.5",
+    "options": [
+      "--requirement /home/tg1999/Desktop/python-inspector/tests/data/pinned-pdt-requirements.txt",
+      "--index-url https://pypi.org/simple",
+      "--python-version 38",
+      "--operating-system linux",
+      "--json <file>"
+    ],
+    "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/nexB/scancode-toolkit/ for support and download.",
+    "warnings": [],
+    "errors": []
+  },
+  "files": [
     {
-      "key": "aboutcode-toolkit",
-      "package_name": "aboutcode-toolkit",
-      "installed_version": "7.0.2",
-      "dependencies": [
+      "type": "file",
+      "path": "/home/tg1999/Desktop/python-inspector/tests/data/pinned-pdt-requirements.txt",
+      "package_data": [
         {
-          "key": "attrs",
-          "package_name": "attrs",
-          "installed_version": "21.4.0",
-          "dependencies": []
-        },
-        {
-          "key": "boolean-py",
-          "package_name": "boolean-py",
-          "installed_version": "4.0",
-          "dependencies": []
-        },
-        {
-          "key": "certifi",
-          "package_name": "certifi",
-          "installed_version": "2022.5.18.1",
-          "dependencies": []
-        },
-        {
-          "key": "click",
-          "package_name": "click",
-          "installed_version": "8.0.4",
-          "dependencies": []
-        },
-        {
-          "key": "jinja2",
-          "package_name": "jinja2",
-          "installed_version": "3.1.2",
+          "type": "pypi",
+          "namespace": null,
+          "name": null,
+          "version": null,
+          "qualifiers": {},
+          "subpath": null,
+          "primary_language": "Python",
+          "description": null,
+          "release_date": null,
+          "parties": [],
+          "keywords": [],
+          "homepage_url": null,
+          "download_url": null,
+          "size": null,
+          "sha1": null,
+          "md5": null,
+          "sha256": null,
+          "sha512": null,
+          "bug_tracking_url": null,
+          "code_view_url": null,
+          "vcs_url": null,
+          "copyright": null,
+          "license_expression": null,
+          "declared_license": null,
+          "notice_text": null,
+          "source_packages": [],
+          "file_references": [],
+          "extra_data": {},
           "dependencies": [
             {
-              "key": "markupsafe",
-              "package_name": "markupsafe",
-              "installed_version": "2.1.1",
-              "dependencies": []
-            }
-          ]
-        },
-        {
-          "key": "license-expression",
-          "package_name": "license-expression",
-          "installed_version": "30.0.0",
-          "dependencies": [
-            {
-              "key": "boolean-py",
-              "package_name": "boolean-py",
-              "installed_version": "4.0",
-              "dependencies": []
-            }
-          ]
-        },
-        {
-          "key": "openpyxl",
-          "package_name": "openpyxl",
-          "installed_version": "3.0.10",
-          "dependencies": [
-            {
-              "key": "et-xmlfile",
-              "package_name": "et-xmlfile",
-              "installed_version": "1.1.0",
-              "dependencies": []
-            }
-          ]
-        },
-        {
-          "key": "packageurl-python",
-          "package_name": "packageurl-python",
-          "installed_version": "0.9.9",
-          "dependencies": []
-        },
-        {
-          "key": "saneyaml",
-          "package_name": "saneyaml",
-          "installed_version": "0.5.2",
-          "dependencies": [
-            {
-              "key": "pyyaml",
-              "package_name": "pyyaml",
-              "installed_version": "6.0",
-              "dependencies": []
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "key": "colorama",
-      "package_name": "colorama",
-      "installed_version": "0.4.4",
-      "dependencies": []
-    },
-    {
-      "key": "commoncode",
-      "package_name": "commoncode",
-      "installed_version": "30.2.0",
-      "dependencies": [
-        {
-          "key": "attrs",
-          "package_name": "attrs",
-          "installed_version": "21.4.0",
-          "dependencies": []
-        },
-        {
-          "key": "beautifulsoup4",
-          "package_name": "beautifulsoup4",
-          "installed_version": "4.11.1",
-          "dependencies": [
-            {
-              "key": "soupsieve",
-              "package_name": "soupsieve",
-              "installed_version": "2.3.2.post1",
-              "dependencies": []
-            }
-          ]
-        },
-        {
-          "key": "click",
-          "package_name": "click",
-          "installed_version": "8.0.4",
-          "dependencies": []
-        },
-        {
-          "key": "intbitset",
-          "package_name": "intbitset",
-          "installed_version": "3.0.1",
-          "dependencies": []
-        },
-        {
-          "key": "requests",
-          "package_name": "requests",
-          "installed_version": "2.27.1",
-          "dependencies": [
-            {
-              "key": "certifi",
-              "package_name": "certifi",
-              "installed_version": "2022.5.18.1",
-              "dependencies": []
+              "purl": "pkg:pypi/aboutcode-toolkit@7.0.2",
+              "extracted_requirement": "aboutcode-toolkit==7.0.2",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
             },
             {
-              "key": "charset-normalizer",
-              "package_name": "charset-normalizer",
-              "installed_version": "2.0.12",
-              "dependencies": []
+              "purl": "pkg:pypi/attrs@21.4.0",
+              "extracted_requirement": "attrs==21.4.0",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
             },
             {
-              "key": "idna",
-              "package_name": "idna",
-              "installed_version": "3.3",
-              "dependencies": []
+              "purl": "pkg:pypi/beautifulsoup4@4.11.1",
+              "extracted_requirement": "beautifulsoup4==4.11.1",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
             },
             {
-              "key": "urllib3",
-              "package_name": "urllib3",
-              "installed_version": "1.26.9",
-              "dependencies": []
-            }
-          ]
-        },
-        {
-          "key": "saneyaml",
-          "package_name": "saneyaml",
-          "installed_version": "0.5.2",
-          "dependencies": [
+              "purl": "pkg:pypi/certifi@2022.5.18.1",
+              "extracted_requirement": "certifi==2022.5.18.1",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
             {
-              "key": "pyyaml",
-              "package_name": "pyyaml",
-              "installed_version": "6.0",
-              "dependencies": []
-            }
-          ]
-        },
-        {
-          "key": "text-unidecode",
-          "package_name": "text-unidecode",
-          "installed_version": "1.3",
-          "dependencies": []
-        }
-      ]
-    },
-    {
-      "key": "dparse2",
-      "package_name": "dparse2",
-      "installed_version": "0.6.1",
-      "dependencies": [
-        {
-          "key": "packaging",
-          "package_name": "packaging",
-          "installed_version": "21.3",
-          "dependencies": [
+              "purl": "pkg:pypi/charset-normalizer@2.0.12",
+              "extracted_requirement": "charset-normalizer==2.0.12",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
             {
-              "key": "pyparsing",
-              "package_name": "pyparsing",
-              "installed_version": "3.0.9",
-              "dependencies": []
-            }
-          ]
-        },
-        {
-          "key": "pyyaml",
-          "package_name": "pyyaml",
-          "installed_version": "6.0",
-          "dependencies": []
-        },
-        {
-          "key": "toml",
-          "package_name": "toml",
-          "installed_version": "0.10.2",
-          "dependencies": []
-        }
-      ]
-    },
-    {
-      "key": "importlib-metadata",
-      "package_name": "importlib-metadata",
-      "installed_version": "4.8.3",
-      "dependencies": [
-        {
-          "key": "zipp",
-          "package_name": "zipp",
-          "installed_version": "3.6.0",
-          "dependencies": []
-        }
-      ]
-    },
-    {
-      "key": "pip-requirements-parser",
-      "package_name": "pip-requirements-parser",
-      "installed_version": "31.2.0",
-      "dependencies": [
-        {
-          "key": "packaging",
-          "package_name": "packaging",
-          "installed_version": "21.3",
-          "dependencies": [
+              "purl": "pkg:pypi/click@8.0.4",
+              "extracted_requirement": "click==8.0.4",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
             {
-              "key": "pyparsing",
-              "package_name": "pyparsing",
-              "installed_version": "3.0.9",
-              "dependencies": []
+              "purl": "pkg:pypi/colorama@0.4.4",
+              "extracted_requirement": "colorama==0.4.4",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/commoncode@30.2.0",
+              "extracted_requirement": "commoncode==30.2.0",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/dparse2@0.6.1",
+              "extracted_requirement": "dparse2==0.6.1",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/idna@3.3",
+              "extracted_requirement": "idna==3.3",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/importlib-metadata@4.8.3",
+              "extracted_requirement": "importlib-metadata==4.8.3",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/intbitset@3.0.1",
+              "extracted_requirement": "intbitset==3.0.1",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/packageurl-python@0.9.9",
+              "extracted_requirement": "packageurl-python==0.9.9",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/packaging@21.3",
+              "extracted_requirement": "packaging==21.3",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/python-inspector",
+              "extracted_requirement": "--editable git+https://github.com/nexB/python-inspector@18baae17824d6bacb4b1d519b10a0d0e50775884#egg=python_inspector",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": false,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": true,
+                "link": "git+https://github.com/nexB/python-inspector@18baae17824d6bacb4b1d519b10a0d0e50775884#egg=python_inspector",
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": false,
+                "is_wheel": false,
+                "is_url": true,
+                "is_vcs_url": true,
+                "is_name_at_url": false,
+                "is_local_path": true
+              }
+            },
+            {
+              "purl": "pkg:pypi/pip-requirements-parser@31.2.0",
+              "extracted_requirement": "pip-requirements-parser==31.2.0",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/pkginfo2@30.0.0",
+              "extracted_requirement": "pkginfo2==30.0.0",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/pyparsing@3.0.9",
+              "extracted_requirement": "pyparsing==3.0.9",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/pyyaml@6.0",
+              "extracted_requirement": "PyYAML==6.0",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/requests@2.27.1",
+              "extracted_requirement": "requests==2.27.1",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/resolvelib@0.8.1",
+              "extracted_requirement": "resolvelib==0.8.1",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/saneyaml@0.5.2",
+              "extracted_requirement": "saneyaml==0.5.2",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/soupsieve@2.3.2.post1",
+              "extracted_requirement": "soupsieve==2.3.2.post1",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/text-unidecode@1.3",
+              "extracted_requirement": "text-unidecode==1.3",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/toml@0.10.2",
+              "extracted_requirement": "toml==0.10.2",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/typing@3.6.6",
+              "extracted_requirement": "typing==3.6.6",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/typing-extensions@4.1.1",
+              "extracted_requirement": "typing_extensions==4.1.1",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/urllib3@1.26.9",
+              "extracted_requirement": "urllib3==1.26.9",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/zipp@3.6.0",
+              "extracted_requirement": "zipp==3.6.0",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
             }
-          ]
+          ],
+          "repository_homepage_url": null,
+          "repository_download_url": null,
+          "api_data_url": null,
+          "datasource_id": "pip_requirements",
+          "purl": null
         }
       ]
-    },
-    {
-      "key": "pkginfo2",
-      "package_name": "pkginfo2",
-      "installed_version": "30.0.0",
-      "dependencies": []
-    },
-    {
-      "key": "resolvelib",
-      "package_name": "resolvelib",
-      "installed_version": "0.8.1",
-      "dependencies": []
-    },
-    {
-      "key": "typing",
-      "package_name": "typing",
-      "installed_version": "3.6.6",
-      "dependencies": []
-    },
-    {
-      "key": "typing-extensions",
-      "package_name": "typing-extensions",
-      "installed_version": "4.1.1",
-      "dependencies": []
     }
   ],
   "packages": [
@@ -3741,6 +4136,280 @@
       "api_data_url": "https://pypi.org/pypi/zipp/3.6.0/json",
       "datasource_id": null,
       "purl": "pkg:pypi/zipp@3.6.0"
+    }
+  ],
+  "resolved_dependencies_graph": [
+    {
+      "key": "aboutcode-toolkit",
+      "package_name": "aboutcode-toolkit",
+      "installed_version": "7.0.2",
+      "dependencies": [
+        {
+          "key": "attrs",
+          "package_name": "attrs",
+          "installed_version": "21.4.0",
+          "dependencies": []
+        },
+        {
+          "key": "boolean-py",
+          "package_name": "boolean-py",
+          "installed_version": "4.0",
+          "dependencies": []
+        },
+        {
+          "key": "certifi",
+          "package_name": "certifi",
+          "installed_version": "2022.5.18.1",
+          "dependencies": []
+        },
+        {
+          "key": "click",
+          "package_name": "click",
+          "installed_version": "8.0.4",
+          "dependencies": []
+        },
+        {
+          "key": "jinja2",
+          "package_name": "jinja2",
+          "installed_version": "3.1.2",
+          "dependencies": [
+            {
+              "key": "markupsafe",
+              "package_name": "markupsafe",
+              "installed_version": "2.1.1",
+              "dependencies": []
+            }
+          ]
+        },
+        {
+          "key": "license-expression",
+          "package_name": "license-expression",
+          "installed_version": "30.0.0",
+          "dependencies": [
+            {
+              "key": "boolean-py",
+              "package_name": "boolean-py",
+              "installed_version": "4.0",
+              "dependencies": []
+            }
+          ]
+        },
+        {
+          "key": "openpyxl",
+          "package_name": "openpyxl",
+          "installed_version": "3.0.10",
+          "dependencies": [
+            {
+              "key": "et-xmlfile",
+              "package_name": "et-xmlfile",
+              "installed_version": "1.1.0",
+              "dependencies": []
+            }
+          ]
+        },
+        {
+          "key": "packageurl-python",
+          "package_name": "packageurl-python",
+          "installed_version": "0.9.9",
+          "dependencies": []
+        },
+        {
+          "key": "saneyaml",
+          "package_name": "saneyaml",
+          "installed_version": "0.5.2",
+          "dependencies": [
+            {
+              "key": "pyyaml",
+              "package_name": "pyyaml",
+              "installed_version": "6.0",
+              "dependencies": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "colorama",
+      "package_name": "colorama",
+      "installed_version": "0.4.4",
+      "dependencies": []
+    },
+    {
+      "key": "commoncode",
+      "package_name": "commoncode",
+      "installed_version": "30.2.0",
+      "dependencies": [
+        {
+          "key": "attrs",
+          "package_name": "attrs",
+          "installed_version": "21.4.0",
+          "dependencies": []
+        },
+        {
+          "key": "beautifulsoup4",
+          "package_name": "beautifulsoup4",
+          "installed_version": "4.11.1",
+          "dependencies": [
+            {
+              "key": "soupsieve",
+              "package_name": "soupsieve",
+              "installed_version": "2.3.2.post1",
+              "dependencies": []
+            }
+          ]
+        },
+        {
+          "key": "click",
+          "package_name": "click",
+          "installed_version": "8.0.4",
+          "dependencies": []
+        },
+        {
+          "key": "intbitset",
+          "package_name": "intbitset",
+          "installed_version": "3.0.1",
+          "dependencies": []
+        },
+        {
+          "key": "requests",
+          "package_name": "requests",
+          "installed_version": "2.27.1",
+          "dependencies": [
+            {
+              "key": "certifi",
+              "package_name": "certifi",
+              "installed_version": "2022.5.18.1",
+              "dependencies": []
+            },
+            {
+              "key": "charset-normalizer",
+              "package_name": "charset-normalizer",
+              "installed_version": "2.0.12",
+              "dependencies": []
+            },
+            {
+              "key": "idna",
+              "package_name": "idna",
+              "installed_version": "3.3",
+              "dependencies": []
+            },
+            {
+              "key": "urllib3",
+              "package_name": "urllib3",
+              "installed_version": "1.26.9",
+              "dependencies": []
+            }
+          ]
+        },
+        {
+          "key": "saneyaml",
+          "package_name": "saneyaml",
+          "installed_version": "0.5.2",
+          "dependencies": [
+            {
+              "key": "pyyaml",
+              "package_name": "pyyaml",
+              "installed_version": "6.0",
+              "dependencies": []
+            }
+          ]
+        },
+        {
+          "key": "text-unidecode",
+          "package_name": "text-unidecode",
+          "installed_version": "1.3",
+          "dependencies": []
+        }
+      ]
+    },
+    {
+      "key": "dparse2",
+      "package_name": "dparse2",
+      "installed_version": "0.6.1",
+      "dependencies": [
+        {
+          "key": "packaging",
+          "package_name": "packaging",
+          "installed_version": "21.3",
+          "dependencies": [
+            {
+              "key": "pyparsing",
+              "package_name": "pyparsing",
+              "installed_version": "3.0.9",
+              "dependencies": []
+            }
+          ]
+        },
+        {
+          "key": "pyyaml",
+          "package_name": "pyyaml",
+          "installed_version": "6.0",
+          "dependencies": []
+        },
+        {
+          "key": "toml",
+          "package_name": "toml",
+          "installed_version": "0.10.2",
+          "dependencies": []
+        }
+      ]
+    },
+    {
+      "key": "importlib-metadata",
+      "package_name": "importlib-metadata",
+      "installed_version": "4.8.3",
+      "dependencies": [
+        {
+          "key": "zipp",
+          "package_name": "zipp",
+          "installed_version": "3.6.0",
+          "dependencies": []
+        }
+      ]
+    },
+    {
+      "key": "pip-requirements-parser",
+      "package_name": "pip-requirements-parser",
+      "installed_version": "31.2.0",
+      "dependencies": [
+        {
+          "key": "packaging",
+          "package_name": "packaging",
+          "installed_version": "21.3",
+          "dependencies": [
+            {
+              "key": "pyparsing",
+              "package_name": "pyparsing",
+              "installed_version": "3.0.9",
+              "dependencies": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "pkginfo2",
+      "package_name": "pkginfo2",
+      "installed_version": "30.0.0",
+      "dependencies": []
+    },
+    {
+      "key": "resolvelib",
+      "package_name": "resolvelib",
+      "installed_version": "0.8.1",
+      "dependencies": []
+    },
+    {
+      "key": "typing",
+      "package_name": "typing",
+      "installed_version": "3.6.6",
+      "dependencies": []
+    },
+    {
+      "key": "typing-extensions",
+      "package_name": "typing-extensions",
+      "installed_version": "4.1.1",
+      "dependencies": []
     }
   ]
 }

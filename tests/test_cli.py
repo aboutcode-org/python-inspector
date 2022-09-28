@@ -344,7 +344,7 @@ def check_requirements_resolution(
     options.extend(extra_options)
     run_cli(options=options)
     check_json_results(
-        result_file=result_file, expected_file=expected_file, regen=regen, clean=not pdt_output
+        result_file=result_file, expected_file=expected_file, regen=regen, clean=True
     )
 
 
@@ -368,7 +368,7 @@ def check_setup_py_resolution(
         assert message in result.output
     if expected_rc == 0:
         check_json_results(
-            result_file=result_file, expected_file=expected_file, regen=regen, clean=not pdt_output
+            result_file=result_file, expected_file=expected_file, regen=regen, clean=True
         )
 
 
@@ -386,10 +386,6 @@ def check_json_results(result_file, expected_file, clean=True, regen=REGEN_TEST_
     """
     with open(result_file) as res:
         results = json.load(res)
-
-    if clean:
-        clean_results(results)
-
     if regen:
         with open(expected_file, "w") as reg:
             json.dump(results, reg, indent=2, separators=(",", ": "))
@@ -400,7 +396,8 @@ def check_json_results(result_file, expected_file, clean=True, regen=REGEN_TEST_
 
             if clean:
                 clean_results(expected)
-
+    if clean:
+        results = clean_results(results)
     assert results == expected
 
 
@@ -409,6 +406,10 @@ def clean_results(results):
     Return cleaned results removing transient values that can change across test
     runs.
     """
+    files = results.get("files", [])
+    for file in files:
+        path = os.path.split(file["path"])[-1]
+        file["path"] = path
     headers = results.get("headers", {})
     options = headers.get("options", [])
     headers["options"] = [o for o in options if not o.startswith("--requirement")]

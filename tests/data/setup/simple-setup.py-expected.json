@@ -13,19 +13,69 @@
     "warnings": [],
     "errors": []
   },
-  "requirements": [
+  "files": [
     {
-      "purl": "pkg:pypi/license-expression",
-      "extracted_requirement": "license-expression<1.2,>=0.1",
-      "scope": "install",
-      "is_runtime": true,
-      "is_optional": false,
-      "is_resolved": false,
-      "resolved_package": {},
-      "extra_data": {}
+      "type": "file",
+      "path": "/home/tg1999/Desktop/python-inspector/tests/data/setup/simple-setup.py",
+      "package_data": {
+        "type": "pypi",
+        "namespace": null,
+        "name": "Example-App",
+        "version": "2.4.0",
+        "qualifiers": {},
+        "subpath": null,
+        "primary_language": "Python",
+        "description": "A synthetic test case for OSS Review Toolkit",
+        "release_date": null,
+        "parties": [],
+        "keywords": [
+          "Programming Language :: Python :: 2"
+        ],
+        "homepage_url": "https://example.org/app",
+        "download_url": null,
+        "size": null,
+        "sha1": null,
+        "md5": null,
+        "sha256": null,
+        "sha512": null,
+        "bug_tracking_url": null,
+        "code_view_url": null,
+        "vcs_url": null,
+        "copyright": null,
+        "license_expression": null,
+        "declared_license": {
+          "license": "MIT License",
+          "classifiers": [
+            "License :: OSI Approved :: MIT License"
+          ]
+        },
+        "notice_text": null,
+        "source_packages": [],
+        "file_references": [],
+        "extra_data": {
+          "python_requires": ">2, <=3"
+        },
+        "dependencies": [
+          {
+            "purl": "pkg:pypi/license-expression",
+            "extracted_requirement": "license-expression<1.2,>=0.1",
+            "scope": "install",
+            "is_runtime": true,
+            "is_optional": false,
+            "is_resolved": false,
+            "resolved_package": {},
+            "extra_data": {}
+          }
+        ],
+        "repository_homepage_url": "https://pypi.org/project/Example-App",
+        "repository_download_url": "https://pypi.org/packages/source/E/Example-App/Example-App-2.4.0.tar.gz",
+        "api_data_url": "https://pypi.org/pypi/Example-App/2.4.0/json",
+        "datasource_id": "pypi_setup_py",
+        "purl": "pkg:pypi/example-app@2.4.0"
+      }
     }
   ],
-  "resolved_dependencies": [
+  "resolved_dependencies_graph": [
     {
       "package": "pkg:pypi/boolean-py@3.8",
       "dependencies": []
