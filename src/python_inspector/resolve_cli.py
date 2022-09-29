@@ -36,7 +36,7 @@ from python_inspector.resolution import parse_deps_from_setup_py_insecurely
 
 TRACE = False
 
-__version__ = "0.6.5"
+__version__ = "0.7.1"
 
 DEFAULT_PYTHON_VERSION = "38"
 PYPI_SIMPLE_URL = "https://pypi.org/simple"

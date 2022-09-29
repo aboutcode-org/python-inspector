@@ -2,6 +2,11 @@ Changelog
 =========
 
 
+v0.7.1
+------
+
+- Correct version reporting #70.
+
 v0.7.0
 ------
 
