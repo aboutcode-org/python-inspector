@@ -2,22 +2,22 @@
   "headers": {
     "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
-    "tool_version": "0.6.5",
+    "tool_version": "0.7.1",
     "options": [
-      "--requirement /home/tg1999/Desktop/python-inspector/tests/data/pdt-requirements.txt",
+      "--requirement /home/tg1999/Desktop/python-inspector-1/tests/data/pdt-requirements.txt",
       "--index-url https://pypi.org/simple",
       "--python-version 38",
       "--operating-system linux",
       "--json <file>"
     ],
-    "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/nexB/scancode-toolkit/ for support and download.",
+    "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/nexB/python-inspector/ for support and download.",
     "warnings": [],
     "errors": []
   },
   "files": [
     {
       "type": "file",
-      "path": "/home/tg1999/Desktop/python-inspector/tests/data/pdt-requirements.txt",
+      "path": "/home/tg1999/Desktop/python-inspector-1/tests/data/pdt-requirements.txt",
       "package_data": [
         {
           "type": "pypi",

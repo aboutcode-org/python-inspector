@@ -400,7 +400,7 @@ def resolve_dependencies(
     notice = (
         "Dependency tree generated with python-inspector.\n"
         "python-inspector is a free software tool from nexB Inc. and others.\n"
-        "Visit https://github.com/nexB/scancode-toolkit/ for support and download."
+        "Visit https://github.com/nexB/python-inspector/ for support and download."
     )
 
     headers = dict(

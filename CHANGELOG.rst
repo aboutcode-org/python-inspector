@@ -2,10 +2,19 @@ Changelog
 =========
 
 
+v0.7.2
+------
+
+- Change Output Format to look like ScanCode-Toolkit #68
+  https://github.com/nexB/python-inspector/issues/68.
+
+
 v0.7.1
 ------
 
-- Correct version reporting #70.
+- Correct version reporting #70
+  https://github.com/nexB/python-inspector/issues/70.
+
 
 v0.7.0
 ------
