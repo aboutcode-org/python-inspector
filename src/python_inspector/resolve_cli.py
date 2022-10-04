@@ -36,7 +36,7 @@ from python_inspector.resolution import parse_deps_from_setup_py_insecurely
 
 TRACE = False
 
-__version__ = "0.7.1"
+__version__ = "0.7.2"
 
 DEFAULT_PYTHON_VERSION = "38"
 PYPI_SIMPLE_URL = "https://pypi.org/simple"
@@ -251,26 +251,26 @@ def resolve_dependencies(
     # TODO: deduplicate me
     direct_dependencies = []
 
+    files = []
+
     if PYPI_SIMPLE_URL not in index_urls:
         index_urls = tuple([PYPI_SIMPLE_URL]) + tuple(index_urls)
 
-    files = []
-
     for req_file in requirement_files:
         deps = dependencies.get_dependencies_from_requirements(requirements_file=req_file)
+        for extra_data in dependencies.get_extra_data_from_requirements(requirements_file=req_file):
+            index_urls = (*index_urls, *tuple(extra_data.get("extra_index_urls") or []))
+        direct_dependencies.extend(deps)
+        package_data = [
+            pkg_data.to_dict() for pkg_data in PipRequirementsFileHandler.parse(location=req_file)
+        ]
         files.append(
             dict(
                 type="file",
                 path=req_file,
-                package_data=[
-                    pkg_data.to_dict()
-                    for pkg_data in PipRequirementsFileHandler.parse(location=req_file)
-                ],
+                package_data=package_data,
             )
         )
-        for extra_data in dependencies.get_extra_data_from_requirements(requirements_file=req_file):
-            index_urls = (*index_urls, *tuple(extra_data.get("extra_index_urls") or []))
-        direct_dependencies.extend(deps)
 
     for specifier in specifiers:
         dep = dependencies.get_dependency(specifier=specifier)
@@ -279,14 +279,15 @@ def resolve_dependencies(
     if setup_py_file:
         package_data = list(PythonSetupPyHandler.parse(location=setup_py_file))
         assert len(package_data) == 1
+        package_data = package_data[0]
+        file_package_data = [package_data.to_dict()]
         files.append(
             dict(
                 type="file",
                 path=setup_py_file,
-                package_data=package_data[0].to_dict(),
+                package_data=file_package_data,
             )
         )
-        package_data = package_data[0]
         # validate if python require matches our current python version
         python_requires = package_data.extra_data.get("python_requires")
         if not utils_pypi.valid_python_version(
@@ -420,24 +421,17 @@ def resolve_dependencies(
             list(get_pypi_data_from_purl(package, repos=repos, environment=environment)),
         )
 
-    if json_output:
-        write_output(
-            headers=headers,
-            resolved_dependencies=resolved_dependencies,
-            json_output=json_output,
-            packages=packages,
-            files=files,
-        )
+    output = dict(
+        headers=headers,
+        files=files,
+        resolved_dependencies_graph=resolved_dependencies,
+        packages=packages,
+    )
 
-    else:
-        write_output(
-            headers=headers,
-            resolved_dependencies=resolved_dependencies,
-            json_output=pdt_output,
-            packages=packages,
-            files=files,
-            pdt_output=True,
-        )
+    write_output(
+        json_output=json_output or pdt_output,
+        output=output,
+    )
 
     if verbose:
         click.secho("done!")
@@ -500,34 +494,11 @@ def get_requirements_from_direct_dependencies(
                 yield req
 
 
-def write_output(
-    headers,
-    resolved_dependencies,
-    json_output,
-    packages,
-    files,
-    pdt_output=False,
-):
+def write_output(output, json_output):
     """
     Write headers, requirements and resolved_dependencies as JSON to ``json_output``.
     Return the output data.
     """
-
-    if not pdt_output:
-        output = dict(
-            headers=headers,
-            files=files,
-            resolved_dependencies_graph=resolved_dependencies,
-            packages=packages,
-        )
-    else:
-        output = dict(
-            headers=headers,
-            files=files,
-            packages=packages,
-            resolved_dependencies_graph=resolved_dependencies,
-        )
-
     json.dump(output, json_output, indent=2)
     return output
 
