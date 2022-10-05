@@ -2,6 +2,13 @@ Changelog
 =========
 
 
+v0.8.1
+------
+
+- Version v0.7.2 was tagged with the same commit as v0.7.1, so this is
+  a new release with the correct commit.
+
+
 v0.8.0
 ------
 
