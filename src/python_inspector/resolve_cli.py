@@ -280,14 +280,6 @@ def resolve_dependencies(
         package_data = list(PythonSetupPyHandler.parse(location=setup_py_file))
         assert len(package_data) == 1
         package_data = package_data[0]
-        file_package_data = [package_data.to_dict()]
-        files.append(
-            dict(
-                type="file",
-                path=setup_py_file,
-                package_data=file_package_data,
-            )
-        )
         # validate if python require matches our current python version
         python_requires = package_data.extra_data.get("python_requires")
         if not utils_pypi.valid_python_version(
@@ -302,6 +294,7 @@ def resolve_dependencies(
             )
             ctx.exit(1)
 
+        setup_py_file_deps = package_data.dependencies
         for dep in package_data.dependencies:
             # TODO : we need to handle to all the scopes
             if dep.scope == "install":
@@ -323,16 +316,29 @@ def resolve_dependencies(
                     location=requirement_location,
                 )
                 if deps:
+                    setup_py_file_deps = list(deps)
                     has_deps = True
                     direct_dependencies.extend(deps)
 
             if not has_deps and contain_string(string="_require", files=[setup_py_file]):
                 if analyze_setup_py_insecurely:
-                    direct_dependencies.extend(
+                    insecure_setup_py_deps = list(
                         parse_deps_from_setup_py_insecurely(setup_py=setup_py_file)
                     )
+                    setup_py_file_deps = insecure_setup_py_deps
+                    direct_dependencies.extend(insecure_setup_py_deps)
                 else:
                     raise Exception("Unable to collect setup.py dependencies securely")
+
+        package_data.dependencies = setup_py_file_deps
+        file_package_data = [package_data.to_dict()]
+        files.append(
+            dict(
+                type="file",
+                path=setup_py_file,
+                package_data=file_package_data,
+            )
+        )
 
     if not direct_dependencies:
         click.secho("Error: no requirements requested.")

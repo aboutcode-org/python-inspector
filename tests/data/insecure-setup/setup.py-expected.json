@@ -79,7 +79,38 @@
           "source_packages": [],
           "file_references": [],
           "extra_data": {},
-          "dependencies": [],
+          "dependencies": [
+            {
+              "purl": "pkg:pypi/isodate",
+              "extracted_requirement": "isodate",
+              "scope": "install",
+              "is_runtime": false,
+              "is_optional": false,
+              "is_resolved": false,
+              "resolved_package": {},
+              "extra_data": {}
+            },
+            {
+              "purl": "pkg:pypi/pyparsing",
+              "extracted_requirement": "pyparsing",
+              "scope": "install",
+              "is_runtime": false,
+              "is_optional": false,
+              "is_resolved": false,
+              "resolved_package": {},
+              "extra_data": {}
+            },
+            {
+              "purl": "pkg:pypi/six",
+              "extracted_requirement": "six",
+              "scope": "install",
+              "is_runtime": false,
+              "is_optional": false,
+              "is_resolved": false,
+              "resolved_package": {},
+              "extra_data": {}
+            }
+          ],
           "repository_homepage_url": "https://pypi.org/project/rdflib",
           "repository_download_url": "https://pypi.org/packages/source/r/rdflib/rdflib-5.0.0.tar.gz",
           "api_data_url": "https://pypi.org/pypi/rdflib/5.0.0/json",
