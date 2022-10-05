@@ -1,5 +1,212 @@
 {
-  "resolved_dependencies": [
+  "headers": {
+    "tool_name": "python-inspector",
+    "tool_homepageurl": "https://github.com/nexB/python-inspector",
+    "tool_version": "0.7.2",
+    "options": [
+      "--requirement /home/tg1999/Desktop/python-inspector-1/tests/data/environment-marker-test-requirements.txt",
+      "--index-url https://pypi.org/simple",
+      "--python-version 37",
+      "--operating-system linux",
+      "--json <file>"
+    ],
+    "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/nexB/python-inspector/ for support and download.",
+    "warnings": [],
+    "errors": []
+  },
+  "files": [
+    {
+      "type": "file",
+      "path": "/home/tg1999/Desktop/python-inspector-1/tests/data/environment-marker-test-requirements.txt",
+      "package_data": [
+        {
+          "type": "pypi",
+          "namespace": null,
+          "name": null,
+          "version": null,
+          "qualifiers": {},
+          "subpath": null,
+          "primary_language": "Python",
+          "description": null,
+          "release_date": null,
+          "parties": [],
+          "keywords": [],
+          "homepage_url": null,
+          "download_url": null,
+          "size": null,
+          "sha1": null,
+          "md5": null,
+          "sha256": null,
+          "sha512": null,
+          "bug_tracking_url": null,
+          "code_view_url": null,
+          "vcs_url": null,
+          "copyright": null,
+          "license_expression": null,
+          "declared_license": null,
+          "notice_text": null,
+          "source_packages": [],
+          "file_references": [],
+          "extra_data": {},
+          "dependencies": [
+            {
+              "purl": "pkg:pypi/click",
+              "extracted_requirement": "click>6,<6.8",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": false,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/flask@1.0",
+              "extracted_requirement": "Flask==1.0",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/itsdangerous",
+              "extracted_requirement": "itsdangerous<0.25",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": false,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/license-expression",
+              "extracted_requirement": "license-expression; platform_system == \"Windows\"",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": false,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/jinja2@2.11.3",
+              "extracted_requirement": "Jinja2==2.11.3",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/markupsafe@1.0",
+              "extracted_requirement": "MarkupSafe==1.0",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            },
+            {
+              "purl": "pkg:pypi/werkzeug@0.15.3",
+              "extracted_requirement": "Werkzeug==0.15.3",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
+            }
+          ],
+          "repository_homepage_url": null,
+          "repository_download_url": null,
+          "api_data_url": null,
+          "datasource_id": "pip_requirements",
+          "purl": null
+        }
+      ]
+    }
+  ],
+  "resolved_dependencies_graph": [
     {
       "key": "flask",
       "package_name": "flask",

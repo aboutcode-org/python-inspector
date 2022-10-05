@@ -36,7 +36,7 @@ from python_inspector.resolution import parse_deps_from_setup_py_insecurely
 
 TRACE = False
 
-__version__ = "0.7.1"
+__version__ = "0.7.2"
 
 DEFAULT_PYTHON_VERSION = "38"
 PYPI_SIMPLE_URL = "https://pypi.org/simple"
@@ -251,6 +251,8 @@ def resolve_dependencies(
     # TODO: deduplicate me
     direct_dependencies = []
 
+    files = []
+
     if PYPI_SIMPLE_URL not in index_urls:
         index_urls = tuple([PYPI_SIMPLE_URL]) + tuple(index_urls)
 
@@ -259,6 +261,16 @@ def resolve_dependencies(
         for extra_data in dependencies.get_extra_data_from_requirements(requirements_file=req_file):
             index_urls = (*index_urls, *tuple(extra_data.get("extra_index_urls") or []))
         direct_dependencies.extend(deps)
+        package_data = [
+            pkg_data.to_dict() for pkg_data in PipRequirementsFileHandler.parse(location=req_file)
+        ]
+        files.append(
+            dict(
+                type="file",
+                path=req_file,
+                package_data=package_data,
+            )
+        )
 
     for specifier in specifiers:
         dep = dependencies.get_dependency(specifier=specifier)
@@ -282,6 +294,7 @@ def resolve_dependencies(
             )
             ctx.exit(1)
 
+        setup_py_file_deps = package_data.dependencies
         for dep in package_data.dependencies:
             # TODO : we need to handle to all the scopes
             if dep.scope == "install":
@@ -303,16 +316,29 @@ def resolve_dependencies(
                     location=requirement_location,
                 )
                 if deps:
+                    setup_py_file_deps = list(deps)
                     has_deps = True
                     direct_dependencies.extend(deps)
 
             if not has_deps and contain_string(string="_require", files=[setup_py_file]):
                 if analyze_setup_py_insecurely:
-                    direct_dependencies.extend(
+                    insecure_setup_py_deps = list(
                         parse_deps_from_setup_py_insecurely(setup_py=setup_py_file)
                     )
+                    setup_py_file_deps = insecure_setup_py_deps
+                    direct_dependencies.extend(insecure_setup_py_deps)
                 else:
                     raise Exception("Unable to collect setup.py dependencies securely")
+
+        package_data.dependencies = setup_py_file_deps
+        file_package_data = [package_data.to_dict()]
+        files.append(
+            dict(
+                type="file",
+                path=setup_py_file,
+                package_data=file_package_data,
+            )
+        )
 
     if not direct_dependencies:
         click.secho("Error: no requirements requested.")
@@ -360,7 +386,7 @@ def resolve_dependencies(
             click.secho(f" {repo}")
 
     # resolve dependencies proper
-    requirements, resolved_dependencies, purls = resolve(
+    resolved_dependencies, purls = resolve(
         direct_dependencies=direct_dependencies,
         environment=environment,
         repos=repos,
@@ -381,7 +407,7 @@ def resolve_dependencies(
     notice = (
         "Dependency tree generated with python-inspector.\n"
         "python-inspector is a free software tool from nexB Inc. and others.\n"
-        "Visit https://github.com/nexB/scancode-toolkit/ for support and download."
+        "Visit https://github.com/nexB/python-inspector/ for support and download."
     )
 
     headers = dict(
@@ -401,24 +427,17 @@ def resolve_dependencies(
             list(get_pypi_data_from_purl(package, repos=repos, environment=environment)),
         )
 
-    if json_output:
-        write_output(
-            headers=headers,
-            requirements=requirements,
-            resolved_dependencies=resolved_dependencies,
-            json_output=json_output,
-            packages=packages,
-        )
+    output = dict(
+        headers=headers,
+        files=files,
+        resolved_dependencies_graph=resolved_dependencies,
+        packages=packages,
+    )
 
-    else:
-        write_output(
-            headers=headers,
-            requirements=requirements,
-            resolved_dependencies=resolved_dependencies,
-            json_output=pdt_output,
-            packages=packages,
-            pdt_output=True,
-        )
+    write_output(
+        json_output=json_output or pdt_output,
+        output=output,
+    )
 
     if verbose:
         click.secho("done!")
@@ -461,9 +480,7 @@ def resolve(
         analyze_setup_py_insecurely=analyze_setup_py_insecurely,
     )
 
-    initial_requirements = [d.to_dict() for d in direct_dependencies]
-
-    return initial_requirements, resolved_dependencies, packages
+    return resolved_dependencies, packages
 
 
 def get_requirements_from_direct_dependencies(
@@ -483,27 +500,11 @@ def get_requirements_from_direct_dependencies(
                 yield req
 
 
-def write_output(
-    headers, requirements, resolved_dependencies, json_output, packages, pdt_output=False
-):
+def write_output(output, json_output):
     """
     Write headers, requirements and resolved_dependencies as JSON to ``json_output``.
     Return the output data.
     """
-
-    if not pdt_output:
-        output = dict(
-            headers=headers,
-            requirements=requirements,
-            resolved_dependencies=resolved_dependencies,
-            packages=packages,
-        )
-    else:
-        output = dict(
-            resolved_dependencies=resolved_dependencies,
-            packages=packages,
-        )
-
     json.dump(output, json_output, indent=2)
     return output
 

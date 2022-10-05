@@ -2,7 +2,7 @@
   "headers": {
     "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
-    "tool_version": "0.7.1",
+    "tool_version": "0.7.2",
     "options": [
       "--specifier flask",
       "--index-url https://pypi.org/simple",
@@ -11,23 +11,12 @@
       "--operating-system linux",
       "--json <file>"
     ],
-    "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/nexB/scancode-toolkit/ for support and download.",
+    "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/nexB/python-inspector/ for support and download.",
     "warnings": [],
     "errors": []
   },
-  "requirements": [
-    {
-      "purl": "pkg:pypi/flask",
-      "extracted_requirement": "flask",
-      "scope": "install",
-      "is_runtime": true,
-      "is_optional": false,
-      "is_resolved": false,
-      "resolved_package": {},
-      "extra_data": {}
-    }
-  ],
-  "resolved_dependencies": [
+  "files": [],
+  "resolved_dependencies_graph": [
     {
       "package": "pkg:pypi/click@8.1.3",
       "dependencies": []
@@ -36,14 +25,14 @@
       "package": "pkg:pypi/flask@2.2.2",
       "dependencies": [
         "pkg:pypi/click@8.1.3",
-        "pkg:pypi/importlib-metadata@4.12.0",
+        "pkg:pypi/importlib-metadata@5.0.0",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
         "pkg:pypi/werkzeug@2.2.2"
       ]
     },
     {
-      "package": "pkg:pypi/importlib-metadata@4.12.0",
+      "package": "pkg:pypi/importlib-metadata@5.0.0",
       "dependencies": [
         "pkg:pypi/zipp@3.8.1"
       ]
@@ -282,12 +271,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "importlib-metadata",
-      "version": "4.12.0",
+      "version": "5.0.0",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": ".. image:: https://img.shields.io/pypi/v/importlib_metadata.svg\n   :target: `PyPI link`_\n\n.. image:: https://img.shields.io/pypi/pyversions/importlib_metadata.svg\n   :target: `PyPI link`_\n\n.. _PyPI link: https://pypi.org/project/importlib_metadata\n\n.. image:: https://github.com/python/importlib_metadata/workflows/tests/badge.svg\n   :target: https://github.com/python/importlib_metadata/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. image:: https://readthedocs.org/projects/importlib-metadata/badge/?version=latest\n   :target: https://importlib-metadata.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2022-informational\n   :target: https://blog.jaraco.com/skeleton\n\n\nLibrary to access the metadata for a Python package.\n\nThis package supplies third-party access to the functionality of\n`importlib.metadata <https://docs.python.org/3/library/importlib.metadata.html>`_\nincluding improvements added to subsequent Python versions.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - importlib_metadata\n     - stdlib\n   * - 4.8\n     - 3.11\n   * - 4.4\n     - 3.10\n   * - 1.4\n     - 3.8\n\n\nUsage\n=====\n\nSee the `online documentation <https://importlib_metadata.readthedocs.io/>`_\nfor usage details.\n\n`Finder authors\n<https://docs.python.org/3/reference/import.html#finders-and-loaders>`_ can\nalso add support for custom package installers.  See the above documentation\nfor details.\n\n\nCaveats\n=======\n\nThis project primarily supports third-party packages installed by PyPA\ntools (or other conforming packages). It does not support:\n\n- Packages in the stdlib.\n- Packages installed without metadata.\n\nProject details\n===============\n\n * Project home: https://github.com/python/importlib_metadata\n * Report bugs at: https://github.com/python/importlib_metadata/issues\n * Code hosting: https://github.com/python/importlib_metadata\n * Documentation: https://importlib_metadata.readthedocs.io/\n",
-      "release_date": "2022-06-25T17:01:22",
+      "description": ".. image:: https://img.shields.io/pypi/v/importlib_metadata.svg\n   :target: `PyPI link`_\n\n.. image:: https://img.shields.io/pypi/pyversions/importlib_metadata.svg\n   :target: `PyPI link`_\n\n.. _PyPI link: https://pypi.org/project/importlib_metadata\n\n.. image:: https://github.com/python/importlib_metadata/workflows/tests/badge.svg\n   :target: https://github.com/python/importlib_metadata/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. image:: https://readthedocs.org/projects/importlib-metadata/badge/?version=latest\n   :target: https://importlib-metadata.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2022-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/importlib-metadata\n   :target: https://tidelift.com/subscription/pkg/pypi-importlib-metadata?utm_source=pypi-importlib-metadata&utm_medium=readme\n\nLibrary to access the metadata for a Python package.\n\nThis package supplies third-party access to the functionality of\n`importlib.metadata <https://docs.python.org/3/library/importlib.metadata.html>`_\nincluding improvements added to subsequent Python versions.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - importlib_metadata\n     - stdlib\n   * - 4.8\n     - 3.11\n   * - 4.4\n     - 3.10\n   * - 1.4\n     - 3.8\n\n\nUsage\n=====\n\nSee the `online documentation <https://importlib_metadata.readthedocs.io/>`_\nfor usage details.\n\n`Finder authors\n<https://docs.python.org/3/reference/import.html#finders-and-loaders>`_ can\nalso add support for custom package installers.  See the above documentation\nfor details.\n\n\nCaveats\n=======\n\nThis project primarily supports third-party packages installed by PyPA\ntools (or other conforming packages). It does not support:\n\n- Packages in the stdlib.\n- Packages installed without metadata.\n\nProject details\n===============\n\n * Project home: https://github.com/python/importlib_metadata\n * Report bugs at: https://github.com/python/importlib_metadata/issues\n * Code hosting: https://github.com/python/importlib_metadata\n * Documentation: https://importlib_metadata.readthedocs.io/\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-importlib-metadata?utm_source=pypi-importlib-metadata&utm_medium=referral&utm_campaign=github>`_.\n\nSecurity Contact\n================\n\nTo report a security vulnerability, please use the\n`Tidelift security contact <https://tidelift.com/security>`_.\nTidelift will coordinate the fix and disclosure.\n",
+      "release_date": "2022-10-02T00:42:11",
       "parties": [
         {
           "type": "person",
@@ -306,11 +295,11 @@
       ],
       "keywords": [],
       "homepage_url": "https://github.com/python/importlib_metadata",
-      "download_url": "https://files.pythonhosted.org/packages/d2/a2/8c239dc898138f208dd14b441b196e7b3032b94d3137d9d8453e186967fc/importlib_metadata-4.12.0-py3-none-any.whl",
-      "size": 21704,
+      "download_url": "https://files.pythonhosted.org/packages/b5/64/ef29a63cf08f047bb7fb22ab0f1f774b87eed0bb46d067a5a524798a4af8/importlib_metadata-5.0.0-py3-none-any.whl",
+      "size": 21811,
       "sha1": null,
-      "md5": "1e7ee4220dec07980ecb9acc7bd7bd5b",
-      "sha256": "7401a975809ea1fdc658c3aa4f78cc2195a0e019c5cbc4c06122884e9ae80c23",
+      "md5": "5b511c1cd69bbb1b933d6c4157c0e983",
+      "sha256": "ddb0e35065e8938f867ed4928d0ae5bf2a53b7773871bfe6bcc7e4fcdc7dea43",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -325,20 +314,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/importlib-metadata/4.12.0/json",
+      "api_data_url": "https://pypi.org/pypi/importlib-metadata/5.0.0/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/importlib-metadata@4.12.0"
+      "purl": "pkg:pypi/importlib-metadata@5.0.0"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "importlib-metadata",
-      "version": "4.12.0",
+      "version": "5.0.0",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": ".. image:: https://img.shields.io/pypi/v/importlib_metadata.svg\n   :target: `PyPI link`_\n\n.. image:: https://img.shields.io/pypi/pyversions/importlib_metadata.svg\n   :target: `PyPI link`_\n\n.. _PyPI link: https://pypi.org/project/importlib_metadata\n\n.. image:: https://github.com/python/importlib_metadata/workflows/tests/badge.svg\n   :target: https://github.com/python/importlib_metadata/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. image:: https://readthedocs.org/projects/importlib-metadata/badge/?version=latest\n   :target: https://importlib-metadata.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2022-informational\n   :target: https://blog.jaraco.com/skeleton\n\n\nLibrary to access the metadata for a Python package.\n\nThis package supplies third-party access to the functionality of\n`importlib.metadata <https://docs.python.org/3/library/importlib.metadata.html>`_\nincluding improvements added to subsequent Python versions.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - importlib_metadata\n     - stdlib\n   * - 4.8\n     - 3.11\n   * - 4.4\n     - 3.10\n   * - 1.4\n     - 3.8\n\n\nUsage\n=====\n\nSee the `online documentation <https://importlib_metadata.readthedocs.io/>`_\nfor usage details.\n\n`Finder authors\n<https://docs.python.org/3/reference/import.html#finders-and-loaders>`_ can\nalso add support for custom package installers.  See the above documentation\nfor details.\n\n\nCaveats\n=======\n\nThis project primarily supports third-party packages installed by PyPA\ntools (or other conforming packages). It does not support:\n\n- Packages in the stdlib.\n- Packages installed without metadata.\n\nProject details\n===============\n\n * Project home: https://github.com/python/importlib_metadata\n * Report bugs at: https://github.com/python/importlib_metadata/issues\n * Code hosting: https://github.com/python/importlib_metadata\n * Documentation: https://importlib_metadata.readthedocs.io/\n",
-      "release_date": "2022-06-25T17:01:24",
+      "description": ".. image:: https://img.shields.io/pypi/v/importlib_metadata.svg\n   :target: `PyPI link`_\n\n.. image:: https://img.shields.io/pypi/pyversions/importlib_metadata.svg\n   :target: `PyPI link`_\n\n.. _PyPI link: https://pypi.org/project/importlib_metadata\n\n.. image:: https://github.com/python/importlib_metadata/workflows/tests/badge.svg\n   :target: https://github.com/python/importlib_metadata/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. image:: https://readthedocs.org/projects/importlib-metadata/badge/?version=latest\n   :target: https://importlib-metadata.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2022-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/importlib-metadata\n   :target: https://tidelift.com/subscription/pkg/pypi-importlib-metadata?utm_source=pypi-importlib-metadata&utm_medium=readme\n\nLibrary to access the metadata for a Python package.\n\nThis package supplies third-party access to the functionality of\n`importlib.metadata <https://docs.python.org/3/library/importlib.metadata.html>`_\nincluding improvements added to subsequent Python versions.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - importlib_metadata\n     - stdlib\n   * - 4.8\n     - 3.11\n   * - 4.4\n     - 3.10\n   * - 1.4\n     - 3.8\n\n\nUsage\n=====\n\nSee the `online documentation <https://importlib_metadata.readthedocs.io/>`_\nfor usage details.\n\n`Finder authors\n<https://docs.python.org/3/reference/import.html#finders-and-loaders>`_ can\nalso add support for custom package installers.  See the above documentation\nfor details.\n\n\nCaveats\n=======\n\nThis project primarily supports third-party packages installed by PyPA\ntools (or other conforming packages). It does not support:\n\n- Packages in the stdlib.\n- Packages installed without metadata.\n\nProject details\n===============\n\n * Project home: https://github.com/python/importlib_metadata\n * Report bugs at: https://github.com/python/importlib_metadata/issues\n * Code hosting: https://github.com/python/importlib_metadata\n * Documentation: https://importlib_metadata.readthedocs.io/\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-importlib-metadata?utm_source=pypi-importlib-metadata&utm_medium=referral&utm_campaign=github>`_.\n\nSecurity Contact\n================\n\nTo report a security vulnerability, please use the\n`Tidelift security contact <https://tidelift.com/security>`_.\nTidelift will coordinate the fix and disclosure.\n",
+      "release_date": "2022-10-02T00:42:12",
       "parties": [
         {
           "type": "person",
@@ -357,11 +346,11 @@
       ],
       "keywords": [],
       "homepage_url": "https://github.com/python/importlib_metadata",
-      "download_url": "https://files.pythonhosted.org/packages/1a/16/441080c907df829016729e71d8bdd42d99b9bdde48b01492ed08912c0aa9/importlib_metadata-4.12.0.tar.gz",
-      "size": 48153,
+      "download_url": "https://files.pythonhosted.org/packages/7e/ec/97f2ce958b62961fddd7258e0ceede844953606ad09b672fa03b86c453d3/importlib_metadata-5.0.0.tar.gz",
+      "size": 48756,
       "sha1": null,
-      "md5": "cfcf29185e13439c76d09c94bc8d81f4",
-      "sha256": "637245b8bab2b6502fcbc752cc4b7a6f6243bb02b31c5c26156ad103d3d45670",
+      "md5": "ccd58a387cc2bab6cf72fdf21e403749",
+      "sha256": "da31db32b304314d044d3c12c79bd59e307889b287ad12ff387b3500835fc2ab",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -376,9 +365,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/importlib-metadata/4.12.0/json",
+      "api_data_url": "https://pypi.org/pypi/importlib-metadata/5.0.0/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/importlib-metadata@4.12.0"
+      "purl": "pkg:pypi/importlib-metadata@5.0.0"
     },
     {
       "type": "pypi",

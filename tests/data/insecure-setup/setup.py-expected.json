@@ -2,50 +2,125 @@
   "headers": {
     "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
-    "tool_version": "0.7.1",
+    "tool_version": "0.7.2",
     "options": [
       "--index-url https://pypi.org/simple",
       "--python-version 27",
       "--operating-system linux",
       "--json <file>"
     ],
-    "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/nexB/scancode-toolkit/ for support and download.",
+    "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/nexB/python-inspector/ for support and download.",
     "warnings": [],
     "errors": []
   },
-  "requirements": [
+  "files": [
     {
-      "purl": "pkg:pypi/isodate",
-      "extracted_requirement": "isodate",
-      "scope": "install",
-      "is_runtime": false,
-      "is_optional": false,
-      "is_resolved": false,
-      "resolved_package": {},
-      "extra_data": {}
-    },
-    {
-      "purl": "pkg:pypi/pyparsing",
-      "extracted_requirement": "pyparsing",
-      "scope": "install",
-      "is_runtime": false,
-      "is_optional": false,
-      "is_resolved": false,
-      "resolved_package": {},
-      "extra_data": {}
-    },
-    {
-      "purl": "pkg:pypi/six",
-      "extracted_requirement": "six",
-      "scope": "install",
-      "is_runtime": false,
-      "is_optional": false,
-      "is_resolved": false,
-      "resolved_package": {},
-      "extra_data": {}
+      "type": "file",
+      "path": "/home/tg1999/Desktop/python-inspector-1/tests/data/insecure-setup/setup.py",
+      "package_data": [
+        {
+          "type": "pypi",
+          "namespace": null,
+          "name": "rdflib",
+          "version": "5.0.0",
+          "qualifiers": {},
+          "subpath": null,
+          "primary_language": "Python",
+          "description": "RDFLib is a Python library for working with RDF, a simple yet powerful language for representing information.",
+          "release_date": null,
+          "parties": [
+            {
+              "type": "person",
+              "role": "author",
+              "name": "Daniel 'eikeon' Krech",
+              "email": "eikeon@eikeon.com",
+              "url": null
+            },
+            {
+              "type": "person",
+              "role": "maintainer",
+              "name": "RDFLib Team",
+              "email": "rdflib-dev@google.com",
+              "url": null
+            }
+          ],
+          "keywords": [
+            "Programming Language :: Python",
+            "Programming Language :: Python :: 2",
+            "Programming Language :: Python :: 3",
+            "Programming Language :: Python :: 2.7",
+            "Programming Language :: Python :: 3.4",
+            "Programming Language :: Python :: 3.5",
+            "Programming Language :: Python :: 3.6",
+            "Programming Language :: Python :: 3.7",
+            "Topic :: Software Development :: Libraries :: Python Modules",
+            "Operating System :: OS Independent",
+            "Natural Language :: English"
+          ],
+          "homepage_url": "https://github.com/RDFLib/rdflib",
+          "download_url": null,
+          "size": null,
+          "sha1": null,
+          "md5": null,
+          "sha256": null,
+          "sha512": null,
+          "bug_tracking_url": null,
+          "code_view_url": null,
+          "vcs_url": null,
+          "copyright": null,
+          "license_expression": null,
+          "declared_license": {
+            "license": "BSD-3-Clause",
+            "classifiers": [
+              "License :: OSI Approved :: BSD License"
+            ]
+          },
+          "notice_text": null,
+          "source_packages": [],
+          "file_references": [],
+          "extra_data": {},
+          "dependencies": [
+            {
+              "purl": "pkg:pypi/isodate",
+              "extracted_requirement": "isodate",
+              "scope": "install",
+              "is_runtime": false,
+              "is_optional": false,
+              "is_resolved": false,
+              "resolved_package": {},
+              "extra_data": {}
+            },
+            {
+              "purl": "pkg:pypi/pyparsing",
+              "extracted_requirement": "pyparsing",
+              "scope": "install",
+              "is_runtime": false,
+              "is_optional": false,
+              "is_resolved": false,
+              "resolved_package": {},
+              "extra_data": {}
+            },
+            {
+              "purl": "pkg:pypi/six",
+              "extracted_requirement": "six",
+              "scope": "install",
+              "is_runtime": false,
+              "is_optional": false,
+              "is_resolved": false,
+              "resolved_package": {},
+              "extra_data": {}
+            }
+          ],
+          "repository_homepage_url": "https://pypi.org/project/rdflib",
+          "repository_download_url": "https://pypi.org/packages/source/r/rdflib/rdflib-5.0.0.tar.gz",
+          "api_data_url": "https://pypi.org/pypi/rdflib/5.0.0/json",
+          "datasource_id": "pypi_setup_py",
+          "purl": "pkg:pypi/rdflib@5.0.0"
+        }
+      ]
     }
   ],
-  "resolved_dependencies": [
+  "resolved_dependencies_graph": [
     {
       "package": "pkg:pypi/isodate@0.6.1",
       "dependencies": [
