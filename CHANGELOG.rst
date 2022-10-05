@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-v0.7.2
+v0.8.0
 ------
 
 - Change Output Format to look like ScanCode-Toolkit #68
