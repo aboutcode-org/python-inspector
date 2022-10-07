@@ -6,7 +6,7 @@
     "options": [
       "--requirement /home/tg1999/Desktop/python-inspector-1/tests/data/azure-devops.req.txt",
       "--index-url https://pypi.org/simple",
-      "--python-version 38",
+      "--python-version 310",
       "--operating-system linux",
       "--json <file>"
     ],
@@ -592,7 +592,7 @@
       "subpath": null,
       "primary_language": "Python",
       "description": "CFFI\n====\n\nForeign Function Interface for Python calling C code.\nPlease see the `Documentation <http://cffi.readthedocs.org/>`_.\n\nContact\n-------\n\n`Mailing list <https://groups.google.com/forum/#!forum/python-cffi>`_\n\n\n",
-      "release_date": "2022-06-30T18:17:48",
+      "release_date": "2022-06-30T18:15:50",
       "parties": [
         {
           "type": "person",
@@ -611,11 +611,11 @@
       ],
       "keywords": [],
       "homepage_url": "http://cffi.readthedocs.org",
-      "download_url": "https://files.pythonhosted.org/packages/b7/8b/06f30caa03b5b3ac006de4f93478dbd0239e2a16566d81a106c322dc4f79/cffi-1.15.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
-      "size": 442655,
+      "download_url": "https://files.pythonhosted.org/packages/88/89/c34caf63029fb7628ec2ebd5c88ae0c9bd17db98c812e4065a4d020ca41f/cffi-1.15.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "size": 441830,
       "sha1": null,
-      "md5": "2719a841c9d7ea47de38f83ca2487966",
-      "sha256": "4f2c9f67e9821cad2e5f480bc8d83b8742896f1242dba247911072d4fa94c192",
+      "md5": "a29947fc15af734d35f4d1e537373898",
+      "sha256": "dd86c085fae2efd48ac91dd7ccffcfc0571387fe1193d33b6394db7ef31fe2a4",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
