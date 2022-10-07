@@ -192,10 +192,11 @@ def is_valid_version(
     """
     Return True if the parsed_version is valid for the given identifier.
     """
-    if (
-        any(parsed_version not in r.specifier for r in requirements[identifier])
-        or parsed_version in bad_versions
-    ):
+    if parsed_version in bad_versions:
+        return False
+    if any(parsed_version not in r.specifier for r in requirements[identifier]):
+        if all(not r.specifier for r in requirements[identifier]):
+            return True
         return False
     return True
 
@@ -504,7 +505,11 @@ class PythonInputProvider(AbstractProvider):
 
     def is_satisfied_by(self, requirement: Requirement, candidate: Candidate) -> bool:
         """Whether the given requirement can be satisfied by a candidate. Overridden."""
-        return candidate.version in requirement.specifier
+        if candidate.version in requirement.specifier:
+            return True
+        elif not requirement.specifier:
+            return True
+        return False
 
     def _iter_dependencies(self, candidate: Candidate) -> Generator[Requirement, None, None]:
         """

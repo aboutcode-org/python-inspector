@@ -163,6 +163,24 @@ def test_cli_with_environment_marker_and_complex_ranges():
 
 
 @pytest.mark.online
+def test_cli_with_azure_devops():
+    requirements_file = test_env.get_test_loc("azure-devops.req.txt")
+    expected_file = test_env.get_test_loc("azure-devops.req-expected.json", must_exist=False)
+    extra_options = [
+        "--operating-system",
+        "linux",
+        "--python-version",
+        "38",
+    ]
+    check_requirements_resolution(
+        requirements_file=requirements_file,
+        expected_file=expected_file,
+        extra_options=extra_options,
+        regen=REGEN_TEST_FIXTURES,
+    )
+
+
+@pytest.mark.online
 def test_cli_with_multiple_index_url_and_tilde_req_with_max_rounds():
     expected_file = test_env.get_test_loc("tilde_req-expected.json", must_exist=False)
     specifier = "zipp~=3.8.0"
