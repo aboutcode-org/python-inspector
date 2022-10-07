@@ -454,16 +454,22 @@ class PythonInputProvider(AbstractProvider):
         """
         Generate candidates for the given identifier. Overridden.
         """
+        valid_versions = []
         for version in all_versions:
             parsed_version = parse_version(version)
-            if not is_valid_version(
+            if is_valid_version(
                 parsed_version=parsed_version,
                 requirements=requirements,
                 identifier=identifier,
                 bad_versions=bad_versions,
             ):
-                continue
-            yield Candidate(name=name, version=parsed_version, extras=extras)
+                valid_versions.append(parsed_version)
+        if all(version.is_prerelease for version in valid_versions):
+            pass
+        else:
+            valid_versions = [version for version in valid_versions if not version.is_prerelease]
+        for version in valid_versions:
+            yield Candidate(name=name, version=version, extras=extras)
 
     def _iter_matches(
         self,
