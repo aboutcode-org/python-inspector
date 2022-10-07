@@ -464,9 +464,7 @@ class PythonInputProvider(AbstractProvider):
                 bad_versions=bad_versions,
             ):
                 valid_versions.append(parsed_version)
-        if all(version.is_prerelease for version in valid_versions):
-            pass
-        else:
+        if not all(version.is_prerelease for version in valid_versions):
             valid_versions = [version for version in valid_versions if not version.is_prerelease]
         for version in valid_versions:
             yield Candidate(name=name, version=version, extras=extras)

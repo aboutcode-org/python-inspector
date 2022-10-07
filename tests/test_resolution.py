@@ -160,6 +160,22 @@ def test_is_valid_version():
     assert is_valid_version(parsed_version, requirements, identifier, bad_versions)
 
 
+def test_is_valid_version_with_no_specifier():
+    parsed_version = packaging.version.parse("2.1.2")
+    requirements = {"flask": [Requirement("flask")]}
+    bad_versions = []
+    identifier = "flask"
+    assert is_valid_version(parsed_version, requirements, identifier, bad_versions)
+
+
+def test_is_valid_version_with_no_specifier_and_pre_release():
+    parsed_version = packaging.version.parse("1.0.0b4")
+    requirements = {"flask": [Requirement("flask")]}
+    bad_versions = []
+    identifier = "flask"
+    assert is_valid_version(parsed_version, requirements, identifier, bad_versions)
+
+
 def test_get_requirements_from_dependencies():
     dependencies = [
         models.DependentPackage(
