@@ -122,7 +122,7 @@ def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
         "pkg:pypi/jinja2@3.1.2",
         "pkg:pypi/markupsafe@2.1.1",
         "pkg:pypi/werkzeug@2.2.2",
-        "pkg:pypi/zipp@3.8.1",
+        "pkg:pypi/zipp@3.9.0",
     ]
 
 
