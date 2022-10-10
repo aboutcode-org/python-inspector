@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+v0.8.3
+------
+
+- Bump dependencies version in tests.
+
+
 v0.8.2
 ------
 
