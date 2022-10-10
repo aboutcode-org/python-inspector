@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+v0.8.2
+------
+
+- For a package that doesn't have a single stable release use the latest pre-release version.
+
+
 v0.8.1
 ------
 

@@ -163,6 +163,42 @@ def test_cli_with_environment_marker_and_complex_ranges():
 
 
 @pytest.mark.online
+def test_cli_with_azure_devops_with_python_310():
+    requirements_file = test_env.get_test_loc("azure-devops.req.txt")
+    expected_file = test_env.get_test_loc("azure-devops.req-310-expected.json", must_exist=False)
+    extra_options = [
+        "--operating-system",
+        "linux",
+        "--python-version",
+        "310",
+    ]
+    check_requirements_resolution(
+        requirements_file=requirements_file,
+        expected_file=expected_file,
+        extra_options=extra_options,
+        regen=REGEN_TEST_FIXTURES,
+    )
+
+
+@pytest.mark.online
+def test_cli_with_azure_devops_with_python_38():
+    requirements_file = test_env.get_test_loc("azure-devops.req.txt")
+    expected_file = test_env.get_test_loc("azure-devops.req-38-expected.json", must_exist=False)
+    extra_options = [
+        "--operating-system",
+        "linux",
+        "--python-version",
+        "38",
+    ]
+    check_requirements_resolution(
+        requirements_file=requirements_file,
+        expected_file=expected_file,
+        extra_options=extra_options,
+        regen=REGEN_TEST_FIXTURES,
+    )
+
+
+@pytest.mark.online
 def test_cli_with_multiple_index_url_and_tilde_req_with_max_rounds():
     expected_file = test_env.get_test_loc("tilde_req-expected.json", must_exist=False)
     specifier = "zipp~=3.8.0"
@@ -304,7 +340,7 @@ def test_passing_of_json_pdt_and_json_flags():
 def test_version_option():
     options = ["--version"]
     result = run_cli(options=options)
-    assert "0.8.1" in result.output
+    assert "0.8.2" in result.output
 
 
 def test_passing_of_netrc_file_that_does_not_exist():
