@@ -125,20 +125,32 @@ def get_pypi_data_from_purl(
         if dist_url not in valid_distribution_urls:
             continue
         digests = url.get("digests") or {}
+        license_classifiers = []
+        keyword_classifiers = []
+        classifiers = info.get("classifiers") or []
+        for clsfr in classifiers:
+            if "License" in clsfr:
+                license_classifiers.append(clsfr)
+            else:
+                keyword_classifiers.append(clsfr)
+
         yield PackageData(
             primary_language="Python",
-            description=info.get("description"),
+            description=info.get("summary") or info.get("description"),
             homepage_url=homepage_url,
             api_data_url=api_url,
             bug_tracking_url=bug_tracking_url,
             code_view_url=code_view_url,
-            declared_license=license,
+            declared_license={
+                "classifiers": license_classifiers,
+                "license": license,
+            },
             download_url=dist_url,
             size=url.get("size"),
             md5=digests.get("md5") or url.get("md5_digest"),
             sha256=digests.get("sha256"),
             release_date=url.get("upload_time"),
-            keywords=info.get("keywords") or [],
+            keywords=keyword_classifiers,
             parties=[
                 models.Party(
                     type=models.party_person,
