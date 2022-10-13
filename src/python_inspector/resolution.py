@@ -481,17 +481,24 @@ class PythonInputProvider(AbstractProvider):
         name = remove_extras(identifier=identifier)
         bad_versions = {c.version for c in incompatibilities[identifier]}
         extras = {e for r in requirements[identifier] for e in r.extras}
+        versions = []
         if not self.repos:
-            all_versions = self.get_versions_for_package(name=name)
-            yield from self.get_candidates(
-                all_versions, requirements, identifier, bad_versions, name, extras
-            )
+            versions.extend(self.get_versions_for_package(name=name))
         else:
             for repo in self.repos:
-                all_versions = self.get_versions_for_package(name=name, repo=repo)
-                yield from self.get_candidates(
-                    all_versions, requirements, identifier, bad_versions, name, extras
-                )
+                versions.extend(self.get_versions_for_package(name=name, repo=repo))
+
+        if not versions:
+            raise Exception(f"This package does not exist: {name}")
+
+        yield from self.get_candidates(
+            all_versions=versions,
+            requirements=requirements,
+            identifier=identifier,
+            bad_versions=bad_versions,
+            name=name,
+            extras=extras,
+        )
 
     def find_matches(
         self,
