@@ -9,6 +9,7 @@
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 import os
+from unittest.mock import patch
 
 import packaging
 import pytest
@@ -16,6 +17,8 @@ from commoncode.testcase import FileDrivenTesting
 from packaging.requirements import Requirement
 
 from _packagedcode import models
+from python_inspector.error import NoVersionsFound
+from python_inspector.resolution import PythonInputProvider
 from python_inspector.resolution import get_requirements_from_dependencies
 from python_inspector.resolution import get_resolved_dependencies
 from python_inspector.resolution import is_valid_version
@@ -122,7 +125,7 @@ def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
         "pkg:pypi/jinja2@3.1.2",
         "pkg:pypi/markupsafe@2.1.1",
         "pkg:pypi/werkzeug@2.2.2",
-        "pkg:pypi/zipp@3.9.0",
+        "pkg:pypi/zipp@3.10.0",
     ]
 
 
@@ -147,7 +150,7 @@ def test_without_supported_wheels():
         "pkg:pypi/hyperlink@21.0.0",
         "pkg:pypi/idna@3.4",
         "pkg:pypi/pycparser@2.21",
-        "pkg:pypi/setuptools@65.4.1",
+        "pkg:pypi/setuptools@65.5.0",
         "pkg:pypi/txaio@22.2.1",
     ]
 
@@ -254,3 +257,11 @@ def test_setup_py_parsing_insecure_testpkh():
         "invenio-records==1.0.*,>=1.0.0",
         "mock>=1.3.0",
     ]
+
+
+@patch("python_inspector.resolution.PythonInputProvider.get_versions_for_package")
+def test_iter_matches(mock_versions):
+    mock_versions.return_value = []
+    provider = PythonInputProvider()
+    with pytest.raises(NoVersionsFound):
+        list(provider._iter_matches("foo-bar", {"foo-bar": []}, {"foo-bar": []}))

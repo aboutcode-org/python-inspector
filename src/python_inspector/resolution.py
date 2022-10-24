@@ -39,6 +39,7 @@ from _packagedcode.pypi import PythonSetupPyHandler
 from _packagedcode.pypi import SetupCfgHandler
 from _packagedcode.pypi import can_process_dependent_package
 from python_inspector import utils_pypi
+from python_inspector.error import NoVersionsFound
 from python_inspector.setup_py_live_eval import iter_requirements
 from python_inspector.utils_pypi import Environment
 from python_inspector.utils_pypi import PypiSimpleRepository
@@ -288,10 +289,17 @@ def remove_extras(identifier: str) -> str:
     return name
 
 
+DEFAULT_ENVIRONMENT = utils_pypi.Environment.from_pyver_and_os(
+    python_version="38", operating_system="linux"
+)
+
+
 class PythonInputProvider(AbstractProvider):
-    def __init__(self, environment=None, repos=tuple(), analyze_setup_py_insecurely=False):
+    def __init__(
+        self, environment=DEFAULT_ENVIRONMENT, repos=tuple(), analyze_setup_py_insecurely=False
+    ):
         self.environment = environment
-        self.environment_marker = get_environment_marker_from_environment(environment)
+        self.environment_marker = get_environment_marker_from_environment(self.environment)
         self.repos = repos or []
         self.versions_by_package = {}
         self.dependencies_by_purl = {}
@@ -472,7 +480,7 @@ class PythonInputProvider(AbstractProvider):
     def _iter_matches(
         self,
         identifier: str,
-        requirements: List[Requirement],
+        requirements: Dict,
         incompatibilities: Dict,
     ) -> Generator[Candidate, None, None]:
         """
@@ -489,7 +497,7 @@ class PythonInputProvider(AbstractProvider):
                 versions.extend(self.get_versions_for_package(name=name, repo=repo))
 
         if not versions:
-            raise Exception(f"This package does not exist: {name}")
+            raise NoVersionsFound(f"This package does not exist: {name}")
 
         yield from self.get_candidates(
             all_versions=versions,

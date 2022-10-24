@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+v0.8.4
+------
+
+- Raise error for non existing package.
+
+
 v0.8.3
 ------
 

@@ -340,7 +340,7 @@ def test_passing_of_json_pdt_and_json_flags():
 def test_version_option():
     options = ["--version"]
     result = run_cli(options=options)
-    assert "0.8.3" in result.output
+    assert "0.8.4" in result.output
 
 
 def test_passing_of_netrc_file_that_does_not_exist():
