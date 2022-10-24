@@ -2,7 +2,7 @@
   "headers": {
     "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
-    "tool_version": "0.8.3",
+    "tool_version": "0.8.4",
     "options": [
       "--specifier flask",
       "--index-url https://pypi.org/simple",
@@ -34,7 +34,7 @@
     {
       "package": "pkg:pypi/importlib-metadata@5.0.0",
       "dependencies": [
-        "pkg:pypi/zipp@3.9.0"
+        "pkg:pypi/zipp@3.10.0"
       ]
     },
     {
@@ -58,7 +58,7 @@
       ]
     },
     {
-      "package": "pkg:pypi/zipp@3.9.0",
+      "package": "pkg:pypi/zipp@3.10.0",
       "dependencies": []
     }
   ],
@@ -781,12 +781,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "zipp",
-      "version": "3.9.0",
+      "version": "3.10.0",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": ".. image:: https://img.shields.io/pypi/v/zipp.svg\n   :target: `PyPI link`_\n\n.. image:: https://img.shields.io/pypi/pyversions/zipp.svg\n   :target: `PyPI link`_\n\n.. _PyPI link: https://pypi.org/project/zipp\n\n.. image:: https://github.com/jaraco/zipp/workflows/tests/badge.svg\n   :target: https://github.com/jaraco/zipp/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. .. image:: https://readthedocs.org/projects/skeleton/badge/?version=latest\n..    :target: https://skeleton.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2022-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/zipp\n   :target: https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=readme\n\n\nA pathlib-compatible Zipfile object wrapper. Official backport of the standard library\n`Path object <https://docs.python.org/3.8/library/zipfile.html#path-objects>`_.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - zipp\n     - stdlib\n   * - 3.5\n     - 3.11\n   * - 3.3\n     - 3.9\n   * - 1.0\n     - 3.8\n\n\nUsage\n=====\n\nUse ``zipp.Path`` in place of ``zipfile.Path`` on any Python.\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=referral&utm_campaign=github>`_.\n\nSecurity Contact\n================\n\nTo report a security vulnerability, please use the\n`Tidelift security contact <https://tidelift.com/security>`_.\nTidelift will coordinate the fix and disclosure.\n",
-      "release_date": "2022-10-08T18:06:29",
+      "release_date": "2022-10-24T01:21:48",
       "parties": [
         {
           "type": "person",
@@ -805,11 +805,11 @@
       ],
       "keywords": [],
       "homepage_url": "https://github.com/jaraco/zipp",
-      "download_url": "https://files.pythonhosted.org/packages/09/85/302c153615db93e9197f13e02f448b3f95d7d786948f2fb3d6d5830a481b/zipp-3.9.0-py3-none-any.whl",
-      "size": 5769,
+      "download_url": "https://files.pythonhosted.org/packages/40/8a/d63273ed0fa4a3d06f77e7b043f6577d8894e95515b0c187c52e2c0efabb/zipp-3.10.0-py3-none-any.whl",
+      "size": 6187,
       "sha1": null,
-      "md5": "c75a0a86788f20e54324ee2a94ae1e54",
-      "sha256": "972cfa31bc2fedd3fa838a51e9bc7e64b7fb725a8c00e7431554311f180e9980",
+      "md5": "45e75fc446a78b655d1dc740d41e5e4f",
+      "sha256": "4fcb6f278987a6605757302a6e40e896257570d11c51628968ccb2a47e80c6c1",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -824,20 +824,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/zipp/3.9.0/json",
+      "api_data_url": "https://pypi.org/pypi/zipp/3.10.0/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/zipp@3.9.0"
+      "purl": "pkg:pypi/zipp@3.10.0"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "zipp",
-      "version": "3.9.0",
+      "version": "3.10.0",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": ".. image:: https://img.shields.io/pypi/v/zipp.svg\n   :target: `PyPI link`_\n\n.. image:: https://img.shields.io/pypi/pyversions/zipp.svg\n   :target: `PyPI link`_\n\n.. _PyPI link: https://pypi.org/project/zipp\n\n.. image:: https://github.com/jaraco/zipp/workflows/tests/badge.svg\n   :target: https://github.com/jaraco/zipp/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. .. image:: https://readthedocs.org/projects/skeleton/badge/?version=latest\n..    :target: https://skeleton.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2022-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/zipp\n   :target: https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=readme\n\n\nA pathlib-compatible Zipfile object wrapper. Official backport of the standard library\n`Path object <https://docs.python.org/3.8/library/zipfile.html#path-objects>`_.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - zipp\n     - stdlib\n   * - 3.5\n     - 3.11\n   * - 3.3\n     - 3.9\n   * - 1.0\n     - 3.8\n\n\nUsage\n=====\n\nUse ``zipp.Path`` in place of ``zipfile.Path`` on any Python.\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=referral&utm_campaign=github>`_.\n\nSecurity Contact\n================\n\nTo report a security vulnerability, please use the\n`Tidelift security contact <https://tidelift.com/security>`_.\nTidelift will coordinate the fix and disclosure.\n",
-      "release_date": "2022-10-08T18:06:30",
+      "release_date": "2022-10-24T01:21:49",
       "parties": [
         {
           "type": "person",
@@ -856,11 +856,11 @@
       ],
       "keywords": [],
       "homepage_url": "https://github.com/jaraco/zipp",
-      "download_url": "https://files.pythonhosted.org/packages/41/2e/1341c5634c25e7254df01ec1f6cbd2bcdee3e647709e7c3647d1b362e3ac/zipp-3.9.0.tar.gz",
-      "size": 15118,
+      "download_url": "https://files.pythonhosted.org/packages/8d/d7/1bd1e0a5bc95a27a6f5c4ee8066ddfc5b69a9ec8d39ab11a41a804ec8f0d/zipp-3.10.0.tar.gz",
+      "size": 15564,
       "sha1": null,
-      "md5": "46815096f7e8cf91de9a0d6c84727608",
-      "sha256": "3a7af91c3db40ec72dd9d154ae18e008c69efe8ca88dde4f9a731bb82fe2f9eb",
+      "md5": "f75b65d022528a44877626641f0f95c3",
+      "sha256": "7a7262fd930bd3e36c50b9a64897aec3fafff3dfdeec9623ae22b40e93f99bb8",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -875,9 +875,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/zipp/3.9.0/json",
+      "api_data_url": "https://pypi.org/pypi/zipp/3.10.0/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/zipp@3.9.0"
+      "purl": "pkg:pypi/zipp@3.10.0"
     }
   ]
 }
