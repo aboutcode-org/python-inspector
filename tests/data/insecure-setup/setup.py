@@ -3,8 +3,7 @@
 import os
 import re
 
-from setuptools import find_packages
-from setuptools import setup
+import setuptools
 
 kwargs = {}
 kwargs["install_requires"] = ["six", "isodate", "pyparsing"]
@@ -28,14 +27,14 @@ def find_version(filename):
 
 version = find_version("rdflib/__init__.py")
 
-packages = find_packages(exclude=("examples*", "test*"))
+packages = setuptools.find_packages(exclude=("examples*", "test*"))
 
 if os.environ.get("READTHEDOCS", None):
     # if building docs for RTD
     # install examples, to get docstrings
     packages.append("examples")
 
-setup(
+setuptools.setup(
     name="rdflib",
     version=version,
     description="RDFLib is a Python library for working with RDF, a "

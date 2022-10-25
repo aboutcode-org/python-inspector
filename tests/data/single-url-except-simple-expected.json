@@ -2,10 +2,9 @@
   "headers": {
     "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
-    "tool_version": "0.8.5",
+    "tool_version": "0.9.0",
     "options": [
       "--specifier flask",
-      "--index-url https://pypi.org/simple",
       "--index-url https://thirdparty.aboutcode.org/pypi/simple/",
       "--python-version 38",
       "--operating-system linux",
@@ -15,7 +14,6 @@
     "warnings": [],
     "errors": []
   },
-  "files": [],
   "resolved_dependencies_graph": [
     {
       "package": "pkg:pypi/click@8.1.3",
@@ -62,6 +60,7 @@
       "dependencies": []
     }
   ],
+  "files": [],
   "packages": [
     {
       "type": "pypi",

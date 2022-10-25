@@ -60,8 +60,7 @@ def iter_requirements(level, extras, setup_file):
             with open(setup_file) as sf:
                 exec(sf.read(), g)
             sys.path.pop()
-            assert g["setup"]  # silence warning about unused imports
-    # called arguments are in `mock_setup.call_args`
+
     mock_args, mock_kwargs = mock_setup.call_args
     install_requires = mock_kwargs.get("install_requires", install_requires)
 

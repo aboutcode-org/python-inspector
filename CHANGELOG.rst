@@ -2,8 +2,15 @@ Changelog
 =========
 
 
+v0.9.0
+------
+
+- Add API function for using cleanly as a library.
+
+
 v0.8.5
 ------
+
 - Adapt python-inspector output according to SCTK output.
 
 

@@ -2,7 +2,7 @@
   "headers": {
     "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
-    "tool_version": "0.8.5",
+    "tool_version": "0.9.0",
     "options": [
       "--index-url https://pypi.org/simple",
       "--python-version 27",
@@ -13,6 +13,46 @@
     "warnings": [],
     "errors": []
   },
+  "resolved_dependencies_graph": [
+    {
+      "key": "ply",
+      "package_name": "ply",
+      "installed_version": "3.11",
+      "dependencies": []
+    },
+    {
+      "key": "rdflib",
+      "package_name": "rdflib",
+      "installed_version": "5.0.0",
+      "dependencies": [
+        {
+          "key": "isodate",
+          "package_name": "isodate",
+          "installed_version": "0.6.1",
+          "dependencies": [
+            {
+              "key": "six",
+              "package_name": "six",
+              "installed_version": "1.16.0",
+              "dependencies": []
+            }
+          ]
+        },
+        {
+          "key": "pyparsing",
+          "package_name": "pyparsing",
+          "installed_version": "2.4.7",
+          "dependencies": []
+        },
+        {
+          "key": "six",
+          "package_name": "six",
+          "installed_version": "1.16.0",
+          "dependencies": []
+        }
+      ]
+    }
+  ],
   "files": [
     {
       "type": "file",
@@ -107,46 +147,6 @@
           "api_data_url": "https://pypi.org/pypi/spdx-tools/0.5.4/json",
           "datasource_id": "pypi_setup_py",
           "purl": "pkg:pypi/spdx-tools@0.5.4"
-        }
-      ]
-    }
-  ],
-  "resolved_dependencies_graph": [
-    {
-      "key": "ply",
-      "package_name": "ply",
-      "installed_version": "3.11",
-      "dependencies": []
-    },
-    {
-      "key": "rdflib",
-      "package_name": "rdflib",
-      "installed_version": "5.0.0",
-      "dependencies": [
-        {
-          "key": "isodate",
-          "package_name": "isodate",
-          "installed_version": "0.6.1",
-          "dependencies": [
-            {
-              "key": "six",
-              "package_name": "six",
-              "installed_version": "1.16.0",
-              "dependencies": []
-            }
-          ]
-        },
-        {
-          "key": "pyparsing",
-          "package_name": "pyparsing",
-          "installed_version": "2.4.7",
-          "dependencies": []
-        },
-        {
-          "key": "six",
-          "package_name": "six",
-          "installed_version": "1.16.0",
-          "dependencies": []
         }
       ]
     }

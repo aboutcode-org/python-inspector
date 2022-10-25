@@ -14,21 +14,17 @@ from typing import Dict
 from typing import Generator
 from typing import List
 from typing import NamedTuple
-from typing import Sequence
 from typing import Tuple
 from typing import Union
 from zipfile import ZipFile
 
 import packaging.utils
-import requests
 from packageurl import PackageURL
 from packaging.requirements import Requirement
 from packaging.version import LegacyVersion
 from packaging.version import Version
 from packaging.version import parse as parse_version
 from resolvelib import AbstractProvider
-from resolvelib import Resolver
-from resolvelib.reporters import BaseReporter
 from resolvelib.structs import DirectedGraph
 
 from _packagedcode.models import DependentPackage
@@ -41,18 +37,10 @@ from _packagedcode.pypi import can_process_dependent_package
 from python_inspector import utils_pypi
 from python_inspector.error import NoVersionsFound
 from python_inspector.setup_py_live_eval import iter_requirements
-from python_inspector.utils_pypi import Environment
+from python_inspector.utils import Candidate
+from python_inspector.utils import contain_string
+from python_inspector.utils import get_response
 from python_inspector.utils_pypi import PypiSimpleRepository
-
-
-class Candidate(NamedTuple):
-    """
-    A candidate is a package that can be installed.
-    """
-
-    name: str
-    version: str
-    extras: str
 
 
 class Result(NamedTuple):
@@ -80,16 +68,6 @@ class Result(NamedTuple):
     criteria: Dict
 
 
-def get_response(url: str) -> Dict:
-    """
-    Return a mapping of the JSON response from fetching ``url``
-    or None if the ``url`` cannot be fetched..
-    """
-    resp = requests.get(url)
-    if resp.status_code == 200:
-        return resp.json()
-
-
 def get_requirements_from_distribution(
     handler: BasePypiHandler,
     location: str,
@@ -103,9 +81,17 @@ def get_requirements_from_distribution(
     if not os.path.exists(location):
         return []
     reqs = []
-    for package_data in handler.parse(location):
-        dependencies = package_data.dependencies
-        reqs.extend(get_requirements_from_dependencies(dependencies=dependencies))
+    try:
+        for package_data in handler.parse(location):
+            dependencies = package_data.dependencies
+            reqs.extend(get_requirements_from_dependencies(dependencies=dependencies))
+    except Exception as e:
+        import subprocess
+
+        subprocess.check_call(["zip", "-T", location])
+        raise Exception(
+            f"Could not get requirements from pypi package at: {location!r}: {e}"
+        ) from e
     return reqs
 
 
@@ -137,20 +123,6 @@ def get_environment_marker_from_environment(environment):
         "platform_system": environment.operating_system.capitalize(),
         "sys_platform": environment.operating_system,
     }
-
-
-def contain_string(string: str, files: List) -> bool:
-    """
-    Return True if the ``string`` is contained in any of the ``files`` list of file paths.
-    """
-    for file in files:
-        if not os.path.exists(file):
-            continue
-        with open(file, encoding="utf-8") as f:
-            # TODO also consider other file names
-            if string in f.read():
-                return True
-    return False
 
 
 def parse_reqs_from_setup_py_insecurely(setup_py):
@@ -756,45 +728,3 @@ def get_setup_dependencies(location, analyze_setup_py_insecurely=False, use_requ
             yield from parse_reqs_from_setup_py_insecurely(setup_py=setup_py_location)
         else:
             raise Exception("Unable to collect setup.py dependencies securely")
-
-
-def get_resolved_dependencies(
-    requirements: List[Requirement],
-    environment: Environment = None,
-    repos: Sequence[PypiSimpleRepository] = tuple(),
-    as_tree: bool = False,
-    max_rounds: int = 200000,
-    verbose: bool = False,
-    pdt_output: bool = False,
-    analyze_setup_py_insecurely: bool = False,
-):
-    """
-    Return resolved dependencies of a ``requirements`` list of Requirement for
-    an ``enviroment`` Environment. The resolved dependencies are formatted as
-    parent/children or a nested tree if ``as_tree`` is True.
-
-    Used the provided ``repos`` list of PypiSimpleRepository.
-    If empty, use instead the PyPI.org JSON API exclusively instead
-    """
-    try:
-        resolver = Resolver(
-            provider=PythonInputProvider(
-                environment=environment,
-                repos=repos,
-                analyze_setup_py_insecurely=analyze_setup_py_insecurely,
-            ),
-            reporter=BaseReporter(),
-        )
-        resolver_results = resolver.resolve(requirements=requirements, max_rounds=max_rounds)
-        package_list = get_package_list(results=resolver_results)
-        if pdt_output:
-            return (format_pdt_tree(resolver_results), package_list)
-        return (
-            format_resolution(resolver_results, as_tree=as_tree),
-            package_list,
-        )
-    except Exception as e:
-        if verbose:
-            import click
-
-            click.secho(f"{e!r}", err=True)

@@ -14,7 +14,7 @@ jobs:
           python_versions: ['3.8', '3.9', '3.10']
           test_suites:
               all: |
-                venv/bin/pytest -n 2 -vvs
+                venv/bin/pytest -n 2 -vvs --reruns 2
 
     - template: etc/ci/azure-posix.yml
       parameters:
@@ -22,7 +22,7 @@ jobs:
           image_name: ubuntu-20.04
           python_versions: ['3.8', '3.9', '3.10']
           test_suites:
-              all: venv/bin/pytest -n 2 -vvs
+              all: venv/bin/pytest -n 2 -vvs --reruns 2
 
     - template: etc/ci/azure-posix.yml
       parameters:
@@ -30,7 +30,7 @@ jobs:
           image_name: macos-12
           python_versions: ['3.8', '3.9', '3.10']
           test_suites:
-              all: venv/bin/pytest -n 2 -vvs
+              all: venv/bin/pytest -n 2 -vvs --reruns 2
 
     - template: etc/ci/azure-posix.yml
       parameters:
@@ -38,7 +38,7 @@ jobs:
           image_name: macos-11
           python_versions: ['3.8', '3.9', '3.10']
           test_suites:
-              all: venv/bin/pytest -n 2 -vvs
+              all: venv/bin/pytest -n 2 -vvs --reruns 2
 
     - template: etc/ci/azure-win.yml
       parameters:
@@ -46,7 +46,7 @@ jobs:
           image_name: windows-2019
           python_versions: ['3.8', '3.9', '3.10']
           test_suites:
-              all: venv\Scripts\pytest -n 2 -vvs
+              all: venv\Scripts\pytest -n 2 -vvs --reruns 2
 
     - template: etc/ci/azure-win.yml
       parameters:
@@ -54,4 +54,4 @@ jobs:
           image_name: windows-2022
           python_versions: ['3.8', '3.9', '3.10']
           test_suites:
-              all: venv\Scripts\pytest -n 2 -vvs
+              all: venv\Scripts\pytest -n 2 -vvs --reruns 2

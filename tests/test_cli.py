@@ -16,8 +16,6 @@ import pytest
 from click.testing import CliRunner
 from commoncode.testcase import FileDrivenTesting
 
-from _packagedcode import models
-from python_inspector.resolve_cli import get_requirements_from_direct_dependencies
 from python_inspector.resolve_cli import resolve_dependencies
 
 # Used for tests to regenerate fixtures with regen=True
@@ -340,7 +338,7 @@ def test_passing_of_json_pdt_and_json_flags():
 def test_version_option():
     options = ["--version"]
     result = run_cli(options=options)
-    assert "0.8.5" in result.output
+    assert "0.9.0" in result.output
 
 
 def test_passing_of_netrc_file_that_does_not_exist():
@@ -448,7 +446,11 @@ def clean_results(results):
         file["path"] = path
     headers = results.get("headers", {})
     options = headers.get("options", [])
-    headers["options"] = [o for o in options if not o.startswith("--requirement")]
+    headers["options"] = [
+        o
+        for o in options
+        if (not o.startswith("--requirement") and not o.startswith("requirement_files-"))
+    ]
     return results
 
 
