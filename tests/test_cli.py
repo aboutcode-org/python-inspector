@@ -346,7 +346,7 @@ def test_passing_of_netrc_file_that_does_not_exist():
     run_cli(options=options, expected_rc=2)
 
 
-def test_passing_of_wrong_requirements_file():
+def test_passing_of_empty_requirements_file():
     test_file = test_env.get_temp_file(file_name="pdt.txt", extension="")
     with open(test_file, "w") as f:
         f.write("")
@@ -354,8 +354,7 @@ def test_passing_of_wrong_requirements_file():
     with open(test_file_2, "w") as f:
         f.write("")
     options = ["--requirement", test_file, "--json", "-", "--requirement", test_file_2]
-    result = run_cli(options=options, expected_rc=1)
-    assert "Error: no requirements requested" in result.output
+    run_cli(options=options, expected_rc=0)
 
 
 def test_passing_of_no_json_output_flag():

@@ -58,9 +58,9 @@ class Resolution(NamedTuple):
 
     def to_dict(self):
         return {
-            "resolution": self.resolution,
-            "packages": [package for package in self.packages],
             "files": self.files,
+            "packages": [package for package in self.packages],
+            "resolution": self.resolution,
         }
 
 
@@ -83,7 +83,14 @@ def resolver_api(
     """
     Resolve the dependencies for the package requirements listed in one or
     more ``requirement_files``, one or more ``specifiers`` and one setuptools
-    ``setup_py_file`` file and save the results as JSON to FILE.
+    ``setup_py_file`` file.
+
+    Resolve the dependencies for the requested ``python_version`` PYVER and
+    ``operating_system`` OS combination defaulting Python version 3.8 and
+    linux OS.
+
+    Download from the provided PyPI simple index_urls INDEX(s) URLs defaulting
+    to PyPI.org
     """
 
     if verbose:
@@ -198,7 +205,11 @@ def resolver_api(
         )
 
     if not direct_dependencies:
-        raise Exception("Error: no requirements requested.")
+        return Resolution(
+            packages=[],
+            resolution={},
+            files=files,
+        )
 
     if verbose:
         printer("direct_dependencies:")
@@ -266,7 +277,7 @@ def resolver_api(
         packages=packages,
         resolution=resolution,
         files=files,
-    ).to_dict()
+    )
 
 
 def resolve(
@@ -345,6 +356,9 @@ def get_resolved_dependencies(
 def get_requirements_from_direct_dependencies(
     direct_dependencies: List[DependentPackage], environment_marker: Dict
 ) -> List[Requirement]:
+    """
+    Yield Requirements from a list of DependentPackages.
+    """
     for dependency in direct_dependencies:
         # FIXME We are skipping editable requirements
         # and other pip options for now

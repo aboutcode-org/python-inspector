@@ -13,46 +13,6 @@
     "warnings": [],
     "errors": []
   },
-  "resolved_dependencies_graph": [
-    {
-      "key": "ply",
-      "package_name": "ply",
-      "installed_version": "3.11",
-      "dependencies": []
-    },
-    {
-      "key": "rdflib",
-      "package_name": "rdflib",
-      "installed_version": "5.0.0",
-      "dependencies": [
-        {
-          "key": "isodate",
-          "package_name": "isodate",
-          "installed_version": "0.6.1",
-          "dependencies": [
-            {
-              "key": "six",
-              "package_name": "six",
-              "installed_version": "1.16.0",
-              "dependencies": []
-            }
-          ]
-        },
-        {
-          "key": "pyparsing",
-          "package_name": "pyparsing",
-          "installed_version": "2.4.7",
-          "dependencies": []
-        },
-        {
-          "key": "six",
-          "package_name": "six",
-          "installed_version": "1.16.0",
-          "dependencies": []
-        }
-      ]
-    }
-  ],
   "files": [
     {
       "type": "file",
@@ -689,6 +649,46 @@
       "api_data_url": "https://pypi.org/pypi/six/1.16.0/json",
       "datasource_id": null,
       "purl": "pkg:pypi/six@1.16.0"
+    }
+  ],
+  "resolved_dependencies_graph": [
+    {
+      "key": "ply",
+      "package_name": "ply",
+      "installed_version": "3.11",
+      "dependencies": []
+    },
+    {
+      "key": "rdflib",
+      "package_name": "rdflib",
+      "installed_version": "5.0.0",
+      "dependencies": [
+        {
+          "key": "isodate",
+          "package_name": "isodate",
+          "installed_version": "0.6.1",
+          "dependencies": [
+            {
+              "key": "six",
+              "package_name": "six",
+              "installed_version": "1.16.0",
+              "dependencies": []
+            }
+          ]
+        },
+        {
+          "key": "pyparsing",
+          "package_name": "pyparsing",
+          "installed_version": "2.4.7",
+          "dependencies": []
+        },
+        {
+          "key": "six",
+          "package_name": "six",
+          "installed_version": "1.16.0",
+          "dependencies": []
+        }
+      ]
     }
   ]
 }

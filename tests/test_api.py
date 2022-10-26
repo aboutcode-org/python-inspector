@@ -31,7 +31,7 @@ def test_api_with_specifier():
                     specifiers=["flask==2.1.2"],
                     python_version="3.10",
                     operating_system="linux",
-                )
+                ).to_dict()
             )
         )
     check_json_results(
@@ -52,7 +52,7 @@ def test_api_with_specifier_pdt():
                     python_version="3.10",
                     operating_system="linux",
                     pdt_output=True,
-                )
+                ).to_dict()
             )
         )
     check_json_results(
@@ -73,7 +73,7 @@ def test_api_with_requirement_file():
                     python_version="3.10",
                     operating_system="linux",
                     requirement_files=[requirement_file],
-                )
+                ).to_dict()
             )
         )
     check_json_results(

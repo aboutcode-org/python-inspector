@@ -13,22 +13,6 @@
     "warnings": [],
     "errors": []
   },
-  "resolved_dependencies_graph": [
-    {
-      "package": "pkg:pypi/isodate@0.6.1",
-      "dependencies": [
-        "pkg:pypi/six@1.16.0"
-      ]
-    },
-    {
-      "package": "pkg:pypi/pyparsing@2.4.7",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/six@1.16.0",
-      "dependencies": []
-    }
-  ],
   "files": [
     {
       "type": "file",
@@ -508,6 +492,22 @@
       "api_data_url": "https://pypi.org/pypi/six/1.16.0/json",
       "datasource_id": null,
       "purl": "pkg:pypi/six@1.16.0"
+    }
+  ],
+  "resolved_dependencies_graph": [
+    {
+      "package": "pkg:pypi/isodate@0.6.1",
+      "dependencies": [
+        "pkg:pypi/six@1.16.0"
+      ]
+    },
+    {
+      "package": "pkg:pypi/pyparsing@2.4.7",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/six@1.16.0",
+      "dependencies": []
     }
   ]
 }

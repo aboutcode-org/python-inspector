@@ -13,18 +13,6 @@
     "warnings": [],
     "errors": []
   },
-  "resolved_dependencies_graph": [
-    {
-      "package": "pkg:pypi/boolean-py@3.8",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/license-expression@1.0",
-      "dependencies": [
-        "pkg:pypi/boolean-py@3.8"
-      ]
-    }
-  ],
   "files": [
     {
       "type": "file",
@@ -349,6 +337,18 @@
       "api_data_url": "https://pypi.org/pypi/license-expression/1.0/json",
       "datasource_id": null,
       "purl": "pkg:pypi/license-expression@1.0"
+    }
+  ],
+  "resolved_dependencies_graph": [
+    {
+      "package": "pkg:pypi/boolean-py@3.8",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/license-expression@1.0",
+      "dependencies": [
+        "pkg:pypi/boolean-py@3.8"
+      ]
     }
   ]
 }

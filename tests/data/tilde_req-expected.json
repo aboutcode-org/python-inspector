@@ -15,12 +15,6 @@
     "warnings": [],
     "errors": []
   },
-  "resolved_dependencies_graph": [
-    {
-      "package": "pkg:pypi/zipp@3.8.1",
-      "dependencies": []
-    }
-  ],
   "files": [],
   "packages": [
     {
@@ -128,6 +122,12 @@
       "api_data_url": "https://pypi.org/pypi/zipp/3.8.1/json",
       "datasource_id": null,
       "purl": "pkg:pypi/zipp@3.8.1"
+    }
+  ],
+  "resolved_dependencies_graph": [
+    {
+      "package": "pkg:pypi/zipp@3.8.1",
+      "dependencies": []
     }
   ]
 }

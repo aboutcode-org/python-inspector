@@ -1,51 +1,5 @@
 {
-  "resolution": [
-    {
-      "key": "flask",
-      "package_name": "flask",
-      "installed_version": "2.1.2",
-      "dependencies": [
-        {
-          "key": "click",
-          "package_name": "click",
-          "installed_version": "8.1.3",
-          "dependencies": []
-        },
-        {
-          "key": "itsdangerous",
-          "package_name": "itsdangerous",
-          "installed_version": "2.1.2",
-          "dependencies": []
-        },
-        {
-          "key": "jinja2",
-          "package_name": "jinja2",
-          "installed_version": "3.1.2",
-          "dependencies": [
-            {
-              "key": "markupsafe",
-              "package_name": "markupsafe",
-              "installed_version": "2.1.1",
-              "dependencies": []
-            }
-          ]
-        },
-        {
-          "key": "werkzeug",
-          "package_name": "werkzeug",
-          "installed_version": "2.2.2",
-          "dependencies": [
-            {
-              "key": "markupsafe",
-              "package_name": "markupsafe",
-              "installed_version": "2.1.1",
-              "dependencies": []
-            }
-          ]
-        }
-      ]
-    }
-  ],
+  "files": [],
   "packages": [
     {
       "type": "pypi",
@@ -660,5 +614,51 @@
       "purl": "pkg:pypi/werkzeug@2.2.2"
     }
   ],
-  "files": []
+  "resolution": [
+    {
+      "key": "flask",
+      "package_name": "flask",
+      "installed_version": "2.1.2",
+      "dependencies": [
+        {
+          "key": "click",
+          "package_name": "click",
+          "installed_version": "8.1.3",
+          "dependencies": []
+        },
+        {
+          "key": "itsdangerous",
+          "package_name": "itsdangerous",
+          "installed_version": "2.1.2",
+          "dependencies": []
+        },
+        {
+          "key": "jinja2",
+          "package_name": "jinja2",
+          "installed_version": "3.1.2",
+          "dependencies": [
+            {
+              "key": "markupsafe",
+              "package_name": "markupsafe",
+              "installed_version": "2.1.1",
+              "dependencies": []
+            }
+          ]
+        },
+        {
+          "key": "werkzeug",
+          "package_name": "werkzeug",
+          "installed_version": "2.2.2",
+          "dependencies": [
+            {
+              "key": "markupsafe",
+              "package_name": "markupsafe",
+              "installed_version": "2.1.1",
+              "dependencies": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

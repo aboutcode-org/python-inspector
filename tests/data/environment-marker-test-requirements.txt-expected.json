@@ -14,46 +14,6 @@
     "warnings": [],
     "errors": []
   },
-  "resolved_dependencies_graph": [
-    {
-      "key": "flask",
-      "package_name": "flask",
-      "installed_version": "1.0",
-      "dependencies": [
-        {
-          "key": "click",
-          "package_name": "click",
-          "installed_version": "6.7",
-          "dependencies": []
-        },
-        {
-          "key": "itsdangerous",
-          "package_name": "itsdangerous",
-          "installed_version": "0.24",
-          "dependencies": []
-        },
-        {
-          "key": "jinja2",
-          "package_name": "jinja2",
-          "installed_version": "2.11.3",
-          "dependencies": [
-            {
-              "key": "markupsafe",
-              "package_name": "markupsafe",
-              "installed_version": "1.0",
-              "dependencies": []
-            }
-          ]
-        },
-        {
-          "key": "werkzeug",
-          "package_name": "werkzeug",
-          "installed_version": "0.15.3",
-          "dependencies": []
-        }
-      ]
-    }
-  ],
   "files": [
     {
       "type": "file",
@@ -906,6 +866,46 @@
       "api_data_url": "https://pypi.org/pypi/werkzeug/0.15.3/json",
       "datasource_id": null,
       "purl": "pkg:pypi/werkzeug@0.15.3"
+    }
+  ],
+  "resolved_dependencies_graph": [
+    {
+      "key": "flask",
+      "package_name": "flask",
+      "installed_version": "1.0",
+      "dependencies": [
+        {
+          "key": "click",
+          "package_name": "click",
+          "installed_version": "6.7",
+          "dependencies": []
+        },
+        {
+          "key": "itsdangerous",
+          "package_name": "itsdangerous",
+          "installed_version": "0.24",
+          "dependencies": []
+        },
+        {
+          "key": "jinja2",
+          "package_name": "jinja2",
+          "installed_version": "2.11.3",
+          "dependencies": [
+            {
+              "key": "markupsafe",
+              "package_name": "markupsafe",
+              "installed_version": "1.0",
+              "dependencies": []
+            }
+          ]
+        },
+        {
+          "key": "werkzeug",
+          "package_name": "werkzeug",
+          "installed_version": "0.15.3",
+          "dependencies": []
+        }
+      ]
     }
   ]
 }

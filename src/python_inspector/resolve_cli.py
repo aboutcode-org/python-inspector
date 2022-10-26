@@ -253,9 +253,9 @@ def resolve_dependencies(
         )
         output = dict(
             headers=headers,
-            resolved_dependencies_graph=resolution_result.get("resolution"),
-            files=resolution_result.get("files"),
-            packages=resolution_result.get("packages"),
+            files=resolution_result.files,
+            packages=resolution_result.packages,
+            resolved_dependencies_graph=resolution_result.resolution,
         )
         write_output_in_file(
             output=output,

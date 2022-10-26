@@ -81,17 +81,9 @@ def get_requirements_from_distribution(
     if not os.path.exists(location):
         return []
     reqs = []
-    try:
-        for package_data in handler.parse(location):
-            dependencies = package_data.dependencies
-            reqs.extend(get_requirements_from_dependencies(dependencies=dependencies))
-    except Exception as e:
-        import subprocess
-
-        subprocess.check_call(["zip", "-T", location])
-        raise Exception(
-            f"Could not get requirements from pypi package at: {location!r}: {e}"
-        ) from e
+    for package_data in handler.parse(location):
+        dependencies = package_data.dependencies
+    reqs.extend(get_requirements_from_dependencies(dependencies=dependencies))
     return reqs
 
 

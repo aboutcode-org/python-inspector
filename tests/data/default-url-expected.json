@@ -14,12 +14,12 @@
     "warnings": [],
     "errors": []
   },
+  "files": [],
+  "packages": [],
   "resolved_dependencies_graph": [
     {
       "package": "pkg:pypi/zipp@3.8.0",
       "dependencies": []
     }
-  ],
-  "files": [],
-  "packages": []
+  ]
 }
