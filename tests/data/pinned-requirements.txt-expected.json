@@ -867,16 +867,21 @@
           "name": "nexB. Inc. and others",
           "email": "info@aboutcode.org",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "license",
+        "about",
+        "metadata",
+        "package",
+        "copyright",
+        "attribution",
+        "software",
+        "inventory",
+        "open source",
+        "sca",
+        "SBOM",
+        "spdx",
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Programming Language :: Python :: 3 :: Only",
@@ -904,7 +909,6 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
-        "classifiers": [],
         "license": "Apache-2.0"
       },
       "notice_text": null,
@@ -935,16 +939,21 @@
           "name": "nexB. Inc. and others",
           "email": "info@aboutcode.org",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "license",
+        "about",
+        "metadata",
+        "package",
+        "copyright",
+        "attribution",
+        "software",
+        "inventory",
+        "open source",
+        "sca",
+        "SBOM",
+        "spdx",
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Programming Language :: Python :: 3 :: Only",
@@ -972,7 +981,6 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
-        "classifiers": [],
         "license": "Apache-2.0"
       },
       "notice_text": null,
@@ -1013,6 +1021,9 @@
         }
       ],
       "keywords": [
+        "class",
+        "attribute",
+        "boilerplate",
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Natural Language :: English",
@@ -1044,10 +1055,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -1087,6 +1098,9 @@
         }
       ],
       "keywords": [
+        "class",
+        "attribute",
+        "boilerplate",
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Natural Language :: English",
@@ -1118,10 +1132,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -1151,13 +1165,6 @@
           "name": "Leonard Richardson",
           "email": "leonardr@segfault.org",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
@@ -1183,10 +1190,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -1216,13 +1223,6 @@
           "name": "Leonard Richardson",
           "email": "leonardr@segfault.org",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
@@ -1248,10 +1248,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -1281,16 +1281,13 @@
           "name": "Sebastian Kraemer",
           "email": "basti.kr@gmail.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "boolean expression",
+        "boolean algebra",
+        "logic",
+        "expression parser",
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
@@ -1314,7 +1311,6 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
-        "classifiers": [],
         "license": "BSD-2-Clause"
       },
       "notice_text": null,
@@ -1345,16 +1341,13 @@
           "name": "Sebastian Kraemer",
           "email": "basti.kr@gmail.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "boolean expression",
+        "boolean algebra",
+        "logic",
+        "expression parser",
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
@@ -1378,7 +1371,6 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
-        "classifiers": [],
         "license": "BSD-2-Clause"
       },
       "notice_text": null,
@@ -1409,13 +1401,6 @@
           "name": "Kenneth Reitz",
           "email": "me@kennethreitz.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
@@ -1443,10 +1428,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MPL-2.0",
         "classifiers": [
           "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)"
-        ],
-        "license": "MPL-2.0"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -1476,13 +1461,6 @@
           "name": "Kenneth Reitz",
           "email": "me@kennethreitz.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
@@ -1510,10 +1488,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MPL-2.0",
         "classifiers": [
           "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)"
-        ],
-        "license": "MPL-2.0"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -1543,16 +1521,18 @@
           "name": "Ahmed TAHRI @Ousret",
           "email": "ahmed.tahri@cloudnursery.dev",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "encoding",
+        "i18n",
+        "txt",
+        "text",
+        "charset",
+        "charset-detector",
+        "normalization",
+        "unicode",
+        "chardet",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
@@ -1583,10 +1563,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -1616,16 +1596,18 @@
           "name": "Ahmed TAHRI @Ousret",
           "email": "ahmed.tahri@cloudnursery.dev",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "encoding",
+        "i18n",
+        "txt",
+        "text",
+        "charset",
+        "charset-detector",
+        "normalization",
+        "unicode",
+        "chardet",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
@@ -1656,10 +1638,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -1717,10 +1699,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "BSD-3-Clause",
         "classifiers": [
           "License :: OSI Approved :: BSD License"
-        ],
-        "license": "BSD-3-Clause"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -1778,10 +1760,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "BSD-3-Clause",
         "classifiers": [
           "License :: OSI Approved :: BSD License"
-        ],
-        "license": "BSD-3-Clause"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -1816,11 +1798,12 @@
           "type": "person",
           "role": "maintainer",
           "name": "Arnon Yaari",
-          "email": "",
+          "email": null,
           "url": null
         }
       ],
       "keywords": [
+        "color colour terminal text ansi windows crossplatform xplatform",
         "Development Status :: 5 - Production/Stable",
         "Environment :: Console",
         "Intended Audience :: Developers",
@@ -1850,10 +1833,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "BSD",
         "classifiers": [
           "License :: OSI Approved :: BSD License"
-        ],
-        "license": "BSD"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -1888,11 +1871,12 @@
           "type": "person",
           "role": "maintainer",
           "name": "Arnon Yaari",
-          "email": "",
+          "email": null,
           "url": null
         }
       ],
       "keywords": [
+        "color colour terminal text ansi windows crossplatform xplatform",
         "Development Status :: 5 - Production/Stable",
         "Environment :: Console",
         "Intended Audience :: Developers",
@@ -1922,10 +1906,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "BSD",
         "classifiers": [
           "License :: OSI Approved :: BSD License"
-        ],
-        "license": "BSD"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -1955,16 +1939,11 @@
           "name": "nexB. Inc. and others",
           "email": "info@aboutcode.org",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "utilities",
+        "scancode-toolkit",
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Programming Language :: Python :: 3",
@@ -1985,7 +1964,6 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
-        "classifiers": [],
         "license": "Apache-2.0"
       },
       "notice_text": null,
@@ -2016,16 +1994,11 @@
           "name": "nexB. Inc. and others",
           "email": "info@aboutcode.org",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "utilities",
+        "scancode-toolkit",
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Programming Language :: Python :: 3",
@@ -2046,7 +2019,6 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
-        "classifiers": [],
         "license": "Apache-2.0"
       },
       "notice_text": null,
@@ -2077,16 +2049,10 @@
           "name": "originally from Jannis Gebauer, maintained by AboutCode.org",
           "email": "info@nexb.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "dparse pypi dependencies tox conda pipfile setup.cfg",
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Natural Language :: English",
@@ -2110,10 +2076,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -2143,16 +2109,10 @@
           "name": "originally from Jannis Gebauer, maintained by AboutCode.org",
           "email": "info@nexb.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "dparse pypi dependencies tox conda pipfile setup.cfg",
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Natural Language :: English",
@@ -2176,10 +2136,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -2209,13 +2169,6 @@
           "name": "See ATUHORS.txt",
           "email": "charlie.clark@clark-consulting.eu",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
@@ -2242,10 +2195,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -2275,13 +2228,6 @@
           "name": "See ATUHORS.txt",
           "email": "charlie.clark@clark-consulting.eu",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
@@ -2308,10 +2254,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -2340,13 +2286,6 @@
           "role": "author",
           "name": "Kim Davies",
           "email": "kim@cynosure.com.au",
-          "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
           "url": null
         }
       ],
@@ -2383,10 +2322,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "BSD-3-Clause",
         "classifiers": [
           "License :: OSI Approved :: BSD License"
-        ],
-        "license": "BSD-3-Clause"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -2415,13 +2354,6 @@
           "role": "author",
           "name": "Kim Davies",
           "email": "kim@cynosure.com.au",
-          "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
           "url": null
         }
       ],
@@ -2458,10 +2390,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "BSD-3-Clause",
         "classifiers": [
           "License :: OSI Approved :: BSD License"
-        ],
-        "license": "BSD-3-Clause"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -2491,13 +2423,6 @@
           "name": "Jason R. Coombs",
           "email": "jaraco@jaraco.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
@@ -2521,8 +2446,7 @@
       "declared_license": {
         "classifiers": [
           "License :: OSI Approved :: Apache Software License"
-        ],
-        "license": ""
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -2552,13 +2476,6 @@
           "name": "Jason R. Coombs",
           "email": "jaraco@jaraco.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
@@ -2582,8 +2499,7 @@
       "declared_license": {
         "classifiers": [
           "License :: OSI Approved :: Apache Software License"
-        ],
-        "license": ""
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -2613,13 +2529,6 @@
           "name": "Invenio collaboration, maintained by Philippe Ombredanne",
           "email": "info@inveniosoftware.org",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
@@ -2645,10 +2554,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "LGPL-3.0-or-later",
         "classifiers": [
           "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)"
-        ],
-        "license": "LGPL-3.0-or-later"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -2678,13 +2587,6 @@
           "name": "Invenio collaboration, maintained by Philippe Ombredanne",
           "email": "info@inveniosoftware.org",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
@@ -2710,10 +2612,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "LGPL-3.0-or-later",
         "classifiers": [
           "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)"
-        ],
-        "license": "LGPL-3.0-or-later"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -2774,10 +2676,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "BSD-3-Clause",
         "classifiers": [
           "License :: OSI Approved :: BSD License"
-        ],
-        "license": "BSD-3-Clause"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -2838,10 +2740,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "BSD-3-Clause",
         "classifiers": [
           "License :: OSI Approved :: BSD License"
-        ],
-        "license": "BSD-3-Clause"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -2871,16 +2773,18 @@
           "name": "nexB. Inc. and others",
           "email": "info@aboutcode.org",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "open source",
+        "license expression",
+        "license",
+        "spdx",
+        "boolean",
+        "parse expression",
+        "normalize expression",
+        "compare expression",
+        "licence",
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Programming Language :: Python :: 3",
@@ -2901,7 +2805,6 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
-        "classifiers": [],
         "license": "Apache-2.0"
       },
       "notice_text": null,
@@ -2932,16 +2835,18 @@
           "name": "nexB. Inc. and others",
           "email": "info@aboutcode.org",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "open source",
+        "license expression",
+        "license",
+        "spdx",
+        "boolean",
+        "parse expression",
+        "normalize expression",
+        "compare expression",
+        "licence",
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Programming Language :: Python :: 3",
@@ -2962,7 +2867,6 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
-        "classifiers": [],
         "license": "Apache-2.0"
       },
       "notice_text": null,
@@ -3024,10 +2928,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "BSD-3-Clause",
         "classifiers": [
           "License :: OSI Approved :: BSD License"
-        ],
-        "license": "BSD-3-Clause"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -3088,10 +2992,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "BSD-3-Clause",
         "classifiers": [
           "License :: OSI Approved :: BSD License"
-        ],
-        "license": "BSD-3-Clause"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -3121,13 +3025,6 @@
           "name": "See AUTHORS",
           "email": "charlie.clark@clark-consulting.eu",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
@@ -3154,10 +3051,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -3187,13 +3084,6 @@
           "name": "See AUTHORS",
           "email": "charlie.clark@clark-consulting.eu",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
@@ -3220,10 +3110,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -3251,18 +3141,15 @@
           "type": "person",
           "role": "author",
           "name": "the purl authors",
-          "email": "",
-          "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
+          "email": null,
           "url": null
         }
       ],
       "keywords": [
+        "package",
+        "url",
+        "package manager",
+        "package url",
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
@@ -3288,10 +3175,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -3319,18 +3206,15 @@
           "type": "person",
           "role": "author",
           "name": "the purl authors",
-          "email": "",
-          "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
+          "email": null,
           "url": null
         }
       ],
       "keywords": [
+        "package",
+        "url",
+        "package manager",
+        "package url",
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
@@ -3356,10 +3240,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -3388,13 +3272,6 @@
           "role": "author",
           "name": "Donald Stufft and individual contributors",
           "email": "donald@stufft.io",
-          "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
           "url": null
         }
       ],
@@ -3425,11 +3302,11 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "BSD-2-Clause or Apache-2.0",
         "classifiers": [
           "License :: OSI Approved :: Apache Software License",
           "License :: OSI Approved :: BSD License"
-        ],
-        "license": "BSD-2-Clause or Apache-2.0"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -3458,13 +3335,6 @@
           "role": "author",
           "name": "Donald Stufft and individual contributors",
           "email": "donald@stufft.io",
-          "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
           "url": null
         }
       ],
@@ -3495,11 +3365,11 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "BSD-2-Clause or Apache-2.0",
         "classifiers": [
           "License :: OSI Approved :: Apache Software License",
           "License :: OSI Approved :: BSD License"
-        ],
-        "license": "BSD-2-Clause or Apache-2.0"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -3529,16 +3399,10 @@
           "name": "The pip authors, nexB. Inc. and others",
           "email": "info@aboutcode.org",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "utilities pip requirements parser dependencies pypi",
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "Programming Language :: Python :: 3",
@@ -3559,7 +3423,6 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
-        "classifiers": [],
         "license": "MIT"
       },
       "notice_text": null,
@@ -3590,16 +3453,10 @@
           "name": "The pip authors, nexB. Inc. and others",
           "email": "info@aboutcode.org",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "utilities pip requirements parser dependencies pypi",
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "Programming Language :: Python :: 3",
@@ -3620,7 +3477,6 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
-        "classifiers": [],
         "license": "MIT"
       },
       "notice_text": null,
@@ -3651,16 +3507,10 @@
           "name": "Maintained by nexB, Inc. Authored by Tres Seaver, Agendaless Consulting",
           "email": "tseaver@agendaless.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "distribution sdist installed metadata",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3.10",
@@ -3686,10 +3536,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -3719,16 +3569,10 @@
           "name": "Maintained by nexB, Inc. Authored by Tres Seaver, Agendaless Consulting",
           "email": "tseaver@agendaless.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "distribution sdist installed metadata",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3.10",
@@ -3754,10 +3598,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -3784,15 +3628,8 @@
         {
           "type": "person",
           "role": "author",
-          "name": "",
+          "name": null,
           "email": "Paul McGuire <ptmcg.gm+pyparsing@gmail.com>",
-          "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
           "url": null
         }
       ],
@@ -3828,8 +3665,7 @@
       "declared_license": {
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": ""
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -3856,15 +3692,8 @@
         {
           "type": "person",
           "role": "author",
-          "name": "",
+          "name": null,
           "email": "Paul McGuire <ptmcg.gm+pyparsing@gmail.com>",
-          "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
           "url": null
         }
       ],
@@ -3900,8 +3729,7 @@
       "declared_license": {
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": ""
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -3930,13 +3758,6 @@
           "role": "author",
           "name": "Kirill Simonov",
           "email": "xi@resolvent.net",
-          "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
           "url": null
         }
       ],
@@ -3970,10 +3791,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -4002,13 +3823,6 @@
           "role": "author",
           "name": "Kirill Simonov",
           "email": "xi@resolvent.net",
-          "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
           "url": null
         }
       ],
@@ -4042,10 +3856,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -4074,13 +3888,6 @@
           "role": "author",
           "name": "Kenneth Reitz",
           "email": "me@kennethreitz.org",
-          "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
           "url": null
         }
       ],
@@ -4117,10 +3924,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "Apache 2.0",
         "classifiers": [
           "License :: OSI Approved :: Apache Software License"
-        ],
-        "license": "Apache 2.0"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -4149,13 +3956,6 @@
           "role": "author",
           "name": "Kenneth Reitz",
           "email": "me@kennethreitz.org",
-          "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
           "url": null
         }
       ],
@@ -4192,10 +3992,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "Apache 2.0",
         "classifiers": [
           "License :: OSI Approved :: Apache Software License"
-        ],
-        "license": "Apache 2.0"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -4225,16 +4025,11 @@
           "name": "Tzu-ping Chung",
           "email": "uranusjr@gmail.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "dependency",
+        "resolution",
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
@@ -4255,10 +4050,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "ISC License",
         "classifiers": [
           "License :: OSI Approved :: ISC License (ISCL)"
-        ],
-        "license": "ISC License"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -4288,16 +4083,11 @@
           "name": "Tzu-ping Chung",
           "email": "uranusjr@gmail.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "dependency",
+        "resolution",
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
@@ -4318,10 +4108,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "ISC License",
         "classifiers": [
           "License :: OSI Approved :: ISC License (ISCL)"
-        ],
-        "license": "ISC License"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -4351,16 +4141,10 @@
           "name": "nexB. Inc. and others",
           "email": "info@aboutcode.org",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "utilities yaml pyyaml block flow",
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Programming Language :: Python :: 3",
@@ -4381,7 +4165,6 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
-        "classifiers": [],
         "license": "Apache-2.0"
       },
       "notice_text": null,
@@ -4412,16 +4195,10 @@
           "name": "nexB. Inc. and others",
           "email": "info@aboutcode.org",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "utilities yaml pyyaml block flow",
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Programming Language :: Python :: 3",
@@ -4442,7 +4219,6 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
-        "classifiers": [],
         "license": "Apache-2.0"
       },
       "notice_text": null,
@@ -4470,19 +4246,19 @@
         {
           "type": "person",
           "role": "author",
-          "name": "",
+          "name": null,
           "email": "Isaac Muse <Isaac.Muse@gmail.com>",
-          "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
           "url": null
         }
       ],
       "keywords": [
+        "CSS",
+        "HTML",
+        "XML",
+        "filter",
+        "query",
+        "selector",
+        "soup",
         "Development Status :: 5 - Production/Stable",
         "Environment :: Console",
         "Intended Audience :: Developers",
@@ -4511,8 +4287,7 @@
       "declared_license": {
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": ""
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -4539,19 +4314,19 @@
         {
           "type": "person",
           "role": "author",
-          "name": "",
+          "name": null,
           "email": "Isaac Muse <Isaac.Muse@gmail.com>",
-          "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
           "url": null
         }
       ],
       "keywords": [
+        "CSS",
+        "HTML",
+        "XML",
+        "filter",
+        "query",
+        "selector",
+        "soup",
         "Development Status :: 5 - Production/Stable",
         "Environment :: Console",
         "Intended Audience :: Developers",
@@ -4580,8 +4355,7 @@
       "declared_license": {
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": ""
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -4610,13 +4384,6 @@
           "role": "author",
           "name": "Mikhail Korobov",
           "email": "kmike84@gmail.com",
-          "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
           "url": null
         }
       ],
@@ -4649,12 +4416,12 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "Artistic License",
         "classifiers": [
           "License :: OSI Approved :: Artistic License",
           "License :: OSI Approved :: GNU General Public License (GPL)",
           "License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)"
-        ],
-        "license": "Artistic License"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -4683,13 +4450,6 @@
           "role": "author",
           "name": "Mikhail Korobov",
           "email": "kmike84@gmail.com",
-          "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
           "url": null
         }
       ],
@@ -4722,12 +4482,12 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "Artistic License",
         "classifiers": [
           "License :: OSI Approved :: Artistic License",
           "License :: OSI Approved :: GNU General Public License (GPL)",
           "License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)"
-        ],
-        "license": "Artistic License"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -4756,13 +4516,6 @@
           "role": "author",
           "name": "William Pearson",
           "email": "uiri@xqz.ca",
-          "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
           "url": null
         }
       ],
@@ -4798,10 +4551,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -4830,13 +4583,6 @@
           "role": "author",
           "name": "William Pearson",
           "email": "uiri@xqz.ca",
-          "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
           "url": null
         }
       ],
@@ -4872,10 +4618,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -4902,19 +4648,24 @@
         {
           "type": "person",
           "role": "author",
-          "name": "",
+          "name": null,
           "email": "\"Guido van Rossum, Jukka Lehtosalo, \u0141ukasz Langa, Michael Lee\" <levkivskyi@gmail.com>",
-          "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
           "url": null
         }
       ],
       "keywords": [
+        "annotations",
+        "backport",
+        "checker",
+        "checking",
+        "function",
+        "hinting",
+        "hints",
+        "type",
+        "typechecking",
+        "typehinting",
+        "typehints",
+        "typing",
         "Development Status :: 3 - Alpha",
         "Environment :: Console",
         "Intended Audience :: Developers",
@@ -4943,8 +4694,7 @@
       "declared_license": {
         "classifiers": [
           "License :: OSI Approved :: Python Software Foundation License"
-        ],
-        "license": ""
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -4971,19 +4721,24 @@
         {
           "type": "person",
           "role": "author",
-          "name": "",
+          "name": null,
           "email": "\"Guido van Rossum, Jukka Lehtosalo, \u0141ukasz Langa, Michael Lee\" <levkivskyi@gmail.com>",
-          "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
           "url": null
         }
       ],
       "keywords": [
+        "annotations",
+        "backport",
+        "checker",
+        "checking",
+        "function",
+        "hinting",
+        "hints",
+        "type",
+        "typechecking",
+        "typehinting",
+        "typehints",
+        "typing",
         "Development Status :: 3 - Alpha",
         "Environment :: Console",
         "Intended Audience :: Developers",
@@ -5012,8 +4767,7 @@
       "declared_license": {
         "classifiers": [
           "License :: OSI Approved :: Python Software Foundation License"
-        ],
-        "license": ""
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -5043,16 +4797,10 @@
           "name": "Guido van Rossum, Jukka Lehtosalo, \u0141ukasz Langa, Ivan Levkivskyi",
           "email": "jukka.lehtosalo@iki.fi",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "typing function annotations type hints hinting checking checker typehints typehinting typechecking backport",
         "Development Status :: 5 - Production/Stable",
         "Environment :: Console",
         "Intended Audience :: Developers",
@@ -5075,10 +4823,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "PSF",
         "classifiers": [
           "License :: OSI Approved :: Python Software Foundation License"
-        ],
-        "license": "PSF"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -5108,16 +4856,10 @@
           "name": "Guido van Rossum, Jukka Lehtosalo, \u0141ukasz Langa, Ivan Levkivskyi",
           "email": "jukka.lehtosalo@iki.fi",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "typing function annotations type hints hinting checking checker typehints typehinting typechecking backport",
         "Development Status :: 5 - Production/Stable",
         "Environment :: Console",
         "Intended Audience :: Developers",
@@ -5140,10 +4882,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "PSF",
         "classifiers": [
           "License :: OSI Approved :: Python Software Foundation License"
-        ],
-        "license": "PSF"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -5173,16 +4915,10 @@
           "name": "Andrey Petrov",
           "email": "andrey.petrov@shazow.net",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "urllib httplib threadsafe filepost http https ssl pooling",
         "Environment :: Web Environment",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
@@ -5215,10 +4951,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -5248,16 +4984,10 @@
           "name": "Andrey Petrov",
           "email": "andrey.petrov@shazow.net",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "urllib httplib threadsafe filepost http https ssl pooling",
         "Environment :: Web Environment",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
@@ -5290,10 +5020,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -5323,13 +5053,6 @@
           "name": "Jason R. Coombs",
           "email": "jaraco@jaraco.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
@@ -5353,8 +5076,7 @@
       "declared_license": {
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": ""
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -5384,13 +5106,6 @@
           "name": "Jason R. Coombs",
           "email": "jaraco@jaraco.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
@@ -5414,8 +5129,7 @@
       "declared_license": {
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": ""
+        ]
       },
       "notice_text": null,
       "source_packages": [],

@@ -13,8 +13,10 @@ from typing import List
 
 from packageurl import PackageURL
 
-from _packagedcode import models
 from _packagedcode.models import PackageData
+from _packagedcode.pypi import get_declared_license
+from _packagedcode.pypi import get_keywords
+from _packagedcode.pypi import get_parties
 from python_inspector import utils_pypi
 from python_inspector.resolution import get_python_version_from_env_tag
 from python_inspector.utils_pypi import Environment
@@ -96,7 +98,6 @@ def get_pypi_data_from_purl(
         return []
     info = response.get("info") or {}
     homepage_url = info.get("home_page")
-    license = info.get("license")
     project_urls = info.get("project_urls") or {}
     code_view_url = get_pypi_codeview_url(project_urls)
     bug_tracking_url = get_pypi_bugtracker_url(project_urls)
@@ -125,14 +126,6 @@ def get_pypi_data_from_purl(
         if dist_url not in valid_distribution_urls:
             continue
         digests = url.get("digests") or {}
-        license_classifiers = []
-        keyword_classifiers = []
-        classifiers = info.get("classifiers") or []
-        for clsfr in classifiers:
-            if "License" in clsfr:
-                license_classifiers.append(clsfr)
-            else:
-                keyword_classifiers.append(clsfr)
 
         yield PackageData(
             primary_language="Python",
@@ -141,29 +134,19 @@ def get_pypi_data_from_purl(
             api_data_url=api_url,
             bug_tracking_url=bug_tracking_url,
             code_view_url=code_view_url,
-            declared_license={
-                "classifiers": license_classifiers,
-                "license": license,
-            },
+            declared_license=get_declared_license(info),
             download_url=dist_url,
             size=url.get("size"),
             md5=digests.get("md5") or url.get("md5_digest"),
             sha256=digests.get("sha256"),
             release_date=url.get("upload_time"),
-            keywords=keyword_classifiers,
-            parties=[
-                models.Party(
-                    type=models.party_person,
-                    name=info.get("author"),
-                    role="author",
-                    email=info.get("author_email"),
-                ),
-                models.Party(
-                    type=models.party_person,
-                    name=info.get("maintainer"),
-                    role="maintainer",
-                    email=info.get("maintainer_email"),
-                ),
-            ],
+            keywords=get_keywords(info),
+            parties=get_parties(
+                info,
+                author_key="author",
+                author_email_key="author_email",
+                maintainer_key="maintainer",
+                maintainer_email_key="maintainer_email",
+            ),
             **purl.to_dict(),
         ).to_dict()

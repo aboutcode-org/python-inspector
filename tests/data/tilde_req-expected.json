@@ -40,13 +40,6 @@
           "name": "Jason R. Coombs",
           "email": "jaraco@jaraco.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
@@ -70,8 +63,7 @@
       "declared_license": {
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": ""
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -101,13 +93,6 @@
           "name": "Jason R. Coombs",
           "email": "jaraco@jaraco.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
@@ -131,8 +116,7 @@
       "declared_license": {
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": ""
+        ]
       },
       "notice_text": null,
       "source_packages": [],

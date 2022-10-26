@@ -107,16 +107,13 @@
           "name": "Sebastian Kraemer",
           "email": "basti.kr@gmail.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "boolean expression",
+        "boolean algebra",
+        "logic",
+        "expression parser",
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
@@ -141,7 +138,6 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
-        "classifiers": [],
         "license": "BSD-2-Clause"
       },
       "notice_text": null,
@@ -172,16 +168,13 @@
           "name": "Sebastian Kraemer",
           "email": "basti.kr@gmail.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "boolean expression",
+        "boolean algebra",
+        "logic",
+        "expression parser",
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
@@ -206,7 +199,6 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
-        "classifiers": [],
         "license": "BSD-2-Clause"
       },
       "notice_text": null,
@@ -237,16 +229,18 @@
           "name": "nexB Inc.",
           "email": "info@nexb.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "license",
+        "spdx",
+        "license expression",
+        "open source",
+        "boolean",
+        "parse expression",
+        "normalize expression",
+        "compare expression",
+        "licence",
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
@@ -271,10 +265,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "apache-2.0",
         "classifiers": [
           "License :: OSI Approved :: Apache Software License"
-        ],
-        "license": "apache-2.0"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -304,16 +298,18 @@
           "name": "nexB Inc.",
           "email": "info@nexb.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
+        "license",
+        "spdx",
+        "license expression",
+        "open source",
+        "boolean",
+        "parse expression",
+        "normalize expression",
+        "compare expression",
+        "licence",
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Operating System :: OS Independent",
@@ -338,10 +334,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "apache-2.0",
         "classifiers": [
           "License :: OSI Approved :: Apache Software License"
-        ],
-        "license": "apache-2.0"
+        ]
       },
       "notice_text": null,
       "source_packages": [],

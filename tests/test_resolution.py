@@ -68,7 +68,7 @@ def test_get_resolved_dependencies_with_flask_and_python_310_windows():
     )
     assert plist == [
         "pkg:pypi/click@8.1.3",
-        "pkg:pypi/colorama@0.4.5",
+        "pkg:pypi/colorama@0.4.6",
         "pkg:pypi/flask@2.1.2",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",

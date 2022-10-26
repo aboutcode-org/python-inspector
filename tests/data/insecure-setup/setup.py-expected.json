@@ -154,13 +154,6 @@
           "name": "Gerhard Weis",
           "email": "gerhard.weis@proclos.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
@@ -193,10 +186,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "BSD",
         "classifiers": [
           "License :: OSI Approved :: BSD License"
-        ],
-        "license": "BSD"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -225,13 +218,6 @@
           "role": "author",
           "name": "Gerhard Weis",
           "email": "gerhard.weis@proclos.com",
-          "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
           "url": null
         }
       ],
@@ -265,10 +251,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "BSD",
         "classifiers": [
           "License :: OSI Approved :: BSD License"
-        ],
-        "license": "BSD"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -297,13 +283,6 @@
           "role": "author",
           "name": "Paul McGuire",
           "email": "ptmcg@users.sourceforge.net",
-          "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
           "url": null
         }
       ],
@@ -337,10 +316,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT License",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT License"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -369,13 +348,6 @@
           "role": "author",
           "name": "Paul McGuire",
           "email": "ptmcg@users.sourceforge.net",
-          "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
           "url": null
         }
       ],
@@ -409,10 +381,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT License",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT License"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -442,13 +414,6 @@
           "name": "Benjamin Peterson",
           "email": "benjamin@python.org",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
@@ -472,10 +437,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -505,13 +470,6 @@
           "name": "Benjamin Peterson",
           "email": "benjamin@python.org",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
@@ -535,10 +493,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "MIT",
         "classifiers": [
           "License :: OSI Approved :: MIT License"
-        ],
-        "license": "MIT"
+        ]
       },
       "notice_text": null,
       "source_packages": [],

@@ -264,13 +264,6 @@
           "name": "Armin Ronacher",
           "email": "armin.ronacher@active-4.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
@@ -292,8 +285,7 @@
       "declared_license": {
         "classifiers": [
           "License :: OSI Approved :: BSD License"
-        ],
-        "license": ""
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -323,13 +315,6 @@
           "name": "Armin Ronacher",
           "email": "armin.ronacher@active-4.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
       "keywords": [
@@ -351,8 +336,7 @@
       "declared_license": {
         "classifiers": [
           "License :: OSI Approved :: BSD License"
-        ],
-        "license": ""
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -422,10 +406,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "BSD",
         "classifiers": [
           "License :: OSI Approved :: BSD License"
-        ],
-        "license": "BSD"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -495,10 +479,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "BSD",
         "classifiers": [
           "License :: OSI Approved :: BSD License"
-        ],
-        "license": "BSD"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -528,13 +512,6 @@
           "name": "Armin Ronacher",
           "email": "armin.ronacher@active-4.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": null,
-          "email": null,
-          "url": null
         }
       ],
       "keywords": [
@@ -556,8 +533,7 @@
       "declared_license": {
         "classifiers": [
           "License :: OSI Approved :: BSD License"
-        ],
-        "license": "UNKNOWN"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -628,10 +604,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "BSD-3-Clause",
         "classifiers": [
           "License :: OSI Approved :: BSD License"
-        ],
-        "license": "BSD-3-Clause"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -702,10 +678,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "BSD-3-Clause",
         "classifiers": [
           "License :: OSI Approved :: BSD License"
-        ],
-        "license": "BSD-3-Clause"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -735,13 +711,6 @@
           "name": "Armin Ronacher",
           "email": "armin.ronacher@active-4.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": null,
-          "email": null,
-          "url": null
         }
       ],
       "keywords": [
@@ -768,10 +737,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "BSD",
         "classifiers": [
           "License :: OSI Approved :: BSD License"
-        ],
-        "license": "BSD"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -845,10 +814,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "BSD-3-Clause",
         "classifiers": [
           "License :: OSI Approved :: BSD License"
-        ],
-        "license": "BSD-3-Clause"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
@@ -922,10 +891,10 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
+        "license": "BSD-3-Clause",
         "classifiers": [
           "License :: OSI Approved :: BSD License"
-        ],
-        "license": "BSD-3-Clause"
+        ]
       },
       "notice_text": null,
       "source_packages": [],
