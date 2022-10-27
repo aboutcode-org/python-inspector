@@ -312,6 +312,20 @@ def test_cli_with_setup_py():
     )
 
 
+@pytest.mark.online
+def test_cli_with_setup_py_no_direct_dependencies():
+    setup_py_file = setup_test_env.get_test_loc("no-direct-dependencies-setup.py")
+    expected_file = setup_test_env.get_test_loc(
+        "no-direct-dependencies-setup.py-expected.json", must_exist=False
+    )
+    check_setup_py_resolution(
+        setup_py=setup_py_file,
+        expected_file=expected_file,
+        regen=REGEN_TEST_FIXTURES,
+        extra_options=["--python-version", "27"],
+    )
+
+
 def check_specs_resolution(
     specifier,
     expected_file,

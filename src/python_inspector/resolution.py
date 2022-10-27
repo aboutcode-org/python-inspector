@@ -719,4 +719,6 @@ def get_setup_dependencies(location, analyze_setup_py_insecurely=False, use_requ
         if analyze_setup_py_insecurely:
             yield from parse_reqs_from_setup_py_insecurely(setup_py=setup_py_location)
         else:
-            raise Exception("Unable to collect setup.py dependencies securely")
+            # We should not raise exception here as we may have a setup.py that does not
+            # have any dependencies. We should not fail in this case.
+            print(f"Unable to collect setup.py dependencies securely: {setup_py_location}")

@@ -192,7 +192,7 @@ def resolver_api(
                     setup_py_file_deps = insecure_setup_py_deps
                     direct_dependencies.extend(insecure_setup_py_deps)
                 else:
-                    raise Exception("Unable to collect setup.py dependencies securely")
+                    printer("Unable to collect setup.py dependencies securely")
 
         package_data.dependencies = setup_py_file_deps
         file_package_data = [package_data.to_dict()]
