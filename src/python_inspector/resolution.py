@@ -43,6 +43,9 @@ from python_inspector.setup_py_live_eval import iter_requirements
 from python_inspector.utils_pypi import Environment
 from python_inspector.utils_pypi import PypiSimpleRepository
 
+USERNAME = os.environ.get("VCIO_USERNAME", "")
+PASSWORD = os.environ.get("VCIO_PASSWORD", "")
+
 
 class Candidate(NamedTuple):
     """
@@ -188,11 +191,14 @@ def is_valid_version(
     requirements: Dict,
     identifier: str,
     bad_versions: List[Version],
+    vulnerable_versions: List[Version],
 ) -> bool:
     """
     Return True if the parsed_version is valid for the given identifier.
     """
     if parsed_version in bad_versions:
+        return False
+    if parsed_version in vulnerable_versions:
         return False
     if any(parsed_version not in r.specifier for r in requirements[identifier]):
         if all(not r.specifier for r in requirements[identifier]):
@@ -297,6 +303,7 @@ class PythonInputProvider(AbstractProvider):
         self.dependencies_by_purl = {}
         self.wheel_or_sdist_by_package = {}
         self.analyze_setup_py_insecurely = analyze_setup_py_insecurely
+        self.vulnerable_versions_by_package = {}
 
     def identify(self, requirement_or_candidate: Union[Candidate, Requirement]) -> str:
         """Given a requirement, return an identifier for it. Overridden."""
@@ -442,6 +449,31 @@ class PythonInputProvider(AbstractProvider):
         for dependency in self.dependencies_by_purl[str(purl)]:
             yield Requirement(dependency)
 
+    def get_vulnerable_versions(self, name):
+        """
+        Return a list of vulnerable versions for a package.
+        """
+        if name not in self.vulnerable_versions_by_package:
+            results = []
+            self.vulnerable_versions_by_package[name] = []
+            resp = requests.get(
+                f"https://public.vulnerablecode.io/api/packages?name={name}&type=pypi",
+                auth=(USERNAME, PASSWORD),
+            ).json()
+            results.extend(resp["results"])
+            next = resp["next"]
+            while next:
+                nr = requests.get(
+                    next,
+                    auth=(USERNAME, PASSWORD),
+                ).json()
+                results.extend(nr["results"])
+                next = nr["next"]
+            for package in results:
+                if package["affected_by_vulnerabilities"]:
+                    self.vulnerable_versions_by_package[name].append(Version(package["version"]))
+        return self.vulnerable_versions_by_package[name]
+
     def get_candidates(
         self,
         all_versions: List[str],
@@ -462,6 +494,7 @@ class PythonInputProvider(AbstractProvider):
                 requirements=requirements,
                 identifier=identifier,
                 bad_versions=bad_versions,
+                vulnerable_versions=self.get_vulnerable_versions(name),
             ):
                 valid_versions.append(parsed_version)
         if not all(version.is_prerelease for version in valid_versions):
