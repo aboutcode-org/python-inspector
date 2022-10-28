@@ -2,7 +2,7 @@
   "headers": {
     "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
-    "tool_version": "0.8.4",
+    "tool_version": "0.8.5",
     "options": [
       "--index-url https://pypi.org/simple",
       "--python-version 27",
@@ -98,7 +98,7 @@
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "\n\nThis library helps you deal with boolean expressions and algebra with variables\nand the boolean functions AND, OR, NOT.\n\nYou can parse expressions from strings and simplify and compare expressions.\nYou can also easily create your custom algreba and mini DSL and create custom\ntokenizers to handle custom expressions.\n\nFor extensive documentation look either into the docs directory or view it online, at\nhttps://booleanpy.readthedocs.org/en/latest/\n\nhttps://github.com/bastikr/boolean.py\n\nCopyright (c) 2009-2020 Sebastian Kraemer, basti.kr@gmail.com and others\nSPDX-License-Identifier: BSD-2-Clause\n\n\n",
+      "description": "Define boolean algebras, create and parse boolean expressions and create custom boolean DSL.\nThis library helps you deal with boolean expressions and algebra with variables\nand the boolean functions AND, OR, NOT.\n\nYou can parse expressions from strings and simplify and compare expressions.\nYou can also easily create your custom algreba and mini DSL and create custom\ntokenizers to handle custom expressions.\n\nFor extensive documentation look either into the docs directory or view it online, at\nhttps://booleanpy.readthedocs.org/en/latest/\n\nhttps://github.com/bastikr/boolean.py\n\nCopyright (c) 2009-2020 Sebastian Kraemer, basti.kr@gmail.com and others\nSPDX-License-Identifier: BSD-2-Clause",
       "release_date": "2020-06-10T22:06:05",
       "parties": [
         {
@@ -107,16 +107,24 @@
           "name": "Sebastian Kraemer",
           "email": "basti.kr@gmail.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
-      "keywords": "boolean expression,boolean algebra,logic,expression parser",
+      "keywords": [
+        "boolean expression",
+        "boolean algebra",
+        "logic",
+        "expression parser",
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3",
+        "Topic :: Scientific/Engineering :: Mathematics",
+        "Topic :: Software Development :: Compilers",
+        "Topic :: Software Development :: Libraries",
+        "Topic :: Utilities"
+      ],
       "homepage_url": "https://github.com/bastikr/boolean.py",
       "download_url": "https://files.pythonhosted.org/packages/eb/5b/f82983127b1a1a4db83ee290e00a94a2b08c566fa6c58466e82ed7b0a76f/boolean.py-3.8-py2.py3-none-any.whl",
       "size": 23771,
@@ -129,7 +137,9 @@
       "vcs_url": null,
       "copyright": null,
       "license_expression": null,
-      "declared_license": "BSD-2-Clause",
+      "declared_license": {
+        "license": "BSD-2-Clause"
+      },
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
@@ -149,7 +159,7 @@
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "\n\nThis library helps you deal with boolean expressions and algebra with variables\nand the boolean functions AND, OR, NOT.\n\nYou can parse expressions from strings and simplify and compare expressions.\nYou can also easily create your custom algreba and mini DSL and create custom\ntokenizers to handle custom expressions.\n\nFor extensive documentation look either into the docs directory or view it online, at\nhttps://booleanpy.readthedocs.org/en/latest/\n\nhttps://github.com/bastikr/boolean.py\n\nCopyright (c) 2009-2020 Sebastian Kraemer, basti.kr@gmail.com and others\nSPDX-License-Identifier: BSD-2-Clause\n\n\n",
+      "description": "Define boolean algebras, create and parse boolean expressions and create custom boolean DSL.\nThis library helps you deal with boolean expressions and algebra with variables\nand the boolean functions AND, OR, NOT.\n\nYou can parse expressions from strings and simplify and compare expressions.\nYou can also easily create your custom algreba and mini DSL and create custom\ntokenizers to handle custom expressions.\n\nFor extensive documentation look either into the docs directory or view it online, at\nhttps://booleanpy.readthedocs.org/en/latest/\n\nhttps://github.com/bastikr/boolean.py\n\nCopyright (c) 2009-2020 Sebastian Kraemer, basti.kr@gmail.com and others\nSPDX-License-Identifier: BSD-2-Clause",
       "release_date": "2020-06-10T22:06:07",
       "parties": [
         {
@@ -158,16 +168,24 @@
           "name": "Sebastian Kraemer",
           "email": "basti.kr@gmail.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
-      "keywords": "boolean expression,boolean algebra,logic,expression parser",
+      "keywords": [
+        "boolean expression",
+        "boolean algebra",
+        "logic",
+        "expression parser",
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3",
+        "Topic :: Scientific/Engineering :: Mathematics",
+        "Topic :: Software Development :: Compilers",
+        "Topic :: Software Development :: Libraries",
+        "Topic :: Utilities"
+      ],
       "homepage_url": "https://github.com/bastikr/boolean.py",
       "download_url": "https://files.pythonhosted.org/packages/a1/eb/b37ef5647243ade8308f7bb46b1a45e6204790c163cbd8cf6df990d5c1c1/boolean.py-3.8.tar.gz",
       "size": 32196,
@@ -180,7 +198,9 @@
       "vcs_url": null,
       "copyright": null,
       "license_expression": null,
-      "declared_license": "BSD-2-Clause",
+      "declared_license": {
+        "license": "BSD-2-Clause"
+      },
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
@@ -200,7 +220,7 @@
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "license-expression is small utility library to parse, compare, simplify and normalize license expressions (such as SPDX license expressions) using boolean logic.\n\n\n",
+      "description": "license-expression is small utility library to parse, compare, simplify and normalize license expressions (such as SPDX license expressions) using boolean logic.",
       "release_date": "2019-10-16T17:48:45",
       "parties": [
         {
@@ -209,16 +229,29 @@
           "name": "nexB Inc.",
           "email": "info@nexb.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
-      "keywords": "license,spdx,license expression,open source,boolean,parse expression,normalize expression,compare expression,licence",
+      "keywords": [
+        "license",
+        "spdx",
+        "license expression",
+        "open source",
+        "boolean",
+        "parse expression",
+        "normalize expression",
+        "compare expression",
+        "licence",
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.4",
+        "Programming Language :: Python :: 3.5",
+        "Topic :: Utilities"
+      ],
       "homepage_url": "https://github.com/nexB/license-expression",
       "download_url": "https://files.pythonhosted.org/packages/12/7a/dd02b8ac8f0cd81557012b8f249ba4d0d32fe8f98e8d951ebc882187fd92/license_expression-1.0-py2.py3-none-any.whl",
       "size": 20066,
@@ -231,7 +264,12 @@
       "vcs_url": null,
       "copyright": null,
       "license_expression": null,
-      "declared_license": "apache-2.0",
+      "declared_license": {
+        "license": "apache-2.0",
+        "classifiers": [
+          "License :: OSI Approved :: Apache Software License"
+        ]
+      },
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
@@ -251,7 +289,7 @@
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "license-expression is small utility library to parse, compare, simplify and normalize license expressions (such as SPDX license expressions) using boolean logic.\n\n\n",
+      "description": "license-expression is small utility library to parse, compare, simplify and normalize license expressions (such as SPDX license expressions) using boolean logic.",
       "release_date": "2019-10-16T17:48:47",
       "parties": [
         {
@@ -260,16 +298,29 @@
           "name": "nexB Inc.",
           "email": "info@nexb.com",
           "url": null
-        },
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "",
-          "email": "",
-          "url": null
         }
       ],
-      "keywords": "license,spdx,license expression,open source,boolean,parse expression,normalize expression,compare expression,licence",
+      "keywords": [
+        "license",
+        "spdx",
+        "license expression",
+        "open source",
+        "boolean",
+        "parse expression",
+        "normalize expression",
+        "compare expression",
+        "licence",
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.4",
+        "Programming Language :: Python :: 3.5",
+        "Topic :: Utilities"
+      ],
       "homepage_url": "https://github.com/nexB/license-expression",
       "download_url": "https://files.pythonhosted.org/packages/27/71/a8d8d78f7866a75f6a940cc53d1557a5edf1ae4a281fe8797cf36077105d/license-expression-1.0.tar.gz",
       "size": 53559,
@@ -282,7 +333,12 @@
       "vcs_url": null,
       "copyright": null,
       "license_expression": null,
-      "declared_license": "apache-2.0",
+      "declared_license": {
+        "license": "apache-2.0",
+        "classifiers": [
+          "License :: OSI Approved :: Apache Software License"
+        ]
+      },
       "notice_text": null,
       "source_packages": [],
       "file_references": [],

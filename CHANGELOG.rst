@@ -2,6 +2,11 @@ Changelog
 =========
 
 
+v0.8.5
+------
+- Adapt python-inspector output according to SCTK output.
+
+
 v0.8.4
 ------
 

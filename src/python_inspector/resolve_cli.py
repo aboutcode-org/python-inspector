@@ -36,7 +36,7 @@ from python_inspector.resolution import parse_deps_from_setup_py_insecurely
 
 TRACE = False
 
-__version__ = "0.8.4"
+__version__ = "0.8.5"
 
 DEFAULT_PYTHON_VERSION = "38"
 PYPI_SIMPLE_URL = "https://pypi.org/simple"
@@ -424,7 +424,12 @@ def resolve_dependencies(
 
     for package in purls:
         packages.extend(
-            list(get_pypi_data_from_purl(package, repos=repos, environment=environment)),
+            [
+                pkg.to_dict()
+                for pkg in list(
+                    get_pypi_data_from_purl(package, repos=repos, environment=environment)
+                )
+            ],
         )
 
     output = dict(
