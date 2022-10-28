@@ -14,7 +14,7 @@ from typing import Dict
 import click
 
 from python_inspector import utils_pypi
-from python_inspector.api import resolver_api
+from python_inspector.api import resolve_dependencies as resolver_api
 from python_inspector.cli_utils import FileOptionType
 from python_inspector.utils import write_output_in_file
 

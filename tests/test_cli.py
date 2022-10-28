@@ -322,7 +322,7 @@ def test_cli_with_setup_py_no_direct_dependencies():
         setup_py=setup_py_file,
         expected_file=expected_file,
         regen=REGEN_TEST_FIXTURES,
-        extra_options=["--python-version", "27"],
+        extra_options=["--python-version", "27", "--analyze-setup-py-insecurely"],
     )
 
 

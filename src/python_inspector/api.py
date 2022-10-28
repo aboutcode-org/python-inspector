@@ -15,6 +15,7 @@ from typing import List
 from typing import NamedTuple
 from typing import Sequence
 
+from packageurl import PackageURL
 from packaging.requirements import Requirement
 from resolvelib import BaseReporter
 from resolvelib import Resolver
@@ -33,12 +34,10 @@ from python_inspector.package_data import get_pypi_data_from_purl
 from python_inspector.resolution import PythonInputProvider
 from python_inspector.resolution import format_pdt_tree
 from python_inspector.resolution import format_resolution
-from python_inspector.resolution import get_deps_from_distribution
 from python_inspector.resolution import get_environment_marker_from_environment
 from python_inspector.resolution import get_package_list
 from python_inspector.resolution import get_python_version_from_env_tag
-from python_inspector.resolution import parse_deps_from_setup_py_insecurely
-from python_inspector.utils import contain_string
+from python_inspector.resolution import get_requirements_from_python_manifest
 from python_inspector.utils_pypi import PYPI_SIMPLE_URL
 from python_inspector.utils_pypi import Environment
 
@@ -64,7 +63,7 @@ class Resolution(NamedTuple):
         }
 
 
-def resolver_api(
+def resolve_dependencies(
     requirement_files=tuple(),
     setup_py_file=None,
     specifiers=tuple(),
@@ -165,34 +164,14 @@ def resolver_api(
                 direct_dependencies.append(dep)
 
         if not package_data.dependencies:
-            has_deps = False
-            if contain_string(string="requirements.txt", files=[setup_py_file]):
-                # Look in requirements file if and only if thy are refered in setup.py or setup.cfg
-                # And no deps have been yielded by requirements file.
-
-                location = os.path.dirname(setup_py_file)
-                requirement_location = os.path.join(
-                    location,
-                    "requirements.txt",
-                )
-                deps = get_deps_from_distribution(
-                    handler=PipRequirementsFileHandler,
-                    location=requirement_location,
-                )
-                if deps:
-                    setup_py_file_deps = list(deps)
-                    has_deps = True
-                    direct_dependencies.extend(deps)
-
-            if not has_deps and contain_string(string="_require", files=[setup_py_file]):
-                if analyze_setup_py_insecurely:
-                    insecure_setup_py_deps = list(
-                        parse_deps_from_setup_py_insecurely(setup_py=setup_py_file)
-                    )
-                    setup_py_file_deps = insecure_setup_py_deps
-                    direct_dependencies.extend(insecure_setup_py_deps)
-                else:
-                    printer("Unable to collect setup.py dependencies securely")
+            reqs = get_requirements_from_python_manifest(
+                sdist_location=os.path.dirname(setup_py_file),
+                setup_py_location=setup_py_file,
+                files=[setup_py_file],
+                analyze_setup_py_insecurely=analyze_setup_py_insecurely,
+            )
+            setup_py_file_deps = list(get_dependent_packages_from_reqs(reqs))
+            direct_dependencies.extend(setup_py_file_deps)
 
         package_data.dependencies = setup_py_file_deps
         file_package_data = [package_data.to_dict()]
@@ -267,7 +246,12 @@ def resolver_api(
 
     for package in purls:
         packages.extend(
-            list(get_pypi_data_from_purl(package, repos=repos, environment=environment)),
+            [
+                pkg.to_dict()
+                for pkg in list(
+                    get_pypi_data_from_purl(package, repos=repos, environment=environment)
+                )
+            ],
         )
 
     if verbose:
@@ -371,3 +355,18 @@ def get_requirements_from_direct_dependencies(
         else:
             if req.marker.evaluate(environment_marker):
                 yield req
+
+
+def get_dependent_packages_from_reqs(requirements: List[Requirement]):
+    for req in requirements:
+        yield DependentPackage(
+            purl=str(
+                PackageURL(
+                    type="pypi",
+                    name=req.name,
+                )
+            ),
+            extracted_requirement=str(req),
+            scope="install",
+            is_runtime=False,
+        )

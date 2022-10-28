@@ -9,6 +9,7 @@ v0.9.0
 - Add support for setuptools.setup in live evaluation.
 - Do not fail if no direct dependencies are provided.
 
+
 v0.8.5
 ------
 

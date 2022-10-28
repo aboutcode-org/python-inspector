@@ -253,6 +253,59 @@ def remove_extras(identifier: str) -> str:
     return name
 
 
+def get_reqs_from_requirements_file_in_sdist(sdist_location: str, files: str) -> List[Requirement]:
+    """
+    Return a list of parsed requirements from the ``sdist_location`` sdist location
+    """
+    if contain_string(string="requirements.txt", files=files):
+        requirement_location = os.path.join(
+            sdist_location,
+            "requirements.txt",
+        )
+        yield from get_requirements_from_distribution(
+            handler=PipRequirementsFileHandler,
+            location=requirement_location,
+        )
+
+
+def get_reqs_insecurely(setup_py_location):
+    """
+    Return a list of Requirement(s) from  ``setup_py_location`` setup.py file location
+    """
+    yield from parse_reqs_from_setup_py_insecurely(setup_py=setup_py_location)
+
+
+def get_requirements_from_python_manifest(
+    sdist_location: str, setup_py_location: str, files: List, analyze_setup_py_insecurely: bool
+) -> List[Requirement]:
+    """
+    Return a list of parsed requirements from the ``sdist_location`` sdist location
+    """
+    # Look in requirements file if and only if thy are refered in setup.py or setup.cfg
+    # And no deps have been yielded by requirements file.
+    requirements = list(
+        get_reqs_from_requirements_file_in_sdist(
+            files=files,
+            sdist_location=sdist_location,
+        )
+    )
+    if requirements:
+        yield from requirements
+
+    elif contain_string(string="_require", files=[setup_py_location]):
+        if analyze_setup_py_insecurely:
+            yield from get_reqs_insecurely(
+                setup_py_location=setup_py_location,
+            )
+
+        else:
+            # We should not raise exception here as we may have a setup.py that does not
+            # have any dependencies. We should not fail in this case.
+            raise Exception(
+                f"Unable to collect setup.py dependencies securely: {setup_py_location}"
+            )
+
+
 DEFAULT_ENVIRONMENT = utils_pypi.Environment.from_pyver_and_os(
     python_version="38", operating_system="linux"
 )
@@ -376,12 +429,12 @@ class PythonInputProvider(AbstractProvider):
         if wheels:
             for wheel in wheels:
                 wheel_location = os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, wheel)
-                deps = get_requirements_from_distribution(
+                requirements = get_requirements_from_distribution(
                     handler=PypiWheelHandler,
                     location=wheel_location,
                 )
-                if deps:
-                    yield from deps
+                if requirements:
+                    yield from requirements
                 # We are only looking at the first wheel and not other wheels
                 break
 
@@ -391,10 +444,35 @@ class PythonInputProvider(AbstractProvider):
             )
             if not sdist_location:
                 return
-            yield from get_setup_dependencies(
-                location=sdist_location,
-                analyze_setup_py_insecurely=self.analyze_setup_py_insecurely,
+
+            setup_py_location = os.path.join(
+                sdist_location,
+                "setup.py",
             )
+            setup_cfg_location = os.path.join(
+                sdist_location,
+                "setup.cfg",
+            )
+
+            requirements = list(
+                get_setup_requirements(
+                    sdist_location=sdist_location,
+                    setup_py_location=setup_py_location,
+                    setup_cfg_location=setup_cfg_location,
+                )
+            )
+            if requirements:
+                yield from requirements
+            else:
+                # Look in requirements file if and only if thy are refered in setup.py or setup.cfg
+                # And no deps have been yielded by requirements file
+
+                yield from get_requirements_from_python_manifest(
+                    sdist_location=sdist_location,
+                    setup_py_location=setup_py_location,
+                    files=[setup_cfg_location, setup_py_location],
+                    analyze_setup_py_insecurely=self.analyze_setup_py_insecurely,
+                )
 
     def get_requirements_for_package_from_pypi_json_api(
         self, purl: PackageURL
@@ -654,7 +732,7 @@ def get_package_list(results):
     return list(sorted(packages))
 
 
-def get_setup_dependencies(location, analyze_setup_py_insecurely=False, use_requirements=True):
+def get_setup_requirements(sdist_location: str, setup_py_location: str, setup_cfg_location: str):
     """
     Yield Requirement(s) from Pypi in the ``location`` directory that contains
     a setup.py and/or a setup.cfg and optionally a requirements.txt file if
@@ -663,17 +741,8 @@ def get_setup_dependencies(location, analyze_setup_py_insecurely=False, use_requ
     ``analyze_setup_py_insecurely`` is True.
     """
 
-    setup_py_location = os.path.join(
-        location,
-        "setup.py",
-    )
-    setup_cfg_location = os.path.join(
-        location,
-        "setup.cfg",
-    )
-
     if not os.path.exists(setup_py_location) and not os.path.exists(setup_cfg_location):
-        raise Exception(f"No setup.py or setup.cfg found in pypi sdist {location}")
+        raise Exception(f"No setup.py or setup.cfg found in pypi sdist {sdist_location}")
 
     # Some commonon packages like flask may have some dependencies in setup.cfg
     # and some dependencies in setup.py. We are going to check both.
@@ -682,43 +751,9 @@ def get_setup_dependencies(location, analyze_setup_py_insecurely=False, use_requ
         SetupCfgHandler: setup_cfg_location,
     }
 
-    # Set to True if we found any dependencies in setup.py or setup.cfg
-    has_deps = False
-
     for handler, location in location_by_sdist_parser.items():
-        deps = get_requirements_from_distribution(
+        reqs = get_requirements_from_distribution(
             handler=handler,
             location=location,
         )
-        if deps:
-            has_deps = True
-            yield from deps
-
-    if (
-        use_requirements
-        and not has_deps
-        and contain_string(string="requirements.txt", files=[setup_py_location, setup_cfg_location])
-    ):
-        # Look in requirements file if and only if thy are refered in setup.py or setup.cfg
-        # And no deps have been yielded by requirements file.
-        requirement_location = os.path.join(
-            location,
-            "requirements.txt",
-        )
-        deps = get_requirements_from_distribution(
-            handler=PipRequirementsFileHandler,
-            location=requirement_location,
-        )
-        if deps:
-            has_deps = True
-            yield from deps
-
-    if not has_deps and contain_string(
-        string="_require", files=[setup_py_location, setup_cfg_location]
-    ):
-        if analyze_setup_py_insecurely:
-            yield from parse_reqs_from_setup_py_insecurely(setup_py=setup_py_location)
-        else:
-            # We should not raise exception here as we may have a setup.py that does not
-            # have any dependencies. We should not fail in this case.
-            print(f"Unable to collect setup.py dependencies securely: {setup_py_location}")
+        yield from reqs
