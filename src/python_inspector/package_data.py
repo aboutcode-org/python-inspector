@@ -15,12 +15,91 @@ from packageurl import PackageURL
 
 from _packagedcode.models import PackageData
 from _packagedcode.pypi import get_declared_license
+from _packagedcode.pypi import get_description
 from _packagedcode.pypi import get_keywords
 from _packagedcode.pypi import get_parties
 from python_inspector import utils_pypi
 from python_inspector.resolution import get_python_version_from_env_tag
 from python_inspector.utils_pypi import Environment
 from python_inspector.utils_pypi import PypiSimpleRepository
+
+
+def get_pypi_data_from_purl(
+    purl: str, environment: Environment, repos: List[PypiSimpleRepository]
+) -> PackageData:
+    """
+    Generate `Package` object from the `purl` string of pypi type
+
+    ``purl`` is a package-url of pypi type
+    ``environment`` is a `Environment` object defaulting Python version 3.8 and linux OS
+    ``repos`` is a list of `PypiSimpleRepository` objects
+    """
+    purl = PackageURL.from_string(purl)
+    name = purl.name
+    version = purl.version
+    if not version:
+        raise Exception("Version is not specified in the purl")
+    base_path = "https://pypi.org/pypi"
+    api_url = f"{base_path}/{name}/{version}/json"
+    from python_inspector.resolution import get_response
+
+    response = get_response(api_url)
+    if not response:
+        return []
+    info = response.get("info") or {}
+    homepage_url = info.get("home_page")
+    project_urls = info.get("project_urls") or {}
+    code_view_url = get_pypi_codeview_url(project_urls)
+    bug_tracking_url = get_pypi_bugtracker_url(project_urls)
+    python_version = get_python_version_from_env_tag(python_version=environment.python_version)
+    valid_distribution_urls = []
+    valid_distribution_urls.extend(
+        list(
+            get_wheel_download_urls(
+                purl=purl,
+                repos=repos,
+                environment=environment,
+                python_version=python_version,
+            )
+        )
+    )
+    valid_distribution_urls.append(
+        get_sdist_download_url(
+            purl=purl,
+            repos=repos,
+            python_version=python_version,
+        )
+    )
+    urls = response.get("urls") or []
+    for url in urls:
+        dist_url = url.get("url")
+        if dist_url not in valid_distribution_urls:
+            continue
+        digests = url.get("digests") or {}
+
+        yield PackageData(
+            primary_language="Python",
+            description=get_description(info),
+            homepage_url=homepage_url,
+            api_data_url=api_url,
+            bug_tracking_url=bug_tracking_url,
+            code_view_url=code_view_url,
+            declared_license=get_declared_license(info),
+            download_url=dist_url,
+            size=url.get("size"),
+            md5=digests.get("md5") or url.get("md5_digest"),
+            sha256=digests.get("sha256"),
+            release_date=url.get("upload_time"),
+            keywords=get_keywords(info),
+            parties=get_parties(
+                info,
+                author_key="author",
+                author_email_key="author_email",
+                maintainer_key="maintainer",
+                maintainer_email_key="maintainer_email",
+            ),
+            **purl.to_dict(),
+        )
 
 
 def get_pypi_bugtracker_url(project_urls):
@@ -76,77 +155,3 @@ def get_sdist_download_url(
         )
         if sdist:
             return sdist.download_url
-
-
-def get_pypi_data_from_purl(
-    purl: str, environment: Environment, repos: List[PypiSimpleRepository]
-) -> PackageData:
-    """
-    Generate `Package` object from the `purl` string of npm type
-    """
-    purl = PackageURL.from_string(purl)
-    name = purl.name
-    version = purl.version
-    if not version:
-        raise Exception("Version is not specified in the purl")
-    base_path = "https://pypi.org/pypi"
-    api_url = f"{base_path}/{name}/{version}/json"
-    from python_inspector.resolution import get_response
-
-    response = get_response(api_url)
-    if not response:
-        return []
-    info = response.get("info") or {}
-    homepage_url = info.get("home_page")
-    project_urls = info.get("project_urls") or {}
-    code_view_url = get_pypi_codeview_url(project_urls)
-    bug_tracking_url = get_pypi_bugtracker_url(project_urls)
-    python_version = get_python_version_from_env_tag(python_version=environment.python_version)
-    valid_distribution_urls = []
-    valid_distribution_urls.extend(
-        list(
-            get_wheel_download_urls(
-                purl=purl,
-                repos=repos,
-                environment=environment,
-                python_version=python_version,
-            )
-        )
-    )
-    valid_distribution_urls.append(
-        get_sdist_download_url(
-            purl=purl,
-            repos=repos,
-            python_version=python_version,
-        )
-    )
-    urls = response.get("urls") or []
-    for url in urls:
-        dist_url = url.get("url")
-        if dist_url not in valid_distribution_urls:
-            continue
-        digests = url.get("digests") or {}
-
-        yield PackageData(
-            primary_language="Python",
-            description=info.get("summary") or info.get("description"),
-            homepage_url=homepage_url,
-            api_data_url=api_url,
-            bug_tracking_url=bug_tracking_url,
-            code_view_url=code_view_url,
-            declared_license=get_declared_license(info),
-            download_url=dist_url,
-            size=url.get("size"),
-            md5=digests.get("md5") or url.get("md5_digest"),
-            sha256=digests.get("sha256"),
-            release_date=url.get("upload_time"),
-            keywords=get_keywords(info),
-            parties=get_parties(
-                info,
-                author_key="author",
-                author_email_key="author_email",
-                maintainer_key="maintainer",
-                maintainer_email_key="maintainer_email",
-            ),
-            **purl.to_dict(),
-        ).to_dict()

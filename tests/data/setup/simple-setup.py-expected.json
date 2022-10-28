@@ -2,7 +2,7 @@
   "headers": {
     "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
-    "tool_version": "0.8.4",
+    "tool_version": "0.8.5",
     "options": [
       "--index-url https://pypi.org/simple",
       "--python-version 27",
@@ -98,7 +98,7 @@
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "Define boolean algebras, create and parse boolean expressions and create custom boolean DSL.",
+      "description": "Define boolean algebras, create and parse boolean expressions and create custom boolean DSL.\nThis library helps you deal with boolean expressions and algebra with variables\nand the boolean functions AND, OR, NOT.\n\nYou can parse expressions from strings and simplify and compare expressions.\nYou can also easily create your custom algreba and mini DSL and create custom\ntokenizers to handle custom expressions.\n\nFor extensive documentation look either into the docs directory or view it online, at\nhttps://booleanpy.readthedocs.org/en/latest/\n\nhttps://github.com/bastikr/boolean.py\n\nCopyright (c) 2009-2020 Sebastian Kraemer, basti.kr@gmail.com and others\nSPDX-License-Identifier: BSD-2-Clause",
       "release_date": "2020-06-10T22:06:05",
       "parties": [
         {
@@ -159,7 +159,7 @@
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "Define boolean algebras, create and parse boolean expressions and create custom boolean DSL.",
+      "description": "Define boolean algebras, create and parse boolean expressions and create custom boolean DSL.\nThis library helps you deal with boolean expressions and algebra with variables\nand the boolean functions AND, OR, NOT.\n\nYou can parse expressions from strings and simplify and compare expressions.\nYou can also easily create your custom algreba and mini DSL and create custom\ntokenizers to handle custom expressions.\n\nFor extensive documentation look either into the docs directory or view it online, at\nhttps://booleanpy.readthedocs.org/en/latest/\n\nhttps://github.com/bastikr/boolean.py\n\nCopyright (c) 2009-2020 Sebastian Kraemer, basti.kr@gmail.com and others\nSPDX-License-Identifier: BSD-2-Clause",
       "release_date": "2020-06-10T22:06:07",
       "parties": [
         {
