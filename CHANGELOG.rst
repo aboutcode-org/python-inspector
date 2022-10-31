@@ -2,8 +2,17 @@ Changelog
 =========
 
 
+v0.9.0
+------
+
+- Add API function for using cleanly as a library.
+- Add support for setuptools.setup in live evaluation.
+- Do not fail if no direct dependencies are provided.
+
+
 v0.8.5
 ------
+
 - Adapt python-inspector output according to SCTK output.
 
 

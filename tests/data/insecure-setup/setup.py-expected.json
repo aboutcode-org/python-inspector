@@ -2,7 +2,7 @@
   "headers": {
     "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
-    "tool_version": "0.8.5",
+    "tool_version": "0.9.0",
     "options": [
       "--index-url https://pypi.org/simple",
       "--python-version 27",
@@ -118,22 +118,6 @@
           "purl": "pkg:pypi/rdflib@5.0.0"
         }
       ]
-    }
-  ],
-  "resolved_dependencies_graph": [
-    {
-      "package": "pkg:pypi/isodate@0.6.1",
-      "dependencies": [
-        "pkg:pypi/six@1.16.0"
-      ]
-    },
-    {
-      "package": "pkg:pypi/pyparsing@2.4.7",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/six@1.16.0",
-      "dependencies": []
     }
   ],
   "packages": [
@@ -508,6 +492,22 @@
       "api_data_url": "https://pypi.org/pypi/six/1.16.0/json",
       "datasource_id": null,
       "purl": "pkg:pypi/six@1.16.0"
+    }
+  ],
+  "resolved_dependencies_graph": [
+    {
+      "package": "pkg:pypi/isodate@0.6.1",
+      "dependencies": [
+        "pkg:pypi/six@1.16.0"
+      ]
+    },
+    {
+      "package": "pkg:pypi/pyparsing@2.4.7",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/six@1.16.0",
+      "dependencies": []
     }
   ]
 }

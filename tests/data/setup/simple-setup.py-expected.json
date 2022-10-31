@@ -2,7 +2,7 @@
   "headers": {
     "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
-    "tool_version": "0.8.5",
+    "tool_version": "0.9.0",
     "options": [
       "--index-url https://pypi.org/simple",
       "--python-version 27",
@@ -74,18 +74,6 @@
           "datasource_id": "pypi_setup_py",
           "purl": "pkg:pypi/example-app@2.4.0"
         }
-      ]
-    }
-  ],
-  "resolved_dependencies_graph": [
-    {
-      "package": "pkg:pypi/boolean-py@3.8",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/license-expression@1.0",
-      "dependencies": [
-        "pkg:pypi/boolean-py@3.8"
       ]
     }
   ],
@@ -349,6 +337,18 @@
       "api_data_url": "https://pypi.org/pypi/license-expression/1.0/json",
       "datasource_id": null,
       "purl": "pkg:pypi/license-expression@1.0"
+    }
+  ],
+  "resolved_dependencies_graph": [
+    {
+      "package": "pkg:pypi/boolean-py@3.8",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/license-expression@1.0",
+      "dependencies": [
+        "pkg:pypi/boolean-py@3.8"
+      ]
     }
   ]
 }

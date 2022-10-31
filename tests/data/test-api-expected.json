@@ -1,19 +1,4 @@
 {
-  "headers": {
-    "tool_name": "python-inspector",
-    "tool_homepageurl": "https://github.com/nexB/python-inspector",
-    "tool_version": "0.9.0",
-    "options": [
-      "--specifier flask",
-      "--index-url https://thirdparty.aboutcode.org/pypi/simple/",
-      "--python-version 38",
-      "--operating-system linux",
-      "--json <file>"
-    ],
-    "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/nexB/python-inspector/ for support and download.",
-    "warnings": [],
-    "errors": []
-  },
   "files": [],
   "packages": [
     {
@@ -142,12 +127,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "flask",
-      "version": "2.2.2",
+      "version": "2.1.2",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "A simple framework for building complex web applications.\nFlask\n=====\n\nFlask is a lightweight `WSGI`_ web application framework. It is designed\nto make getting started quick and easy, with the ability to scale up to\ncomplex applications. It began as a simple wrapper around `Werkzeug`_\nand `Jinja`_ and has become one of the most popular Python web\napplication frameworks.\n\nFlask offers suggestions, but doesn't enforce any dependencies or\nproject layout. It is up to the developer to choose the tools and\nlibraries they want to use. There are many extensions provided by the\ncommunity that make adding new functionality easy.\n\n.. _WSGI: https://wsgi.readthedocs.io/\n.. _Werkzeug: https://werkzeug.palletsprojects.com/\n.. _Jinja: https://jinja.palletsprojects.com/\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    $ pip install -U Flask\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    # save this as app.py\n    from flask import Flask\n\n    app = Flask(__name__)\n\n    @app.route(\"/\")\n    def hello():\n        return \"Hello, World!\"\n\n.. code-block:: text\n\n    $ flask run\n      * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)\n\n\nContributing\n------------\n\nFor guidance on setting up a development environment and how to make a\ncontribution to Flask, see the `contributing guidelines`_.\n\n.. _contributing guidelines: https://github.com/pallets/flask/blob/main/CONTRIBUTING.rst\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Flask and the libraries\nit uses. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, `please\ndonate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://flask.palletsprojects.com/\n-   Changes: https://flask.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/Flask/\n-   Source Code: https://github.com/pallets/flask/\n-   Issue Tracker: https://github.com/pallets/flask/issues/\n-   Website: https://palletsprojects.com/p/flask/\n-   Twitter: https://twitter.com/PalletsTeam\n-   Chat: https://discord.gg/pallets",
-      "release_date": "2022-08-08T23:26:30",
+      "release_date": "2022-04-28T17:47:38",
       "parties": [
         {
           "type": "person",
@@ -177,11 +162,11 @@
         "Topic :: Software Development :: Libraries :: Application Frameworks"
       ],
       "homepage_url": "https://palletsprojects.com/p/flask",
-      "download_url": "https://files.pythonhosted.org/packages/0f/43/15f4f9ab225b0b25352412e8daa3d0e3d135fcf5e127070c74c3632c8b4c/Flask-2.2.2-py3-none-any.whl",
-      "size": 101477,
+      "download_url": "https://files.pythonhosted.org/packages/ba/76/e9580e494eaf6f09710b0f3b9000c9c0363e44af5390be32bb0394165853/Flask-2.1.2-py3-none-any.whl",
+      "size": 95235,
       "sha1": null,
-      "md5": "e737537775d400ad00adf8f59358f7ab",
-      "sha256": "b9c46cc36662a7949f34b52d8ec7bb59c0d74ba08ba6cb9ce9adc1d8676d9526",
+      "md5": "07aede47b441c019aeebbeaed6a76215",
+      "sha256": "fad5b446feb0d6db6aec0c3184d16a8c1f6c3e464b511649c8918a9be100b4fe",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets/flask/issues/",
       "code_view_url": "https://github.com/pallets/flask/",
@@ -201,20 +186,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/flask/2.2.2/json",
+      "api_data_url": "https://pypi.org/pypi/flask/2.1.2/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/flask@2.2.2"
+      "purl": "pkg:pypi/flask@2.1.2"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "flask",
-      "version": "2.2.2",
+      "version": "2.1.2",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "A simple framework for building complex web applications.\nFlask\n=====\n\nFlask is a lightweight `WSGI`_ web application framework. It is designed\nto make getting started quick and easy, with the ability to scale up to\ncomplex applications. It began as a simple wrapper around `Werkzeug`_\nand `Jinja`_ and has become one of the most popular Python web\napplication frameworks.\n\nFlask offers suggestions, but doesn't enforce any dependencies or\nproject layout. It is up to the developer to choose the tools and\nlibraries they want to use. There are many extensions provided by the\ncommunity that make adding new functionality easy.\n\n.. _WSGI: https://wsgi.readthedocs.io/\n.. _Werkzeug: https://werkzeug.palletsprojects.com/\n.. _Jinja: https://jinja.palletsprojects.com/\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    $ pip install -U Flask\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    # save this as app.py\n    from flask import Flask\n\n    app = Flask(__name__)\n\n    @app.route(\"/\")\n    def hello():\n        return \"Hello, World!\"\n\n.. code-block:: text\n\n    $ flask run\n      * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)\n\n\nContributing\n------------\n\nFor guidance on setting up a development environment and how to make a\ncontribution to Flask, see the `contributing guidelines`_.\n\n.. _contributing guidelines: https://github.com/pallets/flask/blob/main/CONTRIBUTING.rst\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Flask and the libraries\nit uses. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, `please\ndonate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://flask.palletsprojects.com/\n-   Changes: https://flask.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/Flask/\n-   Source Code: https://github.com/pallets/flask/\n-   Issue Tracker: https://github.com/pallets/flask/issues/\n-   Website: https://palletsprojects.com/p/flask/\n-   Twitter: https://twitter.com/PalletsTeam\n-   Chat: https://discord.gg/pallets",
-      "release_date": "2022-08-08T23:26:33",
+      "release_date": "2022-04-28T17:47:40",
       "parties": [
         {
           "type": "person",
@@ -244,11 +229,11 @@
         "Topic :: Software Development :: Libraries :: Application Frameworks"
       ],
       "homepage_url": "https://palletsprojects.com/p/flask",
-      "download_url": "https://files.pythonhosted.org/packages/69/b6/53cfa30eed5aa7343daff36622843688ba8c6fe9829bb2b92e193ab1163f/Flask-2.2.2.tar.gz",
-      "size": 677389,
+      "download_url": "https://files.pythonhosted.org/packages/d3/3c/94f38d4db919a9326a706ad56f05a7e6f0c8f7b7d93e2997cca54d3bc14b/Flask-2.1.2.tar.gz",
+      "size": 631846,
       "sha1": null,
-      "md5": "c0d2276cb7d59a06d62c915da9c77ba6",
-      "sha256": "642c450d19c4ad482f96729bd2a8f6d32554aa1e231f4f6b4e7e5264b16cca2b",
+      "md5": "93f1832e5be704ef6ff2a4124579cd85",
+      "sha256": "315ded2ddf8a6281567edb27393010fe3406188bafbfe65a3339d5787d89e477",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets/flask/issues/",
       "code_view_url": "https://github.com/pallets/flask/",
@@ -268,115 +253,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/flask/2.2.2/json",
+      "api_data_url": "https://pypi.org/pypi/flask/2.1.2/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/flask@2.2.2"
-    },
-    {
-      "type": "pypi",
-      "namespace": null,
-      "name": "importlib-metadata",
-      "version": "5.0.0",
-      "qualifiers": {},
-      "subpath": null,
-      "primary_language": "Python",
-      "description": "Read metadata from Python packages\n.. image:: https://img.shields.io/pypi/v/importlib_metadata.svg\n   :target: `PyPI link`_\n\n.. image:: https://img.shields.io/pypi/pyversions/importlib_metadata.svg\n   :target: `PyPI link`_\n\n.. _PyPI link: https://pypi.org/project/importlib_metadata\n\n.. image:: https://github.com/python/importlib_metadata/workflows/tests/badge.svg\n   :target: https://github.com/python/importlib_metadata/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. image:: https://readthedocs.org/projects/importlib-metadata/badge/?version=latest\n   :target: https://importlib-metadata.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2022-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/importlib-metadata\n   :target: https://tidelift.com/subscription/pkg/pypi-importlib-metadata?utm_source=pypi-importlib-metadata&utm_medium=readme\n\nLibrary to access the metadata for a Python package.\n\nThis package supplies third-party access to the functionality of\n`importlib.metadata <https://docs.python.org/3/library/importlib.metadata.html>`_\nincluding improvements added to subsequent Python versions.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - importlib_metadata\n     - stdlib\n   * - 4.8\n     - 3.11\n   * - 4.4\n     - 3.10\n   * - 1.4\n     - 3.8\n\n\nUsage\n=====\n\nSee the `online documentation <https://importlib_metadata.readthedocs.io/>`_\nfor usage details.\n\n`Finder authors\n<https://docs.python.org/3/reference/import.html#finders-and-loaders>`_ can\nalso add support for custom package installers.  See the above documentation\nfor details.\n\n\nCaveats\n=======\n\nThis project primarily supports third-party packages installed by PyPA\ntools (or other conforming packages). It does not support:\n\n- Packages in the stdlib.\n- Packages installed without metadata.\n\nProject details\n===============\n\n * Project home: https://github.com/python/importlib_metadata\n * Report bugs at: https://github.com/python/importlib_metadata/issues\n * Code hosting: https://github.com/python/importlib_metadata\n * Documentation: https://importlib_metadata.readthedocs.io/\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-importlib-metadata?utm_source=pypi-importlib-metadata&utm_medium=referral&utm_campaign=github>`_.\n\nSecurity Contact\n================\n\nTo report a security vulnerability, please use the\n`Tidelift security contact <https://tidelift.com/security>`_.\nTidelift will coordinate the fix and disclosure.",
-      "release_date": "2022-10-02T00:42:11",
-      "parties": [
-        {
-          "type": "person",
-          "role": "author",
-          "name": "Jason R. Coombs",
-          "email": "jaraco@jaraco.com",
-          "url": null
-        }
-      ],
-      "keywords": [
-        "Development Status :: 5 - Production/Stable",
-        "Intended Audience :: Developers",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3 :: Only"
-      ],
-      "homepage_url": "https://github.com/python/importlib_metadata",
-      "download_url": "https://files.pythonhosted.org/packages/b5/64/ef29a63cf08f047bb7fb22ab0f1f774b87eed0bb46d067a5a524798a4af8/importlib_metadata-5.0.0-py3-none-any.whl",
-      "size": 21811,
-      "sha1": null,
-      "md5": "5b511c1cd69bbb1b933d6c4157c0e983",
-      "sha256": "ddb0e35065e8938f867ed4928d0ae5bf2a53b7773871bfe6bcc7e4fcdc7dea43",
-      "sha512": null,
-      "bug_tracking_url": null,
-      "code_view_url": null,
-      "vcs_url": null,
-      "copyright": null,
-      "license_expression": null,
-      "declared_license": {
-        "classifiers": [
-          "License :: OSI Approved :: Apache Software License"
-        ]
-      },
-      "notice_text": null,
-      "source_packages": [],
-      "file_references": [],
-      "extra_data": {},
-      "dependencies": [],
-      "repository_homepage_url": null,
-      "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/importlib-metadata/5.0.0/json",
-      "datasource_id": null,
-      "purl": "pkg:pypi/importlib-metadata@5.0.0"
-    },
-    {
-      "type": "pypi",
-      "namespace": null,
-      "name": "importlib-metadata",
-      "version": "5.0.0",
-      "qualifiers": {},
-      "subpath": null,
-      "primary_language": "Python",
-      "description": "Read metadata from Python packages\n.. image:: https://img.shields.io/pypi/v/importlib_metadata.svg\n   :target: `PyPI link`_\n\n.. image:: https://img.shields.io/pypi/pyversions/importlib_metadata.svg\n   :target: `PyPI link`_\n\n.. _PyPI link: https://pypi.org/project/importlib_metadata\n\n.. image:: https://github.com/python/importlib_metadata/workflows/tests/badge.svg\n   :target: https://github.com/python/importlib_metadata/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. image:: https://readthedocs.org/projects/importlib-metadata/badge/?version=latest\n   :target: https://importlib-metadata.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2022-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/importlib-metadata\n   :target: https://tidelift.com/subscription/pkg/pypi-importlib-metadata?utm_source=pypi-importlib-metadata&utm_medium=readme\n\nLibrary to access the metadata for a Python package.\n\nThis package supplies third-party access to the functionality of\n`importlib.metadata <https://docs.python.org/3/library/importlib.metadata.html>`_\nincluding improvements added to subsequent Python versions.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - importlib_metadata\n     - stdlib\n   * - 4.8\n     - 3.11\n   * - 4.4\n     - 3.10\n   * - 1.4\n     - 3.8\n\n\nUsage\n=====\n\nSee the `online documentation <https://importlib_metadata.readthedocs.io/>`_\nfor usage details.\n\n`Finder authors\n<https://docs.python.org/3/reference/import.html#finders-and-loaders>`_ can\nalso add support for custom package installers.  See the above documentation\nfor details.\n\n\nCaveats\n=======\n\nThis project primarily supports third-party packages installed by PyPA\ntools (or other conforming packages). It does not support:\n\n- Packages in the stdlib.\n- Packages installed without metadata.\n\nProject details\n===============\n\n * Project home: https://github.com/python/importlib_metadata\n * Report bugs at: https://github.com/python/importlib_metadata/issues\n * Code hosting: https://github.com/python/importlib_metadata\n * Documentation: https://importlib_metadata.readthedocs.io/\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-importlib-metadata?utm_source=pypi-importlib-metadata&utm_medium=referral&utm_campaign=github>`_.\n\nSecurity Contact\n================\n\nTo report a security vulnerability, please use the\n`Tidelift security contact <https://tidelift.com/security>`_.\nTidelift will coordinate the fix and disclosure.",
-      "release_date": "2022-10-02T00:42:12",
-      "parties": [
-        {
-          "type": "person",
-          "role": "author",
-          "name": "Jason R. Coombs",
-          "email": "jaraco@jaraco.com",
-          "url": null
-        }
-      ],
-      "keywords": [
-        "Development Status :: 5 - Production/Stable",
-        "Intended Audience :: Developers",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3 :: Only"
-      ],
-      "homepage_url": "https://github.com/python/importlib_metadata",
-      "download_url": "https://files.pythonhosted.org/packages/7e/ec/97f2ce958b62961fddd7258e0ceede844953606ad09b672fa03b86c453d3/importlib_metadata-5.0.0.tar.gz",
-      "size": 48756,
-      "sha1": null,
-      "md5": "ccd58a387cc2bab6cf72fdf21e403749",
-      "sha256": "da31db32b304314d044d3c12c79bd59e307889b287ad12ff387b3500835fc2ab",
-      "sha512": null,
-      "bug_tracking_url": null,
-      "code_view_url": null,
-      "vcs_url": null,
-      "copyright": null,
-      "license_expression": null,
-      "declared_license": {
-        "classifiers": [
-          "License :: OSI Approved :: Apache Software License"
-        ]
-      },
-      "notice_text": null,
-      "source_packages": [],
-      "file_references": [],
-      "extra_data": {},
-      "dependencies": [],
-      "repository_homepage_url": null,
-      "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/importlib-metadata/5.0.0/json",
-      "datasource_id": null,
-      "purl": "pkg:pypi/importlib-metadata@5.0.0"
+      "purl": "pkg:pypi/flask@2.1.2"
     },
     {
       "type": "pypi",
@@ -637,7 +516,7 @@
       "subpath": null,
       "primary_language": "Python",
       "description": "Safely add untrusted strings to HTML/XML markup.\nMarkupSafe\n==========\n\nMarkupSafe implements a text object that escapes characters so it is\nsafe to use in HTML and XML. Characters that have special meanings are\nreplaced so that they display as the actual characters. This mitigates\ninjection attacks, meaning untrusted user input can safely be displayed\non a page.\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    pip install -U MarkupSafe\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nExamples\n--------\n\n.. code-block:: pycon\n\n    >>> from markupsafe import Markup, escape\n\n    >>> # escape replaces special characters and wraps in Markup\n    >>> escape(\"<script>alert(document.cookie);</script>\")\n    Markup('&lt;script&gt;alert(document.cookie);&lt;/script&gt;')\n\n    >>> # wrap in Markup to mark text \"safe\" and prevent escaping\n    >>> Markup(\"<strong>Hello</strong>\")\n    Markup('<strong>hello</strong>')\n\n    >>> escape(Markup(\"<strong>Hello</strong>\"))\n    Markup('<strong>hello</strong>')\n\n    >>> # Markup is a str subclass\n    >>> # methods and operators escape their arguments\n    >>> template = Markup(\"Hello <em>{name}</em>\")\n    >>> template.format(name='\"World\"')\n    Markup('Hello <em>&#34;World&#34;</em>')\n\n\nDonate\n------\n\nThe Pallets organization develops and supports MarkupSafe and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n`please donate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://markupsafe.palletsprojects.com/\n-   Changes: https://markupsafe.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/MarkupSafe/\n-   Source Code: https://github.com/pallets/markupsafe/\n-   Issue Tracker: https://github.com/pallets/markupsafe/issues/\n-   Website: https://palletsprojects.com/p/markupsafe/\n-   Twitter: https://twitter.com/PalletsTeam\n-   Chat: https://discord.gg/pallets",
-      "release_date": "2022-03-15T13:22:49",
+      "release_date": "2022-03-15T13:22:12",
       "parties": [
         {
           "type": "person",
@@ -664,11 +543,11 @@
         "Topic :: Text Processing :: Markup :: HTML"
       ],
       "homepage_url": "https://palletsprojects.com/p/markupsafe/",
-      "download_url": "https://files.pythonhosted.org/packages/fd/f4/524d2e8f5a3727cf309c2b7df7c732038375322df1376c9e9ef3aa92fcaf/MarkupSafe-2.1.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
-      "size": 25883,
+      "download_url": "https://files.pythonhosted.org/packages/9e/82/2e089c6f34e77c073aa5a67040d368aac0dfb9b8ccbb46d381452c26fc33/MarkupSafe-2.1.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "size": 25596,
       "sha1": null,
-      "md5": "e39aa307fb183aacd8bcdb81f5a1ca69",
-      "sha256": "4b9fe39a2ccc108a4accc2676e77da025ce383c108593d65cc909add5c3bd601",
+      "md5": "b4b01daec17d204372a2ff5be052bfe5",
+      "sha256": "10c1bfff05d95783da83491be968e8fe789263689c02724e0c691933c52994f5",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets/markupsafe/issues/",
       "code_view_url": "https://github.com/pallets/markupsafe/",
@@ -889,133 +768,20 @@
       "api_data_url": "https://pypi.org/pypi/werkzeug/2.2.2/json",
       "datasource_id": null,
       "purl": "pkg:pypi/werkzeug@2.2.2"
-    },
-    {
-      "type": "pypi",
-      "namespace": null,
-      "name": "zipp",
-      "version": "3.10.0",
-      "qualifiers": {},
-      "subpath": null,
-      "primary_language": "Python",
-      "description": "Backport of pathlib-compatible object wrapper for zip files\n.. image:: https://img.shields.io/pypi/v/zipp.svg\n   :target: `PyPI link`_\n\n.. image:: https://img.shields.io/pypi/pyversions/zipp.svg\n   :target: `PyPI link`_\n\n.. _PyPI link: https://pypi.org/project/zipp\n\n.. image:: https://github.com/jaraco/zipp/workflows/tests/badge.svg\n   :target: https://github.com/jaraco/zipp/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. .. image:: https://readthedocs.org/projects/skeleton/badge/?version=latest\n..    :target: https://skeleton.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2022-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/zipp\n   :target: https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=readme\n\n\nA pathlib-compatible Zipfile object wrapper. Official backport of the standard library\n`Path object <https://docs.python.org/3.8/library/zipfile.html#path-objects>`_.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - zipp\n     - stdlib\n   * - 3.5\n     - 3.11\n   * - 3.3\n     - 3.9\n   * - 1.0\n     - 3.8\n\n\nUsage\n=====\n\nUse ``zipp.Path`` in place of ``zipfile.Path`` on any Python.\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=referral&utm_campaign=github>`_.\n\nSecurity Contact\n================\n\nTo report a security vulnerability, please use the\n`Tidelift security contact <https://tidelift.com/security>`_.\nTidelift will coordinate the fix and disclosure.",
-      "release_date": "2022-10-24T01:21:48",
-      "parties": [
-        {
-          "type": "person",
-          "role": "author",
-          "name": "Jason R. Coombs",
-          "email": "jaraco@jaraco.com",
-          "url": null
-        }
-      ],
-      "keywords": [
-        "Development Status :: 5 - Production/Stable",
-        "Intended Audience :: Developers",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3 :: Only"
-      ],
-      "homepage_url": "https://github.com/jaraco/zipp",
-      "download_url": "https://files.pythonhosted.org/packages/40/8a/d63273ed0fa4a3d06f77e7b043f6577d8894e95515b0c187c52e2c0efabb/zipp-3.10.0-py3-none-any.whl",
-      "size": 6187,
-      "sha1": null,
-      "md5": "45e75fc446a78b655d1dc740d41e5e4f",
-      "sha256": "4fcb6f278987a6605757302a6e40e896257570d11c51628968ccb2a47e80c6c1",
-      "sha512": null,
-      "bug_tracking_url": null,
-      "code_view_url": null,
-      "vcs_url": null,
-      "copyright": null,
-      "license_expression": null,
-      "declared_license": {
-        "classifiers": [
-          "License :: OSI Approved :: MIT License"
-        ]
-      },
-      "notice_text": null,
-      "source_packages": [],
-      "file_references": [],
-      "extra_data": {},
-      "dependencies": [],
-      "repository_homepage_url": null,
-      "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/zipp/3.10.0/json",
-      "datasource_id": null,
-      "purl": "pkg:pypi/zipp@3.10.0"
-    },
-    {
-      "type": "pypi",
-      "namespace": null,
-      "name": "zipp",
-      "version": "3.10.0",
-      "qualifiers": {},
-      "subpath": null,
-      "primary_language": "Python",
-      "description": "Backport of pathlib-compatible object wrapper for zip files\n.. image:: https://img.shields.io/pypi/v/zipp.svg\n   :target: `PyPI link`_\n\n.. image:: https://img.shields.io/pypi/pyversions/zipp.svg\n   :target: `PyPI link`_\n\n.. _PyPI link: https://pypi.org/project/zipp\n\n.. image:: https://github.com/jaraco/zipp/workflows/tests/badge.svg\n   :target: https://github.com/jaraco/zipp/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. .. image:: https://readthedocs.org/projects/skeleton/badge/?version=latest\n..    :target: https://skeleton.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2022-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/zipp\n   :target: https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=readme\n\n\nA pathlib-compatible Zipfile object wrapper. Official backport of the standard library\n`Path object <https://docs.python.org/3.8/library/zipfile.html#path-objects>`_.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - zipp\n     - stdlib\n   * - 3.5\n     - 3.11\n   * - 3.3\n     - 3.9\n   * - 1.0\n     - 3.8\n\n\nUsage\n=====\n\nUse ``zipp.Path`` in place of ``zipfile.Path`` on any Python.\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=referral&utm_campaign=github>`_.\n\nSecurity Contact\n================\n\nTo report a security vulnerability, please use the\n`Tidelift security contact <https://tidelift.com/security>`_.\nTidelift will coordinate the fix and disclosure.",
-      "release_date": "2022-10-24T01:21:49",
-      "parties": [
-        {
-          "type": "person",
-          "role": "author",
-          "name": "Jason R. Coombs",
-          "email": "jaraco@jaraco.com",
-          "url": null
-        }
-      ],
-      "keywords": [
-        "Development Status :: 5 - Production/Stable",
-        "Intended Audience :: Developers",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3 :: Only"
-      ],
-      "homepage_url": "https://github.com/jaraco/zipp",
-      "download_url": "https://files.pythonhosted.org/packages/8d/d7/1bd1e0a5bc95a27a6f5c4ee8066ddfc5b69a9ec8d39ab11a41a804ec8f0d/zipp-3.10.0.tar.gz",
-      "size": 15564,
-      "sha1": null,
-      "md5": "f75b65d022528a44877626641f0f95c3",
-      "sha256": "7a7262fd930bd3e36c50b9a64897aec3fafff3dfdeec9623ae22b40e93f99bb8",
-      "sha512": null,
-      "bug_tracking_url": null,
-      "code_view_url": null,
-      "vcs_url": null,
-      "copyright": null,
-      "license_expression": null,
-      "declared_license": {
-        "classifiers": [
-          "License :: OSI Approved :: MIT License"
-        ]
-      },
-      "notice_text": null,
-      "source_packages": [],
-      "file_references": [],
-      "extra_data": {},
-      "dependencies": [],
-      "repository_homepage_url": null,
-      "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/zipp/3.10.0/json",
-      "datasource_id": null,
-      "purl": "pkg:pypi/zipp@3.10.0"
     }
   ],
-  "resolved_dependencies_graph": [
+  "resolution": [
     {
       "package": "pkg:pypi/click@8.1.3",
       "dependencies": []
     },
     {
-      "package": "pkg:pypi/flask@2.2.2",
+      "package": "pkg:pypi/flask@2.1.2",
       "dependencies": [
         "pkg:pypi/click@8.1.3",
-        "pkg:pypi/importlib-metadata@5.0.0",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
         "pkg:pypi/werkzeug@2.2.2"
-      ]
-    },
-    {
-      "package": "pkg:pypi/importlib-metadata@5.0.0",
-      "dependencies": [
-        "pkg:pypi/zipp@3.10.0"
       ]
     },
     {
@@ -1037,10 +803,6 @@
       "dependencies": [
         "pkg:pypi/markupsafe@2.1.1"
       ]
-    },
-    {
-      "package": "pkg:pypi/zipp@3.10.0",
-      "dependencies": []
     }
   ]
 }

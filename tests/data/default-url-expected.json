@@ -2,7 +2,7 @@
   "headers": {
     "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
-    "tool_version": "0.8.5",
+    "tool_version": "0.9.0",
     "options": [
       "--specifier zipp==3.8.0",
       "--index-url https://pypi.org/simple",
@@ -15,11 +15,11 @@
     "errors": []
   },
   "files": [],
+  "packages": [],
   "resolved_dependencies_graph": [
     {
       "package": "pkg:pypi/zipp@3.8.0",
       "dependencies": []
     }
-  ],
-  "packages": []
+  ]
 }

@@ -16,8 +16,6 @@ import pytest
 from click.testing import CliRunner
 from commoncode.testcase import FileDrivenTesting
 
-from _packagedcode import models
-from python_inspector.resolve_cli import get_requirements_from_direct_dependencies
 from python_inspector.resolve_cli import resolve_dependencies
 
 # Used for tests to regenerate fixtures with regen=True
@@ -314,6 +312,20 @@ def test_cli_with_setup_py():
     )
 
 
+@pytest.mark.online
+def test_cli_with_setup_py_no_direct_dependencies():
+    setup_py_file = setup_test_env.get_test_loc("no-direct-dependencies-setup.py")
+    expected_file = setup_test_env.get_test_loc(
+        "no-direct-dependencies-setup.py-expected.json", must_exist=False
+    )
+    check_setup_py_resolution(
+        setup_py=setup_py_file,
+        expected_file=expected_file,
+        regen=REGEN_TEST_FIXTURES,
+        extra_options=["--python-version", "27", "--analyze-setup-py-insecurely"],
+    )
+
+
 def check_specs_resolution(
     specifier,
     expected_file,
@@ -340,7 +352,7 @@ def test_passing_of_json_pdt_and_json_flags():
 def test_version_option():
     options = ["--version"]
     result = run_cli(options=options)
-    assert "0.8.5" in result.output
+    assert "0.9.0" in result.output
 
 
 def test_passing_of_netrc_file_that_does_not_exist():
@@ -348,7 +360,7 @@ def test_passing_of_netrc_file_that_does_not_exist():
     run_cli(options=options, expected_rc=2)
 
 
-def test_passing_of_wrong_requirements_file():
+def test_passing_of_empty_requirements_file():
     test_file = test_env.get_temp_file(file_name="pdt.txt", extension="")
     with open(test_file, "w") as f:
         f.write("")
@@ -356,8 +368,7 @@ def test_passing_of_wrong_requirements_file():
     with open(test_file_2, "w") as f:
         f.write("")
     options = ["--requirement", test_file, "--json", "-", "--requirement", test_file_2]
-    result = run_cli(options=options, expected_rc=1)
-    assert "Error: no requirements requested" in result.output
+    run_cli(options=options, expected_rc=0)
 
 
 def test_passing_of_no_json_output_flag():
@@ -448,7 +459,11 @@ def clean_results(results):
         file["path"] = path
     headers = results.get("headers", {})
     options = headers.get("options", [])
-    headers["options"] = [o for o in options if not o.startswith("--requirement")]
+    headers["options"] = [
+        o
+        for o in options
+        if (not o.startswith("--requirement") and not o.startswith("requirement_files-"))
+    ]
     return results
 
 

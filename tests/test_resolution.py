@@ -17,10 +17,10 @@ from commoncode.testcase import FileDrivenTesting
 from packaging.requirements import Requirement
 
 from _packagedcode import models
+from python_inspector.api import get_resolved_dependencies
 from python_inspector.error import NoVersionsFound
 from python_inspector.resolution import PythonInputProvider
 from python_inspector.resolution import get_requirements_from_dependencies
-from python_inspector.resolution import get_resolved_dependencies
 from python_inspector.resolution import is_valid_version
 from python_inspector.resolution import parse_reqs_from_setup_py_insecurely
 from python_inspector.utils_pypi import PYPI_PUBLIC_REPO

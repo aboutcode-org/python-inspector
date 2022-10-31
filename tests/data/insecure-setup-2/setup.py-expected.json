@@ -2,7 +2,7 @@
   "headers": {
     "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
-    "tool_version": "0.8.5",
+    "tool_version": "0.9.0",
     "options": [
       "--index-url https://pypi.org/simple",
       "--python-version 27",
@@ -145,450 +145,6 @@
           "datasource_id": "pypi_setup_py",
           "purl": "pkg:pypi/testpkh@0.0.1"
         }
-      ]
-    }
-  ],
-  "resolved_dependencies_graph": [
-    {
-      "package": "pkg:pypi/amqp@2.6.1",
-      "dependencies": [
-        "pkg:pypi/vine@1.3.0"
-      ]
-    },
-    {
-      "package": "pkg:pypi/attrs@21.4.0",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/babel@2.9.1",
-      "dependencies": [
-        "pkg:pypi/pytz@2022.5"
-      ]
-    },
-    {
-      "package": "pkg:pypi/backports-functools-lru-cache@1.6.4",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/backports-shutil-get-terminal-size@1.0.0",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/billiard@3.6.4.0",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/blinker@1.5",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/cairocffi@0.9.0",
-      "dependencies": [
-        "pkg:pypi/cffi@1.15.1"
-      ]
-    },
-    {
-      "package": "pkg:pypi/cairosvg@1.0.22",
-      "dependencies": [
-        "pkg:pypi/cairocffi@0.9.0"
-      ]
-    },
-    {
-      "package": "pkg:pypi/celery@4.4.7",
-      "dependencies": [
-        "pkg:pypi/billiard@3.6.4.0",
-        "pkg:pypi/kombu@4.6.11",
-        "pkg:pypi/pytz@2022.5",
-        "pkg:pypi/vine@1.3.0"
-      ]
-    },
-    {
-      "package": "pkg:pypi/cffi@1.15.1",
-      "dependencies": [
-        "pkg:pypi/pycparser@2.21"
-      ]
-    },
-    {
-      "package": "pkg:pypi/click@7.1.2",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/configparser@4.0.2",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/contextlib2@0.6.0.post1",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/decorator@4.4.2",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/enum34@1.1.10",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/flask-babelex@0.9.4",
-      "dependencies": [
-        "pkg:pypi/babel@2.9.1",
-        "pkg:pypi/flask@1.1.4",
-        "pkg:pypi/jinja2@2.11.3",
-        "pkg:pypi/speaklater@1.3"
-      ]
-    },
-    {
-      "package": "pkg:pypi/flask-caching@1.9.0",
-      "dependencies": [
-        "pkg:pypi/flask@1.1.4"
-      ]
-    },
-    {
-      "package": "pkg:pypi/flask-celeryext@0.3.4",
-      "dependencies": [
-        "pkg:pypi/celery@4.4.7",
-        "pkg:pypi/flask@1.1.4"
-      ]
-    },
-    {
-      "package": "pkg:pypi/flask-limiter@1.1.0",
-      "dependencies": [
-        "pkg:pypi/flask@1.1.4",
-        "pkg:pypi/limits@1.6",
-        "pkg:pypi/six@1.16.0"
-      ]
-    },
-    {
-      "package": "pkg:pypi/flask-shell-ipython@0.4.1",
-      "dependencies": [
-        "pkg:pypi/click@7.1.2",
-        "pkg:pypi/flask@1.1.4",
-        "pkg:pypi/ipython@5.10.0"
-      ]
-    },
-    {
-      "package": "pkg:pypi/flask-talisman@0.8.1",
-      "dependencies": [
-        "pkg:pypi/six@1.16.0"
-      ]
-    },
-    {
-      "package": "pkg:pypi/flask@1.1.4",
-      "dependencies": [
-        "pkg:pypi/click@7.1.2",
-        "pkg:pypi/itsdangerous@1.1.0",
-        "pkg:pypi/jinja2@2.11.3",
-        "pkg:pypi/werkzeug@1.0.1"
-      ]
-    },
-    {
-      "package": "pkg:pypi/funcsigs@1.0.2",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/importlib-metadata@2.1.3",
-      "dependencies": [
-        "pkg:pypi/configparser@4.0.2",
-        "pkg:pypi/contextlib2@0.6.0.post1",
-        "pkg:pypi/pathlib2@2.3.7.post1",
-        "pkg:pypi/zipp@1.2.0"
-      ]
-    },
-    {
-      "package": "pkg:pypi/invenio%5bauth%2cbase%2cmetadata%5d@3.4.1",
-      "dependencies": [
-        "pkg:pypi/invenio-app@1.3.3",
-        "pkg:pypi/invenio-base@1.2.5",
-        "pkg:pypi/invenio-cache@1.1.0",
-        "pkg:pypi/invenio-celery@1.2.2",
-        "pkg:pypi/invenio-config@1.0.3",
-        "pkg:pypi/invenio-i18n@1.3.1",
-        "pkg:pypi/invenio@3.4.1"
-      ]
-    },
-    {
-      "package": "pkg:pypi/invenio-app@1.3.3",
-      "dependencies": [
-        "pkg:pypi/flask-celeryext@0.3.4",
-        "pkg:pypi/flask-limiter@1.1.0",
-        "pkg:pypi/flask-shell-ipython@0.4.1",
-        "pkg:pypi/flask-talisman@0.8.1",
-        "pkg:pypi/invenio-base@1.2.5",
-        "pkg:pypi/invenio-cache@1.1.0",
-        "pkg:pypi/invenio-config@1.0.3",
-        "pkg:pypi/limits@1.6",
-        "pkg:pypi/uritools@2.2.0"
-      ]
-    },
-    {
-      "package": "pkg:pypi/invenio-base@1.2.5",
-      "dependencies": [
-        "pkg:pypi/blinker@1.5",
-        "pkg:pypi/flask@1.1.4",
-        "pkg:pypi/six@1.16.0",
-        "pkg:pypi/werkzeug@1.0.1"
-      ]
-    },
-    {
-      "package": "pkg:pypi/invenio-cache@1.1.0",
-      "dependencies": [
-        "pkg:pypi/flask-caching@1.9.0",
-        "pkg:pypi/invenio-base@1.2.5"
-      ]
-    },
-    {
-      "package": "pkg:pypi/invenio-celery@1.2.2",
-      "dependencies": [
-        "pkg:pypi/celery@4.4.7",
-        "pkg:pypi/flask-celeryext@0.3.4",
-        "pkg:pypi/invenio-base@1.2.5",
-        "pkg:pypi/msgpack@1.0.4",
-        "pkg:pypi/redis@3.5.3"
-      ]
-    },
-    {
-      "package": "pkg:pypi/invenio-config@1.0.3",
-      "dependencies": [
-        "pkg:pypi/flask@1.1.4"
-      ]
-    },
-    {
-      "package": "pkg:pypi/invenio-i18n@1.3.1",
-      "dependencies": [
-        "pkg:pypi/flask-babelex@0.9.4",
-        "pkg:pypi/invenio-base@1.2.5"
-      ]
-    },
-    {
-      "package": "pkg:pypi/invenio-records@1.0.2",
-      "dependencies": [
-        "pkg:pypi/blinker@1.5",
-        "pkg:pypi/flask-celeryext@0.3.4",
-        "pkg:pypi/flask@1.1.4",
-        "pkg:pypi/jsonpatch@1.32",
-        "pkg:pypi/jsonref@0.2",
-        "pkg:pypi/jsonresolver@0.3.1",
-        "pkg:pypi/jsonschema@4.0.0"
-      ]
-    },
-    {
-      "package": "pkg:pypi/invenio@3.4.1",
-      "dependencies": [
-        "pkg:pypi/invenio-app@1.3.3",
-        "pkg:pypi/invenio-base@1.2.5",
-        "pkg:pypi/invenio-cache@1.1.0",
-        "pkg:pypi/invenio-celery@1.2.2",
-        "pkg:pypi/invenio-config@1.0.3",
-        "pkg:pypi/invenio-i18n@1.3.1"
-      ]
-    },
-    {
-      "package": "pkg:pypi/ipaddress@1.0.23",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/ipython-genutils@0.2.0",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/ipython@5.10.0",
-      "dependencies": [
-        "pkg:pypi/backports-shutil-get-terminal-size@1.0.0",
-        "pkg:pypi/decorator@4.4.2",
-        "pkg:pypi/pathlib2@2.3.7.post1",
-        "pkg:pypi/pexpect@4.8.0",
-        "pkg:pypi/pickleshare@0.7.5",
-        "pkg:pypi/prompt-toolkit@1.0.18",
-        "pkg:pypi/pygments@2.5.2",
-        "pkg:pypi/setuptools@44.1.1",
-        "pkg:pypi/simplegeneric@0.8.1",
-        "pkg:pypi/traitlets@4.3.3"
-      ]
-    },
-    {
-      "package": "pkg:pypi/itsdangerous@1.1.0",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/jinja2@2.11.3",
-      "dependencies": [
-        "pkg:pypi/markupsafe@1.1.1"
-      ]
-    },
-    {
-      "package": "pkg:pypi/jsonpatch@1.32",
-      "dependencies": [
-        "pkg:pypi/jsonpointer@2.3"
-      ]
-    },
-    {
-      "package": "pkg:pypi/jsonpointer@2.3",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/jsonref@0.2",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/jsonresolver@0.3.1",
-      "dependencies": [
-        "pkg:pypi/pluggy@0.13.1",
-        "pkg:pypi/six@1.16.0",
-        "pkg:pypi/werkzeug@1.0.1"
-      ]
-    },
-    {
-      "package": "pkg:pypi/jsonschema@4.0.0",
-      "dependencies": [
-        "pkg:pypi/attrs@21.4.0",
-        "pkg:pypi/importlib-metadata@2.1.3",
-        "pkg:pypi/pyrsistent@0.16.1"
-      ]
-    },
-    {
-      "package": "pkg:pypi/kombu@4.6.11",
-      "dependencies": [
-        "pkg:pypi/amqp@2.6.1",
-        "pkg:pypi/importlib-metadata@2.1.3"
-      ]
-    },
-    {
-      "package": "pkg:pypi/limits@1.6",
-      "dependencies": [
-        "pkg:pypi/six@1.16.0"
-      ]
-    },
-    {
-      "package": "pkg:pypi/markupsafe@1.1.1",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/mock@3.0.5",
-      "dependencies": [
-        "pkg:pypi/funcsigs@1.0.2",
-        "pkg:pypi/six@1.16.0"
-      ]
-    },
-    {
-      "package": "pkg:pypi/msgpack@1.0.4",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/pathlib2@2.3.7.post1",
-      "dependencies": [
-        "pkg:pypi/scandir@1.10.0",
-        "pkg:pypi/six@1.16.0",
-        "pkg:pypi/typing@3.10.0.0"
-      ]
-    },
-    {
-      "package": "pkg:pypi/pexpect@4.8.0",
-      "dependencies": [
-        "pkg:pypi/ptyprocess@0.7.0"
-      ]
-    },
-    {
-      "package": "pkg:pypi/pickleshare@0.7.5",
-      "dependencies": [
-        "pkg:pypi/pathlib2@2.3.7.post1"
-      ]
-    },
-    {
-      "package": "pkg:pypi/pluggy@0.13.1",
-      "dependencies": [
-        "pkg:pypi/importlib-metadata@2.1.3"
-      ]
-    },
-    {
-      "package": "pkg:pypi/prompt-toolkit@1.0.18",
-      "dependencies": [
-        "pkg:pypi/six@1.16.0",
-        "pkg:pypi/wcwidth@0.2.5"
-      ]
-    },
-    {
-      "package": "pkg:pypi/ptyprocess@0.7.0",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/pycparser@2.21",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/pygments@2.5.2",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/pyrsistent@0.16.1",
-      "dependencies": [
-        "pkg:pypi/six@1.16.0"
-      ]
-    },
-    {
-      "package": "pkg:pypi/pytz@2022.5",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/redis@3.5.3",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/scandir@1.10.0",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/setuptools@44.1.1",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/simplegeneric@0.8.1",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/six@1.16.0",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/speaklater@1.3",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/traitlets@4.3.3",
-      "dependencies": [
-        "pkg:pypi/decorator@4.4.2",
-        "pkg:pypi/enum34@1.1.10",
-        "pkg:pypi/ipython-genutils@0.2.0",
-        "pkg:pypi/six@1.16.0"
-      ]
-    },
-    {
-      "package": "pkg:pypi/typing@3.10.0.0",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/uritools@2.2.0",
-      "dependencies": [
-        "pkg:pypi/ipaddress@1.0.23"
-      ]
-    },
-    {
-      "package": "pkg:pypi/vine@1.3.0",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/wcwidth@0.2.5",
-      "dependencies": [
-        "pkg:pypi/backports-functools-lru-cache@1.6.4"
-      ]
-    },
-    {
-      "package": "pkg:pypi/werkzeug@1.0.1",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/zipp@1.2.0",
-      "dependencies": [
-        "pkg:pypi/contextlib2@0.6.0.post1"
       ]
     }
   ],
@@ -8888,6 +8444,450 @@
       "api_data_url": "https://pypi.org/pypi/zipp/1.2.0/json",
       "datasource_id": null,
       "purl": "pkg:pypi/zipp@1.2.0"
+    }
+  ],
+  "resolved_dependencies_graph": [
+    {
+      "package": "pkg:pypi/amqp@2.6.1",
+      "dependencies": [
+        "pkg:pypi/vine@1.3.0"
+      ]
+    },
+    {
+      "package": "pkg:pypi/attrs@21.4.0",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/babel@2.9.1",
+      "dependencies": [
+        "pkg:pypi/pytz@2022.5"
+      ]
+    },
+    {
+      "package": "pkg:pypi/backports-functools-lru-cache@1.6.4",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/backports-shutil-get-terminal-size@1.0.0",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/billiard@3.6.4.0",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/blinker@1.5",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/cairocffi@0.9.0",
+      "dependencies": [
+        "pkg:pypi/cffi@1.15.1"
+      ]
+    },
+    {
+      "package": "pkg:pypi/cairosvg@1.0.22",
+      "dependencies": [
+        "pkg:pypi/cairocffi@0.9.0"
+      ]
+    },
+    {
+      "package": "pkg:pypi/celery@4.4.7",
+      "dependencies": [
+        "pkg:pypi/billiard@3.6.4.0",
+        "pkg:pypi/kombu@4.6.11",
+        "pkg:pypi/pytz@2022.5",
+        "pkg:pypi/vine@1.3.0"
+      ]
+    },
+    {
+      "package": "pkg:pypi/cffi@1.15.1",
+      "dependencies": [
+        "pkg:pypi/pycparser@2.21"
+      ]
+    },
+    {
+      "package": "pkg:pypi/click@7.1.2",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/configparser@4.0.2",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/contextlib2@0.6.0.post1",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/decorator@4.4.2",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/enum34@1.1.10",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/flask-babelex@0.9.4",
+      "dependencies": [
+        "pkg:pypi/babel@2.9.1",
+        "pkg:pypi/flask@1.1.4",
+        "pkg:pypi/jinja2@2.11.3",
+        "pkg:pypi/speaklater@1.3"
+      ]
+    },
+    {
+      "package": "pkg:pypi/flask-caching@1.9.0",
+      "dependencies": [
+        "pkg:pypi/flask@1.1.4"
+      ]
+    },
+    {
+      "package": "pkg:pypi/flask-celeryext@0.3.4",
+      "dependencies": [
+        "pkg:pypi/celery@4.4.7",
+        "pkg:pypi/flask@1.1.4"
+      ]
+    },
+    {
+      "package": "pkg:pypi/flask-limiter@1.1.0",
+      "dependencies": [
+        "pkg:pypi/flask@1.1.4",
+        "pkg:pypi/limits@1.6",
+        "pkg:pypi/six@1.16.0"
+      ]
+    },
+    {
+      "package": "pkg:pypi/flask-shell-ipython@0.4.1",
+      "dependencies": [
+        "pkg:pypi/click@7.1.2",
+        "pkg:pypi/flask@1.1.4",
+        "pkg:pypi/ipython@5.10.0"
+      ]
+    },
+    {
+      "package": "pkg:pypi/flask-talisman@0.8.1",
+      "dependencies": [
+        "pkg:pypi/six@1.16.0"
+      ]
+    },
+    {
+      "package": "pkg:pypi/flask@1.1.4",
+      "dependencies": [
+        "pkg:pypi/click@7.1.2",
+        "pkg:pypi/itsdangerous@1.1.0",
+        "pkg:pypi/jinja2@2.11.3",
+        "pkg:pypi/werkzeug@1.0.1"
+      ]
+    },
+    {
+      "package": "pkg:pypi/funcsigs@1.0.2",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/importlib-metadata@2.1.3",
+      "dependencies": [
+        "pkg:pypi/configparser@4.0.2",
+        "pkg:pypi/contextlib2@0.6.0.post1",
+        "pkg:pypi/pathlib2@2.3.7.post1",
+        "pkg:pypi/zipp@1.2.0"
+      ]
+    },
+    {
+      "package": "pkg:pypi/invenio%5bauth%2cbase%2cmetadata%5d@3.4.1",
+      "dependencies": [
+        "pkg:pypi/invenio-app@1.3.3",
+        "pkg:pypi/invenio-base@1.2.5",
+        "pkg:pypi/invenio-cache@1.1.0",
+        "pkg:pypi/invenio-celery@1.2.2",
+        "pkg:pypi/invenio-config@1.0.3",
+        "pkg:pypi/invenio-i18n@1.3.1",
+        "pkg:pypi/invenio@3.4.1"
+      ]
+    },
+    {
+      "package": "pkg:pypi/invenio-app@1.3.3",
+      "dependencies": [
+        "pkg:pypi/flask-celeryext@0.3.4",
+        "pkg:pypi/flask-limiter@1.1.0",
+        "pkg:pypi/flask-shell-ipython@0.4.1",
+        "pkg:pypi/flask-talisman@0.8.1",
+        "pkg:pypi/invenio-base@1.2.5",
+        "pkg:pypi/invenio-cache@1.1.0",
+        "pkg:pypi/invenio-config@1.0.3",
+        "pkg:pypi/limits@1.6",
+        "pkg:pypi/uritools@2.2.0"
+      ]
+    },
+    {
+      "package": "pkg:pypi/invenio-base@1.2.5",
+      "dependencies": [
+        "pkg:pypi/blinker@1.5",
+        "pkg:pypi/flask@1.1.4",
+        "pkg:pypi/six@1.16.0",
+        "pkg:pypi/werkzeug@1.0.1"
+      ]
+    },
+    {
+      "package": "pkg:pypi/invenio-cache@1.1.0",
+      "dependencies": [
+        "pkg:pypi/flask-caching@1.9.0",
+        "pkg:pypi/invenio-base@1.2.5"
+      ]
+    },
+    {
+      "package": "pkg:pypi/invenio-celery@1.2.2",
+      "dependencies": [
+        "pkg:pypi/celery@4.4.7",
+        "pkg:pypi/flask-celeryext@0.3.4",
+        "pkg:pypi/invenio-base@1.2.5",
+        "pkg:pypi/msgpack@1.0.4",
+        "pkg:pypi/redis@3.5.3"
+      ]
+    },
+    {
+      "package": "pkg:pypi/invenio-config@1.0.3",
+      "dependencies": [
+        "pkg:pypi/flask@1.1.4"
+      ]
+    },
+    {
+      "package": "pkg:pypi/invenio-i18n@1.3.1",
+      "dependencies": [
+        "pkg:pypi/flask-babelex@0.9.4",
+        "pkg:pypi/invenio-base@1.2.5"
+      ]
+    },
+    {
+      "package": "pkg:pypi/invenio-records@1.0.2",
+      "dependencies": [
+        "pkg:pypi/blinker@1.5",
+        "pkg:pypi/flask-celeryext@0.3.4",
+        "pkg:pypi/flask@1.1.4",
+        "pkg:pypi/jsonpatch@1.32",
+        "pkg:pypi/jsonref@0.2",
+        "pkg:pypi/jsonresolver@0.3.1",
+        "pkg:pypi/jsonschema@4.0.0"
+      ]
+    },
+    {
+      "package": "pkg:pypi/invenio@3.4.1",
+      "dependencies": [
+        "pkg:pypi/invenio-app@1.3.3",
+        "pkg:pypi/invenio-base@1.2.5",
+        "pkg:pypi/invenio-cache@1.1.0",
+        "pkg:pypi/invenio-celery@1.2.2",
+        "pkg:pypi/invenio-config@1.0.3",
+        "pkg:pypi/invenio-i18n@1.3.1"
+      ]
+    },
+    {
+      "package": "pkg:pypi/ipaddress@1.0.23",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/ipython-genutils@0.2.0",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/ipython@5.10.0",
+      "dependencies": [
+        "pkg:pypi/backports-shutil-get-terminal-size@1.0.0",
+        "pkg:pypi/decorator@4.4.2",
+        "pkg:pypi/pathlib2@2.3.7.post1",
+        "pkg:pypi/pexpect@4.8.0",
+        "pkg:pypi/pickleshare@0.7.5",
+        "pkg:pypi/prompt-toolkit@1.0.18",
+        "pkg:pypi/pygments@2.5.2",
+        "pkg:pypi/setuptools@44.1.1",
+        "pkg:pypi/simplegeneric@0.8.1",
+        "pkg:pypi/traitlets@4.3.3"
+      ]
+    },
+    {
+      "package": "pkg:pypi/itsdangerous@1.1.0",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/jinja2@2.11.3",
+      "dependencies": [
+        "pkg:pypi/markupsafe@1.1.1"
+      ]
+    },
+    {
+      "package": "pkg:pypi/jsonpatch@1.32",
+      "dependencies": [
+        "pkg:pypi/jsonpointer@2.3"
+      ]
+    },
+    {
+      "package": "pkg:pypi/jsonpointer@2.3",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/jsonref@0.2",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/jsonresolver@0.3.1",
+      "dependencies": [
+        "pkg:pypi/pluggy@0.13.1",
+        "pkg:pypi/six@1.16.0",
+        "pkg:pypi/werkzeug@1.0.1"
+      ]
+    },
+    {
+      "package": "pkg:pypi/jsonschema@4.0.0",
+      "dependencies": [
+        "pkg:pypi/attrs@21.4.0",
+        "pkg:pypi/importlib-metadata@2.1.3",
+        "pkg:pypi/pyrsistent@0.16.1"
+      ]
+    },
+    {
+      "package": "pkg:pypi/kombu@4.6.11",
+      "dependencies": [
+        "pkg:pypi/amqp@2.6.1",
+        "pkg:pypi/importlib-metadata@2.1.3"
+      ]
+    },
+    {
+      "package": "pkg:pypi/limits@1.6",
+      "dependencies": [
+        "pkg:pypi/six@1.16.0"
+      ]
+    },
+    {
+      "package": "pkg:pypi/markupsafe@1.1.1",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/mock@3.0.5",
+      "dependencies": [
+        "pkg:pypi/funcsigs@1.0.2",
+        "pkg:pypi/six@1.16.0"
+      ]
+    },
+    {
+      "package": "pkg:pypi/msgpack@1.0.4",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/pathlib2@2.3.7.post1",
+      "dependencies": [
+        "pkg:pypi/scandir@1.10.0",
+        "pkg:pypi/six@1.16.0",
+        "pkg:pypi/typing@3.10.0.0"
+      ]
+    },
+    {
+      "package": "pkg:pypi/pexpect@4.8.0",
+      "dependencies": [
+        "pkg:pypi/ptyprocess@0.7.0"
+      ]
+    },
+    {
+      "package": "pkg:pypi/pickleshare@0.7.5",
+      "dependencies": [
+        "pkg:pypi/pathlib2@2.3.7.post1"
+      ]
+    },
+    {
+      "package": "pkg:pypi/pluggy@0.13.1",
+      "dependencies": [
+        "pkg:pypi/importlib-metadata@2.1.3"
+      ]
+    },
+    {
+      "package": "pkg:pypi/prompt-toolkit@1.0.18",
+      "dependencies": [
+        "pkg:pypi/six@1.16.0",
+        "pkg:pypi/wcwidth@0.2.5"
+      ]
+    },
+    {
+      "package": "pkg:pypi/ptyprocess@0.7.0",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/pycparser@2.21",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/pygments@2.5.2",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/pyrsistent@0.16.1",
+      "dependencies": [
+        "pkg:pypi/six@1.16.0"
+      ]
+    },
+    {
+      "package": "pkg:pypi/pytz@2022.5",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/redis@3.5.3",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/scandir@1.10.0",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/setuptools@44.1.1",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/simplegeneric@0.8.1",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/six@1.16.0",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/speaklater@1.3",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/traitlets@4.3.3",
+      "dependencies": [
+        "pkg:pypi/decorator@4.4.2",
+        "pkg:pypi/enum34@1.1.10",
+        "pkg:pypi/ipython-genutils@0.2.0",
+        "pkg:pypi/six@1.16.0"
+      ]
+    },
+    {
+      "package": "pkg:pypi/typing@3.10.0.0",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/uritools@2.2.0",
+      "dependencies": [
+        "pkg:pypi/ipaddress@1.0.23"
+      ]
+    },
+    {
+      "package": "pkg:pypi/vine@1.3.0",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/wcwidth@0.2.5",
+      "dependencies": [
+        "pkg:pypi/backports-functools-lru-cache@1.6.4"
+      ]
+    },
+    {
+      "package": "pkg:pypi/werkzeug@1.0.1",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/zipp@1.2.0",
+      "dependencies": [
+        "pkg:pypi/contextlib2@0.6.0.post1"
+      ]
     }
   ]
 }

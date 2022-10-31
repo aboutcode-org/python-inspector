@@ -2,7 +2,7 @@
   "headers": {
     "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
-    "tool_version": "0.8.5",
+    "tool_version": "0.9.0",
     "options": [
       "--requirement /home/tg1999/Desktop/python-inspector-1/tests/data/pdt-requirements.txt",
       "--index-url https://pypi.org/simple",
@@ -181,46 +181,6 @@
           "api_data_url": null,
           "datasource_id": "pip_requirements",
           "purl": null
-        }
-      ]
-    }
-  ],
-  "resolved_dependencies_graph": [
-    {
-      "key": "flask",
-      "package_name": "flask",
-      "installed_version": "1.0",
-      "dependencies": [
-        {
-          "key": "click",
-          "package_name": "click",
-          "installed_version": "6.7",
-          "dependencies": []
-        },
-        {
-          "key": "itsdangerous",
-          "package_name": "itsdangerous",
-          "installed_version": "0.24",
-          "dependencies": []
-        },
-        {
-          "key": "jinja2",
-          "package_name": "jinja2",
-          "installed_version": "2.11.3",
-          "dependencies": [
-            {
-              "key": "markupsafe",
-              "package_name": "markupsafe",
-              "installed_version": "1.0",
-              "dependencies": []
-            }
-          ]
-        },
-        {
-          "key": "werkzeug",
-          "package_name": "werkzeug",
-          "installed_version": "0.15.3",
-          "dependencies": []
         }
       ]
     }
@@ -885,6 +845,46 @@
       "api_data_url": "https://pypi.org/pypi/werkzeug/0.15.3/json",
       "datasource_id": null,
       "purl": "pkg:pypi/werkzeug@0.15.3"
+    }
+  ],
+  "resolved_dependencies_graph": [
+    {
+      "key": "flask",
+      "package_name": "flask",
+      "installed_version": "1.0",
+      "dependencies": [
+        {
+          "key": "click",
+          "package_name": "click",
+          "installed_version": "6.7",
+          "dependencies": []
+        },
+        {
+          "key": "itsdangerous",
+          "package_name": "itsdangerous",
+          "installed_version": "0.24",
+          "dependencies": []
+        },
+        {
+          "key": "jinja2",
+          "package_name": "jinja2",
+          "installed_version": "2.11.3",
+          "dependencies": [
+            {
+              "key": "markupsafe",
+              "package_name": "markupsafe",
+              "installed_version": "1.0",
+              "dependencies": []
+            }
+          ]
+        },
+        {
+          "key": "werkzeug",
+          "package_name": "werkzeug",
+          "installed_version": "0.15.3",
+          "dependencies": []
+        }
+      ]
     }
   ]
 }
