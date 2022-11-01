@@ -15,8 +15,7 @@ from pip_requirements_parser import InstallRequirement
 
 from _packagedcode import models
 from _packagedcode.pypi import PipRequirementsFileHandler
-from _packagedcode.pypi import PythonSetupPyHandler
-from python_inspector.resolution import get_requirements_from_distribution
+from _packagedcode.pypi import get_requirements_txt_dependencies
 
 """
 Utilities to resolve dependencies .
@@ -30,14 +29,16 @@ def get_dependencies_from_requirements(requirements_file="requirements.txt"):
     Yield DependentPackage for each requirement in a `requirement`
     file.
     """
-    for package_data in PipRequirementsFileHandler.parse(location=requirements_file):
-        for dependent_package in package_data.dependencies:
-            if TRACE:
-                print(
-                    "dependent_package.extracted_requirement:",
-                    dependent_package.extracted_requirement,
-                )
-            yield dependent_package
+    dependent_packages, _ = get_requirements_txt_dependencies(
+        location=requirements_file, include_nested=True
+    )
+    for dependent_package in dependent_packages:
+        if TRACE:
+            print(
+                "dependent_package.extracted_requirement:",
+                dependent_package.extracted_requirement,
+            )
+        yield dependent_package
 
 
 def get_extra_data_from_requirements(requirements_file="requirements.txt"):
