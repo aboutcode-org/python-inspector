@@ -21,6 +21,12 @@ v0.9.1
 v0.9.0
 ------
 
+- Add support for recursive requirements.
+
+
+v0.9.0
+------
+
 - Add API function for using cleanly as a library.
 - Add support for setuptools.setup in live evaluation.
 - Do not fail if no direct dependencies are provided.

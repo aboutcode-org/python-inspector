@@ -1,0 +1,5 @@
+# Only installs requirements for deployments
+PyYAML==6.0
+retrying==1.3.3
+shapely==1.7.1
+-r com.txt

@@ -143,21 +143,36 @@ def resolve_dependencies(
     if PYPI_SIMPLE_URL not in index_urls:
         index_urls = tuple([PYPI_SIMPLE_URL]) + tuple(index_urls)
 
-    for req_file in requirement_files:
-        deps = dependencies.get_dependencies_from_requirements(requirements_file=req_file)
-        for extra_data in dependencies.get_extra_data_from_requirements(requirements_file=req_file):
-            index_urls = (*index_urls, *tuple(extra_data.get("extra_index_urls") or []))
-        direct_dependencies.extend(deps)
-        package_data = [
-            pkg_data.to_dict() for pkg_data in PipRequirementsFileHandler.parse(location=req_file)
-        ]
-        files.append(
-            dict(
-                type="file",
-                path=req_file,
-                package_data=package_data,
+    known_files = {*requirement_files}
+    visited_files = set()
+    while True:
+        unvisited_files = known_files - visited_files
+        for req_file in unvisited_files:
+            deps = dependencies.get_dependencies_from_requirements(requirements_file=req_file)
+            os.path.dirname(req_file)
+            for extra_data in dependencies.get_extra_data_from_requirements(
+                requirements_file=req_file
+            ):
+                index_urls = (*index_urls, *tuple(extra_data.get("extra_index_urls") or []))
+                recursive_files = extra_data.get("requirements") or []
+            direct_dependencies.extend(deps)
+            recursive_files = [os.path.join(os.path.dirname(req_file), f) for f in recursive_files]
+            package_data = [
+                pkg_data.to_dict()
+                for pkg_data in PipRequirementsFileHandler.parse(location=req_file)
+            ]
+            files.append(
+                dict(
+                    type="file",
+                    path=req_file,
+                    package_data=package_data,
+                )
             )
-        )
+            visited_files.add(req_file)
+            known_files.update(recursive_files)
+
+        if known_files == visited_files:
+            break
 
     for specifier in specifiers:
         dep = dependencies.get_dependency(specifier=specifier)
