@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+v0.9.3
+------
+
+- Add support for recursive requirements.
+
+
 v0.9.2
 ------
 
@@ -16,12 +22,6 @@ v0.9.1
 
 - Add --prefer-source option, to prefer source packages over binary ones
   if no source distribution is available then binary distributions are used.
-
-
-v0.9.0
-------
-
-- Add support for recursive requirements.
 
 
 v0.9.0
