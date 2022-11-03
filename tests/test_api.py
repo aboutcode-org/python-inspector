@@ -12,6 +12,7 @@
 import json
 import os
 
+import pytest
 from commoncode.testcase import FileDrivenTesting
 
 from python_inspector.resolve_cli import resolver_api
@@ -102,3 +103,37 @@ def test_api_with_prefer_source():
         expected_file=expected_file,
         clean=True,
     )
+
+
+def test_api_with_no_os():
+    with pytest.raises(Exception) as e:
+        resolver_api(
+            specifiers=["flask==2.1.2"],
+            python_version="3.10",
+        )
+
+
+def test_api_with_no_pyver():
+    with pytest.raises(Exception) as e:
+        resolver_api(
+            specifiers=["flask==2.1.2"],
+            operating_system="linux",
+        )
+
+
+def test_api_with_unsupported_os():
+    with pytest.raises(ValueError) as e:
+        resolver_api(
+            specifiers=["flask==2.1.2"],
+            python_version="3.10",
+            operating_system="foo-bar",
+        )
+
+
+def test_api_with_wrong_pyver():
+    with pytest.raises(ValueError) as e:
+        resolver_api(
+            specifiers=["flask==2.1.2"],
+            python_version="3.12",
+            operating_system="linux",
+        )
