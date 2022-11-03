@@ -223,9 +223,9 @@ repositories.
    PyPI "simple" API. Both the "simple" API and the PyPI JSON
    "warehouse-style" API are supported.
 
-- ``--prefer-source``: when set, prefer source distribution instead 
+- ``--prefer-source``: when set, prefer source distribution instead
   of binary distribution. In case there is no source distribution
-  available, the tool should provide binary distribution. 
+  available, the tool should provide binary distribution.
 
 Strategy and error processing:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
