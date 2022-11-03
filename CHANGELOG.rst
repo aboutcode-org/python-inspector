@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+v0.9.1
+------
+
+- Add --prefer-source option.
+
+
 v0.9.0
 ------
 
