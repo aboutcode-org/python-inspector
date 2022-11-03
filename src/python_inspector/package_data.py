@@ -25,7 +25,7 @@ from python_inspector.utils_pypi import PypiSimpleRepository
 
 
 def get_pypi_data_from_purl(
-    purl: str, environment: Environment, repos: List[PypiSimpleRepository]
+    purl: str, environment: Environment, repos: List[PypiSimpleRepository], prefer_source: bool
 ) -> PackageData:
     """
     Generate `Package` object from the `purl` string of pypi type
@@ -33,6 +33,8 @@ def get_pypi_data_from_purl(
     ``purl`` is a package-url of pypi type
     ``environment`` is a `Environment` object defaulting Python version 3.8 and linux OS
     ``repos`` is a list of `PypiSimpleRepository` objects
+    ``prefer_source`` is a boolean value to prefer source distribution over wheel,
+    if no source distribution is available then wheel is used
     """
     purl = PackageURL.from_string(purl)
     name = purl.name
@@ -53,16 +55,7 @@ def get_pypi_data_from_purl(
     bug_tracking_url = get_pypi_bugtracker_url(project_urls)
     python_version = get_python_version_from_env_tag(python_version=environment.python_version)
     valid_distribution_urls = []
-    valid_distribution_urls.extend(
-        list(
-            get_wheel_download_urls(
-                purl=purl,
-                repos=repos,
-                environment=environment,
-                python_version=python_version,
-            )
-        )
-    )
+
     valid_distribution_urls.append(
         get_sdist_download_url(
             purl=purl,
@@ -70,6 +63,21 @@ def get_pypi_data_from_purl(
             python_version=python_version,
         )
     )
+
+    # if prefer_source is True then only source distribution is used
+    # in case of no source distribution available then wheel is used
+    if not valid_distribution_urls or not prefer_source:
+        valid_distribution_urls.extend(
+            list(
+                get_wheel_download_urls(
+                    purl=purl,
+                    repos=repos,
+                    environment=environment,
+                    python_version=python_version,
+                )
+            )
+        )
+
     urls = response.get("urls") or []
     for url in urls:
         dist_url = url.get("url")

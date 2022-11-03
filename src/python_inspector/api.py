@@ -77,6 +77,7 @@ def resolve_dependencies(
     use_pypi_json_api=False,
     verbose=False,
     analyze_setup_py_insecurely=False,
+    prefer_source=False,
     printer=print,
 ):
     """
@@ -249,7 +250,9 @@ def resolve_dependencies(
             [
                 pkg.to_dict()
                 for pkg in list(
-                    get_pypi_data_from_purl(package, repos=repos, environment=environment)
+                    get_pypi_data_from_purl(
+                        package, repos=repos, environment=environment, prefer_source=prefer_source
+                    )
                 )
             ],
         )

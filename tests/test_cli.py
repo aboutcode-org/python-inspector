@@ -238,6 +238,19 @@ def test_cli_with_multiple_index_url_and_tilde_req_and_netrc_file_without_matchi
 
 
 @pytest.mark.online
+def test_cli_with_prefer_source():
+    expected_file = test_env.get_test_loc("prefer-source-expected.json", must_exist=False)
+    specifier = "zipp==3.8.0"
+    extra_options = ["--prefer-source"]
+    check_specs_resolution(
+        specifier=specifier,
+        expected_file=expected_file,
+        extra_options=extra_options,
+        regen=REGEN_TEST_FIXTURES,
+    )
+
+
+@pytest.mark.online
 def test_cli_with_pinned_requirements_file():
     requirements_file = test_env.get_test_loc("pinned-requirements.txt")
     expected_file = test_env.get_test_loc("pinned-requirements.txt-expected.json", must_exist=False)
@@ -352,7 +365,7 @@ def test_passing_of_json_pdt_and_json_flags():
 def test_version_option():
     options = ["--version"]
     result = run_cli(options=options)
-    assert "0.9.0" in result.output
+    assert "0.9.1" in result.output
 
 
 def test_passing_of_netrc_file_that_does_not_exist():

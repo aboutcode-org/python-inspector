@@ -2,6 +2,13 @@ Changelog
 =========
 
 
+v0.9.1
+------
+
+- Add --prefer-source option, to prefer source packages over binary ones
+  if no source distribution is available then binary distributions are used.
+
+
 v0.9.0
 ------
 
