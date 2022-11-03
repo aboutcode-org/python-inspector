@@ -208,7 +208,7 @@ def resolve_dependencies(
     if not direct_dependencies:
         return Resolution(
             packages=[],
-            resolution={},
+            resolution=[],
             files=files,
         )
 
