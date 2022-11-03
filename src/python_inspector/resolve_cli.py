@@ -152,6 +152,11 @@ def print_version(ctx, param, value):
     " dynamically. This is an insecure operation as it can run arbitrary code.",
 )
 @click.option(
+    "--prefer-source",
+    is_flag=True,
+    help="Prefer source distributions over binary distributions.",
+)
+@click.option(
     "--verbose",
     is_flag=True,
     hidden=True,
@@ -182,6 +187,7 @@ def resolve_dependencies(
     use_cached_index=False,
     use_pypi_json_api=False,
     analyze_setup_py_insecurely=False,
+    prefer_source=False,
     verbose=TRACE,
 ):
     """
@@ -194,7 +200,9 @@ def resolve_dependencies(
     linux OS.
 
     Download from the provided PyPI simple --index-url INDEX(s) URLs defaulting
-    to PyPI.org
+    to PyPI.org.
+
+    Provide source distributions over binary distributions with the --prefer-source
 
     Error and progress are printed to stderr.
 
@@ -250,6 +258,7 @@ def resolve_dependencies(
             verbose=verbose,
             analyze_setup_py_insecurely=analyze_setup_py_insecurely,
             printer=click.secho,
+            prefer_source=prefer_source,
         )
         output = dict(
             headers=headers,

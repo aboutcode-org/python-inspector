@@ -25,7 +25,7 @@ from python_inspector.utils_pypi import PypiSimpleRepository
 
 
 def get_pypi_data_from_purl(
-    purl: str, environment: Environment, repos: List[PypiSimpleRepository]
+    purl: str, environment: Environment, repos: List[PypiSimpleRepository], prefer_source: bool
 ) -> PackageData:
     """
     Generate `Package` object from the `purl` string of pypi type
@@ -53,16 +53,17 @@ def get_pypi_data_from_purl(
     bug_tracking_url = get_pypi_bugtracker_url(project_urls)
     python_version = get_python_version_from_env_tag(python_version=environment.python_version)
     valid_distribution_urls = []
-    valid_distribution_urls.extend(
-        list(
-            get_wheel_download_urls(
-                purl=purl,
-                repos=repos,
-                environment=environment,
-                python_version=python_version,
+    if not prefer_source:
+        valid_distribution_urls.extend(
+            list(
+                get_wheel_download_urls(
+                    purl=purl,
+                    repos=repos,
+                    environment=environment,
+                    python_version=python_version,
+                )
             )
         )
-    )
     valid_distribution_urls.append(
         get_sdist_download_url(
             purl=purl,
