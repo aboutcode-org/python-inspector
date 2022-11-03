@@ -154,7 +154,8 @@ def print_version(ctx, param, value):
 @click.option(
     "--prefer-source",
     is_flag=True,
-    help="Prefer source distributions over binary distributions.",
+    help="Prefer source distributions over binary distributions"
+    " if no source distribution is available then binary distributions are used",
 )
 @click.option(
     "--verbose",
@@ -203,6 +204,7 @@ def resolve_dependencies(
     to PyPI.org.
 
     Provide source distributions over binary distributions with the --prefer-source
+    option. If no source distribution is available then binary distributions are used.
 
     Error and progress are printed to stderr.
 

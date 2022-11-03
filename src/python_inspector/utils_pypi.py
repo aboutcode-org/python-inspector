@@ -336,7 +336,7 @@ def download_sdist(
     fetched_sdist_filename = None
 
     for repo in repos:
-        sdist = get_valid_sdist(repo, name, version, python_version=DEFAULT_PYTHON_VERSION)
+        sdist = get_valid_sdist(repo, name, version, python_version=python_version)
         if not sdist:
             if TRACE_DEEP:
                 print(f"    download_sdist: No valid sdist for {name}=={version}")
