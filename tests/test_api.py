@@ -105,6 +105,29 @@ def test_api_with_prefer_source():
     )
 
 
+def test_api_with_recursive_requirement_file():
+    result_file = test_env.get_temp_file("json")
+    requirement_file = test_env.get_test_loc("recursive_requirements/r.txt")
+    expected_file = test_env.get_test_loc(
+        "test-api-with-recursive-requirement-file.json", must_exist=False
+    )
+    with open(result_file, "w") as result:
+        result.write(
+            json.dumps(
+                resolver_api(
+                    python_version="3.8",
+                    operating_system="linux",
+                    requirement_files=[requirement_file],
+                ).to_dict()
+            )
+        )
+    check_json_results(
+        result_file=result_file,
+        expected_file=expected_file,
+        clean=True,
+    )
+
+
 def test_api_with_no_os():
     with pytest.raises(Exception) as e:
         resolver_api(
