@@ -2,7 +2,7 @@
   "headers": {
     "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
-    "tool_version": "0.9.2",
+    "tool_version": "0.9.3",
     "options": [
       "--requirement /home/tg1999/Desktop/python-inspector-1/tests/data/environment-marker-test-requirements.txt",
       "--index-url https://pypi.org/simple",
