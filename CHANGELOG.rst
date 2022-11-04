@@ -7,6 +7,8 @@ v0.9.2
 
 - Make os and python version as mandatory input parameters.
 - Do not return duplicates binaries.
+- Return empty list for resolved dependencies graph in case of no dependencies
+  are found #94 https://github.com/nexB/python-inspector/issues/94.
 
 
 v0.9.1
