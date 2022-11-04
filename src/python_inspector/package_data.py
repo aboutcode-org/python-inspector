@@ -67,16 +67,17 @@ def get_pypi_data_from_purl(
     # if prefer_source is True then only source distribution is used
     # in case of no source distribution available then wheel is used
     if not valid_distribution_urls or not prefer_source:
-        valid_distribution_urls.extend(
-            list(
-                get_wheel_download_urls(
-                    purl=purl,
-                    repos=repos,
-                    environment=environment,
-                    python_version=python_version,
-                )
+        wheel_urls = list(
+            get_wheel_download_urls(
+                purl=purl,
+                repos=repos,
+                environment=environment,
+                python_version=python_version,
             )
         )
+        wheel_url = choose_single_wheel(wheel_urls)
+        if wheel_url:
+            valid_distribution_urls.append(wheel_url)
 
     urls = response.get("urls") or []
     for url in urls:
@@ -108,6 +109,15 @@ def get_pypi_data_from_purl(
             ),
             **purl.to_dict(),
         )
+
+
+def choose_single_wheel(wheel_urls):
+    """
+    Sort wheel urls descendingly and return the first one
+    """
+    wheel_urls.sort(reverse=True)
+    if wheel_urls:
+        return wheel_urls[0]
 
 
 def get_pypi_bugtracker_url(project_urls):
