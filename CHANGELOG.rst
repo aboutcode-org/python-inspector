@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+v0.9.2
+------
+
+- Make os and python version as mandatory input parameters.
+
+
 v0.9.1
 ------
 

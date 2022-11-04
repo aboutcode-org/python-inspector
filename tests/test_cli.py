@@ -356,6 +356,14 @@ def check_specs_resolution(
     )
 
 
+def get_os_and_pyver(options):
+    if "--python-version" not in options:
+        options.extend(["--python-version", "38"])
+    if "--operating-system" not in options:
+        options.extend(["--operating-system", "linux"])
+    return options
+
+
 def test_passing_of_json_pdt_and_json_flags():
     result_file = test_env.get_temp_file("json")
     options = ["--specifier", "foo", "--json", result_file, "--json-pdt", result_file]
@@ -387,6 +395,38 @@ def test_passing_of_empty_requirements_file():
 def test_passing_of_no_json_output_flag():
     options = ["--specifier", "foo"]
     run_cli(options=options, expected_rc=1)
+
+
+def test_passing_of_no_os():
+    options = ["--specifier", "foo", "--json", "-", "--python-version", "38"]
+    message = "No operating system"
+    result = run_cli(options=options, expected_rc=1, get_env=False)
+    if message:
+        assert message in result.output
+
+
+def test_passing_of_no_pyver():
+    options = ["--specifier", "foo", "--json", "-", "--operating-system", "linux"]
+    message = "No python version"
+    result = run_cli(options=options, expected_rc=1, get_env=False)
+    if message:
+        assert message in result.output
+
+
+def test_passing_of_wrong_pyver():
+    options = ["--specifier", "foo", "--json", "-", "--python-version", "foo"]
+    message = "Invalid value for '-p' / '--python-version'"
+    result = run_cli(options=options, expected_rc=2, get_env=False)
+    if message:
+        assert message in result.output
+
+
+def test_passing_of_unsupported_os():
+    options = ["--specifier", "foo", "--json", "-", "--operating-system", "bar"]
+    message = "Invalid value for '-o' / '--operating-system'"
+    result = run_cli(options=options, expected_rc=2, get_env=False)
+    if message:
+        assert message in result.output
 
 
 def check_requirements_resolution(
@@ -480,7 +520,7 @@ def clean_results(results):
     return results
 
 
-def run_cli(options, cli=resolve_dependencies, expected_rc=0, env=None):
+def run_cli(options, cli=resolve_dependencies, expected_rc=0, env=None, get_env=True):
     """
     Run a command line resolution. Return a click.testing.Result object.
     """
@@ -489,6 +529,8 @@ def run_cli(options, cli=resolve_dependencies, expected_rc=0, env=None):
         env = dict(os.environ)
 
     runner = CliRunner()
+    if get_env:
+        options = get_os_and_pyver(options)
     result = runner.invoke(cli, options, catch_exceptions=False, env=env)
 
     if result.exit_code != expected_rc:

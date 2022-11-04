@@ -72,7 +72,6 @@ def print_version(ctx, param, value):
     "python_version",
     type=click.Choice(utils_pypi.PYTHON_VERSIONS),
     metavar="PYVER",
-    default=DEFAULT_PYTHON_VERSION,
     show_default=True,
     help="Python version to use for dependency resolution.",
 )
@@ -82,7 +81,6 @@ def print_version(ctx, param, value):
     "operating_system",
     type=click.Choice(utils_pypi.PLATFORMS_BY_OS),
     metavar="OS",
-    default="linux",
     show_default=True,
     help="OS to use for dependency resolution.",
 )

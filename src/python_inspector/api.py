@@ -38,7 +38,9 @@ from python_inspector.resolution import get_environment_marker_from_environment
 from python_inspector.resolution import get_package_list
 from python_inspector.resolution import get_python_version_from_env_tag
 from python_inspector.resolution import get_requirements_from_python_manifest
+from python_inspector.utils_pypi import PLATFORMS_BY_OS
 from python_inspector.utils_pypi import PYPI_SIMPLE_URL
+from python_inspector.utils_pypi import PYTHON_DOT_VERSIONS_BY_VER
 from python_inspector.utils_pypi import Environment
 
 
@@ -67,8 +69,8 @@ def resolve_dependencies(
     requirement_files=tuple(),
     setup_py_file=None,
     specifiers=tuple(),
-    python_version=DEFAULT_PYTHON_VERSION,
-    operating_system="linux",
+    python_version=None,
+    operating_system=None,
     index_urls=tuple([PYPI_SIMPLE_URL]),
     pdt_output=None,
     netrc_file=None,
@@ -92,6 +94,25 @@ def resolve_dependencies(
     Download from the provided PyPI simple index_urls INDEX(s) URLs defaulting
     to PyPI.org
     """
+
+    if not operating_system:
+        raise Exception(f"No operating system provided.")
+    if operating_system not in PLATFORMS_BY_OS:
+        raise ValueError(
+            f"Invalid operating system: {operating_system}. "
+            f"Must be one of: {', '.join(PLATFORMS_BY_OS.keys())}"
+        )
+
+    valid_python_versions = list(PYTHON_DOT_VERSIONS_BY_VER.keys())
+    valid_python_versions.extend([dot_ver for pyver, dot_ver in PYTHON_DOT_VERSIONS_BY_VER.items()])
+
+    if not python_version:
+        raise Exception(f"No python version provided.")
+    if python_version not in valid_python_versions:
+        raise ValueError(
+            f"Invalid python version: {python_version}. "
+            f"Must be one of: {', '.join(valid_python_versions)}"
+        )
 
     if verbose:
         printer("Resolving dependencies...")
