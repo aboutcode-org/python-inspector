@@ -70,10 +70,9 @@ def print_version(ctx, param, value):
     "-p",
     "--python-version",
     "python_version",
-    type=click.Choice(utils_pypi.valid_python_versions),
+    type=click.Choice(utils_pypi.PYTHON_VERSIONS),
     metavar="PYVER",
     show_default=True,
-    required=True,
     help="Python version to use for dependency resolution.",
 )
 @click.option(
@@ -83,7 +82,6 @@ def print_version(ctx, param, value):
     type=click.Choice(utils_pypi.PLATFORMS_BY_OS),
     metavar="OS",
     show_default=True,
-    required=True,
     help="OS to use for dependency resolution.",
 )
 @click.option(

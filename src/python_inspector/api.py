@@ -40,8 +40,8 @@ from python_inspector.resolution import get_python_version_from_env_tag
 from python_inspector.resolution import get_requirements_from_python_manifest
 from python_inspector.utils_pypi import PLATFORMS_BY_OS
 from python_inspector.utils_pypi import PYPI_SIMPLE_URL
+from python_inspector.utils_pypi import PYTHON_DOT_VERSIONS_BY_VER
 from python_inspector.utils_pypi import Environment
-from python_inspector.utils_pypi import valid_python_versions
 
 
 class Resolution(NamedTuple):
@@ -102,6 +102,9 @@ def resolve_dependencies(
             f"Invalid operating system: {operating_system}. "
             f"Must be one of: {', '.join(PLATFORMS_BY_OS.keys())}"
         )
+
+    valid_python_versions = list(PYTHON_DOT_VERSIONS_BY_VER.keys())
+    valid_python_versions.extend([dot_ver for pyver, dot_ver in PYTHON_DOT_VERSIONS_BY_VER.items()])
 
     if not python_version:
         raise Exception(f"No python version provided.")

@@ -399,12 +399,18 @@ def test_passing_of_no_json_output_flag():
 
 def test_passing_of_no_os():
     options = ["--specifier", "foo", "--json", "-", "--python-version", "38"]
-    run_cli(options=options, expected_rc=2, get_env=False)
+    message = "No operating system"
+    result = run_cli(options=options, expected_rc=1, get_env=False)
+    if message:
+        assert message in result.output
 
 
 def test_passing_of_no_pyver():
     options = ["--specifier", "foo", "--json", "-", "--operating-system", "linux"]
-    run_cli(options=options, expected_rc=2, get_env=False)
+    message = "No python version"
+    result = run_cli(options=options, expected_rc=1, get_env=False)
+    if message:
+        assert message in result.output
 
 
 def test_passing_of_wrong_pyver():

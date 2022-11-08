@@ -6,10 +6,6 @@ v0.9.3
 ------
 
 - Add support for recursive requirements.
-- Add python 3.11 as a valid python version in choices.
-- Operating system and python version are now required fields in CLI.
-- Add dot versions (3.6, 3.7, 3.8, 3.9, 3.10, 3.11, 2.7) with 
-  current python version choices for CLI (36, 37, 38, 39, 310, 311, 27).
 
 
 v0.9.2
