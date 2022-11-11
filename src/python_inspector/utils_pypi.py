@@ -98,7 +98,7 @@ TRACE_DEEP = False
 TRACE_ULTRA_DEEP = False
 
 # Supported environments
-PYTHON_VERSIONS = "36", "37", "38", "39", "310", "27"
+PYTHON_VERSIONS = "36", "37", "38", "39", "310", "311", "27"
 
 PYTHON_DOT_VERSIONS_BY_VER = {
     "36": "3.6",
@@ -107,7 +107,11 @@ PYTHON_DOT_VERSIONS_BY_VER = {
     "39": "3.9",
     "310": "3.10",
     "27": "2.7",
+    "311": "3.11",
 }
+
+valid_python_versions = list(PYTHON_DOT_VERSIONS_BY_VER.keys())
+valid_python_versions.extend([dot_ver for pyver, dot_ver in PYTHON_DOT_VERSIONS_BY_VER.items()])
 
 
 def get_python_dot_version(version):
@@ -123,6 +127,7 @@ ABIS_BY_PYTHON_VERSION = {
     "38": ["cp38", "cp38m", "abi3"],
     "39": ["cp39", "cp39m", "abi3"],
     "310": ["cp310", "cp310m", "abi3"],
+    "311": ["cp311", "cp311m", "abi3"],
     "27": ["cp27", "cp27m"],
 }
 

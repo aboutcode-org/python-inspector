@@ -70,9 +70,10 @@ def print_version(ctx, param, value):
     "-p",
     "--python-version",
     "python_version",
-    type=click.Choice(utils_pypi.PYTHON_VERSIONS),
+    type=click.Choice(utils_pypi.valid_python_versions),
     metavar="PYVER",
     show_default=True,
+    required=True,
     help="Python version to use for dependency resolution.",
 )
 @click.option(
@@ -82,6 +83,7 @@ def print_version(ctx, param, value):
     type=click.Choice(utils_pypi.PLATFORMS_BY_OS),
     metavar="OS",
     show_default=True,
+    required=True,
     help="OS to use for dependency resolution.",
 )
 @click.option(
@@ -195,8 +197,7 @@ def resolve_dependencies(
     SETUP-PY-FILE file and save the results as JSON to FILE.
 
     Resolve the dependencies for the requested ``--python-version`` PYVER and
-    ``--operating_system`` OS combination defaulting Python version 3.8 and
-    linux OS.
+    ``--operating_system`` OS combination.
 
     Download from the provided PyPI simple --index-url INDEX(s) URLs defaulting
     to PyPI.org.

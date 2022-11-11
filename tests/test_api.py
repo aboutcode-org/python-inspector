@@ -160,3 +160,24 @@ def test_api_with_wrong_pyver():
             python_version="3.12",
             operating_system="linux",
         )
+
+
+def test_api_with_python_311():
+    result_file = test_env.get_temp_file("json")
+    expected_file = test_env.get_test_loc("test-api-with-python-311.json", must_exist=False)
+    with open(result_file, "w") as result:
+        result.write(
+            json.dumps(
+                resolver_api(
+                    specifiers=["flask==2.1.2"],
+                    python_version="3.11",
+                    operating_system="linux",
+                    prefer_source=True,
+                ).to_dict()
+            )
+        )
+    check_json_results(
+        result_file=result_file,
+        expected_file=expected_file,
+        clean=True,
+    )
