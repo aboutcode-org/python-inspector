@@ -10,7 +10,7 @@
 #
 
 from packageurl import PackageURL
-from packaging.requirements import Requirement
+from packvers.requirements import Requirement
 from pip_requirements_parser import InstallRequirement
 
 from _packagedcode import models

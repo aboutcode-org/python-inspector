@@ -11,10 +11,10 @@
 import os
 from unittest.mock import patch
 
-import packaging
+import packvers
 import pytest
 from commoncode.testcase import FileDrivenTesting
-from packaging.requirements import Requirement
+from packvers.requirements import Requirement
 
 from _packagedcode import models
 from python_inspector.api import get_resolved_dependencies
@@ -156,7 +156,7 @@ def test_without_supported_wheels():
 
 
 def test_is_valid_version():
-    parsed_version = packaging.version.parse("2.1.2")
+    parsed_version = packvers.version.parse("2.1.2")
     requirements = {"flask": [Requirement("flask>2.0.0")]}
     bad_versions = []
     identifier = "flask"
@@ -164,7 +164,7 @@ def test_is_valid_version():
 
 
 def test_is_valid_version_with_no_specifier():
-    parsed_version = packaging.version.parse("2.1.2")
+    parsed_version = packvers.version.parse("2.1.2")
     requirements = {"flask": [Requirement("flask")]}
     bad_versions = []
     identifier = "flask"
@@ -172,7 +172,7 @@ def test_is_valid_version_with_no_specifier():
 
 
 def test_is_valid_version_with_no_specifier_and_pre_release():
-    parsed_version = packaging.version.parse("1.0.0b4")
+    parsed_version = packvers.version.parse("1.0.0b4")
     requirements = {"flask": [Requirement("flask")]}
     bad_versions = []
     identifier = "flask"

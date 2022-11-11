@@ -21,7 +21,7 @@ except ImportError:  # pragma: no cover
 import mock
 import setuptools
 from commoncode.command import pushd
-from packaging.requirements import Requirement
+from packvers.requirements import Requirement
 
 
 def minver_error(pkg_name):

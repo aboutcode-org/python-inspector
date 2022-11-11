@@ -20,18 +20,16 @@ import sys
 from typing import NamedTuple
 import tempfile
 import zipfile
-
 import dparse2
-import packaging
+import packvers as packaging
 import pip_requirements_parser
 import pkginfo2
 from commoncode import fileutils
-from packaging.specifiers import SpecifierSet
+from packvers.specifiers import SpecifierSet
 from packageurl import PackageURL
-from packaging import markers
-from packaging.requirements import Requirement
-from packaging.utils import canonicalize_name
-
+from packvers import markers
+from packvers.requirements import Requirement
+from packvers.utils import canonicalize_name
 from _packagedcode import models
 from _packagedcode.utils import build_description
 from _packagedcode.utils import combine_expressions
