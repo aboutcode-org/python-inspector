@@ -197,8 +197,7 @@ def resolve_dependencies(
     SETUP-PY-FILE file and save the results as JSON to FILE.
 
     Resolve the dependencies for the requested ``--python-version`` PYVER and
-    ``--operating_system`` OS combination defaulting Python version 3.8 and
-    linux OS.
+    ``--operating_system`` OS combination.
 
     Download from the provided PyPI simple --index-url INDEX(s) URLs defaulting
     to PyPI.org.
