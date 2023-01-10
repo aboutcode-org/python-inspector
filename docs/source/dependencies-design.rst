@@ -198,7 +198,7 @@ selecting pre-built binary packages (options can be repeated):
 -  ``--python-version <python_version>``: the Python version(s) to use for
    wheels and dependency resolution. Can be repeated.
 -  ``--operating-system <os>`` : The OS(ses) to use for wheels: one of
-   linux, mac or windows. Can be repeated.
+   linux, macos or windows. Can be repeated.
 
 Notes: the assumption is that we only support X86/64 by default as an
 architecture for now. We could refine this later with support for
