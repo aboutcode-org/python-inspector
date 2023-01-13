@@ -2,7 +2,7 @@
   "headers": {
     "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
-    "tool_version": "0.9.3",
+    "tool_version": "0.9.4",
     "options": [
       "--requirement /home/jono/nexb/src/python-inspector/tests/data/azure-devops.req.txt",
       "--index-url https://pypi.org/simple",

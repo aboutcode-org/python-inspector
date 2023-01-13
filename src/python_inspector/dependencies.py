@@ -50,6 +50,11 @@ def get_extra_data_from_requirements(requirements_file="requirements.txt"):
         yield package_data.extra_data
 
 
+def is_requirement_pinned(requirement: Requirement):
+    specifiers = requirement.specifier
+    return specifiers and len(specifiers) == 1 and next(iter(specifiers)).operator in {"==", "==="}
+
+
 def get_dependency(specifier):
     """
     Return a DependentPackage given a requirement ``specifier`` string.
@@ -63,26 +68,22 @@ def get_dependency(specifier):
 
     requirement = Requirement(requirement_string=specifier)
 
-    # TODO: use new InstallRequirement.from_specifier constructor when available
-    ir = InstallRequirement(
-        req=requirement,
-        requirement_line=specifier,
-    )
-
     scope = "install"
     is_runtime = True
     is_optional = False
 
-    if ir.name:
+    if requirement.name:
         # will be None if not pinned
-        version = ir.get_pinned_version
-        purl = PackageURL(type="pypi", name=ir.name, version=version).to_string()
+        version = None
+        if is_requirement_pinned(requirement):
+            version = str(list(requirement.specifier)[0].version)
+        purl = PackageURL(type="pypi", name=requirement.name, version=version).to_string()
 
     return models.DependentPackage(
         purl=purl,
         scope=scope,
         is_runtime=is_runtime,
         is_optional=is_optional,
-        is_resolved=ir.is_pinned or False,
+        is_resolved=False or is_requirement_pinned(requirement),
         extracted_requirement=specifier,
     )
