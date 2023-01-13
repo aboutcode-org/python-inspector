@@ -16,7 +16,7 @@ from typing import NamedTuple
 from typing import Sequence
 
 from packageurl import PackageURL
-from packaging.requirements import Requirement
+from packvers.requirements import Requirement
 from resolvelib import BaseReporter
 from resolvelib import Resolver
 from tinynetrc import Netrc

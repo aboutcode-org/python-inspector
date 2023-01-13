@@ -26,9 +26,9 @@ import requests
 from bs4 import BeautifulSoup
 from commoncode import fileutils
 from commoncode.hash import multi_checksums
-from packaging import tags as packaging_tags
-from packaging import version as packaging_version
-from packaging.specifiers import SpecifierSet
+from packvers import tags as packaging_tags
+from packvers import version as packaging_version
+from packvers.specifiers import SpecifierSet
 
 from python_inspector import DEFAULT_PYTHON_VERSION
 from python_inspector import utils_pip_compatibility_tags

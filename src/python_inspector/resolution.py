@@ -18,12 +18,12 @@ from typing import Tuple
 from typing import Union
 from zipfile import ZipFile
 
-import packaging.utils
+import packvers.utils
 from packageurl import PackageURL
-from packaging.requirements import Requirement
-from packaging.version import LegacyVersion
-from packaging.version import Version
-from packaging.version import parse as parse_version
+from packvers.requirements import Requirement
+from packvers.version import LegacyVersion
+from packvers.version import Version
+from packvers.version import parse as parse_version
 from resolvelib import AbstractProvider
 from resolvelib.structs import DirectedGraph
 
@@ -325,7 +325,7 @@ class PythonInputProvider(AbstractProvider):
 
     def identify(self, requirement_or_candidate: Union[Candidate, Requirement]) -> str:
         """Given a requirement, return an identifier for it. Overridden."""
-        name = packaging.utils.canonicalize_name(requirement_or_candidate.name)
+        name = packvers.utils.canonicalize_name(requirement_or_candidate.name)
         if requirement_or_candidate.extras:
             extras_str = ",".join(sorted(requirement_or_candidate.extras))
             return "{}[{}]".format(name, extras_str)
@@ -576,7 +576,7 @@ class PythonInputProvider(AbstractProvider):
         """
         Yield dependencies for the given candidate.
         """
-        name = packaging.utils.canonicalize_name(candidate.name)
+        name = packvers.utils.canonicalize_name(candidate.name)
         # TODO: handle extras https://github.com/nexB/python-inspector/issues/10
         if candidate.extras:
             r = f"{name}=={candidate.version}"
