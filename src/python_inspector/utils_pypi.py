@@ -180,7 +180,7 @@ if not CACHE_THIRDPARTY_DIR:
     CACHE_THIRDPARTY_DIR = ".cache/python_inspector"
     try:
         os.makedirs(CACHE_THIRDPARTY_DIR, exist_ok=True)
-    except:
+    except Exception:
         home = pathlib.Path.home()
         CACHE_THIRDPARTY_DIR = str(home / ".cache/python_inspector")
         os.makedirs(CACHE_THIRDPARTY_DIR, exist_ok=True)
