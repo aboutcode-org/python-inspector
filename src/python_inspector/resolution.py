@@ -10,6 +10,7 @@
 import operator
 import os
 import tarfile
+import re
 from typing import Dict
 from typing import Generator
 from typing import List
@@ -299,11 +300,17 @@ def get_requirements_from_python_manifest(
             )
 
         else:
-            # We should not raise exception here as we may have a setup.py that does not
-            # have any dependencies. We should not fail in this case.
-            raise Exception(
-                f"Unable to collect setup.py dependencies securely: {setup_py_location}"
-            )
+            # Do not raise exception here as we may have a setup.py that does not
+            # have any dependencies.
+            with(open(setup_py_location)) as sf:
+                install_requires = []
+                parameters = re.sub(r"\s", "", re.findall(r'install_requires[\s]*=[\s]*\[[^\]]*\]',
+                                                          sf.read())[0])
+                exec(parameters)  # update 'install_requires' from setup.py
+            if install_requires != []:
+                raise Exception(
+                    f"Unable to collect setup.py dependencies securely: {setup_py_location}"
+                )
 
 
 DEFAULT_ENVIRONMENT = utils_pypi.Environment.from_pyver_and_os(
