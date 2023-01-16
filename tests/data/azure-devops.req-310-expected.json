@@ -2,9 +2,9 @@
   "headers": {
     "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
-    "tool_version": "0.9.3",
+    "tool_version": "0.9.4",
     "options": [
-      "--requirement /home/jono/nexb/src/python-inspector/tests/data/azure-devops.req.txt",
+      "--requirement /home/tg1999/Desktop/python-inspector-1/tests/data/azure-devops.req.txt",
       "--index-url https://pypi.org/simple",
       "--python-version 310",
       "--operating-system linux",
@@ -17,7 +17,7 @@
   "files": [
     {
       "type": "file",
-      "path": "/home/jono/nexb/src/python-inspector/tests/data/azure-devops.req.txt",
+      "path": "/home/tg1999/Desktop/python-inspector-1/tests/data/azure-devops.req.txt",
       "package_data": [
         {
           "type": "pypi",

@@ -1,10 +1,13 @@
 Changelog
 =========
 
-next-version
-------------
+
+v0.9.4
+------
 
 - Create PyPI cache location in the home directory if a cache directory cannot be made at the project root.
+- Replace packaging with packvers.
+- Prevent duplicated package versions.
 
 
 v0.9.3
