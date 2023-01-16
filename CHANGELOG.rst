@@ -1,6 +1,11 @@
 Changelog
 =========
 
+next-version
+------------
+
+- Create PyPI cache location in the home directory if a cache directory cannot be made at the project root.
+
 
 v0.9.3
 ------
@@ -8,7 +13,7 @@ v0.9.3
 - Add support for recursive requirements.
 - Add python 3.11 as a valid python version in choices.
 - Operating system and python version are now required fields in CLI.
-- Add dot versions (3.6, 3.7, 3.8, 3.9, 3.10, 3.11, 2.7) with 
+- Add dot versions (3.6, 3.7, 3.8, 3.9, 3.10, 3.11, 2.7) with
   current python version choices for CLI (36, 37, 38, 39, 310, 311, 27).
 
 
@@ -109,7 +114,7 @@ v0.6.3
 ------
 
 - Ensure to filter out top level dependencies on the basis of their environment markers
-- Do not ignore files on basis of name 
+- Do not ignore files on basis of name
 
 
 v0.6.2
@@ -123,7 +128,7 @@ v0.6.1
 ------
 
 - Use latest ScanCode toolkit packagedcode including the ability to collect
-  extra index URLs from requirements.txt 
+  extra index URLs from requirements.txt
 - Use new pipdeptree-like format for improved compatibility
 - Rename command line tool name from "dad" to "python-inspector"
 

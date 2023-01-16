@@ -33,7 +33,7 @@ valid: isort black
 check:
 	@echo "-> Run pycodestyle (PEP8) validation"
 	@${ACTIVATE} pycodestyle --max-line-length=110 \
-	   --exclude=.eggs,etc/scripts,src/_packagedcode,venv,lib,thirdparty,docs .
+	   --exclude=.eggs,etc/scripts,src/_packagedcode,venv/,lib/,thirdparty/,docs/,.cache/ .
 	@echo "-> Run isort imports ordering validation"
 	@${ACTIVATE} isort --sl --check-only -l 100 setup.py src tests --skip-glob "*/_packagedcode/*"
 	@echo "-> Run black validation"

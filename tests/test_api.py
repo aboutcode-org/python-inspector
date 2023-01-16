@@ -14,9 +14,9 @@ import os
 
 import pytest
 from commoncode.testcase import FileDrivenTesting
+from test_cli import check_json_results
 
 from python_inspector.resolve_cli import resolver_api
-from tests.test_cli import check_json_results
 
 test_env = FileDrivenTesting()
 test_env.test_data_dir = os.path.join(os.path.dirname(__file__), "data")

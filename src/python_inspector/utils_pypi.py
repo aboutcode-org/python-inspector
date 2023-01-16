@@ -11,6 +11,7 @@
 import email
 import itertools
 import os
+import pathlib
 import re
 import shutil
 import tempfile
@@ -174,7 +175,16 @@ PLATFORMS_BY_OS = {
     ],
 }
 
-CACHE_THIRDPARTY_DIR = ".cache/thirdparty"
+CACHE_THIRDPARTY_DIR = os.environ.get("PYTHON_INSPECTOR_CACHE_DIR")
+if not CACHE_THIRDPARTY_DIR:
+    CACHE_THIRDPARTY_DIR = ".cache/python_inspector"
+    try:
+        os.makedirs(CACHE_THIRDPARTY_DIR, exist_ok=True)
+    except Exception:
+        home = pathlib.Path.home()
+        CACHE_THIRDPARTY_DIR = str(home / ".cache/python_inspector")
+        os.makedirs(CACHE_THIRDPARTY_DIR, exist_ok=True)
+
 
 ################################################################################
 
