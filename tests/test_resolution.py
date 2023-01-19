@@ -48,7 +48,7 @@ def test_get_resolved_dependencies_with_flask_and_python_310():
         "pkg:pypi/flask@2.1.2",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
-        "pkg:pypi/markupsafe@2.1.1",
+        "pkg:pypi/markupsafe@2.1.2",
         "pkg:pypi/werkzeug@2.2.2",
     ]
 
@@ -72,7 +72,7 @@ def test_get_resolved_dependencies_with_flask_and_python_310_windows():
         "pkg:pypi/flask@2.1.2",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
-        "pkg:pypi/markupsafe@2.1.1",
+        "pkg:pypi/markupsafe@2.1.2",
         "pkg:pypi/werkzeug@2.2.2",
     ]
 
@@ -123,15 +123,15 @@ def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
         "pkg:pypi/importlib-metadata@6.0.0",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
-        "pkg:pypi/markupsafe@2.1.1",
+        "pkg:pypi/markupsafe@2.1.2",
         "pkg:pypi/werkzeug@2.2.2",
-        "pkg:pypi/zipp@3.11.0",
+        "pkg:pypi/zipp@3.12.1",
     ]
 
 
 @pytest.mark.online
 def test_without_supported_wheels():
-    req = Requirement("autobahn==22.3.2")
+    req = Requirement("autobahn==23.1.1")
     req.is_requirement_resolved = True
     _, plist = get_resolved_dependencies(
         requirements=[req],
@@ -144,13 +144,13 @@ def test_without_supported_wheels():
     )
 
     assert plist == [
-        "pkg:pypi/autobahn@22.3.2",
+        "pkg:pypi/autobahn@23.1.1",
         "pkg:pypi/cffi@1.15.1",
         "pkg:pypi/cryptography@39.0.0",
         "pkg:pypi/hyperlink@21.0.0",
         "pkg:pypi/idna@3.4",
         "pkg:pypi/pycparser@2.21",
-        "pkg:pypi/setuptools@66.0.0",
+        "pkg:pypi/setuptools@67.1.0",
         "pkg:pypi/txaio@23.1.1",
     ]
 
