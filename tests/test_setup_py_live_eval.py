@@ -17,6 +17,7 @@ from python_inspector.setup_py_live_eval import iter_requirements
 
 REQ = abspath(join(dirname(__file__), "./data/requirements.devel.txt"))
 SETUP = abspath(join(dirname(__file__), "./data/setup.txt"))
+SETUP_DISTUTILS = abspath(join(dirname(__file__), "./data/setup-distutils.txt"))
 
 
 def test_iter_requirements_with_setup_py():
@@ -29,3 +30,15 @@ def test_iter_requirements_with_setup_py():
 
     # Dev
     assert list(iter_requirements("dev", [], SETUP)) == ["click>=6.1.0", "mock>=1.3.0"]
+
+
+def test_iter_requirements_with_setup_py_distutils():
+    """Test against setup.py files which import distutils"""
+    # Min
+    assert list(iter_requirements("min", [], SETUP_DISTUTILS)) == []
+
+    # PyPI
+    assert list(iter_requirements("pypi", [], SETUP_DISTUTILS)) == []
+
+    # Dev
+    assert list(iter_requirements("dev", [], SETUP_DISTUTILS)) == []

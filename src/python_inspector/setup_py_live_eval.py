@@ -19,7 +19,6 @@ except ImportError:  # pragma: no cover
     import ConfigParser as configparser
 
 import mock
-import setuptools
 from commoncode.command import pushd
 from packvers.requirements import Requirement
 
@@ -54,11 +53,24 @@ def iter_requirements(level, extras, setup_file):
     setup_requires = {}
     # change directory to setup.py path
     with pushd(os.path.dirname(setup_file)):
-        with mock.patch.object(setuptools, "setup") as mock_setup:
-            sys.path.append(os.path.dirname(setup_file))
-            g = {"__file__": setup_file, "__name__": "__main__"}
-            with open(setup_file) as sf:
-                exec(sf.read(), g)
+        with open(setup_file) as sf:
+            file_contents = sf.read()
+            setup_provider = re.findall(r"from ([a-z._]+) import setup", file_contents)
+            if len(setup_provider) == 1:
+                setup_provider = setup_provider[0]
+            else:
+                setup_provider = ""
+            if not ((setup_provider == "distutils.core") or (setup_provider == "setuptools")):
+                print(
+                    f"Warning: unable to recognize 'import {setup_provider}' in {setup_file}: "
+                    "defaulting to 'distutils.core'."
+                )
+                setup_provider = "distutils.core"
+            exec(f"import {setup_provider}")
+            with mock.patch.object(eval(setup_provider), "setup") as mock_setup:
+                sys.path.append(os.path.dirname(setup_file))
+                g = {"__file__": setup_file, "__name__": "__main__"}
+                exec(file_contents, g)
             sys.path.pop()
             # removing the assertion `assert g["setup"]`` since this is not true for all cases
             # for example when setuptools.setup() is called instead of setup()
