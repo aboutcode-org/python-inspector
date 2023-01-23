@@ -9,37 +9,37 @@
 #
 
 import ast
-from configparser import ConfigParser
+import base64
 import copy
 import json
 import logging
-from pathlib import Path
 import os
 import re
 import sys
-from typing import NamedTuple
 import tempfile
 import zipfile
+from configparser import ConfigParser
+from pathlib import Path
+from typing import NamedTuple
+
 import dparse2
+# FIXME: we always want to use the external library rather than the built-in for now
+import importlib_metadata
 import packvers as packaging
 import pip_requirements_parser
 import pkginfo2
 from commoncode import fileutils
-from packvers.specifiers import SpecifierSet
+from commoncode.fileutils import as_posixpath
 from packageurl import PackageURL
 from packvers import markers
 from packvers.requirements import Requirement
+from packvers.specifiers import SpecifierSet
 from packvers.utils import canonicalize_name
-from _packagedcode import models
-from _packagedcode.utils import build_description
-from _packagedcode.utils import combine_expressions
-from _packagedcode.utils import yield_dependencies_from_package_data
-from _packagedcode.utils import yield_dependencies_from_package_resource
 
-# FIXME: we always want to use the external library rather than the built-in for now
-import importlib_metadata
-import base64
-from commoncode.fileutils import as_posixpath
+from _packagedcode import models
+from _packagedcode.utils import (build_description, combine_expressions,
+                                 yield_dependencies_from_package_data,
+                                 yield_dependencies_from_package_resource)
 
 try:
     from zipfile import Path as ZipPath

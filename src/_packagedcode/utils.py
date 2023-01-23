@@ -9,7 +9,8 @@
 
 try:
     from license_expression import Licensing
-    from license_expression import combine_expressions as le_combine_expressions
+    from license_expression import \
+        combine_expressions as le_combine_expressions
 except:
     Licensing = None
     le_combine_expressions = None

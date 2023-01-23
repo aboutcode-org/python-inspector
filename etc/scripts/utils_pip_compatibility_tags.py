@@ -27,14 +27,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import re
 
-from packaging.tags import (
-    compatible_tags,
-    cpython_tags,
-    generic_tags,
-    interpreter_name,
-    interpreter_version,
-    mac_platforms,
-)
+from packaging.tags import (compatible_tags, cpython_tags, generic_tags,
+                            interpreter_name, interpreter_version,
+                            mac_platforms)
 
 _osx_arch_pat = re.compile(r"(.+)_(\d+)_(\d+)_(.+)")
 

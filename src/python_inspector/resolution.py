@@ -9,8 +9,8 @@
 
 import operator
 import os
-import tarfile
 import re
+import tarfile
 from typing import Dict
 from typing import Generator
 from typing import List
@@ -302,10 +302,11 @@ def get_requirements_from_python_manifest(
         else:
             # Do not raise exception here as we may have a setup.py that does not
             # have any dependencies.
-            with(open(setup_py_location)) as sf:
+            with (open(setup_py_location)) as sf:
                 install_requires = []
-                parameters = re.sub(r"\s", "", re.findall(r'install_requires[\s]*=[\s]*\[[^\]]*\]',
-                                                          sf.read())[0])
+                parameters = re.sub(
+                    r"\s", "", re.findall(r"install_requires[\s]*=[\s]*\[[^\]]*\]", sf.read())[0]
+                )
                 exec(parameters)  # update 'install_requires' from setup.py
             if install_requires != []:
                 raise Exception(
