@@ -21,6 +21,7 @@ from python_inspector.api import get_resolved_dependencies
 from python_inspector.error import NoVersionsFound
 from python_inspector.resolution import PythonInputProvider
 from python_inspector.resolution import get_requirements_from_dependencies
+from python_inspector.resolution import get_requirements_from_python_manifest
 from python_inspector.resolution import is_valid_version
 from python_inspector.resolution import parse_reqs_from_setup_py_insecurely
 from python_inspector.utils_pypi import PYPI_PUBLIC_REPO
@@ -239,6 +240,47 @@ def test_get_requirements_from_dependencies_with_editable_requirements():
     requirements = [str(r) for r in get_requirements_from_dependencies(dependencies)]
 
     assert requirements == []
+
+
+def test_get_requirements_from_python_manifest_securely():
+    sdist_location = "tests/data/secure-setup"
+    setup_py_emptyrequires = "setup-emptyrequires.py"
+    setup_py_norequires = "setup-norequires.py"
+    setup_py_requires = "setup-requires.py"
+    analyze_setup_py_insecurely = False
+    try:
+        ret = list(
+            get_requirements_from_python_manifest(
+                sdist_location,
+                sdist_location + "/" + setup_py_norequires,
+                [sdist_location + "/" + setup_py_norequires],
+                analyze_setup_py_insecurely,
+            )
+        )
+        assert ret == []
+    except Exception:
+        pytest.fail("Failure parsing setup.py where requirements are not provided.")
+    try:
+        ret = list(
+            get_requirements_from_python_manifest(
+                sdist_location,
+                sdist_location + "/" + setup_py_emptyrequires,
+                [sdist_location + "/" + setup_py_emptyrequires],
+                analyze_setup_py_insecurely,
+            )
+        )
+        assert ret == []
+    except Exception:
+        pytest.fail("Failure getting empty requirements securely from setup.py.")
+    with pytest.raises(Exception):
+        ret = list(
+            get_requirements_from_python_manifest(
+                sdist_location,
+                sdist_location + "/" + setup_py_requires,
+                [sdist_location + "/" + setup_py_requires],
+                analyze_setup_py_insecurely,
+            ).next()
+        )
 
 
 def test_setup_py_parsing_insecure():
