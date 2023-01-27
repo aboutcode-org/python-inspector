@@ -303,15 +303,13 @@ def get_requirements_from_python_manifest(
             # Do not raise exception here as we may have a setup.py that does not
             # have any dependencies.
             with (open(setup_py_location)) as sf:
-                install_requires = []
-                parameters = re.sub(
-                    r"\s", "", re.findall(r"install_requires[\s]*=[\s]*\[[^\]]*\]", sf.read())[0]
-                )
-                exec(parameters)  # update 'install_requires' from setup.py
-            if install_requires != []:
-                raise Exception(
-                    f"Unable to collect setup.py dependencies securely: {setup_py_location}"
-                )
+                match = re.search(r"install_requires[\s]*=[\s]*\[([^\]]*)\]", sf.read())
+                if match is not None:
+                    install_requires = re.sub(r"\s", "", match.group(1))
+                    if install_requires != "":
+                        raise Exception(
+                            f"Unable to collect setup.py dependencies securely: {setup_py_location}"
+                        )
 
 
 DEFAULT_ENVIRONMENT = utils_pypi.Environment.from_pyver_and_os(
