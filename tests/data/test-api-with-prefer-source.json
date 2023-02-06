@@ -258,12 +258,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "markupsafe",
-      "version": "2.1.1",
+      "version": "2.1.2",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Safely add untrusted strings to HTML/XML markup.\nMarkupSafe\n==========\n\nMarkupSafe implements a text object that escapes characters so it is\nsafe to use in HTML and XML. Characters that have special meanings are\nreplaced so that they display as the actual characters. This mitigates\ninjection attacks, meaning untrusted user input can safely be displayed\non a page.\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    pip install -U MarkupSafe\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nExamples\n--------\n\n.. code-block:: pycon\n\n    >>> from markupsafe import Markup, escape\n\n    >>> # escape replaces special characters and wraps in Markup\n    >>> escape(\"<script>alert(document.cookie);</script>\")\n    Markup('&lt;script&gt;alert(document.cookie);&lt;/script&gt;')\n\n    >>> # wrap in Markup to mark text \"safe\" and prevent escaping\n    >>> Markup(\"<strong>Hello</strong>\")\n    Markup('<strong>hello</strong>')\n\n    >>> escape(Markup(\"<strong>Hello</strong>\"))\n    Markup('<strong>hello</strong>')\n\n    >>> # Markup is a str subclass\n    >>> # methods and operators escape their arguments\n    >>> template = Markup(\"Hello <em>{name}</em>\")\n    >>> template.format(name='\"World\"')\n    Markup('Hello <em>&#34;World&#34;</em>')\n\n\nDonate\n------\n\nThe Pallets organization develops and supports MarkupSafe and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n`please donate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://markupsafe.palletsprojects.com/\n-   Changes: https://markupsafe.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/MarkupSafe/\n-   Source Code: https://github.com/pallets/markupsafe/\n-   Issue Tracker: https://github.com/pallets/markupsafe/issues/\n-   Website: https://palletsprojects.com/p/markupsafe/\n-   Twitter: https://twitter.com/PalletsTeam\n-   Chat: https://discord.gg/pallets",
-      "release_date": "2022-03-15T13:23:27",
+      "release_date": "2023-01-17T18:23:59",
       "parties": [
         {
           "type": "person",
@@ -290,11 +290,11 @@
         "Topic :: Text Processing :: Markup :: HTML"
       ],
       "homepage_url": "https://palletsprojects.com/p/markupsafe/",
-      "download_url": "https://files.pythonhosted.org/packages/1d/97/2288fe498044284f39ab8950703e88abbac2abbdf65524d576157af70556/MarkupSafe-2.1.1.tar.gz",
-      "size": 18668,
+      "download_url": "https://files.pythonhosted.org/packages/95/7e/68018b70268fb4a2a605e2be44ab7b4dd7ce7808adae6c5ef32e34f4b55a/MarkupSafe-2.1.2.tar.gz",
+      "size": 19080,
       "sha1": null,
-      "md5": "9809f9fdd98bc835b0c21aa8f79cbf30",
-      "sha256": "7f91197cc9e48f989d12e4e6fbc46495c446636dfc81b9ccf50bb0ec74b91d4b",
+      "md5": "02f337b98aef11bd0fee9c5ae860173b",
+      "sha256": "abcabc8c2b26036d62d4c746381a6f7cf60aafcc653198ad678306986b09450d",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets/markupsafe/issues/",
       "code_view_url": "https://github.com/pallets/markupsafe/",
@@ -314,9 +314,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/markupsafe/2.1.1/json",
+      "api_data_url": "https://pypi.org/pypi/markupsafe/2.1.2/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/markupsafe@2.1.1"
+      "purl": "pkg:pypi/markupsafe@2.1.2"
     },
     {
       "type": "pypi",
@@ -407,17 +407,17 @@
     {
       "package": "pkg:pypi/jinja2@3.1.2",
       "dependencies": [
-        "pkg:pypi/markupsafe@2.1.1"
+        "pkg:pypi/markupsafe@2.1.2"
       ]
     },
     {
-      "package": "pkg:pypi/markupsafe@2.1.1",
+      "package": "pkg:pypi/markupsafe@2.1.2",
       "dependencies": []
     },
     {
       "package": "pkg:pypi/werkzeug@2.2.2",
       "dependencies": [
-        "pkg:pypi/markupsafe@2.1.1"
+        "pkg:pypi/markupsafe@2.1.2"
       ]
     }
   ]

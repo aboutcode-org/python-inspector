@@ -24,6 +24,17 @@ The goal of python-inspector is to be a comprehensive library
 that can handle every style of Python package layouts, manifests and lockfiles.
 
 
+Testing
+--------
+
+- Run the tests with::
+
+    pytest -vvs
+
+- These are live tests to regenrate the tests with updated data run::
+  
+      PYINSP_REGEN_TEST_FIXTURES=yes pytest -vvs
+
 Usage
 --------
 
