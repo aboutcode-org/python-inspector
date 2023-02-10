@@ -14,8 +14,9 @@ import os
 import sys
 
 import click
-import utils_requirements
+
 import utils_thirdparty
+import utils_requirements
 
 TRACE = False
 TRACE_DEEP = False

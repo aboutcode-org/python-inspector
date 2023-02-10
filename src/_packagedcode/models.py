@@ -13,13 +13,19 @@ import uuid
 from fnmatch import fnmatchcase
 
 import attr
+from packageurl import normalize_qualifiers
+from packageurl import PackageURL
+
 from commoncode import filetype
-from commoncode.datautils import (Boolean, Date, Integer, List, Mapping,
-                                  String, choices)
+from commoncode.datautils import choices
+from commoncode.datautils import Boolean
+from commoncode.datautils import Date
+from commoncode.datautils import Integer
+from commoncode.datautils import List
+from commoncode.datautils import Mapping
+from commoncode.datautils import String
 from commoncode.fileutils import as_posixpath
 from commoncode.resource import Resource
-from packageurl import PackageURL, normalize_qualifiers
-
 try:
     from typecode import contenttype
 except ImportError:

@@ -25,12 +25,13 @@ import license_expression
 import packageurl
 import requests
 import saneyaml
-import utils_pip_compatibility_tags
 from commoncode import fileutils
 from commoncode.hash import multi_checksums
 from commoncode.text import python_safe_name
 from packaging import tags as packaging_tags
 from packaging import version as packaging_version
+
+import utils_pip_compatibility_tags
 
 """
 Utilities to manage Python thirparty libraries source, binaries and metadata in

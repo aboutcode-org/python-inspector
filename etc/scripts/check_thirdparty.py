@@ -9,6 +9,7 @@
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 import click
+
 import utils_thirdparty
 
 
