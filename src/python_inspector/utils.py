@@ -11,6 +11,7 @@
 
 import json
 import os
+import tempfile
 from typing import Dict
 from typing import List
 from typing import NamedTuple
@@ -23,8 +24,11 @@ def get_netrc_auth(url, netrc):
     Return login and password if url is in netrc
     else return login and password as None
     """
-    if netrc.get(url):
-        return (netrc[url].get("login"), netrc[url].get("password"))
+    hosts = netrc.hosts
+    if url in hosts:
+        url_auth = hosts.get(url)
+        # netrc returns a tuple of (login, account, password)
+        return (url_auth[0], url_auth[2])
     return (None, None)
 
 
