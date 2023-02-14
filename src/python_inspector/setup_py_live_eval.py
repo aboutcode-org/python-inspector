@@ -10,8 +10,8 @@
 """Generate requirements from `setup.py` and `requirements-devel.txt`."""
 
 import os
-import re
 import sys
+import ast
 
 try:
     import configparser
@@ -19,6 +19,8 @@ except ImportError:  # pragma: no cover
     import ConfigParser as configparser
 
 import mock
+import setuptools
+import distutils.core
 from commoncode.command import pushd
 from packvers.requirements import Requirement
 
@@ -26,7 +28,8 @@ from packvers.requirements import Requirement
 def minver_error(pkg_name):
     """Report error about missing minimum version constraint and exit."""
     print(
-        'ERROR: specify minimal version of "{0}" using ' '">=" or "=="'.format(pkg_name),
+        'ERROR: specify minimal version of "{0}" using '
+        '">=" or "=="'.format(pkg_name),
         file=sys.stderr,
     )
     sys.exit(1)
@@ -55,18 +58,65 @@ def iter_requirements(level, extras, setup_file):
     with pushd(os.path.dirname(setup_file)):
         with open(setup_file) as sf:
             file_contents = sf.read()
-            setup_provider = re.findall(r"from ([a-z._]+) import setup", file_contents)
-            if len(setup_provider) == 1:
-                setup_provider = setup_provider[0]
-            else:
-                setup_provider = ""
-            if not ((setup_provider == "distutils.core") or (setup_provider == "setuptools")):
+            node = ast.parse(file_contents)
+            asnames = {}
+            imports = []
+            for elem in ast.walk(node):
+                # save the asnames to parse aliases later
+                if isinstance(elem, ast.Import):
+                    for n in elem.names:
+                        asnames[(n.asname if n.asname is not None else n.name)] = n.name
+            for elem in ast.walk(node):
+                # for function imports, e.g. from setuptools import setup; setup()
+                if isinstance(elem, ast.ImportFrom) and "setup" in [
+                    e.name for e in elem.names
+                ]:
+                    imports.append(elem.module)
+                # for module imports, e.g. import setuptools; setuptools.setup(...)
+                elif (
+                    isinstance(elem, ast.Expr)
+                    and isinstance(elem.value, ast.Call)
+                    and isinstance(elem.value.func, ast.Attribute)
+                    and isinstance(elem.value.func.value, ast.Name)
+                    and elem.value.func.attr == "setup"
+                ):
+                    name = elem.value.func.value.id
+                    if name in asnames.keys():
+                        name = asnames[name]
+                    imports.append(name)
+                # for module imports, e.g. import disttools.core; disttools.core.setup(...)
+                elif (
+                    isinstance(elem, ast.Expr)
+                    and isinstance(elem.value, ast.Call)
+                    and isinstance(elem.value.func, ast.Attribute)
+                    and isinstance(elem.value.func.value, ast.Attribute)
+                    and elem.value.func.attr == "setup"
+                ):
+                    name = (
+                        str(elem.value.func.value.value.id)
+                        + "."
+                        + str(elem.value.func.value.attr)
+                    )
+                    if name in asnames.keys():
+                        name = asnames[name]
+                    imports.append(name)
+            setup_providers = [
+                i for i in imports if i in ["distutils.core", "setuptools"]
+            ]
+            if len(setup_providers) == 0:
                 print(
-                    f"Warning: unable to recognize 'import {setup_provider}' in {setup_file}: "
+                    f"Warning: unable to recognize setup provider in {setup_file}: "
                     "defaulting to 'distutils.core'."
                 )
                 setup_provider = "distutils.core"
-            exec(f"import {setup_provider}")
+            elif len(setup_providers) == 1:
+                setup_provider = setup_providers[0]
+            else:
+                print(
+                    f"Warning: ambiguous setup provider in {setup_file}: candidates are {setup_providers}"
+                    "defaulting to 'distutils.core'."
+                )
+                setup_provider = "distutils.core"
             with mock.patch.object(eval(setup_provider), "setup") as mock_setup:
                 sys.path.append(os.path.dirname(setup_file))
                 g = {"__file__": setup_file, "__name__": "__main__"}
@@ -145,7 +195,9 @@ def iter_requirements(level, extras, setup_file):
                 result[pkg.name] = "{0}=={1}".format(build_pkg_name(pkg), specs["~="])
             else:
                 ver, _ = os.path.splitext(specs["~="])
-                result[pkg.name] = "{0}>={1},=={2}.*".format(build_pkg_name(pkg), specs["~="], ver)
+                result[pkg.name] = "{0}>={1},=={2}.*".format(
+                    build_pkg_name(pkg), specs["~="], ver
+                )
 
         else:
             if level == "min":
