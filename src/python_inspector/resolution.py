@@ -322,7 +322,8 @@ def get_requirements_from_python_manifest(
                     )
                 if len(setup_fct) > 1:
                     print(
-                        f"Warning: identified multiple definitions of 'setup()' in {setup_py_location}, defaulting to the first occurrence"
+                        f"Warning: identified multiple definitions of 'setup()' in {setup_py_location}, "
+                        "defaulting to the first occurrence"
                     )
                 setup_fct = setup_fct[0]
                 install_requires = [
@@ -334,7 +335,8 @@ def get_requirements_from_python_manifest(
                     )
                 if len(install_requires) > 1:
                     print(
-                        f"Warning: identified multiple definitions of 'install_requires' in {setup_py_location}, defaulting to the first occurrence"
+                        f"Warning: identified multiple definitions of 'install_requires' in "
+                        "{setup_py_location}, defaulting to the first occurrence"
                     )
                 install_requires = install_requires[0].elts
                 if len(install_requires) != 0:

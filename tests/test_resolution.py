@@ -50,7 +50,7 @@ def test_get_resolved_dependencies_with_flask_and_python_310():
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
         "pkg:pypi/markupsafe@2.1.2",
-        "pkg:pypi/werkzeug@2.2.2",
+        "pkg:pypi/werkzeug@2.2.3",
     ]
 
 
@@ -74,7 +74,7 @@ def test_get_resolved_dependencies_with_flask_and_python_310_windows():
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
         "pkg:pypi/markupsafe@2.1.2",
-        "pkg:pypi/werkzeug@2.2.2",
+        "pkg:pypi/werkzeug@2.2.3",
     ]
 
 
@@ -125,7 +125,7 @@ def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
         "pkg:pypi/markupsafe@2.1.2",
-        "pkg:pypi/werkzeug@2.2.2",
+        "pkg:pypi/werkzeug@2.2.3",
         "pkg:pypi/zipp@3.13.0",
     ]
 
@@ -151,7 +151,7 @@ def test_without_supported_wheels():
         "pkg:pypi/hyperlink@21.0.0",
         "pkg:pypi/idna@3.4",
         "pkg:pypi/pycparser@2.21",
-        "pkg:pypi/setuptools@67.2.0",
+        "pkg:pypi/setuptools@67.3.2",
         "pkg:pypi/txaio@23.1.1",
     ]
 
