@@ -2831,12 +2831,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "openpyxl",
-      "version": "3.1.0",
+      "version": "3.1.1",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "A Python library to read/write Excel 2010 xlsx/xlsm files\n.. image:: https://coveralls.io/repos/bitbucket/openpyxl/openpyxl/badge.svg?branch=default\n    :target: https://coveralls.io/bitbucket/openpyxl/openpyxl?branch=default\n    :alt: coverage status\n\nIntroduction\n------------\n\nopenpyxl is a Python library to read/write Excel 2010 xlsx/xlsm/xltx/xltm files.\n\nIt was born from lack of existing library to read/write natively from Python\nthe Office Open XML format.\n\nAll kudos to the PHPExcel team as openpyxl was initially based on PHPExcel.\n\n\nSecurity\n--------\n\nBy default openpyxl does not guard against quadratic blowup or billion laughs\nxml attacks. To guard against these attacks install defusedxml.\n\nMailing List\n------------\n\nThe user list can be found on http://groups.google.com/group/openpyxl-users\n\n\nSample code::\n\n    from openpyxl import Workbook\n    wb = Workbook()\n\n    # grab the active worksheet\n    ws = wb.active\n\n    # Data can be assigned directly to cells\n    ws['A1'] = 42\n\n    # Rows can also be appended\n    ws.append([1, 2, 3])\n\n    # Python types will automatically be converted\n    import datetime\n    ws['A2'] = datetime.datetime.now()\n\n    # Save the file\n    wb.save(\"sample.xlsx\")\n\n\nDocumentation\n-------------\n\nThe documentation is at: https://openpyxl.readthedocs.io\n\n* installation methods\n* code examples\n* instructions for contributing\n\nRelease notes: https://openpyxl.readthedocs.io/en/stable/changes.html",
-      "release_date": "2023-01-31T14:40:28",
+      "release_date": "2023-02-13T16:51:26",
       "parties": [
         {
           "type": "person",
@@ -2860,11 +2860,11 @@
         "Programming Language :: Python :: 3.9"
       ],
       "homepage_url": "https://openpyxl.readthedocs.io",
-      "download_url": "https://files.pythonhosted.org/packages/0d/89/f78a9a895e221ec8b13ae7f9495f340a0fb43563b13e2891b5df134f20ea/openpyxl-3.1.0-py2.py3-none-any.whl",
-      "size": 250043,
+      "download_url": "https://files.pythonhosted.org/packages/9e/57/1d3c2ce7f6f783be9b21569fc468a9f3660e35cc17017abfbbc26d3bd061/openpyxl-3.1.1-py2.py3-none-any.whl",
+      "size": 249839,
       "sha1": null,
-      "md5": "66351b61736b19d3c88cd108908447d1",
-      "sha256": "24d7d361025d186ba91eff58135d50855cf035a84371b891e58fb6eb5125660f",
+      "md5": "864e1e1ea061fe056ade64f4e7bbaf22",
+      "sha256": "a0266e033e65f33ee697254b66116a5793c15fc92daf64711080000df4cfe0a8",
       "sha512": null,
       "bug_tracking_url": "https://foss.heptapod.net/openpyxl/openpyxl/-/issues",
       "code_view_url": "https://foss.heptapod.net/openpyxl/openpyxl",
@@ -2884,20 +2884,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/openpyxl/3.1.0/json",
+      "api_data_url": "https://pypi.org/pypi/openpyxl/3.1.1/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/openpyxl@3.1.0"
+      "purl": "pkg:pypi/openpyxl@3.1.1"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "openpyxl",
-      "version": "3.1.0",
+      "version": "3.1.1",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "A Python library to read/write Excel 2010 xlsx/xlsm files\n.. image:: https://coveralls.io/repos/bitbucket/openpyxl/openpyxl/badge.svg?branch=default\n    :target: https://coveralls.io/bitbucket/openpyxl/openpyxl?branch=default\n    :alt: coverage status\n\nIntroduction\n------------\n\nopenpyxl is a Python library to read/write Excel 2010 xlsx/xlsm/xltx/xltm files.\n\nIt was born from lack of existing library to read/write natively from Python\nthe Office Open XML format.\n\nAll kudos to the PHPExcel team as openpyxl was initially based on PHPExcel.\n\n\nSecurity\n--------\n\nBy default openpyxl does not guard against quadratic blowup or billion laughs\nxml attacks. To guard against these attacks install defusedxml.\n\nMailing List\n------------\n\nThe user list can be found on http://groups.google.com/group/openpyxl-users\n\n\nSample code::\n\n    from openpyxl import Workbook\n    wb = Workbook()\n\n    # grab the active worksheet\n    ws = wb.active\n\n    # Data can be assigned directly to cells\n    ws['A1'] = 42\n\n    # Rows can also be appended\n    ws.append([1, 2, 3])\n\n    # Python types will automatically be converted\n    import datetime\n    ws['A2'] = datetime.datetime.now()\n\n    # Save the file\n    wb.save(\"sample.xlsx\")\n\n\nDocumentation\n-------------\n\nThe documentation is at: https://openpyxl.readthedocs.io\n\n* installation methods\n* code examples\n* instructions for contributing\n\nRelease notes: https://openpyxl.readthedocs.io/en/stable/changes.html",
-      "release_date": "2023-01-31T14:40:31",
+      "release_date": "2023-02-13T16:51:28",
       "parties": [
         {
           "type": "person",
@@ -2921,11 +2921,11 @@
         "Programming Language :: Python :: 3.9"
       ],
       "homepage_url": "https://openpyxl.readthedocs.io",
-      "download_url": "https://files.pythonhosted.org/packages/3d/73/bb87810cdde809f69fef11d31e77297894e58710d47626dc5e5b3ff8f92a/openpyxl-3.1.0.tar.gz",
-      "size": 186306,
+      "download_url": "https://files.pythonhosted.org/packages/10/bf/950ea7896f3c42ab04073cd2903f0a190ba77ef28bdf76191f6f86373712/openpyxl-3.1.1.tar.gz",
+      "size": 185802,
       "sha1": null,
-      "md5": "b7ba597b801b9a102f27599b2fa227b3",
-      "sha256": "eccedbe1cdd8b2494057e73959b496821141038dbb7eb9266ea59e3f34208231",
+      "md5": "0b1a5d776707ef471810f61c7bf77a2d",
+      "sha256": "f06d44e2c973781068bce5ecf860a09bcdb1c7f5ce1facd5e9aa82c92c93ae72",
       "sha512": null,
       "bug_tracking_url": "https://foss.heptapod.net/openpyxl/openpyxl/-/issues",
       "code_view_url": "https://foss.heptapod.net/openpyxl/openpyxl",
@@ -2945,9 +2945,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/openpyxl/3.1.0/json",
+      "api_data_url": "https://pypi.org/pypi/openpyxl/3.1.1/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/openpyxl@3.1.0"
+      "purl": "pkg:pypi/openpyxl@3.1.1"
     },
     {
       "type": "pypi",
@@ -5025,7 +5025,7 @@
         {
           "key": "openpyxl",
           "package_name": "openpyxl",
-          "installed_version": "3.1.0",
+          "installed_version": "3.1.1",
           "dependencies": [
             {
               "key": "et-xmlfile",
