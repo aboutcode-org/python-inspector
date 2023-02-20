@@ -7,8 +7,10 @@
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
+import ast
 import operator
 import os
+import re
 import tarfile
 from typing import Dict
 from typing import Generator
@@ -281,7 +283,7 @@ def get_requirements_from_python_manifest(
     """
     Return a list of parsed requirements from the ``sdist_location`` sdist location
     """
-    # Look in requirements file if and only if thy are refered in setup.py or setup.cfg
+    # Look in requirements file if and only if they are refered in setup.py or setup.cfg
     # And no deps have been yielded by requirements file.
     requirements = list(
         get_reqs_from_requirements_file_in_sdist(
@@ -299,11 +301,48 @@ def get_requirements_from_python_manifest(
             )
 
         else:
-            # We should not raise exception here as we may have a setup.py that does not
-            # have any dependencies. We should not fail in this case.
-            raise Exception(
-                f"Unable to collect setup.py dependencies securely: {setup_py_location}"
-            )
+            # Do not raise exception here as we may have a setup.py that does not
+            # have any dependencies.
+            with (open(setup_py_location)) as sf:
+                file_contents = sf.read()
+                node = ast.parse(file_contents)
+                setup_fct = [
+                    elem
+                    for elem in ast.walk(node)
+                    if (
+                        isinstance(elem, ast.Expr)
+                        and isinstance(elem.value, ast.Call)
+                        and isinstance(elem.value.func, ast.Name)
+                        and elem.value.func.id == "setup"
+                    )
+                ]
+                if len(setup_fct) == 0:
+                    raise Exception(
+                        f"Unable to collect setup.py dependencies securely: {setup_py_location}"
+                    )
+                if len(setup_fct) > 1:
+                    print(
+                        f"Warning: identified multiple definitions of 'setup()' in {setup_py_location}, "
+                        "defaulting to the first occurrence"
+                    )
+                setup_fct = setup_fct[0]
+                install_requires = [
+                    k.value for k in setup_fct.value.keywords if k.arg == "install_requires"
+                ]
+                if len(install_requires) == 0:
+                    raise Exception(
+                        f"Unable to collect setup.py dependencies securely: {setup_py_location}"
+                    )
+                if len(install_requires) > 1:
+                    print(
+                        f"Warning: identified multiple definitions of 'install_requires' in "
+                        "{setup_py_location}, defaulting to the first occurrence"
+                    )
+                install_requires = install_requires[0].elts
+                if len(install_requires) != 0:
+                    raise Exception(
+                        f"Unable to collect setup.py dependencies securely: {setup_py_location}"
+                    )
 
 
 DEFAULT_ENVIRONMENT = utils_pypi.Environment.from_pyver_and_os(
