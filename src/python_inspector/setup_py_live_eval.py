@@ -9,18 +9,19 @@
 #
 """Generate requirements from `setup.py` and `requirements-devel.txt`."""
 
+import ast
 import os
 import sys
-import ast
 
 try:
     import configparser
 except ImportError:  # pragma: no cover
     import ConfigParser as configparser
 
+import distutils.core
+
 import mock
 import setuptools
-import distutils.core
 from commoncode.command import pushd
 from packvers.requirements import Requirement
 
@@ -28,8 +29,7 @@ from packvers.requirements import Requirement
 def minver_error(pkg_name):
     """Report error about missing minimum version constraint and exit."""
     print(
-        'ERROR: specify minimal version of "{0}" using '
-        '">=" or "=="'.format(pkg_name),
+        'ERROR: specify minimal version of "{0}" using ' '">=" or "=="'.format(pkg_name),
         file=sys.stderr,
     )
     sys.exit(1)
@@ -68,9 +68,7 @@ def iter_requirements(level, extras, setup_file):
                         asnames[(n.asname if n.asname is not None else n.name)] = n.name
             for elem in ast.walk(node):
                 # for function imports, e.g. from setuptools import setup; setup()
-                if isinstance(elem, ast.ImportFrom) and "setup" in [
-                    e.name for e in elem.names
-                ]:
+                if isinstance(elem, ast.ImportFrom) and "setup" in [e.name for e in elem.names]:
                     imports.append(elem.module)
                 # for module imports, e.g. import setuptools; setuptools.setup(...)
                 elif (
@@ -93,16 +91,12 @@ def iter_requirements(level, extras, setup_file):
                     and elem.value.func.attr == "setup"
                 ):
                     name = (
-                        str(elem.value.func.value.value.id)
-                        + "."
-                        + str(elem.value.func.value.attr)
+                        str(elem.value.func.value.value.id) + "." + str(elem.value.func.value.attr)
                     )
                     if name in asnames.keys():
                         name = asnames[name]
                     imports.append(name)
-            setup_providers = [
-                i for i in imports if i in ["distutils.core", "setuptools"]
-            ]
+            setup_providers = [i for i in imports if i in ["distutils.core", "setuptools"]]
             if len(setup_providers) == 0:
                 print(
                     f"Warning: unable to recognize setup provider in {setup_file}: "
@@ -195,9 +189,7 @@ def iter_requirements(level, extras, setup_file):
                 result[pkg.name] = "{0}=={1}".format(build_pkg_name(pkg), specs["~="])
             else:
                 ver, _ = os.path.splitext(specs["~="])
-                result[pkg.name] = "{0}>={1},=={2}.*".format(
-                    build_pkg_name(pkg), specs["~="], ver
-                )
+                result[pkg.name] = "{0}>={1},=={2}.*".format(build_pkg_name(pkg), specs["~="], ver)
 
         else:
             if level == "min":
