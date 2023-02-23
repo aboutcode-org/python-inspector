@@ -8,19 +8,24 @@
 # file for more details.
 #
 """Tests for `requirements-builder` module."""
-import pytest
-
 from os.path import abspath
 from os.path import dirname
 from os.path import join
+
+import pytest
 
 from python_inspector.setup_py_live_eval import iter_requirements
 
 REQ = abspath(join(dirname(__file__), "./data/requirements.devel.txt"))
 
 
-@pytest.mark.parametrize("setup_py", [abspath(join(dirname(__file__), "./data/setup.txt")),
-                                      abspath(join(dirname(__file__), "./data/setup-qualifiedfct.txt"))])
+@pytest.mark.parametrize(
+    "setup_py",
+    [
+        abspath(join(dirname(__file__), "./data/setup.txt")),
+        abspath(join(dirname(__file__), "./data/setup-qualifiedfct.txt")),
+    ],
+)
 def test_iter_requirements_with_setup_py(setup_py):
     """Test requirements-builder."""
     # Min
@@ -33,10 +38,14 @@ def test_iter_requirements_with_setup_py(setup_py):
     assert list(iter_requirements("dev", [], setup_py)) == ["click>=6.1.0", "mock>=1.3.0"]
 
 
-@pytest.mark.parametrize("setup_py", [abspath(join(dirname(__file__), "./data/setup-distutils.txt")),
-                                      abspath(join(dirname(__file__),
-                                                   "./data/setup-distutils-qualifiedfct.txt")),
-                                      abspath(join(dirname(__file__), "./data/setup-distutils-asnames.txt"))])
+@pytest.mark.parametrize(
+    "setup_py",
+    [
+        abspath(join(dirname(__file__), "./data/setup-distutils.txt")),
+        abspath(join(dirname(__file__), "./data/setup-distutils-qualifiedfct.txt")),
+        abspath(join(dirname(__file__), "./data/setup-distutils-asnames.txt")),
+    ],
+)
 def test_iter_requirements_with_setup_py_noreqs(setup_py):
     """Test against setup.py files which import setup in different ways"""
     # Min
