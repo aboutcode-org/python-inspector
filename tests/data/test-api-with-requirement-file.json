@@ -1274,27 +1274,6 @@
               }
             },
             {
-              "purl": "pkg:pypi/tinynetrc@1.3.1",
-              "extracted_requirement": "tinynetrc==1.3.1",
-              "scope": "install",
-              "is_runtime": true,
-              "is_optional": false,
-              "is_resolved": true,
-              "resolved_package": {},
-              "extra_data": {
-                "is_editable": false,
-                "link": null,
-                "hash_options": [],
-                "is_constraint": false,
-                "is_archive": null,
-                "is_wheel": false,
-                "is_url": null,
-                "is_vcs_url": null,
-                "is_name_at_url": false,
-                "is_local_path": null
-              }
-            },
-            {
               "purl": "pkg:pypi/toml@0.10.2",
               "extracted_requirement": "toml==0.10.2",
               "scope": "install",
@@ -5998,12 +5977,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "pip",
-      "version": "23.0",
+      "version": "23.0.1",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "The PyPA recommended tool for installing Python packages.\npip - The Python Package Installer\n==================================\n\n.. image:: https://img.shields.io/pypi/v/pip.svg\n   :target: https://pypi.org/project/pip/\n\n.. image:: https://readthedocs.org/projects/pip/badge/?version=latest\n   :target: https://pip.pypa.io/en/latest\n\npip is the `package installer`_ for Python. You can use pip to install packages from the `Python Package Index`_ and other indexes.\n\nPlease take a look at our documentation for how to install and use pip:\n\n* `Installation`_\n* `Usage`_\n\nWe release updates regularly, with a new version every 3 months. Find more details in our documentation:\n\n* `Release notes`_\n* `Release process`_\n\nIn pip 20.3, we've `made a big improvement to the heart of pip`_; `learn more`_. We want your input, so `sign up for our user experience research studies`_ to help us do it right.\n\n**Note**: pip 21.0, in January 2021, removed Python 2 support, per pip's `Python 2 support policy`_. Please migrate to Python 3.\n\nIf you find bugs, need help, or want to talk to the developers, please use our mailing lists or chat rooms:\n\n* `Issue tracking`_\n* `Discourse channel`_\n* `User IRC`_\n\nIf you want to get involved head over to GitHub to get the source code, look at our development documentation and feel free to jump on the developer mailing lists and chat rooms:\n\n* `GitHub page`_\n* `Development documentation`_\n* `Development IRC`_\n\nCode of Conduct\n---------------\n\nEveryone interacting in the pip project's codebases, issue trackers, chat\nrooms, and mailing lists is expected to follow the `PSF Code of Conduct`_.\n\n.. _package installer: https://packaging.python.org/guides/tool-recommendations/\n.. _Python Package Index: https://pypi.org\n.. _Installation: https://pip.pypa.io/en/stable/installation/\n.. _Usage: https://pip.pypa.io/en/stable/\n.. _Release notes: https://pip.pypa.io/en/stable/news.html\n.. _Release process: https://pip.pypa.io/en/latest/development/release-process/\n.. _GitHub page: https://github.com/pypa/pip\n.. _Development documentation: https://pip.pypa.io/en/latest/development\n.. _made a big improvement to the heart of pip: https://pyfound.blogspot.com/2020/11/pip-20-3-new-resolver.html\n.. _learn more: https://pip.pypa.io/en/latest/user_guide/#changes-to-the-pip-dependency-resolver-in-20-3-2020\n.. _sign up for our user experience research studies: https://pyfound.blogspot.com/2020/03/new-pip-resolver-to-roll-out-this-year.html\n.. _Python 2 support policy: https://pip.pypa.io/en/latest/development/release-process/#python-2-support\n.. _Issue tracking: https://github.com/pypa/pip/issues\n.. _Discourse channel: https://discuss.python.org/c/packaging\n.. _User IRC: https://kiwiirc.com/nextclient/#ircs://irc.libera.chat:+6697/pypa\n.. _Development IRC: https://kiwiirc.com/nextclient/#ircs://irc.libera.chat:+6697/pypa-dev\n.. _PSF Code of Conduct: https://github.com/pypa/.github/blob/main/CODE_OF_CONDUCT.md",
-      "release_date": "2023-01-30T23:10:52",
+      "release_date": "2023-02-17T18:31:51",
       "parties": [
         {
           "type": "person",
@@ -6029,11 +6008,11 @@
         "Topic :: Software Development :: Build Tools"
       ],
       "homepage_url": "https://pip.pypa.io/",
-      "download_url": "https://files.pythonhosted.org/packages/ab/43/508c403c38eeaa5fc86516eb13bb470ce77601b6d2bbcdb16e26328d0a15/pip-23.0-py3-none-any.whl",
-      "size": 2056044,
+      "download_url": "https://files.pythonhosted.org/packages/07/51/2c0959c5adf988c44d9e1e0d940f5b074516ecc87e96b1af25f59de9ba38/pip-23.0.1-py3-none-any.whl",
+      "size": 2055563,
       "sha1": null,
-      "md5": "911a8561240e5b46c50b7e16834d42dd",
-      "sha256": "b5f88adff801f5ef052bcdef3daa31b55eb67b0fccd6d0106c206fa248e0463c",
+      "md5": "83b53b599a1644afe7e76debe4a62bcc",
+      "sha256": "236bcb61156d76c4b8a05821b988c7b8c35bf0da28a4b614e8d6ab5212c25c6f",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/pypa/pip",
@@ -6053,20 +6032,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/pip/23.0/json",
+      "api_data_url": "https://pypi.org/pypi/pip/23.0.1/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/pip@23.0"
+      "purl": "pkg:pypi/pip@23.0.1"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "pip",
-      "version": "23.0",
+      "version": "23.0.1",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "The PyPA recommended tool for installing Python packages.\npip - The Python Package Installer\n==================================\n\n.. image:: https://img.shields.io/pypi/v/pip.svg\n   :target: https://pypi.org/project/pip/\n\n.. image:: https://readthedocs.org/projects/pip/badge/?version=latest\n   :target: https://pip.pypa.io/en/latest\n\npip is the `package installer`_ for Python. You can use pip to install packages from the `Python Package Index`_ and other indexes.\n\nPlease take a look at our documentation for how to install and use pip:\n\n* `Installation`_\n* `Usage`_\n\nWe release updates regularly, with a new version every 3 months. Find more details in our documentation:\n\n* `Release notes`_\n* `Release process`_\n\nIn pip 20.3, we've `made a big improvement to the heart of pip`_; `learn more`_. We want your input, so `sign up for our user experience research studies`_ to help us do it right.\n\n**Note**: pip 21.0, in January 2021, removed Python 2 support, per pip's `Python 2 support policy`_. Please migrate to Python 3.\n\nIf you find bugs, need help, or want to talk to the developers, please use our mailing lists or chat rooms:\n\n* `Issue tracking`_\n* `Discourse channel`_\n* `User IRC`_\n\nIf you want to get involved head over to GitHub to get the source code, look at our development documentation and feel free to jump on the developer mailing lists and chat rooms:\n\n* `GitHub page`_\n* `Development documentation`_\n* `Development IRC`_\n\nCode of Conduct\n---------------\n\nEveryone interacting in the pip project's codebases, issue trackers, chat\nrooms, and mailing lists is expected to follow the `PSF Code of Conduct`_.\n\n.. _package installer: https://packaging.python.org/guides/tool-recommendations/\n.. _Python Package Index: https://pypi.org\n.. _Installation: https://pip.pypa.io/en/stable/installation/\n.. _Usage: https://pip.pypa.io/en/stable/\n.. _Release notes: https://pip.pypa.io/en/stable/news.html\n.. _Release process: https://pip.pypa.io/en/latest/development/release-process/\n.. _GitHub page: https://github.com/pypa/pip\n.. _Development documentation: https://pip.pypa.io/en/latest/development\n.. _made a big improvement to the heart of pip: https://pyfound.blogspot.com/2020/11/pip-20-3-new-resolver.html\n.. _learn more: https://pip.pypa.io/en/latest/user_guide/#changes-to-the-pip-dependency-resolver-in-20-3-2020\n.. _sign up for our user experience research studies: https://pyfound.blogspot.com/2020/03/new-pip-resolver-to-roll-out-this-year.html\n.. _Python 2 support policy: https://pip.pypa.io/en/latest/development/release-process/#python-2-support\n.. _Issue tracking: https://github.com/pypa/pip/issues\n.. _Discourse channel: https://discuss.python.org/c/packaging\n.. _User IRC: https://kiwiirc.com/nextclient/#ircs://irc.libera.chat:+6697/pypa\n.. _Development IRC: https://kiwiirc.com/nextclient/#ircs://irc.libera.chat:+6697/pypa-dev\n.. _PSF Code of Conduct: https://github.com/pypa/.github/blob/main/CODE_OF_CONDUCT.md",
-      "release_date": "2023-01-30T23:10:56",
+      "release_date": "2023-02-17T18:31:56",
       "parties": [
         {
           "type": "person",
@@ -6092,11 +6071,11 @@
         "Topic :: Software Development :: Build Tools"
       ],
       "homepage_url": "https://pip.pypa.io/",
-      "download_url": "https://files.pythonhosted.org/packages/b5/16/5e24bf63cff51dcc169f43bd43b86b005c49941e09cc3482a5b370db239e/pip-23.0.tar.gz",
-      "size": 2082372,
+      "download_url": "https://files.pythonhosted.org/packages/6b/8b/0b16094553ecc680e43ded8f920c3873b01b1da79a54274c98f08cb29fca/pip-23.0.1.tar.gz",
+      "size": 2082217,
       "sha1": null,
-      "md5": "5d41b9679adae9362026b1753b543cb2",
-      "sha256": "aee438284e82c8def684b0bcc50b1f6ed5e941af97fa940e83e2e8ef1a59da9b",
+      "md5": "f988022baba70f483744cc8c0e584010",
+      "sha256": "cd015ea1bfb0fcef59d8a286c1f8bebcb983f6317719d415dc5351efb7cd7024",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/pypa/pip",
@@ -6116,9 +6095,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/pip/23.0/json",
+      "api_data_url": "https://pypi.org/pypi/pip/23.0.1/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/pip@23.0"
+      "purl": "pkg:pypi/pip@23.0.1"
     },
     {
       "type": "pypi",
@@ -9199,124 +9178,6 @@
     {
       "type": "pypi",
       "namespace": null,
-      "name": "tinynetrc",
-      "version": "1.3.1",
-      "qualifiers": {},
-      "subpath": null,
-      "primary_language": "Python",
-      "description": "Read and write .netrc files.\n*********\ntinynetrc\n*********\n\n.. image:: https://badgen.net/pypi/v/tinynetrc\n  :alt: pypi badge\n  :target: https://pypi.org/project/tinynetrc/\n\n.. image:: https://badgen.net/travis/sloria/tinynetrc/master\n  :alt: travis-ci status\n  :target: https://travis-ci.org/sloria/tinynetrc\n\nRead and write .netrc files in Python.\n\n\n``tinynetrc`` uses the `netrc <https://docs.python.org/3/library/netrc.html>`_\nmodule from the standard library under the hood and adds a few\nimprovements:\n\n* Adds write functionality.\n* Fixes a std lib `bug <https://bugs.python.org/issue30806>`_ with\n  formatting a .netrc file.*\n* Parses .netrc into dictionary values rather than tuples.\n\n\\*This bug is fixed in newer versions of Python.\n\nGet it now\n==========\n::\n\n    pip install tinynetrc\n\n\n``tinynetrc`` supports Python >= 2.7 or >= 3.5.\n\nUsage\n=====\n\n.. code-block:: python\n\n    from tinynetrc import Netrc\n\n    netrc = Netrc()  # parse ~/.netrc\n    # Get credentials\n    netrc['api.heroku.com']['login']\n    netrc['api.heroku.com']['password']\n\n    # Modify an existing entry\n    netrc['api.heroku.com']['password'] = 'newpassword'\n    netrc.save()  # writes to ~/.netrc\n\n    # Add a new entry\n    netrc['surge.surge.sh'] = {\n        'login': 'sloria1@gmail.com',\n        'password': 'secret'\n    }\n    netrc.save()\n\n    # Removing an new entry\n    del netrc['surge.surge.sh']\n    netrc.save()\n\n\nYou can also use ``Netrc`` as a context manager, which will automatically save\n``~/.netrc``.\n\n.. code-block:: python\n\n    from tinynetrc import Netrc\n    with Netrc() as netrc:\n        netrc['api.heroku.com']['password'] = 'newpassword'\n        assert netrc.is_dirty is True\n    # saved!\n\nLicense\n=======\n\nMIT licensed. See the bundled `LICENSE <https://github.com/sloria/tinynetrc/blob/master/LICENSE>`_ file for more details.",
-      "release_date": "2021-08-15T18:24:11",
-      "parties": [
-        {
-          "type": "person",
-          "role": "author",
-          "name": "Steven Loria",
-          "email": "sloria1@gmail.com",
-          "url": null
-        }
-      ],
-      "keywords": [
-        "netrc posix",
-        "Intended Audience :: Developers",
-        "Programming Language :: Python :: 2",
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.5",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: Implementation :: CPython"
-      ],
-      "homepage_url": "https://github.com/sloria/tinynetrc",
-      "download_url": "https://files.pythonhosted.org/packages/eb/0b/633691d7cea5129afa622869485d1985b038df1d3597a35848731d106762/tinynetrc-1.3.1-py2.py3-none-any.whl",
-      "size": 3949,
-      "sha1": null,
-      "md5": "28d05be7ca8510cc65ae358f64bf33fc",
-      "sha256": "46c7820e5f49c9434d2c4cd74de8a06edbbd45e63a8a2980a90b8a43db8facf7",
-      "sha512": null,
-      "bug_tracking_url": null,
-      "code_view_url": null,
-      "vcs_url": null,
-      "copyright": null,
-      "license_expression": null,
-      "declared_license": {
-        "license": "MIT",
-        "classifiers": [
-          "License :: OSI Approved :: MIT License"
-        ]
-      },
-      "notice_text": null,
-      "source_packages": [],
-      "file_references": [],
-      "extra_data": {},
-      "dependencies": [],
-      "repository_homepage_url": null,
-      "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/tinynetrc/1.3.1/json",
-      "datasource_id": null,
-      "purl": "pkg:pypi/tinynetrc@1.3.1"
-    },
-    {
-      "type": "pypi",
-      "namespace": null,
-      "name": "tinynetrc",
-      "version": "1.3.1",
-      "qualifiers": {},
-      "subpath": null,
-      "primary_language": "Python",
-      "description": "Read and write .netrc files.\n*********\ntinynetrc\n*********\n\n.. image:: https://badgen.net/pypi/v/tinynetrc\n  :alt: pypi badge\n  :target: https://pypi.org/project/tinynetrc/\n\n.. image:: https://badgen.net/travis/sloria/tinynetrc/master\n  :alt: travis-ci status\n  :target: https://travis-ci.org/sloria/tinynetrc\n\nRead and write .netrc files in Python.\n\n\n``tinynetrc`` uses the `netrc <https://docs.python.org/3/library/netrc.html>`_\nmodule from the standard library under the hood and adds a few\nimprovements:\n\n* Adds write functionality.\n* Fixes a std lib `bug <https://bugs.python.org/issue30806>`_ with\n  formatting a .netrc file.*\n* Parses .netrc into dictionary values rather than tuples.\n\n\\*This bug is fixed in newer versions of Python.\n\nGet it now\n==========\n::\n\n    pip install tinynetrc\n\n\n``tinynetrc`` supports Python >= 2.7 or >= 3.5.\n\nUsage\n=====\n\n.. code-block:: python\n\n    from tinynetrc import Netrc\n\n    netrc = Netrc()  # parse ~/.netrc\n    # Get credentials\n    netrc['api.heroku.com']['login']\n    netrc['api.heroku.com']['password']\n\n    # Modify an existing entry\n    netrc['api.heroku.com']['password'] = 'newpassword'\n    netrc.save()  # writes to ~/.netrc\n\n    # Add a new entry\n    netrc['surge.surge.sh'] = {\n        'login': 'sloria1@gmail.com',\n        'password': 'secret'\n    }\n    netrc.save()\n\n    # Removing an new entry\n    del netrc['surge.surge.sh']\n    netrc.save()\n\n\nYou can also use ``Netrc`` as a context manager, which will automatically save\n``~/.netrc``.\n\n.. code-block:: python\n\n    from tinynetrc import Netrc\n    with Netrc() as netrc:\n        netrc['api.heroku.com']['password'] = 'newpassword'\n        assert netrc.is_dirty is True\n    # saved!\n\nLicense\n=======\n\nMIT licensed. See the bundled `LICENSE <https://github.com/sloria/tinynetrc/blob/master/LICENSE>`_ file for more details.",
-      "release_date": "2021-08-15T18:24:13",
-      "parties": [
-        {
-          "type": "person",
-          "role": "author",
-          "name": "Steven Loria",
-          "email": "sloria1@gmail.com",
-          "url": null
-        }
-      ],
-      "keywords": [
-        "netrc posix",
-        "Intended Audience :: Developers",
-        "Programming Language :: Python :: 2",
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.5",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: Implementation :: CPython"
-      ],
-      "homepage_url": "https://github.com/sloria/tinynetrc",
-      "download_url": "https://files.pythonhosted.org/packages/87/8f/6df2414a8f38b08836726986437f7612983f25c6dc3c55c66f4850a3d795/tinynetrc-1.3.1.tar.gz",
-      "size": 5484,
-      "sha1": null,
-      "md5": "b21d4536898ac3a106c5dfc156823d05",
-      "sha256": "2b9a256d2e630643b8f0985f5e826ccf0bf3716e07e596a4f67feab363d254df",
-      "sha512": null,
-      "bug_tracking_url": null,
-      "code_view_url": null,
-      "vcs_url": null,
-      "copyright": null,
-      "license_expression": null,
-      "declared_license": {
-        "license": "MIT",
-        "classifiers": [
-          "License :: OSI Approved :: MIT License"
-        ]
-      },
-      "notice_text": null,
-      "source_packages": [],
-      "file_references": [],
-      "extra_data": {},
-      "dependencies": [],
-      "repository_homepage_url": null,
-      "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/tinynetrc/1.3.1/json",
-      "datasource_id": null,
-      "purl": "pkg:pypi/tinynetrc@1.3.1"
-    },
-    {
-      "type": "pypi",
-      "namespace": null,
       "name": "toml",
       "version": "0.10.2",
       "qualifiers": {},
@@ -10788,13 +10649,13 @@
       ]
     },
     {
-      "package": "pkg:pypi/pip@23.0",
+      "package": "pkg:pypi/pip@23.0.1",
       "dependencies": []
     },
     {
       "package": "pkg:pypi/pipdeptree@2.2.1",
       "dependencies": [
-        "pkg:pypi/pip@23.0"
+        "pkg:pypi/pip@23.0.1"
       ]
     },
     {
@@ -10917,10 +10778,6 @@
     },
     {
       "package": "pkg:pypi/text-unidecode@1.3",
-      "dependencies": []
-    },
-    {
-      "package": "pkg:pypi/tinynetrc@1.3.1",
       "dependencies": []
     },
     {

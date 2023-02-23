@@ -11,11 +11,11 @@
 import collections
 import json
 import os
+from netrc import netrc
 from unittest import mock
 
 from commoncode.testcase import FileDrivenTesting
 from test_cli import check_json_results
-from tinynetrc import Netrc
 
 from _packagedcode.pypi import SetupCfgHandler
 from python_inspector.resolution import fetch_and_extract_sdist
@@ -31,14 +31,20 @@ Candidate = collections.namedtuple("Candidate", "name version extras")
 
 def test_get_netrc_auth():
     netrc_file = test_env.get_test_loc("test.netrc")
-    netrc = Netrc(netrc_file)
-    assert get_netrc_auth(url="https://pyp1.org/simple", netrc=netrc) == ("test", "test123")
+    parsed_netrc = netrc(netrc_file)
+    assert get_netrc_auth(url="https://pyp1.org/simple", netrc=parsed_netrc) == ("test", "test123")
+
+
+def test_get_commented_netrc_auth():
+    netrc_file = test_env.get_test_loc("test-commented.netrc")
+    parsed_netrc = netrc(netrc_file)
+    assert get_netrc_auth(url="https://pyp2.org/simple", netrc=parsed_netrc) == ("test", "test123")
 
 
 def test_get_netrc_auth_with_no_matching_url():
     netrc_file = test_env.get_test_loc("test.netrc")
-    netrc = Netrc(netrc_file)
-    assert get_netrc_auth(url="https://pypi2.org/simple", netrc=netrc) == (None, None)
+    parsed_netrc = netrc(netrc_file)
+    assert get_netrc_auth(url="https://pypi2.org/simple", netrc=parsed_netrc) == (None, None)
 
 
 @mock.patch("python_inspector.utils_pypi.CACHE.get")

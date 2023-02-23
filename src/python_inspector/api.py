@@ -10,6 +10,7 @@
 #
 
 import os
+from netrc import netrc
 from typing import Dict
 from typing import List
 from typing import NamedTuple
@@ -19,7 +20,6 @@ from packageurl import PackageURL
 from packvers.requirements import Requirement
 from resolvelib import BaseReporter
 from resolvelib import Resolver
-from tinynetrc import Netrc
 
 from _packagedcode.models import DependentPackage
 from _packagedcode.models import PackageData
@@ -128,9 +128,9 @@ def resolve_dependencies(
     if netrc_file:
         if verbose:
             printer(f"Using netrc file {netrc_file}")
-        netrc = Netrc(file=netrc_file)
+        parsed_netrc = netrc(netrc_file)
     else:
-        netrc = None
+        parsed_netrc = None
 
     # TODO: deduplicate me
     direct_dependencies = []
@@ -233,8 +233,8 @@ def resolve_dependencies(
                 repos.append(existing)
             else:
                 credentials = None
-                if netrc:
-                    login, password = utils.get_netrc_auth(index_url, netrc)
+                if parsed_netrc:
+                    login, password = utils.get_netrc_auth(index_url, parsed_netrc)
                     credentials = (
                         dict(login=login, password=password) if login and password else None
                     )
