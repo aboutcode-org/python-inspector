@@ -2,6 +2,14 @@ Changelog
 =========
 
 
+v0.9.5
+-------------
+
+- Update readme with test instructions.
+- Fail gracefully at parsing setup.py with no deps.
+- Support comments in netrc file #107.
+
+
 v0.9.4
 ------
 
