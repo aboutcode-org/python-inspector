@@ -9,14 +9,16 @@
 #
 """Generate requirements from `setup.py` and `requirements-devel.txt`."""
 
+import ast
 import os
-import re
 import sys
 
 try:
     import configparser
 except ImportError:  # pragma: no cover
     import ConfigParser as configparser
+
+import distutils.core
 
 import mock
 import setuptools
@@ -54,11 +56,65 @@ def iter_requirements(level, extras, setup_file):
     setup_requires = {}
     # change directory to setup.py path
     with pushd(os.path.dirname(setup_file)):
-        with mock.patch.object(setuptools, "setup") as mock_setup:
-            sys.path.append(os.path.dirname(setup_file))
-            g = {"__file__": setup_file, "__name__": "__main__"}
-            with open(setup_file) as sf:
-                exec(sf.read(), g)
+        with open(setup_file) as sf:
+            file_contents = sf.read()
+            node = ast.parse(file_contents)
+            asnames = {}
+            imports = []
+            for elem in ast.walk(node):
+                # save the asnames to parse aliases later
+                if isinstance(elem, ast.Import):
+                    for n in elem.names:
+                        asnames[(n.asname if n.asname is not None else n.name)] = n.name
+            for elem in ast.walk(node):
+                # for function imports, e.g. from setuptools import setup; setup()
+                if isinstance(elem, ast.ImportFrom) and "setup" in [e.name for e in elem.names]:
+                    imports.append(elem.module)
+                # for module imports, e.g. import setuptools; setuptools.setup(...)
+                elif (
+                    isinstance(elem, ast.Expr)
+                    and isinstance(elem.value, ast.Call)
+                    and isinstance(elem.value.func, ast.Attribute)
+                    and isinstance(elem.value.func.value, ast.Name)
+                    and elem.value.func.attr == "setup"
+                ):
+                    name = elem.value.func.value.id
+                    if name in asnames.keys():
+                        name = asnames[name]
+                    imports.append(name)
+                # for module imports, e.g. import disttools.core; disttools.core.setup(...)
+                elif (
+                    isinstance(elem, ast.Expr)
+                    and isinstance(elem.value, ast.Call)
+                    and isinstance(elem.value.func, ast.Attribute)
+                    and isinstance(elem.value.func.value, ast.Attribute)
+                    and elem.value.func.attr == "setup"
+                ):
+                    name = (
+                        str(elem.value.func.value.value.id) + "." + str(elem.value.func.value.attr)
+                    )
+                    if name in asnames.keys():
+                        name = asnames[name]
+                    imports.append(name)
+            setup_providers = [i for i in imports if i in ["distutils.core", "setuptools"]]
+            if len(setup_providers) == 0:
+                print(
+                    f"Warning: unable to recognize setup provider in {setup_file}: "
+                    "defaulting to 'distutils.core'."
+                )
+                setup_provider = "distutils.core"
+            elif len(setup_providers) == 1:
+                setup_provider = setup_providers[0]
+            else:
+                print(
+                    f"Warning: ambiguous setup provider in {setup_file}: candidates are {setup_providers}"
+                    "defaulting to 'distutils.core'."
+                )
+                setup_provider = "distutils.core"
+            with mock.patch.object(eval(setup_provider), "setup") as mock_setup:
+                sys.path.append(os.path.dirname(setup_file))
+                g = {"__file__": setup_file, "__name__": "__main__"}
+                exec(file_contents, g)
             sys.path.pop()
             # removing the assertion `assert g["setup"]`` since this is not true for all cases
             # for example when setuptools.setup() is called instead of setup()
