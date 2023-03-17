@@ -5686,12 +5686,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "msgpack",
-      "version": "1.0.4",
+      "version": "1.0.5",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "MessagePack serializer\n# MessagePack for Python\n\n[![Build Status](https://travis-ci.org/msgpack/msgpack-python.svg?branch=master)](https://travis-ci.org/msgpack/msgpack-python)\n[![Documentation Status](https://readthedocs.org/projects/msgpack-python/badge/?version=latest)](https://msgpack-python.readthedocs.io/en/latest/?badge=latest)\n\n## What's this\n\n[MessagePack](https://msgpack.org/) is an efficient binary serialization format.\nIt lets you exchange data among multiple languages like JSON.\nBut it's faster and smaller.\nThis package provides CPython bindings for reading and writing MessagePack data.\n\n\n## Very important notes for existing users\n\n### PyPI package name\n\nPackage name on PyPI was changed from `msgpack-python` to `msgpack` from 0.5.\n\nWhen upgrading from msgpack-0.4 or earlier, do `pip uninstall msgpack-python` before\n`pip install -U msgpack`.\n\n\n### Compatibility with the old format\n\nYou can use `use_bin_type=False` option to pack `bytes`\nobject into raw type in the old msgpack spec, instead of bin type in new msgpack spec.\n\nYou can unpack old msgpack format using `raw=True` option.\nIt unpacks str (raw) type in msgpack into Python bytes.\n\nSee note below for detail.\n\n\n### Major breaking changes in msgpack 1.0\n\n* Python 2\n\n  * The extension module does not support Python 2 anymore.\n    The pure Python implementation (`msgpack.fallback`) is used for Python 2.\n\n* Packer\n\n  * `use_bin_type=True` by default.  bytes are encoded in bin type in msgpack.\n    **If you are still using Python 2, you must use unicode for all string types.**\n    You can use `use_bin_type=False` to encode into old msgpack format.\n  * `encoding` option is removed.  UTF-8 is used always.\n\n* Unpacker\n\n  * `raw=False` by default.  It assumes str types are valid UTF-8 string\n    and decode them to Python str (unicode) object.\n  * `encoding` option is removed.  You can use `raw=True` to support old format.\n  * Default value of `max_buffer_size` is changed from 0 to 100 MiB.\n  * Default value of `strict_map_key` is changed to True to avoid hashdos.\n    You need to pass `strict_map_key=False` if you have data which contain map keys\n    which type is not bytes or str.\n\n\n## Install\n\n```\n$ pip install msgpack\n```\n\n### Pure Python implementation\n\nThe extension module in msgpack (`msgpack._cmsgpack`) does not support\nPython 2 and PyPy.\n\nBut msgpack provides a pure Python implementation (`msgpack.fallback`)\nfor PyPy and Python 2.\n\n\n\n### Windows\n\nWhen you can't use a binary distribution, you need to install Visual Studio\nor Windows SDK on Windows.\nWithout extension, using pure Python implementation on CPython runs slowly.\n\n\n## How to use\n\nNOTE: In examples below, I use `raw=False` and `use_bin_type=True` for users\nusing msgpack < 1.0. These options are default from msgpack 1.0 so you can omit them.\n\n\n### One-shot pack & unpack\n\nUse `packb` for packing and `unpackb` for unpacking.\nmsgpack provides `dumps` and `loads` as an alias for compatibility with\n`json` and `pickle`.\n\n`pack` and `dump` packs to a file-like object.\n`unpack` and `load` unpacks from a file-like object.\n\n```pycon\n>>> import msgpack\n>>> msgpack.packb([1, 2, 3], use_bin_type=True)\n'\\x93\\x01\\x02\\x03'\n>>> msgpack.unpackb(_, raw=False)\n[1, 2, 3]\n```\n\n`unpack` unpacks msgpack's array to Python's list, but can also unpack to tuple:\n\n```pycon\n>>> msgpack.unpackb(b'\\x93\\x01\\x02\\x03', use_list=False, raw=False)\n(1, 2, 3)\n```\n\nYou should always specify the `use_list` keyword argument for backward compatibility.\nSee performance issues relating to `use_list option`_ below.\n\nRead the docstring for other options.\n\n\n### Streaming unpacking\n\n`Unpacker` is a \"streaming unpacker\". It unpacks multiple objects from one\nstream (or from bytes provided through its `feed` method).\n\n```py\nimport msgpack\nfrom io import BytesIO\n\nbuf = BytesIO()\nfor i in range(100):\n   buf.write(msgpack.packb(i, use_bin_type=True))\n\nbuf.seek(0)\n\nunpacker = msgpack.Unpacker(buf, raw=False)\nfor unpacked in unpacker:\n    print(unpacked)\n```\n\n\n### Packing/unpacking of custom data type\n\nIt is also possible to pack/unpack custom data types. Here is an example for\n`datetime.datetime`.\n\n```py\nimport datetime\nimport msgpack\n\nuseful_dict = {\n    \"id\": 1,\n    \"created\": datetime.datetime.now(),\n}\n\ndef decode_datetime(obj):\n    if '__datetime__' in obj:\n        obj = datetime.datetime.strptime(obj[\"as_str\"], \"%Y%m%dT%H:%M:%S.%f\")\n    return obj\n\ndef encode_datetime(obj):\n    if isinstance(obj, datetime.datetime):\n        return {'__datetime__': True, 'as_str': obj.strftime(\"%Y%m%dT%H:%M:%S.%f\")}\n    return obj\n\n\npacked_dict = msgpack.packb(useful_dict, default=encode_datetime, use_bin_type=True)\nthis_dict_again = msgpack.unpackb(packed_dict, object_hook=decode_datetime, raw=False)\n```\n\n`Unpacker`'s `object_hook` callback receives a dict; the\n`object_pairs_hook` callback may instead be used to receive a list of\nkey-value pairs.\n\n\n### Extended types\n\nIt is also possible to pack/unpack custom data types using the **ext** type.\n\n```pycon\n>>> import msgpack\n>>> import array\n>>> def default(obj):\n...     if isinstance(obj, array.array) and obj.typecode == 'd':\n...         return msgpack.ExtType(42, obj.tostring())\n...     raise TypeError(\"Unknown type: %r\" % (obj,))\n...\n>>> def ext_hook(code, data):\n...     if code == 42:\n...         a = array.array('d')\n...         a.fromstring(data)\n...         return a\n...     return ExtType(code, data)\n...\n>>> data = array.array('d', [1.2, 3.4])\n>>> packed = msgpack.packb(data, default=default, use_bin_type=True)\n>>> unpacked = msgpack.unpackb(packed, ext_hook=ext_hook, raw=False)\n>>> data == unpacked\nTrue\n```\n\n\n### Advanced unpacking control\n\nAs an alternative to iteration, `Unpacker` objects provide `unpack`,\n`skip`, `read_array_header` and `read_map_header` methods. The former two\nread an entire message from the stream, respectively de-serialising and returning\nthe result, or ignoring it. The latter two methods return the number of elements\nin the upcoming container, so that each element in an array, or key-value pair\nin a map, can be unpacked or skipped individually.\n\n\n## Notes\n\n### string and binary type\n\nEarly versions of msgpack didn't distinguish string and binary types.\nThe type for representing both string and binary types was named **raw**.\n\nYou can pack into and unpack from this old spec using `use_bin_type=False`\nand `raw=True` options.\n\n```pycon\n>>> import msgpack\n>>> msgpack.unpackb(msgpack.packb([b'spam', u'eggs'], use_bin_type=False), raw=True)\n[b'spam', b'eggs']\n>>> msgpack.unpackb(msgpack.packb([b'spam', u'eggs'], use_bin_type=True), raw=False)\n[b'spam', 'eggs']\n```\n\n### ext type\n\nTo use the **ext** type, pass `msgpack.ExtType` object to packer.\n\n```pycon\n>>> import msgpack\n>>> packed = msgpack.packb(msgpack.ExtType(42, b'xyzzy'))\n>>> msgpack.unpackb(packed)\nExtType(code=42, data='xyzzy')\n```\n\nYou can use it with `default` and `ext_hook`. See below.\n\n\n### Security\n\nTo unpacking data received from unreliable source, msgpack provides\ntwo security options.\n\n`max_buffer_size` (default: `100*1024*1024`) limits the internal buffer size.\nIt is used to limit the preallocated list size too.\n\n`strict_map_key` (default: `True`) limits the type of map keys to bytes and str.\nWhile msgpack spec doesn't limit the types of the map keys,\nthere is a risk of the hashdos.\nIf you need to support other types for map keys, use `strict_map_key=False`.\n\n\n### Performance tips\n\nCPython's GC starts when growing allocated object.\nThis means unpacking may cause useless GC.\nYou can use `gc.disable()` when unpacking large message.\n\nList is the default sequence type of Python.\nBut tuple is lighter than list.\nYou can use `use_list=False` while unpacking when performance is important.",
-      "release_date": "2022-06-03T07:30:12",
+      "release_date": "2023-03-08T17:50:48",
       "parties": [
         {
           "type": "person",
@@ -5705,6 +5705,7 @@
         "Intended Audience :: Developers",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
@@ -5713,11 +5714,11 @@
         "Programming Language :: Python :: Implementation :: PyPy"
       ],
       "homepage_url": "https://msgpack.org/",
-      "download_url": "https://files.pythonhosted.org/packages/22/44/0829b19ac243211d1d2bd759999aa92196c546518b0be91de9cacc98122a/msgpack-1.0.4.tar.gz",
-      "size": 128053,
+      "download_url": "https://files.pythonhosted.org/packages/dc/a1/eba11a0d4b764bc62966a565b470f8c6f38242723ba3057e9b5098678c30/msgpack-1.0.5.tar.gz",
+      "size": 127834,
       "sha1": null,
-      "md5": "1822cdb939e7531f7ad0f7f09b434f22",
-      "sha256": "f5d869c18f030202eb412f08b28d2afeea553d6613aee89e200d7aca7ef01f5f",
+      "md5": "da12a9f0a65a803ec005219f6095d0a3",
+      "sha256": "c075544284eadc5cddc70f4757331d99dcbc16b2bbd4849d15f8aae4cf36d31c",
       "sha512": null,
       "bug_tracking_url": "https://github.com/msgpack/msgpack-python/issues",
       "code_view_url": "https://github.com/msgpack/msgpack-python",
@@ -5737,9 +5738,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/msgpack/1.0.4/json",
+      "api_data_url": "https://pypi.org/pypi/msgpack/1.0.5/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/msgpack@1.0.4"
+      "purl": "pkg:pypi/msgpack@1.0.5"
     },
     {
       "type": "pypi",
@@ -8644,7 +8645,7 @@
         "pkg:pypi/celery@4.4.7",
         "pkg:pypi/flask-celeryext@0.3.4",
         "pkg:pypi/invenio-base@1.2.5",
-        "pkg:pypi/msgpack@1.0.4",
+        "pkg:pypi/msgpack@1.0.5",
         "pkg:pypi/redis@3.5.3"
       ]
     },
@@ -8772,7 +8773,7 @@
       ]
     },
     {
-      "package": "pkg:pypi/msgpack@1.0.4",
+      "package": "pkg:pypi/msgpack@1.0.5",
       "dependencies": []
     },
     {
