@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+v0.9.6
+-------------
+
+- Mock the actual setup provider defined in setup.py.
+- Update dependency resolvelib to latest.
+
 v0.9.5
 -------------
 
