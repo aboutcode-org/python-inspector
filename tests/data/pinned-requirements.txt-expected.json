@@ -2,7 +2,7 @@
   "headers": {
     "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
-    "tool_version": "0.9.5",
+    "tool_version": "0.9.6",
     "options": [
       "--requirement /home/tg1999/Desktop/python-inspector-1/tests/data/pinned-requirements.txt",
       "--index-url https://pypi.org/simple",
