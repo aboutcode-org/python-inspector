@@ -121,12 +121,12 @@ def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
     assert plist == [
         "pkg:pypi/click@8.1.3",
         "pkg:pypi/flask@2.1.3",
-        "pkg:pypi/importlib-metadata@6.0.0",
+        "pkg:pypi/importlib-metadata@6.1.0",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
         "pkg:pypi/markupsafe@2.1.2",
         "pkg:pypi/werkzeug@2.2.3",
-        "pkg:pypi/zipp@3.14.0",
+        "pkg:pypi/zipp@3.15.0",
     ]
 
 
@@ -147,11 +147,11 @@ def test_without_supported_wheels():
     assert plist == [
         "pkg:pypi/autobahn@22.3.2",
         "pkg:pypi/cffi@1.15.1",
-        "pkg:pypi/cryptography@39.0.1",
+        "pkg:pypi/cryptography@39.0.2",
         "pkg:pypi/hyperlink@21.0.0",
         "pkg:pypi/idna@3.4",
         "pkg:pypi/pycparser@2.21",
-        "pkg:pypi/setuptools@67.4.0",
+        "pkg:pypi/setuptools@67.6.0",
         "pkg:pypi/txaio@23.1.1",
     ]
 
