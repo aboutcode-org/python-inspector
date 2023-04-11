@@ -181,3 +181,26 @@ def test_api_with_python_311():
         expected_file=expected_file,
         clean=True,
     )
+
+
+def test_api_with_partial_setup_py():
+    result_file = test_env.get_temp_file("json")
+    setup_py_file = test_env.get_test_loc("partial-setup.py")
+    expected_file = test_env.get_test_loc("test-api-with-partial-setup-py.json", must_exist=False)
+    with open(result_file, "w") as result:
+        result.write(
+            json.dumps(
+                resolver_api(
+                    python_version="3.11",
+                    operating_system="linux",
+                    setup_py_file=setup_py_file,
+                    prefer_source=True,
+                    analyze_setup_py_insecurely=True,
+                ).to_dict()
+            )
+        )
+    check_json_results(
+        result_file=result_file,
+        expected_file=expected_file,
+        clean=True,
+    )
