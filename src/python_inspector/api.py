@@ -37,6 +37,7 @@ from python_inspector.resolution import format_resolution
 from python_inspector.resolution import get_environment_marker_from_environment
 from python_inspector.resolution import get_package_list
 from python_inspector.resolution import get_python_version_from_env_tag
+from python_inspector.resolution import get_reqs_insecurely
 from python_inspector.resolution import get_requirements_from_python_manifest
 from python_inspector.utils_pypi import PLATFORMS_BY_OS
 from python_inspector.utils_pypi import PYPI_SIMPLE_URL
@@ -175,22 +176,30 @@ def resolve_dependencies(
                 f"is not compatible with setup.py {setup_py_file} "
                 f"python_requires {python_requires}",
             )
-
-        setup_py_file_deps = package_data.dependencies
-        for dep in package_data.dependencies:
-            # TODO : we need to handle to all the scopes
-            if dep.scope == "install":
-                direct_dependencies.append(dep)
-
-        if not package_data.dependencies:
-            reqs = get_requirements_from_python_manifest(
-                sdist_location=os.path.dirname(setup_py_file),
-                setup_py_location=setup_py_file,
-                files=[setup_py_file],
-                analyze_setup_py_insecurely=analyze_setup_py_insecurely,
+        if analyze_setup_py_insecurely:
+            reqs = list(
+                get_reqs_insecurely(
+                    setup_py_location=setup_py_file,
+                )
             )
             setup_py_file_deps = list(get_dependent_packages_from_reqs(reqs))
             direct_dependencies.extend(setup_py_file_deps)
+        else:
+            setup_py_file_deps = package_data.dependencies
+            for dep in package_data.dependencies:
+                # TODO : we need to handle to all the scopes
+                if dep.scope == "install":
+                    direct_dependencies.append(dep)
+
+            if not package_data.dependencies:
+                reqs = get_requirements_from_python_manifest(
+                    sdist_location=os.path.dirname(setup_py_file),
+                    setup_py_location=setup_py_file,
+                    files=[setup_py_file],
+                    analyze_setup_py_insecurely=analyze_setup_py_insecurely,
+                )
+                setup_py_file_deps = list(get_dependent_packages_from_reqs(reqs))
+                direct_dependencies.extend(setup_py_file_deps)
 
         package_data.dependencies = setup_py_file_deps
         file_package_data = [package_data.to_dict()]

@@ -493,25 +493,30 @@ class PythonInputProvider(AbstractProvider):
                 "setup.cfg",
             )
 
-            requirements = list(
-                get_setup_requirements(
-                    sdist_location=sdist_location,
+            if self.analyze_setup_py_insecurely:
+                yield from get_reqs_insecurely(
                     setup_py_location=setup_py_location,
-                    setup_cfg_location=setup_cfg_location,
                 )
-            )
-            if requirements:
-                yield from requirements
             else:
-                # Look in requirements file if and only if thy are refered in setup.py or setup.cfg
-                # And no deps have been yielded by requirements file
-
-                yield from get_requirements_from_python_manifest(
-                    sdist_location=sdist_location,
-                    setup_py_location=setup_py_location,
-                    files=[setup_cfg_location, setup_py_location],
-                    analyze_setup_py_insecurely=self.analyze_setup_py_insecurely,
+                requirements = list(
+                    get_setup_requirements(
+                        sdist_location=sdist_location,
+                        setup_py_location=setup_py_location,
+                        setup_cfg_location=setup_cfg_location,
+                    )
                 )
+                if requirements:
+                    yield from requirements
+                else:
+                    # Look in requirements file if and only if thy are refered in setup.py or setup.cfg
+                    # And no deps have been yielded by requirements file
+
+                    yield from get_requirements_from_python_manifest(
+                        sdist_location=sdist_location,
+                        setup_py_location=setup_py_location,
+                        files=[setup_cfg_location, setup_py_location],
+                        analyze_setup_py_insecurely=self.analyze_setup_py_insecurely,
+                    )
 
     def get_requirements_for_package_from_pypi_json_api(
         self, purl: PackageURL
