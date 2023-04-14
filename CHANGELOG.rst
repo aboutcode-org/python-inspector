@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+v0.9.7
+-------------
+
+- Fix resolution of setup files which partially have dynamic dependencies.
+
+
 v0.9.6
 -------------
 
