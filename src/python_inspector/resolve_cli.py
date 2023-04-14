@@ -20,7 +20,7 @@ from python_inspector.utils import write_output_in_file
 
 TRACE = False
 
-__version__ = "0.9.6"
+__version__ = "0.9.7"
 
 DEFAULT_PYTHON_VERSION = "38"
 PYPI_SIMPLE_URL = "https://pypi.org/simple"
