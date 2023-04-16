@@ -2,10 +2,20 @@ Changelog
 =========
 
 
+
+v0.9.8
+-------------
+
+- Improve command line options output in the JSON output header. Add missing
+  options.
+
+
+
+
 v0.9.7
 -------------
 
-- Fix resolution of setup files which partially have dynamic dependencies.
+- Fix resolution of setup files that have partially dynamic dependencies.
 
 
 v0.9.6

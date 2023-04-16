@@ -4,6 +4,7 @@
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
     "tool_version": "0.9.7",
     "options": [
+      "--setup-py tests/data/setup/simple-setup.py",
       "--index-url https://pypi.org/simple",
       "--python-version 27",
       "--operating-system linux",
@@ -16,7 +17,7 @@
   "files": [
     {
       "type": "file",
-      "path": "/home/tg1999/Desktop/python-inspector-1/tests/data/setup/simple-setup.py",
+      "path": "tests/data/setup/simple-setup.py",
       "package_data": [
         {
           "type": "pypi",

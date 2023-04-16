@@ -102,12 +102,12 @@ TRACE_ULTRA_DEEP = False
 PYTHON_VERSIONS = "36", "37", "38", "39", "310", "311", "27"
 
 PYTHON_DOT_VERSIONS_BY_VER = {
+    "27": "2.7",
     "36": "3.6",
     "37": "3.7",
     "38": "3.8",
     "39": "3.9",
     "310": "3.10",
-    "27": "2.7",
     "311": "3.11",
 }
 
@@ -123,13 +123,13 @@ def get_python_dot_version(version):
 
 
 ABIS_BY_PYTHON_VERSION = {
+    "27": ["cp27", "cp27m"],
     "36": ["cp36", "cp36m", "abi3"],
     "37": ["cp37", "cp37m", "abi3"],
     "38": ["cp38", "cp38m", "abi3"],
     "39": ["cp39", "cp39m", "abi3"],
     "310": ["cp310", "cp310m", "abi3"],
     "311": ["cp311", "cp311m", "abi3"],
-    "27": ["cp27", "cp27m"],
 }
 
 PLATFORMS_BY_OS = {
@@ -137,7 +137,9 @@ PLATFORMS_BY_OS = {
         "linux_x86_64",
         "manylinux1_x86_64",
         "manylinux2010_x86_64",
-        "manylinux2014_x86_64",
+        "manylinux_2014_x86_64",
+        # TODO add https://peps.python.org/pep-0600/
+        # "manylinux_2_17",
     ],
     "macos": [
         "macosx_10_6_intel",
@@ -261,6 +263,9 @@ def download_wheel(
 
 
 def get_valid_sdist(repo, name, version, python_version=DEFAULT_PYTHON_VERSION):
+    """
+    Return an Sdist or None.
+    """
     package = repo.get_package_version(name=name, version=version)
     if not package:
         if TRACE_DEEP:
@@ -337,7 +342,8 @@ def download_sdist(
 ):
     """
     Download the sdist source distribution of package ``name`` and ``version``
-    into the ``dest_dir`` directory. Return a fetched filename or None.
+    into the ``dest_dir`` directory. Return the filename fetched and stored in
+    ``dest_dir`` or None.
 
     Use the first PyPI simple repository from a list of ``repos`` that contains
     this sdist.

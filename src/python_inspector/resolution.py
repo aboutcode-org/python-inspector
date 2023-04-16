@@ -110,7 +110,7 @@ def get_deps_from_distribution(
 def get_environment_marker_from_environment(environment):
     return {
         "extra": "",
-        "python_version": get_python_version_from_env_tag(
+        "python_version": get_python_dot_version_from_env_tag(
             python_version=environment.python_version
         ),
         "platform_system": environment.operating_system.capitalize(),
@@ -134,6 +134,7 @@ def parse_deps_from_setup_py_insecurely(setup_py):
     """
     if not os.path.exists(setup_py):
         return []
+
     for req in iter_requirements(level="", extras=[], setup_file=setup_py):
         parsed_req = Requirement(req)
         yield DependentPackage(
@@ -167,10 +168,10 @@ def is_valid_version(
     return True
 
 
-def get_python_version_from_env_tag(python_version: str) -> str:
+def get_python_dot_version_from_env_tag(python_version: str) -> str:
     """
-    >>> assert get_python_version_from_env_tag("310") == "3.10"
-    >>> assert get_python_version_from_env_tag("39") == "3.9"
+    >>> assert get_python_dot_version_from_env_tag("310") == "3.10"
+    >>> assert get_python_dot_version_from_env_tag("39") == "3.9"
     """
     elements = list(python_version)
     elements.insert(1, ".")
@@ -182,46 +183,48 @@ def fetch_and_extract_sdist(
     repos: List[PypiSimpleRepository], candidate: Candidate, python_version: str
 ) -> Union[str, None]:
     """
-    Fetch and extract the source distribution (sdist) for the ``candidate`` Candidate
-    from the `repos` list of PyPiRepository
-    and a required ``python_version`` Python version.
-    Return the directory location string where the sdist has been extracted.
-    Return None if the sdist was not fetched either
-    because does not exist in any of the ``repos`` or it does not work with
-    the required ``python_version``.
+    Fetch and extract the source distribution (sdist_filename) for the ``candidate``
+    Candidate from the ``repos`` list of PyPiRepository and a required
+    ``python_version`` Python version.
+
+    Return the directory location string where the sdist_filename has been extracted.
+
+    Return None if the sdist_filename was not fetched either because does not exist in
+    any of the ``repos`` or it does not work with the required ``python_version``.
+
     Raise an Exception if extraction fails.
     """
-    sdist = utils_pypi.download_sdist(
+    sdist_filename = utils_pypi.download_sdist(
         name=candidate.name,
         version=str(candidate.version),
         repos=repos,
         python_version=python_version,
     )
 
-    if not sdist:
+    if not sdist_filename:
         return
 
-    return get_sdist_file_path_from_filename(sdist)
+    return get_sdist_file_path_from_filename(sdist_filename)
 
 
-def get_sdist_file_path_from_filename(sdist):
+def get_sdist_file_path_from_filename(sdist_filename):
     """
-    Extract the ``sdist`` tarball and return the directory where it is extracted.
+    Extract the ``sdist_filename`` tarball and return the directory where it is extracted.
     """
     base_dir = os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists")
 
-    if sdist.endswith(".tar.gz"):
-        sdist_file, _, _ = sdist.rpartition(".tar.gz")
-        with tarfile.open(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist)) as tarball:
+    if sdist_filename.endswith(".tar.gz"):
+        sdist_file, _, _ = sdist_filename.rpartition(".tar.gz")
+        with tarfile.open(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist_filename)) as tarball:
             tarball.extractall(os.path.join(base_dir, sdist_file))
 
-    elif sdist.endswith(".zip"):
-        sdist_file, _, _ = sdist.rpartition(".zip")
-        with ZipFile(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist)) as zipped:
+    elif sdist_filename.endswith(".zip"):
+        sdist_file, _, _ = sdist_filename.rpartition(".zip")
+        with ZipFile(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist_filename)) as zipped:
             zipped.extractall(os.path.join(base_dir, sdist_file))
 
     else:
-        raise Exception(f"Unable to extract sdist {sdist}")
+        raise Exception(f"Unable to extract sdist_filename {sdist_filename}")
 
     return os.path.join(base_dir, sdist_file, sdist_file)
 
@@ -404,7 +407,7 @@ class PythonInputProvider(AbstractProvider):
         versions = []
         for version, package in repo.get_package_versions(name).items():
             python_version = parse_version(
-                get_python_version_from_env_tag(python_version=self.environment.python_version)
+                get_python_dot_version_from_env_tag(python_version=self.environment.python_version)
             )
             wheels = list(package.get_supported_wheels(environment=self.environment))
             valid_wheel_present = False
@@ -455,7 +458,7 @@ class PythonInputProvider(AbstractProvider):
         Return requirements for a package from the simple repositories.
         """
         python_version = parse_version(
-            get_python_version_from_env_tag(python_version=self.environment.python_version)
+            get_python_dot_version_from_env_tag(python_version=self.environment.python_version)
         )
 
         wheels = utils_pypi.download_wheel(

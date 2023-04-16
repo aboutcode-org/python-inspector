@@ -25,16 +25,14 @@ test_env.test_data_dir = os.path.join(os.path.dirname(__file__), "data")
 def test_api_with_specifier():
     result_file = test_env.get_temp_file("json")
     expected_file = test_env.get_test_loc("test-api-expected.json", must_exist=False)
+
+    resolution = resolver_api(
+        specifiers=["flask==2.1.2"], python_version="3.10", operating_system="linux"
+    )
+
     with open(result_file, "w") as result:
-        result.write(
-            json.dumps(
-                resolver_api(
-                    specifiers=["flask==2.1.2"],
-                    python_version="3.10",
-                    operating_system="linux",
-                ).to_dict()
-            )
-        )
+        json.dump(resolution.to_dict(), result, indent=2, separators=(",", ": "))
+
     check_json_results(
         result_file=result_file,
         expected_file=expected_file,
@@ -45,17 +43,17 @@ def test_api_with_specifier():
 def test_api_with_specifier_pdt():
     result_file = test_env.get_temp_file("json")
     expected_file = test_env.get_test_loc("test-api-pdt-expected.json", must_exist=False)
+
+    resolution = resolver_api(
+        specifiers=["flask==2.1.2"],
+        python_version="3.10",
+        operating_system="linux",
+        pdt_output=True,
+    )
+
     with open(result_file, "w") as result:
-        result.write(
-            json.dumps(
-                resolver_api(
-                    specifiers=["flask==2.1.2"],
-                    python_version="3.10",
-                    operating_system="linux",
-                    pdt_output=True,
-                ).to_dict()
-            )
-        )
+        json.dump(resolution.to_dict(), result, indent=2, separators=(",", ": "))
+
     check_json_results(
         result_file=result_file,
         expected_file=expected_file,
@@ -67,16 +65,14 @@ def test_api_with_requirement_file():
     result_file = test_env.get_temp_file("json")
     requirement_file = test_env.get_test_loc("frozen-requirements.txt")
     expected_file = test_env.get_test_loc("test-api-with-requirement-file.json", must_exist=False)
+
+    resolution = resolver_api(
+        python_version="3.10", operating_system="linux", requirement_files=[requirement_file]
+    )
+
     with open(result_file, "w") as result:
-        result.write(
-            json.dumps(
-                resolver_api(
-                    python_version="3.10",
-                    operating_system="linux",
-                    requirement_files=[requirement_file],
-                ).to_dict()
-            )
-        )
+        json.dump(resolution.to_dict(), result, indent=2, separators=(",", ": "))
+
     check_json_results(
         result_file=result_file,
         expected_file=expected_file,
@@ -87,17 +83,17 @@ def test_api_with_requirement_file():
 def test_api_with_prefer_source():
     result_file = test_env.get_temp_file("json")
     expected_file = test_env.get_test_loc("test-api-with-prefer-source.json", must_exist=False)
+
+    resolution = resolver_api(
+        specifiers=["flask==2.1.2"],
+        python_version="3.10",
+        operating_system="linux",
+        prefer_source=True,
+    )
+
     with open(result_file, "w") as result:
-        result.write(
-            json.dumps(
-                resolver_api(
-                    specifiers=["flask==2.1.2"],
-                    python_version="3.10",
-                    operating_system="linux",
-                    prefer_source=True,
-                ).to_dict()
-            )
-        )
+        json.dump(resolution.to_dict(), result, indent=2, separators=(",", ": "))
+
     check_json_results(
         result_file=result_file,
         expected_file=expected_file,
@@ -111,16 +107,14 @@ def test_api_with_recursive_requirement_file():
     expected_file = test_env.get_test_loc(
         "test-api-with-recursive-requirement-file.json", must_exist=False
     )
+
+    resolution = resolver_api(
+        python_version="3.8", operating_system="linux", requirement_files=[requirement_file]
+    )
+
     with open(result_file, "w") as result:
-        result.write(
-            json.dumps(
-                resolver_api(
-                    python_version="3.8",
-                    operating_system="linux",
-                    requirement_files=[requirement_file],
-                ).to_dict()
-            )
-        )
+        json.dump(resolution.to_dict(), result, indent=2, separators=(",", ": "))
+
     check_json_results(
         result_file=result_file,
         expected_file=expected_file,
@@ -165,17 +159,17 @@ def test_api_with_wrong_pyver():
 def test_api_with_python_311():
     result_file = test_env.get_temp_file("json")
     expected_file = test_env.get_test_loc("test-api-with-python-311.json", must_exist=False)
+
+    resolution = resolver_api(
+        specifiers=["flask==2.1.2"],
+        python_version="3.11",
+        operating_system="linux",
+        prefer_source=True,
+    )
+
     with open(result_file, "w") as result:
-        result.write(
-            json.dumps(
-                resolver_api(
-                    specifiers=["flask==2.1.2"],
-                    python_version="3.11",
-                    operating_system="linux",
-                    prefer_source=True,
-                ).to_dict()
-            )
-        )
+        json.dump(resolution.to_dict(), result, indent=2, separators=(",", ": "))
+
     check_json_results(
         result_file=result_file,
         expected_file=expected_file,
@@ -187,18 +181,18 @@ def test_api_with_partial_setup_py():
     result_file = test_env.get_temp_file("json")
     setup_py_file = test_env.get_test_loc("partial-setup.py")
     expected_file = test_env.get_test_loc("test-api-with-partial-setup-py.json", must_exist=False)
+
+    resolution = resolver_api(
+        python_version="3.11",
+        operating_system="linux",
+        setup_py_file=setup_py_file,
+        prefer_source=True,
+        analyze_setup_py_insecurely=True,
+    )
+
     with open(result_file, "w") as result:
-        result.write(
-            json.dumps(
-                resolver_api(
-                    python_version="3.11",
-                    operating_system="linux",
-                    setup_py_file=setup_py_file,
-                    prefer_source=True,
-                    analyze_setup_py_insecurely=True,
-                ).to_dict()
-            )
-        )
+        json.dump(resolution.to_dict(), result, indent=2, separators=(",", ": "))
+
     check_json_results(
         result_file=result_file,
         expected_file=expected_file,

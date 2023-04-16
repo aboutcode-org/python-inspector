@@ -4,9 +4,11 @@
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
     "tool_version": "0.9.7",
     "options": [
+      "--setup-py tests/data/insecure-setup-2/setup.py",
       "--index-url https://pypi.org/simple",
       "--python-version 27",
       "--operating-system linux",
+      "--analyze-setup-py-insecurely",
       "--json <file>"
     ],
     "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/nexB/python-inspector/ for support and download.",
@@ -16,7 +18,7 @@
   "files": [
     {
       "type": "file",
-      "path": "/home/tg1999/Desktop/python-inspector-1/tests/data/insecure-setup-2/setup.py",
+      "path": "tests/data/insecure-setup-2/setup.py",
       "package_data": [
         {
           "type": "pypi",

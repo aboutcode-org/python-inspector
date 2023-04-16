@@ -104,7 +104,7 @@ def print_version(ctx, param, value):
     required=False,
     metavar="FILE",
     help="Write output as pretty-printed JSON to FILE. "
-    "Use the special '-' file name to print results on screen/stdout.",
+    "Use the special '-' file name to print results on screen to stdout.",
 )
 @click.option(
     "--json-pdt",
@@ -115,6 +115,7 @@ def print_version(ctx, param, value):
     help="Write output as pretty-printed JSON to FILE as a tree in the style of pipdeptree. "
     "Use the special '-' file name to print results on screen/stdout.",
 )
+# Special hidden option
 @click.option(
     "-n",
     "--netrc",
@@ -123,16 +124,18 @@ def print_version(ctx, param, value):
     metavar="NETRC-FILE",
     hidden=True,
     required=False,
-    help="Netrc file to use for authentication. ",
+    help="Netrc file to use for authentication.",
 )
+# Special hidden option
 @click.option(
     "--max-rounds",
     "max_rounds",
     hidden=True,
     type=int,
     default=200000,
-    help="Increase the max rounds whenever the resolution is too deep",
+    help="Increase the max number of resolution rounds when the package tree is too complex.",
 )
+# Special hidden option
 @click.option(
     "--use-cached-index",
     is_flag=True,
@@ -148,14 +151,14 @@ def print_version(ctx, param, value):
 @click.option(
     "--analyze-setup-py-insecurely",
     is_flag=True,
-    help="Enable collection of requirements in setup.py that compute these"
-    " dynamically. This is an insecure operation as it can run arbitrary code.",
+    help="Enable collection of requirements in setup.py that compute these "
+    "dynamically. This is an insecure operation as it can run arbitrary code.",
 )
 @click.option(
     "--prefer-source",
     is_flag=True,
-    help="Prefer source distributions over binary distributions"
-    " if no source distribution is available then binary distributions are used",
+    help="Prefer source distributions over binary distributions "
+    "if no source distribution is available then binary distributions are used",
 )
 @click.option(
     "--verbose",
@@ -220,12 +223,28 @@ def resolve_dependencies(
         click.secho("Only one of --json or --json-pdt can be used.", err=True)
         ctx.exit(1)
 
-    options = [f"--requirement {rf}" for rf in requirement_files]
-    options += [f"--specifier {sp}" for sp in specifiers]
-    options += [f"--index-url {iu}" for iu in index_urls]
-    options += [f"--python-version {python_version}"]
-    options += [f"--operating-system {operating_system}"]
-    options += ["--json <file>"]
+    options = []
+    options.extend(f"--requirement {rf}" for rf in requirement_files)
+    if setup_py_file:
+        options.append(f"--setup-py {setup_py_file}")
+
+    options.extend(f"--specifier {sp}" for sp in specifiers)
+    options.extend(f"--index-url {iu}" for iu in index_urls)
+    options.append(f"--python-version {python_version}")
+    options.append(f"--operating-system {operating_system}")
+
+    if analyze_setup_py_insecurely:
+        options.append(f"--analyze-setup-py-insecurely")
+    if prefer_source:
+        options.append(f"--prefer-source")
+    if use_pypi_json_api:
+        options.append(f"--use-pypi-json-api")
+    if netrc_file:
+        options.append(f"--netrc {netrc_file}")
+    if json_output:
+        options.append("--json <file>")
+    if pdt_output:
+        options.append("--json-pdt <file>")
 
     notice = (
         "Dependency tree generated with python-inspector.\n"

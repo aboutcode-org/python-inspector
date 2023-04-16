@@ -480,18 +480,21 @@ def check_json_results(result_file, expected_file, clean=True, regen=REGEN_TEST_
     """
     with open(result_file) as res:
         results = json.load(res)
+
+    if clean:
+        results = clean_results(results)
+
     if regen:
         with open(expected_file, "w") as reg:
             json.dump(results, reg, indent=2, separators=(",", ": "))
         expected = results
+
     else:
         with open(expected_file) as res:
             expected = json.load(res)
+        if clean:
+            clean_results(expected)
 
-            if clean:
-                clean_results(expected)
-    if clean:
-        results = clean_results(results)
     assert results == expected
 
 
@@ -500,17 +503,27 @@ def clean_results(results):
     Return cleaned results removing transient values that can change across test
     runs.
     """
-    files = results.get("files", [])
-    for file in files:
-        path = os.path.split(file["path"])[-1]
-        file["path"] = path
+    for file in results.get("files", []):
+        file_path = file["path"]
+        _prefix, test_root, suffix = file_path.partition("tests/data")
+        file["path"] = f"{test_root}{suffix}"
+
     headers = results.get("headers", {})
-    options = headers.get("options", [])
-    headers["options"] = [
-        o
-        for o in options
-        if (not o.startswith("--requirement") and not o.startswith("requirement_files-"))
-    ]
+
+    new_options = []
+    for o in headers.get("options", []):
+        newopt = o
+
+        # clean file path options
+        if o.startswith(("--requirement", "--setup-py", "--netrc")):
+            opt, _, path = o.partition(" ")
+            _prefix, test_root, suffix = path.partition("tests/data")
+            newopt = f"{opt} {test_root}{suffix}"
+
+        new_options.append(newopt)
+
+    headers["options"] = new_options
+
     return results
 
 

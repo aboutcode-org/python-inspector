@@ -11,7 +11,6 @@
 
 from packageurl import PackageURL
 from packvers.requirements import Requirement
-from pip_requirements_parser import InstallRequirement
 
 from _packagedcode import models
 from _packagedcode.pypi import PipRequirementsFileHandler

@@ -9,6 +9,7 @@
       "--index-url https://thirdparty.aboutcode.org/pypi/simple/",
       "--python-version 38",
       "--operating-system linux",
+      "--netrc tests/data/test-commented.netrc",
       "--json <file>"
     ],
     "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/nexB/python-inspector/ for support and download.",

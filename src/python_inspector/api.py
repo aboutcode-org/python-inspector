@@ -36,7 +36,7 @@ from python_inspector.resolution import format_pdt_tree
 from python_inspector.resolution import format_resolution
 from python_inspector.resolution import get_environment_marker_from_environment
 from python_inspector.resolution import get_package_list
-from python_inspector.resolution import get_python_version_from_env_tag
+from python_inspector.resolution import get_python_dot_version_from_env_tag
 from python_inspector.resolution import get_reqs_insecurely
 from python_inspector.resolution import get_requirements_from_python_manifest
 from python_inspector.utils_pypi import PLATFORMS_BY_OS
@@ -168,11 +168,11 @@ def resolve_dependencies(
         # validate if python require matches our current python version
         python_requires = package_data.extra_data.get("python_requires")
         if not utils_pypi.valid_python_version(
-            python_version=get_python_version_from_env_tag(python_version),
+            python_version=get_python_dot_version_from_env_tag(python_version),
             python_requires=python_requires,
         ):
             raise Exception(
-                f"Python version {get_python_version_from_env_tag(python_version)} "
+                f"Python version {get_python_dot_version_from_env_tag(python_version)} "
                 f"is not compatible with setup.py {setup_py_file} "
                 f"python_requires {python_requires}",
             )

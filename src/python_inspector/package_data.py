@@ -19,7 +19,7 @@ from _packagedcode.pypi import get_description
 from _packagedcode.pypi import get_keywords
 from _packagedcode.pypi import get_parties
 from python_inspector import utils_pypi
-from python_inspector.resolution import get_python_version_from_env_tag
+from python_inspector.resolution import get_python_dot_version_from_env_tag
 from python_inspector.utils_pypi import Environment
 from python_inspector.utils_pypi import PypiSimpleRepository
 
@@ -53,7 +53,7 @@ def get_pypi_data_from_purl(
     project_urls = info.get("project_urls") or {}
     code_view_url = get_pypi_codeview_url(project_urls)
     bug_tracking_url = get_pypi_bugtracker_url(project_urls)
-    python_version = get_python_version_from_env_tag(python_version=environment.python_version)
+    python_version = get_python_dot_version_from_env_tag(python_version=environment.python_version)
     valid_distribution_urls = []
 
     valid_distribution_urls.append(
