@@ -10,7 +10,6 @@
 import ast
 import operator
 import os
-import re
 import tarfile
 from typing import Dict
 from typing import Generator
@@ -206,23 +205,25 @@ def fetch_and_extract_sdist(
 
 
 def get_sdist_file_path_from_filename(sdist):
+    """
+    Extract the ``sdist`` tarball and return the directory where it is extracted.
+    """
+    base_dir = os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists")
+
     if sdist.endswith(".tar.gz"):
-        sdist_file = sdist.rstrip(".tar.gz")
-        with tarfile.open(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist)) as file:
-            file.extractall(
-                os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file)
-            )
+        sdist_file, _, _ = sdist.rpartition(".tar.gz")
+        with tarfile.open(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist)) as tarball:
+            tarball.extractall(os.path.join(base_dir, sdist_file))
+
     elif sdist.endswith(".zip"):
-        sdist_file = sdist.rstrip(".zip")
-        with ZipFile(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist)) as zip:
-            zip.extractall(
-                os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file)
-            )
+        sdist_file, _, _ = sdist.rpartition(".zip")
+        with ZipFile(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist)) as zipped:
+            zipped.extractall(os.path.join(base_dir, sdist_file))
 
     else:
         raise Exception(f"Unable to extract sdist {sdist}")
 
-    return os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file, sdist_file)
+    return os.path.join(base_dir, sdist_file, sdist_file)
 
 
 def get_requirements_from_dependencies(
@@ -508,7 +509,7 @@ class PythonInputProvider(AbstractProvider):
                 if requirements:
                     yield from requirements
                 else:
-                    # Look in requirements file if and only if thy are refered in setup.py or setup.cfg
+                    # Look in requirements file if and only if they are refered in setup.py or setup.cfg
                     # And no deps have been yielded by requirements file
 
                     yield from get_requirements_from_python_manifest(
