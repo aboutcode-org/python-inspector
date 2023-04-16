@@ -74,7 +74,7 @@ def print_version(ctx, param, value):
     metavar="PYVER",
     show_default=True,
     required=True,
-    help="Python version to use for dependency resolution.",
+    help="Python version to use for dependency resolution as in 3.8 or 3.11.2",
 )
 @click.option(
     "-o",
@@ -271,7 +271,7 @@ def resolve_dependencies(
             output=output,
             location=json_output or pdt_output,
         )
-    except Exception as exc:
+    except Exception:
         import traceback
 
         click.secho(traceback.format_exc(), err=True)
