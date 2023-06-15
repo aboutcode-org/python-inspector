@@ -20,6 +20,7 @@ from collections import defaultdict
 from typing import List
 from typing import NamedTuple
 from urllib.parse import quote_plus
+from urllib.parse import urljoin
 
 import attr
 import packageurl
@@ -949,7 +950,6 @@ def get_sdist_name_ver_ext(filename):
 
 @attr.attributes
 class Sdist(Distribution):
-
     extension = attr.ib(
         repr=False,
         type=str,
@@ -1593,8 +1593,15 @@ class PypiSimpleRepository:
         for anchor_tag in anchor_tags:
             python_requires = None
             url, _, _sha256 = anchor_tag["href"].partition("#sha256=")
+            if url.startswith(".."):
+                # Handle relative links
+                url = urljoin(package_url, url)
             if "data-requires-python" in anchor_tag.attrs:
                 python_requires = anchor_tag.attrs["data-requires-python"]
+            # Check if the link is a relative URL
+            if not url.startswith(("http://", "https://")):
+                base_url = "/".join(package_url.split("/")[:-1])  # Extract base URL
+                url = urljoin(base_url, url)  # Resolve relative URL
             links.append(Link(url=url, python_requires=python_requires))
         # TODO: keep sha256
         return links
