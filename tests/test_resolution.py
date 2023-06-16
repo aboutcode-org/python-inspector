@@ -49,8 +49,8 @@ def test_get_resolved_dependencies_with_flask_and_python_310():
         "pkg:pypi/flask@2.1.2",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
-        "pkg:pypi/markupsafe@2.1.2",
-        "pkg:pypi/werkzeug@2.2.3",
+        "pkg:pypi/markupsafe@2.1.3",
+        "pkg:pypi/werkzeug@2.3.6",
     ]
 
 
@@ -73,8 +73,8 @@ def test_get_resolved_dependencies_with_flask_and_python_310_windows():
         "pkg:pypi/flask@2.1.2",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
-        "pkg:pypi/markupsafe@2.1.2",
-        "pkg:pypi/werkzeug@2.2.3",
+        "pkg:pypi/markupsafe@2.1.3",
+        "pkg:pypi/werkzeug@2.3.6",
     ]
 
 
@@ -121,11 +121,11 @@ def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
     assert plist == [
         "pkg:pypi/click@8.1.3",
         "pkg:pypi/flask@2.1.3",
-        "pkg:pypi/importlib-metadata@6.3.0",
+        "pkg:pypi/importlib-metadata@6.6.0",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
-        "pkg:pypi/markupsafe@2.1.2",
-        "pkg:pypi/werkzeug@2.2.3",
+        "pkg:pypi/markupsafe@2.1.3",
+        "pkg:pypi/werkzeug@2.3.6",
         "pkg:pypi/zipp@3.15.0",
     ]
 
