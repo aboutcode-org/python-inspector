@@ -66,7 +66,7 @@ def test_fetch_links(mock_get):
     relative_links_result_file = test_env.get_temp_file("json")
     relative_links_expected_file = test_env.get_test_loc("relative-links-expected.json", must_exist=False)
     with open(relative_links_result_file, "w") as file:
-        json.dump(links, file, indent=4)
+        json.dump(relative_links, file, indent=4)
     check_json_results(relative_links_result_file, relative_links_expected_file, clean=False)
 
 
@@ -109,11 +109,4 @@ def test_parse_reqs_with_setup_requires_and_python_requires():
 def test_valid_python_version():
     assert valid_python_version("3.8", ">3.1")
     assert not valid_python_version("3.8.1", ">3.9")
-
-
-# def test_parsing_relative_urls():
-#     self.index_url= test_fetch_links ("tests/data/fetch_links_test.html")
-#     normalized_name=""
-#     simple=PypiSimpleRepository()
-#     assert simple.fetch_links(normalized_name)==""
-        
+ 
