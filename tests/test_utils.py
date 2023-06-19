@@ -62,7 +62,7 @@ def test_fetch_links(mock_get):
     realtive_links_file= test_env.get_test_loc("fetch_links_test.html")
     with open(realtive_links_file) as realtive_file:
         mock_get.return_value = realtive_file.read()
-    relative_links = PypiSimpleRepository().fetch_links(normalized_name="") 
+    relative_links = PypiSimpleRepository().fetch_links(normalized_name="sources.whl") 
     relative_links_result_file = test_env.get_temp_file("json")
     relative_links_expected_file = test_env.get_test_loc("relative-links-expected.json", must_exist=False)
     with open(relative_links_result_file, "w") as file:
