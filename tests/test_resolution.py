@@ -121,7 +121,7 @@ def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
     assert plist == [
         "pkg:pypi/click@8.1.3",
         "pkg:pypi/flask@2.1.3",
-        "pkg:pypi/importlib-metadata@6.6.0",
+        "pkg:pypi/importlib-metadata@6.7.0",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
         "pkg:pypi/markupsafe@2.1.3",
