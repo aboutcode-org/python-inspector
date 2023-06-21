@@ -58,13 +58,15 @@ def test_fetch_links(mock_get):
     with open(result_file, "w") as file:
         json.dump(links, file, indent=4)
     check_json_results(result_file, expected_file, clean=False)
-    #Testing relative links
-    realtive_links_file= test_env.get_test_loc("fetch_links_test.html")
+    # Testing relative links
+    realtive_links_file = test_env.get_test_loc("fetch_links_test.html")
     with open(realtive_links_file) as realtive_file:
         mock_get.return_value = realtive_file.read()
-    relative_links = PypiSimpleRepository().fetch_links(normalized_name="sources.whl") 
+    relative_links = PypiSimpleRepository().fetch_links(normalized_name="sources.whl")
     relative_links_result_file = test_env.get_temp_file("json")
-    relative_links_expected_file = test_env.get_test_loc("relative-links-expected.json", must_exist=False)
+    relative_links_expected_file = test_env.get_test_loc(
+        "relative-links-expected.json", must_exist=False
+    )
     with open(relative_links_result_file, "w") as file:
         json.dump(relative_links, file, indent=4)
     check_json_results(relative_links_result_file, relative_links_expected_file, clean=False)
@@ -109,4 +111,3 @@ def test_parse_reqs_with_setup_requires_and_python_requires():
 def test_valid_python_version():
     assert valid_python_version("3.8", ">3.1")
     assert not valid_python_version("3.8.1", ">3.9")
- 
