@@ -381,12 +381,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "backports-functools-lru-cache",
-      "version": "1.6.4",
+      "version": "1.6.5",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": ".. image:: https://img.shields.io/pypi/v/backports.functools_lru_cache.svg\n   :target: `PyPI link`_\n\n.. image:: https://img.shields.io/pypi/pyversions/backports.functools_lru_cache.svg\n   :target: `PyPI link`_\n\n.. _PyPI link: https://pypi.org/project/backports.functools_lru_cache\n\n.. image:: https://github.com/jaraco/backports.functools_lru_cache/workflows/tests/badge.svg\n   :target: https://github.com/jaraco/backports.functools_lru_cache/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. image:: https://readthedocs.org/projects/backportsfunctools_lru_cache/badge/?version=latest\n   :target: https://backportsfunctools_lru_cache.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://tidelift.com/badges/package/pypi/backports.functools_lru_cache\n   :target: https://tidelift.com/subscription/pkg/pypi-backports.functools_lru_cache?utm_source=pypi-backports.functools_lru_cache&utm_medium=readme\n\nBackport of functools.lru_cache from Python 3.3 as published at `ActiveState\n<http://code.activestate.com/recipes/578078/>`_.\n\nUsage\n=====\n\nConsider using this technique for importing the 'lru_cache' function::\n\n    try:\n        from functools import lru_cache\n    except ImportError:\n        from backports.functools_lru_cache import lru_cache\n\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-backports.functools_lru_cache?utm_source=pypi-backports.functools_lru_cache&utm_medium=referral&utm_campaign=github>`_.\n\nSecurity Contact\n================\n\nTo report a security vulnerability, please use the\n`Tidelift security contact <https://tidelift.com/security>`_.\nTidelift will coordinate the fix and disclosure.",
-      "release_date": "2021-04-11T19:31:38",
+      "description": ".. image:: https://img.shields.io/pypi/v/backports.functools_lru_cache.svg\n   :target: https://pypi.org/project/backports.functools_lru_cache\n\n.. image:: https://img.shields.io/pypi/pyversions/backports.functools_lru_cache.svg\n\n.. image:: https://github.com/jaraco/backports.functools_lru_cache/workflows/tests/badge.svg\n   :target: https://github.com/jaraco/backports.functools_lru_cache/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json\n    :target: https://github.com/astral-sh/ruff\n    :alt: Ruff\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. image:: https://readthedocs.org/projects/backportsfunctools_lru_cache/badge/?version=latest\n   :target: https://backportsfunctools_lru_cache.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2023-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/backports.functools_lru_cache\n   :target: https://tidelift.com/subscription/pkg/pypi-backports.functools_lru_cache?utm_source=pypi-backports.functools_lru_cache&utm_medium=readme\n\nBackport of functools.lru_cache from Python 3.3 as published at `ActiveState\n<http://code.activestate.com/recipes/578078/>`_.\n\nUsage\n=====\n\nConsider using this technique for importing the 'lru_cache' function::\n\n    try:\n        from functools import lru_cache\n    except ImportError:\n        from backports.functools_lru_cache import lru_cache\n\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-backports.functools_lru_cache?utm_source=pypi-backports.functools_lru_cache&utm_medium=referral&utm_campaign=github>`_.\n\nSecurity Contact\n================\n\nTo report a security vulnerability, please use the\n`Tidelift security contact <https://tidelift.com/security>`_.\nTidelift will coordinate the fix and disclosure.",
+      "release_date": "2023-06-24T00:51:01",
       "parties": [
         {
           "type": "person",
@@ -411,11 +411,11 @@
         "Programming Language :: Python :: 3"
       ],
       "homepage_url": "https://github.com/jaraco/backports.functools_lru_cache",
-      "download_url": "https://files.pythonhosted.org/packages/e5/c1/1a48a4bb9b515480d6c666977eeca9243be9fa9e6fb5a34be0ad9627f737/backports.functools_lru_cache-1.6.4-py2.py3-none-any.whl",
-      "size": 5922,
+      "download_url": "https://files.pythonhosted.org/packages/22/5e/3a1b7ee2726c5c3b50e1bbafb5f2963b9bff3279b4423428c2b8063a1600/backports.functools_lru_cache-1.6.5-py2.py3-none-any.whl",
+      "size": 5974,
       "sha1": null,
-      "md5": "1794e5b35e6abf85c7c611091fec8286",
-      "sha256": "dbead04b9daa817909ec64e8d2855fb78feafe0b901d4568758e3a60559d8978",
+      "md5": "5ba97a2c8498f58054d23a9b65697b63",
+      "sha256": "3b8f1c6537651f130706488e61f3275b010002676432e9e7638a9e0fc1b40668",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -434,20 +434,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/backports-functools-lru-cache/1.6.4/json",
+      "api_data_url": "https://pypi.org/pypi/backports-functools-lru-cache/1.6.5/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/backports-functools-lru-cache@1.6.4"
+      "purl": "pkg:pypi/backports-functools-lru-cache@1.6.5"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "backports-functools-lru-cache",
-      "version": "1.6.4",
+      "version": "1.6.5",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": ".. image:: https://img.shields.io/pypi/v/backports.functools_lru_cache.svg\n   :target: `PyPI link`_\n\n.. image:: https://img.shields.io/pypi/pyversions/backports.functools_lru_cache.svg\n   :target: `PyPI link`_\n\n.. _PyPI link: https://pypi.org/project/backports.functools_lru_cache\n\n.. image:: https://github.com/jaraco/backports.functools_lru_cache/workflows/tests/badge.svg\n   :target: https://github.com/jaraco/backports.functools_lru_cache/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. image:: https://readthedocs.org/projects/backportsfunctools_lru_cache/badge/?version=latest\n   :target: https://backportsfunctools_lru_cache.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://tidelift.com/badges/package/pypi/backports.functools_lru_cache\n   :target: https://tidelift.com/subscription/pkg/pypi-backports.functools_lru_cache?utm_source=pypi-backports.functools_lru_cache&utm_medium=readme\n\nBackport of functools.lru_cache from Python 3.3 as published at `ActiveState\n<http://code.activestate.com/recipes/578078/>`_.\n\nUsage\n=====\n\nConsider using this technique for importing the 'lru_cache' function::\n\n    try:\n        from functools import lru_cache\n    except ImportError:\n        from backports.functools_lru_cache import lru_cache\n\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-backports.functools_lru_cache?utm_source=pypi-backports.functools_lru_cache&utm_medium=referral&utm_campaign=github>`_.\n\nSecurity Contact\n================\n\nTo report a security vulnerability, please use the\n`Tidelift security contact <https://tidelift.com/security>`_.\nTidelift will coordinate the fix and disclosure.",
-      "release_date": "2021-04-11T19:31:40",
+      "description": ".. image:: https://img.shields.io/pypi/v/backports.functools_lru_cache.svg\n   :target: https://pypi.org/project/backports.functools_lru_cache\n\n.. image:: https://img.shields.io/pypi/pyversions/backports.functools_lru_cache.svg\n\n.. image:: https://github.com/jaraco/backports.functools_lru_cache/workflows/tests/badge.svg\n   :target: https://github.com/jaraco/backports.functools_lru_cache/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json\n    :target: https://github.com/astral-sh/ruff\n    :alt: Ruff\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. image:: https://readthedocs.org/projects/backportsfunctools_lru_cache/badge/?version=latest\n   :target: https://backportsfunctools_lru_cache.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2023-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/backports.functools_lru_cache\n   :target: https://tidelift.com/subscription/pkg/pypi-backports.functools_lru_cache?utm_source=pypi-backports.functools_lru_cache&utm_medium=readme\n\nBackport of functools.lru_cache from Python 3.3 as published at `ActiveState\n<http://code.activestate.com/recipes/578078/>`_.\n\nUsage\n=====\n\nConsider using this technique for importing the 'lru_cache' function::\n\n    try:\n        from functools import lru_cache\n    except ImportError:\n        from backports.functools_lru_cache import lru_cache\n\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-backports.functools_lru_cache?utm_source=pypi-backports.functools_lru_cache&utm_medium=referral&utm_campaign=github>`_.\n\nSecurity Contact\n================\n\nTo report a security vulnerability, please use the\n`Tidelift security contact <https://tidelift.com/security>`_.\nTidelift will coordinate the fix and disclosure.",
+      "release_date": "2023-06-24T00:51:02",
       "parties": [
         {
           "type": "person",
@@ -472,11 +472,11 @@
         "Programming Language :: Python :: 3"
       ],
       "homepage_url": "https://github.com/jaraco/backports.functools_lru_cache",
-      "download_url": "https://files.pythonhosted.org/packages/95/9f/122a41912932c77d5b8e6cab6bd456e6270211a3ed7248a80c235179a012/backports.functools_lru_cache-1.6.4.tar.gz",
-      "size": 13904,
+      "download_url": "https://files.pythonhosted.org/packages/d7/e9/2585a2b3de3b246ad90370a3a3d19b82b857784975559b44122a4cb5ceb7/backports.functools_lru_cache-1.6.5.tar.gz",
+      "size": 10518,
       "sha1": null,
-      "md5": "8fed424f30bf9554235aa02997b7574c",
-      "sha256": "d5ed2169378b67d3c545e5600d363a923b09c456dab1593914935a68ad478271",
+      "md5": "4bc3c637b0b485302a406294ec98ecb6",
+      "sha256": "e7efcdd8cf92279bcb09fdb9b31e984ffdc96fc9f21e22ff20538884cb99b97d",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -495,9 +495,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/backports-functools-lru-cache/1.6.4/json",
+      "api_data_url": "https://pypi.org/pypi/backports-functools-lru-cache/1.6.5/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/backports-functools-lru-cache@1.6.4"
+      "purl": "pkg:pypi/backports-functools-lru-cache@1.6.5"
     },
     {
       "type": "pypi",
@@ -4501,12 +4501,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "jsonpatch",
-      "version": "1.32",
+      "version": "1.33",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "Apply JSON-Patches (RFC 6902)\npython-json-patch\n=================\n\n|PyPI version| |Supported Python versions| |Build Status| |Coverage\nStatus|\n\nApplying JSON Patches in Python\n-------------------------------\n\nLibrary to apply JSON Patches according to `RFC\n6902 <http://tools.ietf.org/html/rfc6902>`__\n\nSee source code for examples\n\n-  Website: https://github.com/stefankoegl/python-json-patch\n-  Repository: https://github.com/stefankoegl/python-json-patch.git\n-  Documentation: https://python-json-patch.readthedocs.org/\n-  PyPI: https://pypi.python.org/pypi/jsonpatch\n-  Travis CI: https://travis-ci.org/stefankoegl/python-json-patch\n-  Coveralls: https://coveralls.io/r/stefankoegl/python-json-patch\n\nRunning external tests\n----------------------\n\nTo run external tests (such as those from\nhttps://github.com/json-patch/json-patch-tests) use ext\\_test.py\n\n::\n\n    ./ext_tests.py ../json-patch-tests/tests.json\n\n.. |PyPI version| image:: https://img.shields.io/pypi/v/jsonpatch.svg\n   :target: https://pypi.python.org/pypi/jsonpatch/\n.. |Supported Python versions| image:: https://img.shields.io/pypi/pyversions/jsonpatch.svg\n   :target: https://pypi.python.org/pypi/jsonpatch/\n.. |Build Status| image:: https://travis-ci.org/stefankoegl/python-json-patch.png?branch=master\n   :target: https://travis-ci.org/stefankoegl/python-json-patch\n.. |Coverage Status| image:: https://coveralls.io/repos/stefankoegl/python-json-patch/badge.png?branch=master\n   :target: https://coveralls.io/r/stefankoegl/python-json-patch?branch=master",
-      "release_date": "2021-03-13T19:16:37",
+      "description": "Apply JSON-Patches (RFC 6902)\npython-json-patch\n=================\n\n[![PyPI version](https://img.shields.io/pypi/v/jsonpatch.svg)](https://pypi.python.org/pypi/jsonpatch/)\n[![Supported Python versions](https://img.shields.io/pypi/pyversions/jsonpatch.svg)](https://pypi.python.org/pypi/jsonpatch/)\n[![Build Status](https://travis-ci.org/stefankoegl/python-json-patch.png?branch=master)](https://travis-ci.org/stefankoegl/python-json-patch)\n[![Coverage Status](https://coveralls.io/repos/stefankoegl/python-json-patch/badge.png?branch=master)](https://coveralls.io/r/stefankoegl/python-json-patch?branch=master)\n\nApplying JSON Patches in Python\n-------------------------------\n\nLibrary to apply JSON Patches according to\n[RFC 6902](http://tools.ietf.org/html/rfc6902)\n\nSee source code for examples\n\n* Website: https://github.com/stefankoegl/python-json-patch\n* Repository: https://github.com/stefankoegl/python-json-patch.git\n* Documentation: https://python-json-patch.readthedocs.org/\n* PyPI: https://pypi.python.org/pypi/jsonpatch\n* Travis CI: https://travis-ci.org/stefankoegl/python-json-patch\n* Coveralls: https://coveralls.io/r/stefankoegl/python-json-patch\n\nRunning external tests\n----------------------\nTo run external tests (such as those from https://github.com/json-patch/json-patch-tests) use ext_test.py\n\n    ./ext_tests.py ../json-patch-tests/tests.json",
+      "release_date": "2023-06-16T21:01:28",
       "parties": [
         {
           "type": "person",
@@ -4525,8 +4525,6 @@
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.5",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
@@ -4536,11 +4534,11 @@
         "Topic :: Utilities"
       ],
       "homepage_url": "https://github.com/stefankoegl/python-json-patch",
-      "download_url": "https://files.pythonhosted.org/packages/a3/55/f7c93bae36d869292aedfbcbae8b091386194874f16390d680136edd2b28/jsonpatch-1.32-py2.py3-none-any.whl",
-      "size": 12547,
+      "download_url": "https://files.pythonhosted.org/packages/73/07/02e16ed01e04a374e644b575638ec7987ae846d25ad97bcc9945a3ee4b0e/jsonpatch-1.33-py2.py3-none-any.whl",
+      "size": 12898,
       "sha1": null,
-      "md5": "a59ecf0282b11c955734f40a053b05c0",
-      "sha256": "26ac385719ac9f54df8a2f0827bb8253aa3ea8ab7b3368457bcdb8c14595a397",
+      "md5": "c9e70de2819073c6e49e48aa893146a7",
+      "sha256": "0ae28c0cd062bbd8b8ecc26d7d164fbbea9652a1a3693f3b956c1eae5145dade",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -4560,20 +4558,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/jsonpatch/1.32/json",
+      "api_data_url": "https://pypi.org/pypi/jsonpatch/1.33/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/jsonpatch@1.32"
+      "purl": "pkg:pypi/jsonpatch@1.33"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "jsonpatch",
-      "version": "1.32",
+      "version": "1.33",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "Apply JSON-Patches (RFC 6902)\npython-json-patch\n=================\n\n|PyPI version| |Supported Python versions| |Build Status| |Coverage\nStatus|\n\nApplying JSON Patches in Python\n-------------------------------\n\nLibrary to apply JSON Patches according to `RFC\n6902 <http://tools.ietf.org/html/rfc6902>`__\n\nSee source code for examples\n\n-  Website: https://github.com/stefankoegl/python-json-patch\n-  Repository: https://github.com/stefankoegl/python-json-patch.git\n-  Documentation: https://python-json-patch.readthedocs.org/\n-  PyPI: https://pypi.python.org/pypi/jsonpatch\n-  Travis CI: https://travis-ci.org/stefankoegl/python-json-patch\n-  Coveralls: https://coveralls.io/r/stefankoegl/python-json-patch\n\nRunning external tests\n----------------------\n\nTo run external tests (such as those from\nhttps://github.com/json-patch/json-patch-tests) use ext\\_test.py\n\n::\n\n    ./ext_tests.py ../json-patch-tests/tests.json\n\n.. |PyPI version| image:: https://img.shields.io/pypi/v/jsonpatch.svg\n   :target: https://pypi.python.org/pypi/jsonpatch/\n.. |Supported Python versions| image:: https://img.shields.io/pypi/pyversions/jsonpatch.svg\n   :target: https://pypi.python.org/pypi/jsonpatch/\n.. |Build Status| image:: https://travis-ci.org/stefankoegl/python-json-patch.png?branch=master\n   :target: https://travis-ci.org/stefankoegl/python-json-patch\n.. |Coverage Status| image:: https://coveralls.io/repos/stefankoegl/python-json-patch/badge.png?branch=master\n   :target: https://coveralls.io/r/stefankoegl/python-json-patch?branch=master",
-      "release_date": "2021-03-13T19:16:38",
+      "description": "Apply JSON-Patches (RFC 6902)\npython-json-patch\n=================\n\n[![PyPI version](https://img.shields.io/pypi/v/jsonpatch.svg)](https://pypi.python.org/pypi/jsonpatch/)\n[![Supported Python versions](https://img.shields.io/pypi/pyversions/jsonpatch.svg)](https://pypi.python.org/pypi/jsonpatch/)\n[![Build Status](https://travis-ci.org/stefankoegl/python-json-patch.png?branch=master)](https://travis-ci.org/stefankoegl/python-json-patch)\n[![Coverage Status](https://coveralls.io/repos/stefankoegl/python-json-patch/badge.png?branch=master)](https://coveralls.io/r/stefankoegl/python-json-patch?branch=master)\n\nApplying JSON Patches in Python\n-------------------------------\n\nLibrary to apply JSON Patches according to\n[RFC 6902](http://tools.ietf.org/html/rfc6902)\n\nSee source code for examples\n\n* Website: https://github.com/stefankoegl/python-json-patch\n* Repository: https://github.com/stefankoegl/python-json-patch.git\n* Documentation: https://python-json-patch.readthedocs.org/\n* PyPI: https://pypi.python.org/pypi/jsonpatch\n* Travis CI: https://travis-ci.org/stefankoegl/python-json-patch\n* Coveralls: https://coveralls.io/r/stefankoegl/python-json-patch\n\nRunning external tests\n----------------------\nTo run external tests (such as those from https://github.com/json-patch/json-patch-tests) use ext_test.py\n\n    ./ext_tests.py ../json-patch-tests/tests.json",
+      "release_date": "2023-06-26T12:07:29",
       "parties": [
         {
           "type": "person",
@@ -4592,8 +4590,6 @@
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.5",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
@@ -4603,11 +4599,11 @@
         "Topic :: Utilities"
       ],
       "homepage_url": "https://github.com/stefankoegl/python-json-patch",
-      "download_url": "https://files.pythonhosted.org/packages/21/67/83452af2a6db7c4596d1e2ecaa841b9a900980103013b867f2865e5e1cf0/jsonpatch-1.32.tar.gz",
-      "size": 20853,
+      "download_url": "https://files.pythonhosted.org/packages/42/78/18813351fe5d63acad16aec57f94ec2b70a09e53ca98145589e185423873/jsonpatch-1.33.tar.gz",
+      "size": 21699,
       "sha1": null,
-      "md5": "ca0a799438fb7d319bd0d7552a13d10f",
-      "sha256": "b6ddfe6c3db30d81a96aaeceb6baf916094ffa23d7dd5fa2c13e13f8b6e600c2",
+      "md5": "ed3e8eaa5cce105ad02509d185f0889f",
+      "sha256": "9fcd4009c41e6d12348b4a0ff2563ba56a2923a7dfee731d004e212e1ee5030c",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -4627,20 +4623,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/jsonpatch/1.32/json",
+      "api_data_url": "https://pypi.org/pypi/jsonpatch/1.33/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/jsonpatch@1.32"
+      "purl": "pkg:pypi/jsonpatch@1.33"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "jsonpointer",
-      "version": "2.3",
+      "version": "2.4",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Identify specific nodes in a JSON document (RFC 6901)\npython-json-pointer\n===================\n\n[![PyPI version](https://img.shields.io/pypi/v/jsonpointer.svg)](https://pypi.python.org/pypi/jsonpointer/)\n[![Supported Python versions](https://img.shields.io/pypi/pyversions/jsonpointer.svg)](https://pypi.python.org/pypi/jsonpointer/)\n[![Build Status](https://travis-ci.org/stefankoegl/python-json-pointer.svg?branch=master)](https://travis-ci.org/stefankoegl/python-json-pointer)\n[![Coverage Status](https://coveralls.io/repos/stefankoegl/python-json-pointer/badge.svg?branch=master)](https://coveralls.io/r/stefankoegl/python-json-pointer?branch=master)\n\n\nResolve JSON Pointers in Python\n-------------------------------\n\nLibrary to resolve JSON Pointers according to\n[RFC 6901](http://tools.ietf.org/html/rfc6901)\n\nSee source code for examples\n* Website: https://github.com/stefankoegl/python-json-pointer\n* Repository: https://github.com/stefankoegl/python-json-pointer.git\n* Documentation: https://python-json-pointer.readthedocs.org/\n* PyPI: https://pypi.python.org/pypi/jsonpointer\n* Travis CI: https://travis-ci.org/stefankoegl/python-json-pointer\n* Coveralls: https://coveralls.io/r/stefankoegl/python-json-pointer",
-      "release_date": "2022-04-10T11:39:28",
+      "release_date": "2023-06-16T21:15:02",
       "parties": [
         {
           "type": "person",
@@ -4659,8 +4655,8 @@
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.5",
-        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
@@ -4670,11 +4666,11 @@
         "Topic :: Utilities"
       ],
       "homepage_url": "https://github.com/stefankoegl/python-json-pointer",
-      "download_url": "https://files.pythonhosted.org/packages/a3/be/8dc9d31b50e38172c8020c40f497ce8debdb721545ddb9fcb7cca89ea9e6/jsonpointer-2.3-py2.py3-none-any.whl",
-      "size": 7753,
+      "download_url": "https://files.pythonhosted.org/packages/12/f6/0232cc0c617e195f06f810534d00b74d2f348fe71b2118009ad8ad31f878/jsonpointer-2.4-py2.py3-none-any.whl",
+      "size": 7762,
       "sha1": null,
-      "md5": "1ba993a70adde49bfcdd46a1605572f6",
-      "sha256": "51801e558539b4e9cd268638c078c6c5746c9ac96bc38152d443400e4f3793e9",
+      "md5": "eb9dcb8c4ccf5d97cea88a7d13510032",
+      "sha256": "15d51bba20eea3165644553647711d150376234112651b4f1811022aecad7d7a",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -4694,20 +4690,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/jsonpointer/2.3/json",
+      "api_data_url": "https://pypi.org/pypi/jsonpointer/2.4/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/jsonpointer@2.3"
+      "purl": "pkg:pypi/jsonpointer@2.4"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "jsonpointer",
-      "version": "2.3",
+      "version": "2.4",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Identify specific nodes in a JSON document (RFC 6901)\npython-json-pointer\n===================\n\n[![PyPI version](https://img.shields.io/pypi/v/jsonpointer.svg)](https://pypi.python.org/pypi/jsonpointer/)\n[![Supported Python versions](https://img.shields.io/pypi/pyversions/jsonpointer.svg)](https://pypi.python.org/pypi/jsonpointer/)\n[![Build Status](https://travis-ci.org/stefankoegl/python-json-pointer.svg?branch=master)](https://travis-ci.org/stefankoegl/python-json-pointer)\n[![Coverage Status](https://coveralls.io/repos/stefankoegl/python-json-pointer/badge.svg?branch=master)](https://coveralls.io/r/stefankoegl/python-json-pointer?branch=master)\n\n\nResolve JSON Pointers in Python\n-------------------------------\n\nLibrary to resolve JSON Pointers according to\n[RFC 6901](http://tools.ietf.org/html/rfc6901)\n\nSee source code for examples\n* Website: https://github.com/stefankoegl/python-json-pointer\n* Repository: https://github.com/stefankoegl/python-json-pointer.git\n* Documentation: https://python-json-pointer.readthedocs.org/\n* PyPI: https://pypi.python.org/pypi/jsonpointer\n* Travis CI: https://travis-ci.org/stefankoegl/python-json-pointer\n* Coveralls: https://coveralls.io/r/stefankoegl/python-json-pointer",
-      "release_date": "2022-04-10T11:39:29",
+      "release_date": "2023-06-26T12:06:53",
       "parties": [
         {
           "type": "person",
@@ -4726,8 +4722,8 @@
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.5",
-        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
@@ -4737,11 +4733,11 @@
         "Topic :: Utilities"
       ],
       "homepage_url": "https://github.com/stefankoegl/python-json-pointer",
-      "download_url": "https://files.pythonhosted.org/packages/a0/6c/c52556b957a0f904e7c45585444feef206fe5cb1ff656303a1d6d922a53b/jsonpointer-2.3.tar.gz",
-      "size": 9295,
+      "download_url": "https://files.pythonhosted.org/packages/8f/5e/67d3ab449818b629a0ffe554bb7eb5c030a71f7af5d80fbf670d7ebe62bc/jsonpointer-2.4.tar.gz",
+      "size": 9254,
       "sha1": null,
-      "md5": "57fd6581e61d56960d8c2027ff33f5c0",
-      "sha256": "97cba51526c829282218feb99dab1b1e6bdf8efd1c43dc9d57be093c0d69c99a",
+      "md5": "16d785130e5ff235e4ae336eaa611e13",
+      "sha256": "585cee82b70211fa9e6043b7bb89db6e1aa49524340dde8ad6b63206ea689d88",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -4761,9 +4757,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/jsonpointer/2.3/json",
+      "api_data_url": "https://pypi.org/pypi/jsonpointer/2.4/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/jsonpointer@2.3"
+      "purl": "pkg:pypi/jsonpointer@2.4"
     },
     {
       "type": "pypi",
@@ -8215,7 +8211,7 @@
       ]
     },
     {
-      "package": "pkg:pypi/backports-functools-lru-cache@1.6.4",
+      "package": "pkg:pypi/backports-functools-lru-cache@1.6.5",
       "dependencies": []
     },
     {
@@ -8414,7 +8410,7 @@
         "pkg:pypi/blinker@1.5",
         "pkg:pypi/flask-celeryext@0.3.4",
         "pkg:pypi/flask@1.1.4",
-        "pkg:pypi/jsonpatch@1.32",
+        "pkg:pypi/jsonpatch@1.33",
         "pkg:pypi/jsonref@0.2",
         "pkg:pypi/jsonresolver@0.3.1",
         "pkg:pypi/jsonschema@4.0.0"
@@ -8465,13 +8461,13 @@
       ]
     },
     {
-      "package": "pkg:pypi/jsonpatch@1.32",
+      "package": "pkg:pypi/jsonpatch@1.33",
       "dependencies": [
-        "pkg:pypi/jsonpointer@2.3"
+        "pkg:pypi/jsonpointer@2.4"
       ]
     },
     {
-      "package": "pkg:pypi/jsonpointer@2.3",
+      "package": "pkg:pypi/jsonpointer@2.4",
       "dependencies": []
     },
     {
@@ -8617,7 +8613,7 @@
     {
       "package": "pkg:pypi/wcwidth@0.2.6",
       "dependencies": [
-        "pkg:pypi/backports-functools-lru-cache@1.6.4"
+        "pkg:pypi/backports-functools-lru-cache@1.6.5"
       ]
     },
     {

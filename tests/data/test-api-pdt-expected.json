@@ -511,12 +511,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "markupsafe",
-      "version": "2.1.2",
+      "version": "2.1.3",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "Safely add untrusted strings to HTML/XML markup.\nMarkupSafe\n==========\n\nMarkupSafe implements a text object that escapes characters so it is\nsafe to use in HTML and XML. Characters that have special meanings are\nreplaced so that they display as the actual characters. This mitigates\ninjection attacks, meaning untrusted user input can safely be displayed\non a page.\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    pip install -U MarkupSafe\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nExamples\n--------\n\n.. code-block:: pycon\n\n    >>> from markupsafe import Markup, escape\n\n    >>> # escape replaces special characters and wraps in Markup\n    >>> escape(\"<script>alert(document.cookie);</script>\")\n    Markup('&lt;script&gt;alert(document.cookie);&lt;/script&gt;')\n\n    >>> # wrap in Markup to mark text \"safe\" and prevent escaping\n    >>> Markup(\"<strong>Hello</strong>\")\n    Markup('<strong>hello</strong>')\n\n    >>> escape(Markup(\"<strong>Hello</strong>\"))\n    Markup('<strong>hello</strong>')\n\n    >>> # Markup is a str subclass\n    >>> # methods and operators escape their arguments\n    >>> template = Markup(\"Hello <em>{name}</em>\")\n    >>> template.format(name='\"World\"')\n    Markup('Hello <em>&#34;World&#34;</em>')\n\n\nDonate\n------\n\nThe Pallets organization develops and supports MarkupSafe and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n`please donate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://markupsafe.palletsprojects.com/\n-   Changes: https://markupsafe.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/MarkupSafe/\n-   Source Code: https://github.com/pallets/markupsafe/\n-   Issue Tracker: https://github.com/pallets/markupsafe/issues/\n-   Website: https://palletsprojects.com/p/markupsafe/\n-   Twitter: https://twitter.com/PalletsTeam\n-   Chat: https://discord.gg/pallets",
-      "release_date": "2023-01-17T18:22:57",
+      "description": "Safely add untrusted strings to HTML/XML markup.\nMarkupSafe\n==========\n\nMarkupSafe implements a text object that escapes characters so it is\nsafe to use in HTML and XML. Characters that have special meanings are\nreplaced so that they display as the actual characters. This mitigates\ninjection attacks, meaning untrusted user input can safely be displayed\non a page.\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    pip install -U MarkupSafe\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nExamples\n--------\n\n.. code-block:: pycon\n\n    >>> from markupsafe import Markup, escape\n\n    >>> # escape replaces special characters and wraps in Markup\n    >>> escape(\"<script>alert(document.cookie);</script>\")\n    Markup('&lt;script&gt;alert(document.cookie);&lt;/script&gt;')\n\n    >>> # wrap in Markup to mark text \"safe\" and prevent escaping\n    >>> Markup(\"<strong>Hello</strong>\")\n    Markup('<strong>hello</strong>')\n\n    >>> escape(Markup(\"<strong>Hello</strong>\"))\n    Markup('<strong>hello</strong>')\n\n    >>> # Markup is a str subclass\n    >>> # methods and operators escape their arguments\n    >>> template = Markup(\"Hello <em>{name}</em>\")\n    >>> template.format(name='\"World\"')\n    Markup('Hello <em>&#34;World&#34;</em>')\n\n\nDonate\n------\n\nThe Pallets organization develops and supports MarkupSafe and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n`please donate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://markupsafe.palletsprojects.com/\n-   Changes: https://markupsafe.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/MarkupSafe/\n-   Source Code: https://github.com/pallets/markupsafe/\n-   Issue Tracker: https://github.com/pallets/markupsafe/issues/\n-   Chat: https://discord.gg/pallets",
+      "release_date": "2023-06-02T21:42:37",
       "parties": [
         {
           "type": "person",
@@ -543,11 +543,11 @@
         "Topic :: Text Processing :: Markup :: HTML"
       ],
       "homepage_url": "https://palletsprojects.com/p/markupsafe/",
-      "download_url": "https://files.pythonhosted.org/packages/3d/66/2f636ba803fd6eb4cee7b3106ae02538d1e84a7fb7f4f8775c6528a87d31/MarkupSafe-2.1.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
-      "size": 25592,
+      "download_url": "https://files.pythonhosted.org/packages/12/b3/d9ed2c0971e1435b8a62354b18d3060b66c8cb1d368399ec0b9baa7c0ee5/MarkupSafe-2.1.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "size": 25691,
       "sha1": null,
-      "md5": "54ac715bc0b860519f985d92142fefee",
-      "sha256": "28057e985dace2f478e042eaa15606c7efccb700797660629da387eb289b9323",
+      "md5": "222b1015c56628a73fc54c601b78758c",
+      "sha256": "65c1a9bcdadc6c28eecee2c119465aebff8f7a584dd719facdd9e825ec61ab52",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets/markupsafe/issues/",
       "code_view_url": "https://github.com/pallets/markupsafe/",
@@ -567,20 +567,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/markupsafe/2.1.2/json",
+      "api_data_url": "https://pypi.org/pypi/markupsafe/2.1.3/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/markupsafe@2.1.2"
+      "purl": "pkg:pypi/markupsafe@2.1.3"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "markupsafe",
-      "version": "2.1.2",
+      "version": "2.1.3",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "Safely add untrusted strings to HTML/XML markup.\nMarkupSafe\n==========\n\nMarkupSafe implements a text object that escapes characters so it is\nsafe to use in HTML and XML. Characters that have special meanings are\nreplaced so that they display as the actual characters. This mitigates\ninjection attacks, meaning untrusted user input can safely be displayed\non a page.\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    pip install -U MarkupSafe\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nExamples\n--------\n\n.. code-block:: pycon\n\n    >>> from markupsafe import Markup, escape\n\n    >>> # escape replaces special characters and wraps in Markup\n    >>> escape(\"<script>alert(document.cookie);</script>\")\n    Markup('&lt;script&gt;alert(document.cookie);&lt;/script&gt;')\n\n    >>> # wrap in Markup to mark text \"safe\" and prevent escaping\n    >>> Markup(\"<strong>Hello</strong>\")\n    Markup('<strong>hello</strong>')\n\n    >>> escape(Markup(\"<strong>Hello</strong>\"))\n    Markup('<strong>hello</strong>')\n\n    >>> # Markup is a str subclass\n    >>> # methods and operators escape their arguments\n    >>> template = Markup(\"Hello <em>{name}</em>\")\n    >>> template.format(name='\"World\"')\n    Markup('Hello <em>&#34;World&#34;</em>')\n\n\nDonate\n------\n\nThe Pallets organization develops and supports MarkupSafe and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n`please donate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://markupsafe.palletsprojects.com/\n-   Changes: https://markupsafe.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/MarkupSafe/\n-   Source Code: https://github.com/pallets/markupsafe/\n-   Issue Tracker: https://github.com/pallets/markupsafe/issues/\n-   Website: https://palletsprojects.com/p/markupsafe/\n-   Twitter: https://twitter.com/PalletsTeam\n-   Chat: https://discord.gg/pallets",
-      "release_date": "2023-01-17T18:23:59",
+      "description": "Safely add untrusted strings to HTML/XML markup.\nMarkupSafe\n==========\n\nMarkupSafe implements a text object that escapes characters so it is\nsafe to use in HTML and XML. Characters that have special meanings are\nreplaced so that they display as the actual characters. This mitigates\ninjection attacks, meaning untrusted user input can safely be displayed\non a page.\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    pip install -U MarkupSafe\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nExamples\n--------\n\n.. code-block:: pycon\n\n    >>> from markupsafe import Markup, escape\n\n    >>> # escape replaces special characters and wraps in Markup\n    >>> escape(\"<script>alert(document.cookie);</script>\")\n    Markup('&lt;script&gt;alert(document.cookie);&lt;/script&gt;')\n\n    >>> # wrap in Markup to mark text \"safe\" and prevent escaping\n    >>> Markup(\"<strong>Hello</strong>\")\n    Markup('<strong>hello</strong>')\n\n    >>> escape(Markup(\"<strong>Hello</strong>\"))\n    Markup('<strong>hello</strong>')\n\n    >>> # Markup is a str subclass\n    >>> # methods and operators escape their arguments\n    >>> template = Markup(\"Hello <em>{name}</em>\")\n    >>> template.format(name='\"World\"')\n    Markup('Hello <em>&#34;World&#34;</em>')\n\n\nDonate\n------\n\nThe Pallets organization develops and supports MarkupSafe and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n`please donate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://markupsafe.palletsprojects.com/\n-   Changes: https://markupsafe.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/MarkupSafe/\n-   Source Code: https://github.com/pallets/markupsafe/\n-   Issue Tracker: https://github.com/pallets/markupsafe/issues/\n-   Chat: https://discord.gg/pallets",
+      "release_date": "2023-06-02T21:43:45",
       "parties": [
         {
           "type": "person",
@@ -607,11 +607,11 @@
         "Topic :: Text Processing :: Markup :: HTML"
       ],
       "homepage_url": "https://palletsprojects.com/p/markupsafe/",
-      "download_url": "https://files.pythonhosted.org/packages/95/7e/68018b70268fb4a2a605e2be44ab7b4dd7ce7808adae6c5ef32e34f4b55a/MarkupSafe-2.1.2.tar.gz",
-      "size": 19080,
+      "download_url": "https://files.pythonhosted.org/packages/6d/7c/59a3248f411813f8ccba92a55feaac4bf360d29e2ff05ee7d8e1ef2d7dbf/MarkupSafe-2.1.3.tar.gz",
+      "size": 19132,
       "sha1": null,
-      "md5": "02f337b98aef11bd0fee9c5ae860173b",
-      "sha256": "abcabc8c2b26036d62d4c746381a6f7cf60aafcc653198ad678306986b09450d",
+      "md5": "ca33f119bd0551ce15837f58bb180214",
+      "sha256": "af598ed32d6ae86f1b747b82783958b1a4ab8f617b06fe68795c7f026abbdcad",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets/markupsafe/issues/",
       "code_view_url": "https://github.com/pallets/markupsafe/",
@@ -631,20 +631,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/markupsafe/2.1.2/json",
+      "api_data_url": "https://pypi.org/pypi/markupsafe/2.1.3/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/markupsafe@2.1.2"
+      "purl": "pkg:pypi/markupsafe@2.1.3"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "werkzeug",
-      "version": "2.2.3",
+      "version": "2.3.6",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "The comprehensive WSGI web application library.\nWerkzeug\n========\n\n*werkzeug* German noun: \"tool\". Etymology: *werk* (\"work\"), *zeug* (\"stuff\")\n\nWerkzeug is a comprehensive `WSGI`_ web application library. It began as\na simple collection of various utilities for WSGI applications and has\nbecome one of the most advanced WSGI utility libraries.\n\nIt includes:\n\n-   An interactive debugger that allows inspecting stack traces and\n    source code in the browser with an interactive interpreter for any\n    frame in the stack.\n-   A full-featured request object with objects to interact with\n    headers, query args, form data, files, and cookies.\n-   A response object that can wrap other WSGI applications and handle\n    streaming data.\n-   A routing system for matching URLs to endpoints and generating URLs\n    for endpoints, with an extensible system for capturing variables\n    from URLs.\n-   HTTP utilities to handle entity tags, cache control, dates, user\n    agents, cookies, files, and more.\n-   A threaded WSGI server for use while developing applications\n    locally.\n-   A test client for simulating HTTP requests during testing without\n    requiring running a server.\n\nWerkzeug doesn't enforce any dependencies. It is up to the developer to\nchoose a template engine, database adapter, and even how to handle\nrequests. It can be used to build all sorts of end user applications\nsuch as blogs, wikis, or bulletin boards.\n\n`Flask`_ wraps Werkzeug, using it to handle the details of WSGI while\nproviding more structure and patterns for defining powerful\napplications.\n\n.. _WSGI: https://wsgi.readthedocs.io/en/latest/\n.. _Flask: https://www.palletsprojects.com/p/flask/\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    pip install -U Werkzeug\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    from werkzeug.wrappers import Request, Response\n\n    @Request.application\n    def application(request):\n        return Response('Hello, World!')\n\n    if __name__ == '__main__':\n        from werkzeug.serving import run_simple\n        run_simple('localhost', 4000, application)\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Werkzeug and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n`please donate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://werkzeug.palletsprojects.com/\n-   Changes: https://werkzeug.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/Werkzeug/\n-   Source Code: https://github.com/pallets/werkzeug/\n-   Issue Tracker: https://github.com/pallets/werkzeug/issues/\n-   Website: https://palletsprojects.com/p/werkzeug/\n-   Twitter: https://twitter.com/PalletsTeam\n-   Chat: https://discord.gg/pallets",
-      "release_date": "2023-02-14T17:18:42",
+      "description": "The comprehensive WSGI web application library.\nWerkzeug\n========\n\n*werkzeug* German noun: \"tool\". Etymology: *werk* (\"work\"), *zeug* (\"stuff\")\n\nWerkzeug is a comprehensive `WSGI`_ web application library. It began as\na simple collection of various utilities for WSGI applications and has\nbecome one of the most advanced WSGI utility libraries.\n\nIt includes:\n\n-   An interactive debugger that allows inspecting stack traces and\n    source code in the browser with an interactive interpreter for any\n    frame in the stack.\n-   A full-featured request object with objects to interact with\n    headers, query args, form data, files, and cookies.\n-   A response object that can wrap other WSGI applications and handle\n    streaming data.\n-   A routing system for matching URLs to endpoints and generating URLs\n    for endpoints, with an extensible system for capturing variables\n    from URLs.\n-   HTTP utilities to handle entity tags, cache control, dates, user\n    agents, cookies, files, and more.\n-   A threaded WSGI server for use while developing applications\n    locally.\n-   A test client for simulating HTTP requests during testing without\n    requiring running a server.\n\nWerkzeug doesn't enforce any dependencies. It is up to the developer to\nchoose a template engine, database adapter, and even how to handle\nrequests. It can be used to build all sorts of end user applications\nsuch as blogs, wikis, or bulletin boards.\n\n`Flask`_ wraps Werkzeug, using it to handle the details of WSGI while\nproviding more structure and patterns for defining powerful\napplications.\n\n.. _WSGI: https://wsgi.readthedocs.io/en/latest/\n.. _Flask: https://www.palletsprojects.com/p/flask/\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    pip install -U Werkzeug\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    from werkzeug.wrappers import Request, Response\n\n    @Request.application\n    def application(request):\n        return Response('Hello, World!')\n\n    if __name__ == '__main__':\n        from werkzeug.serving import run_simple\n        run_simple('localhost', 4000, application)\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Werkzeug and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n`please donate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://werkzeug.palletsprojects.com/\n-   Changes: https://werkzeug.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/Werkzeug/\n-   Source Code: https://github.com/pallets/werkzeug/\n-   Issue Tracker: https://github.com/pallets/werkzeug/issues/\n-   Chat: https://discord.gg/pallets",
+      "release_date": "2023-06-08T21:26:53",
       "parties": [
         {
           "type": "person",
@@ -673,12 +673,12 @@
         "Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware",
         "Topic :: Software Development :: Libraries :: Application Frameworks"
       ],
-      "homepage_url": "https://palletsprojects.com/p/werkzeug/",
-      "download_url": "https://files.pythonhosted.org/packages/f6/f8/9da63c1617ae2a1dec2fbf6412f3a0cfe9d4ce029eccbda6e1e4258ca45f/Werkzeug-2.2.3-py3-none-any.whl",
-      "size": 233551,
+      "homepage_url": "",
+      "download_url": "https://files.pythonhosted.org/packages/ba/d6/8040faecaba2feb84e1647af174b3243c9b90c163c7ea407820839931efe/Werkzeug-2.3.6-py3-none-any.whl",
+      "size": 242499,
       "sha1": null,
-      "md5": "fd276a08a0dcdf25a48ed1a5ac07b836",
-      "sha256": "56433961bc1f12533306c624f3be5e744389ac61d722175d543e1751285da612",
+      "md5": "17e53591926aee3ce1663b03a1497758",
+      "sha256": "935539fa1413afbb9195b24880778422ed620c0fc09670945185cce4d91a8890",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets/werkzeug/issues/",
       "code_view_url": "https://github.com/pallets/werkzeug/",
@@ -698,20 +698,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/werkzeug/2.2.3/json",
+      "api_data_url": "https://pypi.org/pypi/werkzeug/2.3.6/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/werkzeug@2.2.3"
+      "purl": "pkg:pypi/werkzeug@2.3.6"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "werkzeug",
-      "version": "2.2.3",
+      "version": "2.3.6",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "The comprehensive WSGI web application library.\nWerkzeug\n========\n\n*werkzeug* German noun: \"tool\". Etymology: *werk* (\"work\"), *zeug* (\"stuff\")\n\nWerkzeug is a comprehensive `WSGI`_ web application library. It began as\na simple collection of various utilities for WSGI applications and has\nbecome one of the most advanced WSGI utility libraries.\n\nIt includes:\n\n-   An interactive debugger that allows inspecting stack traces and\n    source code in the browser with an interactive interpreter for any\n    frame in the stack.\n-   A full-featured request object with objects to interact with\n    headers, query args, form data, files, and cookies.\n-   A response object that can wrap other WSGI applications and handle\n    streaming data.\n-   A routing system for matching URLs to endpoints and generating URLs\n    for endpoints, with an extensible system for capturing variables\n    from URLs.\n-   HTTP utilities to handle entity tags, cache control, dates, user\n    agents, cookies, files, and more.\n-   A threaded WSGI server for use while developing applications\n    locally.\n-   A test client for simulating HTTP requests during testing without\n    requiring running a server.\n\nWerkzeug doesn't enforce any dependencies. It is up to the developer to\nchoose a template engine, database adapter, and even how to handle\nrequests. It can be used to build all sorts of end user applications\nsuch as blogs, wikis, or bulletin boards.\n\n`Flask`_ wraps Werkzeug, using it to handle the details of WSGI while\nproviding more structure and patterns for defining powerful\napplications.\n\n.. _WSGI: https://wsgi.readthedocs.io/en/latest/\n.. _Flask: https://www.palletsprojects.com/p/flask/\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    pip install -U Werkzeug\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    from werkzeug.wrappers import Request, Response\n\n    @Request.application\n    def application(request):\n        return Response('Hello, World!')\n\n    if __name__ == '__main__':\n        from werkzeug.serving import run_simple\n        run_simple('localhost', 4000, application)\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Werkzeug and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n`please donate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://werkzeug.palletsprojects.com/\n-   Changes: https://werkzeug.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/Werkzeug/\n-   Source Code: https://github.com/pallets/werkzeug/\n-   Issue Tracker: https://github.com/pallets/werkzeug/issues/\n-   Website: https://palletsprojects.com/p/werkzeug/\n-   Twitter: https://twitter.com/PalletsTeam\n-   Chat: https://discord.gg/pallets",
-      "release_date": "2023-02-14T17:18:44",
+      "description": "The comprehensive WSGI web application library.\nWerkzeug\n========\n\n*werkzeug* German noun: \"tool\". Etymology: *werk* (\"work\"), *zeug* (\"stuff\")\n\nWerkzeug is a comprehensive `WSGI`_ web application library. It began as\na simple collection of various utilities for WSGI applications and has\nbecome one of the most advanced WSGI utility libraries.\n\nIt includes:\n\n-   An interactive debugger that allows inspecting stack traces and\n    source code in the browser with an interactive interpreter for any\n    frame in the stack.\n-   A full-featured request object with objects to interact with\n    headers, query args, form data, files, and cookies.\n-   A response object that can wrap other WSGI applications and handle\n    streaming data.\n-   A routing system for matching URLs to endpoints and generating URLs\n    for endpoints, with an extensible system for capturing variables\n    from URLs.\n-   HTTP utilities to handle entity tags, cache control, dates, user\n    agents, cookies, files, and more.\n-   A threaded WSGI server for use while developing applications\n    locally.\n-   A test client for simulating HTTP requests during testing without\n    requiring running a server.\n\nWerkzeug doesn't enforce any dependencies. It is up to the developer to\nchoose a template engine, database adapter, and even how to handle\nrequests. It can be used to build all sorts of end user applications\nsuch as blogs, wikis, or bulletin boards.\n\n`Flask`_ wraps Werkzeug, using it to handle the details of WSGI while\nproviding more structure and patterns for defining powerful\napplications.\n\n.. _WSGI: https://wsgi.readthedocs.io/en/latest/\n.. _Flask: https://www.palletsprojects.com/p/flask/\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    pip install -U Werkzeug\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    from werkzeug.wrappers import Request, Response\n\n    @Request.application\n    def application(request):\n        return Response('Hello, World!')\n\n    if __name__ == '__main__':\n        from werkzeug.serving import run_simple\n        run_simple('localhost', 4000, application)\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Werkzeug and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n`please donate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://werkzeug.palletsprojects.com/\n-   Changes: https://werkzeug.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/Werkzeug/\n-   Source Code: https://github.com/pallets/werkzeug/\n-   Issue Tracker: https://github.com/pallets/werkzeug/issues/\n-   Chat: https://discord.gg/pallets",
+      "release_date": "2023-06-08T21:26:55",
       "parties": [
         {
           "type": "person",
@@ -740,12 +740,12 @@
         "Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware",
         "Topic :: Software Development :: Libraries :: Application Frameworks"
       ],
-      "homepage_url": "https://palletsprojects.com/p/werkzeug/",
-      "download_url": "https://files.pythonhosted.org/packages/02/3c/baaebf3235c87d61d6593467056d5a8fba7c75ac838b8d100a5e64eba7a0/Werkzeug-2.2.3.tar.gz",
-      "size": 845884,
+      "homepage_url": "",
+      "download_url": "https://files.pythonhosted.org/packages/d1/7e/c35cea5749237d40effc50ed1a1c7518d9f2e768fcf30b4e9ea119e74975/Werkzeug-2.3.6.tar.gz",
+      "size": 833282,
       "sha1": null,
-      "md5": "28c3ec6a4b1ce8f06c85612c1dfa351a",
-      "sha256": "2e1ccc9417d4da358b9de6f174e3ac094391ea1d4fbef2d667865d819dfd0afe",
+      "md5": "de26f240d6f95689a8d15170c2d958b6",
+      "sha256": "98c774df2f91b05550078891dee5f0eb0cb797a522c757a2452b9cee5b202330",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets/werkzeug/issues/",
       "code_view_url": "https://github.com/pallets/werkzeug/",
@@ -765,9 +765,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/werkzeug/2.2.3/json",
+      "api_data_url": "https://pypi.org/pypi/werkzeug/2.3.6/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/werkzeug@2.2.3"
+      "purl": "pkg:pypi/werkzeug@2.3.6"
     }
   ],
   "resolution": [
@@ -796,7 +796,7 @@
             {
               "key": "markupsafe",
               "package_name": "markupsafe",
-              "installed_version": "2.1.2",
+              "installed_version": "2.1.3",
               "dependencies": []
             }
           ]
@@ -804,12 +804,12 @@
         {
           "key": "werkzeug",
           "package_name": "werkzeug",
-          "installed_version": "2.2.3",
+          "installed_version": "2.3.6",
           "dependencies": [
             {
               "key": "markupsafe",
               "package_name": "markupsafe",
-              "installed_version": "2.1.2",
+              "installed_version": "2.1.3",
               "dependencies": []
             }
           ]
