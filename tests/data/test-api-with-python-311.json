@@ -267,13 +267,6 @@
       "parties": [
         {
           "type": "person",
-          "role": "author",
-          "name": "Armin Ronacher",
-          "email": "armin.ronacher@active-4.com",
-          "url": null
-        },
-        {
-          "type": "person",
           "role": "maintainer",
           "name": "Pallets",
           "email": "contact@palletsprojects.com",
@@ -331,16 +324,9 @@
       "parties": [
         {
           "type": "person",
-          "role": "author",
-          "name": "Armin Ronacher",
-          "email": "armin.ronacher@active-4.com",
-          "url": null
-        },
-        {
-          "type": "person",
           "role": "maintainer",
-          "name": "Pallets",
-          "email": "contact@palletsprojects.com",
+          "name": null,
+          "email": "Pallets <contact@palletsprojects.com>",
           "url": null
         }
       ],

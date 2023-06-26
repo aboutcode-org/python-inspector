@@ -2341,8 +2341,15 @@
         {
           "type": "person",
           "role": "author",
-          "name": "Andrey Petrov",
-          "email": "andrey.petrov@shazow.net",
+          "name": null,
+          "email": "Andrey Petrov <andrey.petrov@shazow.net>",
+          "url": null
+        },
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": null,
+          "email": "Seth Michael Larson <sethmichaellarson@gmail.com>, Quentin Pradet <quentin@pradet.me>",
           "url": null
         }
       ],
@@ -2414,8 +2421,15 @@
         {
           "type": "person",
           "role": "author",
-          "name": "Andrey Petrov",
-          "email": "andrey.petrov@shazow.net",
+          "name": null,
+          "email": "Andrey Petrov <andrey.petrov@shazow.net>",
+          "url": null
+        },
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": null,
+          "email": "Seth Michael Larson <sethmichaellarson@gmail.com>, Quentin Pradet <quentin@pradet.me>",
           "url": null
         }
       ],
