@@ -4,7 +4,7 @@
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
     "tool_version": "0.9.7",
     "options": [
-      "--requirement /home/tg1999/Desktop/python-inspector-1/tests/data/azure-devops.req.txt",
+      "--requirement /Users/mathioud/repos/python-inspector/tests/data/azure-devops.req.txt",
       "--index-url https://pypi.org/simple",
       "--python-version 38",
       "--operating-system linux",
@@ -17,7 +17,7 @@
   "files": [
     {
       "type": "file",
-      "path": "/home/tg1999/Desktop/python-inspector-1/tests/data/azure-devops.req.txt",
+      "path": "/Users/mathioud/repos/python-inspector/tests/data/azure-devops.req.txt",
       "package_data": [
         {
           "type": "pypi",
@@ -2341,8 +2341,15 @@
         {
           "type": "person",
           "role": "author",
-          "name": "Andrey Petrov",
-          "email": "andrey.petrov@shazow.net",
+          "name": null,
+          "email": "Andrey Petrov <andrey.petrov@shazow.net>",
+          "url": null
+        },
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": null,
+          "email": "Seth Michael Larson <sethmichaellarson@gmail.com>, Quentin Pradet <quentin@pradet.me>",
           "url": null
         }
       ],
@@ -2414,8 +2421,15 @@
         {
           "type": "person",
           "role": "author",
-          "name": "Andrey Petrov",
-          "email": "andrey.petrov@shazow.net",
+          "name": null,
+          "email": "Andrey Petrov <andrey.petrov@shazow.net>",
+          "url": null
+        },
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": null,
+          "email": "Seth Michael Larson <sethmichaellarson@gmail.com>, Quentin Pradet <quentin@pradet.me>",
           "url": null
         }
       ],
