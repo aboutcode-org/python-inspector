@@ -1593,18 +1593,22 @@ class PypiSimpleRepository:
         for anchor_tag in anchor_tags:
             python_requires = None
             url, _, _sha256 = anchor_tag["href"].partition("#sha256=")
-            if url.startswith(".."):
-                # Handle relative links
-                url = urljoin(package_url, url)
             if "data-requires-python" in anchor_tag.attrs:
                 python_requires = anchor_tag.attrs["data-requires-python"]
-            # Check if the link is a relative URL
-            if not url.startswith(("http://", "https://")):
-                base_url = "/".join(package_url.split("/")[:-1])  # Extract base URL
-                url = urljoin(base_url, url)  # Resolve relative URL
+            url = resolve_relative_url(package_url, url)  # Resolve relative URL
             links.append(Link(url=url, python_requires=python_requires))
         # TODO: keep sha256
         return links
+
+
+def resolve_relative_url(package_url, url):
+    """
+    Resolve a relative URL based on the package URL.
+    """
+    if not url.startswith(("http://", "https://")):
+        base_url = "/".join(package_url.split("/")[:-1])  # Extract base URL
+        url = urljoin(base_url, url)  # Resolve relative URL
+    return url
 
 
 PYPI_PUBLIC_REPO = PypiSimpleRepository(index_url=PYPI_SIMPLE_URL)
