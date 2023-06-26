@@ -16,7 +16,7 @@
   "files": [
     {
       "type": "file",
-      "path": "/Users/mathioud/repos/python-inspector/tests/data/setup/simple-setup.py",
+      "path": "/home/tg1999/Desktop/python-inspector-1/tests/data/setup/simple-setup.py",
       "package_data": [
         {
           "type": "pypi",
