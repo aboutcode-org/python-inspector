@@ -381,12 +381,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "backports-functools-lru-cache",
-      "version": "1.6.5",
+      "version": "1.6.6",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": ".. image:: https://img.shields.io/pypi/v/backports.functools_lru_cache.svg\n   :target: https://pypi.org/project/backports.functools_lru_cache\n\n.. image:: https://img.shields.io/pypi/pyversions/backports.functools_lru_cache.svg\n\n.. image:: https://github.com/jaraco/backports.functools_lru_cache/workflows/tests/badge.svg\n   :target: https://github.com/jaraco/backports.functools_lru_cache/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json\n    :target: https://github.com/astral-sh/ruff\n    :alt: Ruff\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. image:: https://readthedocs.org/projects/backportsfunctools_lru_cache/badge/?version=latest\n   :target: https://backportsfunctools_lru_cache.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2023-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/backports.functools_lru_cache\n   :target: https://tidelift.com/subscription/pkg/pypi-backports.functools_lru_cache?utm_source=pypi-backports.functools_lru_cache&utm_medium=readme\n\nBackport of functools.lru_cache from Python 3.3 as published at `ActiveState\n<http://code.activestate.com/recipes/578078/>`_.\n\nUsage\n=====\n\nConsider using this technique for importing the 'lru_cache' function::\n\n    try:\n        from functools import lru_cache\n    except ImportError:\n        from backports.functools_lru_cache import lru_cache\n\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-backports.functools_lru_cache?utm_source=pypi-backports.functools_lru_cache&utm_medium=referral&utm_campaign=github>`_.\n\nSecurity Contact\n================\n\nTo report a security vulnerability, please use the\n`Tidelift security contact <https://tidelift.com/security>`_.\nTidelift will coordinate the fix and disclosure.",
-      "release_date": "2023-06-24T00:51:01",
+      "description": ".. image:: https://img.shields.io/pypi/v/backports.functools_lru_cache.svg\n   :target: https://pypi.org/project/backports.functools_lru_cache\n\n.. image:: https://img.shields.io/pypi/pyversions/backports.functools_lru_cache.svg\n\n.. image:: https://github.com/jaraco/backports.functools_lru_cache/workflows/tests/badge.svg\n   :target: https://github.com/jaraco/backports.functools_lru_cache/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json\n    :target: https://github.com/astral-sh/ruff\n    :alt: Ruff\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. image:: https://readthedocs.org/projects/backportsfunctools_lru_cache/badge/?version=latest\n   :target: https://backportsfunctools_lru_cache.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2023-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/backports.functools_lru_cache\n   :target: https://tidelift.com/subscription/pkg/pypi-backports.functools_lru_cache?utm_source=pypi-backports.functools_lru_cache&utm_medium=readme\n\nBackport of functools.lru_cache from Python 3.3 as published at `ActiveState\n<http://code.activestate.com/recipes/578078/>`_.\n\nUsage\n=====\n\nConsider using this technique for importing the 'lru_cache' function::\n\n    try:\n        from functools import lru_cache\n    except ImportError:\n        from backports.functools_lru_cache import lru_cache\n\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-backports.functools_lru_cache?utm_source=pypi-backports.functools_lru_cache&utm_medium=referral&utm_campaign=github>`_.",
+      "release_date": "2023-07-09T20:41:50",
       "parties": [
         {
           "type": "person",
@@ -411,11 +411,11 @@
         "Programming Language :: Python :: 3"
       ],
       "homepage_url": "https://github.com/jaraco/backports.functools_lru_cache",
-      "download_url": "https://files.pythonhosted.org/packages/22/5e/3a1b7ee2726c5c3b50e1bbafb5f2963b9bff3279b4423428c2b8063a1600/backports.functools_lru_cache-1.6.5-py2.py3-none-any.whl",
-      "size": 5974,
+      "download_url": "https://files.pythonhosted.org/packages/08/e3/1387bd1c9aa95e354064ee29b8a1dfd3e795b066cc869af8f8d6b70ae4aa/backports.functools_lru_cache-1.6.6-py2.py3-none-any.whl",
+      "size": 5893,
       "sha1": null,
-      "md5": "5ba97a2c8498f58054d23a9b65697b63",
-      "sha256": "3b8f1c6537651f130706488e61f3275b010002676432e9e7638a9e0fc1b40668",
+      "md5": "b94a7bd466065e21446b61d972079b81",
+      "sha256": "77e27d0ffbb463904bdd5ef8b44363f6cd5ef503e664b3f599a3bf5843ed37cf",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -434,20 +434,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/backports-functools-lru-cache/1.6.5/json",
+      "api_data_url": "https://pypi.org/pypi/backports-functools-lru-cache/1.6.6/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/backports-functools-lru-cache@1.6.5"
+      "purl": "pkg:pypi/backports-functools-lru-cache@1.6.6"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "backports-functools-lru-cache",
-      "version": "1.6.5",
+      "version": "1.6.6",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": ".. image:: https://img.shields.io/pypi/v/backports.functools_lru_cache.svg\n   :target: https://pypi.org/project/backports.functools_lru_cache\n\n.. image:: https://img.shields.io/pypi/pyversions/backports.functools_lru_cache.svg\n\n.. image:: https://github.com/jaraco/backports.functools_lru_cache/workflows/tests/badge.svg\n   :target: https://github.com/jaraco/backports.functools_lru_cache/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json\n    :target: https://github.com/astral-sh/ruff\n    :alt: Ruff\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. image:: https://readthedocs.org/projects/backportsfunctools_lru_cache/badge/?version=latest\n   :target: https://backportsfunctools_lru_cache.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2023-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/backports.functools_lru_cache\n   :target: https://tidelift.com/subscription/pkg/pypi-backports.functools_lru_cache?utm_source=pypi-backports.functools_lru_cache&utm_medium=readme\n\nBackport of functools.lru_cache from Python 3.3 as published at `ActiveState\n<http://code.activestate.com/recipes/578078/>`_.\n\nUsage\n=====\n\nConsider using this technique for importing the 'lru_cache' function::\n\n    try:\n        from functools import lru_cache\n    except ImportError:\n        from backports.functools_lru_cache import lru_cache\n\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-backports.functools_lru_cache?utm_source=pypi-backports.functools_lru_cache&utm_medium=referral&utm_campaign=github>`_.\n\nSecurity Contact\n================\n\nTo report a security vulnerability, please use the\n`Tidelift security contact <https://tidelift.com/security>`_.\nTidelift will coordinate the fix and disclosure.",
-      "release_date": "2023-06-24T00:51:02",
+      "description": ".. image:: https://img.shields.io/pypi/v/backports.functools_lru_cache.svg\n   :target: https://pypi.org/project/backports.functools_lru_cache\n\n.. image:: https://img.shields.io/pypi/pyversions/backports.functools_lru_cache.svg\n\n.. image:: https://github.com/jaraco/backports.functools_lru_cache/workflows/tests/badge.svg\n   :target: https://github.com/jaraco/backports.functools_lru_cache/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json\n    :target: https://github.com/astral-sh/ruff\n    :alt: Ruff\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. image:: https://readthedocs.org/projects/backportsfunctools_lru_cache/badge/?version=latest\n   :target: https://backportsfunctools_lru_cache.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2023-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/backports.functools_lru_cache\n   :target: https://tidelift.com/subscription/pkg/pypi-backports.functools_lru_cache?utm_source=pypi-backports.functools_lru_cache&utm_medium=readme\n\nBackport of functools.lru_cache from Python 3.3 as published at `ActiveState\n<http://code.activestate.com/recipes/578078/>`_.\n\nUsage\n=====\n\nConsider using this technique for importing the 'lru_cache' function::\n\n    try:\n        from functools import lru_cache\n    except ImportError:\n        from backports.functools_lru_cache import lru_cache\n\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-backports.functools_lru_cache?utm_source=pypi-backports.functools_lru_cache&utm_medium=referral&utm_campaign=github>`_.",
+      "release_date": "2023-07-09T20:41:51",
       "parties": [
         {
           "type": "person",
@@ -472,11 +472,11 @@
         "Programming Language :: Python :: 3"
       ],
       "homepage_url": "https://github.com/jaraco/backports.functools_lru_cache",
-      "download_url": "https://files.pythonhosted.org/packages/d7/e9/2585a2b3de3b246ad90370a3a3d19b82b857784975559b44122a4cb5ceb7/backports.functools_lru_cache-1.6.5.tar.gz",
-      "size": 10518,
+      "download_url": "https://files.pythonhosted.org/packages/97/ea/a7519e2ea83afe9e7fd845c0279dfe7052be8f3277a259d8a35eae8ce461/backports.functools_lru_cache-1.6.6.tar.gz",
+      "size": 10582,
       "sha1": null,
-      "md5": "4bc3c637b0b485302a406294ec98ecb6",
-      "sha256": "e7efcdd8cf92279bcb09fdb9b31e984ffdc96fc9f21e22ff20538884cb99b97d",
+      "md5": "1a407cf2874f17522f38f85c391fc7b4",
+      "sha256": "7b70e701ba4db58c0ed8671a9d3391b0abb9bd1bc24d4e90c3480f4baafcc2dc",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -495,9 +495,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/backports-functools-lru-cache/1.6.5/json",
+      "api_data_url": "https://pypi.org/pypi/backports-functools-lru-cache/1.6.6/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/backports-functools-lru-cache@1.6.5"
+      "purl": "pkg:pypi/backports-functools-lru-cache@1.6.6"
     },
     {
       "type": "pypi",
@@ -8211,7 +8211,7 @@
       ]
     },
     {
-      "package": "pkg:pypi/backports-functools-lru-cache@1.6.5",
+      "package": "pkg:pypi/backports-functools-lru-cache@1.6.6",
       "dependencies": []
     },
     {
@@ -8613,7 +8613,7 @@
     {
       "package": "pkg:pypi/wcwidth@0.2.6",
       "dependencies": [
-        "pkg:pypi/backports-functools-lru-cache@1.6.5"
+        "pkg:pypi/backports-functools-lru-cache@1.6.6"
       ]
     },
     {
