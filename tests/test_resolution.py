@@ -93,7 +93,7 @@ def test_get_resolved_dependencies_with_flask_and_python_36():
     )
 
     assert plist == [
-        "pkg:pypi/click@8.1.4",
+        "pkg:pypi/click@8.0.4",
         "pkg:pypi/dataclasses@0.8",
         "pkg:pypi/flask@2.0.3",
         "pkg:pypi/importlib-metadata@4.8.3",
