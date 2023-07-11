@@ -1603,7 +1603,14 @@ class PypiSimpleRepository:
 
 def resolve_relative_url(package_url, url):
     """
-    Resolve a relative URL based on the package URL.
+    Resolve a relative URL using the package URL.
+
+    Args:
+        package_url (str): The base URL of the package.
+        url (str): The URL to be resolved.
+
+    Returns:
+        str: The resolved URL.
     """
     if not url.startswith(("http://", "https://")):
         base_url = "/".join(package_url.split("/")[:-1])  # Extract base URL
