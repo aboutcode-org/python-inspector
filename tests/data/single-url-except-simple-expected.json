@@ -984,12 +984,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "zipp",
-      "version": "3.16.0",
+      "version": "3.16.1",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Backport of pathlib-compatible object wrapper for zip files\n.. image:: https://img.shields.io/pypi/v/zipp.svg\n   :target: https://pypi.org/project/zipp\n\n.. image:: https://img.shields.io/pypi/pyversions/zipp.svg\n\n.. image:: https://github.com/jaraco/zipp/workflows/tests/badge.svg\n   :target: https://github.com/jaraco/zipp/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json\n    :target: https://github.com/astral-sh/ruff\n    :alt: Ruff\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. .. image:: https://readthedocs.org/projects/PROJECT_RTD/badge/?version=latest\n..    :target: https://PROJECT_RTD.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2023-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/zipp\n   :target: https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=readme\n\n\nA pathlib-compatible Zipfile object wrapper. Official backport of the standard library\n`Path object <https://docs.python.org/3.8/library/zipfile.html#path-objects>`_.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - zipp\n     - stdlib\n   * - 3.15\n     - 3.12\n   * - 3.5\n     - 3.11\n   * - 3.2\n     - 3.10\n   * - 3.3 ??\n     - 3.9\n   * - 1.0\n     - 3.8\n\n\nUsage\n=====\n\nUse ``zipp.Path`` in place of ``zipfile.Path`` on any Python.\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=referral&utm_campaign=github>`_.",
-      "release_date": "2023-07-08T21:10:48",
+      "release_date": "2023-07-13T03:24:02",
       "parties": [
         {
           "type": "person",
@@ -1006,11 +1006,11 @@
         "Programming Language :: Python :: 3 :: Only"
       ],
       "homepage_url": "https://github.com/jaraco/zipp",
-      "download_url": "https://files.pythonhosted.org/packages/ad/be/a6c11f5e0c042fb97e6b567730f55c56b2fe4089304ae66207a54fa49d7e/zipp-3.16.0-py3-none-any.whl",
-      "size": 6674,
+      "download_url": "https://files.pythonhosted.org/packages/a1/3b/385e3b43200af0b9a13d03c234efbd9d40c6d73ab63fde1c097a2daacdea/zipp-3.16.1-py3-none-any.whl",
+      "size": 7226,
       "sha1": null,
-      "md5": "d3aebd40c6645d1d38deda6766077090",
-      "sha256": "5dadc3ad0a1f825fe42ce1bce0f2fc5a13af2e6b2d386af5b0ff295bc0a287d3",
+      "md5": "f67ff330cc4e1bc7ace1fc61256e724d",
+      "sha256": "0b37c326d826d5ca35f2b9685cd750292740774ef16190008b00a0227c256fe0",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -1029,20 +1029,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/zipp/3.16.0/json",
+      "api_data_url": "https://pypi.org/pypi/zipp/3.16.1/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/zipp@3.16.0"
+      "purl": "pkg:pypi/zipp@3.16.1"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "zipp",
-      "version": "3.16.0",
+      "version": "3.16.1",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Backport of pathlib-compatible object wrapper for zip files\n.. image:: https://img.shields.io/pypi/v/zipp.svg\n   :target: https://pypi.org/project/zipp\n\n.. image:: https://img.shields.io/pypi/pyversions/zipp.svg\n\n.. image:: https://github.com/jaraco/zipp/workflows/tests/badge.svg\n   :target: https://github.com/jaraco/zipp/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json\n    :target: https://github.com/astral-sh/ruff\n    :alt: Ruff\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. .. image:: https://readthedocs.org/projects/PROJECT_RTD/badge/?version=latest\n..    :target: https://PROJECT_RTD.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2023-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/zipp\n   :target: https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=readme\n\n\nA pathlib-compatible Zipfile object wrapper. Official backport of the standard library\n`Path object <https://docs.python.org/3.8/library/zipfile.html#path-objects>`_.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - zipp\n     - stdlib\n   * - 3.15\n     - 3.12\n   * - 3.5\n     - 3.11\n   * - 3.2\n     - 3.10\n   * - 3.3 ??\n     - 3.9\n   * - 1.0\n     - 3.8\n\n\nUsage\n=====\n\nUse ``zipp.Path`` in place of ``zipfile.Path`` on any Python.\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=referral&utm_campaign=github>`_.",
-      "release_date": "2023-07-08T21:10:51",
+      "release_date": "2023-07-13T03:24:04",
       "parties": [
         {
           "type": "person",
@@ -1059,11 +1059,11 @@
         "Programming Language :: Python :: 3 :: Only"
       ],
       "homepage_url": "https://github.com/jaraco/zipp",
-      "download_url": "https://files.pythonhosted.org/packages/52/9a/d93b483b9a744e7f71b311ee9bb5a228f6846219ceb5d6dbcb3eddcd1932/zipp-3.16.0.tar.gz",
-      "size": 18432,
+      "download_url": "https://files.pythonhosted.org/packages/ef/76/5a9e1553f00ee55a6de6b3c176aa4c859c7f64b9bbdc48804df174dee890/zipp-3.16.1.tar.gz",
+      "size": 19194,
       "sha1": null,
-      "md5": "1369ce385c4ae2c99c44ba771d955f07",
-      "sha256": "1876cb065531855bbe83b6c489dcf69ecc28f1068d8e95959fe8bbc77774c941",
+      "md5": "908ece012cb207f6b1b65db4f227f617",
+      "sha256": "857b158da2cbf427b376da1c24fd11faecbac5a4ac7523c3607f8a01f94c2ec0",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -1082,9 +1082,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/zipp/3.16.0/json",
+      "api_data_url": "https://pypi.org/pypi/zipp/3.16.1/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/zipp@3.16.0"
+      "purl": "pkg:pypi/zipp@3.16.1"
     }
   ],
   "resolved_dependencies_graph": [
@@ -1110,7 +1110,7 @@
     {
       "package": "pkg:pypi/importlib-metadata@6.8.0",
       "dependencies": [
-        "pkg:pypi/zipp@3.16.0"
+        "pkg:pypi/zipp@3.16.1"
       ]
     },
     {
@@ -1134,7 +1134,7 @@
       ]
     },
     {
-      "package": "pkg:pypi/zipp@3.16.0",
+      "package": "pkg:pypi/zipp@3.16.1",
       "dependencies": []
     }
   ]
