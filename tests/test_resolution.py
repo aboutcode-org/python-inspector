@@ -147,7 +147,7 @@ def test_without_supported_wheels():
     assert plist == [
         "pkg:pypi/autobahn@22.3.2",
         "pkg:pypi/cffi@1.15.1",
-        "pkg:pypi/cryptography@41.0.1",
+        "pkg:pypi/cryptography@41.0.2",
         "pkg:pypi/hyperlink@21.0.0",
         "pkg:pypi/idna@3.4",
         "pkg:pypi/pycparser@2.21",
