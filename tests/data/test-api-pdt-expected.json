@@ -5,12 +5,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "click",
-      "version": "8.1.4",
+      "version": "8.1.5",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Composable command line interface toolkit\n\\$ click\\_\n==========\n\nClick is a Python package for creating beautiful command line interfaces\nin a composable way with as little code as necessary. It's the \"Command\nLine Interface Creation Kit\". It's highly configurable but comes with\nsensible defaults out of the box.\n\nIt aims to make the process of writing command line tools quick and fun\nwhile also preventing any frustration caused by the inability to\nimplement an intended CLI API.\n\nClick in three points:\n\n-   Arbitrary nesting of commands\n-   Automatic help page generation\n-   Supports lazy loading of subcommands at runtime\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    $ pip install -U click\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    import click\n\n    @click.command()\n    @click.option(\"--count\", default=1, help=\"Number of greetings.\")\n    @click.option(\"--name\", prompt=\"Your name\", help=\"The person to greet.\")\n    def hello(count, name):\n        \"\"\"Simple program that greets NAME for a total of COUNT times.\"\"\"\n        for _ in range(count):\n            click.echo(f\"Hello, {name}!\")\n\n    if __name__ == '__main__':\n        hello()\n\n.. code-block:: text\n\n    $ python hello.py --count=3\n    Your name: Click\n    Hello, Click!\n    Hello, Click!\n    Hello, Click!\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Click and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, `please\ndonate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://click.palletsprojects.com/\n-   Changes: https://click.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/click/\n-   Source Code: https://github.com/pallets/click\n-   Issue Tracker: https://github.com/pallets/click/issues\n-   Chat: https://discord.gg/pallets",
-      "release_date": "2023-07-06T18:27:14",
+      "release_date": "2023-07-13T15:07:09",
       "parties": [
         {
           "type": "person",
@@ -27,11 +27,11 @@
         "Programming Language :: Python"
       ],
       "homepage_url": "https://palletsprojects.com/p/click/",
-      "download_url": "https://files.pythonhosted.org/packages/f9/a6/dc327484918f1656cc9fcebebe77efcfc0ef0d447fa925a8760ee55abe0e/click-8.1.4-py3-none-any.whl",
-      "size": 98151,
+      "download_url": "https://files.pythonhosted.org/packages/22/b3/1da4ea0efa2e5ae410a347be614162ca08bd24a84059938aa5122d1e751b/click-8.1.5-py3-none-any.whl",
+      "size": 98101,
       "sha1": null,
-      "md5": "6cffa64b850cd54c9fc1b152272431f3",
-      "sha256": "2739815aaa5d2c986a88f1e9230c55e17f0caad3d958a5e13ad0797c166db9e3",
+      "md5": "dc35b51c85d43170abe648acc63cdf8e",
+      "sha256": "e576aa487d679441d7d30abb87e1b43d24fc53bffb8758443b1a9e1cee504548",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets/click/issues/",
       "code_view_url": "https://github.com/pallets/click/",
@@ -51,20 +51,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/click/8.1.4/json",
+      "api_data_url": "https://pypi.org/pypi/click/8.1.5/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/click@8.1.4"
+      "purl": "pkg:pypi/click@8.1.5"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "click",
-      "version": "8.1.4",
+      "version": "8.1.5",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Composable command line interface toolkit\n\\$ click\\_\n==========\n\nClick is a Python package for creating beautiful command line interfaces\nin a composable way with as little code as necessary. It's the \"Command\nLine Interface Creation Kit\". It's highly configurable but comes with\nsensible defaults out of the box.\n\nIt aims to make the process of writing command line tools quick and fun\nwhile also preventing any frustration caused by the inability to\nimplement an intended CLI API.\n\nClick in three points:\n\n-   Arbitrary nesting of commands\n-   Automatic help page generation\n-   Supports lazy loading of subcommands at runtime\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    $ pip install -U click\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    import click\n\n    @click.command()\n    @click.option(\"--count\", default=1, help=\"Number of greetings.\")\n    @click.option(\"--name\", prompt=\"Your name\", help=\"The person to greet.\")\n    def hello(count, name):\n        \"\"\"Simple program that greets NAME for a total of COUNT times.\"\"\"\n        for _ in range(count):\n            click.echo(f\"Hello, {name}!\")\n\n    if __name__ == '__main__':\n        hello()\n\n.. code-block:: text\n\n    $ python hello.py --count=3\n    Your name: Click\n    Hello, Click!\n    Hello, Click!\n    Hello, Click!\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Click and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, `please\ndonate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://click.palletsprojects.com/\n-   Changes: https://click.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/click/\n-   Source Code: https://github.com/pallets/click\n-   Issue Tracker: https://github.com/pallets/click/issues\n-   Chat: https://discord.gg/pallets",
-      "release_date": "2023-07-06T18:27:16",
+      "release_date": "2023-07-13T15:07:11",
       "parties": [
         {
           "type": "person",
@@ -81,11 +81,11 @@
         "Programming Language :: Python"
       ],
       "homepage_url": "https://palletsprojects.com/p/click/",
-      "download_url": "https://files.pythonhosted.org/packages/77/88/b0cc5fe95c31c301e9823ea9b028f669c0dcfa205ff71111037a5ed4892c/click-8.1.4.tar.gz",
-      "size": 334821,
+      "download_url": "https://files.pythonhosted.org/packages/7e/ad/7a6a96fab480fb2fbf52f782b2deb3abe1d2c81eca3ef68a575b5a6a4f2e/click-8.1.5.tar.gz",
+      "size": 336199,
       "sha1": null,
-      "md5": "d19686712c4a599bc8bf1f6f3ea7947d",
-      "sha256": "b97d0c74955da062a7d4ef92fadb583806a585b2ea81958a81bd72726cbb8e37",
+      "md5": "7ca55ba4d82321d69594e3a1a4164132",
+      "sha256": "4be4b1af8d665c6d942909916d31a213a106800c47d0eeba73d34da3cbc11367",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets/click/issues/",
       "code_view_url": "https://github.com/pallets/click/",
@@ -105,9 +105,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/click/8.1.4/json",
+      "api_data_url": "https://pypi.org/pypi/click/8.1.5/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/click@8.1.4"
+      "purl": "pkg:pypi/click@8.1.5"
     },
     {
       "type": "pypi",
@@ -737,7 +737,7 @@
         {
           "key": "click",
           "package_name": "click",
-          "installed_version": "8.1.4",
+          "installed_version": "8.1.5",
           "dependencies": []
         },
         {
