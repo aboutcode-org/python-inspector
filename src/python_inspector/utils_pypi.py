@@ -1608,7 +1608,7 @@ def resolve_relative_url(package_url, url):
     Args:
         package_url (str): The base URL of the package.
         url (str): The URL to be resolved.
-        
+
     Returns:
         str: The resolved URL.
     Examples:
