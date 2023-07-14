@@ -1611,6 +1611,9 @@ def resolve_relative_url(package_url, url):
 
     Returns:
         str: The resolved URL.
+    Examples:
+        >>> resolve_relative_url("https://example.com/package", "../path/file.txt")
+        'https://example.com/path/file.txt'
     """
     if not url.startswith(("http://", "https://")):
         base_url = "/".join(package_url.split("/")[:-1])  # Extract base URL
