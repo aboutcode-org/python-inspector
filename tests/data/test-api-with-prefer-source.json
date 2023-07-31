@@ -5,12 +5,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "click",
-      "version": "8.1.5",
+      "version": "8.1.6",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Composable command line interface toolkit\n\\$ click\\_\n==========\n\nClick is a Python package for creating beautiful command line interfaces\nin a composable way with as little code as necessary. It's the \"Command\nLine Interface Creation Kit\". It's highly configurable but comes with\nsensible defaults out of the box.\n\nIt aims to make the process of writing command line tools quick and fun\nwhile also preventing any frustration caused by the inability to\nimplement an intended CLI API.\n\nClick in three points:\n\n-   Arbitrary nesting of commands\n-   Automatic help page generation\n-   Supports lazy loading of subcommands at runtime\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    $ pip install -U click\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    import click\n\n    @click.command()\n    @click.option(\"--count\", default=1, help=\"Number of greetings.\")\n    @click.option(\"--name\", prompt=\"Your name\", help=\"The person to greet.\")\n    def hello(count, name):\n        \"\"\"Simple program that greets NAME for a total of COUNT times.\"\"\"\n        for _ in range(count):\n            click.echo(f\"Hello, {name}!\")\n\n    if __name__ == '__main__':\n        hello()\n\n.. code-block:: text\n\n    $ python hello.py --count=3\n    Your name: Click\n    Hello, Click!\n    Hello, Click!\n    Hello, Click!\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Click and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, `please\ndonate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://click.palletsprojects.com/\n-   Changes: https://click.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/click/\n-   Source Code: https://github.com/pallets/click\n-   Issue Tracker: https://github.com/pallets/click/issues\n-   Chat: https://discord.gg/pallets",
-      "release_date": "2023-07-13T15:07:11",
+      "release_date": "2023-07-18T20:05:13",
       "parties": [
         {
           "type": "person",
@@ -27,11 +27,11 @@
         "Programming Language :: Python"
       ],
       "homepage_url": "https://palletsprojects.com/p/click/",
-      "download_url": "https://files.pythonhosted.org/packages/7e/ad/7a6a96fab480fb2fbf52f782b2deb3abe1d2c81eca3ef68a575b5a6a4f2e/click-8.1.5.tar.gz",
-      "size": 336199,
+      "download_url": "https://files.pythonhosted.org/packages/72/bd/fedc277e7351917b6c4e0ac751853a97af261278a4c7808babafa8ef2120/click-8.1.6.tar.gz",
+      "size": 336051,
       "sha1": null,
-      "md5": "7ca55ba4d82321d69594e3a1a4164132",
-      "sha256": "4be4b1af8d665c6d942909916d31a213a106800c47d0eeba73d34da3cbc11367",
+      "md5": "0ad74cc10856930a76b0560ccc55c162",
+      "sha256": "48ee849951919527a045bfe3bf7baa8a959c423134e1a5b98c05c20ba75a1cbd",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets/click/issues/",
       "code_view_url": "https://github.com/pallets/click/",
@@ -51,9 +51,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/click/8.1.5/json",
+      "api_data_url": "https://pypi.org/pypi/click/8.1.6/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/click@8.1.5"
+      "purl": "pkg:pypi/click@8.1.6"
     },
     {
       "type": "pypi",
@@ -367,13 +367,13 @@
   ],
   "resolution": [
     {
-      "package": "pkg:pypi/click@8.1.5",
+      "package": "pkg:pypi/click@8.1.6",
       "dependencies": []
     },
     {
       "package": "pkg:pypi/flask@2.1.2",
       "dependencies": [
-        "pkg:pypi/click@8.1.5",
+        "pkg:pypi/click@8.1.6",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
         "pkg:pypi/werkzeug@2.3.6"

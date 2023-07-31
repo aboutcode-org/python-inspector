@@ -152,12 +152,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "click",
-      "version": "8.1.5",
+      "version": "8.1.6",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Composable command line interface toolkit\n\\$ click\\_\n==========\n\nClick is a Python package for creating beautiful command line interfaces\nin a composable way with as little code as necessary. It's the \"Command\nLine Interface Creation Kit\". It's highly configurable but comes with\nsensible defaults out of the box.\n\nIt aims to make the process of writing command line tools quick and fun\nwhile also preventing any frustration caused by the inability to\nimplement an intended CLI API.\n\nClick in three points:\n\n-   Arbitrary nesting of commands\n-   Automatic help page generation\n-   Supports lazy loading of subcommands at runtime\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    $ pip install -U click\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    import click\n\n    @click.command()\n    @click.option(\"--count\", default=1, help=\"Number of greetings.\")\n    @click.option(\"--name\", prompt=\"Your name\", help=\"The person to greet.\")\n    def hello(count, name):\n        \"\"\"Simple program that greets NAME for a total of COUNT times.\"\"\"\n        for _ in range(count):\n            click.echo(f\"Hello, {name}!\")\n\n    if __name__ == '__main__':\n        hello()\n\n.. code-block:: text\n\n    $ python hello.py --count=3\n    Your name: Click\n    Hello, Click!\n    Hello, Click!\n    Hello, Click!\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Click and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, `please\ndonate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://click.palletsprojects.com/\n-   Changes: https://click.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/click/\n-   Source Code: https://github.com/pallets/click\n-   Issue Tracker: https://github.com/pallets/click/issues\n-   Chat: https://discord.gg/pallets",
-      "release_date": "2023-07-13T15:07:09",
+      "release_date": "2023-07-18T20:05:12",
       "parties": [
         {
           "type": "person",
@@ -174,11 +174,11 @@
         "Programming Language :: Python"
       ],
       "homepage_url": "https://palletsprojects.com/p/click/",
-      "download_url": "https://files.pythonhosted.org/packages/22/b3/1da4ea0efa2e5ae410a347be614162ca08bd24a84059938aa5122d1e751b/click-8.1.5-py3-none-any.whl",
-      "size": 98101,
+      "download_url": "https://files.pythonhosted.org/packages/1a/70/e63223f8116931d365993d4a6b7ef653a4d920b41d03de7c59499962821f/click-8.1.6-py3-none-any.whl",
+      "size": 97909,
       "sha1": null,
-      "md5": "dc35b51c85d43170abe648acc63cdf8e",
-      "sha256": "e576aa487d679441d7d30abb87e1b43d24fc53bffb8758443b1a9e1cee504548",
+      "md5": "043416d14751ae24c8e8b0968b6fff78",
+      "sha256": "fa244bb30b3b5ee2cae3da8f55c9e5e0c0e86093306301fb418eb9dc40fbded5",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets/click/issues/",
       "code_view_url": "https://github.com/pallets/click/",
@@ -198,20 +198,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/click/8.1.5/json",
+      "api_data_url": "https://pypi.org/pypi/click/8.1.6/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/click@8.1.5"
+      "purl": "pkg:pypi/click@8.1.6"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "click",
-      "version": "8.1.5",
+      "version": "8.1.6",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Composable command line interface toolkit\n\\$ click\\_\n==========\n\nClick is a Python package for creating beautiful command line interfaces\nin a composable way with as little code as necessary. It's the \"Command\nLine Interface Creation Kit\". It's highly configurable but comes with\nsensible defaults out of the box.\n\nIt aims to make the process of writing command line tools quick and fun\nwhile also preventing any frustration caused by the inability to\nimplement an intended CLI API.\n\nClick in three points:\n\n-   Arbitrary nesting of commands\n-   Automatic help page generation\n-   Supports lazy loading of subcommands at runtime\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    $ pip install -U click\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    import click\n\n    @click.command()\n    @click.option(\"--count\", default=1, help=\"Number of greetings.\")\n    @click.option(\"--name\", prompt=\"Your name\", help=\"The person to greet.\")\n    def hello(count, name):\n        \"\"\"Simple program that greets NAME for a total of COUNT times.\"\"\"\n        for _ in range(count):\n            click.echo(f\"Hello, {name}!\")\n\n    if __name__ == '__main__':\n        hello()\n\n.. code-block:: text\n\n    $ python hello.py --count=3\n    Your name: Click\n    Hello, Click!\n    Hello, Click!\n    Hello, Click!\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Click and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, `please\ndonate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://click.palletsprojects.com/\n-   Changes: https://click.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/click/\n-   Source Code: https://github.com/pallets/click\n-   Issue Tracker: https://github.com/pallets/click/issues\n-   Chat: https://discord.gg/pallets",
-      "release_date": "2023-07-13T15:07:11",
+      "release_date": "2023-07-18T20:05:13",
       "parties": [
         {
           "type": "person",
@@ -228,11 +228,11 @@
         "Programming Language :: Python"
       ],
       "homepage_url": "https://palletsprojects.com/p/click/",
-      "download_url": "https://files.pythonhosted.org/packages/7e/ad/7a6a96fab480fb2fbf52f782b2deb3abe1d2c81eca3ef68a575b5a6a4f2e/click-8.1.5.tar.gz",
-      "size": 336199,
+      "download_url": "https://files.pythonhosted.org/packages/72/bd/fedc277e7351917b6c4e0ac751853a97af261278a4c7808babafa8ef2120/click-8.1.6.tar.gz",
+      "size": 336051,
       "sha1": null,
-      "md5": "7ca55ba4d82321d69594e3a1a4164132",
-      "sha256": "4be4b1af8d665c6d942909916d31a213a106800c47d0eeba73d34da3cbc11367",
+      "md5": "0ad74cc10856930a76b0560ccc55c162",
+      "sha256": "48ee849951919527a045bfe3bf7baa8a959c423134e1a5b98c05c20ba75a1cbd",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets/click/issues/",
       "code_view_url": "https://github.com/pallets/click/",
@@ -252,9 +252,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/click/8.1.5/json",
+      "api_data_url": "https://pypi.org/pypi/click/8.1.6/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/click@8.1.5"
+      "purl": "pkg:pypi/click@8.1.6"
     },
     {
       "type": "pypi",
@@ -984,12 +984,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "zipp",
-      "version": "3.16.1",
+      "version": "3.16.2",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Backport of pathlib-compatible object wrapper for zip files\n.. image:: https://img.shields.io/pypi/v/zipp.svg\n   :target: https://pypi.org/project/zipp\n\n.. image:: https://img.shields.io/pypi/pyversions/zipp.svg\n\n.. image:: https://github.com/jaraco/zipp/workflows/tests/badge.svg\n   :target: https://github.com/jaraco/zipp/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json\n    :target: https://github.com/astral-sh/ruff\n    :alt: Ruff\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. .. image:: https://readthedocs.org/projects/PROJECT_RTD/badge/?version=latest\n..    :target: https://PROJECT_RTD.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2023-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/zipp\n   :target: https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=readme\n\n\nA pathlib-compatible Zipfile object wrapper. Official backport of the standard library\n`Path object <https://docs.python.org/3.8/library/zipfile.html#path-objects>`_.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - zipp\n     - stdlib\n   * - 3.15\n     - 3.12\n   * - 3.5\n     - 3.11\n   * - 3.2\n     - 3.10\n   * - 3.3 ??\n     - 3.9\n   * - 1.0\n     - 3.8\n\n\nUsage\n=====\n\nUse ``zipp.Path`` in place of ``zipfile.Path`` on any Python.\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=referral&utm_campaign=github>`_.",
-      "release_date": "2023-07-13T03:24:02",
+      "release_date": "2023-07-14T19:23:31",
       "parties": [
         {
           "type": "person",
@@ -1006,11 +1006,11 @@
         "Programming Language :: Python :: 3 :: Only"
       ],
       "homepage_url": "https://github.com/jaraco/zipp",
-      "download_url": "https://files.pythonhosted.org/packages/a1/3b/385e3b43200af0b9a13d03c234efbd9d40c6d73ab63fde1c097a2daacdea/zipp-3.16.1-py3-none-any.whl",
-      "size": 7226,
+      "download_url": "https://files.pythonhosted.org/packages/8c/08/d3006317aefe25ea79d3b76c9650afabaf6d63d1c8443b236e7405447503/zipp-3.16.2-py3-none-any.whl",
+      "size": 7203,
       "sha1": null,
-      "md5": "f67ff330cc4e1bc7ace1fc61256e724d",
-      "sha256": "0b37c326d826d5ca35f2b9685cd750292740774ef16190008b00a0227c256fe0",
+      "md5": "4145fd62be41c39ea8d127e63b171f72",
+      "sha256": "679e51dd4403591b2d6838a48de3d283f3d188412a9782faadf845f298736ba0",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -1029,20 +1029,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/zipp/3.16.1/json",
+      "api_data_url": "https://pypi.org/pypi/zipp/3.16.2/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/zipp@3.16.1"
+      "purl": "pkg:pypi/zipp@3.16.2"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "zipp",
-      "version": "3.16.1",
+      "version": "3.16.2",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Backport of pathlib-compatible object wrapper for zip files\n.. image:: https://img.shields.io/pypi/v/zipp.svg\n   :target: https://pypi.org/project/zipp\n\n.. image:: https://img.shields.io/pypi/pyversions/zipp.svg\n\n.. image:: https://github.com/jaraco/zipp/workflows/tests/badge.svg\n   :target: https://github.com/jaraco/zipp/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json\n    :target: https://github.com/astral-sh/ruff\n    :alt: Ruff\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. .. image:: https://readthedocs.org/projects/PROJECT_RTD/badge/?version=latest\n..    :target: https://PROJECT_RTD.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2023-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/zipp\n   :target: https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=readme\n\n\nA pathlib-compatible Zipfile object wrapper. Official backport of the standard library\n`Path object <https://docs.python.org/3.8/library/zipfile.html#path-objects>`_.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - zipp\n     - stdlib\n   * - 3.15\n     - 3.12\n   * - 3.5\n     - 3.11\n   * - 3.2\n     - 3.10\n   * - 3.3 ??\n     - 3.9\n   * - 1.0\n     - 3.8\n\n\nUsage\n=====\n\nUse ``zipp.Path`` in place of ``zipfile.Path`` on any Python.\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=referral&utm_campaign=github>`_.",
-      "release_date": "2023-07-13T03:24:04",
+      "release_date": "2023-07-14T19:23:33",
       "parties": [
         {
           "type": "person",
@@ -1059,11 +1059,11 @@
         "Programming Language :: Python :: 3 :: Only"
       ],
       "homepage_url": "https://github.com/jaraco/zipp",
-      "download_url": "https://files.pythonhosted.org/packages/ef/76/5a9e1553f00ee55a6de6b3c176aa4c859c7f64b9bbdc48804df174dee890/zipp-3.16.1.tar.gz",
-      "size": 19194,
+      "download_url": "https://files.pythonhosted.org/packages/e2/45/f3b987ad5bf9e08095c1ebe6352238be36f25dd106fde424a160061dce6d/zipp-3.16.2.tar.gz",
+      "size": 20002,
       "sha1": null,
-      "md5": "908ece012cb207f6b1b65db4f227f617",
-      "sha256": "857b158da2cbf427b376da1c24fd11faecbac5a4ac7523c3607f8a01f94c2ec0",
+      "md5": "f5c13dccedc282cbe50aae5983de7fe4",
+      "sha256": "ebc15946aa78bd63458992fc81ec3b6f7b1e92d51c35e6de1c3804e73b799147",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -1082,9 +1082,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/zipp/3.16.1/json",
+      "api_data_url": "https://pypi.org/pypi/zipp/3.16.2/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/zipp@3.16.1"
+      "purl": "pkg:pypi/zipp@3.16.2"
     }
   ],
   "resolved_dependencies_graph": [
@@ -1093,14 +1093,14 @@
       "dependencies": []
     },
     {
-      "package": "pkg:pypi/click@8.1.5",
+      "package": "pkg:pypi/click@8.1.6",
       "dependencies": []
     },
     {
       "package": "pkg:pypi/flask@2.3.2",
       "dependencies": [
         "pkg:pypi/blinker@1.6.2",
-        "pkg:pypi/click@8.1.5",
+        "pkg:pypi/click@8.1.6",
         "pkg:pypi/importlib-metadata@6.8.0",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
@@ -1110,7 +1110,7 @@
     {
       "package": "pkg:pypi/importlib-metadata@6.8.0",
       "dependencies": [
-        "pkg:pypi/zipp@3.16.1"
+        "pkg:pypi/zipp@3.16.2"
       ]
     },
     {
@@ -1134,7 +1134,7 @@
       ]
     },
     {
-      "package": "pkg:pypi/zipp@3.16.1",
+      "package": "pkg:pypi/zipp@3.16.2",
       "dependencies": []
     }
   ]
