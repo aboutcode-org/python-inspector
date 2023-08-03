@@ -59,12 +59,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "semver",
-      "version": "3.0.0",
+      "version": "3.0.1",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Python helper for Semantic Versioning (https://semver.org)\nQuickstart\n==========\n\n.. teaser-begin\n\nA Python module for `semantic versioning`_. Simplifies comparing versions.\n\n|GHAction| |python-support| |downloads| |license| |docs| |black|\n|openissues| |GHDiscussion|\n\n.. teaser-end\n\n.. note::\n\n   This project works for Python 3.7 and greater only. If you are\n   looking for a compatible version for Python 2, use the\n   maintenance branch |MAINT|_.\n\n   The last version of semver which supports Python 2.7 to 3.5 will be\n   2.x.y However, keep in mind, the major 2 release is frozen: no new\n   features nor backports will be integrated.\n\n   We recommend to upgrade your workflow to Python 3 to gain support,\n   bugfixes, and new features.\n\n.. |MAINT| replace:: ``maint/v2``\n.. _MAINT: https://github.com/python-semver/python-semver/tree/maint/v2\n\n\nThe module follows the ``MAJOR.MINOR.PATCH`` style:\n\n* ``MAJOR`` version when you make incompatible API changes,\n* ``MINOR`` version when you add functionality in a backwards compatible manner, and\n* ``PATCH`` version when you make backwards compatible bug fixes.\n\nAdditional labels for pre-release and build metadata are supported.\n\nTo import this library, use:\n\n.. code-block:: python\n\n    >>> import semver\n\nWorking with the library is quite straightforward. To turn a version string into the\ndifferent parts, use the ``semver.Version.parse`` function:\n\n.. code-block:: python\n\n    >>> ver = semver.Version.parse('1.2.3-pre.2+build.4')\n    >>> ver.major\n    1\n    >>> ver.minor\n    2\n    >>> ver.patch\n    3\n    >>> ver.prerelease\n    'pre.2'\n    >>> ver.build\n    'build.4'\n\nTo raise parts of a version, there are a couple of functions available for\nyou. The function ``semver.Version.bump_major`` leaves the original object untouched, but\nreturns a new ``semver.Version`` instance with the raised major part:\n\n.. code-block:: python\n\n    >>> ver = semver.Version.parse(\"3.4.5\")\n    >>> ver.bump_major()\n    Version(major=4, minor=0, patch=0, prerelease=None, build=None)\n\nIt is allowed to concatenate different \"bump functions\":\n\n.. code-block:: python\n\n    >>> ver.bump_major().bump_minor()\n    Version(major=4, minor=1, patch=0, prerelease=None, build=None)\n\nTo compare two versions, semver provides the ``semver.compare`` function.\nThe return value indicates the relationship between the first and second\nversion:\n\n.. code-block:: python\n\n    >>> semver.compare(\"1.0.0\", \"2.0.0\")\n    -1\n    >>> semver.compare(\"2.0.0\", \"1.0.0\")\n    1\n    >>> semver.compare(\"2.0.0\", \"2.0.0\")\n    0\n\n\nThere are other functions to discover. Read on!\n\n\n.. |latest-version| image:: https://img.shields.io/pypi/v/semver.svg\n   :alt: Latest version on PyPI\n   :target: https://pypi.org/project/semver\n.. |python-support| image:: https://img.shields.io/pypi/pyversions/semver.svg\n   :target: https://pypi.org/project/semver\n   :alt: Python versions\n.. |downloads| image:: https://img.shields.io/pypi/dm/semver.svg\n   :alt: Monthly downloads from PyPI\n   :target: https://pypi.org/project/semver\n.. |license| image:: https://img.shields.io/pypi/l/semver.svg\n   :alt: Software license\n   :target: https://github.com/python-semver/python-semver/blob/master/LICENSE.txt\n.. |docs| image:: https://readthedocs.org/projects/python-semver/badge/?version=latest\n   :target: http://python-semver.readthedocs.io/en/latest/?badge=latest\n   :alt: Documentation Status\n.. _semantic versioning: https://semver.org/\n.. |black| image:: https://img.shields.io/badge/code%20style-black-000000.svg\n    :target: https://github.com/psf/black\n    :alt: Black Formatter\n.. |Gitter| image:: https://badges.gitter.im/python-semver/community.svg\n    :target: https://gitter.im/python-semver/community\n    :alt: Gitter\n.. |openissues| image:: http://isitmaintained.com/badge/open/python-semver/python-semver.svg\n    :target: http://isitmaintained.com/project/python-semver/python-semver\n    :alt: Percentage of open issues\n.. |GHAction| image:: https://github.com/python-semver/python-semver/workflows/Python/badge.svg\n    :alt: Python\n.. |GHDiscussion| image:: https://shields.io/badge/GitHub-%20Discussions-green?logo=github\n    :target: https://github.com/python-semver/python-semver/discussions\n    :alt: GitHub Discussion",
-      "release_date": "2023-04-02T13:20:12",
+      "release_date": "2023-06-14T11:43:22",
       "parties": [
         {
           "type": "person",
@@ -96,11 +96,11 @@
         "Topic :: Software Development :: Libraries :: Python Modules"
       ],
       "homepage_url": "https://github.com/python-semver/python-semver",
-      "download_url": "https://files.pythonhosted.org/packages/9f/93/b7389cdd7e573e70cfbeb4b0bbe101af1050a6681342f5d2bc6f1bf2d150/semver-3.0.0.tar.gz",
-      "size": 204359,
+      "download_url": "https://files.pythonhosted.org/packages/46/30/a14b56e500e8eabf8c349edd0583d736b231e652b7dce776e85df11e9e0b/semver-3.0.1.tar.gz",
+      "size": 205762,
       "sha1": null,
-      "md5": "0d36e4e2b2c4366f2b4b5c53b2abe3c0",
-      "sha256": "94df43924c4521ec7d307fc86da1531db6c2c33d9d5cdc3e64cca0eb68569269",
+      "md5": "b7502c12ce325ffffeab694fed52f6f5",
+      "sha256": "9ec78c5447883c67b97f98c3b6212796708191d22e4ad30f4570f840171cbce1",
       "sha512": null,
       "bug_tracking_url": "https://github.com/python-semver/python-semver/issues",
       "code_view_url": null,
@@ -120,14 +120,14 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/semver/3.0.0/json",
+      "api_data_url": "https://pypi.org/pypi/semver/3.0.1/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/semver@3.0.0"
+      "purl": "pkg:pypi/semver@3.0.1"
     }
   ],
   "resolution": [
     {
-      "package": "pkg:pypi/semver@3.0.0",
+      "package": "pkg:pypi/semver@3.0.1",
       "dependencies": []
     }
   ]

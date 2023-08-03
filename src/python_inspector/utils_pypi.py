@@ -20,6 +20,8 @@ from collections import defaultdict
 from typing import List
 from typing import NamedTuple
 from urllib.parse import quote_plus
+from urllib.parse import urlparse
+from urllib.parse import urlunparse
 
 import attr
 import packageurl
@@ -949,7 +951,6 @@ def get_sdist_name_ver_ext(filename):
 
 @attr.attributes
 class Sdist(Distribution):
-
     extension = attr.ib(
         repr=False,
         type=str,
@@ -1595,9 +1596,35 @@ class PypiSimpleRepository:
             url, _, _sha256 = anchor_tag["href"].partition("#sha256=")
             if "data-requires-python" in anchor_tag.attrs:
                 python_requires = anchor_tag.attrs["data-requires-python"]
+            # Resolve relative URL
+            url = resolve_relative_url(package_url, url)
             links.append(Link(url=url, python_requires=python_requires))
         # TODO: keep sha256
         return links
+
+
+def resolve_relative_url(package_url, url):
+    """
+    Return the resolved `url` URLstring given a `package_url` base URL string
+    of a package.
+
+    For example:
+    >>> resolve_relative_url("https://example.com/package", "../path/file.txt")
+    'https://example.com/path/file.txt'
+    """
+    if not url.startswith(("http://", "https://")):
+        base_url_parts = urlparse(package_url)
+        url_parts = urlparse(url)
+        # If the relative URL starts with '..', remove the last directory from the base URL
+        if url_parts.path.startswith(".."):
+            path = base_url_parts.path.rstrip("/").rsplit("/", 1)[0] + url_parts.path[2:]
+        else:
+            path = urlunparse(
+                ("", "", url_parts.path, url_parts.params, url_parts.query, url_parts.fragment)
+            )
+        resolved_url_parts = base_url_parts._replace(path=path)
+        url = urlunparse(resolved_url_parts)
+    return url
 
 
 PYPI_PUBLIC_REPO = PypiSimpleRepository(index_url=PYPI_SIMPLE_URL)
