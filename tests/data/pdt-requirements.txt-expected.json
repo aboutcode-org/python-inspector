@@ -2,9 +2,9 @@
   "headers": {
     "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
-    "tool_version": "0.9.7",
+    "tool_version": "0.9.8",
     "options": [
-      "--requirement /home/tg1999/Desktop/python-inspector-1/tests/data/pdt-requirements.txt",
+      "--requirement /home/tg1999/Desktop/example/tools/python-inspector/tests/data/pdt-requirements.txt",
       "--index-url https://pypi.org/simple",
       "--python-version 38",
       "--operating-system linux",
@@ -17,7 +17,7 @@
   "files": [
     {
       "type": "file",
-      "path": "/home/tg1999/Desktop/python-inspector-1/tests/data/pdt-requirements.txt",
+      "path": "/home/tg1999/Desktop/example/tools/python-inspector/tests/data/pdt-requirements.txt",
       "package_data": [
         {
           "type": "pypi",

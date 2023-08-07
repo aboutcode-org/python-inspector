@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v0.9.8
+-------------
+
+- Add the ability to handle relative links.
+
 
 v0.9.7
 -------------

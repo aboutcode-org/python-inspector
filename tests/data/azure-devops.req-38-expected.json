@@ -2,9 +2,9 @@
   "headers": {
     "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
-    "tool_version": "0.9.7",
+    "tool_version": "0.9.8",
     "options": [
-      "--requirement /Users/mathioud/repos/python-inspector/tests/data/azure-devops.req.txt",
+      "--requirement /home/tg1999/Desktop/example/tools/python-inspector/tests/data/azure-devops.req.txt",
       "--index-url https://pypi.org/simple",
       "--python-version 38",
       "--operating-system linux",
@@ -17,7 +17,7 @@
   "files": [
     {
       "type": "file",
-      "path": "/Users/mathioud/repos/python-inspector/tests/data/azure-devops.req.txt",
+      "path": "/home/tg1999/Desktop/example/tools/python-inspector/tests/data/azure-devops.req.txt",
       "package_data": [
         {
           "type": "pypi",
@@ -997,12 +997,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "cryptography",
-      "version": "41.0.2",
+      "version": "41.0.3",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "cryptography is a package which provides cryptographic recipes and primitives to Python developers.\npyca/cryptography\n=================\n\n.. image:: https://img.shields.io/pypi/v/cryptography.svg\n    :target: https://pypi.org/project/cryptography/\n    :alt: Latest Version\n\n.. image:: https://readthedocs.org/projects/cryptography/badge/?version=latest\n    :target: https://cryptography.io\n    :alt: Latest Docs\n\n.. image:: https://github.com/pyca/cryptography/workflows/CI/badge.svg?branch=main\n    :target: https://github.com/pyca/cryptography/actions?query=workflow%3ACI+branch%3Amain\n\n\n``cryptography`` is a package which provides cryptographic recipes and\nprimitives to Python developers. Our goal is for it to be your \"cryptographic\nstandard library\". It supports Python 3.7+ and PyPy3 7.3.10+.\n\n``cryptography`` includes both high level recipes and low level interfaces to\ncommon cryptographic algorithms such as symmetric ciphers, message digests, and\nkey derivation functions. For example, to encrypt something with\n``cryptography``'s high level symmetric encryption recipe:\n\n.. code-block:: pycon\n\n    >>> from cryptography.fernet import Fernet\n    >>> # Put this somewhere safe!\n    >>> key = Fernet.generate_key()\n    >>> f = Fernet(key)\n    >>> token = f.encrypt(b\"A really secret message. Not for prying eyes.\")\n    >>> token\n    b'...'\n    >>> f.decrypt(token)\n    b'A really secret message. Not for prying eyes.'\n\nYou can find more information in the `documentation`_.\n\nYou can install ``cryptography`` with:\n\n.. code-block:: console\n\n    $ pip install cryptography\n\nFor full details see `the installation documentation`_.\n\nDiscussion\n~~~~~~~~~~\n\nIf you run into bugs, you can file them in our `issue tracker`_.\n\nWe maintain a `cryptography-dev`_ mailing list for development discussion.\n\nYou can also join ``#pyca`` on ``irc.libera.chat`` to ask questions or get\ninvolved.\n\nSecurity\n~~~~~~~~\n\nNeed to report a security issue? Please consult our `security reporting`_\ndocumentation.\n\n\n.. _`documentation`: https://cryptography.io/\n.. _`the installation documentation`: https://cryptography.io/en/latest/installation/\n.. _`issue tracker`: https://github.com/pyca/cryptography/issues\n.. _`cryptography-dev`: https://mail.python.org/mailman/listinfo/cryptography-dev\n.. _`security reporting`: https://cryptography.io/en/latest/security/",
-      "release_date": "2023-07-11T03:25:42",
+      "release_date": "2023-08-01T20:35:42",
       "parties": [
         {
           "type": "person",
@@ -1034,11 +1034,11 @@
         "Topic :: Security :: Cryptography"
       ],
       "homepage_url": "",
-      "download_url": "https://files.pythonhosted.org/packages/fe/ee/aa40ae0f8cfb5988736b3a93adba13421dbfe318211d48a2da138a3a346e/cryptography-41.0.2-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
-      "size": 4291427,
+      "download_url": "https://files.pythonhosted.org/packages/21/74/a7ebb5bcf733b1626e4778941e505792d7f655e799ff3bdbd9a176516ee2/cryptography-41.0.3-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "size": 4308894,
       "sha1": null,
-      "md5": "384e52a9ea431783150b79764a700971",
-      "sha256": "f14ad275364c8b4e525d018f6716537ae7b6d369c094805cae45300847e0894f",
+      "md5": "c7fce3b285651310e92cfe5a6e299898",
+      "sha256": "84537453d57f55a50a5b6835622ee405816999a7113267739a1b4581f83535bd",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -1059,20 +1059,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/cryptography/41.0.2/json",
+      "api_data_url": "https://pypi.org/pypi/cryptography/41.0.3/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/cryptography@41.0.2"
+      "purl": "pkg:pypi/cryptography@41.0.3"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "cryptography",
-      "version": "41.0.2",
+      "version": "41.0.3",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "cryptography is a package which provides cryptographic recipes and primitives to Python developers.\npyca/cryptography\n=================\n\n.. image:: https://img.shields.io/pypi/v/cryptography.svg\n    :target: https://pypi.org/project/cryptography/\n    :alt: Latest Version\n\n.. image:: https://readthedocs.org/projects/cryptography/badge/?version=latest\n    :target: https://cryptography.io\n    :alt: Latest Docs\n\n.. image:: https://github.com/pyca/cryptography/workflows/CI/badge.svg?branch=main\n    :target: https://github.com/pyca/cryptography/actions?query=workflow%3ACI+branch%3Amain\n\n\n``cryptography`` is a package which provides cryptographic recipes and\nprimitives to Python developers. Our goal is for it to be your \"cryptographic\nstandard library\". It supports Python 3.7+ and PyPy3 7.3.10+.\n\n``cryptography`` includes both high level recipes and low level interfaces to\ncommon cryptographic algorithms such as symmetric ciphers, message digests, and\nkey derivation functions. For example, to encrypt something with\n``cryptography``'s high level symmetric encryption recipe:\n\n.. code-block:: pycon\n\n    >>> from cryptography.fernet import Fernet\n    >>> # Put this somewhere safe!\n    >>> key = Fernet.generate_key()\n    >>> f = Fernet(key)\n    >>> token = f.encrypt(b\"A really secret message. Not for prying eyes.\")\n    >>> token\n    b'...'\n    >>> f.decrypt(token)\n    b'A really secret message. Not for prying eyes.'\n\nYou can find more information in the `documentation`_.\n\nYou can install ``cryptography`` with:\n\n.. code-block:: console\n\n    $ pip install cryptography\n\nFor full details see `the installation documentation`_.\n\nDiscussion\n~~~~~~~~~~\n\nIf you run into bugs, you can file them in our `issue tracker`_.\n\nWe maintain a `cryptography-dev`_ mailing list for development discussion.\n\nYou can also join ``#pyca`` on ``irc.libera.chat`` to ask questions or get\ninvolved.\n\nSecurity\n~~~~~~~~\n\nNeed to report a security issue? Please consult our `security reporting`_\ndocumentation.\n\n\n.. _`documentation`: https://cryptography.io/\n.. _`the installation documentation`: https://cryptography.io/en/latest/installation/\n.. _`issue tracker`: https://github.com/pyca/cryptography/issues\n.. _`cryptography-dev`: https://mail.python.org/mailman/listinfo/cryptography-dev\n.. _`security reporting`: https://cryptography.io/en/latest/security/",
-      "release_date": "2023-07-11T03:26:24",
+      "release_date": "2023-08-01T20:36:22",
       "parties": [
         {
           "type": "person",
@@ -1104,11 +1104,11 @@
         "Topic :: Security :: Cryptography"
       ],
       "homepage_url": "",
-      "download_url": "https://files.pythonhosted.org/packages/93/b7/b6b3420a2f027c1067f712eb3aea8653f8ca7490f183f9917879c447139b/cryptography-41.0.2.tar.gz",
-      "size": 630080,
+      "download_url": "https://files.pythonhosted.org/packages/8e/5d/2bf54672898375d081cb24b30baeb7793568ae5d958ef781349e9635d1c8/cryptography-41.0.3.tar.gz",
+      "size": 630139,
       "sha1": null,
-      "md5": "218dde9757c27459271235acd993b49c",
-      "sha256": "7d230bf856164de164ecb615ccc14c7fc6de6906ddd5b491f3af90d3514c925c",
+      "md5": "fbf930acd8de95780604c40c4e817a74",
+      "sha256": "6d192741113ef5e30d89dcb5b956ef4e1578f304708701b8b73d38e3e1461f34",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -1129,9 +1129,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/cryptography/41.0.2/json",
+      "api_data_url": "https://pypi.org/pypi/cryptography/41.0.3/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/cryptography@41.0.2"
+      "purl": "pkg:pypi/cryptography@41.0.3"
     },
     {
       "type": "pypi",
@@ -2497,7 +2497,7 @@
       "package": "pkg:pypi/azure-storage-blob@12.17.0",
       "dependencies": [
         "pkg:pypi/azure-core@1.28.0",
-        "pkg:pypi/cryptography@41.0.2",
+        "pkg:pypi/cryptography@41.0.3",
         "pkg:pypi/isodate@0.6.1",
         "pkg:pypi/typing-extensions@4.7.1"
       ]
@@ -2521,7 +2521,7 @@
       "dependencies": []
     },
     {
-      "package": "pkg:pypi/cryptography@41.0.2",
+      "package": "pkg:pypi/cryptography@41.0.3",
       "dependencies": [
         "pkg:pypi/cffi@1.15.1"
       ]
