@@ -20,6 +20,7 @@ from collections import defaultdict
 from typing import List
 from typing import NamedTuple
 from urllib.parse import quote_plus
+from urllib.parse import unquote
 from urllib.parse import urlparse
 from urllib.parse import urlunparse
 
@@ -700,7 +701,7 @@ class Distribution(NameVer):
         Return a distribution built from the data found in a `filename` string.
         Raise an exception if this is not a valid filename
         """
-        filename = os.path.basename(filename.strip("/"))
+        filename = unquote(os.path.basename(filename.strip("/")))
         clazz = cls.get_dist_class(filename)
         return clazz.from_filename(filename)
 
