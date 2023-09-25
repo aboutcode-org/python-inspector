@@ -45,12 +45,12 @@ def test_get_resolved_dependencies_with_flask_and_python_310():
         as_tree=False,
     )
     assert plist == [
-        "pkg:pypi/click@8.1.6",
+        "pkg:pypi/click@8.1.7",
         "pkg:pypi/flask@2.1.2",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
         "pkg:pypi/markupsafe@2.1.3",
-        "pkg:pypi/werkzeug@2.3.6",
+        "pkg:pypi/werkzeug@2.3.7",
     ]
 
 
@@ -68,13 +68,13 @@ def test_get_resolved_dependencies_with_flask_and_python_310_windows():
         as_tree=False,
     )
     assert plist == [
-        "pkg:pypi/click@8.1.6",
+        "pkg:pypi/click@8.1.7",
         "pkg:pypi/colorama@0.4.6",
         "pkg:pypi/flask@2.1.2",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
         "pkg:pypi/markupsafe@2.1.3",
-        "pkg:pypi/werkzeug@2.3.6",
+        "pkg:pypi/werkzeug@2.3.7",
     ]
 
 
@@ -119,14 +119,14 @@ def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
         ),
     )
     assert plist == [
-        "pkg:pypi/click@8.1.6",
+        "pkg:pypi/click@8.1.7",
         "pkg:pypi/flask@2.1.3",
         "pkg:pypi/importlib-metadata@6.8.0",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
         "pkg:pypi/markupsafe@2.1.3",
-        "pkg:pypi/werkzeug@2.3.6",
-        "pkg:pypi/zipp@3.16.2",
+        "pkg:pypi/werkzeug@2.3.7",
+        "pkg:pypi/zipp@3.17.0",
     ]
 
 
@@ -147,11 +147,11 @@ def test_without_supported_wheels():
     assert plist == [
         "pkg:pypi/autobahn@22.3.2",
         "pkg:pypi/cffi@1.15.1",
-        "pkg:pypi/cryptography@41.0.3",
+        "pkg:pypi/cryptography@41.0.4",
         "pkg:pypi/hyperlink@21.0.0",
         "pkg:pypi/idna@3.4",
         "pkg:pypi/pycparser@2.21",
-        "pkg:pypi/setuptools@68.0.0",
+        "pkg:pypi/setuptools@68.2.2",
         "pkg:pypi/txaio@23.1.1",
     ]
 

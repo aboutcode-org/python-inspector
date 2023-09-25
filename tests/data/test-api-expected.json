@@ -5,12 +5,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "click",
-      "version": "8.1.6",
+      "version": "8.1.7",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Composable command line interface toolkit\n\\$ click\\_\n==========\n\nClick is a Python package for creating beautiful command line interfaces\nin a composable way with as little code as necessary. It's the \"Command\nLine Interface Creation Kit\". It's highly configurable but comes with\nsensible defaults out of the box.\n\nIt aims to make the process of writing command line tools quick and fun\nwhile also preventing any frustration caused by the inability to\nimplement an intended CLI API.\n\nClick in three points:\n\n-   Arbitrary nesting of commands\n-   Automatic help page generation\n-   Supports lazy loading of subcommands at runtime\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    $ pip install -U click\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    import click\n\n    @click.command()\n    @click.option(\"--count\", default=1, help=\"Number of greetings.\")\n    @click.option(\"--name\", prompt=\"Your name\", help=\"The person to greet.\")\n    def hello(count, name):\n        \"\"\"Simple program that greets NAME for a total of COUNT times.\"\"\"\n        for _ in range(count):\n            click.echo(f\"Hello, {name}!\")\n\n    if __name__ == '__main__':\n        hello()\n\n.. code-block:: text\n\n    $ python hello.py --count=3\n    Your name: Click\n    Hello, Click!\n    Hello, Click!\n    Hello, Click!\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Click and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, `please\ndonate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://click.palletsprojects.com/\n-   Changes: https://click.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/click/\n-   Source Code: https://github.com/pallets/click\n-   Issue Tracker: https://github.com/pallets/click/issues\n-   Chat: https://discord.gg/pallets",
-      "release_date": "2023-07-18T20:05:12",
+      "release_date": "2023-08-17T17:29:10",
       "parties": [
         {
           "type": "person",
@@ -27,11 +27,11 @@
         "Programming Language :: Python"
       ],
       "homepage_url": "https://palletsprojects.com/p/click/",
-      "download_url": "https://files.pythonhosted.org/packages/1a/70/e63223f8116931d365993d4a6b7ef653a4d920b41d03de7c59499962821f/click-8.1.6-py3-none-any.whl",
-      "size": 97909,
+      "download_url": "https://files.pythonhosted.org/packages/00/2e/d53fa4befbf2cfa713304affc7ca780ce4fc1fd8710527771b58311a3229/click-8.1.7-py3-none-any.whl",
+      "size": 97941,
       "sha1": null,
-      "md5": "043416d14751ae24c8e8b0968b6fff78",
-      "sha256": "fa244bb30b3b5ee2cae3da8f55c9e5e0c0e86093306301fb418eb9dc40fbded5",
+      "md5": "37a41134cc8a13400234746942d5d180",
+      "sha256": "ae74fb96c20a0277a1d615f1e4d73c8414f5a98db8b799a7931d1582f3390c28",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets/click/issues/",
       "code_view_url": "https://github.com/pallets/click/",
@@ -51,20 +51,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/click/8.1.6/json",
+      "api_data_url": "https://pypi.org/pypi/click/8.1.7/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/click@8.1.6"
+      "purl": "pkg:pypi/click@8.1.7"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "click",
-      "version": "8.1.6",
+      "version": "8.1.7",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Composable command line interface toolkit\n\\$ click\\_\n==========\n\nClick is a Python package for creating beautiful command line interfaces\nin a composable way with as little code as necessary. It's the \"Command\nLine Interface Creation Kit\". It's highly configurable but comes with\nsensible defaults out of the box.\n\nIt aims to make the process of writing command line tools quick and fun\nwhile also preventing any frustration caused by the inability to\nimplement an intended CLI API.\n\nClick in three points:\n\n-   Arbitrary nesting of commands\n-   Automatic help page generation\n-   Supports lazy loading of subcommands at runtime\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    $ pip install -U click\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    import click\n\n    @click.command()\n    @click.option(\"--count\", default=1, help=\"Number of greetings.\")\n    @click.option(\"--name\", prompt=\"Your name\", help=\"The person to greet.\")\n    def hello(count, name):\n        \"\"\"Simple program that greets NAME for a total of COUNT times.\"\"\"\n        for _ in range(count):\n            click.echo(f\"Hello, {name}!\")\n\n    if __name__ == '__main__':\n        hello()\n\n.. code-block:: text\n\n    $ python hello.py --count=3\n    Your name: Click\n    Hello, Click!\n    Hello, Click!\n    Hello, Click!\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Click and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, `please\ndonate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://click.palletsprojects.com/\n-   Changes: https://click.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/click/\n-   Source Code: https://github.com/pallets/click\n-   Issue Tracker: https://github.com/pallets/click/issues\n-   Chat: https://discord.gg/pallets",
-      "release_date": "2023-07-18T20:05:13",
+      "release_date": "2023-08-17T17:29:11",
       "parties": [
         {
           "type": "person",
@@ -81,11 +81,11 @@
         "Programming Language :: Python"
       ],
       "homepage_url": "https://palletsprojects.com/p/click/",
-      "download_url": "https://files.pythonhosted.org/packages/72/bd/fedc277e7351917b6c4e0ac751853a97af261278a4c7808babafa8ef2120/click-8.1.6.tar.gz",
-      "size": 336051,
+      "download_url": "https://files.pythonhosted.org/packages/96/d3/f04c7bfcf5c1862a2a5b845c6b2b360488cf47af55dfa79c98f6a6bf98b5/click-8.1.7.tar.gz",
+      "size": 336121,
       "sha1": null,
-      "md5": "0ad74cc10856930a76b0560ccc55c162",
-      "sha256": "48ee849951919527a045bfe3bf7baa8a959c423134e1a5b98c05c20ba75a1cbd",
+      "md5": "7c3b52c56fd30699f453a7dc7b42cecb",
+      "sha256": "ca9853ad459e787e2192211578cc907e7594e294c7ccc834310722b41b9ca6de",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets/click/issues/",
       "code_view_url": "https://github.com/pallets/click/",
@@ -105,9 +105,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/click/8.1.6/json",
+      "api_data_url": "https://pypi.org/pypi/click/8.1.7/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/click@8.1.6"
+      "purl": "pkg:pypi/click@8.1.7"
     },
     {
       "type": "pypi",
@@ -611,12 +611,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "werkzeug",
-      "version": "2.3.6",
+      "version": "2.3.7",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "The comprehensive WSGI web application library.\nWerkzeug\n========\n\n*werkzeug* German noun: \"tool\". Etymology: *werk* (\"work\"), *zeug* (\"stuff\")\n\nWerkzeug is a comprehensive `WSGI`_ web application library. It began as\na simple collection of various utilities for WSGI applications and has\nbecome one of the most advanced WSGI utility libraries.\n\nIt includes:\n\n-   An interactive debugger that allows inspecting stack traces and\n    source code in the browser with an interactive interpreter for any\n    frame in the stack.\n-   A full-featured request object with objects to interact with\n    headers, query args, form data, files, and cookies.\n-   A response object that can wrap other WSGI applications and handle\n    streaming data.\n-   A routing system for matching URLs to endpoints and generating URLs\n    for endpoints, with an extensible system for capturing variables\n    from URLs.\n-   HTTP utilities to handle entity tags, cache control, dates, user\n    agents, cookies, files, and more.\n-   A threaded WSGI server for use while developing applications\n    locally.\n-   A test client for simulating HTTP requests during testing without\n    requiring running a server.\n\nWerkzeug doesn't enforce any dependencies. It is up to the developer to\nchoose a template engine, database adapter, and even how to handle\nrequests. It can be used to build all sorts of end user applications\nsuch as blogs, wikis, or bulletin boards.\n\n`Flask`_ wraps Werkzeug, using it to handle the details of WSGI while\nproviding more structure and patterns for defining powerful\napplications.\n\n.. _WSGI: https://wsgi.readthedocs.io/en/latest/\n.. _Flask: https://www.palletsprojects.com/p/flask/\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    pip install -U Werkzeug\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    from werkzeug.wrappers import Request, Response\n\n    @Request.application\n    def application(request):\n        return Response('Hello, World!')\n\n    if __name__ == '__main__':\n        from werkzeug.serving import run_simple\n        run_simple('localhost', 4000, application)\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Werkzeug and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n`please donate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://werkzeug.palletsprojects.com/\n-   Changes: https://werkzeug.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/Werkzeug/\n-   Source Code: https://github.com/pallets/werkzeug/\n-   Issue Tracker: https://github.com/pallets/werkzeug/issues/\n-   Chat: https://discord.gg/pallets",
-      "release_date": "2023-06-08T21:26:53",
+      "release_date": "2023-08-14T09:30:45",
       "parties": [
         {
           "type": "person",
@@ -639,11 +639,11 @@
         "Topic :: Software Development :: Libraries :: Application Frameworks"
       ],
       "homepage_url": "",
-      "download_url": "https://files.pythonhosted.org/packages/ba/d6/8040faecaba2feb84e1647af174b3243c9b90c163c7ea407820839931efe/Werkzeug-2.3.6-py3-none-any.whl",
-      "size": 242499,
+      "download_url": "https://files.pythonhosted.org/packages/9b/59/a7c32e3d8d0e546a206e0552a2c04444544f15c1da4a01df8938d20c6ffc/werkzeug-2.3.7-py3-none-any.whl",
+      "size": 242216,
       "sha1": null,
-      "md5": "17e53591926aee3ce1663b03a1497758",
-      "sha256": "935539fa1413afbb9195b24880778422ed620c0fc09670945185cce4d91a8890",
+      "md5": "201b5bf3fa4dd3eb572704a6e61e69de",
+      "sha256": "effc12dba7f3bd72e605ce49807bbe692bd729c3bb122a3b91747a6ae77df528",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets/werkzeug/issues/",
       "code_view_url": "https://github.com/pallets/werkzeug/",
@@ -651,7 +651,6 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
-        "license": "BSD-3-Clause",
         "classifiers": [
           "License :: OSI Approved :: BSD License"
         ]
@@ -663,20 +662,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/werkzeug/2.3.6/json",
+      "api_data_url": "https://pypi.org/pypi/werkzeug/2.3.7/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/werkzeug@2.3.6"
+      "purl": "pkg:pypi/werkzeug@2.3.7"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "werkzeug",
-      "version": "2.3.6",
+      "version": "2.3.7",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "The comprehensive WSGI web application library.\nWerkzeug\n========\n\n*werkzeug* German noun: \"tool\". Etymology: *werk* (\"work\"), *zeug* (\"stuff\")\n\nWerkzeug is a comprehensive `WSGI`_ web application library. It began as\na simple collection of various utilities for WSGI applications and has\nbecome one of the most advanced WSGI utility libraries.\n\nIt includes:\n\n-   An interactive debugger that allows inspecting stack traces and\n    source code in the browser with an interactive interpreter for any\n    frame in the stack.\n-   A full-featured request object with objects to interact with\n    headers, query args, form data, files, and cookies.\n-   A response object that can wrap other WSGI applications and handle\n    streaming data.\n-   A routing system for matching URLs to endpoints and generating URLs\n    for endpoints, with an extensible system for capturing variables\n    from URLs.\n-   HTTP utilities to handle entity tags, cache control, dates, user\n    agents, cookies, files, and more.\n-   A threaded WSGI server for use while developing applications\n    locally.\n-   A test client for simulating HTTP requests during testing without\n    requiring running a server.\n\nWerkzeug doesn't enforce any dependencies. It is up to the developer to\nchoose a template engine, database adapter, and even how to handle\nrequests. It can be used to build all sorts of end user applications\nsuch as blogs, wikis, or bulletin boards.\n\n`Flask`_ wraps Werkzeug, using it to handle the details of WSGI while\nproviding more structure and patterns for defining powerful\napplications.\n\n.. _WSGI: https://wsgi.readthedocs.io/en/latest/\n.. _Flask: https://www.palletsprojects.com/p/flask/\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    pip install -U Werkzeug\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    from werkzeug.wrappers import Request, Response\n\n    @Request.application\n    def application(request):\n        return Response('Hello, World!')\n\n    if __name__ == '__main__':\n        from werkzeug.serving import run_simple\n        run_simple('localhost', 4000, application)\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Werkzeug and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n`please donate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://werkzeug.palletsprojects.com/\n-   Changes: https://werkzeug.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/Werkzeug/\n-   Source Code: https://github.com/pallets/werkzeug/\n-   Issue Tracker: https://github.com/pallets/werkzeug/issues/\n-   Chat: https://discord.gg/pallets",
-      "release_date": "2023-06-08T21:26:55",
+      "release_date": "2023-08-14T09:30:46",
       "parties": [
         {
           "type": "person",
@@ -699,11 +698,11 @@
         "Topic :: Software Development :: Libraries :: Application Frameworks"
       ],
       "homepage_url": "",
-      "download_url": "https://files.pythonhosted.org/packages/d1/7e/c35cea5749237d40effc50ed1a1c7518d9f2e768fcf30b4e9ea119e74975/Werkzeug-2.3.6.tar.gz",
-      "size": 833282,
+      "download_url": "https://files.pythonhosted.org/packages/ef/56/0acc9f560053478a4987fa35c95d904f04b6915f6b5c4d1c14dc8862ba0a/werkzeug-2.3.7.tar.gz",
+      "size": 819625,
       "sha1": null,
-      "md5": "de26f240d6f95689a8d15170c2d958b6",
-      "sha256": "98c774df2f91b05550078891dee5f0eb0cb797a522c757a2452b9cee5b202330",
+      "md5": "31bb8f7f0be8724e6da89df0f6fc5d12",
+      "sha256": "2b8c0e447b4b9dbcc85dd97b6eeb4dcbaf6c8b6c3be0bd654e25553e0a2157d8",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets/werkzeug/issues/",
       "code_view_url": "https://github.com/pallets/werkzeug/",
@@ -711,7 +710,6 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
-        "license": "BSD-3-Clause",
         "classifiers": [
           "License :: OSI Approved :: BSD License"
         ]
@@ -723,23 +721,23 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/werkzeug/2.3.6/json",
+      "api_data_url": "https://pypi.org/pypi/werkzeug/2.3.7/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/werkzeug@2.3.6"
+      "purl": "pkg:pypi/werkzeug@2.3.7"
     }
   ],
   "resolution": [
     {
-      "package": "pkg:pypi/click@8.1.6",
+      "package": "pkg:pypi/click@8.1.7",
       "dependencies": []
     },
     {
       "package": "pkg:pypi/flask@2.1.2",
       "dependencies": [
-        "pkg:pypi/click@8.1.6",
+        "pkg:pypi/click@8.1.7",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.2",
-        "pkg:pypi/werkzeug@2.3.6"
+        "pkg:pypi/werkzeug@2.3.7"
       ]
     },
     {
@@ -757,7 +755,7 @@
       "dependencies": []
     },
     {
-      "package": "pkg:pypi/werkzeug@2.3.6",
+      "package": "pkg:pypi/werkzeug@2.3.7",
       "dependencies": [
         "pkg:pypi/markupsafe@2.1.3"
       ]

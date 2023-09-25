@@ -303,7 +303,7 @@ def get_requirements_from_python_manifest(
         else:
             # Do not raise exception here as we may have a setup.py that does not
             # have any dependencies.
-            with (open(setup_py_location)) as sf:
+            with open(setup_py_location) as sf:
                 file_contents = sf.read()
                 node = ast.parse(file_contents)
                 setup_fct = [
