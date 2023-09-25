@@ -4,7 +4,7 @@
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
     "tool_version": "0.9.8",
     "options": [
-      "--requirement /home/frank/sources/github/nexB/python-inspector/tests/data/azure-devops.req.txt",
+      "--requirement /home/tg1999/Desktop/example/tools/python-inspector/tests/data/azure-devops.req.txt",
       "--index-url https://pypi.org/simple",
       "--python-version 310",
       "--operating-system linux",
@@ -17,7 +17,7 @@
   "files": [
     {
       "type": "file",
-      "path": "/home/frank/sources/github/nexB/python-inspector/tests/data/azure-devops.req.txt",
+      "path": "/home/tg1999/Desktop/example/tools/python-inspector/tests/data/azure-devops.req.txt",
       "package_data": [
         {
           "type": "pypi",
