@@ -87,6 +87,6 @@ testing =
     pycodestyle
 
 docs =
-    Sphinx >= 3.3.1
+    Sphinx >= 3.3.1,<7.0.0
     sphinx-rtd-theme >= 0.5.0
     doc8 >= 0.8.1
