@@ -16,7 +16,7 @@
   "files": [
     {
       "type": "file",
-      "path": "/home/frank/sources/github/nexB/python-inspector/tests/data/setup/no-direct-dependencies-setup.py",
+      "path": "/home/tg1999/Desktop/example/tools/python-inspector/tests/data/setup/no-direct-dependencies-setup.py",
       "package_data": [
         {
           "type": "pypi",
