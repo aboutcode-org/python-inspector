@@ -172,6 +172,7 @@ def print_version(ctx, param, value):
     callback=print_version,
     help="Show the version and exit.",
 )
+@click.option('--permissive', is_flag=True, default=False, help='Enable permissive mode.')
 @click.help_option("-h", "--help")
 def resolve_dependencies(
     ctx,
@@ -190,6 +191,7 @@ def resolve_dependencies(
     analyze_setup_py_insecurely=False,
     prefer_source=False,
     verbose=TRACE,
+    permissive=False,
 ):
     """
     Resolve the dependencies for the package requirements listed in one or
@@ -260,6 +262,7 @@ def resolve_dependencies(
             analyze_setup_py_insecurely=analyze_setup_py_insecurely,
             printer=click.secho,
             prefer_source=prefer_source,
+            permissive=permissive,
         )
         output = dict(
             headers=headers,
