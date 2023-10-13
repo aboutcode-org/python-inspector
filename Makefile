@@ -9,11 +9,12 @@
 #
 
 # Python version can be specified with `$ PYTHON_EXE=python3.x make conf`
+PYTHON_EXE?=python3
 VENV=venv
 ACTIVATE?=. ${VENV}/bin/activate;
 
 dev:
-	@echo "-> Configure the dev envt."
+	@echo "-> Configure the development envt."
 	./configure --dev
 
 isort:
