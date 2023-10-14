@@ -82,7 +82,7 @@ def resolve_dependencies(
     analyze_setup_py_insecurely=False,
     prefer_source=False,
     printer=print,
-    permissive=False,
+    ignore_errors=False,
 ):
     """
     Resolve the dependencies for the package requirements listed in one or
@@ -269,7 +269,7 @@ def resolve_dependencies(
         max_rounds=max_rounds,
         pdt_output=pdt_output,
         analyze_setup_py_insecurely=analyze_setup_py_insecurely,
-        permisseve=permissive,
+        ignore_errors=ignore_errors,
     )
 
     packages = []
@@ -304,7 +304,7 @@ def resolve(
     max_rounds=200000,
     pdt_output=False,
     analyze_setup_py_insecurely=False,
-    permisseve=False,
+    ignore_errors=False,
 ):
     """
     Resolve dependencies given a ``direct_dependencies`` list of
@@ -330,7 +330,7 @@ def resolve(
         max_rounds=max_rounds,
         pdt_output=pdt_output,
         analyze_setup_py_insecurely=analyze_setup_py_insecurely,
-        permissive=permisseve,
+        ignore_errors=ignore_errors,
     )
 
     return resolved_dependencies, packages
@@ -344,7 +344,7 @@ def get_resolved_dependencies(
     max_rounds: int = 200000,
     pdt_output: bool = False,
     analyze_setup_py_insecurely: bool = False,
-    permissive: bool = False,
+    ignore_errors: bool = False,
 ):
     """
     Return resolved dependencies of a ``requirements`` list of Requirement for
@@ -359,7 +359,7 @@ def get_resolved_dependencies(
             environment=environment,
             repos=repos,
             analyze_setup_py_insecurely=analyze_setup_py_insecurely,
-            permissive=permissive,
+            ignore_errors=ignore_errors,
         ),
         reporter=BaseReporter(),
     )
