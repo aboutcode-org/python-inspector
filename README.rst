@@ -11,9 +11,13 @@ Homepage: https://github.com/nexB/python-inspector and https://www.aboutcode.org
 
 - resolve PyPI packages dependencies
 
-- parse various manifests and packages files such as pip requirement files,
-  Pipfile, pyproject.toml, poetry.lock, setup.py and setup.cfg and legacy and
-  current metadata file formats for eggs, wheels and sdist.
+- parse various requirements.txt files and setup.py files as input
+  for resolving dependencies.
+
+- parse additionally various manifests and packages files such as
+  Pipfile, pyproject.toml, poetry.lock and setup.cfg and legacy and
+  current metadata file formats for eggs, wheels and sdist. These
+  have not been wired with the command line yet.
 
 - query PyPI JSON and simple APIs for package information
 
