@@ -701,7 +701,6 @@ class Distribution(NameVer):
         Return a distribution built from the data found in a `filename` string.
         Raise an exception if this is not a valid filename
         """
-        filename = unquote(os.path.basename(filename.strip("/")))
         clazz = cls.get_dist_class(filename)
         return clazz.from_filename(filename)
 
@@ -950,6 +949,15 @@ def get_sdist_name_ver_ext(filename):
     return name, version, extension
 
 
+def get_filename(filename):
+    """
+    Return a filename from a ``filename`` path or name string. Unquote as needed.
+    """
+    filename = filename.strip("/")
+    filename = os.path.basename(filename)
+    return unquote(filename)
+
+
 @attr.attributes
 class Sdist(Distribution):
     extension = attr.ib(
@@ -965,6 +973,7 @@ class Sdist(Distribution):
         Return a Sdist object built from a filename.
         Raise an exception if this is not a valid sdist filename
         """
+        filename = get_filename(filename)
         name_ver_ext = get_sdist_name_ver_ext(filename)
         if not name_ver_ext:
             raise InvalidDistributionFilename(filename)
@@ -1069,6 +1078,7 @@ class Wheel(Distribution):
         Return a wheel object built from a filename.
         Raise an exception if this is not a valid wheel filename
         """
+        filename = get_filename(filename)
         wheel_info = cls.get_wheel_from_filename(filename)
         if not wheel_info:
             raise InvalidDistributionFilename(filename)
