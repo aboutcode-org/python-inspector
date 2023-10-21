@@ -58,9 +58,16 @@ class Resolution(NamedTuple):
     packages: List[PackageData]
     files: List[Dict]
 
-    def to_dict(self):
+    def to_dict(self, generic_paths=False):
+        files = self.files
+        if generic_paths:
+            # clean file paths
+            for file in files:
+                path = file["path"]
+                file["path"] = utils.remove_test_data_dir_variable_prefix(path=path)
+
         return {
-            "files": self.files,
+            "files": files,
             "packages": [package for package in self.packages],
             "resolution": self.resolution,
         }
@@ -82,6 +89,7 @@ def resolve_dependencies(
     analyze_setup_py_insecurely=False,
     prefer_source=False,
     printer=print,
+    generic_paths=False,
 ):
     """
     Resolve the dependencies for the package requirements listed in one or
@@ -141,6 +149,7 @@ def resolve_dependencies(
     if PYPI_SIMPLE_URL not in index_urls:
         index_urls = tuple([PYPI_SIMPLE_URL]) + tuple(index_urls)
 
+    # requirements
     for req_file in requirement_files:
         deps = dependencies.get_dependencies_from_requirements(requirements_file=req_file)
         for extra_data in dependencies.get_extra_data_from_requirements(requirements_file=req_file):
@@ -149,6 +158,9 @@ def resolve_dependencies(
         package_data = [
             pkg_data.to_dict() for pkg_data in PipRequirementsFileHandler.parse(location=req_file)
         ]
+        if generic_paths:
+            req_file = utils.remove_test_data_dir_variable_prefix(path=req_file)
+
         files.append(
             dict(
                 type="file",
@@ -157,10 +169,12 @@ def resolve_dependencies(
             )
         )
 
+    # specs
     for specifier in specifiers:
         dep = dependencies.get_dependency(specifier=specifier)
         direct_dependencies.append(dep)
 
+    # setup.py
     if setup_py_file:
         package_data = list(PythonSetupPyHandler.parse(location=setup_py_file))
         assert len(package_data) == 1
@@ -203,6 +217,8 @@ def resolve_dependencies(
 
         package_data.dependencies = setup_py_file_deps
         file_package_data = [package_data.to_dict()]
+        if generic_paths:
+            setup_py_file = utils.remove_test_data_dir_variable_prefix(path=setup_py_file)
         files.append(
             dict(
                 type="file",
@@ -292,6 +308,9 @@ def resolve_dependencies(
         resolution=resolution,
         files=files,
     )
+
+
+resolver_api = resolve_dependencies
 
 
 def resolve(

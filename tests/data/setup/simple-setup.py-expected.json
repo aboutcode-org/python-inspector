@@ -4,10 +4,10 @@
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
     "tool_version": "0.9.8",
     "options": [
-      "--index-url https://pypi.org/simple",
-      "--python-version 27",
+      "--json <file>",
       "--operating-system linux",
-      "--json <file>"
+      "--python-version 27",
+      "--setup-py tests/data/setup/simple-setup.py"
     ],
     "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/nexB/python-inspector/ for support and download.",
     "warnings": [],
@@ -16,7 +16,7 @@
   "files": [
     {
       "type": "file",
-      "path": "/home/tg1999/Desktop/python-inspector-1/tests/data/setup/simple-setup.py",
+      "path": "tests/data/setup/simple-setup.py",
       "package_data": [
         {
           "type": "pypi",

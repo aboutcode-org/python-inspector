@@ -11,7 +11,6 @@
 
 import json
 import os
-import tempfile
 from typing import Dict
 from typing import List
 from typing import NamedTuple
@@ -73,3 +72,15 @@ def get_response(url: str) -> Dict:
     resp = requests.get(url)
     if resp.status_code == 200:
         return resp.json()
+
+
+def remove_test_data_dir_variable_prefix(path, placeholder="<file>"):
+    """
+    Return a clean path, removing variable test path prefix or using a ``placeholder``.
+    Used for testing to ensure that results are stable across runs.
+    """
+    if "tests/data/" in path:
+        _junk, test_dir, cleaned = path.partition("tests/data/")
+        return f"{test_dir}{cleaned}"
+    else:
+        return placeholder

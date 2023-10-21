@@ -9,198 +9,111 @@
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
-import json
 import os
 
 import pytest
 from commoncode.testcase import FileDrivenTesting
-from test_cli import check_json_results
+from test_cli import check_data_results
 
-from python_inspector.resolve_cli import resolver_api
+from python_inspector.api import resolver_api
 
 test_env = FileDrivenTesting()
 test_env.test_data_dir = os.path.join(os.path.dirname(__file__), "data")
 
 
 def test_api_with_specifier():
-    result_file = test_env.get_temp_file("json")
     expected_file = test_env.get_test_loc("test-api-expected.json", must_exist=False)
-    with open(result_file, "w") as result:
-        result.write(
-            json.dumps(
-                resolver_api(
-                    specifiers=["flask==2.1.2"],
-                    python_version="3.10",
-                    operating_system="linux",
-                ).to_dict()
-            )
-        )
-    check_json_results(
-        result_file=result_file,
-        expected_file=expected_file,
-        clean=True,
+    results = resolver_api(
+        specifiers=["flask==2.1.2"],
+        python_version="3.10",
+        operating_system="linux",
     )
+    check_data_results(results=results.to_dict(generic_paths=True), expected_file=expected_file)
 
 
 def test_api_with_specifier_pdt():
-    result_file = test_env.get_temp_file("json")
     expected_file = test_env.get_test_loc("test-api-pdt-expected.json", must_exist=False)
-    with open(result_file, "w") as result:
-        result.write(
-            json.dumps(
-                resolver_api(
-                    specifiers=["flask==2.1.2"],
-                    python_version="3.10",
-                    operating_system="linux",
-                    pdt_output=True,
-                ).to_dict()
-            )
-        )
-    check_json_results(
-        result_file=result_file,
-        expected_file=expected_file,
-        clean=True,
+    results = resolver_api(
+        specifiers=["flask==2.1.2"],
+        python_version="3.10",
+        operating_system="linux",
+        pdt_output=True,
     )
+    check_data_results(results=results.to_dict(generic_paths=True), expected_file=expected_file)
 
 
 def test_api_with_requirement_file():
-    result_file = test_env.get_temp_file("json")
-    requirement_file = test_env.get_test_loc("frozen-requirements.txt")
     expected_file = test_env.get_test_loc("test-api-with-requirement-file.json", must_exist=False)
-    with open(result_file, "w") as result:
-        result.write(
-            json.dumps(
-                resolver_api(
-                    python_version="3.10",
-                    operating_system="linux",
-                    requirement_files=[requirement_file],
-                ).to_dict()
-            )
-        )
-    check_json_results(
-        result_file=result_file,
-        expected_file=expected_file,
-        clean=True,
+    results = resolver_api(
+        python_version="3.10",
+        operating_system="linux",
+        requirement_files=[test_env.get_test_loc("frozen-requirements.txt")],
     )
+    check_data_results(results=results.to_dict(generic_paths=True), expected_file=expected_file)
 
 
 def test_api_with_prefer_source():
-    result_file = test_env.get_temp_file("json")
     expected_file = test_env.get_test_loc("test-api-with-prefer-source.json", must_exist=False)
-    with open(result_file, "w") as result:
-        result.write(
-            json.dumps(
-                resolver_api(
-                    specifiers=["flask==2.1.2"],
-                    python_version="3.10",
-                    operating_system="linux",
-                    prefer_source=True,
-                ).to_dict()
-            )
-        )
-    check_json_results(
-        result_file=result_file,
-        expected_file=expected_file,
-        clean=True,
+    results = resolver_api(
+        specifiers=["flask==2.1.2"],
+        python_version="3.10",
+        operating_system="linux",
+        prefer_source=True,
     )
+    check_data_results(results=results.to_dict(generic_paths=True), expected_file=expected_file)
 
 
 def test_api_with_recursive_requirement_file():
-    result_file = test_env.get_temp_file("json")
     requirement_file = test_env.get_test_loc("recursive_requirements/r.txt")
     expected_file = test_env.get_test_loc(
         "test-api-with-recursive-requirement-file.json", must_exist=False
     )
-    with open(result_file, "w") as result:
-        result.write(
-            json.dumps(
-                resolver_api(
-                    python_version="3.8",
-                    operating_system="linux",
-                    requirement_files=[requirement_file],
-                ).to_dict()
-            )
-        )
-    check_json_results(
-        result_file=result_file,
-        expected_file=expected_file,
-        clean=True,
+    results = resolver_api(
+        python_version="3.8",
+        operating_system="linux",
+        requirement_files=[requirement_file],
     )
+    check_data_results(results=results.to_dict(generic_paths=True), expected_file=expected_file)
 
 
 def test_api_with_no_os():
-    with pytest.raises(Exception) as e:
-        resolver_api(
-            specifiers=["flask==2.1.2"],
-            python_version="3.10",
-        )
+    with pytest.raises(Exception):
+        resolver_api(specifiers=["flask==2.1.2"], python_version="3.10")
 
 
 def test_api_with_no_pyver():
-    with pytest.raises(Exception) as e:
-        resolver_api(
-            specifiers=["flask==2.1.2"],
-            operating_system="linux",
-        )
+    with pytest.raises(Exception):
+        resolver_api(specifiers=["flask==2.1.2"], operating_system="linux")
 
 
 def test_api_with_unsupported_os():
-    with pytest.raises(ValueError) as e:
-        resolver_api(
-            specifiers=["flask==2.1.2"],
-            python_version="3.10",
-            operating_system="foo-bar",
-        )
+    with pytest.raises(ValueError):
+        resolver_api(specifiers=["flask==2.1.2"], python_version="3.10", operating_system="foo-bar")
 
 
 def test_api_with_wrong_pyver():
-    with pytest.raises(ValueError) as e:
-        resolver_api(
-            specifiers=["flask==2.1.2"],
-            python_version="3.12",
-            operating_system="linux",
-        )
+    with pytest.raises(ValueError):
+        resolver_api(specifiers=["flask==2.1.2"], python_version="3.12", operating_system="linux")
 
 
 def test_api_with_python_311():
-    result_file = test_env.get_temp_file("json")
     expected_file = test_env.get_test_loc("test-api-with-python-311.json", must_exist=False)
-    with open(result_file, "w") as result:
-        result.write(
-            json.dumps(
-                resolver_api(
-                    specifiers=["flask==2.1.2"],
-                    python_version="3.11",
-                    operating_system="linux",
-                    prefer_source=True,
-                ).to_dict()
-            )
-        )
-    check_json_results(
-        result_file=result_file,
-        expected_file=expected_file,
-        clean=True,
+    results = resolver_api(
+        specifiers=["flask==2.1.2"],
+        python_version="3.11",
+        operating_system="linux",
+        prefer_source=True,
     )
+    check_data_results(results=results.to_dict(generic_paths=True), expected_file=expected_file)
 
 
 def test_api_with_partial_setup_py():
-    result_file = test_env.get_temp_file("json")
-    setup_py_file = test_env.get_test_loc("partial-setup.py")
     expected_file = test_env.get_test_loc("test-api-with-partial-setup-py.json", must_exist=False)
-    with open(result_file, "w") as result:
-        result.write(
-            json.dumps(
-                resolver_api(
-                    python_version="3.11",
-                    operating_system="linux",
-                    setup_py_file=setup_py_file,
-                    prefer_source=True,
-                    analyze_setup_py_insecurely=True,
-                ).to_dict()
-            )
-        )
-    check_json_results(
-        result_file=result_file,
-        expected_file=expected_file,
-        clean=True,
+    results = resolver_api(
+        python_version="3.11",
+        operating_system="linux",
+        setup_py_file=test_env.get_test_loc("partial-setup.py"),
+        prefer_source=True,
+        analyze_setup_py_insecurely=True,
     )
+    check_data_results(results=results.to_dict(generic_paths=True), expected_file=expected_file)

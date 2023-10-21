@@ -4,11 +4,10 @@
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
     "tool_version": "0.9.8",
     "options": [
-      "--requirement /home/tg1999/Desktop/python-inspector-1/tests/data/environment-marker-test-requirements.txt",
-      "--index-url https://pypi.org/simple",
-      "--python-version 37",
+      "--json-pdt <file>",
       "--operating-system linux",
-      "--json <file>"
+      "--python-version 37",
+      "--requirement tests/data/environment-marker-test-requirements.txt"
     ],
     "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/nexB/python-inspector/ for support and download.",
     "warnings": [],
@@ -17,7 +16,7 @@
   "files": [
     {
       "type": "file",
-      "path": "/home/tg1999/Desktop/python-inspector-1/tests/data/environment-marker-test-requirements.txt",
+      "path": "tests/data/environment-marker-test-requirements.txt",
       "package_data": [
         {
           "type": "pypi",

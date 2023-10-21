@@ -2,7 +2,7 @@
   "files": [
     {
       "type": "file",
-      "path": "/home/tg1999/Desktop/python-inspector-1/tests/data/recursive_requirements/r.txt",
+      "path": "tests/data/recursive_requirements/r.txt",
       "package_data": [
         {
           "type": "pypi",
