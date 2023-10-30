@@ -2,7 +2,7 @@
   "files": [
     {
       "type": "file",
-      "path": "/home/tg1999/Desktop/python-inspector-1/tests/data/partial-setup.py",
+      "path": "tests/data/partial-setup.py",
       "package_data": [
         {
           "type": "pypi",

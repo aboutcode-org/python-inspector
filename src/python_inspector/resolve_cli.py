@@ -14,7 +14,6 @@ from typing import Dict
 import click
 
 from python_inspector import utils_pypi
-from python_inspector.api import resolve_dependencies as resolver_api
 from python_inspector.cli_utils import FileOptionType
 from python_inspector.utils import write_output_in_file
 
@@ -52,9 +51,9 @@ def print_version(ctx, param, value):
     "setup_py_file",
     type=click.Path(exists=True, readable=True, path_type=str, dir_okay=False),
     metavar="SETUP-PY-FILE",
+    multiple=False,
     required=False,
-    help="Path to setuptools setup.py file listing dependencies and metadata. "
-    "This option can be used multiple times.",
+    help="Path to setuptools setup.py file listing dependencies and metadata.",
 )
 @click.option(
     "--spec",
@@ -74,7 +73,8 @@ def print_version(ctx, param, value):
     metavar="PYVER",
     show_default=True,
     required=True,
-    help="Python version to use for dependency resolution.",
+    help="Python version to use for dependency resolution. One of "
+    + ", ".join(utils_pypi.PYTHON_DOT_VERSIONS_BY_VER.values()),
 )
 @click.option(
     "-o",
@@ -84,7 +84,7 @@ def print_version(ctx, param, value):
     metavar="OS",
     show_default=True,
     required=True,
-    help="OS to use for dependency resolution.",
+    help="OS to use for dependency resolution. One of " + ", ".join(utils_pypi.PLATFORMS_BY_OS),
 )
 @click.option(
     "--index-url",
@@ -123,7 +123,7 @@ def print_version(ctx, param, value):
     metavar="NETRC-FILE",
     hidden=True,
     required=False,
-    help="Netrc file to use for authentication. ",
+    help="Netrc file to use for authentication.",
 )
 @click.option(
     "--max-rounds",
@@ -131,13 +131,15 @@ def print_version(ctx, param, value):
     hidden=True,
     type=int,
     default=200000,
-    help="Increase the max rounds whenever the resolution is too deep",
+    help="Increase the maximum number of resolution rounds. "
+    "Use in the rare cases where the resolution graph is very deep.",
 )
 @click.option(
     "--use-cached-index",
     is_flag=True,
     hidden=True,
-    help="Use cached on-disk PyPI simple package indexes and do not refetch if present.",
+    help="Use cached on-disk PyPI simple package indexes "
+    "and do not refetch package index if cache is present.",
 )
 @click.option(
     "--use-pypi-json-api",
@@ -148,20 +150,19 @@ def print_version(ctx, param, value):
 @click.option(
     "--analyze-setup-py-insecurely",
     is_flag=True,
-    help="Enable collection of requirements in setup.py that compute these"
-    " dynamically. This is an insecure operation as it can run arbitrary code.",
+    help="Enable collection of requirements in setup.py that compute these "
+    "dynamically. This is an insecure operation as it can run arbitrary code.",
 )
 @click.option(
     "--prefer-source",
     is_flag=True,
-    help="Prefer source distributions over binary distributions"
-    " if no source distribution is available then binary distributions are used",
+    help="Prefer source distributions over binary distributions if no source "
+    "distribution is available then binary distributions are used",
 )
 @click.option(
     "--verbose",
     is_flag=True,
-    hidden=True,
-    help="Enable debug output.",
+    help="Enable verbose debug output.",
 )
 @click.option(
     "-V",
@@ -173,6 +174,13 @@ def print_version(ctx, param, value):
     help="Show the version and exit.",
 )
 @click.help_option("-h", "--help")
+@click.option(
+    "--generic-paths",
+    is_flag=True,
+    hidden=True,
+    help="Use generic or truncated paths in the JSON output header and files sections. "
+    "Used only for testing to avoid absolute paths and paths changing at each run.",
+)
 def resolve_dependencies(
     ctx,
     requirement_files,
@@ -190,6 +198,7 @@ def resolve_dependencies(
     analyze_setup_py_insecurely=False,
     prefer_source=False,
     verbose=TRACE,
+    generic_paths=False,
 ):
     """
     Resolve the dependencies for the package requirements listed in one or
@@ -212,6 +221,8 @@ def resolve_dependencies(
 
         python-inspector --spec "flask==2.1.2" --json -
     """
+    from python_inspector.api import resolve_dependencies as resolver_api
+
     if not (json_output or pdt_output):
         click.secho("No output file specified. Use --json or --json-pdt.", err=True)
         ctx.exit(1)
@@ -220,12 +231,7 @@ def resolve_dependencies(
         click.secho("Only one of --json or --json-pdt can be used.", err=True)
         ctx.exit(1)
 
-    options = [f"--requirement {rf}" for rf in requirement_files]
-    options += [f"--specifier {sp}" for sp in specifiers]
-    options += [f"--index-url {iu}" for iu in index_urls]
-    options += [f"--python-version {python_version}"]
-    options += [f"--operating-system {operating_system}"]
-    options += ["--json <file>"]
+    options = get_pretty_options(ctx, generic_paths=generic_paths)
 
     notice = (
         "Dependency tree generated with python-inspector.\n"
@@ -260,10 +266,13 @@ def resolve_dependencies(
             analyze_setup_py_insecurely=analyze_setup_py_insecurely,
             printer=click.secho,
             prefer_source=prefer_source,
+            generic_paths=generic_paths,
         )
+
+        files = resolution_result.files or []
         output = dict(
             headers=headers,
-            files=resolution_result.files,
+            files=files,
             packages=resolution_result.packages,
             resolved_dependencies_graph=resolution_result.resolution,
         )
@@ -271,11 +280,118 @@ def resolve_dependencies(
             output=output,
             location=json_output or pdt_output,
         )
-    except Exception as exc:
+    except Exception:
         import traceback
 
         click.secho(traceback.format_exc(), err=True)
         ctx.exit(1)
+
+
+def get_pretty_options(ctx, generic_paths=False):
+    """
+    Return a sorted list of formatted strings for the selected CLI options of
+    the `ctx` Click.context, putting arguments first then options:
+
+        ["~/some/path", "--license", ...]
+
+    Skip options that are hidden or flags that are not set.
+    If ``generic_paths`` is True, click.File and click.Path parameters are made
+    "generic" replacing their value with a placeholder. This is used mostly for
+    testing.
+    """
+
+    args = []
+    options = []
+
+    param_values = ctx.params
+    for param in ctx.command.params:
+        name = param.name
+        value = param_values.get(name)
+
+        if param.is_eager:
+            continue
+
+        if getattr(param, "hidden", False):
+            continue
+
+        if value == param.default:
+            continue
+
+        if value in (None, False):
+            continue
+
+        if value in (tuple(), []):
+            # option with multiple values, the value is a emoty tuple
+            continue
+
+        # opts is a list of CLI options as in "--verbose": the last opt is
+        # the CLI option long form by convention
+        cli_opt = param.opts[-1]
+
+        if not isinstance(value, (tuple, list)):
+            value = [value]
+
+        for val in value:
+            val = get_pretty_value(param_type=param.type, value=val, generic_paths=generic_paths)
+
+            if isinstance(param, click.Argument):
+                args.append(val)
+            else:
+                # an option
+                if val is True:
+                    # mere flag... do not add the "true" value
+                    options.append(f"{cli_opt}")
+                else:
+                    options.append(f"{cli_opt} {val}")
+
+    return sorted(args) + sorted(options)
+
+
+def get_pretty_value(param_type, value, generic_paths=False):
+    """
+    Return pretty formatted string extracted from a parameter ``value``.
+    Make paths generic (by using a placeholder or truncating the path) if
+    ``generic_paths`` is True.
+    """
+    if isinstance(param_type, (click.Path, click.File)):
+        return get_pretty_path(param_type, value, generic_paths)
+
+    elif not (value is None or isinstance(value, (str, bytes, tuple, list, dict, bool))):
+        # coerce to string for non-basic types
+        return repr(value)
+
+    else:
+        return value
+
+
+def get_pretty_path(param_type, value, generic_paths=False):
+    """
+    Return a pretty path value for a Path or File option. Truncate the path or
+    use a placeholder as needed if ``generic_paths`` is True. Used for testing.
+    """
+    from python_inspector.utils import remove_test_data_dir_variable_prefix
+
+    if value == "-":
+        return value
+
+    if isinstance(param_type, click.Path):
+        if generic_paths:
+            return remove_test_data_dir_variable_prefix(path=value)
+        return value
+
+    elif isinstance(param_type, click.File):
+        # the value cannot be displayed as-is as this may be an opened file-
+        # like object
+        vname = getattr(value, "name", None)
+        if not vname:
+            return "<file>"
+        else:
+            value = vname
+
+        if generic_paths:
+            return remove_test_data_dir_variable_prefix(path=value, placeholder="<file>")
+
+    return value
 
 
 if __name__ == "__main__":

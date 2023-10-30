@@ -4,11 +4,11 @@
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
     "tool_version": "0.9.8",
     "options": [
-      "--specifier zipp==3.8.0",
-      "--index-url https://pypi.org/simple",
-      "--python-version 38",
+      "--json <file>",
       "--operating-system linux",
-      "--json <file>"
+      "--python-version 38",
+      "--specifier zipp==3.8.0",
+      "--use-pypi-json-api"
     ],
     "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/nexB/python-inspector/ for support and download.",
     "warnings": [],

@@ -4,11 +4,11 @@
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
     "tool_version": "0.9.8",
     "options": [
-      "--specifier flask",
       "--index-url https://thirdparty.aboutcode.org/pypi/simple/",
-      "--python-version 38",
+      "--json <file>",
       "--operating-system linux",
-      "--json <file>"
+      "--python-version 38",
+      "--specifier flask"
     ],
     "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/nexB/python-inspector/ for support and download.",
     "warnings": [],

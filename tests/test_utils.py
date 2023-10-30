@@ -15,7 +15,7 @@ from netrc import netrc
 from unittest import mock
 
 from commoncode.testcase import FileDrivenTesting
-from test_cli import check_json_results
+from test_cli import check_json_file_results
 
 from _packagedcode.pypi import SetupCfgHandler
 from python_inspector.resolution import fetch_and_extract_sdist
@@ -57,7 +57,7 @@ def test_fetch_links(mock_get):
     expected_file = test_env.get_test_loc("psycopg2-links-expected.json", must_exist=False)
     with open(result_file, "w") as file:
         json.dump(links, file, indent=4)
-    check_json_results(result_file, expected_file, clean=False)
+    check_json_file_results(result_file, expected_file)
     # Testing relative links
     realtive_links_file = test_env.get_test_loc("fetch_links_test.html")
     with open(realtive_links_file) as realtive_file:
@@ -69,7 +69,7 @@ def test_fetch_links(mock_get):
     )
     with open(relative_links_result_file, "w") as file:
         json.dump(relative_links, file, indent=4)
-    check_json_results(relative_links_result_file, relative_links_expected_file, clean=False)
+    check_json_file_results(relative_links_result_file, relative_links_expected_file)
 
 
 def test_parse_reqs():
@@ -80,7 +80,7 @@ def test_parse_reqs():
     expected_file = test_env.get_test_loc("parse-reqs.json", must_exist=False)
     with open(result_file, "w") as file:
         json.dump(results, file, indent=4)
-    check_json_results(result_file, expected_file, clean=False)
+    check_json_file_results(result_file, expected_file)
 
 
 def test_get_sdist_file():
@@ -105,7 +105,7 @@ def test_parse_reqs_with_setup_requires_and_python_requires():
     )
     with open(result_file, "w") as file:
         json.dump(results, file, indent=4)
-    check_json_results(result_file, expected_file, clean=False)
+    check_json_file_results(result_file, expected_file)
 
 
 def test_valid_python_version():

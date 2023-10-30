@@ -13,6 +13,7 @@ from unittest.mock import patch
 
 import packvers
 import pytest
+from commoncode.system import on_mac
 from commoncode.testcase import FileDrivenTesting
 from packvers.requirements import Requirement
 
@@ -26,6 +27,7 @@ from python_inspector.resolution import is_valid_version
 from python_inspector.resolution import parse_reqs_from_setup_py_insecurely
 from python_inspector.utils_pypi import PYPI_PUBLIC_REPO
 from python_inspector.utils_pypi import Environment
+from python_inspector.utils_pypi import PypiSimpleRepository
 
 setup_test_env = FileDrivenTesting()
 setup_test_env.test_data_dir = os.path.join(os.path.dirname(__file__), "data")
@@ -127,6 +129,35 @@ def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
         "pkg:pypi/markupsafe@2.1.3",
         "pkg:pypi/werkzeug@3.0.0",
         "pkg:pypi/zipp@3.17.0",
+    ]
+
+
+@pytest.mark.online
+@pytest.mark.skipif(on_mac, reason="torch is only available for linux and windows.")
+def test_get_resolved_dependencies_for_version_containing_local_version_identifier():
+    req = Requirement("torch==2.0.0+cpu")
+    req.is_requirement_resolved = True
+    _, plist = get_resolved_dependencies(
+        requirements=[req],
+        environment=Environment(
+            python_version="310",
+            operating_system="linux",
+        ),
+        repos=[
+            PypiSimpleRepository(index_url="https://download.pytorch.org/whl/cpu", credentials=None)
+        ],
+        as_tree=False,
+    )
+
+    assert plist == [
+        "pkg:pypi/filelock@3.9.0",
+        "pkg:pypi/jinja2@3.1.2",
+        "pkg:pypi/markupsafe@2.1.2",
+        "pkg:pypi/mpmath@1.3.0",
+        "pkg:pypi/networkx@3.0",
+        "pkg:pypi/sympy@1.12",
+        "pkg:pypi/torch@2.0.0%2Bcpu",
+        "pkg:pypi/typing-extensions@4.4.0",
     ]
 
 

@@ -349,14 +349,14 @@ def check_specs_resolution(
     options = ["--specifier", specifier, "--json", result_file]
     options.extend(extra_options)
     run_cli(options=options)
-    check_json_results(
+    check_json_file_results(
         result_file=result_file,
         expected_file=expected_file,
         regen=regen,
     )
 
 
-def get_os_and_pyver(options):
+def append_os_and_pyver_options(options):
     if "--python-version" not in options:
         options.extend(["--python-version", "38"])
     if "--operating-system" not in options:
@@ -437,9 +437,7 @@ def check_requirements_resolution(
         options = ["--requirement", requirements_file, "--json", result_file]
     options.extend(extra_options)
     run_cli(options=options)
-    check_json_results(
-        result_file=result_file, expected_file=expected_file, regen=regen, clean=True
-    )
+    check_json_file_results(result_file=result_file, expected_file=expected_file, regen=regen)
 
 
 def check_setup_py_resolution(
@@ -461,57 +459,39 @@ def check_setup_py_resolution(
     if message:
         assert message in result.output
     if expected_rc == 0:
-        check_json_results(
-            result_file=result_file, expected_file=expected_file, regen=regen, clean=True
-        )
+        check_json_file_results(result_file=result_file, expected_file=expected_file, regen=regen)
 
 
-def check_json_results(result_file, expected_file, clean=True, regen=REGEN_TEST_FIXTURES):
+def check_json_file_results(result_file, expected_file, regen=REGEN_TEST_FIXTURES):
     """
     Check the ``result_file`` JSON results against the ``expected_file``
     expected JSON results.
-
-    If ``clean`` is True, remove headers data that can change across runs to
-    provide stable test resultys.
 
     If ``regen`` is True the expected_file WILL BE overwritten with the new
     results from ``results_file``. This is convenient for updating tests
     expectations.
     """
-    with open(result_file) as res:
-        results = json.load(res)
+    with open(result_file) as resi:
+        results = json.load(resi)
+    check_data_results(results, expected_file, regen)
+
+
+def check_data_results(results, expected_file, regen=REGEN_TEST_FIXTURES):
+    """
+    Check the ``results`` data against the ``expected_file`` expected JSON results.
+
+    If ``regen`` is True the expected_file WILL BE overwritten with the new
+    results from ``results_file``. This is convenient for updating tests
+    expectations.
+    """
     if regen:
-        with open(expected_file, "w") as reg:
-            json.dump(results, reg, indent=2, separators=(",", ": "))
+        with open(expected_file, "w") as exo:
+            json.dump(results, exo, indent=2, separators=(",", ": "))
         expected = results
     else:
-        with open(expected_file) as res:
-            expected = json.load(res)
-
-            if clean:
-                clean_results(expected)
-    if clean:
-        results = clean_results(results)
+        with open(expected_file) as reso:
+            expected = json.load(reso)
     assert results == expected
-
-
-def clean_results(results):
-    """
-    Return cleaned results removing transient values that can change across test
-    runs.
-    """
-    files = results.get("files", [])
-    for file in files:
-        path = os.path.split(file["path"])[-1]
-        file["path"] = path
-    headers = results.get("headers", {})
-    options = headers.get("options", [])
-    headers["options"] = [
-        o
-        for o in options
-        if (not o.startswith("--requirement") and not o.startswith("requirement_files-"))
-    ]
-    return results
 
 
 def run_cli(options, cli=resolve_dependencies, expected_rc=0, env=None, get_env=True):
@@ -524,15 +504,20 @@ def run_cli(options, cli=resolve_dependencies, expected_rc=0, env=None, get_env=
 
     runner = CliRunner()
     if get_env:
-        options = get_os_and_pyver(options)
+        options = append_os_and_pyver_options(options)
+
+    if "--generic-paths" not in options:
+        options.append("--generic-paths")
+
     result = runner.invoke(cli, options, catch_exceptions=False, env=env)
 
     if result.exit_code != expected_rc:
         output = result.output
+        opts = " ".join(options)
         error = f"""
 Failure to run:
 rc: {result.exit_code}
-python-inspector {options}
+python-inspector {opts}
 output:
 {output}
 """
