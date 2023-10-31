@@ -1,6 +1,12 @@
 Changelog
 =========
 
+v0.10.0
+-----------
+
+- Fix resolving requirements with percent encoded characters.
+
+
 v0.9.8
 -------------
 
