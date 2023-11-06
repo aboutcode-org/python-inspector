@@ -352,7 +352,8 @@ DEFAULT_ENVIRONMENT = utils_pypi.Environment.from_pyver_and_os(
 
 class PythonInputProvider(AbstractProvider):
     def __init__(
-        self, environment=DEFAULT_ENVIRONMENT, repos=tuple(), analyze_setup_py_insecurely=False
+        self, environment=DEFAULT_ENVIRONMENT, repos=tuple(), analyze_setup_py_insecurely=True,
+        ignore_errors=False
     ):
         self.environment = environment
         self.environment_marker = get_environment_marker_from_environment(self.environment)
@@ -361,6 +362,7 @@ class PythonInputProvider(AbstractProvider):
         self.dependencies_by_purl = {}
         self.wheel_or_sdist_by_package = {}
         self.analyze_setup_py_insecurely = analyze_setup_py_insecurely
+        self.ignore_errors = ignore_errors
 
     def identify(self, requirement_or_candidate: Union[Candidate, Requirement]) -> str:
         """Given a requirement, return an identifier for it. Overridden."""
@@ -583,8 +585,11 @@ class PythonInputProvider(AbstractProvider):
                 versions.extend(self.get_versions_for_package(name=name, repo=repo))
 
         if not versions:
-            raise NoVersionsFound(f"This package does not exist: {name}")
-
+            if self.ignore_errors:
+                yield from [Candidate("NonExistant", "0.0.0", "")]
+                return
+            else:
+                raise NoVersionsFound(f"This package does not exist: {name}")
         yield from self.get_candidates(
             all_versions=versions,
             requirements=requirements,
