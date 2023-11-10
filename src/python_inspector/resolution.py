@@ -352,8 +352,11 @@ DEFAULT_ENVIRONMENT = utils_pypi.Environment.from_pyver_and_os(
 
 class PythonInputProvider(AbstractProvider):
     def __init__(
-        self, environment=DEFAULT_ENVIRONMENT, repos=tuple(), analyze_setup_py_insecurely=True,
-        ignore_errors=False
+        self,
+        environment=DEFAULT_ENVIRONMENT,
+        repos=tuple(),
+        analyze_setup_py_insecurely=True,
+        ignore_errors=False,
     ):
         self.environment = environment
         self.environment_marker = get_environment_marker_from_environment(self.environment)

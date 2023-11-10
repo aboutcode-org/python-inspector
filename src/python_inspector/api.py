@@ -71,6 +71,7 @@ class Resolution(NamedTuple):
             "resolution": self.resolution,
         }
 
+
 def resolve_dependencies(
     requirement_files=tuple(),
     setup_py_file=None,
