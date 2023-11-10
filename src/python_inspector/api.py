@@ -58,13 +58,18 @@ class Resolution(NamedTuple):
     packages: List[PackageData]
     files: List[Dict]
 
-    def to_dict(self):
+    def to_dict(self, generic_paths=False):
+        files = self.files
+        if generic_paths:
+            # clean file paths
+            for file in files:
+                path = file["path"]
+                file["path"] = utils.remove_test_data_dir_variable_prefix(path=path)
         return {
-            "files": self.files,
+            "files": files,
             "packages": [package for package in self.packages],
             "resolution": self.resolution,
         }
-
 
 def resolve_dependencies(
     requirement_files=tuple(),
@@ -82,6 +87,7 @@ def resolve_dependencies(
     analyze_setup_py_insecurely=False,
     prefer_source=False,
     printer=print,
+    generic_paths=False,
     ignore_errors=False,
 ):
     """
