@@ -173,7 +173,9 @@ def print_version(ctx, param, value):
     callback=print_version,
     help="Show the version and exit.",
 )
-@click.option('--ignore-errors', is_flag=True, default=False, help='Ignore errors and continue execution.')
+@click.option(
+    "--ignore-errors", is_flag=True, default=False, help="Ignore errors and continue execution."
+)
 @click.help_option("-h", "--help")
 @click.option(
     "--generic-paths",
@@ -200,7 +202,7 @@ def resolve_dependencies(
     prefer_source=False,
     verbose=TRACE,
     generic_paths=False,
-    ignore_errors=False
+    ignore_errors=False,
 ):
     """
     Resolve the dependencies for the package requirements listed in one or
