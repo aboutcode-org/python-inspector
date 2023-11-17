@@ -152,7 +152,7 @@ def test_get_resolved_dependencies_for_version_containing_local_version_identifi
     assert plist == [
         "pkg:pypi/filelock@3.9.0",
         "pkg:pypi/jinja2@3.1.2",
-        "pkg:pypi/markupsafe@2.1.2",
+        "pkg:pypi/markupsafe@2.1.3",
         "pkg:pypi/mpmath@1.3.0",
         "pkg:pypi/networkx@3.0",
         "pkg:pypi/sympy@1.12",
