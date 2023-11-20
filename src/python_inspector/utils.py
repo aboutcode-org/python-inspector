@@ -79,8 +79,10 @@ def remove_test_data_dir_variable_prefix(path, placeholder="<file>"):
     Return a clean path, removing variable test path prefix or using a ``placeholder``.
     Used for testing to ensure that results are stable across runs.
     """
+    path = path.replace("\\", "/")
     if "tests/data/" in path:
         _junk, test_dir, cleaned = path.partition("tests/data/")
-        return f"{test_dir}{cleaned}"
+        cleaned = f"{test_dir}{cleaned}"
+        return cleaned.replace("\\", "/")
     else:
         return placeholder

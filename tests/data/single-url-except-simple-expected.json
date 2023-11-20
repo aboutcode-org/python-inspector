@@ -20,12 +20,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "blinker",
-      "version": "1.6.3",
+      "version": "1.7.0",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Fast, simple object-to-object and broadcast signaling\nBlinker\n=======\n\nBlinker provides a fast dispatching system that allows any number of\ninterested parties to subscribe to events, or \"signals\".\n\nSignal receivers can subscribe to specific senders or receive signals\nsent by any sender.\n\n.. code-block:: pycon\n\n    >>> from blinker import signal\n    >>> started = signal('round-started')\n    >>> def each(round):\n    ...     print(f\"Round {round}\")\n    ...\n    >>> started.connect(each)\n\n    >>> def round_two(round):\n    ...     print(\"This is round two.\")\n    ...\n    >>> started.connect(round_two, sender=2)\n\n    >>> for round in range(1, 4):\n    ...     started.send(round)\n    ...\n    Round 1!\n    Round 2!\n    This is round two.\n    Round 3!\n\n\nLinks\n-----\n\n-   Documentation: https://blinker.readthedocs.io/\n-   Changes: https://blinker.readthedocs.io/#changes\n-   PyPI Releases: https://pypi.org/project/blinker/\n-   Source Code: https://github.com/pallets-eco/blinker/\n-   Issue Tracker: https://github.com/pallets-eco/blinker/issues/",
-      "release_date": "2023-10-07T14:16:19",
+      "release_date": "2023-11-01T22:06:00",
       "parties": [
         {
           "type": "person",
@@ -54,11 +54,11 @@
         "Topic :: Software Development :: Libraries"
       ],
       "homepage_url": "",
-      "download_url": "https://files.pythonhosted.org/packages/bf/2b/11bcedb7dee4923253a4a21bae3be854bcc4f06295bd827756352016d97c/blinker-1.6.3-py3-none-any.whl",
-      "size": 13398,
+      "download_url": "https://files.pythonhosted.org/packages/fa/2a/7f3714cbc6356a0efec525ce7a0613d581072ed6eb53eb7b9754f33db807/blinker-1.7.0-py3-none-any.whl",
+      "size": 13068,
       "sha1": null,
-      "md5": "4ab7b0e126ce1c1b364e41807d477d7e",
-      "sha256": "296320d6c28b006eb5e32d4712202dbcdcbf5dc482da298c2f44881c43884aaa",
+      "md5": "1e62cc24a24ad42ba12fb576f5c5ce89",
+      "sha256": "c3f865d4d54db7abc53758a01601cf343fe55b84c1de4e3fa910e420b438d5b9",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets-eco/blinker/issues/",
       "code_view_url": "https://github.com/pallets-eco/blinker/",
@@ -77,20 +77,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/blinker/1.6.3/json",
+      "api_data_url": "https://pypi.org/pypi/blinker/1.7.0/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/blinker@1.6.3"
+      "purl": "pkg:pypi/blinker@1.7.0"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "blinker",
-      "version": "1.6.3",
+      "version": "1.7.0",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Fast, simple object-to-object and broadcast signaling\nBlinker\n=======\n\nBlinker provides a fast dispatching system that allows any number of\ninterested parties to subscribe to events, or \"signals\".\n\nSignal receivers can subscribe to specific senders or receive signals\nsent by any sender.\n\n.. code-block:: pycon\n\n    >>> from blinker import signal\n    >>> started = signal('round-started')\n    >>> def each(round):\n    ...     print(f\"Round {round}\")\n    ...\n    >>> started.connect(each)\n\n    >>> def round_two(round):\n    ...     print(\"This is round two.\")\n    ...\n    >>> started.connect(round_two, sender=2)\n\n    >>> for round in range(1, 4):\n    ...     started.send(round)\n    ...\n    Round 1!\n    Round 2!\n    This is round two.\n    Round 3!\n\n\nLinks\n-----\n\n-   Documentation: https://blinker.readthedocs.io/\n-   Changes: https://blinker.readthedocs.io/#changes\n-   PyPI Releases: https://pypi.org/project/blinker/\n-   Source Code: https://github.com/pallets-eco/blinker/\n-   Issue Tracker: https://github.com/pallets-eco/blinker/issues/",
-      "release_date": "2023-10-07T14:16:21",
+      "release_date": "2023-11-01T22:06:01",
       "parties": [
         {
           "type": "person",
@@ -119,11 +119,11 @@
         "Topic :: Software Development :: Libraries"
       ],
       "homepage_url": "",
-      "download_url": "https://files.pythonhosted.org/packages/ea/96/ed1420a974540da7419094f2553bc198c454cee5f72576e7c7629dd12d6e/blinker-1.6.3.tar.gz",
-      "size": 28092,
+      "download_url": "https://files.pythonhosted.org/packages/a1/13/6df5fc090ff4e5d246baf1f45fe9e5623aa8565757dfa5bd243f6a545f9e/blinker-1.7.0.tar.gz",
+      "size": 28134,
       "sha1": null,
-      "md5": "911d92a757f609b4344c04c207affea4",
-      "sha256": "152090d27c1c5c722ee7e48504b02d76502811ce02e1523553b4cf8c8b3d3a8d",
+      "md5": "0306b831281e9918ffb0ac6e3e18b47f",
+      "sha256": "e6820ff6fa4e4d1d8e2747c2283749c3f547e4fee112b98555cdcdae32996182",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets-eco/blinker/issues/",
       "code_view_url": "https://github.com/pallets-eco/blinker/",
@@ -142,9 +142,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/blinker/1.6.3/json",
+      "api_data_url": "https://pypi.org/pypi/blinker/1.7.0/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/blinker@1.6.3"
+      "purl": "pkg:pypi/blinker@1.7.0"
     },
     {
       "type": "pypi",
@@ -1069,7 +1069,7 @@
   ],
   "resolved_dependencies_graph": [
     {
-      "package": "pkg:pypi/blinker@1.6.3",
+      "package": "pkg:pypi/blinker@1.7.0",
       "dependencies": []
     },
     {
@@ -1079,7 +1079,7 @@
     {
       "package": "pkg:pypi/flask@3.0.0",
       "dependencies": [
-        "pkg:pypi/blinker@1.6.3",
+        "pkg:pypi/blinker@1.7.0",
         "pkg:pypi/click@8.1.7",
         "pkg:pypi/importlib-metadata@6.8.0",
         "pkg:pypi/itsdangerous@2.1.2",
