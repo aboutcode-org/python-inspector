@@ -248,12 +248,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "azure-devops",
-      "version": "7.1.0b3",
+      "version": "7.1.0b4",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Python wrapper around the Azure DevOps 7.x APIs\nAzure DevOps Python clients",
-      "release_date": "2023-04-26T17:38:59",
+      "release_date": "2023-11-20T14:38:02",
       "parties": [
         {
           "type": "person",
@@ -278,16 +278,17 @@
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9"
       ],
       "homepage_url": "https://github.com/microsoft/azure-devops-python-api",
-      "download_url": "https://files.pythonhosted.org/packages/2f/26/0be5efeeef498ac42b2c1c0d29dd9dc1917e19aab7e442a3f521122a7093/azure_devops-7.1.0b3-py3-none-any.whl",
-      "size": 1555021,
+      "download_url": "https://files.pythonhosted.org/packages/9a/30/067b9aba3cb146f4334afb737eb86c4f66e2b645fbca770377253550a9b3/azure_devops-7.1.0b4-py3-none-any.whl",
+      "size": 1554711,
       "sha1": null,
-      "md5": "b9373f77e9cd0a737d0648e79062ff56",
-      "sha256": "ef082a59e79e7f5d979481c7737093cb54618f362b216292fcce7f26d9c452c3",
+      "md5": "5f916043df39453932e3214d309450d0",
+      "sha256": "f827e9fbc7c77bc6f2aaee46e5717514e9fe7d676c87624eccd0ca640b54f122",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -307,20 +308,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/azure-devops/7.1.0b3/json",
+      "api_data_url": "https://pypi.org/pypi/azure-devops/7.1.0b4/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/azure-devops@7.1.0b3"
+      "purl": "pkg:pypi/azure-devops@7.1.0b4"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "azure-devops",
-      "version": "7.1.0b3",
+      "version": "7.1.0b4",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Python wrapper around the Azure DevOps 7.x APIs\nAzure DevOps Python clients",
-      "release_date": "2023-04-26T17:39:02",
+      "release_date": "2023-11-20T14:38:06",
       "parties": [
         {
           "type": "person",
@@ -345,16 +346,17 @@
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9"
       ],
       "homepage_url": "https://github.com/microsoft/azure-devops-python-api",
-      "download_url": "https://files.pythonhosted.org/packages/48/1b/a6198ee1d90aa9c8d23ff1b3a9f7ea680c445e42a810cb32f465990bcd01/azure-devops-7.1.0b3.tar.gz",
-      "size": 1336724,
+      "download_url": "https://files.pythonhosted.org/packages/e1/f9/495982345252dc7a15ac632e038be1f975ca0d2f25abfe8f8d908569141d/azure-devops-7.1.0b4.tar.gz",
+      "size": 1336261,
       "sha1": null,
-      "md5": "aa3428f6ee9a66111e4002e9e1528c3e",
-      "sha256": "644e34d110f016e65c7b36647274c90c20223bf2ecca9be8806aa5a4c754b4e7",
+      "md5": "bf401acf6533d4a2dcfd2106ffcbc86a",
+      "sha256": "f04ba939112579f3d530cfecc044a74ef9e9339ba23c9ee1ece248241f07ff85",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -374,9 +376,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/azure-devops/7.1.0b3/json",
+      "api_data_url": "https://pypi.org/pypi/azure-devops/7.1.0b4/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/azure-devops@7.1.0b3"
+      "purl": "pkg:pypi/azure-devops@7.1.0b4"
     },
     {
       "type": "pypi",
@@ -2489,7 +2491,7 @@
       ]
     },
     {
-      "package": "pkg:pypi/azure-devops@7.1.0b3",
+      "package": "pkg:pypi/azure-devops@7.1.0b4",
       "dependencies": [
         "pkg:pypi/msrest@0.7.1"
       ]
