@@ -43,6 +43,27 @@ def test_cli_with_default_urls():
 
 
 @pytest.mark.online
+def test_cli_with_requirements_and_ignore_errors():
+    requirements_file = test_env.get_test_loc("error-requirements.txt")
+    expected_file = test_env.get_test_loc(
+        "example-requirements-ignore-errors-expected.json", must_exist=False
+    )
+    extra_options = [
+        "--ignore-errors",
+        "--operating-system",
+        "linux",
+        "--python-version",
+        "310",
+    ]
+    check_requirements_resolution(
+        requirements_file=requirements_file,
+        expected_file=expected_file,
+        extra_options=extra_options,
+        regen=REGEN_TEST_FIXTURES,
+    )
+
+
+@pytest.mark.online
 def test_pdt_output():
     requirements_file = test_env.get_test_loc("pdt-requirements.txt")
     expected_file = test_env.get_test_loc("pdt-requirements.txt-expected.json", must_exist=False)

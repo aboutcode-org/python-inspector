@@ -182,7 +182,7 @@ def test_without_supported_wheels():
         "pkg:pypi/hyperlink@21.0.0",
         "pkg:pypi/idna@3.4",
         "pkg:pypi/pycparser@2.21",
-        "pkg:pypi/setuptools@68.2.2",
+        "pkg:pypi/setuptools@69.0.0",
         "pkg:pypi/txaio@23.1.1",
     ]
 
