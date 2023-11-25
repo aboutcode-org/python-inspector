@@ -54,6 +54,20 @@ def write_output_in_file(output, location):
     return output
 
 
+def write_resolved_packages(package_list, requirements_file):
+    """
+    Write the resolved package names and versions into ``requirements_file_path``
+    """
+    dependencies = package_list[0]["package_data"][0]["dependencies"]
+    resolved_packages = []
+    for dependency in dependencies:
+        if dependency["is_resolved"]:
+            package = dependency["extracted_requirement"]
+            resolved_packages.append(package)
+    for package in resolved_packages:
+        requirements_file.write(package + "\n")
+
+
 class Candidate(NamedTuple):
     """
     A candidate is a package that can be installed.

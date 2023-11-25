@@ -444,6 +444,52 @@ def test_passing_of_unsupported_os():
         assert message in result.output
 
 
+@pytest.mark.online
+def test_resolved_cli():
+    """
+    Tests the '--resolved-output' option of resolve_dependencies() function.
+    The '--resolved-output' option takes in a filename and writes.
+    The resolved package dependencies into a .txt file with the given filename.
+    """
+    requirements_file = test_env.get_test_loc("pinned-requirements.txt")
+    expected_file = test_env.get_test_loc(
+        "resolved-pinned-requirements-expected.txt", must_exist=False
+    )
+    result_txt_file = test_env.get_temp_file("txt")
+    result_json_file = test_env.get_temp_file("json")
+    options = [
+        "--requirement",
+        requirements_file,
+        "--resolved-output",
+        result_txt_file,
+        "--json",
+        result_json_file,
+    ]
+    run_cli(options=options)
+    check_resolved_packages_results(result_txt_file, expected_file)
+
+
+def check_resolved_packages_results(result_file, expected_file, regen=REGEN_TEST_FIXTURES):
+    """
+    Check the ``result_file`` data against the ``expected_file`` expected results.
+
+    If ``regen`` is True the expected_file WILL BE overwritten with the new
+    results from ``results_file``. This is convenient for updating tests
+    expectations.
+    """
+    with open(result_file, "r") as res_file:
+        results = res_file.readlines()
+
+    if regen:
+        with open(expected_file, "w") as exo:
+            exo.writelines(results)
+        expected = results
+    else:
+        with open(expected_file) as reso:
+            expected = reso.readlines()
+    assert results == expected
+
+
 def check_requirements_resolution(
     requirements_file,
     expected_file,
