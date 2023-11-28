@@ -34,11 +34,11 @@ valid: isort black
 check:
 	@echo "-> Run pycodestyle (PEP8) validation"
 	@${ACTIVATE} pycodestyle --max-line-length=110 \
-	   --exclude=.eggs,etc/scripts,src/_packagedcode,venv/,lib/,thirdparty/,docs/,.cache/ .
+	   --exclude=.eggs,etc/scripts,src/_packagedcode,venv/,lib/,thirdparty/,docs/,.cache/,tests/.cache/,./src/python_inspector/.cache/ .
 	@echo "-> Run isort imports ordering validation"
-	@${ACTIVATE} isort --sl --check-only -l 100 setup.py src tests --skip-glob "*/_packagedcode/*"
+	@${ACTIVATE} isort --sl --check-only -l 100 setup.py src tests --skip-glob "*/_packagedcode/*" --extend-skip-glob="*/.cache/*"
 	@echo "-> Run black validation"
-	@${ACTIVATE} black --check -l 100 src tests setup.py --exclude "_packagedcode/.*"
+	@${ACTIVATE} black --check -l 100 src tests setup.py --exclude "_packagedcode/.*|.cache/.*"
 
 clean:
 	@echo "-> Clean the Python env"

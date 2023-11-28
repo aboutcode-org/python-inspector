@@ -8,9 +8,10 @@
 # See https://github.com/nexB/python-inspector for support or download.
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
-
+import difflib
 import json
 import os
+from typing import Iterable
 
 import pytest
 from click.testing import CliRunner
@@ -363,7 +364,7 @@ def test_cli_with_setup_py_no_direct_dependencies():
 def check_specs_resolution(
     specifier,
     expected_file,
-    extra_options=tuple(),
+    extra_options: Iterable = tuple(),
     regen=REGEN_TEST_FIXTURES,
 ):
     result_file = test_env.get_temp_file("json")
@@ -447,7 +448,7 @@ def test_passing_of_unsupported_os():
 def check_requirements_resolution(
     requirements_file,
     expected_file,
-    extra_options=tuple(),
+    extra_options: Iterable = tuple(),
     regen=REGEN_TEST_FIXTURES,
     pdt_output=False,
 ):
@@ -464,7 +465,7 @@ def check_requirements_resolution(
 def check_setup_py_resolution(
     setup_py,
     expected_file,
-    extra_options=tuple(),
+    extra_options: Iterable = tuple(),
     regen=REGEN_TEST_FIXTURES,
     pdt_output=False,
     expected_rc=0,
@@ -512,6 +513,23 @@ def check_data_results(results, expected_file, regen=REGEN_TEST_FIXTURES):
     else:
         with open(expected_file) as reso:
             expected = json.load(reso)
+
+    if results != expected:
+        # in case of a test failure, show a human-readable diff
+        # of the expected and actual result file.
+        actual_string = json.dumps(results, indent=2)
+        expected_string = json.dumps(expected, indent=2)
+
+        for line in difflib.unified_diff(
+            expected_string.split("\n"),
+            actual_string.split("\n"),
+            "expected",
+            "actual",
+            n=3,
+            lineterm="\n",
+        ):
+            print(line)
+
     assert results == expected
 
 

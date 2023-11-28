@@ -7,6 +7,7 @@
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
+import configparser
 import subprocess
 import unittest
 
@@ -16,6 +17,11 @@ class BaseTests(unittest.TestCase):
         """
         This test shouldn't run in proliferated repositories.
         """
+        setup_cfg = configparser.ConfigParser()
+        setup_cfg.read("setup.cfg")
+        if setup_cfg["metadata"]["name"] != "skeleton":
+            return
+
         args = "make check"
         try:
             subprocess.check_output(args.split())
