@@ -9,7 +9,7 @@
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
-from typing import List
+from typing import List, Iterable, Optional
 
 from packageurl import PackageURL
 
@@ -24,9 +24,9 @@ from python_inspector.utils_pypi import Environment
 from python_inspector.utils_pypi import PypiSimpleRepository
 
 
-def get_pypi_data_from_purl(
+async def get_pypi_data_from_purl(
     purl: str, environment: Environment, repos: List[PypiSimpleRepository], prefer_source: bool
-) -> PackageData:
+) -> Optional[PackageData]:
     """
     Generate `Package` object from the `purl` string of pypi type
 
@@ -36,18 +36,19 @@ def get_pypi_data_from_purl(
     ``prefer_source`` is a boolean value to prefer source distribution over wheel,
     if no source distribution is available then wheel is used
     """
-    purl = PackageURL.from_string(purl)
-    name = purl.name
-    version = purl.version
+    parsed_purl = PackageURL.from_string(purl)
+    name = parsed_purl.name
+    version = parsed_purl.version
     if not version:
         raise Exception("Version is not specified in the purl")
     base_path = "https://pypi.org/pypi"
     api_url = f"{base_path}/{name}/{version}/json"
-    from python_inspector.resolution import get_response
 
-    response = get_response(api_url)
+    from python_inspector.utils import get_response_async
+    response = await get_response_async(api_url)
     if not response:
-        return []
+        return None
+
     info = response.get("info") or {}
     homepage_url = info.get("home_page")
     project_urls = info.get("project_urls") or {}
@@ -56,13 +57,9 @@ def get_pypi_data_from_purl(
     python_version = get_python_version_from_env_tag(python_version=environment.python_version)
     valid_distribution_urls = []
 
-    valid_distribution_urls.append(
-        get_sdist_download_url(
-            purl=purl,
-            repos=repos,
-            python_version=python_version,
-        )
-    )
+    sdist_url = get_sdist_download_url(purl=parsed_purl, repos=repos, python_version=python_version)
+    if sdist_url:
+        valid_distribution_urls.append(sdist_url)
 
     valid_distribution_urls = [url for url in valid_distribution_urls if url]
 
@@ -71,7 +68,7 @@ def get_pypi_data_from_purl(
     if not valid_distribution_urls or not prefer_source:
         wheel_urls = list(
             get_wheel_download_urls(
-                purl=purl,
+                purl=parsed_purl,
                 repos=repos,
                 environment=environment,
                 python_version=python_version,
@@ -79,16 +76,19 @@ def get_pypi_data_from_purl(
         )
         wheel_url = choose_single_wheel(wheel_urls)
         if wheel_url:
-            valid_distribution_urls.append(wheel_url)
+            valid_distribution_urls.insert(0, wheel_url)
 
-    urls = response.get("urls") or []
-    for url in urls:
-        dist_url = url.get("url")
-        if dist_url not in valid_distribution_urls:
+    urls = {url.get("url"): url for url in response.get("urls", [])}
+    # iterate over the valid distribution urls and return the first
+    # one that is matching.
+    for dist_url in valid_distribution_urls:
+        if dist_url not in urls:
             continue
-        digests = url.get("digests") or {}
 
-        yield PackageData(
+        url_data = urls.get(dist_url)
+        digests = url_data.get("digests", {})
+
+        return PackageData(
             primary_language="Python",
             description=get_description(info),
             homepage_url=homepage_url,
@@ -98,10 +98,10 @@ def get_pypi_data_from_purl(
             license_expression=info.get("license_expression"),
             declared_license=get_declared_license(info),
             download_url=dist_url,
-            size=url.get("size"),
-            md5=digests.get("md5") or url.get("md5_digest"),
+            size=url_data.get("size"),
+            md5=digests.get("md5") or url_data.get("md5_digest"),
             sha256=digests.get("sha256"),
-            release_date=url.get("upload_time"),
+            release_date=url_data.get("upload_time"),
             keywords=get_keywords(info),
             parties=get_parties(
                 info,
@@ -110,8 +110,10 @@ def get_pypi_data_from_purl(
                 maintainer_key="maintainer",
                 maintainer_email_key="maintainer_email",
             ),
-            **purl.to_dict(),
+            **parsed_purl.to_dict(),
         )
+
+    return None
 
 
 def choose_single_wheel(wheel_urls):
@@ -125,18 +127,18 @@ def choose_single_wheel(wheel_urls):
 
 def get_pypi_bugtracker_url(project_urls):
     bug_tracking_url = project_urls.get("Tracker")
-    if not (bug_tracking_url):
+    if not bug_tracking_url:
         bug_tracking_url = project_urls.get("Issue Tracker")
-    if not (bug_tracking_url):
+    if not bug_tracking_url:
         bug_tracking_url = project_urls.get("Bug Tracker")
     return bug_tracking_url
 
 
 def get_pypi_codeview_url(project_urls):
     code_view_url = project_urls.get("Source")
-    if not (code_view_url):
+    if not code_view_url:
         code_view_url = project_urls.get("Code")
-    if not (code_view_url):
+    if not code_view_url:
         code_view_url = project_urls.get("Source Code")
     return code_view_url
 
@@ -146,7 +148,7 @@ def get_wheel_download_urls(
     repos: List[PypiSimpleRepository],
     environment: Environment,
     python_version: str,
-) -> List[str]:
+) -> Iterable[str]:
     """
     Return a list of download urls for the given purl.
     """

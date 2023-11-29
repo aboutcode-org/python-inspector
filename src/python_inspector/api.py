@@ -8,7 +8,7 @@
 # See https://aboutcode-orgnexB/python-inspector for support or download.
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
-
+import asyncio
 import os
 from netrc import netrc
 from typing import Dict
@@ -26,7 +26,6 @@ from _packagedcode.models import PackageData
 from _packagedcode.pypi import PipRequirementsFileHandler
 from _packagedcode.pypi import PythonSetupPyHandler
 from _packagedcode.pypi import can_process_dependent_package
-from python_inspector import DEFAULT_PYTHON_VERSION
 from python_inspector import dependencies
 from python_inspector import utils
 from python_inspector import utils_pypi
@@ -231,7 +230,7 @@ def resolve_dependencies(
     if not direct_dependencies:
         return Resolution(
             packages=[],
-            resolution=[],
+            resolution={},
             files=files,
         )
 
@@ -288,19 +287,21 @@ def resolve_dependencies(
         ignore_errors=ignore_errors,
     )
 
-    packages = []
+    async def gather_pypi_data():
+        async def get_pypi_data(package):
+            if verbose:
+                printer(f"  package '{package}'")
 
-    for package in purls:
-        packages.extend(
-            [
-                pkg.to_dict()
-                for pkg in list(
-                    get_pypi_data_from_purl(
-                        package, repos=repos, environment=environment, prefer_source=prefer_source
-                    )
-                )
-            ],
-        )
+            return await get_pypi_data_from_purl(
+                package, repos=repos, environment=environment, prefer_source=prefer_source
+            )
+
+        if verbose:
+            printer(f"retrieve data from pypi:")
+
+        return await asyncio.gather(*[get_pypi_data(package) for package in purls])
+
+    packages = [pkg.to_dict() for pkg in asyncio.run(gather_pypi_data()) if pkg is not None]
 
     if verbose:
         printer("done!")
@@ -316,14 +317,14 @@ resolver_api = resolve_dependencies
 
 
 def resolve(
-    direct_dependencies,
-    environment,
-    repos=tuple(),
-    as_tree=False,
-    max_rounds=200000,
-    pdt_output=False,
-    analyze_setup_py_insecurely=False,
-    ignore_errors=False,
+    direct_dependencies: List[DependentPackage],
+    environment: Environment,
+    repos: Sequence[utils_pypi.PypiSimpleRepository] = tuple(),
+    as_tree: bool = False,
+    max_rounds: int = 200000,
+    pdt_output: bool = False,
+    analyze_setup_py_insecurely: bool = False,
+    ignore_errors: bool = False,
 ):
     """
     Resolve dependencies given a ``direct_dependencies`` list of
