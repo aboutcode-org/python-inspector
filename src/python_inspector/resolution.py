@@ -10,7 +10,6 @@
 import ast
 import operator
 import os
-import re
 import tarfile
 from typing import Dict
 from typing import Generator
