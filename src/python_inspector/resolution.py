@@ -11,7 +11,7 @@ import ast
 import operator
 import os
 import tarfile
-from typing import Dict
+from typing import Dict, Iterable, Optional
 from typing import Generator
 from typing import List
 from typing import NamedTuple
@@ -70,7 +70,7 @@ class Result(NamedTuple):
 
 
 def get_requirements_from_distribution(
-    handler: BasePypiHandler,
+    handler: type[BasePypiHandler],
     location: str,
 ) -> List[Requirement]:
     """
@@ -84,7 +84,7 @@ def get_requirements_from_distribution(
     reqs = []
     for package_data in handler.parse(location):
         dependencies = package_data.dependencies
-    reqs.extend(get_requirements_from_dependencies(dependencies=dependencies))
+        reqs.extend(get_requirements_from_dependencies(dependencies=dependencies))
     return reqs
 
 
@@ -103,7 +103,7 @@ def get_deps_from_distribution(
     deps = []
     for package_data in handler.parse(location):
         dependencies = package_data.dependencies
-        deps.extend(dependencies=dependencies)
+        deps.extend(dependencies)
     return deps
 
 
@@ -254,7 +254,7 @@ def remove_extras(identifier: str) -> str:
     return name
 
 
-def get_reqs_from_requirements_file_in_sdist(sdist_location: str, files: str) -> List[Requirement]:
+def get_reqs_from_requirements_file_in_sdist(sdist_location: str, files: List) -> List[Requirement]:
     """
     Return a list of parsed requirements from the ``sdist_location`` sdist location
     """
@@ -282,7 +282,7 @@ def get_requirements_from_python_manifest(
     """
     Return a list of parsed requirements from the ``sdist_location`` sdist location
     """
-    # Look in requirements file if and only if they are refered in setup.py or setup.cfg
+    # Look in requirements file if and only if they are referred in setup.py or setup.cfg
     # And no deps have been yielded by requirements file.
     requirements = list(
         get_reqs_from_requirements_file_in_sdist(
@@ -388,7 +388,7 @@ class PythonInputProvider(AbstractProvider):
         return transitive, identifier
 
     def get_versions_for_package(
-        self, name: str, repo: Union[List[PypiSimpleRepository], None] = None
+        self, name: str, repo: Optional[PypiSimpleRepository] = None
     ) -> List[Version]:
         """
         Return a list of versions for a package.
@@ -442,7 +442,7 @@ class PythonInputProvider(AbstractProvider):
 
     def get_requirements_for_package(
         self, purl: PackageURL, candidate: Candidate
-    ) -> Generator[Requirement, None, None]:
+    ) -> Iterable[Requirement]:
         """
         Yield requirements for a package.
         """
@@ -524,7 +524,7 @@ class PythonInputProvider(AbstractProvider):
 
     def get_requirements_for_package_from_pypi_json_api(
         self, purl: PackageURL
-    ) -> List[Requirement]:
+    ) -> Iterable[Requirement]:
         """
         Return requirements for a package from the PyPI.org JSON API
         """
@@ -548,7 +548,7 @@ class PythonInputProvider(AbstractProvider):
         bad_versions: List[str],
         name: str,
         extras: Dict,
-    ) -> Generator[Candidate, None, None]:
+    ) -> Iterable[Candidate]:
         """
         Generate candidates for the given identifier. Overridden.
         """
@@ -574,7 +574,7 @@ class PythonInputProvider(AbstractProvider):
         incompatibilities: Dict,
     ) -> Generator[Candidate, None, None]:
         """
-        Yield candidates for the given identifier, requirements and incompatibilities
+        Yield candidates for the given identifier, requirements and incompatibilities.
         """
         name = remove_extras(identifier=identifier)
         bad_versions = {c.version for c in incompatibilities[identifier]}

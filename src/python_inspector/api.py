@@ -11,7 +11,7 @@
 import asyncio
 import os
 from netrc import netrc
-from typing import Dict
+from typing import Dict, Tuple
 from typing import List
 from typing import NamedTuple
 from typing import Sequence
@@ -365,14 +365,14 @@ def get_resolved_dependencies(
     pdt_output: bool = False,
     analyze_setup_py_insecurely: bool = False,
     ignore_errors: bool = False,
-):
+) -> Tuple[List[Dict], List[str]]:
     """
     Return resolved dependencies of a ``requirements`` list of Requirement for
-    an ``enviroment`` Environment. The resolved dependencies are formatted as
+    an ``environment`` Environment. The resolved dependencies are formatted as
     parent/children or a nested tree if ``as_tree`` is True.
 
     Used the provided ``repos`` list of PypiSimpleRepository.
-    If empty, use instead the PyPI.org JSON API exclusively instead
+    If empty, use instead the PyPI.org JSON API exclusively instead.
     """
     resolver = Resolver(
         provider=PythonInputProvider(
@@ -386,11 +386,8 @@ def get_resolved_dependencies(
     resolver_results = resolver.resolve(requirements=requirements, max_rounds=max_rounds)
     package_list = get_package_list(results=resolver_results)
     if pdt_output:
-        return (format_pdt_tree(resolver_results), package_list)
-    return (
-        format_resolution(resolver_results, as_tree=as_tree),
-        package_list,
-    )
+        return format_pdt_tree(resolver_results), package_list
+    return format_resolution(resolver_results, as_tree=as_tree), package_list
 
 
 def get_requirements_from_direct_dependencies(

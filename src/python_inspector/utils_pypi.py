@@ -98,7 +98,7 @@ Wheel downloader
 """
 
 TRACE = False
-TRACE_DEEP = False
+TRACE_DEEP = True
 TRACE_ULTRA_DEEP = False
 
 # Supported environments
@@ -265,7 +265,7 @@ def download_wheel(
             fetched_wheel_filenames.append(fetched_wheel_filename)
 
         if fetched_wheel_filenames:
-            # do not futher fetch from other repos if we find in first, typically PyPI
+            # do not further fetch from other repos if we find in first, typically PyPI
             break
     return fetched_wheel_filenames
 
@@ -1770,7 +1770,7 @@ def get_remote_file_content(
 ):
     """
     Fetch and return a tuple of (headers, content) at `url`. Return content as a
-    text string if `as_text` is True. Otherwise return the content as bytes.
+    text string if `as_text` is True. Otherwise, return the content as bytes.
 
     If `header_only` is True, return only (headers, None). Headers is a mapping
     of HTTP headers.
@@ -1779,7 +1779,7 @@ def get_remote_file_content(
     """
     time.sleep(_delay)
     headers = headers or {}
-    # using a GET with stream=True ensure we get the the final header from
+    # using a GET with stream=True ensure we get the final header from
     # several redirects and that we can ignore content there. A HEAD request may
     # not get us this last header
     if verbose and not echo_func:
@@ -1834,7 +1834,7 @@ def fetch_and_save(
 ):
     """
     Fetch content at ``path_or_url`` URL or path and save this to
-    ``dest_dir/filername``. Return the fetched content. Raise an Exception on
+    ``dest_dir/filename``. Return the fetched content. Raise an Exception on
     errors. Treats the content as text if as_text is True otherwise as treat as
     binary.
     """
@@ -1845,6 +1845,7 @@ def fetch_and_save(
         verbose=verbose,
         echo_func=echo_func,
     )
+
     output = os.path.join(dest_dir, filename)
     wmode = "w" if as_text else "wb"
     with open(output, wmode) as fo:

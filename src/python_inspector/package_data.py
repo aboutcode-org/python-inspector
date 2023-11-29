@@ -9,7 +9,7 @@
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
-from typing import List, Iterable, Optional
+from typing import List, Iterable, Optional, Dict
 
 from packageurl import PackageURL
 
@@ -78,7 +78,7 @@ async def get_pypi_data_from_purl(
         if wheel_url:
             valid_distribution_urls.insert(0, wheel_url)
 
-    urls = {url.get("url"): url for url in response.get("urls", [])}
+    urls = {url.get("url"): url for url in response.get("urls") or []}
     # iterate over the valid distribution urls and return the first
     # one that is matching.
     for dist_url in valid_distribution_urls:
@@ -86,7 +86,7 @@ async def get_pypi_data_from_purl(
             continue
 
         url_data = urls.get(dist_url)
-        digests = url_data.get("digests", {})
+        digests = url_data.get("digests") or {}
 
         return PackageData(
             primary_language="Python",
@@ -116,16 +116,18 @@ async def get_pypi_data_from_purl(
     return None
 
 
-def choose_single_wheel(wheel_urls):
+def choose_single_wheel(wheel_urls: List[str]) -> Optional[str]:
     """
     Sort wheel urls descendingly and return the first one
     """
     wheel_urls.sort(reverse=True)
     if wheel_urls:
         return wheel_urls[0]
+    else:
+        return None
 
 
-def get_pypi_bugtracker_url(project_urls):
+def get_pypi_bugtracker_url(project_urls: Dict) -> Optional[str]:
     bug_tracking_url = project_urls.get("Tracker")
     if not bug_tracking_url:
         bug_tracking_url = project_urls.get("Issue Tracker")
@@ -134,7 +136,7 @@ def get_pypi_bugtracker_url(project_urls):
     return bug_tracking_url
 
 
-def get_pypi_codeview_url(project_urls):
+def get_pypi_codeview_url(project_urls: Dict) -> Optional[str]:
     code_view_url = project_urls.get("Source")
     if not code_view_url:
         code_view_url = project_urls.get("Code")
