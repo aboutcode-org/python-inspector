@@ -8,7 +8,7 @@
 # See https://github.com/nexB/skeleton for support or download.
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
-
+import asyncio
 import email
 import itertools
 import os
@@ -18,8 +18,11 @@ import shutil
 import tempfile
 import time
 from collections import defaultdict
-from typing import List, Dict, Union, Tuple
+from typing import Dict
+from typing import List
 from typing import NamedTuple
+from typing import Tuple
+from typing import Union
 from urllib.parse import quote_plus
 from urllib.parse import unquote
 from urllib.parse import urlparse
@@ -1310,7 +1313,7 @@ class PypiPackage(NameVer):
         ...     Link(url="https://example.com/bar/bitarray-0.8.1.tar.gz",python_requires= ">=3.7"),
         ...     Link(url="bitarray-0.8.1.tar.gz.ABOUT",python_requires= ">=3.7"),
         ...     Link(url="bit.LICENSE", python_requires=">=3.7")]
-        >>> results = list(PypiPackage.dists_from_links(links))
+        >>> results = list(asyncio.run(PypiPackage.dists_from_links(links)))
         >>> for r in results:
         ...    print(r.__class__.__name__, r.name, r.version)
         ...    if isinstance(r, Wheel):

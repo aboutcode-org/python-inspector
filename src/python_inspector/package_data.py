@@ -9,7 +9,10 @@
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
-from typing import List, Iterable, Optional, Dict
+from typing import Dict
+from typing import Iterable
+from typing import List
+from typing import Optional
 
 from packageurl import PackageURL
 
