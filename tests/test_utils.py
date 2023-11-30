@@ -11,6 +11,7 @@
 import collections
 import json
 import os
+import sys
 from netrc import netrc
 from unittest import mock
 
@@ -49,6 +50,7 @@ def test_get_netrc_auth_with_no_matching_url():
 
 
 @pytest.mark.asyncio
+@pytest.mark.skipif(sys.version_info < (3, 8), reason="requires python3.8 or higher")
 @mock.patch("python_inspector.utils_pypi.CACHE.get")
 async def test_fetch_links(mock_get):
     file_name = test_env.get_test_loc("psycopg2.html")
