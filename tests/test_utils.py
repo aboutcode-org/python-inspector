@@ -53,7 +53,7 @@ def test_get_netrc_auth_with_no_matching_url():
 async def test_fetch_links(mock_get):
     file_name = test_env.get_test_loc("psycopg2.html")
     with open(file_name) as file:
-        mock_get.return_value = file.read()
+        mock_get.return_value = file.read(), file_name
     links = await PypiSimpleRepository().fetch_links(normalized_name="psycopg2")
     result_file = test_env.get_temp_file("json")
     expected_file = test_env.get_test_loc("psycopg2-links-expected.json", must_exist=False)
@@ -63,7 +63,7 @@ async def test_fetch_links(mock_get):
     # Testing relative links
     relative_links_file = test_env.get_test_loc("fetch_links_test.html")
     with open(relative_links_file) as relative_file:
-        mock_get.return_value = relative_file.read()
+        mock_get.return_value = relative_file.read(), relative_links_file
     relative_links = await PypiSimpleRepository().fetch_links(normalized_name="sources.whl")
     relative_links_result_file = test_env.get_temp_file("json")
     relative_links_expected_file = test_env.get_test_loc(
