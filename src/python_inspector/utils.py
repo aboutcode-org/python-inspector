@@ -11,9 +11,10 @@
 
 import json
 import os
-from typing import Dict, Optional
+from typing import Dict
 from typing import List
 from typing import NamedTuple
+from typing import Optional
 
 import aiohttp
 import requests

@@ -8,7 +8,8 @@
 # See https://github.com/nexB/skeleton for support or download.
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
-from typing import Iterable, Mapping
+from typing import Iterable
+from typing import Mapping
 
 from packageurl import PackageURL
 from packvers.requirements import Requirement

@@ -11,10 +11,11 @@
 import asyncio
 import os
 from netrc import netrc
-from typing import Dict, Tuple
+from typing import Dict
 from typing import List
 from typing import NamedTuple
 from typing import Sequence
+from typing import Tuple
 
 from packageurl import PackageURL
 from packvers.requirements import Requirement
@@ -23,9 +24,10 @@ from resolvelib import Resolver
 
 from _packagedcode.models import DependentPackage
 from _packagedcode.models import PackageData
-from _packagedcode.pypi import PipRequirementsFileHandler, get_resolved_purl
+from _packagedcode.pypi import PipRequirementsFileHandler
 from _packagedcode.pypi import PythonSetupPyHandler
 from _packagedcode.pypi import can_process_dependent_package
+from _packagedcode.pypi import get_resolved_purl
 from python_inspector import dependencies
 from python_inspector import utils
 from python_inspector import utils_pypi
