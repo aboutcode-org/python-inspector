@@ -285,16 +285,20 @@ def resolve_dependencies(
         pdt_output=pdt_output,
         analyze_setup_py_insecurely=analyze_setup_py_insecurely,
         ignore_errors=ignore_errors,
+        verbose=verbose,
+        printer=printer
     )
 
     async def gather_pypi_data():
         async def get_pypi_data(package):
-            if verbose:
-                printer(f"  package '{package}'")
-
-            return await get_pypi_data_from_purl(
+            data = await get_pypi_data_from_purl(
                 package, repos=repos, environment=environment, prefer_source=prefer_source
             )
+
+            if verbose:
+                printer(f"  retrieved package '{package}'")
+
+            return data
 
         if verbose:
             printer(f"retrieve data from pypi:")
@@ -325,6 +329,8 @@ def resolve(
     pdt_output: bool = False,
     analyze_setup_py_insecurely: bool = False,
     ignore_errors: bool = False,
+    verbose: bool = False,
+    printer=print
 ):
     """
     Resolve dependencies given a ``direct_dependencies`` list of
@@ -351,6 +357,8 @@ def resolve(
         pdt_output=pdt_output,
         analyze_setup_py_insecurely=analyze_setup_py_insecurely,
         ignore_errors=ignore_errors,
+        verbose=verbose,
+        printer=printer
     )
 
     return resolved_dependencies, packages
@@ -365,6 +373,8 @@ def get_resolved_dependencies(
     pdt_output: bool = False,
     analyze_setup_py_insecurely: bool = False,
     ignore_errors: bool = False,
+    verbose: bool = False,
+    printer=print
 ) -> Tuple[List[Dict], List[str]]:
     """
     Return resolved dependencies of a ``requirements`` list of Requirement for
@@ -374,13 +384,31 @@ def get_resolved_dependencies(
     Used the provided ``repos`` list of PypiSimpleRepository.
     If empty, use instead the PyPI.org JSON API exclusively instead.
     """
+    provider = PythonInputProvider(
+        environment=environment,
+        repos=repos,
+        analyze_setup_py_insecurely=analyze_setup_py_insecurely,
+        ignore_errors=ignore_errors,
+    )
+
+    async def gather_version_data():
+        async def get_version_data(name: str):
+            versions = await provider.fill_versions_for_package(name)
+
+            if verbose:
+                printer(f"  retrieved versions for package '{name}'")
+
+            return versions
+
+        if verbose:
+            printer(f"versions:")
+
+        return await asyncio.gather(*[get_version_data(requirement.name) for requirement in requirements])
+
+    asyncio.run(gather_version_data())
+
     resolver = Resolver(
-        provider=PythonInputProvider(
-            environment=environment,
-            repos=repos,
-            analyze_setup_py_insecurely=analyze_setup_py_insecurely,
-            ignore_errors=ignore_errors,
-        ),
+        provider=provider,
         reporter=BaseReporter(),
     )
     resolver_results = resolver.resolve(requirements=requirements, max_rounds=max_rounds)

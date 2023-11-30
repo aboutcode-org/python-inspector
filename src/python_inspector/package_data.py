@@ -56,8 +56,7 @@ async def get_pypi_data_from_purl(
     bug_tracking_url = get_pypi_bugtracker_url(project_urls)
     python_version = get_python_version_from_env_tag(python_version=environment.python_version)
     valid_distribution_urls = []
-
-    sdist_url = get_sdist_download_url(purl=parsed_purl, repos=repos, python_version=python_version)
+    sdist_url = await get_sdist_download_url(purl=parsed_purl, repos=repos, python_version=python_version)
     if sdist_url:
         valid_distribution_urls.append(sdist_url)
 
@@ -66,14 +65,16 @@ async def get_pypi_data_from_purl(
     # if prefer_source is True then only source distribution is used
     # in case of no source distribution available then wheel is used
     if not valid_distribution_urls or not prefer_source:
-        wheel_urls = list(
-            get_wheel_download_urls(
-                purl=parsed_purl,
-                repos=repos,
-                environment=environment,
-                python_version=python_version,
-            )
-        )
+        wheel_urls = \
+            [
+                item
+                for item in await get_wheel_download_urls(
+                    purl=parsed_purl,
+                    repos=repos,
+                    environment=environment,
+                    python_version=python_version,
+                )
+            ]
         wheel_url = choose_single_wheel(wheel_urls)
         if wheel_url:
             valid_distribution_urls.insert(0, wheel_url)
@@ -145,38 +146,40 @@ def get_pypi_codeview_url(project_urls: Dict) -> Optional[str]:
     return code_view_url
 
 
-def get_wheel_download_urls(
+async def get_wheel_download_urls(
     purl: PackageURL,
     repos: List[PypiSimpleRepository],
     environment: Environment,
     python_version: str,
-) -> Iterable[str]:
+) -> List[str]:
     """
     Return a list of download urls for the given purl.
     """
+    download_urls = []
     for repo in repos:
-        for wheel in utils_pypi.get_supported_and_valid_wheels(
+        for wheel in await utils_pypi.get_supported_and_valid_wheels(
             repo=repo,
             name=purl.name,
             version=purl.version,
             environment=environment,
             python_version=python_version,
         ):
-            yield wheel.download_url
+            download_urls.append(await wheel.download_url)
+    return download_urls
 
 
-def get_sdist_download_url(
+async def get_sdist_download_url(
     purl: PackageURL, repos: List[PypiSimpleRepository], python_version: str
 ) -> str:
     """
     Return a list of download urls for the given purl.
     """
     for repo in repos:
-        sdist = utils_pypi.get_valid_sdist(
+        sdist = await utils_pypi.get_valid_sdist(
             repo=repo,
             name=purl.name,
             version=purl.version,
             python_version=python_version,
         )
         if sdist:
-            return sdist.download_url
+            return await sdist.download_url

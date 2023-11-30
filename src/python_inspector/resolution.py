@@ -8,10 +8,11 @@
 #
 
 import ast
+import asyncio
 import operator
 import os
 import tarfile
-from typing import Dict, Iterable, Optional
+from typing import Dict, Iterable, Mapping
 from typing import Generator
 from typing import List
 from typing import NamedTuple
@@ -40,7 +41,7 @@ from python_inspector.error import NoVersionsFound
 from python_inspector.setup_py_live_eval import iter_requirements
 from python_inspector.utils import Candidate
 from python_inspector.utils import contain_string
-from python_inspector.utils import get_response
+from python_inspector.utils import get_response_async
 from python_inspector.utils_pypi import PypiSimpleRepository
 
 
@@ -178,7 +179,7 @@ def get_python_version_from_env_tag(python_version: str) -> str:
     return python_version
 
 
-def fetch_and_extract_sdist(
+async def fetch_and_extract_sdist(
     repos: List[PypiSimpleRepository], candidate: Candidate, python_version: str
 ) -> Union[str, None]:
     """
@@ -191,7 +192,7 @@ def fetch_and_extract_sdist(
     the required ``python_version``.
     Raise an Exception if extraction fails.
     """
-    sdist = utils_pypi.download_sdist(
+    sdist = await utils_pypi.download_sdist(
         name=candidate.name,
         version=str(candidate.version),
         repos=repos,
@@ -360,7 +361,7 @@ class PythonInputProvider(AbstractProvider):
         self.environment = environment
         self.environment_marker = get_environment_marker_from_environment(self.environment)
         self.repos = repos or []
-        self.versions_by_package = {}
+        self.versions_by_package: Dict[str, List[Version]] = {}
         self.dependencies_by_purl = {}
         self.wheel_or_sdist_by_package = {}
         self.analyze_setup_py_insecurely = analyze_setup_py_insecurely
@@ -387,25 +388,38 @@ class PythonInputProvider(AbstractProvider):
         transitive = all(p is not None for _, p in information[identifier])
         return transitive, identifier
 
-    def get_versions_for_package(
-        self, name: str, repo: Optional[PypiSimpleRepository] = None
-    ) -> List[Version]:
+    def get_versions_for_package(self, name: str) -> List[Version]:
         """
         Return a list of versions for a package.
         """
-        if repo and self.environment:
-            return self.get_versions_for_package_from_repo(name, repo)
+        versions = self.versions_by_package.get(name)
+        if not versions:
+            return asyncio.run(self.fill_versions_for_package(name))
         else:
-            return self.get_versions_for_package_from_pypi_json_api(name)
+            return versions
 
-    def get_versions_for_package_from_repo(
+    async def fill_versions_for_package(self, name: str) -> List[Version]:
+        versions = self.versions_by_package.get(name) or []
+        if versions:
+            return versions
+
+        if self.repos and self.environment:
+            for repo in self.repos:
+                versions.extend(await self._get_versions_for_package_from_repo(name, repo))
+        else:
+            versions.extend(await self._get_versions_for_package_from_pypi_json_api(name))
+
+        self.versions_by_package[name] = versions
+        return versions
+
+    async def _get_versions_for_package_from_repo(
         self, name: str, repo: PypiSimpleRepository
     ) -> List[Version]:
         """
         Return a list of versions for a package name from a repo
         """
         versions = []
-        for version, package in repo.get_package_versions(name).items():
+        for version, package in (await repo.get_package_versions(name)).items():
             python_version = parse_version(
                 get_python_version_from_env_tag(python_version=self.environment.python_version)
             )
@@ -426,32 +440,45 @@ class PythonInputProvider(AbstractProvider):
                 versions.append(version)
         return versions
 
-    def get_versions_for_package_from_pypi_json_api(self, name: str) -> List[Version]:
+    async def _get_versions_for_package_from_pypi_json_api(self, name: str) -> List[Version]:
         """
         Return a list of versions for a package name from the PyPI.org JSON API
         """
-        if name not in self.versions_by_package:
-            api_url = f"https://pypi.org/pypi/{name}/json"
-            resp = get_response(api_url)
-            if not resp:
-                self.versions_by_package[name] = []
-            releases = resp.get("releases") or {}
-            self.versions_by_package[name] = releases.keys() or []
-        versions = self.versions_by_package[name]
-        return versions
+        api_url = f"https://pypi.org/pypi/{name}/json"
+        resp = await get_response_async(api_url)
+        if not resp:
+            self.versions_by_package[name] = []
+        releases = resp.get("releases") or {}
+        return releases.keys() or []
 
     def get_requirements_for_package(
         self, purl: PackageURL, candidate: Candidate
-    ) -> Iterable[Requirement]:
+    ) -> List[Requirement]:
+        dependencies = self.dependencies_by_purl.get(str(purl))
+        if not dependencies:
+            return asyncio.run(self.fill_requirements_for_package(purl, candidate))
+        else:
+            return dependencies
+
+    async def fill_requirements_for_package(
+        self, purl: PackageURL, candidate: Candidate
+    ) -> List[Requirement]:
         """
         Yield requirements for a package.
         """
-        if self.repos and self.environment:
-            return self.get_requirements_for_package_from_pypi_simple(candidate)
-        else:
-            return self.get_requirements_for_package_from_pypi_json_api(purl)
+        dependencies = self.dependencies_by_purl.get(str(purl)) or []
+        if dependencies:
+            return dependencies
 
-    def get_requirements_for_package_from_pypi_simple(
+        if self.repos and self.environment:
+            dependencies.extend(await self._get_requirements_for_package_from_pypi_simple(candidate))
+        else:
+            dependencies.extend(await self._get_requirements_for_package_from_pypi_json_api(purl))
+
+        self.dependencies_by_purl[str(purl)] = dependencies
+        return dependencies
+
+    async def _get_requirements_for_package_from_pypi_simple(
         self, candidate: Candidate
     ) -> List[Requirement]:
         """
@@ -461,7 +488,7 @@ class PythonInputProvider(AbstractProvider):
             get_python_version_from_env_tag(python_version=self.environment.python_version)
         )
 
-        wheels = utils_pypi.download_wheel(
+        wheels = await utils_pypi.download_wheel(
             name=candidate.name,
             version=str(candidate.version),
             environment=self.environment,
@@ -476,17 +503,14 @@ class PythonInputProvider(AbstractProvider):
                     handler=PypiWheelHandler,
                     location=wheel_location,
                 )
-                if requirements:
-                    yield from requirements
                 # We are only looking at the first wheel and not other wheels
-                break
-
+                return requirements
         else:
-            sdist_location = fetch_and_extract_sdist(
+            sdist_location = await fetch_and_extract_sdist(
                 repos=self.repos, candidate=candidate, python_version=python_version
             )
             if not sdist_location:
-                return
+                return []
 
             setup_py_location = os.path.join(
                 sdist_location,
@@ -498,9 +522,7 @@ class PythonInputProvider(AbstractProvider):
             )
 
             if self.analyze_setup_py_insecurely:
-                yield from get_reqs_insecurely(
-                    setup_py_location=setup_py_location,
-                )
+                return get_reqs_insecurely(setup_py_location=setup_py_location)
             else:
                 requirements = list(
                     get_setup_requirements(
@@ -510,35 +532,31 @@ class PythonInputProvider(AbstractProvider):
                     )
                 )
                 if requirements:
-                    yield from requirements
+                    return requirements
                 else:
-                    # Look in requirements file if and only if thy are refered in setup.py or setup.cfg
+                    # Look in requirements file if and only if thy are referred in setup.py or setup.cfg
                     # And no deps have been yielded by requirements file
-
-                    yield from get_requirements_from_python_manifest(
+                    return get_requirements_from_python_manifest(
                         sdist_location=sdist_location,
                         setup_py_location=setup_py_location,
                         files=[setup_cfg_location, setup_py_location],
                         analyze_setup_py_insecurely=self.analyze_setup_py_insecurely,
                     )
 
-    def get_requirements_for_package_from_pypi_json_api(
+    async def _get_requirements_for_package_from_pypi_json_api(
         self, purl: PackageURL
-    ) -> Iterable[Requirement]:
+    ) -> List[Requirement]:
         """
         Return requirements for a package from the PyPI.org JSON API
         """
         # if no repos are provided use the incorrect but fast JSON API
-        if str(purl) not in self.dependencies_by_purl:
-            api_url = f"https://pypi.org/pypi/{purl.name}/{purl.version}/json"
-            resp = get_response(api_url)
-            if not resp:
-                self.dependencies_by_purl[str(purl)] = []
-            info = resp.get("info") or {}
-            requires_dist = info.get("requires_dist") or []
-            self.dependencies_by_purl[str(purl)] = requires_dist
-        for dependency in self.dependencies_by_purl[str(purl)]:
-            yield Requirement(dependency)
+        api_url = f"https://pypi.org/pypi/{purl.name}/{purl.version}/json"
+        resp = await get_response_async(api_url)
+        if not resp:
+            return []
+        info = resp.get("info") or {}
+        requires_dist = info.get("requires_dist") or []
+        return requires_dist
 
     def get_candidates(
         self,
@@ -570,7 +588,7 @@ class PythonInputProvider(AbstractProvider):
     def _iter_matches(
         self,
         identifier: str,
-        requirements: Dict,
+        requirements: Mapping[str, List[Requirement]],
         incompatibilities: Dict,
     ) -> Generator[Candidate, None, None]:
         """
@@ -579,12 +597,7 @@ class PythonInputProvider(AbstractProvider):
         name = remove_extras(identifier=identifier)
         bad_versions = {c.version for c in incompatibilities[identifier]}
         extras = {e for r in requirements[identifier] for e in r.extras}
-        versions = []
-        if not self.repos:
-            versions.extend(self.get_versions_for_package(name=name))
-        else:
-            for repo in self.repos:
-                versions.extend(self.get_versions_for_package(name=name, repo=repo))
+        versions = self.get_versions_for_package(name)
 
         if not versions:
             if self.ignore_errors:
@@ -604,7 +617,7 @@ class PythonInputProvider(AbstractProvider):
     def find_matches(
         self,
         identifier: str,
-        requirements: List[Requirement],
+        requirements: Mapping[str, List[Requirement]],
         incompatibilities: Dict,
     ) -> List[Candidate]:
         """Find all possible candidates that satisfy given constraints. Overridden."""
@@ -623,7 +636,7 @@ class PythonInputProvider(AbstractProvider):
             return True
         return False
 
-    def _iter_dependencies(self, candidate: Candidate) -> Generator[Requirement, None, None]:
+    def _iter_dependencies(self, candidate: Candidate) -> Iterable[Requirement]:
         """
         Yield dependencies for the given candidate.
         """
