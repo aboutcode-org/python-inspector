@@ -12,7 +12,7 @@ import asyncio
 import operator
 import os
 import tarfile
-from typing import Dict, Iterable, Mapping
+from typing import Dict, Iterable, Mapping, Type
 from typing import Generator
 from typing import List
 from typing import NamedTuple
@@ -71,7 +71,7 @@ class Result(NamedTuple):
 
 
 def get_requirements_from_distribution(
-    handler: type[BasePypiHandler],
+    handler: Type[BasePypiHandler],
     location: str,
 ) -> List[Requirement]:
     """
