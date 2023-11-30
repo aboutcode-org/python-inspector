@@ -18,13 +18,14 @@ import shutil
 import tempfile
 import time
 from collections import defaultdict
-from typing import List, Dict
+from typing import List, Dict, Union, Tuple
 from typing import NamedTuple
 from urllib.parse import quote_plus
 from urllib.parse import unquote
 from urllib.parse import urlparse
 from urllib.parse import urlunparse
 
+import aiofiles
 import aiohttp
 import attr
 import packageurl
@@ -1600,7 +1601,7 @@ class PypiSimpleRepository:
         name using the `index_url` of this repository.
         """
         package_url = f"{self.index_url}/{normalized_name}"
-        text = await CACHE.get(
+        text, _ = await CACHE.get(
             path_or_url=package_url,
             credentials=self.credentials,
             as_text=True,
@@ -1678,7 +1679,7 @@ class Cache:
         force=False,
         verbose=False,
         echo_func=None,
-    ):
+    ) -> Tuple[Union[str, bytes], str]:
         """
         Return the content fetched from a ``path_or_url`` through the cache.
         Raise an Exception on errors. Treats the content as text if as_text is
@@ -1699,13 +1700,13 @@ class Cache:
                 echo_func=echo_func,
             )
             wmode = "w" if as_text else "wb"
-            with open(cached, wmode) as fo:
-                fo.write(content)
-            return content
+            async with aiofiles.open(cached, mode=wmode) as fo:
+                await fo.write(content)
+            return content, cached
         else:
             if TRACE_DEEP:
                 print(f"        FILE CACHE HIT: {path_or_url}")
-            return get_local_file_content(path=cached, as_text=as_text)
+            return await get_local_file_content(path=cached, as_text=as_text), cached
 
 
 CACHE = Cache()
@@ -1737,13 +1738,13 @@ async def get_file_content(
     elif path_or_url.startswith("file://") or (
         path_or_url.startswith("/") and os.path.exists(path_or_url)
     ):
-        return get_local_file_content(path=path_or_url, as_text=as_text)
+        return await get_local_file_content(path=path_or_url, as_text=as_text)
 
     else:
         raise Exception(f"Unsupported URL scheme: {path_or_url}")
 
 
-def get_local_file_content(path, as_text=True):
+async def get_local_file_content(path: str, as_text=True) -> str:
     """
     Return the content at `url` as text. Return the content as bytes is
     `as_text` is False.
@@ -1752,8 +1753,8 @@ def get_local_file_content(path, as_text=True):
         path = path[7:]
 
     mode = "r" if as_text else "rb"
-    with open(path, mode) as fo:
-        return fo.read()
+    async with aiofiles.open(path, mode=mode) as fo:
+        return await fo.read()
 
 
 class RemoteNotFetchedException(Exception):
@@ -1835,7 +1836,7 @@ async def fetch_and_save(
     errors. Treats the content as text if as_text is True otherwise as treat as
     binary.
     """
-    content = await CACHE.get(
+    content, path = await CACHE.get(
         path_or_url=path_or_url,
         credentials=credentials,
         as_text=as_text,
@@ -1844,7 +1845,8 @@ async def fetch_and_save(
     )
 
     output = os.path.join(dest_dir, filename)
-    wmode = "w" if as_text else "wb"
-    with open(output, wmode) as fo:
-        fo.write(content)
+    if os.path.exists(output):
+        os.remove(output)
+
+    os.symlink(os.path.abspath(path), output)
     return content

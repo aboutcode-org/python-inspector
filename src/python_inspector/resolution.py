@@ -438,6 +438,7 @@ class PythonInputProvider(AbstractProvider):
                 )
             if valid_wheel_present or pypi_valid_python_version:
                 versions.append(version)
+
         return versions
 
     async def _get_versions_for_package_from_pypi_json_api(self, name: str) -> List[Version]:
@@ -556,7 +557,7 @@ class PythonInputProvider(AbstractProvider):
             return []
         info = resp.get("info") or {}
         requires_dist = info.get("requires_dist") or []
-        return requires_dist
+        return list(map(lambda r: Requirement(r), requires_dist))
 
     def get_candidates(
         self,

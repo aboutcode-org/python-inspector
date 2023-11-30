@@ -23,7 +23,7 @@ from resolvelib import Resolver
 
 from _packagedcode.models import DependentPackage
 from _packagedcode.models import PackageData
-from _packagedcode.pypi import PipRequirementsFileHandler
+from _packagedcode.pypi import PipRequirementsFileHandler, get_resolved_purl
 from _packagedcode.pypi import PythonSetupPyHandler
 from _packagedcode.pypi import can_process_dependent_package
 from python_inspector import dependencies
@@ -38,6 +38,7 @@ from python_inspector.resolution import get_package_list
 from python_inspector.resolution import get_python_version_from_env_tag
 from python_inspector.resolution import get_reqs_insecurely
 from python_inspector.resolution import get_requirements_from_python_manifest
+from python_inspector.utils import Candidate
 from python_inspector.utils_pypi import PLATFORMS_BY_OS
 from python_inspector.utils_pypi import PYPI_SIMPLE_URL
 from python_inspector.utils_pypi import Environment
@@ -230,7 +231,7 @@ def resolve_dependencies(
     if not direct_dependencies:
         return Resolution(
             packages=[],
-            resolution={},
+            resolution=[],
             files=files,
         )
 
@@ -301,7 +302,7 @@ def resolve_dependencies(
             return data
 
         if verbose:
-            printer(f"retrieve data from pypi:")
+            printer(f"retrieve package data from pypi:")
 
         return await asyncio.gather(*[get_pypi_data(package) for package in purls])
 
@@ -391,6 +392,8 @@ def get_resolved_dependencies(
         ignore_errors=ignore_errors,
     )
 
+    # gather version data for all requirements concurrently in advance.
+
     async def gather_version_data():
         async def get_version_data(name: str):
             versions = await provider.fill_versions_for_package(name)
@@ -406,6 +409,28 @@ def get_resolved_dependencies(
         return await asyncio.gather(*[get_version_data(requirement.name) for requirement in requirements])
 
     asyncio.run(gather_version_data())
+
+    # gather dependencies for all pinned requirements concurrently in advance.
+
+    async def gather_dependencies():
+        async def get_dependencies(requirement: Requirement):
+            purl = PackageURL(type="pypi", name=requirement.name)
+            resolved_purl = get_resolved_purl(purl=purl, specifiers=requirement.specifier)
+
+            if resolved_purl:
+                purl = resolved_purl.purl
+                candidate = Candidate(requirement.name, purl.version, requirement.extras)
+                await provider.fill_requirements_for_package(purl, candidate)
+
+                if verbose:
+                    printer(f"  retrieved dependencies for requirement '{str(purl)}'")
+
+        if verbose:
+            printer(f"dependencies:")
+
+        return await asyncio.gather(*[get_dependencies(requirement) for requirement in requirements])
+
+    asyncio.run(gather_dependencies())
 
     resolver = Resolver(
         provider=provider,
