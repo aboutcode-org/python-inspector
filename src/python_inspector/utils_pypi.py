@@ -1575,20 +1575,24 @@ class PypiSimpleRepository:
         """
         if not version:
             versions = list(
-                (await self._get_package_versions_map(
-                    name=name,
-                    verbose=verbose,
-                    echo_func=echo_func,
-                )).values()
+                (
+                    await self._get_package_versions_map(
+                        name=name,
+                        verbose=verbose,
+                        echo_func=echo_func,
+                    )
+                ).values()
             )
             # return the latest version
             return versions and versions[-1]
         else:
-            return (await self._get_package_versions_map(
-                name=name,
-                verbose=verbose,
-                echo_func=echo_func,
-            )).get(version)
+            return (
+                await self._get_package_versions_map(
+                    name=name,
+                    verbose=verbose,
+                    echo_func=echo_func,
+                )
+            ).get(version)
 
     async def fetch_links(
         self,
@@ -1795,9 +1799,7 @@ async def get_remote_file_content(
         auth = (credentials.get("login"), credentials.get("password"))
 
     async with aiohttp.ClientSession() as session:
-        async with session.get(url, allow_redirects=True,
-                               headers=headers,
-                               auth=auth) as response:
+        async with session.get(url, allow_redirects=True, headers=headers, auth=auth) as response:
             status = response.status
             if status != requests.codes.ok:  # NOQA
                 if status == 429 and _delay < 20:

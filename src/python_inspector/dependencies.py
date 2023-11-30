@@ -25,7 +25,9 @@ Utilities to resolve dependencies.
 TRACE = False
 
 
-def get_dependencies_from_requirements(requirements_file="requirements.txt") -> Iterable[DependentPackage]:
+def get_dependencies_from_requirements(
+    requirements_file="requirements.txt",
+) -> Iterable[DependentPackage]:
     """
     Yield DependentPackage for each requirement in a `requirement` file.
     """

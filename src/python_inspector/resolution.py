@@ -472,7 +472,9 @@ class PythonInputProvider(AbstractProvider):
             return dependencies
 
         if self.repos and self.environment:
-            dependencies.extend(await self._get_requirements_for_package_from_pypi_simple(candidate))
+            dependencies.extend(
+                await self._get_requirements_for_package_from_pypi_simple(candidate)
+            )
         else:
             dependencies.extend(await self._get_requirements_for_package_from_pypi_json_api(purl))
 
