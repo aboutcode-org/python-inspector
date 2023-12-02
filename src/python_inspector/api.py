@@ -56,7 +56,7 @@ class Resolution(NamedTuple):
     ``files`` is a parsed list of input file data.
     """
 
-    resolution: Dict
+    resolution: List[Dict]
     packages: List[PackageData]
     files: List[Dict]
 
