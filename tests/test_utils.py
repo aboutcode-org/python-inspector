@@ -20,6 +20,7 @@ from test_cli import check_json_file_results
 from _packagedcode.pypi import SetupCfgHandler
 from python_inspector.resolution import fetch_and_extract_sdist
 from python_inspector.utils import get_netrc_auth
+from python_inspector.utils import write_resolved_packages
 from python_inspector.utils_pypi import PypiSimpleRepository
 from python_inspector.utils_pypi import valid_python_version
 
@@ -111,3 +112,21 @@ def test_parse_reqs_with_setup_requires_and_python_requires():
 def test_valid_python_version():
     assert valid_python_version("3.8", ">3.1")
     assert not valid_python_version("3.8.1", ">3.9")
+
+
+def test_write_resolved_packages_with_empty_package():
+    package_list = []
+    requirements_file = test_env.get_test_loc("pinned-requirements.txt")
+    assert (
+        write_resolved_packages(package_list, requirements_file)
+        == "Package list is not a list or empty"
+    )
+
+
+def test_write_resolved_packages_with_corrupt_package():
+    package_list = [{"test": "wrong_value"}, {"list": ["list", "of", "values"]}]
+    requirements_file = test_env.get_test_loc("pinned-requirements.txt")
+    assert (
+        write_resolved_packages(package_list, requirements_file)
+        == "Could not find dependencies key in package_list"
+    )

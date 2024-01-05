@@ -56,16 +56,26 @@ def write_output_in_file(output, location):
 
 def write_resolved_packages(package_list, requirements_file):
     """
-    Write the resolved package names and versions into ``requirements_file_path``
+    Write the resolved package names and versions into `requirements_file`
     """
-    dependencies = package_list[0]["package_data"][0]["dependencies"]
-    resolved_packages = []
-    for dependency in dependencies:
-        if dependency["is_resolved"]:
-            package = dependency["extracted_requirement"]
-            resolved_packages.append(package)
-    for package in resolved_packages:
-        requirements_file.write(package + "\n")
+    print(package_list)
+    # if package list is a python list and not empty then proceed
+    if package_list and len(package_list) > 0:
+        try:
+            dependencies = package_list[0]["package_data"][0]["dependencies"]
+            resolved_packages = []
+            for dependency in dependencies:
+                if dependency.get("is_resolved"):
+                    package = dependency.get("extracted_requirement")
+                    if package:
+                        resolved_packages.append(package)
+        except KeyError:
+            return "Could not find dependencies key in package_list"
+        if len(resolved_packages) > 0:
+            for package in resolved_packages:
+                requirements_file.write(package + "\n")
+    else:
+        return "Package list is not a list or empty"
 
 
 class Candidate(NamedTuple):

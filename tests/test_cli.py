@@ -448,8 +448,8 @@ def test_passing_of_unsupported_os():
 def test_resolved_cli():
     """
     Tests the '--resolved-output' option of resolve_dependencies() function.
-    The '--resolved-output' option takes in a filename and writes.
-    The resolved package dependencies into a .txt file with the given filename.
+    The '--resolved-output' option takes in a filename and writes
+    the resolved package dependencies into a .txt file with the given filename.
     """
     requirements_file = test_env.get_test_loc("pinned-requirements.txt")
     expected_file = test_env.get_test_loc(
