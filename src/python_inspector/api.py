@@ -154,6 +154,7 @@ def resolve_dependencies(
         deps = dependencies.get_dependencies_from_requirements(requirements_file=req_file)
         for extra_data in dependencies.get_extra_data_from_requirements(requirements_file=req_file):
             index_urls = (*index_urls, *tuple(extra_data.get("extra_index_urls") or []))
+            index_urls = (*index_urls, *tuple(extra_data.get("index_url") or []))
         direct_dependencies.extend(deps)
         package_data = [
             pkg_data.to_dict() for pkg_data in PipRequirementsFileHandler.parse(location=req_file)

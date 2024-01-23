@@ -24,7 +24,8 @@ def test_get_extra_data_from_requirements():
                 "https://pypi.python.org/simple/",
                 "https://testpypi.python.org/simple/",
                 "https://pypi1.python.org/simple/",
-            ]
+            ],
+            "index_url": "https://pypi-index1.python.org/simple/",
         }
     ]
     result = list(get_extra_data_from_requirements(req_file))
