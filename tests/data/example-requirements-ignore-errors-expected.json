@@ -600,12 +600,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "pytest",
-      "version": "7.4.3",
+      "version": "7.4.4",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "pytest: simple powerful testing with Python\n.. image:: https://github.com/pytest-dev/pytest/raw/main/doc/en/img/pytest_logo_curves.svg\n   :target: https://docs.pytest.org/en/stable/\n   :align: center\n   :height: 200\n   :alt: pytest\n\n\n------\n\n.. image:: https://img.shields.io/pypi/v/pytest.svg\n    :target: https://pypi.org/project/pytest/\n\n.. image:: https://img.shields.io/conda/vn/conda-forge/pytest.svg\n    :target: https://anaconda.org/conda-forge/pytest\n\n.. image:: https://img.shields.io/pypi/pyversions/pytest.svg\n    :target: https://pypi.org/project/pytest/\n\n.. image:: https://codecov.io/gh/pytest-dev/pytest/branch/main/graph/badge.svg\n    :target: https://codecov.io/gh/pytest-dev/pytest\n    :alt: Code coverage Status\n\n.. image:: https://github.com/pytest-dev/pytest/workflows/test/badge.svg\n    :target: https://github.com/pytest-dev/pytest/actions?query=workflow%3Atest\n\n.. image:: https://results.pre-commit.ci/badge/github/pytest-dev/pytest/main.svg\n   :target: https://results.pre-commit.ci/latest/github/pytest-dev/pytest/main\n   :alt: pre-commit.ci status\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n    :target: https://github.com/psf/black\n\n.. image:: https://www.codetriage.com/pytest-dev/pytest/badges/users.svg\n    :target: https://www.codetriage.com/pytest-dev/pytest\n\n.. image:: https://readthedocs.org/projects/pytest/badge/?version=latest\n    :target: https://pytest.readthedocs.io/en/latest/?badge=latest\n    :alt: Documentation Status\n\n.. image:: https://img.shields.io/badge/Discord-pytest--dev-blue\n    :target: https://discord.com/invite/pytest-dev\n    :alt: Discord\n\n.. image:: https://img.shields.io/badge/Libera%20chat-%23pytest-orange\n    :target: https://web.libera.chat/#pytest\n    :alt: Libera chat\n\n\nThe ``pytest`` framework makes it easy to write small tests, yet\nscales to support complex functional testing for applications and libraries.\n\nAn example of a simple test:\n\n.. code-block:: python\n\n    # content of test_sample.py\n    def inc(x):\n        return x + 1\n\n\n    def test_answer():\n        assert inc(3) == 5\n\n\nTo execute it::\n\n    $ pytest\n    ============================= test session starts =============================\n    collected 1 items\n\n    test_sample.py F\n\n    ================================== FAILURES ===================================\n    _________________________________ test_answer _________________________________\n\n        def test_answer():\n    >       assert inc(3) == 5\n    E       assert 4 == 5\n    E        +  where 4 = inc(3)\n\n    test_sample.py:5: AssertionError\n    ========================== 1 failed in 0.04 seconds ===========================\n\n\nDue to ``pytest``'s detailed assertion introspection, only plain ``assert`` statements are used. See `getting-started <https://docs.pytest.org/en/stable/getting-started.html#our-first-test-run>`_ for more examples.\n\n\nFeatures\n--------\n\n- Detailed info on failing `assert statements <https://docs.pytest.org/en/stable/how-to/assert.html>`_ (no need to remember ``self.assert*`` names)\n\n- `Auto-discovery\n  <https://docs.pytest.org/en/stable/explanation/goodpractices.html#python-test-discovery>`_\n  of test modules and functions\n\n- `Modular fixtures <https://docs.pytest.org/en/stable/explanation/fixtures.html>`_ for\n  managing small or parametrized long-lived test resources\n\n- Can run `unittest <https://docs.pytest.org/en/stable/how-to/unittest.html>`_ (or trial),\n  `nose <https://docs.pytest.org/en/stable/how-to/nose.html>`_ test suites out of the box\n\n- Python 3.7+ or PyPy3\n\n- Rich plugin architecture, with over 850+ `external plugins <https://docs.pytest.org/en/latest/reference/plugin_list.html>`_ and thriving community\n\n\nDocumentation\n-------------\n\nFor full documentation, including installation, tutorials and PDF documents, please see https://docs.pytest.org/en/stable/.\n\n\nBugs/Requests\n-------------\n\nPlease use the `GitHub issue tracker <https://github.com/pytest-dev/pytest/issues>`_ to submit bugs or request features.\n\n\nChangelog\n---------\n\nConsult the `Changelog <https://docs.pytest.org/en/stable/changelog.html>`__ page for fixes and enhancements of each version.\n\n\nSupport pytest\n--------------\n\n`Open Collective`_ is an online funding platform for open and transparent communities.\nIt provides tools to raise money and share your finances in full transparency.\n\nIt is the platform of choice for individuals and companies that want to make one-time or\nmonthly donations directly to the project.\n\nSee more details in the `pytest collective`_.\n\n.. _Open Collective: https://opencollective.com\n.. _pytest collective: https://opencollective.com/pytest\n\n\npytest for enterprise\n---------------------\n\nAvailable as part of the Tidelift Subscription.\n\nThe maintainers of pytest and thousands of other packages are working with Tidelift to deliver commercial support and\nmaintenance for the open source dependencies you use to build your applications.\nSave time, reduce risk, and improve code health, while paying the maintainers of the exact dependencies you use.\n\n`Learn more. <https://tidelift.com/subscription/pkg/pypi-pytest?utm_source=pypi-pytest&utm_medium=referral&utm_campaign=enterprise&utm_term=repo>`_\n\nSecurity\n^^^^^^^^\n\npytest has never been associated with a security vulnerability, but in any case, to report a\nsecurity vulnerability please use the `Tidelift security contact <https://tidelift.com/security>`_.\nTidelift will coordinate the fix and disclosure.\n\n\nLicense\n-------\n\nCopyright Holger Krekel and others, 2004.\n\nDistributed under the terms of the `MIT`_ license, pytest is free and open source software.\n\n.. _`MIT`: https://github.com/pytest-dev/pytest/blob/main/LICENSE",
-      "release_date": "2023-10-24T19:23:14",
+      "release_date": "2023-12-31T12:00:13",
       "parties": [
         {
           "type": "person",
@@ -636,11 +636,11 @@
         "Topic :: Utilities"
       ],
       "homepage_url": "https://docs.pytest.org/en/latest/",
-      "download_url": "https://files.pythonhosted.org/packages/f3/8c/f16efd81ca8e293b2cc78f111190a79ee539d0d5d36ccd49975cb3beac60/pytest-7.4.3-py3-none-any.whl",
-      "size": 325075,
+      "download_url": "https://files.pythonhosted.org/packages/51/ff/f6e8b8f39e08547faece4bd80f89d5a8de68a38b2d179cc1c4490ffa3286/pytest-7.4.4-py3-none-any.whl",
+      "size": 325287,
       "sha1": null,
-      "md5": "de7ab8f50d3e458ce84c8338d45cac38",
-      "sha256": "0d009c083ea859a71b76adf7c1d502e4bc170b80a8ef002da5806527b9591fac",
+      "md5": "f3981d1b2b2e159f9b5fa6d2bc8e9a57",
+      "sha256": "b090cdf5ed60bf4c45261be03239c2c1c22df034fbffe691abe93cd80cea01d8",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pytest-dev/pytest/issues",
       "code_view_url": "https://github.com/pytest-dev/pytest",
@@ -660,20 +660,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/pytest/7.4.3/json",
+      "api_data_url": "https://pypi.org/pypi/pytest/7.4.4/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/pytest@7.4.3"
+      "purl": "pkg:pypi/pytest@7.4.4"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "pytest",
-      "version": "7.4.3",
+      "version": "7.4.4",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "pytest: simple powerful testing with Python\n.. image:: https://github.com/pytest-dev/pytest/raw/main/doc/en/img/pytest_logo_curves.svg\n   :target: https://docs.pytest.org/en/stable/\n   :align: center\n   :height: 200\n   :alt: pytest\n\n\n------\n\n.. image:: https://img.shields.io/pypi/v/pytest.svg\n    :target: https://pypi.org/project/pytest/\n\n.. image:: https://img.shields.io/conda/vn/conda-forge/pytest.svg\n    :target: https://anaconda.org/conda-forge/pytest\n\n.. image:: https://img.shields.io/pypi/pyversions/pytest.svg\n    :target: https://pypi.org/project/pytest/\n\n.. image:: https://codecov.io/gh/pytest-dev/pytest/branch/main/graph/badge.svg\n    :target: https://codecov.io/gh/pytest-dev/pytest\n    :alt: Code coverage Status\n\n.. image:: https://github.com/pytest-dev/pytest/workflows/test/badge.svg\n    :target: https://github.com/pytest-dev/pytest/actions?query=workflow%3Atest\n\n.. image:: https://results.pre-commit.ci/badge/github/pytest-dev/pytest/main.svg\n   :target: https://results.pre-commit.ci/latest/github/pytest-dev/pytest/main\n   :alt: pre-commit.ci status\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n    :target: https://github.com/psf/black\n\n.. image:: https://www.codetriage.com/pytest-dev/pytest/badges/users.svg\n    :target: https://www.codetriage.com/pytest-dev/pytest\n\n.. image:: https://readthedocs.org/projects/pytest/badge/?version=latest\n    :target: https://pytest.readthedocs.io/en/latest/?badge=latest\n    :alt: Documentation Status\n\n.. image:: https://img.shields.io/badge/Discord-pytest--dev-blue\n    :target: https://discord.com/invite/pytest-dev\n    :alt: Discord\n\n.. image:: https://img.shields.io/badge/Libera%20chat-%23pytest-orange\n    :target: https://web.libera.chat/#pytest\n    :alt: Libera chat\n\n\nThe ``pytest`` framework makes it easy to write small tests, yet\nscales to support complex functional testing for applications and libraries.\n\nAn example of a simple test:\n\n.. code-block:: python\n\n    # content of test_sample.py\n    def inc(x):\n        return x + 1\n\n\n    def test_answer():\n        assert inc(3) == 5\n\n\nTo execute it::\n\n    $ pytest\n    ============================= test session starts =============================\n    collected 1 items\n\n    test_sample.py F\n\n    ================================== FAILURES ===================================\n    _________________________________ test_answer _________________________________\n\n        def test_answer():\n    >       assert inc(3) == 5\n    E       assert 4 == 5\n    E        +  where 4 = inc(3)\n\n    test_sample.py:5: AssertionError\n    ========================== 1 failed in 0.04 seconds ===========================\n\n\nDue to ``pytest``'s detailed assertion introspection, only plain ``assert`` statements are used. See `getting-started <https://docs.pytest.org/en/stable/getting-started.html#our-first-test-run>`_ for more examples.\n\n\nFeatures\n--------\n\n- Detailed info on failing `assert statements <https://docs.pytest.org/en/stable/how-to/assert.html>`_ (no need to remember ``self.assert*`` names)\n\n- `Auto-discovery\n  <https://docs.pytest.org/en/stable/explanation/goodpractices.html#python-test-discovery>`_\n  of test modules and functions\n\n- `Modular fixtures <https://docs.pytest.org/en/stable/explanation/fixtures.html>`_ for\n  managing small or parametrized long-lived test resources\n\n- Can run `unittest <https://docs.pytest.org/en/stable/how-to/unittest.html>`_ (or trial),\n  `nose <https://docs.pytest.org/en/stable/how-to/nose.html>`_ test suites out of the box\n\n- Python 3.7+ or PyPy3\n\n- Rich plugin architecture, with over 850+ `external plugins <https://docs.pytest.org/en/latest/reference/plugin_list.html>`_ and thriving community\n\n\nDocumentation\n-------------\n\nFor full documentation, including installation, tutorials and PDF documents, please see https://docs.pytest.org/en/stable/.\n\n\nBugs/Requests\n-------------\n\nPlease use the `GitHub issue tracker <https://github.com/pytest-dev/pytest/issues>`_ to submit bugs or request features.\n\n\nChangelog\n---------\n\nConsult the `Changelog <https://docs.pytest.org/en/stable/changelog.html>`__ page for fixes and enhancements of each version.\n\n\nSupport pytest\n--------------\n\n`Open Collective`_ is an online funding platform for open and transparent communities.\nIt provides tools to raise money and share your finances in full transparency.\n\nIt is the platform of choice for individuals and companies that want to make one-time or\nmonthly donations directly to the project.\n\nSee more details in the `pytest collective`_.\n\n.. _Open Collective: https://opencollective.com\n.. _pytest collective: https://opencollective.com/pytest\n\n\npytest for enterprise\n---------------------\n\nAvailable as part of the Tidelift Subscription.\n\nThe maintainers of pytest and thousands of other packages are working with Tidelift to deliver commercial support and\nmaintenance for the open source dependencies you use to build your applications.\nSave time, reduce risk, and improve code health, while paying the maintainers of the exact dependencies you use.\n\n`Learn more. <https://tidelift.com/subscription/pkg/pypi-pytest?utm_source=pypi-pytest&utm_medium=referral&utm_campaign=enterprise&utm_term=repo>`_\n\nSecurity\n^^^^^^^^\n\npytest has never been associated with a security vulnerability, but in any case, to report a\nsecurity vulnerability please use the `Tidelift security contact <https://tidelift.com/security>`_.\nTidelift will coordinate the fix and disclosure.\n\n\nLicense\n-------\n\nCopyright Holger Krekel and others, 2004.\n\nDistributed under the terms of the `MIT`_ license, pytest is free and open source software.\n\n.. _`MIT`: https://github.com/pytest-dev/pytest/blob/main/LICENSE",
-      "release_date": "2023-10-24T19:23:16",
+      "release_date": "2023-12-31T12:00:18",
       "parties": [
         {
           "type": "person",
@@ -704,11 +704,11 @@
         "Topic :: Utilities"
       ],
       "homepage_url": "https://docs.pytest.org/en/latest/",
-      "download_url": "https://files.pythonhosted.org/packages/38/d4/174f020da50c5afe9f5963ad0fc5b56a4287e3586e3de5b3c8bce9c547b4/pytest-7.4.3.tar.gz",
-      "size": 1356179,
+      "download_url": "https://files.pythonhosted.org/packages/80/1f/9d8e98e4133ffb16c90f3b405c43e38d3abb715bb5d7a63a5a684f7e46a3/pytest-7.4.4.tar.gz",
+      "size": 1357116,
       "sha1": null,
-      "md5": "9a13432f66fd105bdcbca3db867721bc",
-      "sha256": "d989d136982de4e3b29dabcc838ad581c64e8ed52c11fbe86ddebd9da0818cd5",
+      "md5": "e2ac4c70861f26d735b64e5687bb218e",
+      "sha256": "2cf0005922c6ace4a3e2ec8b4080eb0d9753fdc93107415332f50ce9e7994280",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pytest-dev/pytest/issues",
       "code_view_url": "https://github.com/pytest-dev/pytest",
@@ -728,9 +728,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/pytest/7.4.3/json",
+      "api_data_url": "https://pypi.org/pypi/pytest/7.4.4/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/pytest@7.4.3"
+      "purl": "pkg:pypi/pytest@7.4.4"
     },
     {
       "type": "pypi",
@@ -879,7 +879,7 @@
       "dependencies": []
     },
     {
-      "package": "pkg:pypi/pytest@7.4.3",
+      "package": "pkg:pypi/pytest@7.4.4",
       "dependencies": [
         "pkg:pypi/exceptiongroup@1.2.0",
         "pkg:pypi/iniconfig@2.0.0",

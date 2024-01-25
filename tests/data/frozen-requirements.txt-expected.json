@@ -5991,12 +5991,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "pip",
-      "version": "23.3.1",
+      "version": "23.3.2",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "The PyPA recommended tool for installing Python packages.\npip - The Python Package Installer\n==================================\n\n.. image:: https://img.shields.io/pypi/v/pip.svg\n   :target: https://pypi.org/project/pip/\n   :alt: PyPI\n\n.. image:: https://img.shields.io/pypi/pyversions/pip\n   :target: https://pypi.org/project/pip\n   :alt: PyPI - Python Version\n\n.. image:: https://readthedocs.org/projects/pip/badge/?version=latest\n   :target: https://pip.pypa.io/en/latest\n   :alt: Documentation\n\npip is the `package installer`_ for Python. You can use pip to install packages from the `Python Package Index`_ and other indexes.\n\nPlease take a look at our documentation for how to install and use pip:\n\n* `Installation`_\n* `Usage`_\n\nWe release updates regularly, with a new version every 3 months. Find more details in our documentation:\n\n* `Release notes`_\n* `Release process`_\n\nIf you find bugs, need help, or want to talk to the developers, please use our mailing lists or chat rooms:\n\n* `Issue tracking`_\n* `Discourse channel`_\n* `User IRC`_\n\nIf you want to get involved head over to GitHub to get the source code, look at our development documentation and feel free to jump on the developer mailing lists and chat rooms:\n\n* `GitHub page`_\n* `Development documentation`_\n* `Development IRC`_\n\nCode of Conduct\n---------------\n\nEveryone interacting in the pip project's codebases, issue trackers, chat\nrooms, and mailing lists is expected to follow the `PSF Code of Conduct`_.\n\n.. _package installer: https://packaging.python.org/guides/tool-recommendations/\n.. _Python Package Index: https://pypi.org\n.. _Installation: https://pip.pypa.io/en/stable/installation/\n.. _Usage: https://pip.pypa.io/en/stable/\n.. _Release notes: https://pip.pypa.io/en/stable/news.html\n.. _Release process: https://pip.pypa.io/en/latest/development/release-process/\n.. _GitHub page: https://github.com/pypa/pip\n.. _Development documentation: https://pip.pypa.io/en/latest/development\n.. _Issue tracking: https://github.com/pypa/pip/issues\n.. _Discourse channel: https://discuss.python.org/c/packaging\n.. _User IRC: https://kiwiirc.com/nextclient/#ircs://irc.libera.chat:+6697/pypa\n.. _Development IRC: https://kiwiirc.com/nextclient/#ircs://irc.libera.chat:+6697/pypa-dev\n.. _PSF Code of Conduct: https://github.com/pypa/.github/blob/main/CODE_OF_CONDUCT.md",
-      "release_date": "2023-10-21T11:10:25",
+      "release_date": "2023-12-17T13:05:02",
       "parties": [
         {
           "type": "person",
@@ -6023,11 +6023,11 @@
         "Topic :: Software Development :: Build Tools"
       ],
       "homepage_url": "https://pip.pypa.io/",
-      "download_url": "https://files.pythonhosted.org/packages/47/6a/453160888fab7c6a432a6e25f8afe6256d0d9f2cbd25971021da6491d899/pip-23.3.1-py3-none-any.whl",
-      "size": 2107242,
+      "download_url": "https://files.pythonhosted.org/packages/15/aa/3f4c7bcee2057a76562a5b33ecbd199be08cdb4443a02e26bd2c3cf6fc39/pip-23.3.2-py3-none-any.whl",
+      "size": 2109393,
       "sha1": null,
-      "md5": "5d2d058044a3ae2800d18e358ddc72ca",
-      "sha256": "55eb67bb6171d37447e82213be585b75fe2b12b359e993773aca4de9247a052b",
+      "md5": "c98c21d96fb96b82756dd827438a32c7",
+      "sha256": "5052d7889c1f9d05224cd41741acb7c5d6fa735ab34e339624a614eaaa7e7d76",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/pypa/pip",
@@ -6047,20 +6047,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/pip/23.3.1/json",
+      "api_data_url": "https://pypi.org/pypi/pip/23.3.2/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/pip@23.3.1"
+      "purl": "pkg:pypi/pip@23.3.2"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "pip",
-      "version": "23.3.1",
+      "version": "23.3.2",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "The PyPA recommended tool for installing Python packages.\npip - The Python Package Installer\n==================================\n\n.. image:: https://img.shields.io/pypi/v/pip.svg\n   :target: https://pypi.org/project/pip/\n   :alt: PyPI\n\n.. image:: https://img.shields.io/pypi/pyversions/pip\n   :target: https://pypi.org/project/pip\n   :alt: PyPI - Python Version\n\n.. image:: https://readthedocs.org/projects/pip/badge/?version=latest\n   :target: https://pip.pypa.io/en/latest\n   :alt: Documentation\n\npip is the `package installer`_ for Python. You can use pip to install packages from the `Python Package Index`_ and other indexes.\n\nPlease take a look at our documentation for how to install and use pip:\n\n* `Installation`_\n* `Usage`_\n\nWe release updates regularly, with a new version every 3 months. Find more details in our documentation:\n\n* `Release notes`_\n* `Release process`_\n\nIf you find bugs, need help, or want to talk to the developers, please use our mailing lists or chat rooms:\n\n* `Issue tracking`_\n* `Discourse channel`_\n* `User IRC`_\n\nIf you want to get involved head over to GitHub to get the source code, look at our development documentation and feel free to jump on the developer mailing lists and chat rooms:\n\n* `GitHub page`_\n* `Development documentation`_\n* `Development IRC`_\n\nCode of Conduct\n---------------\n\nEveryone interacting in the pip project's codebases, issue trackers, chat\nrooms, and mailing lists is expected to follow the `PSF Code of Conduct`_.\n\n.. _package installer: https://packaging.python.org/guides/tool-recommendations/\n.. _Python Package Index: https://pypi.org\n.. _Installation: https://pip.pypa.io/en/stable/installation/\n.. _Usage: https://pip.pypa.io/en/stable/\n.. _Release notes: https://pip.pypa.io/en/stable/news.html\n.. _Release process: https://pip.pypa.io/en/latest/development/release-process/\n.. _GitHub page: https://github.com/pypa/pip\n.. _Development documentation: https://pip.pypa.io/en/latest/development\n.. _Issue tracking: https://github.com/pypa/pip/issues\n.. _Discourse channel: https://discuss.python.org/c/packaging\n.. _User IRC: https://kiwiirc.com/nextclient/#ircs://irc.libera.chat:+6697/pypa\n.. _Development IRC: https://kiwiirc.com/nextclient/#ircs://irc.libera.chat:+6697/pypa-dev\n.. _PSF Code of Conduct: https://github.com/pypa/.github/blob/main/CODE_OF_CONDUCT.md",
-      "release_date": "2023-10-21T11:10:27",
+      "release_date": "2023-12-17T13:05:07",
       "parties": [
         {
           "type": "person",
@@ -6087,11 +6087,11 @@
         "Topic :: Software Development :: Build Tools"
       ],
       "homepage_url": "https://pip.pypa.io/",
-      "download_url": "https://files.pythonhosted.org/packages/1f/7f/4da15e07ccd11c84c1ccc8f6e24288d5e76c99441bf80e315b33542db951/pip-23.3.1.tar.gz",
-      "size": 2132086,
+      "download_url": "https://files.pythonhosted.org/packages/b7/06/6b1ad0ae8f97d7a0d6f6ad640db10780578999e647a9593512ceb6f06469/pip-23.3.2.tar.gz",
+      "size": 2132244,
       "sha1": null,
-      "md5": "f0c9fba61e9d9badcc9921062e993d84",
-      "sha256": "1fcaa041308d01f14575f6d0d2ea4b75a3e2871fe4f9c694976f908768e14174",
+      "md5": "38dd5f7ab301167df063405c7fc16c84",
+      "sha256": "7fd9972f96db22c8077a1ee2691b172c8089b17a5652a44494a9ecb0d78f9149",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/pypa/pip",
@@ -6111,9 +6111,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/pip/23.3.1/json",
+      "api_data_url": "https://pypi.org/pypi/pip/23.3.2/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/pip@23.3.1"
+      "purl": "pkg:pypi/pip@23.3.2"
     },
     {
       "type": "pypi",
@@ -10802,7 +10802,7 @@
         {
           "key": "pip",
           "package_name": "pip",
-          "installed_version": "23.3.1",
+          "installed_version": "23.3.2",
           "dependencies": []
         }
       ]
