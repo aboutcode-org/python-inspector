@@ -11,6 +11,7 @@
 
 import os
 from netrc import netrc
+from pip._internal.configuration import Configuration
 from typing import Dict
 from typing import List
 from typing import NamedTuple
@@ -101,7 +102,7 @@ def resolve_dependencies(
     linux OS.
 
     Download from the provided PyPI simple index_urls INDEX(s) URLs defaulting
-    to PyPI.org
+    to PyPI.org if not global index-url is configured, overriding PyPI.org
     """
 
     if not operating_system:
@@ -146,7 +147,15 @@ def resolve_dependencies(
 
     files = []
 
-    if PYPI_SIMPLE_URL not in index_urls:
+    # We need respect system and user configuration
+    # before explicitly assign PYPI
+    config = Configuration(True)
+    config.load()
+
+    global_index: str | None = config.get_value('global.index-url')
+    if global_index and global_index not in index_urls:
+        index_urls = tuple([global_index]) + tuple(index_urls)
+    elif PYPI_SIMPLE_URL not in index_urls:
         index_urls = tuple([PYPI_SIMPLE_URL]) + tuple(index_urls)
 
     # requirements
