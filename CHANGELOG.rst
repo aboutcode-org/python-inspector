@@ -1,6 +1,13 @@
 Changelog
 =========
 
+v0.11.0
+-----------
+
+- Add ignore error mode.
+- Fix missing index_urls parsing.
+
+
 v0.10.0
 -----------
 
