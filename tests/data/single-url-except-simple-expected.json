@@ -2,7 +2,7 @@
   "headers": {
     "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
-    "tool_version": "0.10.0",
+    "tool_version": "0.11.0",
     "options": [
       "--index-url https://thirdparty.aboutcode.org/pypi/simple/",
       "--json <file>",
@@ -258,12 +258,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "flask",
-      "version": "3.0.1",
+      "version": "3.0.2",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "A simple framework for building complex web applications.\nFlask\n=====\n\nFlask is a lightweight `WSGI`_ web application framework. It is designed\nto make getting started quick and easy, with the ability to scale up to\ncomplex applications. It began as a simple wrapper around `Werkzeug`_\nand `Jinja`_ and has become one of the most popular Python web\napplication frameworks.\n\nFlask offers suggestions, but doesn't enforce any dependencies or\nproject layout. It is up to the developer to choose the tools and\nlibraries they want to use. There are many extensions provided by the\ncommunity that make adding new functionality easy.\n\n.. _WSGI: https://wsgi.readthedocs.io/\n.. _Werkzeug: https://werkzeug.palletsprojects.com/\n.. _Jinja: https://jinja.palletsprojects.com/\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    $ pip install -U Flask\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    # save this as app.py\n    from flask import Flask\n\n    app = Flask(__name__)\n\n    @app.route(\"/\")\n    def hello():\n        return \"Hello, World!\"\n\n.. code-block:: text\n\n    $ flask run\n      * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)\n\n\nContributing\n------------\n\nFor guidance on setting up a development environment and how to make a\ncontribution to Flask, see the `contributing guidelines`_.\n\n.. _contributing guidelines: https://github.com/pallets/flask/blob/main/CONTRIBUTING.rst\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Flask and the libraries\nit uses. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, `please\ndonate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://flask.palletsprojects.com/\n-   Changes: https://flask.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/Flask/\n-   Source Code: https://github.com/pallets/flask/\n-   Issue Tracker: https://github.com/pallets/flask/issues/\n-   Chat: https://discord.gg/pallets",
-      "release_date": "2024-01-18T20:02:43",
+      "release_date": "2024-02-03T21:11:42",
       "parties": [
         {
           "type": "person",
@@ -286,11 +286,11 @@
         "Topic :: Software Development :: Libraries :: Application Frameworks"
       ],
       "homepage_url": "",
-      "download_url": "https://files.pythonhosted.org/packages/bd/0e/63738e88e981ae57c23bad6c499898314a1110a4141f77d7bd929b552fb4/flask-3.0.1-py3-none-any.whl",
-      "size": 101243,
+      "download_url": "https://files.pythonhosted.org/packages/93/a6/aa98bfe0eb9b8b15d36cdfd03c8ca86a03968a87f27ce224fb4f766acb23/flask-3.0.2-py3-none-any.whl",
+      "size": 101300,
       "sha1": null,
-      "md5": "16f700724a67c81161cb918dede0437c",
-      "sha256": "ca631a507f6dfe6c278ae20112cea3ff54ff2216390bf8880f6b035a5354af13",
+      "md5": "7de254c028a2a8022a31223266a44be7",
+      "sha256": "3232e0e9c850d781933cf0207523d1ece087eb8d87b23777ae38456e2fbe7c6e",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets/flask/issues/",
       "code_view_url": "https://github.com/pallets/flask/",
@@ -309,20 +309,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/flask/3.0.1/json",
+      "api_data_url": "https://pypi.org/pypi/flask/3.0.2/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/flask@3.0.1"
+      "purl": "pkg:pypi/flask@3.0.2"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "flask",
-      "version": "3.0.1",
+      "version": "3.0.2",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "A simple framework for building complex web applications.\nFlask\n=====\n\nFlask is a lightweight `WSGI`_ web application framework. It is designed\nto make getting started quick and easy, with the ability to scale up to\ncomplex applications. It began as a simple wrapper around `Werkzeug`_\nand `Jinja`_ and has become one of the most popular Python web\napplication frameworks.\n\nFlask offers suggestions, but doesn't enforce any dependencies or\nproject layout. It is up to the developer to choose the tools and\nlibraries they want to use. There are many extensions provided by the\ncommunity that make adding new functionality easy.\n\n.. _WSGI: https://wsgi.readthedocs.io/\n.. _Werkzeug: https://werkzeug.palletsprojects.com/\n.. _Jinja: https://jinja.palletsprojects.com/\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    $ pip install -U Flask\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    # save this as app.py\n    from flask import Flask\n\n    app = Flask(__name__)\n\n    @app.route(\"/\")\n    def hello():\n        return \"Hello, World!\"\n\n.. code-block:: text\n\n    $ flask run\n      * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)\n\n\nContributing\n------------\n\nFor guidance on setting up a development environment and how to make a\ncontribution to Flask, see the `contributing guidelines`_.\n\n.. _contributing guidelines: https://github.com/pallets/flask/blob/main/CONTRIBUTING.rst\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Flask and the libraries\nit uses. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, `please\ndonate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://flask.palletsprojects.com/\n-   Changes: https://flask.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/Flask/\n-   Source Code: https://github.com/pallets/flask/\n-   Issue Tracker: https://github.com/pallets/flask/issues/\n-   Chat: https://discord.gg/pallets",
-      "release_date": "2024-01-18T20:02:46",
+      "release_date": "2024-02-03T21:11:44",
       "parties": [
         {
           "type": "person",
@@ -345,11 +345,11 @@
         "Topic :: Software Development :: Libraries :: Application Frameworks"
       ],
       "homepage_url": "",
-      "download_url": "https://files.pythonhosted.org/packages/b2/14/97b9137a02f57d2287f3a9731b3a339fda716d2d3a157d7d1d89c2bebf7b/flask-3.0.1.tar.gz",
-      "size": 675138,
+      "download_url": "https://files.pythonhosted.org/packages/3f/e0/a89e8120faea1edbfca1a9b171cff7f2bf62ec860bbafcb2c2387c0317be/flask-3.0.2.tar.gz",
+      "size": 675248,
       "sha1": null,
-      "md5": "1f2d47c769796fda3dcdbbc62fead96c",
-      "sha256": "6489f51bb3666def6f314e15f19d50a1869a19ae0e8c9a3641ffe66c77d42403",
+      "md5": "3a419da273f762032d344ea129717171",
+      "sha256": "822c03f4b799204250a7ee84b1eddc40665395333973dfb9deebfe425fefcb7d",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets/flask/issues/",
       "code_view_url": "https://github.com/pallets/flask/",
@@ -368,9 +368,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/flask/3.0.1/json",
+      "api_data_url": "https://pypi.org/pypi/flask/3.0.2/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/flask@3.0.1"
+      "purl": "pkg:pypi/flask@3.0.2"
     },
     {
       "type": "pypi",
@@ -718,12 +718,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "markupsafe",
-      "version": "2.1.4",
+      "version": "2.1.5",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Safely add untrusted strings to HTML/XML markup.\nMarkupSafe\n==========\n\nMarkupSafe implements a text object that escapes characters so it is\nsafe to use in HTML and XML. Characters that have special meanings are\nreplaced so that they display as the actual characters. This mitigates\ninjection attacks, meaning untrusted user input can safely be displayed\non a page.\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    pip install -U MarkupSafe\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nExamples\n--------\n\n.. code-block:: pycon\n\n    >>> from markupsafe import Markup, escape\n\n    >>> # escape replaces special characters and wraps in Markup\n    >>> escape(\"<script>alert(document.cookie);</script>\")\n    Markup('&lt;script&gt;alert(document.cookie);&lt;/script&gt;')\n\n    >>> # wrap in Markup to mark text \"safe\" and prevent escaping\n    >>> Markup(\"<strong>Hello</strong>\")\n    Markup('<strong>hello</strong>')\n\n    >>> escape(Markup(\"<strong>Hello</strong>\"))\n    Markup('<strong>hello</strong>')\n\n    >>> # Markup is a str subclass\n    >>> # methods and operators escape their arguments\n    >>> template = Markup(\"Hello <em>{name}</em>\")\n    >>> template.format(name='\"World\"')\n    Markup('Hello <em>&#34;World&#34;</em>')\n\n\nDonate\n------\n\nThe Pallets organization develops and supports MarkupSafe and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n`please donate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://markupsafe.palletsprojects.com/\n-   Changes: https://markupsafe.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/MarkupSafe/\n-   Source Code: https://github.com/pallets/markupsafe/\n-   Issue Tracker: https://github.com/pallets/markupsafe/issues/\n-   Chat: https://discord.gg/pallets",
-      "release_date": "2024-01-19T22:49:13",
+      "release_date": "2024-02-02T16:31:01",
       "parties": [
         {
           "type": "person",
@@ -743,11 +743,11 @@
         "Topic :: Text Processing :: Markup :: HTML"
       ],
       "homepage_url": "https://palletsprojects.com/p/markupsafe/",
-      "download_url": "https://files.pythonhosted.org/packages/35/21/45495e6d8fd4fedad477b9fb97905279433f58c141e1b4fa7c752f1bc5ca/MarkupSafe-2.1.4-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
-      "size": 26107,
+      "download_url": "https://files.pythonhosted.org/packages/c7/bd/50319665ce81bb10e90d1cf76f9e1aa269ea6f7fa30ab4521f14d122a3df/MarkupSafe-2.1.5-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+      "size": 26106,
       "sha1": null,
-      "md5": "4206b35075defbed0242fe292e9dfe15",
-      "sha256": "23984d1bdae01bee794267424af55eef4dfc038dc5d1272860669b2aa025c9e3",
+      "md5": "4f97754a1154496e5bc9d3f21fb0315a",
+      "sha256": "fa9db3f79de01457b03d4f01b34cf91bc0048eb2c3846ff26f66687c2f6d16ab",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets/markupsafe/issues/",
       "code_view_url": "https://github.com/pallets/markupsafe/",
@@ -767,20 +767,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/markupsafe/2.1.4/json",
+      "api_data_url": "https://pypi.org/pypi/markupsafe/2.1.5/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/markupsafe@2.1.4"
+      "purl": "pkg:pypi/markupsafe@2.1.5"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "markupsafe",
-      "version": "2.1.4",
+      "version": "2.1.5",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Safely add untrusted strings to HTML/XML markup.\nMarkupSafe\n==========\n\nMarkupSafe implements a text object that escapes characters so it is\nsafe to use in HTML and XML. Characters that have special meanings are\nreplaced so that they display as the actual characters. This mitigates\ninjection attacks, meaning untrusted user input can safely be displayed\non a page.\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    pip install -U MarkupSafe\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nExamples\n--------\n\n.. code-block:: pycon\n\n    >>> from markupsafe import Markup, escape\n\n    >>> # escape replaces special characters and wraps in Markup\n    >>> escape(\"<script>alert(document.cookie);</script>\")\n    Markup('&lt;script&gt;alert(document.cookie);&lt;/script&gt;')\n\n    >>> # wrap in Markup to mark text \"safe\" and prevent escaping\n    >>> Markup(\"<strong>Hello</strong>\")\n    Markup('<strong>hello</strong>')\n\n    >>> escape(Markup(\"<strong>Hello</strong>\"))\n    Markup('<strong>hello</strong>')\n\n    >>> # Markup is a str subclass\n    >>> # methods and operators escape their arguments\n    >>> template = Markup(\"Hello <em>{name}</em>\")\n    >>> template.format(name='\"World\"')\n    Markup('Hello <em>&#34;World&#34;</em>')\n\n\nDonate\n------\n\nThe Pallets organization develops and supports MarkupSafe and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n`please donate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://markupsafe.palletsprojects.com/\n-   Changes: https://markupsafe.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/MarkupSafe/\n-   Source Code: https://github.com/pallets/markupsafe/\n-   Issue Tracker: https://github.com/pallets/markupsafe/issues/\n-   Chat: https://discord.gg/pallets",
-      "release_date": "2024-01-19T22:49:34",
+      "release_date": "2024-02-02T16:31:22",
       "parties": [
         {
           "type": "person",
@@ -800,11 +800,11 @@
         "Topic :: Text Processing :: Markup :: HTML"
       ],
       "homepage_url": "https://palletsprojects.com/p/markupsafe/",
-      "download_url": "https://files.pythonhosted.org/packages/fb/5a/fb1326fe32913e663c8e2d6bdf7cde6f472e51f9c21f0768d9b9080fe7c5/MarkupSafe-2.1.4.tar.gz",
-      "size": 19288,
+      "download_url": "https://files.pythonhosted.org/packages/87/5b/aae44c6655f3801e81aa3eef09dbbf012431987ba564d7231722f68df02d/MarkupSafe-2.1.5.tar.gz",
+      "size": 19384,
       "sha1": null,
-      "md5": "8138329a11cf4bd0f9db780b2af26c66",
-      "sha256": "3aae9af4cac263007fd6309c64c6ab4506dd2b79382d9d19a1994f9240b8db4f",
+      "md5": "8fe7227653f2fb9b1ffe7f9f2058998a",
+      "sha256": "d283d37a890ba4c1ae73ffadf8046435c76e7bc2247bbb63c00bd1a709c6544b",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets/markupsafe/issues/",
       "code_view_url": "https://github.com/pallets/markupsafe/",
@@ -824,9 +824,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/markupsafe/2.1.4/json",
+      "api_data_url": "https://pypi.org/pypi/markupsafe/2.1.5/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/markupsafe@2.1.4"
+      "purl": "pkg:pypi/markupsafe@2.1.5"
     },
     {
       "type": "pypi",
@@ -1063,7 +1063,7 @@
       "dependencies": []
     },
     {
-      "package": "pkg:pypi/flask@3.0.1",
+      "package": "pkg:pypi/flask@3.0.2",
       "dependencies": [
         "pkg:pypi/blinker@1.7.0",
         "pkg:pypi/click@8.1.7",
@@ -1086,17 +1086,17 @@
     {
       "package": "pkg:pypi/jinja2@3.1.3",
       "dependencies": [
-        "pkg:pypi/markupsafe@2.1.4"
+        "pkg:pypi/markupsafe@2.1.5"
       ]
     },
     {
-      "package": "pkg:pypi/markupsafe@2.1.4",
+      "package": "pkg:pypi/markupsafe@2.1.5",
       "dependencies": []
     },
     {
       "package": "pkg:pypi/werkzeug@3.0.1",
       "dependencies": [
-        "pkg:pypi/markupsafe@2.1.4"
+        "pkg:pypi/markupsafe@2.1.5"
       ]
     },
     {

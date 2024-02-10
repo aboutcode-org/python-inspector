@@ -51,7 +51,7 @@ def test_get_resolved_dependencies_with_flask_and_python_310():
         "pkg:pypi/flask@2.1.2",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.3",
-        "pkg:pypi/markupsafe@2.1.4",
+        "pkg:pypi/markupsafe@2.1.5",
         "pkg:pypi/werkzeug@3.0.1",
     ]
 
@@ -75,7 +75,7 @@ def test_get_resolved_dependencies_with_flask_and_python_310_windows():
         "pkg:pypi/flask@2.1.2",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.3",
-        "pkg:pypi/markupsafe@2.1.4",
+        "pkg:pypi/markupsafe@2.1.5",
         "pkg:pypi/werkzeug@3.0.1",
     ]
 
@@ -126,7 +126,7 @@ def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
         "pkg:pypi/importlib-metadata@7.0.1",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.3",
-        "pkg:pypi/markupsafe@2.1.4",
+        "pkg:pypi/markupsafe@2.1.5",
         "pkg:pypi/werkzeug@3.0.1",
         "pkg:pypi/zipp@3.17.0",
     ]
@@ -154,10 +154,10 @@ def test_get_resolved_dependencies_for_version_containing_local_version_identifi
         "pkg:pypi/jinja2@3.1.2",
         "pkg:pypi/markupsafe@2.1.3",
         "pkg:pypi/mpmath@1.3.0",
-        "pkg:pypi/networkx@3.0",
+        "pkg:pypi/networkx@3.2.1",
         "pkg:pypi/sympy@1.12",
         "pkg:pypi/torch@2.0.0%2Bcpu",
-        "pkg:pypi/typing-extensions@4.4.0",
+        "pkg:pypi/typing-extensions@4.8.0",
     ]
 
 
@@ -178,7 +178,7 @@ def test_without_supported_wheels():
     assert plist == [
         "pkg:pypi/autobahn@22.3.2",
         "pkg:pypi/cffi@1.16.0",
-        "pkg:pypi/cryptography@42.0.0",
+        "pkg:pypi/cryptography@42.0.2",
         "pkg:pypi/hyperlink@21.0.0",
         "pkg:pypi/idna@3.6",
         "pkg:pypi/pycparser@2.21",
