@@ -26,7 +26,7 @@ class FileOptionType(click.File):
         if value in known_opts:
             self.fail(
                 "Illegal file name conflicting with an option name: "
-                f"{ os.fsdecode(value)}. "
+                f"{os.fsdecode(value)}. "
                 'Use the special "-" file name to print results on screen/stdout.',
                 param,
                 ctx,

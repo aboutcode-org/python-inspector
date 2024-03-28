@@ -11,6 +11,7 @@
 
 import json
 import os
+import sys
 
 import pytest
 from click.testing import CliRunner
@@ -326,6 +327,7 @@ def test_cli_with_insecure_option():
     )
 
 
+@pytest.mark.skipif(sys.version_info[:2] == (3, 12), reason="Skipping test for Python 3.12")
 @pytest.mark.online
 def test_cli_with_insecure_option_testpkh():
     setup_py_file = test_env.get_test_loc("insecure-setup-2/setup.py")
