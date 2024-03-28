@@ -200,6 +200,24 @@ def test_cli_with_azure_devops_with_python_310():
 
 
 @pytest.mark.online
+def test_cli_with_azure_devops_with_python_312():
+    requirements_file = test_env.get_test_loc("azure-devops.req.txt")
+    expected_file = test_env.get_test_loc("azure-devops.req-312-expected.json", must_exist=False)
+    extra_options = [
+        "--operating-system",
+        "linux",
+        "--python-version",
+        "312",
+    ]
+    check_requirements_resolution(
+        requirements_file=requirements_file,
+        expected_file=expected_file,
+        extra_options=extra_options,
+        regen=REGEN_TEST_FIXTURES,
+    )
+
+
+@pytest.mark.online
 def test_cli_with_azure_devops_with_python_38():
     requirements_file = test_env.get_test_loc("azure-devops.req.txt")
     expected_file = test_env.get_test_loc("azure-devops.req-38-expected.json", must_exist=False)
