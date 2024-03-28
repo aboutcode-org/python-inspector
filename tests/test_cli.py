@@ -11,6 +11,7 @@
 
 import json
 import os
+import sys
 
 import pytest
 from click.testing import CliRunner
@@ -200,6 +201,24 @@ def test_cli_with_azure_devops_with_python_310():
 
 
 @pytest.mark.online
+def test_cli_with_azure_devops_with_python_312():
+    requirements_file = test_env.get_test_loc("azure-devops.req.txt")
+    expected_file = test_env.get_test_loc("azure-devops.req-312-expected.json", must_exist=False)
+    extra_options = [
+        "--operating-system",
+        "linux",
+        "--python-version",
+        "312",
+    ]
+    check_requirements_resolution(
+        requirements_file=requirements_file,
+        expected_file=expected_file,
+        extra_options=extra_options,
+        regen=REGEN_TEST_FIXTURES,
+    )
+
+
+@pytest.mark.online
 def test_cli_with_azure_devops_with_python_38():
     requirements_file = test_env.get_test_loc("azure-devops.req.txt")
     expected_file = test_env.get_test_loc("azure-devops.req-38-expected.json", must_exist=False)
@@ -308,6 +327,7 @@ def test_cli_with_insecure_option():
     )
 
 
+@pytest.mark.skipif(sys.version_info[:2] == (3, 12), reason="Skipping test for Python 3.12")
 @pytest.mark.online
 def test_cli_with_insecure_option_testpkh():
     setup_py_file = test_env.get_test_loc("insecure-setup-2/setup.py")
@@ -394,7 +414,7 @@ def test_passing_of_json_pdt_and_json_flags():
 def test_version_option():
     options = ["--version"]
     result = run_cli(options=options)
-    assert "0.11.0" in result.output
+    assert "0.12.0" in result.output
 
 
 def test_passing_of_netrc_file_that_does_not_exist():

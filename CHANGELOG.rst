@@ -1,6 +1,12 @@
 Changelog
 =========
 
+v0.12.0
+-----------
+
+- Add support for Python3.12
+
+
 v0.11.0
 -----------
 

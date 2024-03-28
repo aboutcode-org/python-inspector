@@ -2,7 +2,7 @@
   "headers": {
     "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/nexB/python-inspector",
-    "tool_version": "0.11.0",
+    "tool_version": "0.12.0",
     "options": [
       "--index-url https://thirdparty.aboutcode.org/pypi/simple/",
       "--json <file>",
@@ -376,12 +376,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "importlib-metadata",
-      "version": "7.0.1",
+      "version": "7.1.0",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "Read metadata from Python packages\n.. image:: https://img.shields.io/pypi/v/importlib_metadata.svg\n   :target: https://pypi.org/project/importlib_metadata\n\n.. image:: https://img.shields.io/pypi/pyversions/importlib_metadata.svg\n\n.. image:: https://github.com/python/importlib_metadata/actions/workflows/main.yml/badge.svg\n   :target: https://github.com/python/importlib_metadata/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json\n    :target: https://github.com/astral-sh/ruff\n    :alt: Ruff\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. image:: https://readthedocs.org/projects/importlib-metadata/badge/?version=latest\n   :target: https://importlib-metadata.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2023-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/importlib-metadata\n   :target: https://tidelift.com/subscription/pkg/pypi-importlib-metadata?utm_source=pypi-importlib-metadata&utm_medium=readme\n\nLibrary to access the metadata for a Python package.\n\nThis package supplies third-party access to the functionality of\n`importlib.metadata <https://docs.python.org/3/library/importlib.metadata.html>`_\nincluding improvements added to subsequent Python versions.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - importlib_metadata\n     - stdlib\n   * - 7.0\n     - 3.13\n   * - 6.5\n     - 3.12\n   * - 4.13\n     - 3.11\n   * - 4.6\n     - 3.10\n   * - 1.4\n     - 3.8\n\n\nUsage\n=====\n\nSee the `online documentation <https://importlib-metadata.readthedocs.io/>`_\nfor usage details.\n\n`Finder authors\n<https://docs.python.org/3/reference/import.html#finders-and-loaders>`_ can\nalso add support for custom package installers.  See the above documentation\nfor details.\n\n\nCaveats\n=======\n\nThis project primarily supports third-party packages installed by PyPA\ntools (or other conforming packages). It does not support:\n\n- Packages in the stdlib.\n- Packages installed without metadata.\n\nProject details\n===============\n\n * Project home: https://github.com/python/importlib_metadata\n * Report bugs at: https://github.com/python/importlib_metadata/issues\n * Code hosting: https://github.com/python/importlib_metadata\n * Documentation: https://importlib-metadata.readthedocs.io/\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-importlib-metadata?utm_source=pypi-importlib-metadata&utm_medium=referral&utm_campaign=github>`_.",
-      "release_date": "2023-12-22T17:17:19",
+      "description": "Read metadata from Python packages\n.. image:: https://img.shields.io/pypi/v/importlib_metadata.svg\n   :target: https://pypi.org/project/importlib_metadata\n\n.. image:: https://img.shields.io/pypi/pyversions/importlib_metadata.svg\n\n.. image:: https://github.com/python/importlib_metadata/actions/workflows/main.yml/badge.svg\n   :target: https://github.com/python/importlib_metadata/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json\n    :target: https://github.com/astral-sh/ruff\n    :alt: Ruff\n\n.. image:: https://readthedocs.org/projects/importlib-metadata/badge/?version=latest\n   :target: https://importlib-metadata.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2024-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/importlib-metadata\n   :target: https://tidelift.com/subscription/pkg/pypi-importlib-metadata?utm_source=pypi-importlib-metadata&utm_medium=readme\n\nLibrary to access the metadata for a Python package.\n\nThis package supplies third-party access to the functionality of\n`importlib.metadata <https://docs.python.org/3/library/importlib.metadata.html>`_\nincluding improvements added to subsequent Python versions.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - importlib_metadata\n     - stdlib\n   * - 7.0\n     - 3.13\n   * - 6.5\n     - 3.12\n   * - 4.13\n     - 3.11\n   * - 4.6\n     - 3.10\n   * - 1.4\n     - 3.8\n\n\nUsage\n=====\n\nSee the `online documentation <https://importlib-metadata.readthedocs.io/>`_\nfor usage details.\n\n`Finder authors\n<https://docs.python.org/3/reference/import.html#finders-and-loaders>`_ can\nalso add support for custom package installers.  See the above documentation\nfor details.\n\n\nCaveats\n=======\n\nThis project primarily supports third-party packages installed by PyPA\ntools (or other conforming packages). It does not support:\n\n- Packages in the stdlib.\n- Packages installed without metadata.\n\nProject details\n===============\n\n * Project home: https://github.com/python/importlib_metadata\n * Report bugs at: https://github.com/python/importlib_metadata/issues\n * Code hosting: https://github.com/python/importlib_metadata\n * Documentation: https://importlib-metadata.readthedocs.io/\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-importlib-metadata?utm_source=pypi-importlib-metadata&utm_medium=referral&utm_campaign=github>`_.",
+      "release_date": "2024-03-20T19:51:30",
       "parties": [
         {
           "type": "person",
@@ -398,11 +398,11 @@
         "Programming Language :: Python :: 3 :: Only"
       ],
       "homepage_url": "https://github.com/python/importlib_metadata",
-      "download_url": "https://files.pythonhosted.org/packages/c0/8b/d8427f023c081a8303e6ac7209c16e6878f2765d5b59667f3903fbcfd365/importlib_metadata-7.0.1-py3-none-any.whl",
-      "size": 23450,
+      "download_url": "https://files.pythonhosted.org/packages/2d/0a/679461c511447ffaf176567d5c496d1de27cbe34a87df6677d7171b2fbd4/importlib_metadata-7.1.0-py3-none-any.whl",
+      "size": 24409,
       "sha1": null,
-      "md5": "6e7b1ecc1d63501048d17b2a59e74878",
-      "sha256": "4805911c3a4ec7c3966410053e9ec6a1fecd629117df5adee56dfc9432a1081e",
+      "md5": "2ef416aa6395c560f15cdce9074546f6",
+      "sha256": "30962b96c0c223483ed6cc7280e7f0199feb01a0e40cfae4d4450fc6fab1f570",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -421,20 +421,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/importlib-metadata/7.0.1/json",
+      "api_data_url": "https://pypi.org/pypi/importlib-metadata/7.1.0/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/importlib-metadata@7.0.1"
+      "purl": "pkg:pypi/importlib-metadata@7.1.0"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "importlib-metadata",
-      "version": "7.0.1",
+      "version": "7.1.0",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "Read metadata from Python packages\n.. image:: https://img.shields.io/pypi/v/importlib_metadata.svg\n   :target: https://pypi.org/project/importlib_metadata\n\n.. image:: https://img.shields.io/pypi/pyversions/importlib_metadata.svg\n\n.. image:: https://github.com/python/importlib_metadata/actions/workflows/main.yml/badge.svg\n   :target: https://github.com/python/importlib_metadata/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json\n    :target: https://github.com/astral-sh/ruff\n    :alt: Ruff\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. image:: https://readthedocs.org/projects/importlib-metadata/badge/?version=latest\n   :target: https://importlib-metadata.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2023-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/importlib-metadata\n   :target: https://tidelift.com/subscription/pkg/pypi-importlib-metadata?utm_source=pypi-importlib-metadata&utm_medium=readme\n\nLibrary to access the metadata for a Python package.\n\nThis package supplies third-party access to the functionality of\n`importlib.metadata <https://docs.python.org/3/library/importlib.metadata.html>`_\nincluding improvements added to subsequent Python versions.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - importlib_metadata\n     - stdlib\n   * - 7.0\n     - 3.13\n   * - 6.5\n     - 3.12\n   * - 4.13\n     - 3.11\n   * - 4.6\n     - 3.10\n   * - 1.4\n     - 3.8\n\n\nUsage\n=====\n\nSee the `online documentation <https://importlib-metadata.readthedocs.io/>`_\nfor usage details.\n\n`Finder authors\n<https://docs.python.org/3/reference/import.html#finders-and-loaders>`_ can\nalso add support for custom package installers.  See the above documentation\nfor details.\n\n\nCaveats\n=======\n\nThis project primarily supports third-party packages installed by PyPA\ntools (or other conforming packages). It does not support:\n\n- Packages in the stdlib.\n- Packages installed without metadata.\n\nProject details\n===============\n\n * Project home: https://github.com/python/importlib_metadata\n * Report bugs at: https://github.com/python/importlib_metadata/issues\n * Code hosting: https://github.com/python/importlib_metadata\n * Documentation: https://importlib-metadata.readthedocs.io/\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-importlib-metadata?utm_source=pypi-importlib-metadata&utm_medium=referral&utm_campaign=github>`_.",
-      "release_date": "2023-12-22T17:17:22",
+      "description": "Read metadata from Python packages\n.. image:: https://img.shields.io/pypi/v/importlib_metadata.svg\n   :target: https://pypi.org/project/importlib_metadata\n\n.. image:: https://img.shields.io/pypi/pyversions/importlib_metadata.svg\n\n.. image:: https://github.com/python/importlib_metadata/actions/workflows/main.yml/badge.svg\n   :target: https://github.com/python/importlib_metadata/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json\n    :target: https://github.com/astral-sh/ruff\n    :alt: Ruff\n\n.. image:: https://readthedocs.org/projects/importlib-metadata/badge/?version=latest\n   :target: https://importlib-metadata.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2024-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/importlib-metadata\n   :target: https://tidelift.com/subscription/pkg/pypi-importlib-metadata?utm_source=pypi-importlib-metadata&utm_medium=readme\n\nLibrary to access the metadata for a Python package.\n\nThis package supplies third-party access to the functionality of\n`importlib.metadata <https://docs.python.org/3/library/importlib.metadata.html>`_\nincluding improvements added to subsequent Python versions.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - importlib_metadata\n     - stdlib\n   * - 7.0\n     - 3.13\n   * - 6.5\n     - 3.12\n   * - 4.13\n     - 3.11\n   * - 4.6\n     - 3.10\n   * - 1.4\n     - 3.8\n\n\nUsage\n=====\n\nSee the `online documentation <https://importlib-metadata.readthedocs.io/>`_\nfor usage details.\n\n`Finder authors\n<https://docs.python.org/3/reference/import.html#finders-and-loaders>`_ can\nalso add support for custom package installers.  See the above documentation\nfor details.\n\n\nCaveats\n=======\n\nThis project primarily supports third-party packages installed by PyPA\ntools (or other conforming packages). It does not support:\n\n- Packages in the stdlib.\n- Packages installed without metadata.\n\nProject details\n===============\n\n * Project home: https://github.com/python/importlib_metadata\n * Report bugs at: https://github.com/python/importlib_metadata/issues\n * Code hosting: https://github.com/python/importlib_metadata\n * Documentation: https://importlib-metadata.readthedocs.io/\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-importlib-metadata?utm_source=pypi-importlib-metadata&utm_medium=referral&utm_campaign=github>`_.",
+      "release_date": "2024-03-20T19:51:32",
       "parties": [
         {
           "type": "person",
@@ -451,11 +451,11 @@
         "Programming Language :: Python :: 3 :: Only"
       ],
       "homepage_url": "https://github.com/python/importlib_metadata",
-      "download_url": "https://files.pythonhosted.org/packages/90/b4/206081fca69171b4dc1939e77b378a7b87021b0f43ce07439d49d8ac5c84/importlib_metadata-7.0.1.tar.gz",
-      "size": 50537,
+      "download_url": "https://files.pythonhosted.org/packages/a0/fc/c4e6078d21fc4fa56300a241b87eae76766aa380a23fc450fc85bb7bf547/importlib_metadata-7.1.0.tar.gz",
+      "size": 52120,
       "sha1": null,
-      "md5": "4bdbc45be0f7ad80660f6d07ebbd2814",
-      "sha256": "f238736bb06590ae52ac1fab06a3a9ef1d8dce2b7a35b5ab329371d6c8f5d2cc",
+      "md5": "aa0201673a892c5925ffb3622a6adeaa",
+      "sha256": "b78938b926ee8d5f020fc4772d487045805a55ddbad2ecf21c6d60938dc7fcd2",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -474,9 +474,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/importlib-metadata/7.0.1/json",
+      "api_data_url": "https://pypi.org/pypi/importlib-metadata/7.1.0/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/importlib-metadata@7.0.1"
+      "purl": "pkg:pypi/importlib-metadata@7.1.0"
     },
     {
       "type": "pypi",
@@ -950,12 +950,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "zipp",
-      "version": "3.17.0",
+      "version": "3.18.1",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "Backport of pathlib-compatible object wrapper for zip files\n.. image:: https://img.shields.io/pypi/v/zipp.svg\n   :target: https://pypi.org/project/zipp\n\n.. image:: https://img.shields.io/pypi/pyversions/zipp.svg\n\n.. image:: https://github.com/jaraco/zipp/workflows/tests/badge.svg\n   :target: https://github.com/jaraco/zipp/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json\n    :target: https://github.com/astral-sh/ruff\n    :alt: Ruff\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. .. image:: https://readthedocs.org/projects/PROJECT_RTD/badge/?version=latest\n..    :target: https://PROJECT_RTD.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2023-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/zipp\n   :target: https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=readme\n\n\nA pathlib-compatible Zipfile object wrapper. Official backport of the standard library\n`Path object <https://docs.python.org/3.8/library/zipfile.html#path-objects>`_.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - zipp\n     - stdlib\n   * - 3.15\n     - 3.12\n   * - 3.5\n     - 3.11\n   * - 3.2\n     - 3.10\n   * - 3.3 ??\n     - 3.9\n   * - 1.0\n     - 3.8\n\n\nUsage\n=====\n\nUse ``zipp.Path`` in place of ``zipfile.Path`` on any Python.\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=referral&utm_campaign=github>`_.",
-      "release_date": "2023-09-18T15:18:23",
+      "description": "Backport of pathlib-compatible object wrapper for zip files\n.. image:: https://img.shields.io/pypi/v/zipp.svg\n   :target: https://pypi.org/project/zipp\n\n.. image:: https://img.shields.io/pypi/pyversions/zipp.svg\n\n.. image:: https://github.com/jaraco/zipp/actions/workflows/main.yml/badge.svg\n   :target: https://github.com/jaraco/zipp/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json\n    :target: https://github.com/astral-sh/ruff\n    :alt: Ruff\n\n.. .. image:: https://readthedocs.org/projects/PROJECT_RTD/badge/?version=latest\n..    :target: https://PROJECT_RTD.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2024-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/zipp\n   :target: https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=readme\n\n\nA pathlib-compatible Zipfile object wrapper. Official backport of the standard library\n`Path object <https://docs.python.org/3.8/library/zipfile.html#path-objects>`_.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - zipp\n     - stdlib\n   * - 3.15\n     - 3.12\n   * - 3.5\n     - 3.11\n   * - 3.2\n     - 3.10\n   * - 3.3 ??\n     - 3.9\n   * - 1.0\n     - 3.8\n\n\nUsage\n=====\n\nUse ``zipp.Path`` in place of ``zipfile.Path`` on any Python.\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=referral&utm_campaign=github>`_.",
+      "release_date": "2024-03-14T21:09:02",
       "parties": [
         {
           "type": "person",
@@ -972,11 +972,11 @@
         "Programming Language :: Python :: 3 :: Only"
       ],
       "homepage_url": "https://github.com/jaraco/zipp",
-      "download_url": "https://files.pythonhosted.org/packages/d9/66/48866fc6b158c81cc2bfecc04c480f105c6040e8b077bc54c634b4a67926/zipp-3.17.0-py3-none-any.whl",
-      "size": 7396,
+      "download_url": "https://files.pythonhosted.org/packages/c2/0a/ba9d0ee9536d3ef73a3448e931776e658b36f128d344e175bc32b092a8bf/zipp-3.18.1-py3-none-any.whl",
+      "size": 8247,
       "sha1": null,
-      "md5": "d93f0b8485000b37800a6de09ed6c1cb",
-      "sha256": "0e923e726174922dce09c53c59ad483ff7bbb8e572e00c7f7c46b88556409f31",
+      "md5": "827fca02e89ef48e5e2c04b242c990b8",
+      "sha256": "206f5a15f2af3dbaee80769fb7dc6f249695e940acca08dfb2a4769fe61e538b",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -995,20 +995,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/zipp/3.17.0/json",
+      "api_data_url": "https://pypi.org/pypi/zipp/3.18.1/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/zipp@3.17.0"
+      "purl": "pkg:pypi/zipp@3.18.1"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "zipp",
-      "version": "3.17.0",
+      "version": "3.18.1",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "Backport of pathlib-compatible object wrapper for zip files\n.. image:: https://img.shields.io/pypi/v/zipp.svg\n   :target: https://pypi.org/project/zipp\n\n.. image:: https://img.shields.io/pypi/pyversions/zipp.svg\n\n.. image:: https://github.com/jaraco/zipp/workflows/tests/badge.svg\n   :target: https://github.com/jaraco/zipp/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json\n    :target: https://github.com/astral-sh/ruff\n    :alt: Ruff\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. .. image:: https://readthedocs.org/projects/PROJECT_RTD/badge/?version=latest\n..    :target: https://PROJECT_RTD.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2023-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/zipp\n   :target: https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=readme\n\n\nA pathlib-compatible Zipfile object wrapper. Official backport of the standard library\n`Path object <https://docs.python.org/3.8/library/zipfile.html#path-objects>`_.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - zipp\n     - stdlib\n   * - 3.15\n     - 3.12\n   * - 3.5\n     - 3.11\n   * - 3.2\n     - 3.10\n   * - 3.3 ??\n     - 3.9\n   * - 1.0\n     - 3.8\n\n\nUsage\n=====\n\nUse ``zipp.Path`` in place of ``zipfile.Path`` on any Python.\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=referral&utm_campaign=github>`_.",
-      "release_date": "2023-09-18T15:18:24",
+      "description": "Backport of pathlib-compatible object wrapper for zip files\n.. image:: https://img.shields.io/pypi/v/zipp.svg\n   :target: https://pypi.org/project/zipp\n\n.. image:: https://img.shields.io/pypi/pyversions/zipp.svg\n\n.. image:: https://github.com/jaraco/zipp/actions/workflows/main.yml/badge.svg\n   :target: https://github.com/jaraco/zipp/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json\n    :target: https://github.com/astral-sh/ruff\n    :alt: Ruff\n\n.. .. image:: https://readthedocs.org/projects/PROJECT_RTD/badge/?version=latest\n..    :target: https://PROJECT_RTD.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2024-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/zipp\n   :target: https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=readme\n\n\nA pathlib-compatible Zipfile object wrapper. Official backport of the standard library\n`Path object <https://docs.python.org/3.8/library/zipfile.html#path-objects>`_.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - zipp\n     - stdlib\n   * - 3.15\n     - 3.12\n   * - 3.5\n     - 3.11\n   * - 3.2\n     - 3.10\n   * - 3.3 ??\n     - 3.9\n   * - 1.0\n     - 3.8\n\n\nUsage\n=====\n\nUse ``zipp.Path`` in place of ``zipfile.Path`` on any Python.\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=referral&utm_campaign=github>`_.",
+      "release_date": "2024-03-14T21:09:04",
       "parties": [
         {
           "type": "person",
@@ -1025,11 +1025,11 @@
         "Programming Language :: Python :: 3 :: Only"
       ],
       "homepage_url": "https://github.com/jaraco/zipp",
-      "download_url": "https://files.pythonhosted.org/packages/58/03/dd5ccf4e06dec9537ecba8fcc67bbd4ea48a2791773e469e73f94c3ba9a6/zipp-3.17.0.tar.gz",
-      "size": 20367,
+      "download_url": "https://files.pythonhosted.org/packages/3e/ef/65da662da6f9991e87f058bc90b91a935ae655a16ae5514660d6460d1298/zipp-3.18.1.tar.gz",
+      "size": 21220,
       "sha1": null,
-      "md5": "a4cf8c530da863c27a04251724436681",
-      "sha256": "84e64a1c28cf7e91ed2078bb8cc8c259cb19b76942096c8d7b84947690cabaf0",
+      "md5": "35d5af28231d6464fe2c2bea05d306dd",
+      "sha256": "2884ed22e7d8961de1c9a05142eb69a247f120291bc0206a00a7642f09b5b715",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -1048,9 +1048,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/zipp/3.17.0/json",
+      "api_data_url": "https://pypi.org/pypi/zipp/3.18.1/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/zipp@3.17.0"
+      "purl": "pkg:pypi/zipp@3.18.1"
     }
   ],
   "resolved_dependencies_graph": [
@@ -1067,16 +1067,16 @@
       "dependencies": [
         "pkg:pypi/blinker@1.7.0",
         "pkg:pypi/click@8.1.7",
-        "pkg:pypi/importlib-metadata@7.0.1",
+        "pkg:pypi/importlib-metadata@7.1.0",
         "pkg:pypi/itsdangerous@2.1.2",
         "pkg:pypi/jinja2@3.1.3",
         "pkg:pypi/werkzeug@3.0.1"
       ]
     },
     {
-      "package": "pkg:pypi/importlib-metadata@7.0.1",
+      "package": "pkg:pypi/importlib-metadata@7.1.0",
       "dependencies": [
-        "pkg:pypi/zipp@3.17.0"
+        "pkg:pypi/zipp@3.18.1"
       ]
     },
     {
@@ -1100,7 +1100,7 @@
       ]
     },
     {
-      "package": "pkg:pypi/zipp@3.17.0",
+      "package": "pkg:pypi/zipp@3.18.1",
       "dependencies": []
     }
   ]
