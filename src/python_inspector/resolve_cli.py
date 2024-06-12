@@ -16,6 +16,7 @@ import click
 from python_inspector import utils_pypi
 from python_inspector.cli_utils import FileOptionType
 from python_inspector.utils import write_output_in_file
+from python_inspector.utils import write_resolved_packages
 
 TRACE = False
 
@@ -116,6 +117,15 @@ def print_version(ctx, param, value):
     "Use the special '-' file name to print results on screen/stdout.",
 )
 @click.option(
+    "--resolved-output",
+    "resolved_output",
+    type=FileOptionType(mode="w", encoding="utf-8", lazy=True),
+    required=False,
+    metavar="FILE",
+    help="Write the packages that are resolved after inspecting, into a TEXT file."
+    "The packages are written in a typical requirements file format that can be used by pip.",
+)
+@click.option(
     "-n",
     "--netrc",
     "netrc_file",
@@ -194,6 +204,7 @@ def resolve_dependencies(
     index_urls,
     json_output,
     pdt_output,
+    resolved_output,
     netrc_file,
     max_rounds,
     use_cached_index=False,
@@ -285,6 +296,8 @@ def resolve_dependencies(
             output=output,
             location=json_output or pdt_output,
         )
+        if resolved_output:
+            write_resolved_packages(files, resolved_output)
     except Exception:
         import traceback
 
