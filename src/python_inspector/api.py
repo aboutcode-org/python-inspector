@@ -73,8 +73,8 @@ class Resolution(NamedTuple):
         }
 
 def pip_conf_get_index_urls() -> list:
-    pip_index_url_cmd = "pip config get global.index-url"
-    pip_extra_index_url_cmd = "pip config get global.extra-index-url"
+    pip_index_url_cmd = ["pip", "config", "get", "global.index-url"]
+    pip_extra_index_url_cmd = ["pip", "config", "get", "global.extra-index-url"]
     index_urls = subprocess.run(pip_index_url_cmd, capture_output=True)
     if index_urls.returncode != 0:
         index_urls = []
