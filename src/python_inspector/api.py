@@ -73,6 +73,7 @@ class Resolution(NamedTuple):
         }
 
 def pip_conf_get_index_urls() -> list:
+    # Get index urls from pip
     pip_index_url_cmd = ["pip", "config", "get", "global.index-url"]
     pip_extra_index_url_cmd = ["pip", "config", "get", "global.extra-index-url"]
     index_urls = subprocess.run(pip_index_url_cmd, capture_output=True)
@@ -85,7 +86,13 @@ def pip_conf_get_index_urls() -> list:
         extra_index_urls = []
     else:
         extra_index_urls = extra_index_urls.stdout.decode("utf-8").split()
-    all_index_urls = [url for url in index_urls + extra_index_urls if url != ""]
+
+    # Extract index urls from environment variables
+    pip_index_url_env = [] if os.getenv("PIP_INDEX_URL") is not None else os.getenv("PIP_INDEX_URL").split()
+    pip_extra_index_url_env = [] if os.getenv("PIP_EXTRA_INDEX_URL") is not None else os.getenv("PIP_EXTRA_INDEX_URL").split()
+    pip_env_urls = pip_index_url_env + pip_extra_index_url_env
+
+    all_index_urls = [url for url in index_urls + extra_index_urls + pip_env_urls if url != ""]
     return all_index_urls
 
 def resolve_dependencies(
