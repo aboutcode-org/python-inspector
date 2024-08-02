@@ -88,8 +88,8 @@ def pip_conf_get_index_urls() -> list:
         extra_index_urls = extra_index_urls.stdout.decode("utf-8").split()
 
     # Extract index urls from environment variables
-    pip_index_url_env = [] if os.getenv("PIP_INDEX_URL") is not None else os.getenv("PIP_INDEX_URL").split()
-    pip_extra_index_url_env = [] if os.getenv("PIP_EXTRA_INDEX_URL") is not None else os.getenv("PIP_EXTRA_INDEX_URL").split()
+    pip_index_url_env = [] if os.getenv("PIP_INDEX_URL") is None else os.getenv("PIP_INDEX_URL").split()
+    pip_extra_index_url_env = [] if os.getenv("PIP_EXTRA_INDEX_URL") is None else os.getenv("PIP_EXTRA_INDEX_URL").split()
     pip_env_urls = pip_index_url_env + pip_extra_index_url_env
 
     all_index_urls = [url for url in index_urls + extra_index_urls + pip_env_urls if url != ""]
