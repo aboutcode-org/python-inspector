@@ -10,6 +10,7 @@
 #
 
 import os
+import subprocess
 from netrc import netrc
 from typing import Dict
 from typing import List
@@ -71,6 +72,21 @@ class Resolution(NamedTuple):
             "resolution": self.resolution,
         }
 
+def pip_conf_get_index_urls() -> list:
+    pip_index_url_cmd = "pip config get global.index-url"
+    pip_extra_index_url_cmd = "pip config get global.extra-index-url"
+    index_urls = subprocess.run(pip_index_url_cmd, capture_output=True)
+    if index_urls.returncode != 0:
+        index_urls = []
+    else:
+        index_urls = index_urls.stdout.decode("utf-8").split()
+    extra_index_urls = subprocess.run(pip_extra_index_url_cmd, capture_output=True)
+    if extra_index_urls.returncode != 0:
+        extra_index_urls = []
+    else:
+        extra_index_urls = extra_index_urls.stdout.decode("utf-8").split()
+    all_index_urls = [url for url in index_urls + extra_index_urls if url != ""]
+    return all_index_urls
 
 def resolve_dependencies(
     requirement_files=tuple(),
@@ -145,6 +161,11 @@ def resolve_dependencies(
     direct_dependencies = []
 
     files = []
+
+    pip_conf_index_urls = pip_conf_get_index_urls()
+
+    if pip_conf_index_urls != []:
+        index_urls = tuple(pip_conf_index_urls) + tuple(index_urls)
 
     if PYPI_SIMPLE_URL not in index_urls:
         index_urls = tuple([PYPI_SIMPLE_URL]) + tuple(index_urls)
