@@ -73,9 +73,14 @@ class Resolution(NamedTuple):
         }
 
 def pip_conf_get_index_urls() -> list:
-    # Get index urls from pip
-    pip_index_url_cmd = ["pip", "config", "get", "global.index-url"]
-    pip_extra_index_url_cmd = ["pip", "config", "get", "global.extra-index-url"]
+    """
+    Returns a list of index_urls as provided by `pip config get`. If none, it returns an empty list.
+    """
+
+    # Get index URLS from pip and split them into lists.
+    # Index URLs are split by whitespace
+    pip_index_url_cmd = ["/usr/bin/env", "python", "-m", "pip", "config", "get", "global.index-url"]
+    pip_extra_index_url_cmd = ["/usr/bin/env", "python", "-m", "pip", "config", "get", "global.extra-index-url"]
     index_urls = subprocess.run(pip_index_url_cmd, capture_output=True)
     if index_urls.returncode != 0:
         index_urls = []
