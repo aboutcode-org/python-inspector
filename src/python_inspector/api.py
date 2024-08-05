@@ -81,10 +81,10 @@ def pip_conf_get_index_urls() -> list:
 
     # Get index URLS from pip and split them into lists.
     # Index URLs are split by whitespace
-    pip_index_url_cmd = ["/usr/bin/env", "python", "-m", "pip",
-                         "config", "get", "global.index-url"]
-    pip_extra_index_url_cmd = ["/usr/bin/env", "python", "-m", "pip",
-                               "config", "get", "global.extra-index-url"]
+    base_pip = ["/usr/bin/env", "python", "-m", "pip"]
+    config = ["config", "get"]
+    pip_index_url_cmd = base_pip + config + ["global.index-url"]
+    pip_extra_index_url_cmd = base_pip + config + ["global.extra-index-url"]
     index_urls = subprocess.run(pip_index_url_cmd, capture_output=True)
     if index_urls.returncode != 0:
         index_urls = []
