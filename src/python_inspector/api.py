@@ -72,33 +72,42 @@ class Resolution(NamedTuple):
             "resolution": self.resolution,
         }
 
+
 def pip_conf_get_index_urls() -> list:
     """
-    Returns a list of index_urls as provided by `pip config get`. If none, it returns an empty list.
+    Returns a list of index_urls as provided by `pip config get`.
+    If none, it returns an empty list.
     """
 
     # Get index URLS from pip and split them into lists.
     # Index URLs are split by whitespace
-    pip_index_url_cmd = ["/usr/bin/env", "python", "-m", "pip", "config", "get", "global.index-url"]
-    pip_extra_index_url_cmd = ["/usr/bin/env", "python", "-m", "pip", "config", "get", "global.extra-index-url"]
+    pip_index_url_cmd = ["/usr/bin/env", "python", "-m", "pip",
+                         "config", "get", "global.index-url"]
+    pip_extra_index_url_cmd = ["/usr/bin/env", "python", "-m", "pip",
+                               "config", "get", "global.extra-index-url"]
     index_urls = subprocess.run(pip_index_url_cmd, capture_output=True)
     if index_urls.returncode != 0:
         index_urls = []
     else:
         index_urls = index_urls.stdout.decode("utf-8").split()
-    extra_index_urls = subprocess.run(pip_extra_index_url_cmd, capture_output=True)
+    extra_index_urls = subprocess.run(pip_extra_index_url_cmd,
+                                      capture_output=True)
     if extra_index_urls.returncode != 0:
         extra_index_urls = []
     else:
         extra_index_urls = extra_index_urls.stdout.decode("utf-8").split()
 
     # Extract index urls from environment variables
-    pip_index_url_env = [] if os.getenv("PIP_INDEX_URL") is None else os.getenv("PIP_INDEX_URL").split()
-    pip_extra_index_url_env = [] if os.getenv("PIP_EXTRA_INDEX_URL") is None else os.getenv("PIP_EXTRA_INDEX_URL").split()
+    pip_index_url_env = [] if os.getenv("PIP_INDEX_URL") is None \
+        else os.getenv("PIP_INDEX_URL").split()
+    pip_extra_index_url_env = [] if os.getenv("PIP_EXTRA_INDEX_URL") is None \
+        else os.getenv("PIP_EXTRA_INDEX_URL").split()
     pip_env_urls = pip_index_url_env + pip_extra_index_url_env
 
-    all_index_urls = [url for url in index_urls + extra_index_urls + pip_env_urls if url != ""]
+    all_index_urls = [url for url in index_urls + extra_index_urls +
+                      pip_env_urls if url != ""]
     return all_index_urls
+
 
 def resolve_dependencies(
     requirement_files=tuple(),
