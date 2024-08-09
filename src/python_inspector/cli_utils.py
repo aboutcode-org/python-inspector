@@ -3,7 +3,7 @@
 # ScanCode is a trademark of nexB Inc.
 # SPDX-License-Identifier: Apache-2.0
 # See http://www.apache.org/licenses/LICENSE-2.0 for the license text.
-# See https://github.com/nexB/scancode-toolkit for support or download.
+# See https://github.com/aboutcode-org/scancode-toolkit for support or download.
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
@@ -21,7 +21,8 @@ class FileOptionType(click.File):
 
     def convert(self, value, param, ctx):
         known_opts = set(
-            chain.from_iterable(p.opts for p in ctx.command.params if isinstance(p, click.Option))
+            chain.from_iterable(
+                p.opts for p in ctx.command.params if isinstance(p, click.Option))
         )
         if value in known_opts:
             self.fail(

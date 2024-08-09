@@ -4,7 +4,7 @@ python-inspector - inspect Python packages dependencies and metadata
 
 Copyright (c) nexB Inc. and others.
 SPDX-License-Identifier: Apache-2.0
-Homepage: https://github.com/nexB/python-inspector and https://www.aboutcode.org/
+Homepage: https://github.com/aboutcode-org/python-inspector and https://www.aboutcode.org/
 
 
 ``python-inspector`` is a collection of utilities to:
@@ -36,7 +36,7 @@ Testing
     pytest -vvs
 
 - These are live tests to regenrate the tests with updated data run::
-  
+
       PYINSP_REGEN_TEST_FIXTURES=yes pytest -vvs
 
 Usage
@@ -44,7 +44,7 @@ Usage
 
 - Install with pip::
 
-    pip install git+https://github.com/nexB/python-inspector
+    pip install git+https://github.com/aboutcode-org/python-inspector
 
 - Run the command line utility with::
 
@@ -71,5 +71,5 @@ Its companion libraries are:
   installed site-packages and their metadata formats.
 
 - ``packageurl-python`` to use Package URL to reference Python packages
- 
- 
+
+

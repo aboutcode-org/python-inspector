@@ -5,7 +5,7 @@
 # ScanCode is a trademark of nexB Inc.
 # SPDX-License-Identifier: Apache-2.0
 # See http://www.apache.org/licenses/LICENSE-2.0 for the license text.
-# See https://github.com/nexB/python-inspector for support or download.
+# See https://github.com/aboutcode-org/python-inspector for support or download.
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
@@ -84,7 +84,8 @@ def print_version(ctx, param, value):
     metavar="OS",
     show_default=True,
     required=True,
-    help="OS to use for dependency resolution. One of " + ", ".join(utils_pypi.PLATFORMS_BY_OS),
+    help="OS to use for dependency resolution. One of " +
+    ", ".join(utils_pypi.PLATFORMS_BY_OS),
 )
 @click.option(
     "--index-url",
@@ -228,7 +229,8 @@ def resolve_dependencies(
     from python_inspector.api import resolve_dependencies as resolver_api
 
     if not (json_output or pdt_output):
-        click.secho("No output file specified. Use --json or --json-pdt.", err=True)
+        click.secho(
+            "No output file specified. Use --json or --json-pdt.", err=True)
         ctx.exit(1)
 
     if json_output and pdt_output:
@@ -240,12 +242,12 @@ def resolve_dependencies(
     notice = (
         "Dependency tree generated with python-inspector.\n"
         "python-inspector is a free software tool from nexB Inc. and others.\n"
-        "Visit https://github.com/nexB/python-inspector/ for support and download."
+        "Visit https://github.com/aboutcode-org/python-inspector/ for support and download."
     )
 
     headers = dict(
         tool_name="python-inspector",
-        tool_homepageurl="https://github.com/nexB/python-inspector",
+        tool_homepageurl="https://github.com/aboutcode-org/python-inspector",
         tool_version=__version__,
         options=options,
         notice=notice,
@@ -337,7 +339,8 @@ def get_pretty_options(ctx, generic_paths=False):
             value = [value]
 
         for val in value:
-            val = get_pretty_value(param_type=param.type, value=val, generic_paths=generic_paths)
+            val = get_pretty_value(param_type=param.type,
+                                   value=val, generic_paths=generic_paths)
 
             if isinstance(param, click.Argument):
                 args.append(val)

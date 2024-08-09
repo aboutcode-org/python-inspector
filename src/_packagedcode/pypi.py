@@ -4,7 +4,7 @@
 # ScanCode is a trademark of nexB Inc.
 # SPDX-License-Identifier: Apache-2.0
 # See http://www.apache.org/licenses/LICENSE-2.0 for the license text.
-# See https://github.com/nexB/scancode-toolkit for support or download.
+# See https://github.com/aboutcode-org/scancode-toolkit for support or download.
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
@@ -457,7 +457,7 @@ def parse_metadata(location, datasource_id, package_type):
         name=name,
         version=version,
         description=get_description(metainfo=meta, location=str(location)),
-        #TODO: https://github.com/nexB/scancode-toolkit/issues/3014
+        #TODO: https://github.com/aboutcode-org/scancode-toolkit/issues/3014
         declared_license=get_declared_license(meta),
         keywords=get_keywords(meta),
         parties=get_parties(meta),
@@ -781,7 +781,7 @@ class SetupCfgHandler(BaseExtractedPythonLayout):
     def parse_reqs(cls, reqs, scope):
         """
         Parse a list of requirements and return a list of dependencies
-        """ 
+        """
         dependent_packages = []
         for req in reqs:
             req_parsed = packaging.requirements.Requirement(str(req))
@@ -816,7 +816,7 @@ def get_resolved_purl(purl: PackageURL, specifiers: SpecifierSet):
     return ResolvedPurl(
         purl=purl,
         is_resolved=is_resolved,
-    )    
+    )
 
 class PipfileHandler(BaseDependencyFileHandler):
     datasource_id = 'pipfile'
@@ -918,7 +918,7 @@ def get_requirements_txt_dependencies(location, include_nested=False):
                 if isinstance(value, list):
                     extra_data[name].extend(value)
                 else:
-                    extra_data[name] = value    
+                    extra_data[name] = value
     dependent_packages = []
     for req in req_file.requirements:
 
@@ -987,7 +987,7 @@ def can_process_dependent_package(dep: models.DependentPackage):
     requirement_flags.pop("hash_options", None)
     if not requirement_flags:
         return True
-    # we can not process the requirement if it has any flag set 
+    # we can not process the requirement if it has any flag set
     # because this means it is not a standard specifier
     # but rather some pip specific option of sorts
     return not any(requirement_flags.values())

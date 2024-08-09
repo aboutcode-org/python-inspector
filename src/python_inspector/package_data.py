@@ -5,7 +5,7 @@
 # ScanCode is a trademark of nexB Inc.
 # SPDX-License-Identifier: Apache-2.0
 # See http://www.apache.org/licenses/LICENSE-2.0 for the license text.
-# See https://github.com/nexB/python-inspector for support or download.
+# See https://github.com/aboutcode-org/python-inspector for support or download.
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
@@ -53,7 +53,8 @@ def get_pypi_data_from_purl(
     project_urls = info.get("project_urls") or {}
     code_view_url = get_pypi_codeview_url(project_urls)
     bug_tracking_url = get_pypi_bugtracker_url(project_urls)
-    python_version = get_python_version_from_env_tag(python_version=environment.python_version)
+    python_version = get_python_version_from_env_tag(
+        python_version=environment.python_version)
     valid_distribution_urls = []
 
     valid_distribution_urls.append(

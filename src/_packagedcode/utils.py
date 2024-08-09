@@ -3,7 +3,7 @@
 # ScanCode is a trademark of nexB Inc.
 # SPDX-License-Identifier: Apache-2.0
 # See http://www.apache.org/licenses/LICENSE-2.0 for the license text.
-# See https://github.com/nexB/scancode-toolkit for support or download.
+# See https://github.com/aboutcode-org/scancode-toolkit for support or download.
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
@@ -123,7 +123,7 @@ def build_description(summary, description):
         description = summary
     else:
         if summary and summary not in description:
-            description = '\n'.join([summary , description])
+            description = '\n'.join([summary, description])
 
     return description
 
@@ -142,7 +142,8 @@ def combine_expressions(
     license ``expressions`` strings or LicenseExpression objects.
     """
     if not licensing:
-        raise Exception('combine_expressions: cannot combine combine_expressions without license_expression package.')
+        raise Exception(
+            'combine_expressions: cannot combine combine_expressions without license_expression package.')
     return expressions and str(le_combine_expressions(expressions, relation, unique, licensing)) or None
 
 

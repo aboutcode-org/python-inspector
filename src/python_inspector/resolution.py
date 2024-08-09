@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: ISC AND Apache-2.0
 # derived and heavily modified from https://github.com/sarugaku/resolvelib
 
-# See https://github.com/nexB/python-inspector for support or download.
+# See https://github.com/aboutcode-org/python-inspector for support or download.
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
@@ -210,13 +210,15 @@ def get_sdist_file_path_from_filename(sdist):
         sdist_file = sdist.rstrip(".tar.gz")
         with tarfile.open(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist)) as file:
             file.extractall(
-                os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file)
+                os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR,
+                             "extracted_sdists", sdist_file)
             )
     elif sdist.endswith(".zip"):
         sdist_file = sdist.rstrip(".zip")
         with ZipFile(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist)) as zip:
             zip.extractall(
-                os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file)
+                os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR,
+                             "extracted_sdists", sdist_file)
             )
 
     else:
@@ -241,7 +243,7 @@ def get_requirements_from_dependencies(
 
         # FIXME We are skipping editable requirements
         # and other pip options for now
-        # https://github.com/nexB/python-inspector/issues/41
+        # https://github.com/aboutcode-org/python-inspector/issues/41
         if can_process_dependent_package(dep):
             yield Requirement(str(dep.extracted_requirement))
 
@@ -359,7 +361,8 @@ class PythonInputProvider(AbstractProvider):
         ignore_errors=False,
     ):
         self.environment = environment
-        self.environment_marker = get_environment_marker_from_environment(self.environment)
+        self.environment_marker = get_environment_marker_from_environment(
+            self.environment)
         self.repos = repos or []
         self.versions_by_package = {}
         self.dependencies_by_purl = {}
@@ -408,9 +411,11 @@ class PythonInputProvider(AbstractProvider):
         versions = []
         for version, package in repo.get_package_versions(name).items():
             python_version = parse_version(
-                get_python_version_from_env_tag(python_version=self.environment.python_version)
+                get_python_version_from_env_tag(
+                    python_version=self.environment.python_version)
             )
-            wheels = list(package.get_supported_wheels(environment=self.environment))
+            wheels = list(package.get_supported_wheels(
+                environment=self.environment))
             valid_wheel_present = False
             pypi_valid_python_version = False
             if wheels:
@@ -459,7 +464,8 @@ class PythonInputProvider(AbstractProvider):
         Return requirements for a package from the simple repositories.
         """
         python_version = parse_version(
-            get_python_version_from_env_tag(python_version=self.environment.python_version)
+            get_python_version_from_env_tag(
+                python_version=self.environment.python_version)
         )
 
         wheels = utils_pypi.download_wheel(
@@ -472,7 +478,8 @@ class PythonInputProvider(AbstractProvider):
 
         if wheels:
             for wheel in wheels:
-                wheel_location = os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, wheel)
+                wheel_location = os.path.join(
+                    utils_pypi.CACHE_THIRDPARTY_DIR, wheel)
                 requirements = get_requirements_from_distribution(
                     handler=PypiWheelHandler,
                     location=wheel_location,
@@ -564,7 +571,8 @@ class PythonInputProvider(AbstractProvider):
             ):
                 valid_versions.append(parsed_version)
         if not all(version.is_prerelease for version in valid_versions):
-            valid_versions = [version for version in valid_versions if not version.is_prerelease]
+            valid_versions = [
+                version for version in valid_versions if not version.is_prerelease]
         for version in valid_versions:
             yield Candidate(name=name, version=version, extras=extras)
 
@@ -585,7 +593,8 @@ class PythonInputProvider(AbstractProvider):
             versions.extend(self.get_versions_for_package(name=name))
         else:
             for repo in self.repos:
-                versions.extend(self.get_versions_for_package(name=name, repo=repo))
+                versions.extend(
+                    self.get_versions_for_package(name=name, repo=repo))
 
         if not versions:
             if self.ignore_errors:
@@ -629,7 +638,7 @@ class PythonInputProvider(AbstractProvider):
         Yield dependencies for the given candidate.
         """
         name = packvers.utils.canonicalize_name(candidate.name)
-        # TODO: handle extras https://github.com/nexB/python-inspector/issues/10
+        # TODO: handle extras https://github.com/aboutcode-org/python-inspector/issues/10
         if candidate.extras:
             r = f"{name}=={candidate.version}"
             yield Requirement(r)
@@ -676,7 +685,8 @@ def dfs(mapping: Dict, graph: DirectedGraph, src: str):
 
     return dict(
         package=str(src_purl),
-        dependencies=sorted([dfs(mapping, graph, c) for c in children], key=lambda d: d["package"]),
+        dependencies=sorted([dfs(mapping, graph, c)
+                            for c in children], key=lambda d: d["package"]),
     )
 
 
@@ -794,7 +804,8 @@ def get_setup_requirements(sdist_location: str, setup_py_location: str, setup_cf
     """
 
     if not os.path.exists(setup_py_location) and not os.path.exists(setup_cfg_location):
-        raise Exception(f"No setup.py or setup.cfg found in pypi sdist {sdist_location}")
+        raise Exception(
+            f"No setup.py or setup.cfg found in pypi sdist {sdist_location}")
 
     # Some commonon packages like flask may have some dependencies in setup.cfg
     # and some dependencies in setup.py. We are going to check both.

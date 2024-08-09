@@ -161,13 +161,13 @@ Another example could be https://github.com/digitalocean/sample-django
 
 We use the latest main branch from python-inspector and scancode-toolkit 31.0.0rc2
 installed on Linux with Python 3.8 using the release tarball from:
-https://github.com/nexB/scancode-toolkit/releases/tag/v31.0.0rc2
+https://github.com/aboutcode-org/scancode-toolkit/releases/tag/v31.0.0rc2
 
 ScanCode setup::
 
     mkdir -p ~/tmp/pyinsp-example/tools
     cd ~/tmp/pyinsp-example/tools
-    wget https://github.com/nexB/scancode-toolkit/releases/download/v31.0.0rc2/scancode-toolkit-31.0.0rc2_py38-linux.tar.xz
+    wget https://github.com/aboutcode-org/scancode-toolkit/releases/download/v31.0.0rc2/scancode-toolkit-31.0.0rc2_py38-linux.tar.xz
     tar -xf scancode-toolkit-31.0.0rc2_py38-linux.tar.xz
     cd scancode-toolkit-31.0.0rc2/
     ./scancode --help
@@ -175,7 +175,7 @@ ScanCode setup::
 python-inspector setup::
 
     cd ~/tmp/pyinsp-example/tools
-    git clone https://github.com/nexB/python-inspector
+    git clone https://github.com/aboutcode-org/python-inspector
     python3.8 -m venv venv
     source venv/bin/activate
     pip install --upgrade pip setuptools wheel

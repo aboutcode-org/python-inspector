@@ -3,7 +3,7 @@
 # ScanCode is a trademark of nexB Inc.
 # SPDX-License-Identifier: Apache-2.0
 # See http://www.apache.org/licenses/LICENSE-2.0 for the license text.
-# See https://github.com/nexB/scancode-toolkit for support or download.
+# See https://github.com/aboutcode-org/scancode-toolkit for support or download.
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
@@ -373,7 +373,7 @@ class DependentPackage(ModelMixin):
              'either from the datafile or collected from another source. Some '
              'lockfiles for Composer or Cargo contain extra dependency data.'
          )
-    
+
     extra_data = Mapping(
         label='extra data',
         help='A mapping of arbitrary extra data.',

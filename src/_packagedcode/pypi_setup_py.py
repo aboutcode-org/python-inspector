@@ -2,7 +2,7 @@
 # Copyright (c) Gram and others.
 # This code is copied and modified from dephell_setuptools https://github.com/pypa/setuptools
 # SPDX-License-Identifier: MIT
-# See https://github.com/nexB/scancode-toolkit for support or download.
+# See https://github.com/aboutcode-org/scancode-toolkit for support or download.
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
@@ -192,11 +192,11 @@ def clean_setup(data):
     Return a cleaned mapping from a setup ``data`` mapping.
     """
     result = {k: v
-        for k, v in data.items()
-        if k in FIELDS
-        and (v and v is not False)
-        and str(v) != 'UNKNOWN'
-    }
+              for k, v in data.items()
+              if k in FIELDS
+              and (v and v is not False)
+              and str(v) != 'UNKNOWN'
+              }
 
     # split keywords in words
     keywords = result.get('keywords')
