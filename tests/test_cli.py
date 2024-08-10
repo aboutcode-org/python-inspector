@@ -12,6 +12,7 @@
 import json
 import os
 import sys
+import pdb
 
 import pytest
 from click.testing import CliRunner
@@ -159,6 +160,35 @@ def test_cli_with_multiple_index_url_and_tilde_req():
         extra_options=extra_options,
         regen=REGEN_TEST_FIXTURES,
     )
+
+@pytest.mark.online
+def test_cli_with_single_env_var_index_url():
+    expected_file = test_env.get_test_loc("single-url-env-var-expected.json", must_exist=False)
+    specifier = "zipp==3.8.0"
+    os.environ["PYINSP_INDEX_URL"] = "https://pypi.org/simple"
+    check_specs_resolution(
+        specifier=specifier,
+        expected_file=expected_file,
+        extra_options=[],
+        regen=REGEN_TEST_FIXTURES
+    )
+    os.unsetenv("PYINSP_INDEX_URL")
+
+@pytest.mark.online
+def test_cli_with_single_env_var_index_url_except_pypi_simple():
+    expected_file = test_env.get_test_loc(
+        "single-url-env-var-except-simple-expected.json", must_exist=False
+    )
+    # using flask since it's not present in thirdparty
+    specifier = "flask"
+    os.environ["PYINSP_INDEX_URL"] = "https://thirdparty.aboutcode.org/pypi/simple/"
+    check_specs_resolution(
+        specifier=specifier,
+        expected_file=expected_file,
+        extra_options=[],
+        regen=REGEN_TEST_FIXTURES,
+    )
+    os.unsetenv("PYINSP_INDEX_URL")
 
 
 @pytest.mark.online
