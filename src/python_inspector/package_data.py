@@ -14,14 +14,11 @@ from typing import List
 from packageurl import PackageURL
 
 from _packagedcode.models import PackageData
-from _packagedcode.pypi import get_declared_license
-from _packagedcode.pypi import get_description
-from _packagedcode.pypi import get_keywords
-from _packagedcode.pypi import get_parties
+from _packagedcode.pypi import (get_declared_license, get_description,
+                                get_keywords, get_parties)
 from python_inspector import utils_pypi
 from python_inspector.resolution import get_python_version_from_env_tag
-from python_inspector.utils_pypi import Environment
-from python_inspector.utils_pypi import PypiSimpleRepository
+from python_inspector.utils_pypi import Environment, PypiSimpleRepository
 
 
 def get_pypi_data_from_purl(

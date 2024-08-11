@@ -11,38 +11,26 @@
 
 import os
 from netrc import netrc
-from typing import Dict
-from typing import List
-from typing import NamedTuple
-from typing import Sequence
+from typing import Dict, List, NamedTuple, Optional, Sequence
 
 from packageurl import PackageURL
 from packvers.requirements import Requirement
-from resolvelib import BaseReporter
-from resolvelib import Resolver
+from resolvelib import BaseReporter, Resolver
 
-from _packagedcode.models import DependentPackage
-from _packagedcode.models import PackageData
-from _packagedcode.pypi import PipRequirementsFileHandler
-from _packagedcode.pypi import PythonSetupPyHandler
-from _packagedcode.pypi import can_process_dependent_package
-from python_inspector import DEFAULT_PYTHON_VERSION
-from python_inspector import dependencies
-from python_inspector import utils
-from python_inspector import utils_pypi
+from _packagedcode.models import DependentPackage, PackageData
+from _packagedcode.pypi import (PipRequirementsFileHandler,
+                                PythonSetupPyHandler,
+                                can_process_dependent_package)
+from python_inspector import dependencies, settings, utils, utils_pypi
 from python_inspector.package_data import get_pypi_data_from_purl
-from python_inspector.resolution import PythonInputProvider
-from python_inspector.resolution import format_pdt_tree
-from python_inspector.resolution import format_resolution
-from python_inspector.resolution import get_environment_marker_from_environment
-from python_inspector.resolution import get_package_list
-from python_inspector.resolution import get_python_version_from_env_tag
-from python_inspector.resolution import get_reqs_insecurely
-from python_inspector.resolution import get_requirements_from_python_manifest
-from python_inspector.utils_pypi import PLATFORMS_BY_OS
-from python_inspector.utils_pypi import PYPI_SIMPLE_URL
-from python_inspector.utils_pypi import Environment
-from python_inspector.utils_pypi import valid_python_versions
+from python_inspector.resolution import (
+    PythonInputProvider, format_pdt_tree, format_resolution,
+    get_environment_marker_from_environment, get_package_list,
+    get_python_version_from_env_tag, get_reqs_insecurely,
+    get_requirements_from_python_manifest)
+from python_inspector.settings import TraceLevel
+from python_inspector.utils_pypi import (PLATFORMS_BY_OS, Environment,
+                                         valid_python_versions)
 
 
 class Resolution(NamedTuple):
@@ -79,7 +67,6 @@ def resolve_dependencies(
     specifiers=tuple(),
     python_version=None,
     operating_system=None,
-    index_urls=tuple([PYPI_SIMPLE_URL]),
     pdt_output=None,
     netrc_file=None,
     max_rounds=200000,
@@ -104,6 +91,9 @@ def resolve_dependencies(
     Download from the provided PyPI simple index_urls INDEX(s) URLs defaulting
     to PyPI.org
     """
+
+    if verbose:
+        settings.TRACE = TraceLevel.TRACE
 
     if not operating_system:
         raise Exception(f"No operating system provided.")
@@ -147,8 +137,9 @@ def resolve_dependencies(
 
     files = []
 
-    if PYPI_SIMPLE_URL not in index_urls:
-        index_urls = tuple([PYPI_SIMPLE_URL]) + tuple(index_urls)
+    index_urls = tuple([settings.INDEX_URL])
+    if settings.EXTRA_INDEX_URLS:
+        index_urls = index_urls + tuple(settings.EXTRA_INDEX_URLS)
 
     # requirements
     for req_file in requirement_files:
@@ -366,7 +357,7 @@ def resolve(
 
 def get_resolved_dependencies(
     requirements: List[Requirement],
-    environment: Environment = None,
+    environment: Environment,
     repos: Sequence[utils_pypi.PypiSimpleRepository] = tuple(),
     as_tree: bool = False,
     max_rounds: int = 200000,

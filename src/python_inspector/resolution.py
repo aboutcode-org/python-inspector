@@ -12,36 +12,25 @@ import operator
 import os
 import re
 import tarfile
-from typing import Dict
-from typing import Generator
-from typing import List
-from typing import NamedTuple
-from typing import Tuple
-from typing import Union
+from typing import Dict, Generator, List, NamedTuple, Tuple, Union
 from zipfile import ZipFile
 
 import packvers.utils
 from packageurl import PackageURL
 from packvers.requirements import Requirement
-from packvers.version import LegacyVersion
-from packvers.version import Version
+from packvers.version import LegacyVersion, Version
 from packvers.version import parse as parse_version
 from resolvelib import AbstractProvider
 from resolvelib.structs import DirectedGraph
 
 from _packagedcode.models import DependentPackage
-from _packagedcode.pypi import BasePypiHandler
-from _packagedcode.pypi import PipRequirementsFileHandler
-from _packagedcode.pypi import PypiWheelHandler
-from _packagedcode.pypi import PythonSetupPyHandler
-from _packagedcode.pypi import SetupCfgHandler
-from _packagedcode.pypi import can_process_dependent_package
+from _packagedcode.pypi import (BasePypiHandler, PipRequirementsFileHandler,
+                                PypiWheelHandler, PythonSetupPyHandler,
+                                SetupCfgHandler, can_process_dependent_package)
 from python_inspector import utils_pypi
 from python_inspector.error import NoVersionsFound
 from python_inspector.setup_py_live_eval import iter_requirements
-from python_inspector.utils import Candidate
-from python_inspector.utils import contain_string
-from python_inspector.utils import get_response
+from python_inspector.utils import Candidate, contain_string, get_response
 from python_inspector.utils_pypi import PypiSimpleRepository
 
 

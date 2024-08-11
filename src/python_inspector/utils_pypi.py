@@ -17,12 +17,8 @@ import shutil
 import tempfile
 import time
 from collections import defaultdict
-from typing import List
-from typing import NamedTuple
-from urllib.parse import quote_plus
-from urllib.parse import unquote
-from urllib.parse import urlparse
-from urllib.parse import urlunparse
+from typing import List, NamedTuple
+from urllib.parse import quote_plus, unquote, urlparse, urlunparse
 
 import attr
 import packageurl
@@ -34,8 +30,8 @@ from packvers import tags as packaging_tags
 from packvers import version as packaging_version
 from packvers.specifiers import SpecifierSet
 
-from python_inspector import DEFAULT_PYTHON_VERSION
-from python_inspector import utils_pip_compatibility_tags
+from python_inspector import settings, utils_pip_compatibility_tags
+from python_inspector.settings import TraceLevel
 
 """
 Utilities to manage Python thirparty libraries source, binaries and metadata in
@@ -96,10 +92,6 @@ Wheel downloader
 
 
 """
-
-TRACE = False
-TRACE_DEEP = False
-TRACE_ULTRA_DEEP = False
 
 # Supported environments
 PYTHON_VERSIONS = "27", "36", "37", "38", "39", "310", "311", "312"
@@ -191,10 +183,7 @@ if not CACHE_THIRDPARTY_DIR:
         os.makedirs(CACHE_THIRDPARTY_DIR, exist_ok=True)
 
 
-################################################################################
-
-PYPI_SIMPLE_URL = "https://pypi.org/simple"
-PYPI_INDEX_URLS = (PYPI_SIMPLE_URL,)
+PYPI_INDEX_URLS = (settings.INDEX_URL)
 
 ################################################################################
 
@@ -224,7 +213,7 @@ def download_wheel(
     repos=tuple(),
     verbose=False,
     echo_func=None,
-    python_version=DEFAULT_PYTHON_VERSION,
+    python_version=settings.DEFAULT_PYTHON_VERSION,
 ):
     """
     Download the wheels binary distribution(s) of package ``name`` and
@@ -234,7 +223,7 @@ def download_wheel(
 
     Use the first PyPI simple repository from a list of ``repos`` that contains this wheel.
     """
-    if TRACE_DEEP:
+    if settings.TRACE == TraceLevel.TRACE:
         print(f"  download_wheel: {name}=={version} for envt: {environment}")
 
     if not repos:
@@ -246,7 +235,7 @@ def download_wheel(
             repo, name, version, environment, python_version
         )
         if not supported_and_valid_wheels:
-            if TRACE_DEEP:
+            if settings.TRACE == TraceLevel.TRACE_DEEP:
                 print(
                     f"    download_wheel: No supported and valid wheel for {name}=={version}: {environment} "
                 )
@@ -265,44 +254,44 @@ def download_wheel(
     return fetched_wheel_filenames
 
 
-def get_valid_sdist(repo, name, version, python_version=DEFAULT_PYTHON_VERSION):
+def get_valid_sdist(repo, name, version, python_version=settings.DEFAULT_PYTHON_VERSION):
     package = repo.get_package_version(name=name, version=version)
     if not package:
-        if TRACE_DEEP:
+        if settings.TRACE == TraceLevel.TRACE_DEEP:
             print(
                 print(f"    get_valid_sdist: No package in {repo.index_url} for {name}=={version}")
             )
         return
     sdist = package.sdist
     if not sdist:
-        if TRACE_DEEP:
+        if settings.TRACE == TraceLevel.TRACE_DEEP:
             print(f"    get_valid_sdist: No sdist for {name}=={version}")
         return
     if not valid_python_version(
         python_requires=sdist.python_requires, python_version=python_version
     ):
         return
-    if TRACE_DEEP:
+    if settings.TRACE == TraceLevel.TRACE_DEEP:
         print(f"    get_valid_sdist: Getting sdist from index (or cache): {sdist.download_url}")
     return sdist
 
 
 def get_supported_and_valid_wheels(
-    repo, name, version, environment, python_version=DEFAULT_PYTHON_VERSION
+    repo, name, version, environment, python_version=settings.DEFAULT_PYTHON_VERSION
 ) -> List:
     """
     Return a list of wheels matching the ``environment`` Environment constraints.
     """
     package = repo.get_package_version(name=name, version=version)
     if not package:
-        if TRACE_DEEP:
+        if settings.TRACE == TraceLevel.TRACE_DEEP:
             print(
                 f"    get_supported_and_valid_wheels: No package in {repo.index_url} for {name}=={version}"
             )
         return []
     supported_wheels = list(package.get_supported_wheels(environment=environment))
     if not supported_wheels:
-        if TRACE_DEEP:
+        if settings.TRACE == TraceLevel.TRACE_DEEP:
             print(
                 f"    get_supported_and_valid_wheels: No supported wheel for {name}=={version}: {environment}"
             )
@@ -313,7 +302,7 @@ def get_supported_and_valid_wheels(
             python_requires=wheel.python_requires, python_version=python_version
         ):
             continue
-        if TRACE_DEEP:
+        if settings.TRACE == TraceLevel.TRACE_DEEP:
             print(
                 f"""    get_supported_and_valid_wheels: Getting wheel from index (or cache):
                 {wheel.download_url}"""
@@ -338,7 +327,7 @@ def download_sdist(
     repos=tuple(),
     verbose=False,
     echo_func=None,
-    python_version=DEFAULT_PYTHON_VERSION,
+    python_version=settings.DEFAULT_PYTHON_VERSION,
 ):
     """
     Download the sdist source distribution of package ``name`` and ``version``
@@ -347,7 +336,7 @@ def download_sdist(
     Use the first PyPI simple repository from a list of ``repos`` that contains
     this sdist.
     """
-    if TRACE:
+    if settings.TRACE == TraceLevel.TRACE_DEEP:
         print(f"  download_sdist: {name}=={version}")
 
     if not repos:
@@ -358,7 +347,7 @@ def download_sdist(
     for repo in repos:
         sdist = get_valid_sdist(repo, name, version, python_version=python_version)
         if not sdist:
-            if TRACE_DEEP:
+            if settings.TRACE == TraceLevel.TRACE_DEEP:
                 print(f"    download_sdist: No valid sdist for {name}=={version}")
             continue
         fetched_sdist_filename = sdist.download(
@@ -625,7 +614,7 @@ class Distribution(NameVer):
         for repo in repos:
             package = repo.get_package_version(name=self.name, version=self.version)
             if not package:
-                if TRACE:
+                if settings.TRACE == TraceLevel.TRACE:
                     print(
                         f"     get_best_download_url: {self.name}=={self.version} "
                         f"not found in {repo.index_url}"
@@ -635,7 +624,7 @@ class Distribution(NameVer):
             if pypi_url:
                 return pypi_url
             else:
-                if TRACE:
+                if settings.TRACE == TraceLevel.TRACE:
                     print(
                         f"     get_best_download_url: {self.filename} not found in {repo.index_url}"
                     )
@@ -651,7 +640,7 @@ class Distribution(NameVer):
         Return the fetched filename.
         """
         assert self.filename
-        if TRACE_DEEP:
+        if settings.TRACE == TraceLevel.TRACE_DEEP:
             print(
                 f"Fetching distribution of {self.name}=={self.version}:",
                 self.filename,
@@ -1115,7 +1104,7 @@ class Wheel(Distribution):
         """
         Return True is this wheel is compatible with one of a list of PEP 425 tags.
         """
-        if TRACE_DEEP:
+        if settings.TRACE == TraceLevel.TRACE_DEEP:
             print()
             print("is_supported_by_tags: tags:", tags)
             print("self.tags:", self.tags)
@@ -1187,13 +1176,13 @@ class PypiPackage(NameVer):
         metadata=dict(help="List of Wheel for this package"),
     )
 
-    def get_supported_wheels(self, environment, verbose=TRACE_ULTRA_DEEP):
+    def get_supported_wheels(self, environment):
         """
         Yield all the Wheel of this package supported and compatible with the
         Environment `environment`.
         """
         envt_tags = environment.tags()
-        if verbose:
+        if settings.TRACE == TraceLevel.TRACE_ULTRA_DEEP:
             print("get_supported_wheels: envt_tags:", envt_tags)
         for wheel in self.wheels:
             if wheel.is_supported_by_tags(envt_tags):
@@ -1220,7 +1209,7 @@ class PypiPackage(NameVer):
         >>> assert package.wheels == [w1, w2]
         """
         dists = list(dists)
-        if TRACE_DEEP:
+        if settings.TRACE == TraceLevel.TRACE_DEEP:
             print(f"package_from_dists: {dists}")
         if not dists:
             return
@@ -1257,7 +1246,7 @@ class PypiPackage(NameVer):
             else:
                 raise Exception(f"Unknown distribution type: {dist}")
 
-        if TRACE_DEEP:
+        if settings.TRACE == TraceLevel.TRACE_DEEP:
             print(f"package_from_dists: {package}")
 
         return package
@@ -1269,7 +1258,7 @@ class PypiPackage(NameVer):
         These are sorted by name and then by version from oldest to newest.
         """
         dists = PypiPackage.dists_from_links(links)
-        if TRACE_ULTRA_DEEP:
+        if settings.TRACE == TraceLevel.TRACE_ULTRA_DEEP:
             print("packages_from_many_paths_or_urls: dists:", dists)
 
         dists = NameVer.sorted(dists)
@@ -1279,7 +1268,7 @@ class PypiPackage(NameVer):
             key=NameVer.sortable_name_version,
         ):
             package = PypiPackage.package_from_dists(dists_of_package)
-            if TRACE_ULTRA_DEEP:
+            if settings.TRACE == TraceLevel.TRACE_ULTRA_DEEP:
                 print("packages_from_many_paths_or_urls", package)
             yield package
 
@@ -1316,14 +1305,14 @@ class PypiPackage(NameVer):
         Sdist bitarray 0.8.1
         """
         dists = []
-        if TRACE_ULTRA_DEEP:
+        if settings.TRACE == TraceLevel.TRACE_ULTRA_DEEP:
             print("     ###paths_or_urls:", links)
         installable: List[Link] = [link for link in links if link.url.endswith(EXTENSIONS)]
         for link in installable:
             try:
                 dist = Distribution.from_link(link=link)
                 dists.append(dist)
-                if TRACE_DEEP:
+                if settings.TRACE == TraceLevel.TRACE_DEEP:
                     print(
                         "     ===> dists_from_paths_or_urls:",
                         dist,
@@ -1335,7 +1324,7 @@ class PypiPackage(NameVer):
                         link.url,
                     )
             except InvalidDistributionFilename:
-                if TRACE_DEEP:
+                if settings.TRACE == TraceLevel.TRACE_DEEP:
                     print(f"     Skipping invalid distribution from: {link.url}")
                 continue
         return dists
@@ -1464,7 +1453,7 @@ class PypiSimpleRepository:
 
     index_url = attr.ib(
         type=str,
-        default=PYPI_SIMPLE_URL,
+        default=settings.INDEX_URL,
         metadata=dict(help="Base PyPI simple URL for this index."),
     )
 
@@ -1527,10 +1516,10 @@ class PypiSimpleRepository:
                 }
                 self.packages[normalized_name] = versions
             except RemoteNotFetchedException as e:
-                if TRACE:
+                if settings.TRACE == TraceLevel.TRACE:
                     print(f"failed to fetch package name: {name} from: {self.index_url}:\n{e}")
 
-        if not versions and TRACE:
+        if not versions and settings.TRACE == TraceLevel.TRACE:
             print(f"WARNING: package {name} not found in repo: {self.index_url}")
 
         return versions
@@ -1640,7 +1629,7 @@ def resolve_relative_url(package_url, url):
     return url
 
 
-PYPI_PUBLIC_REPO = PypiSimpleRepository(index_url=PYPI_SIMPLE_URL)
+PYPI_PUBLIC_REPO = PypiSimpleRepository(index_url=settings.INDEX_URL)
 DEFAULT_PYPI_REPOS = (PYPI_PUBLIC_REPO,)
 DEFAULT_PYPI_REPOS_BY_URL = {r.index_url: r for r in DEFAULT_PYPI_REPOS}
 
@@ -1682,7 +1671,7 @@ class Cache:
         cached = os.path.join(self.directory, cache_key)
 
         if force or not os.path.exists(cached):
-            if TRACE_DEEP:
+            if settings.TRACE == TraceLevel.TRACE_DEEP:
                 print(f"        FILE CACHE MISS: {path_or_url}")
             content = get_file_content(
                 path_or_url=path_or_url,
@@ -1696,7 +1685,7 @@ class Cache:
                 fo.write(content)
             return content
         else:
-            if TRACE_DEEP:
+            if settings.TRACE == TraceLevel.TRACE_DEEP:
                 print(f"        FILE CACHE HIT: {path_or_url}")
             return get_local_file_content(path=cached, as_text=as_text)
 
@@ -1716,7 +1705,7 @@ def get_file_content(
     remote URL. Return the content as bytes is `as_text` is False.
     """
     if path_or_url.startswith("https://"):
-        if TRACE_DEEP:
+        if settings.TRACE == TraceLevel.TRACE_DEEP:
             print(f"Fetching: {path_or_url}")
         _headers, content = get_remote_file_content(
             url=path_or_url,

@@ -68,6 +68,7 @@ install_requires =
     saneyaml >= 0.5.2
     toml >= 0.10.0
     mock >= 3.0.5
+    pydantic_settings >= 2.4.0
 
 [options.packages.find]
 where = src

@@ -20,6 +20,10 @@ class FileOptionType(click.File):
     """
 
     def convert(self, value, param, ctx):
+        if not ctx:
+            self.fail(
+                "Trying to access a command from invalid context."
+            )
         known_opts = set(
             chain.from_iterable(
                 p.opts for p in ctx.command.params if isinstance(p, click.Option))

@@ -13,16 +13,13 @@ from typing import Dict
 
 import click
 
-from python_inspector import utils_pypi
+from python_inspector import settings, utils_pypi
 from python_inspector.cli_utils import FileOptionType
+from python_inspector.settings import TraceLevel
 from python_inspector.utils import write_output_in_file
-
-TRACE = False
 
 __version__ = "0.12.0"
 
-DEFAULT_PYTHON_VERSION = "38"
-PYPI_SIMPLE_URL = "https://pypi.org/simple"
 
 
 def print_version(ctx, param, value):
@@ -89,13 +86,21 @@ def print_version(ctx, param, value):
 )
 @click.option(
     "--index-url",
-    "index_urls",
+    "index_url",
     type=str,
     metavar="INDEX",
     show_default=True,
-    default=tuple([PYPI_SIMPLE_URL]),
+    required=False,
+    help="PyPI default index URL to use. Defaults to pypi.org refistry."
+)
+@click.option(
+    "--extra-index-urls",
+    "extra_index_urls",
+    type=str,
+    show_default=False,
     multiple=True,
-    help="PyPI simple index URL(s) to use in order of preference. "
+    required=False,
+    help="PyPI extra index URL(s) to try after index-url in order of preference. "
     "This option can be used multiple times.",
 )
 @click.option(
@@ -192,7 +197,8 @@ def resolve_dependencies(
     specifiers,
     python_version,
     operating_system,
-    index_urls,
+    index_url,
+    extra_index_urls,
     json_output,
     pdt_output,
     netrc_file,
@@ -201,7 +207,7 @@ def resolve_dependencies(
     use_pypi_json_api=False,
     analyze_setup_py_insecurely=False,
     prefer_source=False,
-    verbose=TRACE,
+    verbose=False,
     generic_paths=False,
     ignore_errors=False,
 ):
@@ -255,6 +261,11 @@ def resolve_dependencies(
         errors=[],
     )
 
+    if index_url:
+        settings.INDEX_URL = index_url
+    if extra_index_urls:
+        settings.EXTRA_INDEX_URLS = extra_index_urls
+
     try:
         resolution_result: Dict = resolver_api(
             requirement_files=requirement_files,
@@ -262,7 +273,6 @@ def resolve_dependencies(
             specifiers=specifiers,
             python_version=python_version,
             operating_system=operating_system,
-            index_urls=index_urls,
             pdt_output=pdt_output,
             netrc_file=netrc_file,
             max_rounds=max_rounds,

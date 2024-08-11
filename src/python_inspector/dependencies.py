@@ -17,11 +17,12 @@ from _packagedcode import models
 from _packagedcode.pypi import PipRequirementsFileHandler
 from _packagedcode.pypi import get_requirements_txt_dependencies
 
+from python_inspector import settings
+from python_inspector.settings import TraceLevel
+
 """
 Utilities to resolve dependencies .
 """
-
-TRACE = False
 
 
 def get_dependencies_from_requirements(requirements_file="requirements.txt"):
@@ -33,7 +34,7 @@ def get_dependencies_from_requirements(requirements_file="requirements.txt"):
         location=requirements_file, include_nested=True
     )
     for dependent_package in dependent_packages:
-        if TRACE:
+        if settings.TRACE == TraceLevel.TRACE:
             print(
                 "dependent_package.extracted_requirement:",
                 dependent_package.extracted_requirement,
@@ -69,9 +70,9 @@ def get_dependency(specifier):
     requirement = Requirement(requirement_string=specifier)
 
     scope = "install"
-    is_runtime = True
-    is_optional = False
-
+    is_runtime: bool = True
+    is_optional: bool= False
+ 
     if requirement.name:
         # will be None if not pinned
         version = None
