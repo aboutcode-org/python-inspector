@@ -12,7 +12,6 @@
 import json
 import os
 import sys
-import pdb
 
 import pytest
 from click.testing import CliRunner
