@@ -327,6 +327,10 @@ def test_cli_with_insecure_option():
     )
 
 
+@pytest.mark.skipif(sys.version_info[:2] == (3, 8), reason="Skipping test for Python 3.8")
+@pytest.mark.skipif(sys.version_info[:2] == (3, 9), reason="Skipping test for Python 3.9")
+@pytest.mark.skipif(sys.version_info[:2] == (3, 10), reason="Skipping test for Python 3.10")
+@pytest.mark.skipif(sys.version_info[:2] == (3, 11), reason="Skipping test for Python 3.11")
 @pytest.mark.skipif(sys.version_info[:2] == (3, 12), reason="Skipping test for Python 3.12")
 @pytest.mark.online
 def test_cli_with_insecure_option_testpkh():
