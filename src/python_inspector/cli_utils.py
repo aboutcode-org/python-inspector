@@ -21,8 +21,7 @@ class FileOptionType(click.File):
 
     def convert(self, value, param, ctx):
         known_opts = set(
-            chain.from_iterable(
-                p.opts for p in ctx.command.params if isinstance(p, click.Option))
+            chain.from_iterable(p.opts for p in ctx.command.params if isinstance(p, click.Option))
         )
         if value in known_opts:
             self.fail(
