@@ -90,6 +90,7 @@ def print_version(ctx, param, value):
 @click.option(
     "--index-url",
     "index_urls",
+    envvar="PYINSP_INDEX_URL",
     type=str,
     metavar="INDEX",
     show_default=True,
