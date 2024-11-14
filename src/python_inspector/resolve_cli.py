@@ -13,6 +13,7 @@ from typing import Dict
 
 import click
 
+from python_inspector import settings
 from python_inspector import utils_pypi
 from python_inspector.cli_utils import FileOptionType
 from python_inspector.utils import write_output_in_file
@@ -92,9 +93,9 @@ def print_version(ctx, param, value):
     "index_urls",
     type=str,
     metavar="INDEX",
-    show_default=True,
-    default=tuple([PYPI_SIMPLE_URL]),
+    show_default=False,
     multiple=True,
+    required=False,
     help="PyPI simple index URL(s) to use in order of preference. "
     "This option can be used multiple times.",
 )
@@ -254,6 +255,9 @@ def resolve_dependencies(
         warnings=[],
         errors=[],
     )
+
+    if index_urls:
+        settings.INDEX_URL = index_urls
 
     try:
         resolution_result: Dict = resolver_api(

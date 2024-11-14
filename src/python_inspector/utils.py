@@ -11,7 +11,7 @@
 
 import json
 import os
-from typing import Dict
+from typing import Any
 from typing import List
 from typing import NamedTuple
 
@@ -64,7 +64,7 @@ class Candidate(NamedTuple):
     extras: str
 
 
-def get_response(url: str) -> Dict:
+def get_response(url: str) -> Any:
     """
     Return a mapping of the JSON response from fetching ``url``
     or None if the ``url`` cannot be fetched..

@@ -130,7 +130,7 @@ def test_cli_with_single_index_url_except_pypi_simple():
         "single-url-except-simple-expected.json", must_exist=False
     )
     # using flask since it's not present in thirdparty
-    specifier = "flask"
+    specifier = "requests"
     extra_options = [
         "--index-url",
         "https://thirdparty.aboutcode.org/pypi/simple/",
@@ -219,14 +219,14 @@ def test_cli_with_azure_devops_with_python_312():
 
 
 @pytest.mark.online
-def test_cli_with_azure_devops_with_python_38():
+def test_cli_with_azure_devops_with_python_39():
     requirements_file = test_env.get_test_loc("azure-devops.req.txt")
-    expected_file = test_env.get_test_loc("azure-devops.req-38-expected.json", must_exist=False)
+    expected_file = test_env.get_test_loc("azure-devops.req-39-expected.json", must_exist=False)
     extra_options = [
         "--operating-system",
         "linux",
         "--python-version",
-        "38",
+        "39",
     ]
     check_requirements_resolution(
         requirements_file=requirements_file,
@@ -399,7 +399,7 @@ def check_specs_resolution(
 
 def append_os_and_pyver_options(options):
     if "--python-version" not in options:
-        options.extend(["--python-version", "38"])
+        options.extend(["--python-version", "39"])
     if "--operating-system" not in options:
         options.extend(["--operating-system", "linux"])
     return options
@@ -439,7 +439,7 @@ def test_passing_of_no_json_output_flag():
 
 
 def test_passing_of_no_os():
-    options = ["--specifier", "foo", "--json", "-", "--python-version", "38"]
+    options = ["--specifier", "foo", "--json", "-", "--python-version", "39"]
     run_cli(options=options, expected_rc=2, get_env=False)
 
 

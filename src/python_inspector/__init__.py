@@ -7,4 +7,12 @@
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
-DEFAULT_PYTHON_VERSION = "3.8"
+from pydantic import ValidationError
+
+from python_inspector.settings import Settings
+
+# Initialize global settings
+try:
+    settings = Settings()
+except ValidationError as e:
+    print(e)

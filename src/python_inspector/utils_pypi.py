@@ -11,7 +11,6 @@
 import email
 import itertools
 import os
-import pathlib
 import re
 import shutil
 import tempfile
@@ -19,6 +18,7 @@ import time
 from collections import defaultdict
 from typing import List
 from typing import NamedTuple
+from typing import Optional
 from urllib.parse import quote_plus
 from urllib.parse import unquote
 from urllib.parse import urlparse
@@ -34,8 +34,8 @@ from packvers import tags as packaging_tags
 from packvers import version as packaging_version
 from packvers.specifiers import SpecifierSet
 
-from python_inspector import DEFAULT_PYTHON_VERSION
 from python_inspector import utils_pip_compatibility_tags
+from python_inspector import settings
 
 """
 Utilities to manage Python thirparty libraries source, binaries and metadata in
@@ -116,7 +116,9 @@ PYTHON_DOT_VERSIONS_BY_VER = {
 }
 
 valid_python_versions = list(PYTHON_DOT_VERSIONS_BY_VER.keys())
-valid_python_versions.extend([dot_ver for pyver, dot_ver in PYTHON_DOT_VERSIONS_BY_VER.items()])
+valid_python_versions.extend(
+    [dot_ver for pyver, dot_ver in PYTHON_DOT_VERSIONS_BY_VER.items()]
+)
 
 
 def get_python_dot_version(version):
@@ -180,21 +182,12 @@ PLATFORMS_BY_OS = {
     ],
 }
 
-CACHE_THIRDPARTY_DIR = os.environ.get("PYTHON_INSPECTOR_CACHE_DIR")
-if not CACHE_THIRDPARTY_DIR:
-    CACHE_THIRDPARTY_DIR = ".cache/python_inspector"
-    try:
-        os.makedirs(CACHE_THIRDPARTY_DIR, exist_ok=True)
-    except Exception:
-        home = pathlib.Path.home()
-        CACHE_THIRDPARTY_DIR = str(home / ".cache/python_inspector")
-        os.makedirs(CACHE_THIRDPARTY_DIR, exist_ok=True)
+try:
+    settings.CACHE_THIRDPARTY_DIR.mkdir(parents=True, exist_ok=True)
+except OSError as e:
+    print(f"Unable to create the directory {e.filename}")
+    exit(1)
 
-
-################################################################################
-
-PYPI_SIMPLE_URL = "https://pypi.org/simple"
-PYPI_INDEX_URLS = (PYPI_SIMPLE_URL,)
 
 ################################################################################
 
@@ -220,11 +213,11 @@ def download_wheel(
     name,
     version,
     environment,
-    dest_dir=CACHE_THIRDPARTY_DIR,
+    dest_dir=settings.CACHE_THIRDPARTY_DIR.as_posix(),
     repos=tuple(),
     verbose=False,
     echo_func=None,
-    python_version=DEFAULT_PYTHON_VERSION,
+    python_version=settings.DEFAULT_PYTHON_VERSION,
 ):
     """
     Download the wheels binary distribution(s) of package ``name`` and
@@ -238,7 +231,7 @@ def download_wheel(
         print(f"  download_wheel: {name}=={version} for envt: {environment}")
 
     if not repos:
-        repos = DEFAULT_PYPI_REPOS
+        repos = get_current_indexes()
 
     fetched_wheel_filenames = []
     for repo in repos:
@@ -265,15 +258,21 @@ def download_wheel(
     return fetched_wheel_filenames
 
 
-def get_valid_sdist(repo, name, version, python_version=DEFAULT_PYTHON_VERSION):
+def get_valid_sdist(
+    repo, name, version, python_version=settings.DEFAULT_PYTHON_VERSION
+):
     package = repo.get_package_version(name=name, version=version)
     if not package:
         if TRACE_DEEP:
             print(
-                print(f"    get_valid_sdist: No package in {repo.index_url} for {name}=={version}")
+                print(
+                    f"    get_valid_sdist: No package in {repo.index_url} for {name}=={version}"
+                )
             )
         return
+
     sdist = package.sdist
+
     if not sdist:
         if TRACE_DEEP:
             print(f"    get_valid_sdist: No sdist for {name}=={version}")
@@ -283,12 +282,14 @@ def get_valid_sdist(repo, name, version, python_version=DEFAULT_PYTHON_VERSION):
     ):
         return
     if TRACE_DEEP:
-        print(f"    get_valid_sdist: Getting sdist from index (or cache): {sdist.download_url}")
+        print(
+            f"    get_valid_sdist: Getting sdist from index (or cache): {sdist.download_url}"
+        )
     return sdist
 
 
 def get_supported_and_valid_wheels(
-    repo, name, version, environment, python_version=DEFAULT_PYTHON_VERSION
+    repo, name, version, environment, python_version=settings.DEFAULT_PYTHON_VERSION
 ) -> List:
     """
     Return a list of wheels matching the ``environment`` Environment constraints.
@@ -334,11 +335,11 @@ def valid_python_version(python_version, python_requires):
 def download_sdist(
     name,
     version,
-    dest_dir=CACHE_THIRDPARTY_DIR,
+    dest_dir=settings.CACHE_THIRDPARTY_DIR.as_posix(),
     repos=tuple(),
     verbose=False,
     echo_func=None,
-    python_version=DEFAULT_PYTHON_VERSION,
+    python_version=settings.DEFAULT_PYTHON_VERSION,
 ):
     """
     Download the sdist source distribution of package ``name`` and ``version``
@@ -351,11 +352,12 @@ def download_sdist(
         print(f"  download_sdist: {name}=={version}")
 
     if not repos:
-        repos = DEFAULT_PYPI_REPOS
+        repos = get_current_indexes()
 
     fetched_sdist_filename = None
 
     for repo in repos:
+
         sdist = get_valid_sdist(repo, name, version, python_version=python_version)
         if not sdist:
             if TRACE_DEEP:
@@ -428,7 +430,6 @@ class Link(NamedTuple):
 
 @attr.attributes
 class Distribution(NameVer):
-
     """
     A Distribution is either either a Wheel or Sdist and is identified by and
     created from its filename as well as its name and version. A Distribution is
@@ -620,7 +621,7 @@ class Distribution(NameVer):
         """
 
         if not repos:
-            repos = DEFAULT_PYPI_REPOS
+            repos = get_current_indexes()
 
         for repo in repos:
             package = repo.get_package_version(name=self.name, version=self.version)
@@ -642,7 +643,7 @@ class Distribution(NameVer):
 
     def download(
         self,
-        dest_dir=CACHE_THIRDPARTY_DIR,
+        dest_dir=settings.CACHE_THIRDPARTY_DIR.as_posix(),
         verbose=False,
         echo_func=None,
     ):
@@ -712,7 +713,7 @@ class Distribution(NameVer):
         """
         return {k: v for k, v in attr.asdict(self).items() if v}
 
-    def get_checksums(self, dest_dir=CACHE_THIRDPARTY_DIR):
+    def get_checksums(self, dest_dir=settings.CACHE_THIRDPARTY_DIR.as_posix()):
         """
         Return a mapping of computed checksums for this dist filename is
         `dest_dir`.
@@ -723,13 +724,13 @@ class Distribution(NameVer):
         else:
             return {}
 
-    def set_checksums(self, dest_dir=CACHE_THIRDPARTY_DIR):
+    def set_checksums(self, dest_dir=settings.CACHE_THIRDPARTY_DIR.as_posix()):
         """
         Update self with checksums computed for this dist filename is `dest_dir`.
         """
         self.update(self.get_checksums(dest_dir), overwrite=True)
 
-    def validate_checksums(self, dest_dir=CACHE_THIRDPARTY_DIR):
+    def validate_checksums(self, dest_dir=settings.CACHE_THIRDPARTY_DIR.as_posix()):
         """
         Return True if all checksums that have a value in this dist match
         checksums computed for this dist filename is `dest_dir`.
@@ -742,7 +743,7 @@ class Distribution(NameVer):
                 return False
         return True
 
-    def extract_pkginfo(self, dest_dir=CACHE_THIRDPARTY_DIR):
+    def extract_pkginfo(self, dest_dir=settings.CACHE_THIRDPARTY_DIR.as_posix()):
         """
         Return the text of the first PKG-INFO or METADATA file found in the
         archive of this Distribution in `dest_dir`. Return None if not found.
@@ -771,7 +772,7 @@ class Distribution(NameVer):
                     with open(pi) as fi:
                         return fi.read()
 
-    def load_pkginfo_data(self, dest_dir=CACHE_THIRDPARTY_DIR):
+    def load_pkginfo_data(self, dest_dir=settings.CACHE_THIRDPARTY_DIR.as_posix()):
         """
         Update self with data loaded from the PKG-INFO file found in the
         archive of this Distribution in `dest_dir`.
@@ -1000,7 +1001,6 @@ class Sdist(Distribution):
 
 @attr.attributes
 class Wheel(Distribution):
-
     """
     Represents a wheel file.
 
@@ -1096,7 +1096,10 @@ class Wheel(Distribution):
 
         # All the tag combinations from this file
         tags = {
-            packaging_tags.Tag(x, y, z) for x in python_versions for y in abis for z in platforms
+            packaging_tags.Tag(x, y, z)
+            for x in python_versions
+            for y in abis
+            for z in platforms
         }
 
         return cls(
@@ -1156,7 +1159,11 @@ class Wheel(Distribution):
         >>> Wheel.from_filename('future-0.16.0-py3-cp36m-any.whl').is_pure()
         False
         """
-        return "py3" in self.python_versions and "none" in self.abis and "any" in self.platforms
+        return (
+            "py3" in self.python_versions
+            and "none" in self.abis
+            and "any" in self.platforms
+        )
 
 
 def is_pure_wheel(filename):
@@ -1318,7 +1325,9 @@ class PypiPackage(NameVer):
         dists = []
         if TRACE_ULTRA_DEEP:
             print("     ###paths_or_urls:", links)
-        installable: List[Link] = [link for link in links if link.url.endswith(EXTENSIONS)]
+        installable: List[Link] = [
+            link for link in links if link.url.endswith(EXTENSIONS)
+        ]
         for link in installable:
             try:
                 dist = Distribution.from_link(link=link)
@@ -1462,9 +1471,10 @@ class PypiSimpleRepository:
     PyPI simple index. It is populated lazily based on requested packages names.
     """
 
-    index_url = attr.ib(
-        type=str,
-        default=PYPI_SIMPLE_URL,
+    # We use first entry in INDEX_URL setting as default
+
+    index_url: str = attr.ib(
+        default=settings.INDEX_URL[0],
         metadata=dict(help="Base PyPI simple URL for this index."),
     )
 
@@ -1488,8 +1498,7 @@ class PypiSimpleRepository:
         repr=False,
     )
 
-    use_cached_index = attr.ib(
-        type=bool,
+    use_cached_index: bool = attr.ib(
         default=False,
         metadata=dict(
             help="If True, use any existing on-disk cached PyPI index files. Otherwise, fetch and cache."
@@ -1497,7 +1506,7 @@ class PypiSimpleRepository:
         repr=False,
     )
 
-    credentials = attr.ib(type=dict, default=None)
+    credentials: Optional[dict] = attr.ib(default=None)
 
     def _get_package_versions_map(
         self,
@@ -1512,7 +1521,10 @@ class PypiSimpleRepository:
         assert name
         normalized_name = NameVer.normalize_name(name)
         versions = self.packages[normalized_name]
-        if not versions and normalized_name not in self.fetched_package_normalized_names:
+        if (
+            not versions
+            and normalized_name not in self.fetched_package_normalized_names
+        ):
             self.fetched_package_normalized_names.add(normalized_name)
             try:
                 links = self.fetch_links(
@@ -1528,7 +1540,9 @@ class PypiSimpleRepository:
                 self.packages[normalized_name] = versions
             except RemoteNotFetchedException as e:
                 if TRACE:
-                    print(f"failed to fetch package name: {name} from: {self.index_url}:\n{e}")
+                    print(
+                        f"failed to fetch package name: {name} from: {self.index_url}:\n{e}"
+                    )
 
         if not versions and TRACE:
             print(f"WARNING: package {name} not found in repo: {self.index_url}")
@@ -1537,7 +1551,7 @@ class PypiSimpleRepository:
 
     def get_package_versions(
         self,
-        name,
+        name: str,
         verbose=False,
         echo_func=None,
     ):
@@ -1630,19 +1644,23 @@ def resolve_relative_url(package_url, url):
         url_parts = urlparse(url)
         # If the relative URL starts with '..', remove the last directory from the base URL
         if url_parts.path.startswith(".."):
-            path = base_url_parts.path.rstrip("/").rsplit("/", 1)[0] + url_parts.path[2:]
+            path = (
+                base_url_parts.path.rstrip("/").rsplit("/", 1)[0] + url_parts.path[2:]
+            )
         else:
             path = urlunparse(
-                ("", "", url_parts.path, url_parts.params, url_parts.query, url_parts.fragment)
+                (
+                    "",
+                    "",
+                    url_parts.path,
+                    url_parts.params,
+                    url_parts.query,
+                    url_parts.fragment,
+                )
             )
         resolved_url_parts = base_url_parts._replace(path=path)
         url = urlunparse(resolved_url_parts)
     return url
-
-
-PYPI_PUBLIC_REPO = PypiSimpleRepository(index_url=PYPI_SIMPLE_URL)
-DEFAULT_PYPI_REPOS = (PYPI_PUBLIC_REPO,)
-DEFAULT_PYPI_REPOS_BY_URL = {r.index_url: r for r in DEFAULT_PYPI_REPOS}
 
 ################################################################################
 #
@@ -1658,7 +1676,7 @@ class Cache:
     This is used to avoid impolite fetching from remote locations.
     """
 
-    directory = attr.ib(type=str, default=CACHE_THIRDPARTY_DIR)
+    directory = attr.ib(type=str, default=settings.CACHE_THIRDPARTY_DIR.as_posix())
 
     def __attrs_post_init__(self):
         os.makedirs(self.directory, exist_ok=True)
@@ -1718,7 +1736,7 @@ def get_file_content(
     if path_or_url.startswith("https://"):
         if TRACE_DEEP:
             print(f"Fetching: {path_or_url}")
-        _headers, content = get_remote_file_content(
+        _, content = get_remote_file_content(
             url=path_or_url,
             credentials=credentials,
             as_text=as_text,
@@ -1810,7 +1828,9 @@ def get_remote_file_content(
                 )
 
             else:
-                raise RemoteNotFetchedException(f"Failed HTTP request from {url} with {status}")
+                raise RemoteNotFetchedException(
+                    f"Failed HTTP request from {url} with {status}"
+                )
 
         if headers_only:
             return response.headers, None
@@ -1845,3 +1865,10 @@ def fetch_and_save(
     with open(output, wmode) as fo:
         fo.write(content)
     return content
+
+
+def get_current_indexes() -> list[PypiSimpleRepository]:
+    """
+    Return a lost of PypiSimpleRepository indexes available
+    """
+    return [PypiSimpleRepository(index_url=url) for url in settings.INDEX_URL]
