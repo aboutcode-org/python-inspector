@@ -18,6 +18,7 @@ from commoncode.testcase import FileDrivenTesting
 from packvers.requirements import Requirement
 
 from _packagedcode import models
+from python_inspector import settings
 from python_inspector.api import get_resolved_dependencies
 from python_inspector.error import NoVersionsFound
 from python_inspector.resolution import PythonInputProvider
@@ -25,9 +26,9 @@ from python_inspector.resolution import get_requirements_from_dependencies
 from python_inspector.resolution import get_requirements_from_python_manifest
 from python_inspector.resolution import is_valid_version
 from python_inspector.resolution import parse_reqs_from_setup_py_insecurely
-from python_inspector.utils_pypi import PYPI_PUBLIC_REPO
 from python_inspector.utils_pypi import Environment
 from python_inspector.utils_pypi import PypiSimpleRepository
+from python_inspector.utils_pypi import get_current_indexes
 
 setup_test_env = FileDrivenTesting()
 setup_test_env.test_data_dir = os.path.join(os.path.dirname(__file__), "data")
@@ -43,16 +44,16 @@ def test_get_resolved_dependencies_with_flask_and_python_310():
             python_version="310",
             operating_system="linux",
         ),
-        repos=[PYPI_PUBLIC_REPO],
+        repos=get_current_indexes(),
         as_tree=False,
     )
     assert plist == [
         "pkg:pypi/click@8.1.7",
         "pkg:pypi/flask@2.1.2",
-        "pkg:pypi/itsdangerous@2.1.2",
-        "pkg:pypi/jinja2@3.1.3",
-        "pkg:pypi/markupsafe@2.1.5",
-        "pkg:pypi/werkzeug@3.0.1",
+        "pkg:pypi/itsdangerous@2.2.0",
+        "pkg:pypi/jinja2@3.1.4",
+        "pkg:pypi/markupsafe@3.0.2",
+        "pkg:pypi/werkzeug@3.1.3",
     ]
 
 
@@ -66,17 +67,17 @@ def test_get_resolved_dependencies_with_flask_and_python_310_windows():
             python_version="310",
             operating_system="windows",
         ),
-        repos=[PYPI_PUBLIC_REPO],
+        repos=get_current_indexes(),
         as_tree=False,
     )
     assert plist == [
         "pkg:pypi/click@8.1.7",
         "pkg:pypi/colorama@0.4.6",
         "pkg:pypi/flask@2.1.2",
-        "pkg:pypi/itsdangerous@2.1.2",
-        "pkg:pypi/jinja2@3.1.3",
-        "pkg:pypi/markupsafe@2.1.5",
-        "pkg:pypi/werkzeug@3.0.1",
+        "pkg:pypi/itsdangerous@2.2.0",
+        "pkg:pypi/jinja2@3.1.4",
+        "pkg:pypi/markupsafe@3.0.2",
+        "pkg:pypi/werkzeug@3.1.3",
     ]
 
 
@@ -90,7 +91,7 @@ def test_get_resolved_dependencies_with_flask_and_python_36():
             python_version="36",
             operating_system="linux",
         ),
-        repos=[PYPI_PUBLIC_REPO],
+        repos=get_current_indexes(),
         as_tree=False,
     )
 
@@ -116,19 +117,21 @@ def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
         requirements=[req],
         as_tree=False,
         environment=Environment(
-            python_version="38",
+            python_version="39",
             operating_system="linux",
         ),
+        repos=get_current_indexes(),
     )
+
     assert plist == [
         "pkg:pypi/click@8.1.7",
         "pkg:pypi/flask@2.1.3",
-        "pkg:pypi/importlib-metadata@7.1.0",
-        "pkg:pypi/itsdangerous@2.1.2",
-        "pkg:pypi/jinja2@3.1.3",
-        "pkg:pypi/markupsafe@2.1.5",
-        "pkg:pypi/werkzeug@3.0.1",
-        "pkg:pypi/zipp@3.18.1",
+        "pkg:pypi/importlib-metadata@8.5.0",
+        "pkg:pypi/itsdangerous@2.2.0",
+        "pkg:pypi/jinja2@3.1.4",
+        "pkg:pypi/markupsafe@3.0.2",
+        "pkg:pypi/werkzeug@3.1.3",
+        "pkg:pypi/zipp@3.21.0",
     ]
 
 
@@ -144,7 +147,9 @@ def test_get_resolved_dependencies_for_version_containing_local_version_identifi
             operating_system="linux",
         ),
         repos=[
-            PypiSimpleRepository(index_url="https://download.pytorch.org/whl/cpu", credentials=None)
+            PypiSimpleRepository(
+                index_url="https://download.pytorch.org/whl/cpu", credentials=None
+            )
         ],
         as_tree=False,
     )
@@ -168,21 +173,21 @@ def test_without_supported_wheels():
     _, plist = get_resolved_dependencies(
         requirements=[req],
         as_tree=False,
-        repos=[PYPI_PUBLIC_REPO],
+        repos=get_current_indexes(),
         environment=Environment(
-            python_version="38",
+            python_version="39",
             operating_system="linux",
         ),
     )
 
     assert plist == [
         "pkg:pypi/autobahn@22.3.2",
-        "pkg:pypi/cffi@1.16.0",
-        "pkg:pypi/cryptography@42.0.5",
+        "pkg:pypi/cffi@1.17.1",
+        "pkg:pypi/cryptography@43.0.3",
         "pkg:pypi/hyperlink@21.0.0",
-        "pkg:pypi/idna@3.6",
-        "pkg:pypi/pycparser@2.21",
-        "pkg:pypi/setuptools@69.2.0",
+        "pkg:pypi/idna@3.10",
+        "pkg:pypi/pycparser@2.22",
+        "pkg:pypi/setuptools@75.5.0",
         "pkg:pypi/txaio@23.1.1",
     ]
 
@@ -316,13 +321,19 @@ def test_get_requirements_from_python_manifest_securely():
 
 def test_setup_py_parsing_insecure():
     setup_py_file = setup_test_env.get_test_loc("insecure-setup/setup.py")
-    reqs = [str(req) for req in list(parse_reqs_from_setup_py_insecurely(setup_py=setup_py_file))]
+    reqs = [
+        str(req)
+        for req in list(parse_reqs_from_setup_py_insecurely(setup_py=setup_py_file))
+    ]
     assert reqs == ["isodate", "pyparsing", "six"]
 
 
 def test_setup_py_parsing_insecure_testpkh():
     setup_py_file = setup_test_env.get_test_loc("insecure-setup-2/setup.py")
-    reqs = [str(req) for req in list(parse_reqs_from_setup_py_insecurely(setup_py=setup_py_file))]
+    reqs = [
+        str(req)
+        for req in list(parse_reqs_from_setup_py_insecurely(setup_py=setup_py_file))
+    ]
     assert reqs == [
         "CairoSVG<2.0.0,>=1.0.20",
         "click>=5.0.0",
