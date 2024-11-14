@@ -10,12 +10,13 @@
 import ast
 import operator
 import os
-import re
 import tarfile
+from typing import Any
 from typing import Dict
 from typing import Generator
 from typing import List
 from typing import NamedTuple
+from typing import Optional
 from typing import Tuple
 from typing import Union
 from zipfile import ZipFile
@@ -36,6 +37,7 @@ from _packagedcode.pypi import PypiWheelHandler
 from _packagedcode.pypi import PythonSetupPyHandler
 from _packagedcode.pypi import SetupCfgHandler
 from _packagedcode.pypi import can_process_dependent_package
+from python_inspector import settings
 from python_inspector import utils_pypi
 from python_inspector.error import NoVersionsFound
 from python_inspector.setup_py_live_eval import iter_requirements
@@ -208,23 +210,23 @@ def fetch_and_extract_sdist(
 def get_sdist_file_path_from_filename(sdist):
     if sdist.endswith(".tar.gz"):
         sdist_file = sdist.rstrip(".tar.gz")
-        with tarfile.open(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist)) as file:
+        with tarfile.open(os.path.join(settings.CACHE_THIRDPARTY_DIR.as_posix(), sdist)) as file:
             file.extractall(
-                os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR,
+                os.path.join(settings.CACHE_THIRDPARTY_DIR.as_posix(),
                              "extracted_sdists", sdist_file)
             )
     elif sdist.endswith(".zip"):
         sdist_file = sdist.rstrip(".zip")
-        with ZipFile(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist)) as zip:
+        with ZipFile(os.path.join(settings.CACHE_THIRDPARTY_DIR.as_posix(), sdist)) as zip:
             zip.extractall(
-                os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR,
+                os.path.join(settings.CACHE_THIRDPARTY_DIR.as_posix(),
                              "extracted_sdists", sdist_file)
             )
 
     else:
         raise Exception(f"Unable to extract sdist {sdist}")
 
-    return os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file, sdist_file)
+    return os.path.join(settings.CACHE_THIRDPARTY_DIR.as_posix(), "extracted_sdists", sdist_file, sdist_file)
 
 
 def get_requirements_from_dependencies(
@@ -337,8 +339,8 @@ def get_requirements_from_python_manifest(
                     )
                 if len(install_requires) > 1:
                     print(
-                        f"Warning: identified multiple definitions of 'install_requires' in "
-                        "{setup_py_location}, defaulting to the first occurrence"
+                        "Warning: identified multiple definitions of 'install_requires' in "
+                        f"{setup_py_location}, defaulting to the first occurrence"
                     )
                 install_requires = install_requires[0].elts
                 if len(install_requires) != 0:
@@ -392,11 +394,12 @@ class PythonInputProvider(AbstractProvider):
         return transitive, identifier
 
     def get_versions_for_package(
-        self, name: str, repo: Union[List[PypiSimpleRepository], None] = None
+        self, name: str, repo: Optional[PypiSimpleRepository] = None
     ) -> List[Version]:
         """
         Return a list of versions for a package.
         """
+
         if repo and self.environment:
             return self.get_versions_for_package_from_repo(name, repo)
         else:
@@ -409,24 +412,27 @@ class PythonInputProvider(AbstractProvider):
         Return a list of versions for a package name from a repo
         """
         versions = []
+
         for version, package in repo.get_package_versions(name).items():
             python_version = parse_version(
                 get_python_version_from_env_tag(
-                    python_version=self.environment.python_version)
+                    python_version=self.environment.python_version
+                )
             )
-            wheels = list(package.get_supported_wheels(
-                environment=self.environment))
+            wheels = list(package.get_supported_wheels(environment=self.environment))
             valid_wheel_present = False
             pypi_valid_python_version = False
             if wheels:
                 for wheel in wheels:
                     if utils_pypi.valid_python_version(
-                        python_requires=wheel.python_requires, python_version=python_version
+                        python_requires=wheel.python_requires,
+                        python_version=python_version,
                     ):
                         valid_wheel_present = True
             if package.sdist:
                 pypi_valid_python_version = utils_pypi.valid_python_version(
-                    python_requires=package.sdist.python_requires, python_version=python_version
+                    python_requires=package.sdist.python_requires,
+                    python_version=python_version,
                 )
             if valid_wheel_present or pypi_valid_python_version:
                 versions.append(version)
@@ -436,13 +442,17 @@ class PythonInputProvider(AbstractProvider):
         """
         Return a list of versions for a package name from the PyPI.org JSON API
         """
+
         if name not in self.versions_by_package:
             api_url = f"https://pypi.org/pypi/{name}/json"
-            resp = get_response(api_url)
-            if not resp:
-                self.versions_by_package[name] = []
-            releases = resp.get("releases") or {}
-            self.versions_by_package[name] = releases.keys() or []
+            releases: dict[str, Any] = {}
+            self.versions_by_package[name] = []
+
+            response = get_response(api_url)
+
+            if isinstance(response, dict):
+                releases = response.get("releases", {})
+                self.versions_by_package[name] = releases.keys() or []
         versions = self.versions_by_package[name]
         return versions
 
@@ -465,7 +475,8 @@ class PythonInputProvider(AbstractProvider):
         """
         python_version = parse_version(
             get_python_version_from_env_tag(
-                python_version=self.environment.python_version)
+                python_version=self.environment.python_version
+            )
         )
 
         wheels = utils_pypi.download_wheel(
@@ -479,7 +490,8 @@ class PythonInputProvider(AbstractProvider):
         if wheels:
             for wheel in wheels:
                 wheel_location = os.path.join(
-                    utils_pypi.CACHE_THIRDPARTY_DIR, wheel)
+                    settings.CACHE_THIRDPARTY_DIR.as_posix(), wheel
+                )
                 requirements = get_requirements_from_distribution(
                     handler=PypiWheelHandler,
                     location=wheel_location,
@@ -532,19 +544,22 @@ class PythonInputProvider(AbstractProvider):
 
     def get_requirements_for_package_from_pypi_json_api(
         self, purl: PackageURL
-    ) -> List[Requirement]:
+    ) -> Generator[Requirement, Any, Any]:
         """
         Return requirements for a package from the PyPI.org JSON API
         """
+        self.dependencies_by_purl[str(purl)] = []
+        info: dict[str, Any] = {}
+
         # if no repos are provided use the incorrect but fast JSON API
         if str(purl) not in self.dependencies_by_purl:
             api_url = f"https://pypi.org/pypi/{purl.name}/{purl.version}/json"
-            resp = get_response(api_url)
-            if not resp:
-                self.dependencies_by_purl[str(purl)] = []
-            info = resp.get("info") or {}
-            requires_dist = info.get("requires_dist") or []
-            self.dependencies_by_purl[str(purl)] = requires_dist
+
+            response = get_response(api_url)
+            if isinstance(response, dict):
+                info = response.get("info", {})
+                requires_dist = info.get("requires_dist", [])
+                self.dependencies_by_purl[str(purl)] = requires_dist
         for dependency in self.dependencies_by_purl[str(purl)]:
             yield Requirement(dependency)
 
@@ -572,7 +587,8 @@ class PythonInputProvider(AbstractProvider):
                 valid_versions.append(parsed_version)
         if not all(version.is_prerelease for version in valid_versions):
             valid_versions = [
-                version for version in valid_versions if not version.is_prerelease]
+                version for version in valid_versions if not version.is_prerelease
+            ]
         for version in valid_versions:
             yield Candidate(name=name, version=version, extras=extras)
 
@@ -685,8 +701,9 @@ def dfs(mapping: Dict, graph: DirectedGraph, src: str):
 
     return dict(
         package=str(src_purl),
-        dependencies=sorted([dfs(mapping, graph, c)
-                            for c in children], key=lambda d: d["package"]),
+        dependencies=sorted(
+            [dfs(mapping, graph, c) for c in children], key=lambda d: d["package"]
+        ),
     )
 
 
@@ -743,7 +760,10 @@ def pdt_dfs(mapping, graph, src):
     children = list(graph.iter_children(src))
     if not children:
         return dict(
-            key=src, package_name=src, installed_version=str(mapping[src].version), dependencies=[]
+            key=src,
+            package_name=src,
+            installed_version=str(mapping[src].version),
+            dependencies=[],
         )
     # recurse
     dependencies = [pdt_dfs(mapping, graph, c) for c in children]
@@ -794,7 +814,9 @@ def get_package_list(results):
     return list(sorted(packages))
 
 
-def get_setup_requirements(sdist_location: str, setup_py_location: str, setup_cfg_location: str):
+def get_setup_requirements(
+    sdist_location: str, setup_py_location: str, setup_cfg_location: str
+):
     """
     Yield Requirement(s) from Pypi in the ``location`` directory that contains
     a setup.py and/or a setup.cfg and optionally a requirements.txt file if
@@ -805,7 +827,8 @@ def get_setup_requirements(sdist_location: str, setup_py_location: str, setup_cf
 
     if not os.path.exists(setup_py_location) and not os.path.exists(setup_cfg_location):
         raise Exception(
-            f"No setup.py or setup.cfg found in pypi sdist {sdist_location}")
+            f"No setup.py or setup.cfg found in pypi sdist {sdist_location}"
+        )
 
     # Some commonon packages like flask may have some dependencies in setup.cfg
     # and some dependencies in setup.py. We are going to check both.
