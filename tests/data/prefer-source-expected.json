@@ -1,7 +1,7 @@
 {
   "headers": {
     "tool_name": "python-inspector",
-    "tool_homepageurl": "https://github.com/nexB/python-inspector",
+    "tool_homepageurl": "https://github.com/aboutcode-org/python-inspector",
     "tool_version": "0.12.0",
     "options": [
       "--json <file>",
@@ -10,7 +10,7 @@
       "--python-version 38",
       "--specifier zipp==3.8.0"
     ],
-    "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/nexB/python-inspector/ for support and download.",
+    "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/aboutcode-org/python-inspector/ for support and download.",
     "warnings": [],
     "errors": []
   },

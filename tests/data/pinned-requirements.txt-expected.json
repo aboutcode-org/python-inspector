@@ -1,7 +1,7 @@
 {
   "headers": {
     "tool_name": "python-inspector",
-    "tool_homepageurl": "https://github.com/nexB/python-inspector",
+    "tool_homepageurl": "https://github.com/aboutcode-org/python-inspector",
     "tool_version": "0.12.0",
     "options": [
       "--json <file>",
@@ -9,7 +9,7 @@
       "--python-version 38",
       "--requirement tests/data/pinned-requirements.txt"
     ],
-    "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/nexB/python-inspector/ for support and download.",
+    "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/aboutcode-org/python-inspector/ for support and download.",
     "warnings": [],
     "errors": []
   },
@@ -2450,18 +2450,18 @@
       "type": "pypi",
       "namespace": null,
       "name": "jinja2",
-      "version": "3.1.3",
+      "version": "3.1.4",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "A very fast and expressive template engine.\nJinja\n=====\n\nJinja is a fast, expressive, extensible templating engine. Special\nplaceholders in the template allow writing code similar to Python\nsyntax. Then the template is passed data to render the final document.\n\nIt includes:\n\n-   Template inheritance and inclusion.\n-   Define and import macros within templates.\n-   HTML templates can use autoescaping to prevent XSS from untrusted\n    user input.\n-   A sandboxed environment can safely render untrusted templates.\n-   AsyncIO support for generating templates and calling async\n    functions.\n-   I18N support with Babel.\n-   Templates are compiled to optimized Python code just-in-time and\n    cached, or can be compiled ahead-of-time.\n-   Exceptions point to the correct line in templates to make debugging\n    easier.\n-   Extensible filters, tests, functions, and even syntax.\n\nJinja's philosophy is that while application logic belongs in Python if\npossible, it shouldn't make the template designer's job difficult by\nrestricting functionality too much.\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    $ pip install -U Jinja2\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nIn A Nutshell\n-------------\n\n.. code-block:: jinja\n\n    {% extends \"base.html\" %}\n    {% block title %}Members{% endblock %}\n    {% block content %}\n      <ul>\n      {% for user in users %}\n        <li><a href=\"{{ user.url }}\">{{ user.username }}</a></li>\n      {% endfor %}\n      </ul>\n    {% endblock %}\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Jinja and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, `please\ndonate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://jinja.palletsprojects.com/\n-   Changes: https://jinja.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/Jinja2/\n-   Source Code: https://github.com/pallets/jinja/\n-   Issue Tracker: https://github.com/pallets/jinja/issues/\n-   Chat: https://discord.gg/pallets",
-      "release_date": "2024-01-10T23:12:19",
+      "description": "A very fast and expressive template engine.\n# Jinja\n\nJinja is a fast, expressive, extensible templating engine. Special\nplaceholders in the template allow writing code similar to Python\nsyntax. Then the template is passed data to render the final document.\n\nIt includes:\n\n-   Template inheritance and inclusion.\n-   Define and import macros within templates.\n-   HTML templates can use autoescaping to prevent XSS from untrusted\n    user input.\n-   A sandboxed environment can safely render untrusted templates.\n-   AsyncIO support for generating templates and calling async\n    functions.\n-   I18N support with Babel.\n-   Templates are compiled to optimized Python code just-in-time and\n    cached, or can be compiled ahead-of-time.\n-   Exceptions point to the correct line in templates to make debugging\n    easier.\n-   Extensible filters, tests, functions, and even syntax.\n\nJinja's philosophy is that while application logic belongs in Python if\npossible, it shouldn't make the template designer's job difficult by\nrestricting functionality too much.\n\n\n## In A Nutshell\n\n.. code-block:: jinja\n\n    {% extends \"base.html\" %}\n    {% block title %}Members{% endblock %}\n    {% block content %}\n      <ul>\n      {% for user in users %}\n        <li><a href=\"{{ user.url }}\">{{ user.username }}</a></li>\n      {% endfor %}\n      </ul>\n    {% endblock %}\n\n\n## Donate\n\nThe Pallets organization develops and supports Jinja and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, [please\ndonate today][].\n\n[please donate today]: https://palletsprojects.com/donate",
+      "release_date": "2024-05-05T23:41:59",
       "parties": [
         {
           "type": "person",
           "role": "maintainer",
-          "name": "Pallets",
-          "email": "contact@palletsprojects.com",
+          "name": null,
+          "email": "Pallets <contact@palletsprojects.com>",
           "url": null
         }
       ],
@@ -2472,22 +2472,22 @@
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
-        "Topic :: Text Processing :: Markup :: HTML"
+        "Topic :: Text Processing :: Markup :: HTML",
+        "Typing :: Typed"
       ],
-      "homepage_url": "https://palletsprojects.com/p/jinja/",
-      "download_url": "https://files.pythonhosted.org/packages/30/6d/6de6be2d02603ab56e72997708809e8a5b0fbfee080735109b40a3564843/Jinja2-3.1.3-py3-none-any.whl",
-      "size": 133236,
+      "homepage_url": null,
+      "download_url": "https://files.pythonhosted.org/packages/31/80/3a54838c3fb461f6fec263ebf3a3a41771bd05190238de3486aae8540c36/jinja2-3.1.4-py3-none-any.whl",
+      "size": 133271,
       "sha1": null,
-      "md5": "bb730eed73dcd0bc2b04c71555f37d92",
-      "sha256": "7d6d50dd97d52cbc355597bd845fabfbac3f551e1f99619e39a35ce8c370b5fa",
+      "md5": "a5fadd0603a10249348865e85a6f57bc",
+      "sha256": "bc5dd2abb727a5319567b7a813e6a2e7318c39f4f487cfe6c89c6f9c7d25197d",
       "sha512": null,
-      "bug_tracking_url": "https://github.com/pallets/jinja/issues/",
+      "bug_tracking_url": null,
       "code_view_url": "https://github.com/pallets/jinja/",
       "vcs_url": null,
       "copyright": null,
       "license_expression": null,
       "declared_license": {
-        "license": "BSD-3-Clause",
         "classifiers": [
           "License :: OSI Approved :: BSD License"
         ]
@@ -2499,26 +2499,26 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/jinja2/3.1.3/json",
+      "api_data_url": "https://pypi.org/pypi/jinja2/3.1.4/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/jinja2@3.1.3"
+      "purl": "pkg:pypi/jinja2@3.1.4"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "jinja2",
-      "version": "3.1.3",
+      "version": "3.1.4",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "A very fast and expressive template engine.\nJinja\n=====\n\nJinja is a fast, expressive, extensible templating engine. Special\nplaceholders in the template allow writing code similar to Python\nsyntax. Then the template is passed data to render the final document.\n\nIt includes:\n\n-   Template inheritance and inclusion.\n-   Define and import macros within templates.\n-   HTML templates can use autoescaping to prevent XSS from untrusted\n    user input.\n-   A sandboxed environment can safely render untrusted templates.\n-   AsyncIO support for generating templates and calling async\n    functions.\n-   I18N support with Babel.\n-   Templates are compiled to optimized Python code just-in-time and\n    cached, or can be compiled ahead-of-time.\n-   Exceptions point to the correct line in templates to make debugging\n    easier.\n-   Extensible filters, tests, functions, and even syntax.\n\nJinja's philosophy is that while application logic belongs in Python if\npossible, it shouldn't make the template designer's job difficult by\nrestricting functionality too much.\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    $ pip install -U Jinja2\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nIn A Nutshell\n-------------\n\n.. code-block:: jinja\n\n    {% extends \"base.html\" %}\n    {% block title %}Members{% endblock %}\n    {% block content %}\n      <ul>\n      {% for user in users %}\n        <li><a href=\"{{ user.url }}\">{{ user.username }}</a></li>\n      {% endfor %}\n      </ul>\n    {% endblock %}\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Jinja and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, `please\ndonate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://jinja.palletsprojects.com/\n-   Changes: https://jinja.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/Jinja2/\n-   Source Code: https://github.com/pallets/jinja/\n-   Issue Tracker: https://github.com/pallets/jinja/issues/\n-   Chat: https://discord.gg/pallets",
-      "release_date": "2024-01-10T23:12:21",
+      "description": "A very fast and expressive template engine.\n# Jinja\n\nJinja is a fast, expressive, extensible templating engine. Special\nplaceholders in the template allow writing code similar to Python\nsyntax. Then the template is passed data to render the final document.\n\nIt includes:\n\n-   Template inheritance and inclusion.\n-   Define and import macros within templates.\n-   HTML templates can use autoescaping to prevent XSS from untrusted\n    user input.\n-   A sandboxed environment can safely render untrusted templates.\n-   AsyncIO support for generating templates and calling async\n    functions.\n-   I18N support with Babel.\n-   Templates are compiled to optimized Python code just-in-time and\n    cached, or can be compiled ahead-of-time.\n-   Exceptions point to the correct line in templates to make debugging\n    easier.\n-   Extensible filters, tests, functions, and even syntax.\n\nJinja's philosophy is that while application logic belongs in Python if\npossible, it shouldn't make the template designer's job difficult by\nrestricting functionality too much.\n\n\n## In A Nutshell\n\n.. code-block:: jinja\n\n    {% extends \"base.html\" %}\n    {% block title %}Members{% endblock %}\n    {% block content %}\n      <ul>\n      {% for user in users %}\n        <li><a href=\"{{ user.url }}\">{{ user.username }}</a></li>\n      {% endfor %}\n      </ul>\n    {% endblock %}\n\n\n## Donate\n\nThe Pallets organization develops and supports Jinja and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, [please\ndonate today][].\n\n[please donate today]: https://palletsprojects.com/donate",
+      "release_date": "2024-05-05T23:42:02",
       "parties": [
         {
           "type": "person",
           "role": "maintainer",
-          "name": "Pallets",
-          "email": "contact@palletsprojects.com",
+          "name": null,
+          "email": "Pallets <contact@palletsprojects.com>",
           "url": null
         }
       ],
@@ -2529,22 +2529,22 @@
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
-        "Topic :: Text Processing :: Markup :: HTML"
+        "Topic :: Text Processing :: Markup :: HTML",
+        "Typing :: Typed"
       ],
-      "homepage_url": "https://palletsprojects.com/p/jinja/",
-      "download_url": "https://files.pythonhosted.org/packages/b2/5e/3a21abf3cd467d7876045335e681d276ac32492febe6d98ad89562d1a7e1/Jinja2-3.1.3.tar.gz",
-      "size": 268261,
+      "homepage_url": null,
+      "download_url": "https://files.pythonhosted.org/packages/ed/55/39036716d19cab0747a5020fc7e907f362fbf48c984b14e62127f7e68e5d/jinja2-3.1.4.tar.gz",
+      "size": 240245,
       "sha1": null,
-      "md5": "caf5418c851eac59e70a78d9730d4cea",
-      "sha256": "ac8bd6544d4bb2c9792bf3a159e80bba8fda7f07e81bc3aed565432d5925ba90",
+      "md5": "02ca9a6364c92e83d14b037bef4732bc",
+      "sha256": "4a3aee7acbbe7303aede8e9648d13b8bf88a429282aa6122a993f0ac800cb369",
       "sha512": null,
-      "bug_tracking_url": "https://github.com/pallets/jinja/issues/",
+      "bug_tracking_url": null,
       "code_view_url": "https://github.com/pallets/jinja/",
       "vcs_url": null,
       "copyright": null,
       "license_expression": null,
       "declared_license": {
-        "license": "BSD-3-Clause",
         "classifiers": [
           "License :: OSI Approved :: BSD License"
         ]
@@ -2556,20 +2556,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/jinja2/3.1.3/json",
+      "api_data_url": "https://pypi.org/pypi/jinja2/3.1.4/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/jinja2@3.1.3"
+      "purl": "pkg:pypi/jinja2@3.1.4"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "license-expression",
-      "version": "30.3.0",
+      "version": "30.3.1",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "license-expression is a comprehensive utility library to parse, compare, simplify and normalize license expressions (such as SPDX license expressions) using boolean logic.\n==================\nlicense-expression\n==================\n\n``license-expression`` is a comprehensive utility library to parse, compare,\nsimplify and normalize license expressions (such as SPDX license expressions)\nusing boolean logic.\n\n- License: Apache-2.0\n- Python: 3.8+\n- Homepage: https://github.com/nexB/license-expression/\n- Install: `pip install license-expression` also available in most Linux distro.\n\nSoftware project licenses are often a combination of several free and open\nsource software licenses. License expressions -- as specified by SPDX -- provide\na concise and human readable way to express these licenses without having to\nread long license texts, while still being machine-readable.\n\nLicense expressions are used by key FOSS projects such as Linux; several\npackages ecosystem use them to document package licensing metadata such as\nnpm and Rubygems; they are important when exchanging software data (such as with\nSPDX and SBOM in general) as a way to express licensing precisely.\n\n``license-expression`` is a comprehensive utility library to parse, compare,\nsimplify and normalize these license expressions (such as SPDX license expressions)\nusing boolean logic like in: `GPL-2.0-or-later WITH Classpath-exception-2.0 AND MIT`.\n\nIt includes the license keys from SPDX https://spdx.org/licenses/ (version 3.23)\nand ScanCode license DB (version 32.0.8, last published on 2023-02-27).\nSee https://scancode-licensedb.aboutcode.org/ to get started quickly.\n\n``license-expression`` is both powerful and simple to use and is a used as the\nlicense expression engine in several projects and products such as:\n\n- AboutCode-toolkit https://github.com/nexB/aboutcode-toolkit\n- AlekSIS (School Information System) https://edugit.org/AlekSIS/official/AlekSIS-Core\n- Barista https://github.com/Optum/barista\n- Conda forge tools https://github.com/conda-forge/conda-smithy\n- DejaCode https://dejacode.com\n- DeltaCode https://github.com/nexB/deltacode\n- FenixscanX https://github.com/SmartsYoung/FenixscanX\n- FetchCode https://github.com/nexB/fetchcode\n- Flict https://github.com/vinland-technology/flict and https://github.com/vinland-technology\n- license.sh https://github.com/webscopeio/license.sh\n- liferay_inbound_checker https://github.com/carmenbianca/liferay_inbound_checker\n- REUSE https://reuse.software/ and https://github.com/fsfe/reuse-tool\n- ScanCode-io https://github.com/nexB/scancode.io\n- ScanCode-toolkit https://github.com/nexB/scancode-toolkit\n\nSee also for details:\n- https://spdx.github.io/spdx-spec/appendix-IV-SPDX-license-expressions/\n\n``license-expression`` is also packaged for most Linux distributions. See below.\n\nAlternative:\n\nThere is no known alternative library for Python, but there are several similar\nlibraries in other languages (but not as powerful of course!):\n\n- JavaScript https://github.com/jslicense/spdx-expression-parse.js\n- Rust https://github.com/ehuss/license-exprs\n- Haskell https://github.com/phadej/spdx\n- Go https://github.com/kyoh86/go-spdx\n- Ada https://github.com/Fabien-Chouteau/spdx_ada\n- Java https://github.com/spdx/tools and https://github.com/aschet/spdx-license-expression-tools\n\nBuild and tests status\n======================\n\n+--------------------------+------------------------+----------------------------------+\n|**Linux & macOS (Travis)**| **Windows (AppVeyor)** |**Linux, Windows & macOS (Azure)**|\n+==========================+========================+==================================+\n|                          |                        |                                  |\n| |travis-badge-icon|      | |appveyor-badge-icon|  |   |azure-badge-icon|             |\n|                          |                        |                                  |\n+--------------------------+------------------------+----------------------------------+\n\nSource code and download\n========================\n\n- GitHub https://github.com/nexB/license-expression.git\n- PyPI https://pypi.python.org/pypi/license-expression\n\nAlso available in several Linux distros:\n\n- Arch Linux https://archlinux.org/packages/extra/any/python-license-expression/\n- Debian https://packages.debian.org/unstable/source/license-expression\n- DragonFly BSD https://github.com/DragonFlyBSD/DPorts/tree/master/textproc/py-license-expression\n- Fedora https://src.fedoraproject.org/rpms/python-license-expression/\n- FreeBSD https://www.freshports.org/textproc/py-license-expression\n- NixOS https://github.com/NixOS/nixpkgs/blob/release-21.05/pkgs/development/python-modules/license-expression/default.nix\n- openSUSE https://build.opensuse.org/package/show/openSUSE:Factory/python-license-expression\n\n\nSupport\n=======\n\n- Submit bugs and questions at: https://github.com/nexB/license-expression/issues\n- Join the chat at: https://gitter.im/aboutcode-org/discuss\n\nDescription\n===========\n\nThis module defines a mini language to parse, validate, simplify, normalize and\ncompare license expressions using a boolean logic engine.\n\nThis supports SPDX license expressions and also accepts other license naming\nconventions and license identifiers aliases to resolve and normalize any license\nexpressions.\n\nUsing boolean logic, license expressions can be tested for equality, containment,\nequivalence and can be normalized or simplified.\n\nIt also bundles the SPDX License list (3.20 as of now) and the ScanCode license\nDB (based on latest ScanCode) to easily parse and validate expressions using\nthe license symbols.\n\n\nUsage examples\n==============\n\nThe main entry point is the ``Licensing`` object that you can use to parse,\nvalidate, compare, simplify and normalize license expressions.\n\nCreate an SPDX Licensing and parse expressions::\n\n\t>>> from license_expression import get_spdx_licensing\n\t>>> licensing = get_spdx_licensing()\n\t>>> expression = ' GPL-2.0 or LGPL-2.1 and mit '\n\t>>> parsed = licensing.parse(expression)\n\t>>> print(parsed.pretty())\n\tOR(\n\t  LicenseSymbol('GPL-2.0-only'),\n\t  AND(\n\t    LicenseSymbol('LGPL-2.1-only'),\n\t    LicenseSymbol('MIT')\n\t  )\n\t)\n\n\t>>> str(parsed)\n\t'GPL-2.0-only OR (LGPL-2.1-only AND MIT)'\n\n\t>>> licensing.parse('unknwon with foo', validate=True, strict=True)\n\tlicense_expression.ExpressionParseError: A plain license symbol cannot be used\n\tas an exception in a \"WITH symbol\" statement. for token: \"foo\" at position: 13\n\n\t>>> licensing.parse('unknwon with foo', validate=True)\n\tlicense_expression.ExpressionError: Unknown license key(s): unknwon, foo\n\n\t>>> licensing.validate('foo and MIT and GPL-2.0+')\n\tExpressionInfo(\n\t    original_expression='foo and MIT and GPL-2.0+',\n\t    normalized_expression=None,\n\t    errors=['Unknown license key(s): foo'],\n\t    invalid_symbols=['foo']\n\t)\n\n\nCreate a simple Licensing and parse expressions::\n\n    >>> from license_expression import Licensing, LicenseSymbol\n    >>> licensing = Licensing()\n    >>> expression = ' GPL-2.0 or LGPL-2.1 and mit '\n    >>> parsed = licensing.parse(expression)\n    >>> expression = ' GPL-2.0 or LGPL-2.1 and mit '\n    >>> expected = 'GPL-2.0-only OR (LGPL-2.1-only AND mit)'\n    >>> assert str(parsed) == expected\n    >>> assert parsed.render('{symbol.key}') == expected\n\n\nCreate a Licensing with your own license symbols::\n\n    >>> expected = [\n    ...   LicenseSymbol('GPL-2.0'),\n    ...   LicenseSymbol('LGPL-2.1'),\n    ...   LicenseSymbol('mit')\n    ... ]\n    >>> assert licensing.license_symbols(expression) == expected\n    >>> assert licensing.license_symbols(parsed) == expected\n\n    >>> symbols = ['GPL-2.0+', 'Classpath', 'BSD']\n    >>> licensing = Licensing(symbols)\n    >>> expression = 'GPL-2.0+ with Classpath or (bsd)'\n    >>> parsed = licensing.parse(expression)\n    >>> expected = 'GPL-2.0+ WITH Classpath OR BSD'\n    >>> assert parsed.render('{symbol.key}') == expected\n\n    >>> expected = [\n    ...   LicenseSymbol('GPL-2.0+'),\n    ...   LicenseSymbol('Classpath'),\n    ...   LicenseSymbol('BSD')\n    ... ]\n    >>> assert licensing.license_symbols(parsed) == expected\n    >>> assert licensing.license_symbols(expression) == expected\n\nAnd expression can be deduplicated, to remove duplicate license subexpressions\nwithout changing the order and without consider license choices as simplifiable::\n\n    >>> expression2 = ' GPL-2.0 or (mit and LGPL 2.1) or bsd Or GPL-2.0  or (mit and LGPL 2.1)'\n    >>> parsed2 = licensing.parse(expression2)\n    >>> str(parsed2)\n    'GPL-2.0 OR (mit AND LGPL 2.1) OR BSD OR GPL-2.0 OR (mit AND LGPL 2.1)'\n    >>> assert str(parsed2.simplify()) == 'BSD OR GPL-2.0 OR (LGPL 2.1 AND mit)'\n\nExpression can be simplified, treating them as boolean expressions::\n\n    >>> expression2 = ' GPL-2.0 or (mit and LGPL 2.1) or bsd Or GPL-2.0  or (mit and LGPL 2.1)'\n    >>> parsed2 = licensing.parse(expression2)\n    >>> str(parsed2)\n    'GPL-2.0 OR (mit AND LGPL 2.1) OR BSD OR GPL-2.0 OR (mit AND LGPL 2.1)'\n    >>> assert str(parsed2.simplify()) == 'BSD OR GPL-2.0 OR (LGPL 2.1 AND mit)'\n\nTwo expressions can be compared for equivalence and containment:\n\n    >>> expr1 = licensing.parse(' GPL-2.0 or (LGPL 2.1 and mit) ')\n    >>> expr2 = licensing.parse(' (mit and LGPL 2.1)  or GPL-2.0 ')\n    >>> licensing.is_equivalent(expr1, expr2)\n    True\n    >>> licensing.is_equivalent(' GPL-2.0 or (LGPL 2.1 and mit) ',\n    ...                         ' (mit and LGPL 2.1)  or GPL-2.0 ')\n    True\n    >>> expr1.simplify() == expr2.simplify()\n    True\n    >>> expr3 = licensing.parse(' GPL-2.0 or mit or LGPL 2.1')\n    >>> licensing.is_equivalent(expr2, expr3)\n    False\n    >>> expr4 = licensing.parse('mit and LGPL 2.1')\n    >>> expr4.simplify() in expr2.simplify()\n    True\n    >>> licensing.contains(expr2, expr4)\n    True\n\nDevelopment\n===========\n\n- Checkout a clone from https://github.com/nexB/license-expression.git\n\n- Then run ``./configure --dev`` and then ``source tmp/bin/activate`` on Linux and POSIX.\n  This will install all dependencies in a local virtualenv, including\n  development deps.\n\n- On Windows run  ``configure.bat --dev`` and then ``Scripts\\bin\\activate`` instead.\n\n- To run the tests, run ``pytest -vvs``\n\n\n.. |travis-badge-icon| image:: https://api.travis-ci.org/nexB/license-expression.png?branch=master\n    :target: https://travis-ci.org/nexB/license-expression\n    :alt: Travis tests status\n    :align: middle\n\n.. |appveyor-badge-icon| image:: https://ci.appveyor.com/api/projects/status/github/nexB/license-expression?svg=true\n    :target: https://ci.appveyor.com/project/nexB/license-expression\n    :alt: Appveyor tests status\n    :align: middle\n\n.. |azure-badge-icon| image:: https://dev.azure.com/nexB/license-expression/_apis/build/status/nexB.license-expression?branchName=master\n    :target: https://dev.azure.com/nexB/license-expression/_build/latest?definitionId=2&branchName=master\n    :alt: Azure pipelines tests status\n    :align: middle",
-      "release_date": "2024-03-19T10:20:10",
+      "description": "license-expression is a comprehensive utility library to parse, compare, simplify and normalize license expressions (such as SPDX license expressions) using boolean logic.\n==================\nlicense-expression\n==================\n\n``license-expression`` is a comprehensive utility library to parse, compare,\nsimplify and normalize license expressions (such as SPDX license expressions)\nusing boolean logic.\n\n- License: Apache-2.0\n- Python: 3.8+\n- Homepage: https://github.com/aboutcode-org/license-expression/\n- Install: `pip install license-expression` also available in most Linux distro.\n\nSoftware project licenses are often a combination of several free and open\nsource software licenses. License expressions -- as specified by SPDX -- provide\na concise and human readable way to express these licenses without having to\nread long license texts, while still being machine-readable.\n\nLicense expressions are used by key FOSS projects such as Linux; several\npackages ecosystem use them to document package licensing metadata such as\nnpm and Rubygems; they are important when exchanging software data (such as with\nSPDX and SBOM in general) as a way to express licensing precisely.\n\n``license-expression`` is a comprehensive utility library to parse, compare,\nsimplify and normalize these license expressions (such as SPDX license expressions)\nusing boolean logic like in: `GPL-2.0-or-later WITH Classpath-exception-2.0 AND MIT`.\n\nIt includes the license keys from SPDX https://spdx.org/licenses/ (version 3.23)\nand ScanCode license DB (version 32.0.8, last published on 2023-02-27).\nSee https://scancode-licensedb.aboutcode.org/ to get started quickly.\n\n``license-expression`` is both powerful and simple to use and is a used as the\nlicense expression engine in several projects and products such as:\n\n- AboutCode-toolkit https://github.com/aboutcode-org/aboutcode-toolkit\n- AlekSIS (School Information System) https://edugit.org/AlekSIS/official/AlekSIS-Core\n- Barista https://github.com/Optum/barista\n- Conda forge tools https://github.com/conda-forge/conda-smithy\n- DejaCode https://dejacode.com\n- DeltaCode https://github.com/nexB/deltacode\n- FenixscanX https://github.com/SmartsYoung/FenixscanX\n- FetchCode https://github.com/aboutcode-org/fetchcode\n- Flict https://github.com/vinland-technology/flict and https://github.com/vinland-technology\n- license.sh https://github.com/webscopeio/license.sh\n- liferay_inbound_checker https://github.com/carmenbianca/liferay_inbound_checker\n- REUSE https://reuse.software/ and https://github.com/fsfe/reuse-tool\n- ScanCode-io https://github.com/aboutcode-org/scancode.io\n- ScanCode-toolkit https://github.com/aboutcode-org/scancode-toolkit\n\nSee also for details:\n- https://spdx.github.io/spdx-spec/appendix-IV-SPDX-license-expressions/\n\n``license-expression`` is also packaged for most Linux distributions. See below.\n\nAlternative:\n\nThere is no known alternative library for Python, but there are several similar\nlibraries in other languages (but not as powerful of course!):\n\n- JavaScript https://github.com/jslicense/spdx-expression-parse.js\n- Rust https://github.com/ehuss/license-exprs\n- Haskell https://github.com/phadej/spdx\n- Go https://github.com/kyoh86/go-spdx\n- Ada https://github.com/Fabien-Chouteau/spdx_ada\n- Java https://github.com/spdx/tools and https://github.com/aschet/spdx-license-expression-tools\n\nBuild and tests status\n======================\n\n+--------------------------+------------------------+----------------------------------+\n|**Linux & macOS (Travis)**| **Windows (AppVeyor)** |**Linux, Windows & macOS (Azure)**|\n+==========================+========================+==================================+\n|                          |                        |                                  |\n| |travis-badge-icon|      | |appveyor-badge-icon|  |   |azure-badge-icon|             |\n|                          |                        |                                  |\n+--------------------------+------------------------+----------------------------------+\n\nSource code and download\n========================\n\n- GitHub https://github.com/aboutcode-org/license-expression.git\n- PyPI https://pypi.python.org/pypi/license-expression\n\nAlso available in several Linux distros:\n\n- Arch Linux https://archlinux.org/packages/extra/any/python-license-expression/\n- Debian https://packages.debian.org/unstable/source/license-expression\n- DragonFly BSD https://github.com/DragonFlyBSD/DPorts/tree/master/textproc/py-license-expression\n- Fedora https://src.fedoraproject.org/rpms/python-license-expression/\n- FreeBSD https://www.freshports.org/textproc/py-license-expression\n- NixOS https://github.com/NixOS/nixpkgs/blob/release-21.05/pkgs/development/python-modules/license-expression/default.nix\n- openSUSE https://build.opensuse.org/package/show/openSUSE:Factory/python-license-expression\n\n\nSupport\n=======\n\n- Submit bugs and questions at: https://github.com/aboutcode-org/license-expression/issues\n- Join the chat at: https://gitter.im/aboutcode-org/discuss\n\nDescription\n===========\n\nThis module defines a mini language to parse, validate, simplify, normalize and\ncompare license expressions using a boolean logic engine.\n\nThis supports SPDX license expressions and also accepts other license naming\nconventions and license identifiers aliases to resolve and normalize any license\nexpressions.\n\nUsing boolean logic, license expressions can be tested for equality, containment,\nequivalence and can be normalized or simplified.\n\nIt also bundles the SPDX License list (3.20 as of now) and the ScanCode license\nDB (based on latest ScanCode) to easily parse and validate expressions using\nthe license symbols.\n\n\nUsage examples\n==============\n\nThe main entry point is the ``Licensing`` object that you can use to parse,\nvalidate, compare, simplify and normalize license expressions.\n\nCreate an SPDX Licensing and parse expressions::\n\n\t>>> from license_expression import get_spdx_licensing\n\t>>> licensing = get_spdx_licensing()\n\t>>> expression = ' GPL-2.0 or LGPL-2.1 and mit '\n\t>>> parsed = licensing.parse(expression)\n\t>>> print(parsed.pretty())\n\tOR(\n\t  LicenseSymbol('GPL-2.0-only'),\n\t  AND(\n\t    LicenseSymbol('LGPL-2.1-only'),\n\t    LicenseSymbol('MIT')\n\t  )\n\t)\n\n\t>>> str(parsed)\n\t'GPL-2.0-only OR (LGPL-2.1-only AND MIT)'\n\n\t>>> licensing.parse('unknwon with foo', validate=True, strict=True)\n\tlicense_expression.ExpressionParseError: A plain license symbol cannot be used\n\tas an exception in a \"WITH symbol\" statement. for token: \"foo\" at position: 13\n\n\t>>> licensing.parse('unknwon with foo', validate=True)\n\tlicense_expression.ExpressionError: Unknown license key(s): unknwon, foo\n\n\t>>> licensing.validate('foo and MIT and GPL-2.0+')\n\tExpressionInfo(\n\t    original_expression='foo and MIT and GPL-2.0+',\n\t    normalized_expression=None,\n\t    errors=['Unknown license key(s): foo'],\n\t    invalid_symbols=['foo']\n\t)\n\n\nCreate a simple Licensing and parse expressions::\n\n    >>> from license_expression import Licensing, LicenseSymbol\n    >>> licensing = Licensing()\n    >>> expression = ' GPL-2.0 or LGPL-2.1 and mit '\n    >>> parsed = licensing.parse(expression)\n    >>> expression = ' GPL-2.0 or LGPL-2.1 and mit '\n    >>> expected = 'GPL-2.0-only OR (LGPL-2.1-only AND mit)'\n    >>> assert str(parsed) == expected\n    >>> assert parsed.render('{symbol.key}') == expected\n\n\nCreate a Licensing with your own license symbols::\n\n    >>> expected = [\n    ...   LicenseSymbol('GPL-2.0'),\n    ...   LicenseSymbol('LGPL-2.1'),\n    ...   LicenseSymbol('mit')\n    ... ]\n    >>> assert licensing.license_symbols(expression) == expected\n    >>> assert licensing.license_symbols(parsed) == expected\n\n    >>> symbols = ['GPL-2.0+', 'Classpath', 'BSD']\n    >>> licensing = Licensing(symbols)\n    >>> expression = 'GPL-2.0+ with Classpath or (bsd)'\n    >>> parsed = licensing.parse(expression)\n    >>> expected = 'GPL-2.0+ WITH Classpath OR BSD'\n    >>> assert parsed.render('{symbol.key}') == expected\n\n    >>> expected = [\n    ...   LicenseSymbol('GPL-2.0+'),\n    ...   LicenseSymbol('Classpath'),\n    ...   LicenseSymbol('BSD')\n    ... ]\n    >>> assert licensing.license_symbols(parsed) == expected\n    >>> assert licensing.license_symbols(expression) == expected\n\nAnd expression can be deduplicated, to remove duplicate license subexpressions\nwithout changing the order and without consider license choices as simplifiable::\n\n    >>> expression2 = ' GPL-2.0 or (mit and LGPL 2.1) or bsd Or GPL-2.0  or (mit and LGPL 2.1)'\n    >>> parsed2 = licensing.parse(expression2)\n    >>> str(parsed2)\n    'GPL-2.0 OR (mit AND LGPL 2.1) OR BSD OR GPL-2.0 OR (mit AND LGPL 2.1)'\n    >>> assert str(parsed2.simplify()) == 'BSD OR GPL-2.0 OR (LGPL 2.1 AND mit)'\n\nExpression can be simplified, treating them as boolean expressions::\n\n    >>> expression2 = ' GPL-2.0 or (mit and LGPL 2.1) or bsd Or GPL-2.0  or (mit and LGPL 2.1)'\n    >>> parsed2 = licensing.parse(expression2)\n    >>> str(parsed2)\n    'GPL-2.0 OR (mit AND LGPL 2.1) OR BSD OR GPL-2.0 OR (mit AND LGPL 2.1)'\n    >>> assert str(parsed2.simplify()) == 'BSD OR GPL-2.0 OR (LGPL 2.1 AND mit)'\n\nTwo expressions can be compared for equivalence and containment:\n\n    >>> expr1 = licensing.parse(' GPL-2.0 or (LGPL 2.1 and mit) ')\n    >>> expr2 = licensing.parse(' (mit and LGPL 2.1)  or GPL-2.0 ')\n    >>> licensing.is_equivalent(expr1, expr2)\n    True\n    >>> licensing.is_equivalent(' GPL-2.0 or (LGPL 2.1 and mit) ',\n    ...                         ' (mit and LGPL 2.1)  or GPL-2.0 ')\n    True\n    >>> expr1.simplify() == expr2.simplify()\n    True\n    >>> expr3 = licensing.parse(' GPL-2.0 or mit or LGPL 2.1')\n    >>> licensing.is_equivalent(expr2, expr3)\n    False\n    >>> expr4 = licensing.parse('mit and LGPL 2.1')\n    >>> expr4.simplify() in expr2.simplify()\n    True\n    >>> licensing.contains(expr2, expr4)\n    True\n\nDevelopment\n===========\n\n- Checkout a clone from https://github.com/aboutcode-org/license-expression.git\n\n- Then run ``./configure --dev`` and then ``source tmp/bin/activate`` on Linux and POSIX.\n  This will install all dependencies in a local virtualenv, including\n  development deps.\n\n- On Windows run  ``configure.bat --dev`` and then ``Scripts\\bin\\activate`` instead.\n\n- To run the tests, run ``pytest -vvs``\n\n\n.. |travis-badge-icon| image:: https://api.travis-ci.org/nexB/license-expression.png?branch=master\n    :target: https://travis-ci.org/nexB/license-expression\n    :alt: Travis tests status\n    :align: middle\n\n.. |appveyor-badge-icon| image:: https://ci.appveyor.com/api/projects/status/github/nexB/license-expression?svg=true\n    :target: https://ci.appveyor.com/project/nexB/license-expression\n    :alt: Appveyor tests status\n    :align: middle\n\n.. |azure-badge-icon| image:: https://dev.azure.com/nexB/license-expression/_apis/build/status/nexB.license-expression?branchName=master\n    :target: https://dev.azure.com/nexB/license-expression/_build/latest?definitionId=2&branchName=master\n    :alt: Azure pipelines tests status\n    :align: middle",
+      "release_date": "2024-08-13T05:29:14",
       "parties": [
         {
           "type": "person",
@@ -2596,12 +2596,12 @@
         "Topic :: Software Development",
         "Topic :: Utilities"
       ],
-      "homepage_url": "https://github.com/nexB/license-expression",
-      "download_url": "https://files.pythonhosted.org/packages/54/f8/985a9a17d75533a8d6f6750b9e6ce5c0134ee70cf809a7e72ef19a1be756/license_expression-30.3.0-py3-none-any.whl",
-      "size": 108940,
+      "homepage_url": "https://github.com/aboutcode-org/license-expression",
+      "download_url": "https://files.pythonhosted.org/packages/91/84/a7cf5dfa141501a20cb63595f02edfe38e0db2e3cc34e4f3cd273cc285df/license_expression-30.3.1-py3-none-any.whl",
+      "size": 109008,
       "sha1": null,
-      "md5": "0cd7c5effb66cb6e575f925dc60cb30b",
-      "sha256": "ae0ba9a829d6909c785dc2f0131f13d10d68318e4a5f28af5ef152d6b52f9b41",
+      "md5": "3210d82badca7a6266c695e6b3c0093d",
+      "sha256": "97904b9185c7bbb1e98799606fa7424191c375e70ba63a524b6f7100e42ddc46",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -2618,20 +2618,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/license-expression/30.3.0/json",
+      "api_data_url": "https://pypi.org/pypi/license-expression/30.3.1/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/license-expression@30.3.0"
+      "purl": "pkg:pypi/license-expression@30.3.1"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "license-expression",
-      "version": "30.3.0",
+      "version": "30.3.1",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "license-expression is a comprehensive utility library to parse, compare, simplify and normalize license expressions (such as SPDX license expressions) using boolean logic.\n==================\nlicense-expression\n==================\n\n``license-expression`` is a comprehensive utility library to parse, compare,\nsimplify and normalize license expressions (such as SPDX license expressions)\nusing boolean logic.\n\n- License: Apache-2.0\n- Python: 3.8+\n- Homepage: https://github.com/nexB/license-expression/\n- Install: `pip install license-expression` also available in most Linux distro.\n\nSoftware project licenses are often a combination of several free and open\nsource software licenses. License expressions -- as specified by SPDX -- provide\na concise and human readable way to express these licenses without having to\nread long license texts, while still being machine-readable.\n\nLicense expressions are used by key FOSS projects such as Linux; several\npackages ecosystem use them to document package licensing metadata such as\nnpm and Rubygems; they are important when exchanging software data (such as with\nSPDX and SBOM in general) as a way to express licensing precisely.\n\n``license-expression`` is a comprehensive utility library to parse, compare,\nsimplify and normalize these license expressions (such as SPDX license expressions)\nusing boolean logic like in: `GPL-2.0-or-later WITH Classpath-exception-2.0 AND MIT`.\n\nIt includes the license keys from SPDX https://spdx.org/licenses/ (version 3.23)\nand ScanCode license DB (version 32.0.8, last published on 2023-02-27).\nSee https://scancode-licensedb.aboutcode.org/ to get started quickly.\n\n``license-expression`` is both powerful and simple to use and is a used as the\nlicense expression engine in several projects and products such as:\n\n- AboutCode-toolkit https://github.com/nexB/aboutcode-toolkit\n- AlekSIS (School Information System) https://edugit.org/AlekSIS/official/AlekSIS-Core\n- Barista https://github.com/Optum/barista\n- Conda forge tools https://github.com/conda-forge/conda-smithy\n- DejaCode https://dejacode.com\n- DeltaCode https://github.com/nexB/deltacode\n- FenixscanX https://github.com/SmartsYoung/FenixscanX\n- FetchCode https://github.com/nexB/fetchcode\n- Flict https://github.com/vinland-technology/flict and https://github.com/vinland-technology\n- license.sh https://github.com/webscopeio/license.sh\n- liferay_inbound_checker https://github.com/carmenbianca/liferay_inbound_checker\n- REUSE https://reuse.software/ and https://github.com/fsfe/reuse-tool\n- ScanCode-io https://github.com/nexB/scancode.io\n- ScanCode-toolkit https://github.com/nexB/scancode-toolkit\n\nSee also for details:\n- https://spdx.github.io/spdx-spec/appendix-IV-SPDX-license-expressions/\n\n``license-expression`` is also packaged for most Linux distributions. See below.\n\nAlternative:\n\nThere is no known alternative library for Python, but there are several similar\nlibraries in other languages (but not as powerful of course!):\n\n- JavaScript https://github.com/jslicense/spdx-expression-parse.js\n- Rust https://github.com/ehuss/license-exprs\n- Haskell https://github.com/phadej/spdx\n- Go https://github.com/kyoh86/go-spdx\n- Ada https://github.com/Fabien-Chouteau/spdx_ada\n- Java https://github.com/spdx/tools and https://github.com/aschet/spdx-license-expression-tools\n\nBuild and tests status\n======================\n\n+--------------------------+------------------------+----------------------------------+\n|**Linux & macOS (Travis)**| **Windows (AppVeyor)** |**Linux, Windows & macOS (Azure)**|\n+==========================+========================+==================================+\n|                          |                        |                                  |\n| |travis-badge-icon|      | |appveyor-badge-icon|  |   |azure-badge-icon|             |\n|                          |                        |                                  |\n+--------------------------+------------------------+----------------------------------+\n\nSource code and download\n========================\n\n- GitHub https://github.com/nexB/license-expression.git\n- PyPI https://pypi.python.org/pypi/license-expression\n\nAlso available in several Linux distros:\n\n- Arch Linux https://archlinux.org/packages/extra/any/python-license-expression/\n- Debian https://packages.debian.org/unstable/source/license-expression\n- DragonFly BSD https://github.com/DragonFlyBSD/DPorts/tree/master/textproc/py-license-expression\n- Fedora https://src.fedoraproject.org/rpms/python-license-expression/\n- FreeBSD https://www.freshports.org/textproc/py-license-expression\n- NixOS https://github.com/NixOS/nixpkgs/blob/release-21.05/pkgs/development/python-modules/license-expression/default.nix\n- openSUSE https://build.opensuse.org/package/show/openSUSE:Factory/python-license-expression\n\n\nSupport\n=======\n\n- Submit bugs and questions at: https://github.com/nexB/license-expression/issues\n- Join the chat at: https://gitter.im/aboutcode-org/discuss\n\nDescription\n===========\n\nThis module defines a mini language to parse, validate, simplify, normalize and\ncompare license expressions using a boolean logic engine.\n\nThis supports SPDX license expressions and also accepts other license naming\nconventions and license identifiers aliases to resolve and normalize any license\nexpressions.\n\nUsing boolean logic, license expressions can be tested for equality, containment,\nequivalence and can be normalized or simplified.\n\nIt also bundles the SPDX License list (3.20 as of now) and the ScanCode license\nDB (based on latest ScanCode) to easily parse and validate expressions using\nthe license symbols.\n\n\nUsage examples\n==============\n\nThe main entry point is the ``Licensing`` object that you can use to parse,\nvalidate, compare, simplify and normalize license expressions.\n\nCreate an SPDX Licensing and parse expressions::\n\n\t>>> from license_expression import get_spdx_licensing\n\t>>> licensing = get_spdx_licensing()\n\t>>> expression = ' GPL-2.0 or LGPL-2.1 and mit '\n\t>>> parsed = licensing.parse(expression)\n\t>>> print(parsed.pretty())\n\tOR(\n\t  LicenseSymbol('GPL-2.0-only'),\n\t  AND(\n\t    LicenseSymbol('LGPL-2.1-only'),\n\t    LicenseSymbol('MIT')\n\t  )\n\t)\n\n\t>>> str(parsed)\n\t'GPL-2.0-only OR (LGPL-2.1-only AND MIT)'\n\n\t>>> licensing.parse('unknwon with foo', validate=True, strict=True)\n\tlicense_expression.ExpressionParseError: A plain license symbol cannot be used\n\tas an exception in a \"WITH symbol\" statement. for token: \"foo\" at position: 13\n\n\t>>> licensing.parse('unknwon with foo', validate=True)\n\tlicense_expression.ExpressionError: Unknown license key(s): unknwon, foo\n\n\t>>> licensing.validate('foo and MIT and GPL-2.0+')\n\tExpressionInfo(\n\t    original_expression='foo and MIT and GPL-2.0+',\n\t    normalized_expression=None,\n\t    errors=['Unknown license key(s): foo'],\n\t    invalid_symbols=['foo']\n\t)\n\n\nCreate a simple Licensing and parse expressions::\n\n    >>> from license_expression import Licensing, LicenseSymbol\n    >>> licensing = Licensing()\n    >>> expression = ' GPL-2.0 or LGPL-2.1 and mit '\n    >>> parsed = licensing.parse(expression)\n    >>> expression = ' GPL-2.0 or LGPL-2.1 and mit '\n    >>> expected = 'GPL-2.0-only OR (LGPL-2.1-only AND mit)'\n    >>> assert str(parsed) == expected\n    >>> assert parsed.render('{symbol.key}') == expected\n\n\nCreate a Licensing with your own license symbols::\n\n    >>> expected = [\n    ...   LicenseSymbol('GPL-2.0'),\n    ...   LicenseSymbol('LGPL-2.1'),\n    ...   LicenseSymbol('mit')\n    ... ]\n    >>> assert licensing.license_symbols(expression) == expected\n    >>> assert licensing.license_symbols(parsed) == expected\n\n    >>> symbols = ['GPL-2.0+', 'Classpath', 'BSD']\n    >>> licensing = Licensing(symbols)\n    >>> expression = 'GPL-2.0+ with Classpath or (bsd)'\n    >>> parsed = licensing.parse(expression)\n    >>> expected = 'GPL-2.0+ WITH Classpath OR BSD'\n    >>> assert parsed.render('{symbol.key}') == expected\n\n    >>> expected = [\n    ...   LicenseSymbol('GPL-2.0+'),\n    ...   LicenseSymbol('Classpath'),\n    ...   LicenseSymbol('BSD')\n    ... ]\n    >>> assert licensing.license_symbols(parsed) == expected\n    >>> assert licensing.license_symbols(expression) == expected\n\nAnd expression can be deduplicated, to remove duplicate license subexpressions\nwithout changing the order and without consider license choices as simplifiable::\n\n    >>> expression2 = ' GPL-2.0 or (mit and LGPL 2.1) or bsd Or GPL-2.0  or (mit and LGPL 2.1)'\n    >>> parsed2 = licensing.parse(expression2)\n    >>> str(parsed2)\n    'GPL-2.0 OR (mit AND LGPL 2.1) OR BSD OR GPL-2.0 OR (mit AND LGPL 2.1)'\n    >>> assert str(parsed2.simplify()) == 'BSD OR GPL-2.0 OR (LGPL 2.1 AND mit)'\n\nExpression can be simplified, treating them as boolean expressions::\n\n    >>> expression2 = ' GPL-2.0 or (mit and LGPL 2.1) or bsd Or GPL-2.0  or (mit and LGPL 2.1)'\n    >>> parsed2 = licensing.parse(expression2)\n    >>> str(parsed2)\n    'GPL-2.0 OR (mit AND LGPL 2.1) OR BSD OR GPL-2.0 OR (mit AND LGPL 2.1)'\n    >>> assert str(parsed2.simplify()) == 'BSD OR GPL-2.0 OR (LGPL 2.1 AND mit)'\n\nTwo expressions can be compared for equivalence and containment:\n\n    >>> expr1 = licensing.parse(' GPL-2.0 or (LGPL 2.1 and mit) ')\n    >>> expr2 = licensing.parse(' (mit and LGPL 2.1)  or GPL-2.0 ')\n    >>> licensing.is_equivalent(expr1, expr2)\n    True\n    >>> licensing.is_equivalent(' GPL-2.0 or (LGPL 2.1 and mit) ',\n    ...                         ' (mit and LGPL 2.1)  or GPL-2.0 ')\n    True\n    >>> expr1.simplify() == expr2.simplify()\n    True\n    >>> expr3 = licensing.parse(' GPL-2.0 or mit or LGPL 2.1')\n    >>> licensing.is_equivalent(expr2, expr3)\n    False\n    >>> expr4 = licensing.parse('mit and LGPL 2.1')\n    >>> expr4.simplify() in expr2.simplify()\n    True\n    >>> licensing.contains(expr2, expr4)\n    True\n\nDevelopment\n===========\n\n- Checkout a clone from https://github.com/nexB/license-expression.git\n\n- Then run ``./configure --dev`` and then ``source tmp/bin/activate`` on Linux and POSIX.\n  This will install all dependencies in a local virtualenv, including\n  development deps.\n\n- On Windows run  ``configure.bat --dev`` and then ``Scripts\\bin\\activate`` instead.\n\n- To run the tests, run ``pytest -vvs``\n\n\n.. |travis-badge-icon| image:: https://api.travis-ci.org/nexB/license-expression.png?branch=master\n    :target: https://travis-ci.org/nexB/license-expression\n    :alt: Travis tests status\n    :align: middle\n\n.. |appveyor-badge-icon| image:: https://ci.appveyor.com/api/projects/status/github/nexB/license-expression?svg=true\n    :target: https://ci.appveyor.com/project/nexB/license-expression\n    :alt: Appveyor tests status\n    :align: middle\n\n.. |azure-badge-icon| image:: https://dev.azure.com/nexB/license-expression/_apis/build/status/nexB.license-expression?branchName=master\n    :target: https://dev.azure.com/nexB/license-expression/_build/latest?definitionId=2&branchName=master\n    :alt: Azure pipelines tests status\n    :align: middle",
-      "release_date": "2024-03-19T10:20:14",
+      "description": "license-expression is a comprehensive utility library to parse, compare, simplify and normalize license expressions (such as SPDX license expressions) using boolean logic.\n==================\nlicense-expression\n==================\n\n``license-expression`` is a comprehensive utility library to parse, compare,\nsimplify and normalize license expressions (such as SPDX license expressions)\nusing boolean logic.\n\n- License: Apache-2.0\n- Python: 3.8+\n- Homepage: https://github.com/aboutcode-org/license-expression/\n- Install: `pip install license-expression` also available in most Linux distro.\n\nSoftware project licenses are often a combination of several free and open\nsource software licenses. License expressions -- as specified by SPDX -- provide\na concise and human readable way to express these licenses without having to\nread long license texts, while still being machine-readable.\n\nLicense expressions are used by key FOSS projects such as Linux; several\npackages ecosystem use them to document package licensing metadata such as\nnpm and Rubygems; they are important when exchanging software data (such as with\nSPDX and SBOM in general) as a way to express licensing precisely.\n\n``license-expression`` is a comprehensive utility library to parse, compare,\nsimplify and normalize these license expressions (such as SPDX license expressions)\nusing boolean logic like in: `GPL-2.0-or-later WITH Classpath-exception-2.0 AND MIT`.\n\nIt includes the license keys from SPDX https://spdx.org/licenses/ (version 3.23)\nand ScanCode license DB (version 32.0.8, last published on 2023-02-27).\nSee https://scancode-licensedb.aboutcode.org/ to get started quickly.\n\n``license-expression`` is both powerful and simple to use and is a used as the\nlicense expression engine in several projects and products such as:\n\n- AboutCode-toolkit https://github.com/aboutcode-org/aboutcode-toolkit\n- AlekSIS (School Information System) https://edugit.org/AlekSIS/official/AlekSIS-Core\n- Barista https://github.com/Optum/barista\n- Conda forge tools https://github.com/conda-forge/conda-smithy\n- DejaCode https://dejacode.com\n- DeltaCode https://github.com/nexB/deltacode\n- FenixscanX https://github.com/SmartsYoung/FenixscanX\n- FetchCode https://github.com/aboutcode-org/fetchcode\n- Flict https://github.com/vinland-technology/flict and https://github.com/vinland-technology\n- license.sh https://github.com/webscopeio/license.sh\n- liferay_inbound_checker https://github.com/carmenbianca/liferay_inbound_checker\n- REUSE https://reuse.software/ and https://github.com/fsfe/reuse-tool\n- ScanCode-io https://github.com/aboutcode-org/scancode.io\n- ScanCode-toolkit https://github.com/aboutcode-org/scancode-toolkit\n\nSee also for details:\n- https://spdx.github.io/spdx-spec/appendix-IV-SPDX-license-expressions/\n\n``license-expression`` is also packaged for most Linux distributions. See below.\n\nAlternative:\n\nThere is no known alternative library for Python, but there are several similar\nlibraries in other languages (but not as powerful of course!):\n\n- JavaScript https://github.com/jslicense/spdx-expression-parse.js\n- Rust https://github.com/ehuss/license-exprs\n- Haskell https://github.com/phadej/spdx\n- Go https://github.com/kyoh86/go-spdx\n- Ada https://github.com/Fabien-Chouteau/spdx_ada\n- Java https://github.com/spdx/tools and https://github.com/aschet/spdx-license-expression-tools\n\nBuild and tests status\n======================\n\n+--------------------------+------------------------+----------------------------------+\n|**Linux & macOS (Travis)**| **Windows (AppVeyor)** |**Linux, Windows & macOS (Azure)**|\n+==========================+========================+==================================+\n|                          |                        |                                  |\n| |travis-badge-icon|      | |appveyor-badge-icon|  |   |azure-badge-icon|             |\n|                          |                        |                                  |\n+--------------------------+------------------------+----------------------------------+\n\nSource code and download\n========================\n\n- GitHub https://github.com/aboutcode-org/license-expression.git\n- PyPI https://pypi.python.org/pypi/license-expression\n\nAlso available in several Linux distros:\n\n- Arch Linux https://archlinux.org/packages/extra/any/python-license-expression/\n- Debian https://packages.debian.org/unstable/source/license-expression\n- DragonFly BSD https://github.com/DragonFlyBSD/DPorts/tree/master/textproc/py-license-expression\n- Fedora https://src.fedoraproject.org/rpms/python-license-expression/\n- FreeBSD https://www.freshports.org/textproc/py-license-expression\n- NixOS https://github.com/NixOS/nixpkgs/blob/release-21.05/pkgs/development/python-modules/license-expression/default.nix\n- openSUSE https://build.opensuse.org/package/show/openSUSE:Factory/python-license-expression\n\n\nSupport\n=======\n\n- Submit bugs and questions at: https://github.com/aboutcode-org/license-expression/issues\n- Join the chat at: https://gitter.im/aboutcode-org/discuss\n\nDescription\n===========\n\nThis module defines a mini language to parse, validate, simplify, normalize and\ncompare license expressions using a boolean logic engine.\n\nThis supports SPDX license expressions and also accepts other license naming\nconventions and license identifiers aliases to resolve and normalize any license\nexpressions.\n\nUsing boolean logic, license expressions can be tested for equality, containment,\nequivalence and can be normalized or simplified.\n\nIt also bundles the SPDX License list (3.20 as of now) and the ScanCode license\nDB (based on latest ScanCode) to easily parse and validate expressions using\nthe license symbols.\n\n\nUsage examples\n==============\n\nThe main entry point is the ``Licensing`` object that you can use to parse,\nvalidate, compare, simplify and normalize license expressions.\n\nCreate an SPDX Licensing and parse expressions::\n\n\t>>> from license_expression import get_spdx_licensing\n\t>>> licensing = get_spdx_licensing()\n\t>>> expression = ' GPL-2.0 or LGPL-2.1 and mit '\n\t>>> parsed = licensing.parse(expression)\n\t>>> print(parsed.pretty())\n\tOR(\n\t  LicenseSymbol('GPL-2.0-only'),\n\t  AND(\n\t    LicenseSymbol('LGPL-2.1-only'),\n\t    LicenseSymbol('MIT')\n\t  )\n\t)\n\n\t>>> str(parsed)\n\t'GPL-2.0-only OR (LGPL-2.1-only AND MIT)'\n\n\t>>> licensing.parse('unknwon with foo', validate=True, strict=True)\n\tlicense_expression.ExpressionParseError: A plain license symbol cannot be used\n\tas an exception in a \"WITH symbol\" statement. for token: \"foo\" at position: 13\n\n\t>>> licensing.parse('unknwon with foo', validate=True)\n\tlicense_expression.ExpressionError: Unknown license key(s): unknwon, foo\n\n\t>>> licensing.validate('foo and MIT and GPL-2.0+')\n\tExpressionInfo(\n\t    original_expression='foo and MIT and GPL-2.0+',\n\t    normalized_expression=None,\n\t    errors=['Unknown license key(s): foo'],\n\t    invalid_symbols=['foo']\n\t)\n\n\nCreate a simple Licensing and parse expressions::\n\n    >>> from license_expression import Licensing, LicenseSymbol\n    >>> licensing = Licensing()\n    >>> expression = ' GPL-2.0 or LGPL-2.1 and mit '\n    >>> parsed = licensing.parse(expression)\n    >>> expression = ' GPL-2.0 or LGPL-2.1 and mit '\n    >>> expected = 'GPL-2.0-only OR (LGPL-2.1-only AND mit)'\n    >>> assert str(parsed) == expected\n    >>> assert parsed.render('{symbol.key}') == expected\n\n\nCreate a Licensing with your own license symbols::\n\n    >>> expected = [\n    ...   LicenseSymbol('GPL-2.0'),\n    ...   LicenseSymbol('LGPL-2.1'),\n    ...   LicenseSymbol('mit')\n    ... ]\n    >>> assert licensing.license_symbols(expression) == expected\n    >>> assert licensing.license_symbols(parsed) == expected\n\n    >>> symbols = ['GPL-2.0+', 'Classpath', 'BSD']\n    >>> licensing = Licensing(symbols)\n    >>> expression = 'GPL-2.0+ with Classpath or (bsd)'\n    >>> parsed = licensing.parse(expression)\n    >>> expected = 'GPL-2.0+ WITH Classpath OR BSD'\n    >>> assert parsed.render('{symbol.key}') == expected\n\n    >>> expected = [\n    ...   LicenseSymbol('GPL-2.0+'),\n    ...   LicenseSymbol('Classpath'),\n    ...   LicenseSymbol('BSD')\n    ... ]\n    >>> assert licensing.license_symbols(parsed) == expected\n    >>> assert licensing.license_symbols(expression) == expected\n\nAnd expression can be deduplicated, to remove duplicate license subexpressions\nwithout changing the order and without consider license choices as simplifiable::\n\n    >>> expression2 = ' GPL-2.0 or (mit and LGPL 2.1) or bsd Or GPL-2.0  or (mit and LGPL 2.1)'\n    >>> parsed2 = licensing.parse(expression2)\n    >>> str(parsed2)\n    'GPL-2.0 OR (mit AND LGPL 2.1) OR BSD OR GPL-2.0 OR (mit AND LGPL 2.1)'\n    >>> assert str(parsed2.simplify()) == 'BSD OR GPL-2.0 OR (LGPL 2.1 AND mit)'\n\nExpression can be simplified, treating them as boolean expressions::\n\n    >>> expression2 = ' GPL-2.0 or (mit and LGPL 2.1) or bsd Or GPL-2.0  or (mit and LGPL 2.1)'\n    >>> parsed2 = licensing.parse(expression2)\n    >>> str(parsed2)\n    'GPL-2.0 OR (mit AND LGPL 2.1) OR BSD OR GPL-2.0 OR (mit AND LGPL 2.1)'\n    >>> assert str(parsed2.simplify()) == 'BSD OR GPL-2.0 OR (LGPL 2.1 AND mit)'\n\nTwo expressions can be compared for equivalence and containment:\n\n    >>> expr1 = licensing.parse(' GPL-2.0 or (LGPL 2.1 and mit) ')\n    >>> expr2 = licensing.parse(' (mit and LGPL 2.1)  or GPL-2.0 ')\n    >>> licensing.is_equivalent(expr1, expr2)\n    True\n    >>> licensing.is_equivalent(' GPL-2.0 or (LGPL 2.1 and mit) ',\n    ...                         ' (mit and LGPL 2.1)  or GPL-2.0 ')\n    True\n    >>> expr1.simplify() == expr2.simplify()\n    True\n    >>> expr3 = licensing.parse(' GPL-2.0 or mit or LGPL 2.1')\n    >>> licensing.is_equivalent(expr2, expr3)\n    False\n    >>> expr4 = licensing.parse('mit and LGPL 2.1')\n    >>> expr4.simplify() in expr2.simplify()\n    True\n    >>> licensing.contains(expr2, expr4)\n    True\n\nDevelopment\n===========\n\n- Checkout a clone from https://github.com/aboutcode-org/license-expression.git\n\n- Then run ``./configure --dev`` and then ``source tmp/bin/activate`` on Linux and POSIX.\n  This will install all dependencies in a local virtualenv, including\n  development deps.\n\n- On Windows run  ``configure.bat --dev`` and then ``Scripts\\bin\\activate`` instead.\n\n- To run the tests, run ``pytest -vvs``\n\n\n.. |travis-badge-icon| image:: https://api.travis-ci.org/nexB/license-expression.png?branch=master\n    :target: https://travis-ci.org/nexB/license-expression\n    :alt: Travis tests status\n    :align: middle\n\n.. |appveyor-badge-icon| image:: https://ci.appveyor.com/api/projects/status/github/nexB/license-expression?svg=true\n    :target: https://ci.appveyor.com/project/nexB/license-expression\n    :alt: Appveyor tests status\n    :align: middle\n\n.. |azure-badge-icon| image:: https://dev.azure.com/nexB/license-expression/_apis/build/status/nexB.license-expression?branchName=master\n    :target: https://dev.azure.com/nexB/license-expression/_build/latest?definitionId=2&branchName=master\n    :alt: Azure pipelines tests status\n    :align: middle",
+      "release_date": "2024-08-13T05:29:16",
       "parties": [
         {
           "type": "person",
@@ -2658,12 +2658,12 @@
         "Topic :: Software Development",
         "Topic :: Utilities"
       ],
-      "homepage_url": "https://github.com/nexB/license-expression",
-      "download_url": "https://files.pythonhosted.org/packages/04/75/d0b021ce2ab2eb9f28151dbae650e5ec4bca23f375b973c3807f3009c56f/license-expression-30.3.0.tar.gz",
-      "size": 174389,
+      "homepage_url": "https://github.com/aboutcode-org/license-expression",
+      "download_url": "https://files.pythonhosted.org/packages/57/8b/dbe230196eee2de208ba87dcfae69c46db9d7ed70e2f30f143bf994ee075/license_expression-30.3.1.tar.gz",
+      "size": 174601,
       "sha1": null,
-      "md5": "6bd38d05f738015576e4ae22dadb8488",
-      "sha256": "1295406f736b4f395ff069aec1cebfad53c0fcb3cf57df0f5ec58fc7b905aea5",
+      "md5": "030df78064748876ca852e8b5ac0d407",
+      "sha256": "60d5bec1f3364c256a92b9a08583d7ea933c7aa272c8d36d04144a89a3858c01",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -2680,9 +2680,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/license-expression/30.3.0/json",
+      "api_data_url": "https://pypi.org/pypi/license-expression/30.3.1/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/license-expression@30.3.0"
+      "purl": "pkg:pypi/license-expression@30.3.1"
     },
     {
       "type": "pypi",
@@ -2802,12 +2802,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "openpyxl",
-      "version": "3.1.2",
+      "version": "3.1.5",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "A Python library to read/write Excel 2010 xlsx/xlsm files\n.. image:: https://coveralls.io/repos/bitbucket/openpyxl/openpyxl/badge.svg?branch=default\n    :target: https://coveralls.io/bitbucket/openpyxl/openpyxl?branch=default\n    :alt: coverage status\n\nIntroduction\n------------\n\nopenpyxl is a Python library to read/write Excel 2010 xlsx/xlsm/xltx/xltm files.\n\nIt was born from lack of existing library to read/write natively from Python\nthe Office Open XML format.\n\nAll kudos to the PHPExcel team as openpyxl was initially based on PHPExcel.\n\n\nSecurity\n--------\n\nBy default openpyxl does not guard against quadratic blowup or billion laughs\nxml attacks. To guard against these attacks install defusedxml.\n\nMailing List\n------------\n\nThe user list can be found on http://groups.google.com/group/openpyxl-users\n\n\nSample code::\n\n    from openpyxl import Workbook\n    wb = Workbook()\n\n    # grab the active worksheet\n    ws = wb.active\n\n    # Data can be assigned directly to cells\n    ws['A1'] = 42\n\n    # Rows can also be appended\n    ws.append([1, 2, 3])\n\n    # Python types will automatically be converted\n    import datetime\n    ws['A2'] = datetime.datetime.now()\n\n    # Save the file\n    wb.save(\"sample.xlsx\")\n\n\nDocumentation\n-------------\n\nThe documentation is at: https://openpyxl.readthedocs.io\n\n* installation methods\n* code examples\n* instructions for contributing\n\nRelease notes: https://openpyxl.readthedocs.io/en/stable/changes.html",
-      "release_date": "2023-03-11T16:58:36",
+      "release_date": "2024-06-28T14:03:41",
       "parties": [
         {
           "type": "person",
@@ -2831,11 +2831,11 @@
         "Programming Language :: Python :: 3.9"
       ],
       "homepage_url": "https://openpyxl.readthedocs.io",
-      "download_url": "https://files.pythonhosted.org/packages/6a/94/a59521de836ef0da54aaf50da6c4da8fb4072fb3053fa71f052fd9399e7a/openpyxl-3.1.2-py2.py3-none-any.whl",
-      "size": 249985,
+      "download_url": "https://files.pythonhosted.org/packages/c0/da/977ded879c29cbd04de313843e76868e6e13408a94ed6b987245dc7c8506/openpyxl-3.1.5-py2.py3-none-any.whl",
+      "size": 250910,
       "sha1": null,
-      "md5": "797657015056d50de2bc003d8a9379c2",
-      "sha256": "f91456ead12ab3c6c2e9491cf33ba6d08357d802192379bb482f1033ade496f5",
+      "md5": "05a1b34e9893bab14dd70c7645c4ddcb",
+      "sha256": "5282c12b107bffeef825f4617dc029afaf41d0ea60823bbb665ef3079dc79de2",
       "sha512": null,
       "bug_tracking_url": "https://foss.heptapod.net/openpyxl/openpyxl/-/issues",
       "code_view_url": "https://foss.heptapod.net/openpyxl/openpyxl",
@@ -2855,20 +2855,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/openpyxl/3.1.2/json",
+      "api_data_url": "https://pypi.org/pypi/openpyxl/3.1.5/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/openpyxl@3.1.2"
+      "purl": "pkg:pypi/openpyxl@3.1.5"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "openpyxl",
-      "version": "3.1.2",
+      "version": "3.1.5",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "A Python library to read/write Excel 2010 xlsx/xlsm files\n.. image:: https://coveralls.io/repos/bitbucket/openpyxl/openpyxl/badge.svg?branch=default\n    :target: https://coveralls.io/bitbucket/openpyxl/openpyxl?branch=default\n    :alt: coverage status\n\nIntroduction\n------------\n\nopenpyxl is a Python library to read/write Excel 2010 xlsx/xlsm/xltx/xltm files.\n\nIt was born from lack of existing library to read/write natively from Python\nthe Office Open XML format.\n\nAll kudos to the PHPExcel team as openpyxl was initially based on PHPExcel.\n\n\nSecurity\n--------\n\nBy default openpyxl does not guard against quadratic blowup or billion laughs\nxml attacks. To guard against these attacks install defusedxml.\n\nMailing List\n------------\n\nThe user list can be found on http://groups.google.com/group/openpyxl-users\n\n\nSample code::\n\n    from openpyxl import Workbook\n    wb = Workbook()\n\n    # grab the active worksheet\n    ws = wb.active\n\n    # Data can be assigned directly to cells\n    ws['A1'] = 42\n\n    # Rows can also be appended\n    ws.append([1, 2, 3])\n\n    # Python types will automatically be converted\n    import datetime\n    ws['A2'] = datetime.datetime.now()\n\n    # Save the file\n    wb.save(\"sample.xlsx\")\n\n\nDocumentation\n-------------\n\nThe documentation is at: https://openpyxl.readthedocs.io\n\n* installation methods\n* code examples\n* instructions for contributing\n\nRelease notes: https://openpyxl.readthedocs.io/en/stable/changes.html",
-      "release_date": "2023-03-11T16:58:38",
+      "release_date": "2024-06-28T14:03:44",
       "parties": [
         {
           "type": "person",
@@ -2892,11 +2892,11 @@
         "Programming Language :: Python :: 3.9"
       ],
       "homepage_url": "https://openpyxl.readthedocs.io",
-      "download_url": "https://files.pythonhosted.org/packages/42/e8/af028681d493814ca9c2ff8106fc62a4a32e4e0ae14602c2a98fc7b741c8/openpyxl-3.1.2.tar.gz",
-      "size": 185977,
+      "download_url": "https://files.pythonhosted.org/packages/3d/f9/88d94a75de065ea32619465d2f77b29a0469500e99012523b91cc4141cd1/openpyxl-3.1.5.tar.gz",
+      "size": 186464,
       "sha1": null,
-      "md5": "fd7b9e3c703e2889f6a1edbdb9737768",
-      "sha256": "a6f5977418eff3b2d5500d54d9db50c8277a368436f4e4f8ddb1be3422870184",
+      "md5": "13e63bdced2dbca00c8741eea3ecfa1c",
+      "sha256": "cf0e3cf56142039133628b5acffe8ef0c12bc902d2aadd3e0fe5878dc08d1050",
       "sha512": null,
       "bug_tracking_url": "https://foss.heptapod.net/openpyxl/openpyxl/-/issues",
       "code_view_url": "https://foss.heptapod.net/openpyxl/openpyxl",
@@ -2916,9 +2916,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/openpyxl/3.1.2/json",
+      "api_data_url": "https://pypi.org/pypi/openpyxl/3.1.5/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/openpyxl@3.1.2"
+      "purl": "pkg:pypi/openpyxl@3.1.5"
     },
     {
       "type": "pypi",
@@ -4945,9 +4945,9 @@
         "pkg:pypi/boolean-py@4.0",
         "pkg:pypi/certifi@2022.5.18.1",
         "pkg:pypi/click@8.0.4",
-        "pkg:pypi/jinja2@3.1.3",
-        "pkg:pypi/license-expression@30.3.0",
-        "pkg:pypi/openpyxl@3.1.2",
+        "pkg:pypi/jinja2@3.1.4",
+        "pkg:pypi/license-expression@30.3.1",
+        "pkg:pypi/openpyxl@3.1.5",
         "pkg:pypi/packageurl-python@0.9.9",
         "pkg:pypi/saneyaml@0.5.2"
       ]
@@ -5021,13 +5021,13 @@
       "dependencies": []
     },
     {
-      "package": "pkg:pypi/jinja2@3.1.3",
+      "package": "pkg:pypi/jinja2@3.1.4",
       "dependencies": [
         "pkg:pypi/markupsafe@2.1.5"
       ]
     },
     {
-      "package": "pkg:pypi/license-expression@30.3.0",
+      "package": "pkg:pypi/license-expression@30.3.1",
       "dependencies": [
         "pkg:pypi/boolean-py@4.0"
       ]
@@ -5037,7 +5037,7 @@
       "dependencies": []
     },
     {
-      "package": "pkg:pypi/openpyxl@3.1.2",
+      "package": "pkg:pypi/openpyxl@3.1.5",
       "dependencies": [
         "pkg:pypi/et-xmlfile@1.1.0"
       ]
