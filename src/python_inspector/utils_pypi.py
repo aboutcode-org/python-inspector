@@ -1593,6 +1593,16 @@ class PypiSimpleRepository:
         name using the `index_url` of this repository.
         """
         package_url = f"{self.index_url}/{normalized_name}"
+        if len(package_url) >= 256:
+            base64_re = re.compile(f"https://(.*:.*)@(.*){normalized_name}")
+            match = base64_re.search(self.index_url)
+            if match:
+                auth = match.group(1)
+                username = auth.split(":")[0]
+                token = auth,split(":")[1]
+                remainder = match.group(2)
+                new_index_url =  f"https://{username}:{token}@{remainder}"
+                package_url = f"{new_index_url}/{normalized_name}"
         text = CACHE.get(
             path_or_url=package_url,
             credentials=self.credentials,
