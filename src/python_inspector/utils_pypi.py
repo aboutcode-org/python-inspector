@@ -16,6 +16,7 @@ import re
 import shutil
 import tempfile
 import time
+
 from collections import defaultdict
 from typing import List
 from typing import NamedTuple
@@ -27,6 +28,7 @@ from urllib.parse import urlunparse
 import attr
 import packageurl
 import requests
+
 from bs4 import BeautifulSoup
 from commoncode import fileutils
 from commoncode.hash import multi_checksums
@@ -215,7 +217,6 @@ collect_urls = re.compile('href="([^"]+)"').findall
 class DistributionNotFound(Exception):
     pass
 
-
 def download_wheel(
     name,
     version,
@@ -252,6 +253,7 @@ def download_wheel(
                 )
             continue
         for wheel in supported_and_valid_wheels:
+            wheel.credentials = repo.credentials
             fetched_wheel_filename = wheel.download(
                 dest_dir=dest_dir,
                 verbose=verbose,
@@ -1130,7 +1132,8 @@ class Wheel(Distribution):
         pyvers = ".".join(self.python_versions)
         abis = ".".join(self.abis)
         plats = ".".join(self.platforms)
-        return f"{self.name}-{self.version}{build}-{pyvers}-{abis}-{plats}.whl"
+        name = f"{self.name}-{self.version}{build}-{pyvers}-{abis}-{plats}.whl"
+        return name
 
     def is_pure(self):
         """
@@ -1593,16 +1596,6 @@ class PypiSimpleRepository:
         name using the `index_url` of this repository.
         """
         package_url = f"{self.index_url}/{normalized_name}"
-        if len(package_url) >= 256:
-            base64_re = re.compile(f"https://(.*:.*)@(.*){normalized_name}")
-            match = base64_re.search(self.index_url)
-            if match:
-                auth = match.group(1)
-                username = auth.split(":")[0]
-                token = auth,split(":")[1]
-                remainder = match.group(2)
-                new_index_url =  f"https://{username}:{token}@{remainder}"
-                package_url = f"{new_index_url}/{normalized_name}"
         text = CACHE.get(
             path_or_url=package_url,
             credentials=self.credentials,
@@ -1645,7 +1638,10 @@ def resolve_relative_url(package_url, url):
             path = urlunparse(
                 ("", "", url_parts.path, url_parts.params, url_parts.query, url_parts.fragment)
             )
-        resolved_url_parts = base_url_parts._replace(path=path)
+        if base_url_parts.path != "":
+            resolved_url_parts = base_url_parts._replace(path=base_url_parts.path + "/" + path)
+        else:
+            resolved_url_parts = base_url_parts._replace(path=path)
         url = urlunparse(resolved_url_parts)
     return url
 
@@ -1688,6 +1684,8 @@ class Cache:
         True otherwise as treat as binary. `path_or_url` can be a path or a URL
         to a file.
         """
+
+
         cache_key = quote_plus(path_or_url.strip("/"))
         cached = os.path.join(self.directory, cache_key)
 
@@ -1792,21 +1790,25 @@ def get_remote_file_content(
     if verbose:
         echo_func(f"DOWNLOADING: {url}")
 
-    auth = None
+    if TRACE:
+        print(f"DOWNLOADING: {url}")
+
     if credentials:
         auth = (credentials.get("login"), credentials.get("password"))
+    else:
+        auth = None
 
     stream = requests.get(
         url,
         allow_redirects=True,
         stream=True,
         headers=headers,
-        auth=auth,
+        auth=auth
     )
 
     with stream as response:
         status = response.status_code
-        if status != requests.codes.ok:  # NOQA
+        if status != requests.codes.ok: # NOQA
             if status == 429 and _delay < 20:
                 # too many requests: start some exponential delay
                 increased_delay = (_delay * 2) or 1
