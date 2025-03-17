@@ -9,6 +9,7 @@
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
+from collections.abc import Generator
 from typing import List
 
 from packageurl import PackageURL
@@ -25,7 +26,10 @@ from python_inspector.utils_pypi import PypiSimpleRepository
 
 
 def get_pypi_data_from_purl(
-    purl: str, environment: Environment, repos: List[PypiSimpleRepository], prefer_source: bool
+    purl: str,
+    environment: Environment,
+    repos: list[PypiSimpleRepository],
+    prefer_source: bool,
 ) -> PackageData:
     """
     Generate `Package` object from the `purl` string of pypi type
@@ -36,9 +40,9 @@ def get_pypi_data_from_purl(
     ``prefer_source`` is a boolean value to prefer source distribution over wheel,
     if no source distribution is available then wheel is used
     """
-    purl = PackageURL.from_string(purl)
-    name = purl.name
-    version = purl.version
+    packageurl: PackageURL = PackageURL.from_string(purl)
+    name = packageurl.name
+    version = packageurl.version
     if not version:
         raise Exception("Version is not specified in the purl")
     base_path = "https://pypi.org/pypi"
@@ -54,12 +58,13 @@ def get_pypi_data_from_purl(
     code_view_url = get_pypi_codeview_url(project_urls)
     bug_tracking_url = get_pypi_bugtracker_url(project_urls)
     python_version = get_python_version_from_env_tag(
-        python_version=environment.python_version)
+        python_version=environment.python_version
+    )
     valid_distribution_urls = []
 
     valid_distribution_urls.append(
         get_sdist_download_url(
-            purl=purl,
+            purl=packageurl,
             repos=repos,
             python_version=python_version,
         )
@@ -70,7 +75,7 @@ def get_pypi_data_from_purl(
     if not valid_distribution_urls or not prefer_source:
         wheel_urls = list(
             get_wheel_download_urls(
-                purl=purl,
+                purl=packageurl,
                 repos=repos,
                 environment=environment,
                 python_version=python_version,
@@ -108,7 +113,7 @@ def get_pypi_data_from_purl(
                 maintainer_key="maintainer",
                 maintainer_email_key="maintainer_email",
             ),
-            **purl.to_dict(),
+            **packageurl.to_dict(),
         )
 
 
@@ -144,7 +149,7 @@ def get_wheel_download_urls(
     repos: List[PypiSimpleRepository],
     environment: Environment,
     python_version: str,
-) -> List[str]:
+) -> Generator[str, None, None]:
     """
     Return a list of download urls for the given purl.
     """
