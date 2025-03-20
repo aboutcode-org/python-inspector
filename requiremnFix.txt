@@ -1,0 +1,55 @@
+ Recreate requirements.txt Manually
+Try creating a new requirements.txt file manually with the following:
+
+cp requirements.txt requirements_backup.txt  # Create a backup
+nano requirements.txt  # Open in an editor
+
+
+
+
+
+
+Try Installing Packages Before Running python-inspector
+Before running the python-inspector command, try installing the dependencies:
+
+bash
+Copy
+Edit
+pip install -r requirements.txt
+
+
+ Use Python 3.11 Compatible Packages
+Your requirements.txt file contains some old packages (e.g., arrow==0.10.0, bottle==0.12.12), which might not be fully compatible with Python 3.11. Try updating the package versions:
+
+bash
+Copy
+Edit
+pip install --upgrade boto3 arrow bottle
+Then regenerate requirements.txt using:
+
+bash
+Copy
+Edit
+pip freeze > requirements.txt
+5. Run python-inspector with Debugging
+Try running python-inspector with --verbose to get more details:
+
+bash
+Copy
+Edit
+python-inspector --python-version 311 --operating-system macos --json-pdt o.json --analyze-setup-py-insecurely --requirement /Users/gbuwa/IdeaProjects/terrestrial-pipeline/python/requirements.txt --verbose
+This might give more insights into the specific package causing the issue.
+
+6. Check for a Broken Cache
+Try clearing any cached dependencies:
+
+bash
+Copy
+Edit
+pip cache purge
+Then reinstall:
+
+bash
+Copy
+Edit
+pip install -r requirements.txt
