@@ -117,6 +117,7 @@ def test_api_with_lief_python_312():
     )
     check_data_results(results=results.to_dict(generic_paths=True), expected_file=expected_file)
 
+
 def test_api_with_partial_setup_py():
     expected_file = test_env.get_test_loc("test-api-with-partial-setup-py.json", must_exist=False)
     results = resolver_api(
