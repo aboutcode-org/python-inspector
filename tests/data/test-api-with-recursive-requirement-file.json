@@ -563,12 +563,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "six",
-      "version": "1.16.0",
+      "version": "1.17.0",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "Python 2 and 3 compatibility utilities\n.. image:: https://img.shields.io/pypi/v/six.svg\n   :target: https://pypi.org/project/six/\n   :alt: six on PyPI\n\n.. image:: https://travis-ci.org/benjaminp/six.svg?branch=master\n   :target: https://travis-ci.org/benjaminp/six\n   :alt: six on TravisCI\n\n.. image:: https://readthedocs.org/projects/six/badge/?version=latest\n   :target: https://six.readthedocs.io/\n   :alt: six's documentation on Read the Docs\n\n.. image:: https://img.shields.io/badge/license-MIT-green.svg\n   :target: https://github.com/benjaminp/six/blob/master/LICENSE\n   :alt: MIT License badge\n\nSix is a Python 2 and 3 compatibility library.  It provides utility functions\nfor smoothing over the differences between the Python versions with the goal of\nwriting Python code that is compatible on both Python versions.  See the\ndocumentation for more information on what is provided.\n\nSix supports Python 2.7 and 3.3+.  It is contained in only one Python\nfile, so it can be easily copied into your project. (The copyright and license\nnotice must be retained.)\n\nOnline documentation is at https://six.readthedocs.io/.\n\nBugs can be reported to https://github.com/benjaminp/six.  The code can also\nbe found there.",
-      "release_date": "2021-05-05T14:18:17",
+      "description": "Python 2 and 3 compatibility utilities\n.. image:: https://img.shields.io/pypi/v/six.svg\n   :target: https://pypi.org/project/six/\n   :alt: six on PyPI\n\n.. image:: https://readthedocs.org/projects/six/badge/?version=latest\n   :target: https://six.readthedocs.io/\n   :alt: six's documentation on Read the Docs\n\n.. image:: https://img.shields.io/badge/license-MIT-green.svg\n   :target: https://github.com/benjaminp/six/blob/master/LICENSE\n   :alt: MIT License badge\n\nSix is a Python 2 and 3 compatibility library.  It provides utility functions\nfor smoothing over the differences between the Python versions with the goal of\nwriting Python code that is compatible on both Python versions.  See the\ndocumentation for more information on what is provided.\n\nSix supports Python 2.7 and 3.3+.  It is contained in only one Python\nfile, so it can be easily copied into your project. (The copyright and license\nnotice must be retained.)\n\nOnline documentation is at https://six.readthedocs.io/.\n\nBugs can be reported to https://github.com/benjaminp/six.  The code can also\nbe found there.",
+      "release_date": "2024-12-04T17:35:26",
       "parties": [
         {
           "type": "person",
@@ -587,11 +587,11 @@
         "Topic :: Utilities"
       ],
       "homepage_url": "https://github.com/benjaminp/six",
-      "download_url": "https://files.pythonhosted.org/packages/d9/5a/e7c31adbe875f2abbb91bd84cf2dc52d792b5a01506781dbcf25c91daf11/six-1.16.0-py2.py3-none-any.whl",
-      "size": 11053,
+      "download_url": "https://files.pythonhosted.org/packages/b7/ce/149a00dd41f10bc29e5921b496af8b574d8413afcd5e30dfa0ed46c2cc5e/six-1.17.0-py2.py3-none-any.whl",
+      "size": 11050,
       "sha1": null,
-      "md5": "529d7fd7e14612ccde86417b4402d6f3",
-      "sha256": "8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254",
+      "md5": "090bac7d568f9c1f64b671de641ccdee",
+      "sha256": "4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -611,20 +611,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/six/1.16.0/json",
+      "api_data_url": "https://pypi.org/pypi/six/1.17.0/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/six@1.16.0"
+      "purl": "pkg:pypi/six@1.17.0"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "six",
-      "version": "1.16.0",
+      "version": "1.17.0",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "Python 2 and 3 compatibility utilities\n.. image:: https://img.shields.io/pypi/v/six.svg\n   :target: https://pypi.org/project/six/\n   :alt: six on PyPI\n\n.. image:: https://travis-ci.org/benjaminp/six.svg?branch=master\n   :target: https://travis-ci.org/benjaminp/six\n   :alt: six on TravisCI\n\n.. image:: https://readthedocs.org/projects/six/badge/?version=latest\n   :target: https://six.readthedocs.io/\n   :alt: six's documentation on Read the Docs\n\n.. image:: https://img.shields.io/badge/license-MIT-green.svg\n   :target: https://github.com/benjaminp/six/blob/master/LICENSE\n   :alt: MIT License badge\n\nSix is a Python 2 and 3 compatibility library.  It provides utility functions\nfor smoothing over the differences between the Python versions with the goal of\nwriting Python code that is compatible on both Python versions.  See the\ndocumentation for more information on what is provided.\n\nSix supports Python 2.7 and 3.3+.  It is contained in only one Python\nfile, so it can be easily copied into your project. (The copyright and license\nnotice must be retained.)\n\nOnline documentation is at https://six.readthedocs.io/.\n\nBugs can be reported to https://github.com/benjaminp/six.  The code can also\nbe found there.",
-      "release_date": "2021-05-05T14:18:18",
+      "description": "Python 2 and 3 compatibility utilities\n.. image:: https://img.shields.io/pypi/v/six.svg\n   :target: https://pypi.org/project/six/\n   :alt: six on PyPI\n\n.. image:: https://readthedocs.org/projects/six/badge/?version=latest\n   :target: https://six.readthedocs.io/\n   :alt: six's documentation on Read the Docs\n\n.. image:: https://img.shields.io/badge/license-MIT-green.svg\n   :target: https://github.com/benjaminp/six/blob/master/LICENSE\n   :alt: MIT License badge\n\nSix is a Python 2 and 3 compatibility library.  It provides utility functions\nfor smoothing over the differences between the Python versions with the goal of\nwriting Python code that is compatible on both Python versions.  See the\ndocumentation for more information on what is provided.\n\nSix supports Python 2.7 and 3.3+.  It is contained in only one Python\nfile, so it can be easily copied into your project. (The copyright and license\nnotice must be retained.)\n\nOnline documentation is at https://six.readthedocs.io/.\n\nBugs can be reported to https://github.com/benjaminp/six.  The code can also\nbe found there.",
+      "release_date": "2024-12-04T17:35:28",
       "parties": [
         {
           "type": "person",
@@ -643,11 +643,11 @@
         "Topic :: Utilities"
       ],
       "homepage_url": "https://github.com/benjaminp/six",
-      "download_url": "https://files.pythonhosted.org/packages/71/39/171f1c67cd00715f190ba0b100d606d440a28c93c7714febeca8b79af85e/six-1.16.0.tar.gz",
-      "size": 34041,
+      "download_url": "https://files.pythonhosted.org/packages/94/e7/b2c673351809dca68a0e064b6af791aa332cf192da575fd474ed7d6f16a2/six-1.17.0.tar.gz",
+      "size": 34031,
       "sha1": null,
-      "md5": "a7c927740e4964dd29b72cebfc1429bb",
-      "sha256": "1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926",
+      "md5": "a0387fe15662c71057b4fb2b7aa9056a",
+      "sha256": "ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -667,9 +667,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/six/1.16.0/json",
+      "api_data_url": "https://pypi.org/pypi/six/1.17.0/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/six@1.16.0"
+      "purl": "pkg:pypi/six@1.17.0"
     }
   ],
   "resolution": [
@@ -680,7 +680,7 @@
     {
       "package": "pkg:pypi/retrying@1.3.3",
       "dependencies": [
-        "pkg:pypi/six@1.16.0"
+        "pkg:pypi/six@1.17.0"
       ]
     },
     {
@@ -692,7 +692,7 @@
       "dependencies": []
     },
     {
-      "package": "pkg:pypi/six@1.16.0",
+      "package": "pkg:pypi/six@1.17.0",
       "dependencies": []
     }
   ]
