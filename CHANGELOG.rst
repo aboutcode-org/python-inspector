@@ -1,7 +1,7 @@
 Changelog
 =========
 
-v0.13.0
+v0.13.1
 -----------
 
 - Fix ResolutionImpossible for lief==0.15.1 #202
