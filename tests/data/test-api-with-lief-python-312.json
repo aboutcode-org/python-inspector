@@ -1,0 +1,67 @@
+{
+  "files": [],
+  "packages": [
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "lief",
+      "version": "0.15.1",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Library to instrument executable formats\nAbout\n=====\n\nThe purpose of this project is to provide a cross platform library that can parse, modify and\nabstract ELF, PE and MachO formats.\n\nMain features:\n\n  * **Parsing**: LIEF can parse ELF, PE, MachO, OAT, DEX, VDEX, ART and provides an user-friendly API to access to format internals.\n  * **Modify**: LIEF enables to modify some parts of these formats\n  * **Abstract**: Three formats have common features like sections, symbols, entry point... LIEF factors them.\n  * **API**: LIEF can be used in C, C++ and Python\n\n\nDownloads / Install\n===================\n\nFirst, make sure to have an updated version of setuptools:\n\n.. code-block:: console\n\n   $ pip install setuptools --upgrade\n\nTo install the latest **version** (release):\n\n.. code-block:: console\n\n   $ pip install lief\n\nTo install nightly build:\n\n.. code-block:: console\n\n   $ pip install [--user] --index-url https://lief.s3-website.fr-par.scw.cloud/latest lief\n\n\nGetting started\n===============\n\nPython\n------\n\n.. code-block:: python\n\n  import lief\n\n  # ELF\n  binary = lief.parse(\"/usr/bin/ls\")\n  print(binary)\n\n  # PE\n  binary = lief.parse(\"C:\\\\Windows\\\\explorer.exe\")\n  print(binary)\n\n  # Mach-O\n  binary = lief.parse(\"/usr/bin/ls\")\n  print(binary)\n\nC++\n---\n\n.. code-block:: cpp\n\n  #include <LIEF/LIEF.hpp>\n\n  int main(int argc, char** argv) {\n    // ELF\n    try {\n      std::unique_ptr<LIEF::ELF::Binary> elf = LIEF::ELF::Parser::parse(\"/bin/ls\");\n      std::cout << *elf << '\\n';\n    } catch (const LIEF::exception& err) {\n      std::cerr << err.what() << '\\n';\n    }\n\n    // PE\n    try {\n      std::unique_ptr<LIEF::PE::Binary> pe = LIEF::PE::Parser::parse(\"C:\\\\Windows\\\\explorer.exe\");\n      std::cout << *pe << '\\n';\n    } catch (const LIEF::exception& err) {\n      std::cerr << err.what() << '\\n';\n    }\n\n    // Mach-O\n    try {\n      std::unique_ptr<LIEF::MachO::FatBinary> macho = LIEF::MachO::Parser::parse(\"/bin/ls\");\n      std::cout << *macho << '\\n';\n    } catch (const LIEF::exception& err) {\n      std::cerr << err.what() << '\\n';\n    }\n\n    return 0;\n  }\n\nC (Limited API)\n----------------\n\n.. code-block:: cpp\n\n  #include <LIEF/LIEF.h>\n\n  int main(int argc, char** argv) {\n    Elf_Binary_t* elf = elf_parse(\"/usr/bin/ls\");\n\n    Elf_Section_t** sections = elf->sections;\n\n    for (size_t i = 0; sections[i] != NULL; ++i) {\n      printf(\"%s\\n\", sections[i]->name);\n    }\n\n    elf_binary_destroy(elf);\n    return 0;\n  }\n\nDocumentation\n=============\n\n* `Main documentation <https://lief-project.github.io/doc/latest/index.html>`_\n* `Tutorial <https://lief-project.github.io/doc/latest/tutorials/index.html>`_\n* `API <https://lief-project.github.io/doc/latest/api/index.html>`_\n* `Doxygen <https://lief-project.github.io/doc/latest/doxygen/index.html>`_\n\nContact\n=======\n\n* **Mail**: contact at lief.re\n* **Gitter**: `lief-project <https://gitter.im/lief-project>`_\n\n\nAuthors\n=======\n\nRomain Thomas `@rh0main <https://twitter.com/rh0main>`_ - `Quarkslab <https://www.quarkslab.com>`_\n\n----\n\nLIEF is provided under the `Apache 2.0 license <https://github.com/lief-project/LIEF/blob/0.12.3/LICENSE>`_",
+      "release_date": "2024-07-23T14:52:11",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": null,
+          "email": "Romain Thomas <contact@lief.re>",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "parser",
+        "elf",
+        "pe",
+        "macho",
+        "reverse-engineering",
+        "Development Status :: 4 - Beta",
+        "Programming Language :: C++",
+        "Programming Language :: Python :: 3",
+        "Topic :: Software Development :: Libraries"
+      ],
+      "homepage_url": "https://lief-project.github.io/",
+      "download_url": "https://files.pythonhosted.org/packages/bd/e8/398583add15a3a74207624be6a853a30a986252440f19b4052022cea911a/lief-0.15.1-cp312-cp312-musllinux_1_2_x86_64.whl",
+      "size": 2476427,
+      "sha1": null,
+      "md5": "0a223b5258a2a5a112b92af3f38cf9f2",
+      "sha256": "c2ec738bcafee8a569741f4a749f0596823b12f10713306c7d0cbbf85759f51c",
+      "sha512": null,
+      "bug_tracking_url": "https://github.com/lief-project/LIEF/issues",
+      "code_view_url": null,
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": {
+        "license": "Apache License 2.0"
+      },
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/lief/0.15.1/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/lief@0.15.1"
+    }
+  ],
+  "resolution": [
+    {
+      "package": "pkg:pypi/lief@0.15.1",
+      "dependencies": []
+    }
+  ]
+}

@@ -145,6 +145,9 @@ PLATFORMS_BY_OS = {
         "manylinux1_x86_64",
         "manylinux2010_x86_64",
         "manylinux2014_x86_64",
+        "manylinux2014_aarch6",
+        "musllinux_1_2_x86_64",
+        "manylinux_2_33_aarch64",
     ],
     "macos": [
         "macosx_10_6_intel",

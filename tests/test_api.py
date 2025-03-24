@@ -107,6 +107,17 @@ def test_api_with_python_311():
     check_data_results(results=results.to_dict(generic_paths=True), expected_file=expected_file)
 
 
+def test_api_with_lief_python_312():
+    expected_file = test_env.get_test_loc("test-api-with-lief-python-312.json", must_exist=False)
+    results = resolver_api(
+        specifiers=["lief==0.15.1"],
+        python_version="3.12",
+        operating_system="linux",
+        prefer_source=True,
+    )
+    check_data_results(results=results.to_dict(generic_paths=True), expected_file=expected_file)
+
+
 def test_api_with_partial_setup_py():
     expected_file = test_env.get_test_loc("test-api-with-partial-setup-py.json", must_exist=False)
     results = resolver_api(

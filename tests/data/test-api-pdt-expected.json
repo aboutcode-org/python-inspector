@@ -474,7 +474,7 @@
       "subpath": null,
       "primary_language": "Python",
       "description": "Safely add untrusted strings to HTML/XML markup.\n# MarkupSafe\n\nMarkupSafe implements a text object that escapes characters so it is\nsafe to use in HTML and XML. Characters that have special meanings are\nreplaced so that they display as the actual characters. This mitigates\ninjection attacks, meaning untrusted user input can safely be displayed\non a page.\n\n\n## Examples\n\n```pycon\n>>> from markupsafe import Markup, escape\n\n>>> # escape replaces special characters and wraps in Markup\n>>> escape(\"<script>alert(document.cookie);</script>\")\nMarkup('&lt;script&gt;alert(document.cookie);&lt;/script&gt;')\n\n>>> # wrap in Markup to mark text \"safe\" and prevent escaping\n>>> Markup(\"<strong>Hello</strong>\")\nMarkup('<strong>hello</strong>')\n\n>>> escape(Markup(\"<strong>Hello</strong>\"))\nMarkup('<strong>hello</strong>')\n\n>>> # Markup is a str subclass\n>>> # methods and operators escape their arguments\n>>> template = Markup(\"Hello <em>{name}</em>\")\n>>> template.format(name='\"World\"')\nMarkup('Hello <em>&#34;World&#34;</em>')\n```\n\n## Donate\n\nThe Pallets organization develops and supports MarkupSafe and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n[please donate today][].\n\n[please donate today]: https://palletsprojects.com/donate",
-      "release_date": "2024-10-18T15:20:55",
+      "release_date": "2024-10-18T15:20:59",
       "parties": [
         {
           "type": "person",
@@ -495,11 +495,11 @@
         "Typing :: Typed"
       ],
       "homepage_url": null,
-      "download_url": "https://files.pythonhosted.org/packages/22/35/137da042dfb4720b638d2937c38a9c2df83fe32d20e8c8f3185dbfef05f7/MarkupSafe-3.0.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
-      "size": 20866,
+      "download_url": "https://files.pythonhosted.org/packages/bd/6e/61ebf08d8940553afff20d1fb1ba7294b6f8d279df9fd0c0db911b4bbcfd/MarkupSafe-3.0.2-cp310-cp310-musllinux_1_2_x86_64.whl",
+      "size": 21091,
       "sha1": null,
-      "md5": "6fb2985db3f3b1aec8d8615221fb91ea",
-      "sha256": "bbcb445fa71794da8f178f0f6d66789a28d7319071af7a496d4d507ed566270d",
+      "md5": "ef4de80fb119dfe436aa346068b6cbc8",
+      "sha256": "b424c77b206d63d500bcb69fa55ed8d0e6a3774056bdc4839fc9298a7edca171",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/pallets/markupsafe/",

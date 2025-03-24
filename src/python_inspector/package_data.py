@@ -64,6 +64,8 @@ def get_pypi_data_from_purl(
         )
     )
 
+    valid_distribution_urls = [url for url in valid_distribution_urls if url]
+
     # if prefer_source is True then only source distribution is used
     # in case of no source distribution available then wheel is used
     if not valid_distribution_urls or not prefer_source:
