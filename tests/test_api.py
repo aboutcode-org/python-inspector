@@ -93,7 +93,7 @@ def test_api_with_unsupported_os():
 
 def test_api_with_wrong_pyver():
     with pytest.raises(ValueError):
-        resolver_api(specifiers=["flask==2.1.2"], python_version="3.13", operating_system="linux")
+        resolver_api(specifiers=["flask==2.1.2"], python_version="3.14", operating_system="linux")
 
 
 def test_api_with_python_311():
