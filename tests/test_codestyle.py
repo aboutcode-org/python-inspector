@@ -8,13 +8,13 @@
 #
 
 import subprocess
-import unittest
 import sys
+import unittest
+
 import pytest
 
 
 class BaseTests(unittest.TestCase):
-
     @pytest.mark.skipif(sys.version_info[:2] == (3, 12), reason="Skipping test for Python 3.12")
     def test_codestyle(self):
         """
