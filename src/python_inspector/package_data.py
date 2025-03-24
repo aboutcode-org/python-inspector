@@ -93,6 +93,7 @@ def get_pypi_data_from_purl(
             api_data_url=api_url,
             bug_tracking_url=bug_tracking_url,
             code_view_url=code_view_url,
+            license_expression=info.get("license_expression"),
             declared_license=get_declared_license(info),
             download_url=dist_url,
             size=url.get("size"),
