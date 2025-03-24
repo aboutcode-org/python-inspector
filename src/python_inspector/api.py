@@ -64,8 +64,7 @@ class Resolution(NamedTuple):
             # clean file paths
             for file in files:
                 path = file["path"]
-                file["path"] = utils.remove_test_data_dir_variable_prefix(
-                    path=path)
+                file["path"] = utils.remove_test_data_dir_variable_prefix(path=path)
         return {
             "files": files,
             "packages": [package for package in self.packages],
@@ -152,20 +151,16 @@ def resolve_dependencies(
 
     # requirements
     for req_file in requirement_files:
-        deps = dependencies.get_dependencies_from_requirements(
-            requirements_file=req_file)
+        deps = dependencies.get_dependencies_from_requirements(requirements_file=req_file)
         for extra_data in dependencies.get_extra_data_from_requirements(requirements_file=req_file):
-            index_urls = (
-                *index_urls, *tuple(extra_data.get("extra_index_urls") or []))
-            index_urls = (
-                *index_urls, *tuple(extra_data.get("index_url") or []))
+            index_urls = (*index_urls, *tuple(extra_data.get("extra_index_urls") or []))
+            index_urls = (*index_urls, *tuple(extra_data.get("index_url") or []))
         direct_dependencies.extend(deps)
         package_data = [
             pkg_data.to_dict() for pkg_data in PipRequirementsFileHandler.parse(location=req_file)
         ]
         if generic_paths:
-            req_file = utils.remove_test_data_dir_variable_prefix(
-                path=req_file)
+            req_file = utils.remove_test_data_dir_variable_prefix(path=req_file)
 
         files.append(
             dict(
@@ -218,15 +213,13 @@ def resolve_dependencies(
                     files=[setup_py_file],
                     analyze_setup_py_insecurely=analyze_setup_py_insecurely,
                 )
-                setup_py_file_deps = list(
-                    get_dependent_packages_from_reqs(reqs))
+                setup_py_file_deps = list(get_dependent_packages_from_reqs(reqs))
                 direct_dependencies.extend(setup_py_file_deps)
 
         package_data.dependencies = setup_py_file_deps
         file_package_data = [package_data.to_dict()]
         if generic_paths:
-            setup_py_file = utils.remove_test_data_dir_variable_prefix(
-                path=setup_py_file)
+            setup_py_file = utils.remove_test_data_dir_variable_prefix(path=setup_py_file)
         files.append(
             dict(
                 type="file",
@@ -267,11 +260,9 @@ def resolve_dependencies(
             else:
                 credentials = None
                 if parsed_netrc:
-                    login, password = utils.get_netrc_auth(
-                        index_url, parsed_netrc)
+                    login, password = utils.get_netrc_auth(index_url, parsed_netrc)
                     credentials = (
-                        dict(login=login,
-                             password=password) if login and password else None
+                        dict(login=login, password=password) if login and password else None
                     )
                 repo = utils_pypi.PypiSimpleRepository(
                     index_url=index_url,
@@ -391,8 +382,7 @@ def get_resolved_dependencies(
         ),
         reporter=BaseReporter(),
     )
-    resolver_results = resolver.resolve(
-        requirements=requirements, max_rounds=max_rounds)
+    resolver_results = resolver.resolve(requirements=requirements, max_rounds=max_rounds)
     package_list = get_package_list(results=resolver_results)
     if pdt_output:
         return (format_pdt_tree(resolver_results), package_list)
