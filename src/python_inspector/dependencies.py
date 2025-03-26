@@ -8,26 +8,29 @@
 # See https://github.com/nexB/skeleton for support or download.
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
+from typing import Iterable
+from typing import Mapping
 
 from packageurl import PackageURL
 from packvers.requirements import Requirement
-from pip_requirements_parser import InstallRequirement
 
 from _packagedcode import models
+from _packagedcode.models import DependentPackage
 from _packagedcode.pypi import PipRequirementsFileHandler
 from _packagedcode.pypi import get_requirements_txt_dependencies
 
 """
-Utilities to resolve dependencies .
+Utilities to resolve dependencies.
 """
 
 TRACE = False
 
 
-def get_dependencies_from_requirements(requirements_file="requirements.txt"):
+def get_dependencies_from_requirements(
+    requirements_file="requirements.txt",
+) -> Iterable[DependentPackage]:
     """
-    Yield DependentPackage for each requirement in a `requirement`
-    file.
+    Yield DependentPackage for each requirement in a `requirement` file.
     """
     dependent_packages, _ = get_requirements_txt_dependencies(
         location=requirements_file, include_nested=True
@@ -41,21 +44,20 @@ def get_dependencies_from_requirements(requirements_file="requirements.txt"):
         yield dependent_package
 
 
-def get_extra_data_from_requirements(requirements_file="requirements.txt"):
+def get_extra_data_from_requirements(requirements_file="requirements.txt") -> Iterable[Mapping]:
     """
-    Yield extra_data for each requirement in a `requirement`
-    file.
+    Yield extra_data for each requirement in a `requirement` file.
     """
     for package_data in PipRequirementsFileHandler.parse(location=requirements_file):
         yield package_data.extra_data
 
 
-def is_requirement_pinned(requirement: Requirement):
+def is_requirement_pinned(requirement: Requirement) -> bool:
     specifiers = requirement.specifier
     return specifiers and len(specifiers) == 1 and next(iter(specifiers)).operator in {"==", "==="}
 
 
-def get_dependency(specifier):
+def get_dependency(specifier) -> DependentPackage:
     """
     Return a DependentPackage given a requirement ``specifier`` string.
 

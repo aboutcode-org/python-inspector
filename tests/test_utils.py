@@ -11,9 +11,11 @@
 import collections
 import json
 import os
+import sys
 from netrc import netrc
 from unittest import mock
 
+import pytest
 from commoncode.testcase import FileDrivenTesting
 from test_cli import check_json_file_results
 
@@ -47,22 +49,24 @@ def test_get_netrc_auth_with_no_matching_url():
     assert get_netrc_auth(url="https://pypi2.org/simple", netrc=parsed_netrc) == (None, None)
 
 
+@pytest.mark.asyncio
+@pytest.mark.skipif(sys.version_info < (3, 8), reason="requires python3.8 or higher")
 @mock.patch("python_inspector.utils_pypi.CACHE.get")
-def test_fetch_links(mock_get):
+async def test_fetch_links(mock_get):
     file_name = test_env.get_test_loc("psycopg2.html")
     with open(file_name) as file:
-        mock_get.return_value = file.read()
-    links = PypiSimpleRepository().fetch_links(normalized_name="psycopg2")
+        mock_get.return_value = file.read(), file_name
+    links = await PypiSimpleRepository().fetch_links(normalized_name="psycopg2")
     result_file = test_env.get_temp_file("json")
     expected_file = test_env.get_test_loc("psycopg2-links-expected.json", must_exist=False)
     with open(result_file, "w") as file:
         json.dump(links, file, indent=4)
     check_json_file_results(result_file, expected_file)
     # Testing relative links
-    realtive_links_file = test_env.get_test_loc("fetch_links_test.html")
-    with open(realtive_links_file) as realtive_file:
-        mock_get.return_value = realtive_file.read()
-    relative_links = PypiSimpleRepository().fetch_links(normalized_name="sources.whl")
+    relative_links_file = test_env.get_test_loc("fetch_links_test.html")
+    with open(relative_links_file) as relative_file:
+        mock_get.return_value = relative_file.read(), relative_links_file
+    relative_links = await PypiSimpleRepository().fetch_links(normalized_name="sources.whl")
     relative_links_result_file = test_env.get_temp_file("json")
     relative_links_expected_file = test_env.get_test_loc(
         "relative-links-expected.json", must_exist=False
@@ -83,8 +87,9 @@ def test_parse_reqs():
     check_json_file_results(result_file, expected_file)
 
 
-def test_get_sdist_file():
-    sdist_file = fetch_and_extract_sdist(
+@pytest.mark.asyncio
+async def test_get_sdist_file():
+    sdist_file = await fetch_and_extract_sdist(
         repos=tuple([PypiSimpleRepository()]),
         candidate=Candidate(name="psycopg2", version="2.7.5", extras=None),
         python_version="3.8",
