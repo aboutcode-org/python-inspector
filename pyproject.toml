@@ -107,9 +107,17 @@ python-inspector = "python_inspector.resolve_cli:resolve_dependencies"
 
 
 [tool.pytest.ini_options]
-addopts = ["--import-mode=importlib"]
+addopts = [
+    "--import-mode=importlib",
+    "--strict-markers",
+    "-rfExXw",
+]
 log_cli = true
 log_cli_level = "INFO"
+pythonpath = [
+    "etc/scripts",
+    "tests"
+]
 testpaths = [
     "tests",
     "etc"

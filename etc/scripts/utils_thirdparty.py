@@ -1699,8 +1699,12 @@ class PypiSimpleRepository:
         return links
 
 
-PYPI_PUBLIC_REPO = PypiSimpleRepository(index_url=PYPI_SIMPLE_URL)
-PYPI_SELFHOSTED_REPO = PypiSimpleRepository(index_url=ABOUT_PYPI_SIMPLE_URL)
+PYPI_PUBLIC_REPO = PypiSimpleRepository()
+PYPI_PUBLIC_REPO.index_url = PYPI_SIMPLE_URL
+
+PYPI_SELFHOSTED_REPO = PypiSimpleRepository()
+PYPI_SELFHOSTED_REPO.index_url=ABOUT_PYPI_SIMPLE_URL
+
 DEFAULT_PYPI_REPOS = PYPI_PUBLIC_REPO, PYPI_SELFHOSTED_REPO
 DEFAULT_PYPI_REPOS_BY_URL = {r.index_url: r for r in DEFAULT_PYPI_REPOS}
 

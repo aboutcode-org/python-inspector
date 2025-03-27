@@ -6,30 +6,24 @@ jobs:
   build:
     runs-on: ubuntu-20.04
 
-    strategy:
-      max-parallel: 4
-      matrix:
-        python-version: [3.9]
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup uv
+      - uses: actions/checkout@v4
+      - name: Install uv and set up Python
         uses: astral-sh/setup-uv@22695119d769bdb6f7032ad67b9bca0ef8c4a174 # v5.4.0
         with:
+          version: "latest"
+          pyproject-file: "pyrpoject.toml"
           enable-cache: true
-          pyproject-file: "pyproject.toml"
 
       - name: Install Dependencies
-        run:  pip install -e .[docs]
+        run: |
+          uv sync --all-groups
 
       - name: Check Sphinx Documentation build minimally
         working-directory: ./docs
-        run: sphinx-build -E -W source build
+        run: |
+          uv run sphinx-build -E -W source build
 
       - name: Check for documentation style errors
-        working-directory: ./docs
-        run: ./scripts/doc8_style_check.sh
-
-
+        run: |
+          uv run hatch run validate-docs

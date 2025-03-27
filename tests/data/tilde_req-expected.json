@@ -8,7 +8,7 @@
       "--index-url https://thirdparty.aboutcode.org/pypi/simple/",
       "--json <file>",
       "--operating-system linux",
-      "--python-version 38",
+      "--python-version 39",
       "--specifier zipp~=3.8.0"
     ],
     "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/aboutcode-org/python-inspector/ for support and download.",
