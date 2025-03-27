@@ -28,16 +28,66 @@ The goal of python-inspector is to be a comprehensive library
 that can handle every style of Python package layouts, manifests and lockfiles.
 
 
+Developing
+----------
+
+- `Install Astral Uv <https://docs.astral.sh/uv/getting-started/installation/>`_. For convenience:
+
+  - Regular: ``pip install uv``
+  - Isolated ( if you have pipx installed): ``pipx install uv``
+
+- (Optional) Configure pre-commit for commit linter checks:
+
+.. code-block:: bash
+   pre-commit install
+   pre-commit install --hook-type commit-msg
+
+
+- Run from development tree. A virtual .venv will be created if you not have one
+
+  - You can run using uv direct
+    .. code-block:: bash
+       uv run python-inspector --help
+  
+  - Or if you have a virtual env activated do:
+    .. code-block:: bash
+        uv sync # One single time
+        python-inspector --help
+
+
 Testing
 --------
 
-- Run the tests with::
+- Run the tests. Tests have a special dependency group with their requirements for text exclusively:
 
-    pytest -vvs
+.. code-block:: bash
+   uv sync --group=testing
 
-- These are live tests to regenrate the tests with updated data run::
+If you want to use Uv ( which enable possibility to use multiple python versions)
 
-      PYINSP_REGEN_TEST_FIXTURES=yes pytest -vvs
+.. code-block:: bash
+    uv run -p 3.9 pytest -vvs
+
+Or if you have a virtualenv activated with the deps installed
+
+.. code-block:: bash
+    uv run -p 3.9 pytest -vvs
+
+- These are live tests to regenerate the tests with updated data run::
+
+.. code-block:: bash
+    uv sync
+    PYINSP_REGEN_TEST_FIXTURES=yes uv run pytest -vvs
+
+
+Documentation
+-------------
+
+.. code-block:: bash
+    uv sync --all-groups
+    hatch run validate-docs
+
+
 
 Usage
 --------
@@ -86,6 +136,7 @@ This project is funded, supported and sponsored by:
 - Google, including the Google Summer of Code and the Google Seasons of Doc programmes
 - Mercedes-Benz Group
 - Microsoft and Microsoft Azure
+- Cariad SE
 - AboutCode ASBL
 - nexB Inc. 
 
