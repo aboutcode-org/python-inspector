@@ -37,22 +37,23 @@ Developing
   - Isolated ( if you have pipx installed): ``pipx install uv``
 
 - (Optional) Configure pre-commit for commit linter checks:
-
 .. code-block:: bash
-   pre-commit install
-   pre-commit install --hook-type commit-msg
-
+  
+    pre-commit install
+    pre-commit install --hook-type commit-msg
 
 - Run from development tree. A virtual .venv will be created if you not have one
 
-  - You can run using uv direct
-    .. code-block:: bash
-       uv run python-inspector --help
+- You can run using uv direct
+.. code-block:: bash
+
+    uv run python-inspector --help
   
-  - Or if you have a virtual env activated do:
-    .. code-block:: bash
-        uv sync # One single time
-        python-inspector --help
+- Or if you have a virtual env activated do:
+.. code-block:: bash
+    
+    uv sync # One single time
+    python-inspector --help
 
 
 Testing
@@ -66,16 +67,19 @@ Testing
 If you want to use Uv ( which enable possibility to use multiple python versions)
 
 .. code-block:: bash
+    
     uv run -p 3.9 pytest -vvs
 
 Or if you have a virtualenv activated with the deps installed
 
 .. code-block:: bash
+    
     uv run -p 3.9 pytest -vvs
 
 - These are live tests to regenerate the tests with updated data run::
 
-.. code-block:: bash
+.. code-block:: shell
+    
     uv sync
     PYINSP_REGEN_TEST_FIXTURES=yes uv run pytest -vvs
 
@@ -84,13 +88,13 @@ Documentation
 -------------
 
 .. code-block:: bash
+    
     uv sync --all-groups
     hatch run validate-docs
 
 
-
 Usage
---------
+-----
 
 - Install with pip::
 
