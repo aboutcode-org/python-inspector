@@ -6,7 +6,7 @@
     "options": [
       "--json <file>",
       "--operating-system linux",
-      "--python-version 38",
+      "--python-version 39",
       "--specifier zipp==3.8.0",
       "--use-pypi-json-api"
     ],

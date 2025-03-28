@@ -116,7 +116,7 @@ def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
         requirements=[req],
         as_tree=False,
         environment=Environment(
-            python_version="38",
+            python_version="39",
             operating_system="linux",
         ),
     )
@@ -170,7 +170,7 @@ def test_without_supported_wheels():
         as_tree=False,
         repos=[PYPI_PUBLIC_REPO],
         environment=Environment(
-            python_version="38",
+            python_version="39",
             operating_system="linux",
         ),
     )
@@ -178,11 +178,11 @@ def test_without_supported_wheels():
     assert plist == [
         "pkg:pypi/autobahn@22.3.2",
         "pkg:pypi/cffi@1.17.1",
-        "pkg:pypi/cryptography@44.0.2",
+        "pkg:pypi/cryptography@43.0.3",
         "pkg:pypi/hyperlink@21.0.0",
         "pkg:pypi/idna@3.10",
         "pkg:pypi/pycparser@2.22",
-        "pkg:pypi/setuptools@75.3.2",
+        "pkg:pypi/setuptools@78.1.0",
         "pkg:pypi/txaio@23.1.1",
     ]
 

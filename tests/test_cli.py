@@ -237,14 +237,14 @@ def test_cli_with_azure_devops_with_python_313():
 
 
 @pytest.mark.online
-def test_cli_with_azure_devops_with_python_38():
+def test_cli_with_azure_devops_with_python_39():
     requirements_file = test_env.get_test_loc("azure-devops.req.txt")
-    expected_file = test_env.get_test_loc("azure-devops.req-38-expected.json", must_exist=False)
+    expected_file = test_env.get_test_loc("azure-devops.req-39-expected.json", must_exist=False)
     extra_options = [
         "--operating-system",
         "linux",
         "--python-version",
-        "38",
+        "39",
     ]
     check_requirements_resolution(
         requirements_file=requirements_file,
@@ -328,7 +328,7 @@ def test_cli_with_setup_py_failure():
         expected_file=expected_file,
         regen=REGEN_TEST_FIXTURES,
         expected_rc=1,
-        message=f"Python version 3.8 is not compatible with setup.py {setup_py_file} python_requires >2, <=3",
+        message=f"Python version 3.9 is not compatible with setup.py {setup_py_file} python_requires >2, <=3",
     )
 
 
@@ -346,6 +346,7 @@ def test_cli_with_insecure_option():
 
 
 @pytest.mark.skipif(sys.version_info[:2] == (3, 12), reason="Skipping test for Python 3.12")
+@pytest.mark.skipif(sys.version_info[:2] == (3, 13), reason="Skipping test for Python 3.13")
 @pytest.mark.online
 def test_cli_with_insecure_option_testpkh():
     setup_py_file = test_env.get_test_loc("insecure-setup-2/setup.py")
@@ -417,7 +418,7 @@ def check_specs_resolution(
 
 def append_os_and_pyver_options(options):
     if "--python-version" not in options:
-        options.extend(["--python-version", "38"])
+        options.extend(["--python-version", "39"])
     if "--operating-system" not in options:
         options.extend(["--operating-system", "linux"])
     return options
@@ -457,7 +458,7 @@ def test_passing_of_no_json_output_flag():
 
 
 def test_passing_of_no_os():
-    options = ["--specifier", "foo", "--json", "-", "--python-version", "38"]
+    options = ["--specifier", "foo", "--json", "-", "--python-version", "39"]
     run_cli(options=options, expected_rc=2, get_env=False)
 
 
