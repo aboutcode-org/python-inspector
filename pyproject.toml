@@ -77,6 +77,8 @@ exclude = [
 # vulnerablecode, fetchcode
   "**/tests/*/test_data/**/*",
   "**/tests/test_data/**/*",
+# exclude vendored code from ScanCode
+  "src/_packagedcode", 
 ]
 
 
