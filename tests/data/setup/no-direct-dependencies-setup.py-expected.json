@@ -1,0 +1,86 @@
+{
+  "headers": {
+    "tool_name": "python-inspector",
+    "tool_homepageurl": "https://github.com/aboutcode-org/python-inspector",
+    "tool_version": "0.13.0",
+    "options": [
+      "--analyze-setup-py-insecurely",
+      "--json <file>",
+      "--operating-system linux",
+      "--python-version 27",
+      "--setup-py tests/data/setup/no-direct-dependencies-setup.py"
+    ],
+    "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/aboutcode-org/python-inspector/ for support and download.",
+    "warnings": [],
+    "errors": []
+  },
+  "files": [
+    {
+      "type": "file",
+      "path": "tests/data/setup/no-direct-dependencies-setup.py",
+      "package_data": [
+        {
+          "type": "pypi",
+          "namespace": null,
+          "name": "spdx-tools",
+          "version": "0.5.4",
+          "qualifiers": {},
+          "subpath": null,
+          "primary_language": "Python",
+          "description": "SPDX parser and tools.",
+          "release_date": null,
+          "parties": [
+            {
+              "type": "person",
+              "role": "author",
+              "name": "Ahmed H. Ismail",
+              "email": "ahm3d.hisham@gmail.com",
+              "url": null
+            },
+            {
+              "type": "person",
+              "role": "maintainer",
+              "name": "Philippe Ombredanne, SPDX group at the Linux Foundation and others",
+              "email": "pombredanne@gmail.com",
+              "url": null
+            }
+          ],
+          "keywords": [
+            "Intended Audience :: Developers",
+            "Programming Language :: Python :: 2.7"
+          ],
+          "homepage_url": "https://github.com/spdx/tools-python",
+          "download_url": null,
+          "size": null,
+          "sha1": null,
+          "md5": null,
+          "sha256": null,
+          "sha512": null,
+          "bug_tracking_url": null,
+          "code_view_url": null,
+          "vcs_url": null,
+          "copyright": null,
+          "license_expression": null,
+          "declared_license": {
+            "license": "Apache-2.0",
+            "classifiers": [
+              "License :: OSI Approved :: Apache Software License"
+            ]
+          },
+          "notice_text": null,
+          "source_packages": [],
+          "file_references": [],
+          "extra_data": {},
+          "dependencies": [],
+          "repository_homepage_url": "https://pypi.org/project/spdx-tools",
+          "repository_download_url": "https://pypi.org/packages/source/s/spdx-tools/spdx-tools-0.5.4.tar.gz",
+          "api_data_url": "https://pypi.org/pypi/spdx-tools/0.5.4/json",
+          "datasource_id": "pypi_setup_py",
+          "purl": "pkg:pypi/spdx-tools@0.5.4"
+        }
+      ]
+    }
+  ],
+  "packages": [],
+  "resolved_dependencies_graph": []
+}

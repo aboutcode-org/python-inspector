@@ -1,0 +1,92 @@
+[metadata]
+name = python-inspector
+license = Apache-2.0
+
+# description must be on ONE line https://github.com/pypa/setuptools/issues/1390
+description = python-inspector is is a collection of utilities to collect PyPI package metadata and resolve packages dependencies.
+long_description = file:README.rst
+long_description_content_type = text/x-rst
+url = https://github.com/aboutcode-org/python-inspector
+
+author = nexB. Inc. and others
+author_email = info@aboutcode.org
+
+classifiers =
+    Development Status :: 4 - Beta
+    Intended Audience :: Developers
+    Programming Language :: Python :: 3
+    Programming Language :: Python :: 3 :: Only
+    Topic :: Software Development
+    Topic :: Utilities
+
+keywords =
+    open source
+    scan
+    package
+    dependency
+    pypi
+    python
+    SBOM
+    sca
+    dependencies
+    dependency resolution
+    resolver
+    resolvelib
+    pip
+    requirements
+
+license_files =
+    apache-2.0.LICENSE
+    NOTICE
+    AUTHORS.rst
+    CHANGELOG.rst
+    CODE_OF_CONDUCT.rst
+
+[options]
+package_dir =
+    =src
+packages = find:
+include_package_data = true
+zip_safe = false
+
+setup_requires = setuptools_scm[toml] >= 4
+
+python_requires = >=3.6.*
+
+install_requires =
+    attrs >= 18.1, !=20.1.0
+    click > 7.0
+    colorama >= 0.3.9
+    commoncode >= 30.0.0
+    dparse2 >= 0.6.1
+    importlib_metadata >= 4.12.0
+    packageurl_python >= 0.9.0
+    pkginfo2 >= 30.0.0
+    pip-requirements-parser >= 31.2.0
+    requests >= 2.18.0
+    resolvelib >= 0.8.1
+    saneyaml >= 0.5.2
+    toml >= 0.10.0
+    mock >= 3.0.5
+
+[options.packages.find]
+where = src
+
+[options.entry_points]
+console_scripts =
+    python-inspector = python_inspector.resolve_cli:resolve_dependencies
+
+[options.extras_require]
+testing =
+    pytest >= 6, != 7.0.0
+    pytest-xdist >= 2
+    aboutcode-toolkit >= 7.0.2
+    twine
+    black
+    isort
+    pycodestyle
+
+docs =
+    Sphinx >= 3.3.1,<7.0.0
+    sphinx-rtd-theme >= 0.5.0
+    doc8 >= 0.8.1

@@ -1,0 +1,136 @@
+{
+  "files": [
+    {
+      "type": "file",
+      "path": "tests/data/partial-setup.py",
+      "package_data": [
+        {
+          "type": "pypi",
+          "namespace": null,
+          "name": "example",
+          "version": "0.0.1",
+          "qualifiers": {},
+          "subpath": null,
+          "primary_language": "Python",
+          "description": "",
+          "release_date": null,
+          "parties": [],
+          "keywords": [],
+          "homepage_url": null,
+          "download_url": null,
+          "size": null,
+          "sha1": null,
+          "md5": null,
+          "sha256": null,
+          "sha512": null,
+          "bug_tracking_url": null,
+          "code_view_url": null,
+          "vcs_url": null,
+          "copyright": null,
+          "license_expression": null,
+          "declared_license": {},
+          "notice_text": null,
+          "source_packages": [],
+          "file_references": [],
+          "extra_data": {},
+          "dependencies": [
+            {
+              "purl": "pkg:pypi/semver",
+              "extracted_requirement": "semver",
+              "scope": "install",
+              "is_runtime": false,
+              "is_optional": false,
+              "is_resolved": false,
+              "resolved_package": {},
+              "extra_data": {}
+            }
+          ],
+          "repository_homepage_url": "https://pypi.org/project/example",
+          "repository_download_url": "https://pypi.org/packages/source/e/example/example-0.0.1.tar.gz",
+          "api_data_url": "https://pypi.org/pypi/example/0.0.1/json",
+          "datasource_id": "pypi_setup_py",
+          "purl": "pkg:pypi/example@0.0.1"
+        }
+      ]
+    }
+  ],
+  "packages": [
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "semver",
+      "version": "3.0.4",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Python helper for Semantic Versioning (https://semver.org)\nQuickstart\n==========\n\n.. teaser-begin\n\nA Python module to simplify `semantic versioning`_.\n\n|GHAction| |python-support| |downloads| |license| |docs| |black|\n|openissues| |GHDiscussion|\n\n.. teaser-end\n\nThe module follows the ``MAJOR.MINOR.PATCH`` style:\n\n* ``MAJOR`` version when you make incompatible API changes,\n* ``MINOR`` version when you add functionality in a backwards compatible manner, and\n* ``PATCH`` version when you make backwards compatible bug fixes.\n\nAdditional labels for pre-release and build metadata are supported.\n\nTo import this library, use:\n\n.. code-block:: python\n\n    >>> import semver\n\nWorking with the library is quite straightforward. To turn a version string into the\ndifferent parts, use the ``semver.Version.parse`` function:\n\n.. code-block:: python\n\n    >>> ver = semver.Version.parse('1.2.3-pre.2+build.4')\n    >>> ver.major\n    1\n    >>> ver.minor\n    2\n    >>> ver.patch\n    3\n    >>> ver.prerelease\n    'pre.2'\n    >>> ver.build\n    'build.4'\n\nTo raise parts of a version, there are a couple of functions available for\nyou. The function ``semver.Version.bump_major`` leaves the original object untouched, but\nreturns a new ``semver.Version`` instance with the raised major part:\n\n.. code-block:: python\n\n    >>> ver = semver.Version.parse(\"3.4.5\")\n    >>> ver.bump_major()\n    Version(major=4, minor=0, patch=0, prerelease=None, build=None)\n\nIt is allowed to concatenate different \"bump functions\":\n\n.. code-block:: python\n\n    >>> ver.bump_major().bump_minor()\n    Version(major=4, minor=1, patch=0, prerelease=None, build=None)\n\nTo compare two versions, semver provides the ``semver.compare`` function.\nThe return value indicates the relationship between the first and second\nversion:\n\n.. code-block:: python\n\n    >>> semver.compare(\"1.0.0\", \"2.0.0\")\n    -1\n    >>> semver.compare(\"2.0.0\", \"1.0.0\")\n    1\n    >>> semver.compare(\"2.0.0\", \"2.0.0\")\n    0\n\n\nThere are other functions to discover. Read on!\n\n\n.. |latest-version| image:: https://img.shields.io/pypi/v/semver.svg\n   :alt: Latest version on PyPI\n   :target: https://pypi.org/project/semver\n.. |python-support| image:: https://img.shields.io/pypi/pyversions/semver.svg\n   :target: https://pypi.org/project/semver\n   :alt: Python versions\n.. |downloads| image:: https://img.shields.io/pypi/dm/semver.svg\n   :alt: Monthly downloads from PyPI\n   :target: https://pypi.org/project/semver\n.. |license| image:: https://img.shields.io/pypi/l/semver.svg\n   :alt: Software license\n   :target: https://github.com/python-semver/python-semver/blob/master/LICENSE.txt\n.. |docs| image:: https://readthedocs.org/projects/python-semver/badge/?version=latest\n   :target: http://python-semver.readthedocs.io/en/latest/?badge=latest\n   :alt: Documentation Status\n.. _semantic versioning: https://semver.org/\n.. |black| image:: https://img.shields.io/badge/code%20style-black-000000.svg\n    :target: https://github.com/psf/black\n    :alt: Black Formatter\n.. |Gitter| image:: https://badges.gitter.im/python-semver/community.svg\n    :target: https://gitter.im/python-semver/community\n    :alt: Gitter\n.. |openissues| image:: http://isitmaintained.com/badge/open/python-semver/python-semver.svg\n    :target: http://isitmaintained.com/project/python-semver/python-semver\n    :alt: Percentage of open issues\n.. |GHAction| image:: https://github.com/python-semver/python-semver/workflows/Python/badge.svg\n    :alt: Python\n.. |GHDiscussion| image:: https://shields.io/badge/GitHub-%20Discussions-green?logo=github\n    :target: https://github.com/python-semver/python-semver/discussions\n    :alt: GitHub Discussion",
+      "release_date": "2025-01-24T13:19:27",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": null,
+          "email": "Kostiantyn Rybnikov <k-bx@k-bx.com>, Tom Schraitle <toms@suse.de>",
+          "url": null
+        },
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": null,
+          "email": "Tom Schraitle <toms@suse.de>, Sebastien Celles <s.celles@gmail.com>",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Environment :: Web Environment",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
+        "Programming Language :: Python :: 3.14",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Topic :: Software Development :: Libraries :: Python Modules"
+      ],
+      "homepage_url": null,
+      "download_url": "https://files.pythonhosted.org/packages/72/d1/d3159231aec234a59dd7d601e9dd9fe96f3afff15efd33c1070019b26132/semver-3.0.4.tar.gz",
+      "size": 269730,
+      "sha1": null,
+      "md5": "a0d76b528e489bf7ce1255a0a1486123",
+      "sha256": "afc7d8c584a5ed0a11033af086e8af226a9c0b206f313e0301f8dd7b6b589602",
+      "sha512": null,
+      "bug_tracking_url": "https://github.com/python-semver/python-semver/issues",
+      "code_view_url": null,
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": {
+        "license": "Copyright (c) 2013, Konstantine Rybnikov All rights reserved.  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.  Neither the name of the python-semver org nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. ",
+        "classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ]
+      },
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/semver/3.0.4/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/semver@3.0.4"
+    }
+  ],
+  "resolution": [
+    {
+      "package": "pkg:pypi/semver@3.0.4",
+      "dependencies": []
+    }
+  ]
+}

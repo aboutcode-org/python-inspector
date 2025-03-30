@@ -1,0 +1,25 @@
+{
+  "headers": {
+    "tool_name": "python-inspector",
+    "tool_homepageurl": "https://github.com/aboutcode-org/python-inspector",
+    "tool_version": "0.13.0",
+    "options": [
+      "--json <file>",
+      "--operating-system linux",
+      "--python-version 38",
+      "--specifier zipp==3.8.0",
+      "--use-pypi-json-api"
+    ],
+    "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/aboutcode-org/python-inspector/ for support and download.",
+    "warnings": [],
+    "errors": []
+  },
+  "files": [],
+  "packages": [],
+  "resolved_dependencies_graph": [
+    {
+      "package": "pkg:pypi/zipp@3.8.0",
+      "dependencies": []
+    }
+  ]
+}

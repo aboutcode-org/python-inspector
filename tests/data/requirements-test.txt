@@ -1,0 +1,5 @@
+attrs
+--extra-index-url https://pypi.python.org/simple/
+--extra-index-url https://testpypi.python.org/simple/
+--extra-index-url https://pypi1.python.org/simple/
+--index-url https://pypi-index1.python.org/simple/

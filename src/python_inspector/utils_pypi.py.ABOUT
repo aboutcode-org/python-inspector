@@ -1,0 +1,16 @@
+about_resource: utils_pypi.py
+package_url: pkg:github.com/pypa/pip/@20.3.1#src/pip/_internal/models/wheel.py
+type: github
+namespace: pypa
+name: pip
+version: 20.3.1
+subpath: src/pip/_internal/models/wheel.py
+
+download_url: https://github.com/pypa/pip/blob/20.3.1/src/pip/_internal/models/wheel.py
+copyright: Copyright (c) 2008-2020 The pip developers (see AUTHORS.txt file)
+license_expression: mit
+notes: The Wheel class is copied and heavily modified from 
+ pip-20.3.1 pip/_internal/models/wheel.py
+ The models code is alos inspired from the ISC-licensed packaging-dists
+ https://github.com/uranusjr/packaging-dists by Tzu-ping Chung
+ 

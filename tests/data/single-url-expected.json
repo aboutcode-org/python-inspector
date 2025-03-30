@@ -1,0 +1,131 @@
+{
+  "headers": {
+    "tool_name": "python-inspector",
+    "tool_homepageurl": "https://github.com/aboutcode-org/python-inspector",
+    "tool_version": "0.13.0",
+    "options": [
+      "--json <file>",
+      "--operating-system linux",
+      "--python-version 38",
+      "--specifier zipp==3.8.0"
+    ],
+    "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/aboutcode-org/python-inspector/ for support and download.",
+    "warnings": [],
+    "errors": []
+  },
+  "files": [],
+  "packages": [
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "zipp",
+      "version": "3.8.0",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Backport of pathlib-compatible object wrapper for zip files\n.. image:: https://img.shields.io/pypi/v/zipp.svg\n   :target: `PyPI link`_\n\n.. image:: https://img.shields.io/pypi/pyversions/zipp.svg\n   :target: `PyPI link`_\n\n.. _PyPI link: https://pypi.org/project/zipp\n\n.. image:: https://github.com/jaraco/zipp/workflows/tests/badge.svg\n   :target: https://github.com/jaraco/zipp/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. .. image:: https://readthedocs.org/projects/skeleton/badge/?version=latest\n..    :target: https://skeleton.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2022-informational\n   :target: https://blog.jaraco.com/skeleton\n\n\nA pathlib-compatible Zipfile object wrapper. Official backport of the standard library\n`Path object <https://docs.python.org/3.8/library/zipfile.html#path-objects>`_.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - zipp\n     - stdlib\n   * - 3.5\n     - 3.11\n   * - 3.3\n     - 3.9\n   * - 1.0\n     - 3.8\n\n\nUsage\n=====\n\nUse ``zipp.Path`` in place of ``zipfile.Path`` on any Python.",
+      "release_date": "2022-04-03T15:07:27",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Jason R. Coombs",
+          "email": "jaraco@jaraco.com",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3 :: Only"
+      ],
+      "homepage_url": "https://github.com/jaraco/zipp",
+      "download_url": "https://files.pythonhosted.org/packages/80/0e/16a7ee38617aab6a624e95948d314097cc2669edae9b02ded53309941cfc/zipp-3.8.0-py3-none-any.whl",
+      "size": 5369,
+      "sha1": null,
+      "md5": "da531f1b3a5c5e65470cb74729242bfc",
+      "sha256": "c4f6e5bbf48e74f7a38e7cc5b0480ff42b0ae5178957d564d18932525d5cf099",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": null,
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": {
+        "classifiers": [
+          "License :: OSI Approved :: MIT License"
+        ]
+      },
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/zipp/3.8.0/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/zipp@3.8.0"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "zipp",
+      "version": "3.8.0",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Backport of pathlib-compatible object wrapper for zip files\n.. image:: https://img.shields.io/pypi/v/zipp.svg\n   :target: `PyPI link`_\n\n.. image:: https://img.shields.io/pypi/pyversions/zipp.svg\n   :target: `PyPI link`_\n\n.. _PyPI link: https://pypi.org/project/zipp\n\n.. image:: https://github.com/jaraco/zipp/workflows/tests/badge.svg\n   :target: https://github.com/jaraco/zipp/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/badge/code%20style-black-000000.svg\n   :target: https://github.com/psf/black\n   :alt: Code style: Black\n\n.. .. image:: https://readthedocs.org/projects/skeleton/badge/?version=latest\n..    :target: https://skeleton.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2022-informational\n   :target: https://blog.jaraco.com/skeleton\n\n\nA pathlib-compatible Zipfile object wrapper. Official backport of the standard library\n`Path object <https://docs.python.org/3.8/library/zipfile.html#path-objects>`_.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - zipp\n     - stdlib\n   * - 3.5\n     - 3.11\n   * - 3.3\n     - 3.9\n   * - 1.0\n     - 3.8\n\n\nUsage\n=====\n\nUse ``zipp.Path`` in place of ``zipfile.Path`` on any Python.",
+      "release_date": "2022-04-03T15:07:28",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Jason R. Coombs",
+          "email": "jaraco@jaraco.com",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3 :: Only"
+      ],
+      "homepage_url": "https://github.com/jaraco/zipp",
+      "download_url": "https://files.pythonhosted.org/packages/cc/3c/3e8c69cd493297003da83f26ccf1faea5dd7da7892a0a7c965ac3bcba7bf/zipp-3.8.0.tar.gz",
+      "size": 13344,
+      "sha1": null,
+      "md5": "8864ff5ed01cd28755cc87f1443dbc67",
+      "sha256": "56bf8aadb83c24db6c4b577e13de374ccfb67da2078beba1d037c17980bf43ad",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": null,
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": {
+        "classifiers": [
+          "License :: OSI Approved :: MIT License"
+        ]
+      },
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/zipp/3.8.0/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/zipp@3.8.0"
+    }
+  ],
+  "resolved_dependencies_graph": [
+    {
+      "package": "pkg:pypi/zipp@3.8.0",
+      "dependencies": []
+    }
+  ]
+}

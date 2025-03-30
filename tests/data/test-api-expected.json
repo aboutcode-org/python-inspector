@@ -1,0 +1,740 @@
+{
+  "files": [],
+  "packages": [
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "click",
+      "version": "8.1.8",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Composable command line interface toolkit\n# $ click_\n\nClick is a Python package for creating beautiful command line interfaces\nin a composable way with as little code as necessary. It's the \"Command\nLine Interface Creation Kit\". It's highly configurable but comes with\nsensible defaults out of the box.\n\nIt aims to make the process of writing command line tools quick and fun\nwhile also preventing any frustration caused by the inability to\nimplement an intended CLI API.\n\nClick in three points:\n\n-   Arbitrary nesting of commands\n-   Automatic help page generation\n-   Supports lazy loading of subcommands at runtime\n\n\n## A Simple Example\n\n```python\nimport click\n\n@click.command()\n@click.option(\"--count\", default=1, help=\"Number of greetings.\")\n@click.option(\"--name\", prompt=\"Your name\", help=\"The person to greet.\")\ndef hello(count, name):\n    \"\"\"Simple program that greets NAME for a total of COUNT times.\"\"\"\n    for _ in range(count):\n        click.echo(f\"Hello, {name}!\")\n\nif __name__ == '__main__':\n    hello()\n```\n\n```\n$ python hello.py --count=3\nYour name: Click\nHello, Click!\nHello, Click!\nHello, Click!\n```\n\n\n## Donate\n\nThe Pallets organization develops and supports Click and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, [please\ndonate today][].\n\n[please donate today]: https://palletsprojects.com/donate",
+      "release_date": "2024-12-21T18:38:41",
+      "parties": [
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": null,
+          "email": "Pallets <contact@palletsprojects.com>",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Typing :: Typed"
+      ],
+      "homepage_url": null,
+      "download_url": "https://files.pythonhosted.org/packages/7e/d4/7ebdbd03970677812aac39c869717059dbb71a4cfc033ca6e5221787892c/click-8.1.8-py3-none-any.whl",
+      "size": 98188,
+      "sha1": null,
+      "md5": "7dc0eee374f3bb75bcce4c9dd4222f5f",
+      "sha256": "63c132bbbed01578a06712a2d1f497bb62d9c1c0d329b7903a866228027263b2",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": "https://github.com/pallets/click/",
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": {
+        "classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ]
+      },
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/click/8.1.8/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/click@8.1.8"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "click",
+      "version": "8.1.8",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Composable command line interface toolkit\n# $ click_\n\nClick is a Python package for creating beautiful command line interfaces\nin a composable way with as little code as necessary. It's the \"Command\nLine Interface Creation Kit\". It's highly configurable but comes with\nsensible defaults out of the box.\n\nIt aims to make the process of writing command line tools quick and fun\nwhile also preventing any frustration caused by the inability to\nimplement an intended CLI API.\n\nClick in three points:\n\n-   Arbitrary nesting of commands\n-   Automatic help page generation\n-   Supports lazy loading of subcommands at runtime\n\n\n## A Simple Example\n\n```python\nimport click\n\n@click.command()\n@click.option(\"--count\", default=1, help=\"Number of greetings.\")\n@click.option(\"--name\", prompt=\"Your name\", help=\"The person to greet.\")\ndef hello(count, name):\n    \"\"\"Simple program that greets NAME for a total of COUNT times.\"\"\"\n    for _ in range(count):\n        click.echo(f\"Hello, {name}!\")\n\nif __name__ == '__main__':\n    hello()\n```\n\n```\n$ python hello.py --count=3\nYour name: Click\nHello, Click!\nHello, Click!\nHello, Click!\n```\n\n\n## Donate\n\nThe Pallets organization develops and supports Click and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, [please\ndonate today][].\n\n[please donate today]: https://palletsprojects.com/donate",
+      "release_date": "2024-12-21T18:38:44",
+      "parties": [
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": null,
+          "email": "Pallets <contact@palletsprojects.com>",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Typing :: Typed"
+      ],
+      "homepage_url": null,
+      "download_url": "https://files.pythonhosted.org/packages/b9/2e/0090cbf739cee7d23781ad4b89a9894a41538e4fcf4c31dcdd705b78eb8b/click-8.1.8.tar.gz",
+      "size": 226593,
+      "sha1": null,
+      "md5": "b52ee8e6c33d88a2b4626e6a6002245d",
+      "sha256": "ed53c9d8990d83c2a27deae68e4ee337473f6330c040a31d4225c9574d16096a",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": "https://github.com/pallets/click/",
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": {
+        "classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ]
+      },
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/click/8.1.8/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/click@8.1.8"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "flask",
+      "version": "2.1.2",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "A simple framework for building complex web applications.\nFlask\n=====\n\nFlask is a lightweight `WSGI`_ web application framework. It is designed\nto make getting started quick and easy, with the ability to scale up to\ncomplex applications. It began as a simple wrapper around `Werkzeug`_\nand `Jinja`_ and has become one of the most popular Python web\napplication frameworks.\n\nFlask offers suggestions, but doesn't enforce any dependencies or\nproject layout. It is up to the developer to choose the tools and\nlibraries they want to use. There are many extensions provided by the\ncommunity that make adding new functionality easy.\n\n.. _WSGI: https://wsgi.readthedocs.io/\n.. _Werkzeug: https://werkzeug.palletsprojects.com/\n.. _Jinja: https://jinja.palletsprojects.com/\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    $ pip install -U Flask\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    # save this as app.py\n    from flask import Flask\n\n    app = Flask(__name__)\n\n    @app.route(\"/\")\n    def hello():\n        return \"Hello, World!\"\n\n.. code-block:: text\n\n    $ flask run\n      * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)\n\n\nContributing\n------------\n\nFor guidance on setting up a development environment and how to make a\ncontribution to Flask, see the `contributing guidelines`_.\n\n.. _contributing guidelines: https://github.com/pallets/flask/blob/main/CONTRIBUTING.rst\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Flask and the libraries\nit uses. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, `please\ndonate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://flask.palletsprojects.com/\n-   Changes: https://flask.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/Flask/\n-   Source Code: https://github.com/pallets/flask/\n-   Issue Tracker: https://github.com/pallets/flask/issues/\n-   Website: https://palletsprojects.com/p/flask/\n-   Twitter: https://twitter.com/PalletsTeam\n-   Chat: https://discord.gg/pallets",
+      "release_date": "2022-04-28T17:47:38",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Armin Ronacher",
+          "email": "armin.ronacher@active-4.com",
+          "url": null
+        },
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": "Pallets",
+          "email": "contact@palletsprojects.com",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Environment :: Web Environment",
+        "Framework :: Flask",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+        "Topic :: Internet :: WWW/HTTP :: WSGI",
+        "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
+        "Topic :: Software Development :: Libraries :: Application Frameworks"
+      ],
+      "homepage_url": "https://palletsprojects.com/p/flask",
+      "download_url": "https://files.pythonhosted.org/packages/ba/76/e9580e494eaf6f09710b0f3b9000c9c0363e44af5390be32bb0394165853/Flask-2.1.2-py3-none-any.whl",
+      "size": 95235,
+      "sha1": null,
+      "md5": "07aede47b441c019aeebbeaed6a76215",
+      "sha256": "fad5b446feb0d6db6aec0c3184d16a8c1f6c3e464b511649c8918a9be100b4fe",
+      "sha512": null,
+      "bug_tracking_url": "https://github.com/pallets/flask/issues/",
+      "code_view_url": "https://github.com/pallets/flask/",
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": {
+        "license": "BSD-3-Clause",
+        "classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ]
+      },
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/flask/2.1.2/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/flask@2.1.2"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "flask",
+      "version": "2.1.2",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "A simple framework for building complex web applications.\nFlask\n=====\n\nFlask is a lightweight `WSGI`_ web application framework. It is designed\nto make getting started quick and easy, with the ability to scale up to\ncomplex applications. It began as a simple wrapper around `Werkzeug`_\nand `Jinja`_ and has become one of the most popular Python web\napplication frameworks.\n\nFlask offers suggestions, but doesn't enforce any dependencies or\nproject layout. It is up to the developer to choose the tools and\nlibraries they want to use. There are many extensions provided by the\ncommunity that make adding new functionality easy.\n\n.. _WSGI: https://wsgi.readthedocs.io/\n.. _Werkzeug: https://werkzeug.palletsprojects.com/\n.. _Jinja: https://jinja.palletsprojects.com/\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    $ pip install -U Flask\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nA Simple Example\n----------------\n\n.. code-block:: python\n\n    # save this as app.py\n    from flask import Flask\n\n    app = Flask(__name__)\n\n    @app.route(\"/\")\n    def hello():\n        return \"Hello, World!\"\n\n.. code-block:: text\n\n    $ flask run\n      * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)\n\n\nContributing\n------------\n\nFor guidance on setting up a development environment and how to make a\ncontribution to Flask, see the `contributing guidelines`_.\n\n.. _contributing guidelines: https://github.com/pallets/flask/blob/main/CONTRIBUTING.rst\n\n\nDonate\n------\n\nThe Pallets organization develops and supports Flask and the libraries\nit uses. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, `please\ndonate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://flask.palletsprojects.com/\n-   Changes: https://flask.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/Flask/\n-   Source Code: https://github.com/pallets/flask/\n-   Issue Tracker: https://github.com/pallets/flask/issues/\n-   Website: https://palletsprojects.com/p/flask/\n-   Twitter: https://twitter.com/PalletsTeam\n-   Chat: https://discord.gg/pallets",
+      "release_date": "2022-04-28T17:47:40",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Armin Ronacher",
+          "email": "armin.ronacher@active-4.com",
+          "url": null
+        },
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": "Pallets",
+          "email": "contact@palletsprojects.com",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Environment :: Web Environment",
+        "Framework :: Flask",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+        "Topic :: Internet :: WWW/HTTP :: WSGI",
+        "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
+        "Topic :: Software Development :: Libraries :: Application Frameworks"
+      ],
+      "homepage_url": "https://palletsprojects.com/p/flask",
+      "download_url": "https://files.pythonhosted.org/packages/d3/3c/94f38d4db919a9326a706ad56f05a7e6f0c8f7b7d93e2997cca54d3bc14b/Flask-2.1.2.tar.gz",
+      "size": 631846,
+      "sha1": null,
+      "md5": "93f1832e5be704ef6ff2a4124579cd85",
+      "sha256": "315ded2ddf8a6281567edb27393010fe3406188bafbfe65a3339d5787d89e477",
+      "sha512": null,
+      "bug_tracking_url": "https://github.com/pallets/flask/issues/",
+      "code_view_url": "https://github.com/pallets/flask/",
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": {
+        "license": "BSD-3-Clause",
+        "classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ]
+      },
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/flask/2.1.2/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/flask@2.1.2"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "itsdangerous",
+      "version": "2.2.0",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Safely pass data to untrusted environments and back.\n# ItsDangerous\n\n... so better sign this\n\nVarious helpers to pass data to untrusted environments and to get it\nback safe and sound. Data is cryptographically signed to ensure that a\ntoken has not been tampered with.\n\nIt's possible to customize how data is serialized. Data is compressed as\nneeded. A timestamp can be added and verified automatically while\nloading a token.\n\n\n## A Simple Example\n\nHere's how you could generate a token for transmitting a user's id and\nname between web requests.\n\n```python\nfrom itsdangerous import URLSafeSerializer\nauth_s = URLSafeSerializer(\"secret key\", \"auth\")\ntoken = auth_s.dumps({\"id\": 5, \"name\": \"itsdangerous\"})\n\nprint(token)\n# eyJpZCI6NSwibmFtZSI6Iml0c2Rhbmdlcm91cyJ9.6YP6T0BaO67XP--9UzTrmurXSmg\n\ndata = auth_s.loads(token)\nprint(data[\"name\"])\n# itsdangerous\n```\n\n\n## Donate\n\nThe Pallets organization develops and supports ItsDangerous and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n[please donate today][].\n\n[please donate today]: https://palletsprojects.com/donate",
+      "release_date": "2024-04-16T21:28:14",
+      "parties": [
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": null,
+          "email": "Pallets <contact@palletsprojects.com>",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Typing :: Typed"
+      ],
+      "homepage_url": null,
+      "download_url": "https://files.pythonhosted.org/packages/04/96/92447566d16df59b2a776c0fb82dbc4d9e07cd95062562af01e408583fc4/itsdangerous-2.2.0-py3-none-any.whl",
+      "size": 16234,
+      "sha1": null,
+      "md5": "22e41bfb2008481e855f1693a9df4c54",
+      "sha256": "c6242fc49e35958c8b15141343aa660db5fc54d4f13a1db01a3f5891b98700ef",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": "https://github.com/pallets/itsdangerous/",
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": {
+        "classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ]
+      },
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/itsdangerous/2.2.0/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/itsdangerous@2.2.0"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "itsdangerous",
+      "version": "2.2.0",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Safely pass data to untrusted environments and back.\n# ItsDangerous\n\n... so better sign this\n\nVarious helpers to pass data to untrusted environments and to get it\nback safe and sound. Data is cryptographically signed to ensure that a\ntoken has not been tampered with.\n\nIt's possible to customize how data is serialized. Data is compressed as\nneeded. A timestamp can be added and verified automatically while\nloading a token.\n\n\n## A Simple Example\n\nHere's how you could generate a token for transmitting a user's id and\nname between web requests.\n\n```python\nfrom itsdangerous import URLSafeSerializer\nauth_s = URLSafeSerializer(\"secret key\", \"auth\")\ntoken = auth_s.dumps({\"id\": 5, \"name\": \"itsdangerous\"})\n\nprint(token)\n# eyJpZCI6NSwibmFtZSI6Iml0c2Rhbmdlcm91cyJ9.6YP6T0BaO67XP--9UzTrmurXSmg\n\ndata = auth_s.loads(token)\nprint(data[\"name\"])\n# itsdangerous\n```\n\n\n## Donate\n\nThe Pallets organization develops and supports ItsDangerous and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n[please donate today][].\n\n[please donate today]: https://palletsprojects.com/donate",
+      "release_date": "2024-04-16T21:28:15",
+      "parties": [
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": null,
+          "email": "Pallets <contact@palletsprojects.com>",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Typing :: Typed"
+      ],
+      "homepage_url": null,
+      "download_url": "https://files.pythonhosted.org/packages/9c/cb/8ac0172223afbccb63986cc25049b154ecfb5e85932587206f42317be31d/itsdangerous-2.2.0.tar.gz",
+      "size": 54410,
+      "sha1": null,
+      "md5": "a901babde35694c3577f7655010cd380",
+      "sha256": "e0050c0b7da1eea53ffaf149c0cfbb5c6e2e2b69c4bef22c81fa6eb73e5f6173",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": "https://github.com/pallets/itsdangerous/",
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": {
+        "classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ]
+      },
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/itsdangerous/2.2.0/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/itsdangerous@2.2.0"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "jinja2",
+      "version": "3.1.6",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "A very fast and expressive template engine.\n# Jinja\n\nJinja is a fast, expressive, extensible templating engine. Special\nplaceholders in the template allow writing code similar to Python\nsyntax. Then the template is passed data to render the final document.\n\nIt includes:\n\n-   Template inheritance and inclusion.\n-   Define and import macros within templates.\n-   HTML templates can use autoescaping to prevent XSS from untrusted\n    user input.\n-   A sandboxed environment can safely render untrusted templates.\n-   AsyncIO support for generating templates and calling async\n    functions.\n-   I18N support with Babel.\n-   Templates are compiled to optimized Python code just-in-time and\n    cached, or can be compiled ahead-of-time.\n-   Exceptions point to the correct line in templates to make debugging\n    easier.\n-   Extensible filters, tests, functions, and even syntax.\n\nJinja's philosophy is that while application logic belongs in Python if\npossible, it shouldn't make the template designer's job difficult by\nrestricting functionality too much.\n\n\n## In A Nutshell\n\n```jinja\n{% extends \"base.html\" %}\n{% block title %}Members{% endblock %}\n{% block content %}\n  <ul>\n  {% for user in users %}\n    <li><a href=\"{{ user.url }}\">{{ user.username }}</a></li>\n  {% endfor %}\n  </ul>\n{% endblock %}\n```\n\n## Donate\n\nThe Pallets organization develops and supports Jinja and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, [please\ndonate today][].\n\n[please donate today]: https://palletsprojects.com/donate\n\n## Contributing\n\nSee our [detailed contributing documentation][contrib] for many ways to\ncontribute, including reporting issues, requesting features, asking or answering\nquestions, and making PRs.\n\n[contrib]: https://palletsprojects.com/contributing/",
+      "release_date": "2025-03-05T20:05:00",
+      "parties": [
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": null,
+          "email": "Pallets <contact@palletsprojects.com>",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Environment :: Web Environment",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+        "Topic :: Text Processing :: Markup :: HTML",
+        "Typing :: Typed"
+      ],
+      "homepage_url": null,
+      "download_url": "https://files.pythonhosted.org/packages/62/a1/3d680cbfd5f4b8f15abc1d571870c5fc3e594bb582bc3b64ea099db13e56/jinja2-3.1.6-py3-none-any.whl",
+      "size": 134899,
+      "sha1": null,
+      "md5": "845b37cea56edd0f4dbd949244e9d798",
+      "sha256": "85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": "https://github.com/pallets/jinja/",
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": {
+        "classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ]
+      },
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/jinja2/3.1.6/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/jinja2@3.1.6"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "jinja2",
+      "version": "3.1.6",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "A very fast and expressive template engine.\n# Jinja\n\nJinja is a fast, expressive, extensible templating engine. Special\nplaceholders in the template allow writing code similar to Python\nsyntax. Then the template is passed data to render the final document.\n\nIt includes:\n\n-   Template inheritance and inclusion.\n-   Define and import macros within templates.\n-   HTML templates can use autoescaping to prevent XSS from untrusted\n    user input.\n-   A sandboxed environment can safely render untrusted templates.\n-   AsyncIO support for generating templates and calling async\n    functions.\n-   I18N support with Babel.\n-   Templates are compiled to optimized Python code just-in-time and\n    cached, or can be compiled ahead-of-time.\n-   Exceptions point to the correct line in templates to make debugging\n    easier.\n-   Extensible filters, tests, functions, and even syntax.\n\nJinja's philosophy is that while application logic belongs in Python if\npossible, it shouldn't make the template designer's job difficult by\nrestricting functionality too much.\n\n\n## In A Nutshell\n\n```jinja\n{% extends \"base.html\" %}\n{% block title %}Members{% endblock %}\n{% block content %}\n  <ul>\n  {% for user in users %}\n    <li><a href=\"{{ user.url }}\">{{ user.username }}</a></li>\n  {% endfor %}\n  </ul>\n{% endblock %}\n```\n\n## Donate\n\nThe Pallets organization develops and supports Jinja and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, [please\ndonate today][].\n\n[please donate today]: https://palletsprojects.com/donate\n\n## Contributing\n\nSee our [detailed contributing documentation][contrib] for many ways to\ncontribute, including reporting issues, requesting features, asking or answering\nquestions, and making PRs.\n\n[contrib]: https://palletsprojects.com/contributing/",
+      "release_date": "2025-03-05T20:05:02",
+      "parties": [
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": null,
+          "email": "Pallets <contact@palletsprojects.com>",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Environment :: Web Environment",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+        "Topic :: Text Processing :: Markup :: HTML",
+        "Typing :: Typed"
+      ],
+      "homepage_url": null,
+      "download_url": "https://files.pythonhosted.org/packages/df/bf/f7da0350254c0ed7c72f3e33cef02e048281fec7ecec5f032d4aac52226b/jinja2-3.1.6.tar.gz",
+      "size": 245115,
+      "sha1": null,
+      "md5": "66d4c25ff43d1deaf9637ccda523dec8",
+      "sha256": "0137fb05990d35f1275a587e9aee6d56da821fc83491a0fb838183be43f66d6d",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": "https://github.com/pallets/jinja/",
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": {
+        "classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ]
+      },
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/jinja2/3.1.6/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/jinja2@3.1.6"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "markupsafe",
+      "version": "3.0.2",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Safely add untrusted strings to HTML/XML markup.\n# MarkupSafe\n\nMarkupSafe implements a text object that escapes characters so it is\nsafe to use in HTML and XML. Characters that have special meanings are\nreplaced so that they display as the actual characters. This mitigates\ninjection attacks, meaning untrusted user input can safely be displayed\non a page.\n\n\n## Examples\n\n```pycon\n>>> from markupsafe import Markup, escape\n\n>>> # escape replaces special characters and wraps in Markup\n>>> escape(\"<script>alert(document.cookie);</script>\")\nMarkup('&lt;script&gt;alert(document.cookie);&lt;/script&gt;')\n\n>>> # wrap in Markup to mark text \"safe\" and prevent escaping\n>>> Markup(\"<strong>Hello</strong>\")\nMarkup('<strong>hello</strong>')\n\n>>> escape(Markup(\"<strong>Hello</strong>\"))\nMarkup('<strong>hello</strong>')\n\n>>> # Markup is a str subclass\n>>> # methods and operators escape their arguments\n>>> template = Markup(\"Hello <em>{name}</em>\")\n>>> template.format(name='\"World\"')\nMarkup('Hello <em>&#34;World&#34;</em>')\n```\n\n## Donate\n\nThe Pallets organization develops and supports MarkupSafe and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n[please donate today][].\n\n[please donate today]: https://palletsprojects.com/donate",
+      "release_date": "2024-10-18T15:20:59",
+      "parties": [
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": null,
+          "email": "Pallets <contact@palletsprojects.com>",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Environment :: Web Environment",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+        "Topic :: Text Processing :: Markup :: HTML",
+        "Typing :: Typed"
+      ],
+      "homepage_url": null,
+      "download_url": "https://files.pythonhosted.org/packages/bd/6e/61ebf08d8940553afff20d1fb1ba7294b6f8d279df9fd0c0db911b4bbcfd/MarkupSafe-3.0.2-cp310-cp310-musllinux_1_2_x86_64.whl",
+      "size": 21091,
+      "sha1": null,
+      "md5": "ef4de80fb119dfe436aa346068b6cbc8",
+      "sha256": "b424c77b206d63d500bcb69fa55ed8d0e6a3774056bdc4839fc9298a7edca171",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": "https://github.com/pallets/markupsafe/",
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": {
+        "license": "Copyright 2010 Pallets  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:  1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.  2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.  3.  Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. ",
+        "classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ]
+      },
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/markupsafe/3.0.2/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/markupsafe@3.0.2"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "markupsafe",
+      "version": "3.0.2",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Safely add untrusted strings to HTML/XML markup.\n# MarkupSafe\n\nMarkupSafe implements a text object that escapes characters so it is\nsafe to use in HTML and XML. Characters that have special meanings are\nreplaced so that they display as the actual characters. This mitigates\ninjection attacks, meaning untrusted user input can safely be displayed\non a page.\n\n\n## Examples\n\n```pycon\n>>> from markupsafe import Markup, escape\n\n>>> # escape replaces special characters and wraps in Markup\n>>> escape(\"<script>alert(document.cookie);</script>\")\nMarkup('&lt;script&gt;alert(document.cookie);&lt;/script&gt;')\n\n>>> # wrap in Markup to mark text \"safe\" and prevent escaping\n>>> Markup(\"<strong>Hello</strong>\")\nMarkup('<strong>hello</strong>')\n\n>>> escape(Markup(\"<strong>Hello</strong>\"))\nMarkup('<strong>hello</strong>')\n\n>>> # Markup is a str subclass\n>>> # methods and operators escape their arguments\n>>> template = Markup(\"Hello <em>{name}</em>\")\n>>> template.format(name='\"World\"')\nMarkup('Hello <em>&#34;World&#34;</em>')\n```\n\n## Donate\n\nThe Pallets organization develops and supports MarkupSafe and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n[please donate today][].\n\n[please donate today]: https://palletsprojects.com/donate",
+      "release_date": "2024-10-18T15:21:54",
+      "parties": [
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": null,
+          "email": "Pallets <contact@palletsprojects.com>",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Environment :: Web Environment",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+        "Topic :: Text Processing :: Markup :: HTML",
+        "Typing :: Typed"
+      ],
+      "homepage_url": null,
+      "download_url": "https://files.pythonhosted.org/packages/b2/97/5d42485e71dfc078108a86d6de8fa46db44a1a9295e89c5d6d4a06e23a62/markupsafe-3.0.2.tar.gz",
+      "size": 20537,
+      "sha1": null,
+      "md5": "cb0071711b573b155cc8f86e1de72167",
+      "sha256": "ee55d3edf80167e48ea11a923c7386f4669df67d7994554387f84e7d8b0a2bf0",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": "https://github.com/pallets/markupsafe/",
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": {
+        "license": "Copyright 2010 Pallets  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:  1.  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.  2.  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.  3.  Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. ",
+        "classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ]
+      },
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/markupsafe/3.0.2/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/markupsafe@3.0.2"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "werkzeug",
+      "version": "3.1.3",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "The comprehensive WSGI web application library.\n# Werkzeug\n\n*werkzeug* German noun: \"tool\". Etymology: *werk* (\"work\"), *zeug* (\"stuff\")\n\nWerkzeug is a comprehensive [WSGI][] web application library. It began as\na simple collection of various utilities for WSGI applications and has\nbecome one of the most advanced WSGI utility libraries.\n\nIt includes:\n\n-   An interactive debugger that allows inspecting stack traces and\n    source code in the browser with an interactive interpreter for any\n    frame in the stack.\n-   A full-featured request object with objects to interact with\n    headers, query args, form data, files, and cookies.\n-   A response object that can wrap other WSGI applications and handle\n    streaming data.\n-   A routing system for matching URLs to endpoints and generating URLs\n    for endpoints, with an extensible system for capturing variables\n    from URLs.\n-   HTTP utilities to handle entity tags, cache control, dates, user\n    agents, cookies, files, and more.\n-   A threaded WSGI server for use while developing applications\n    locally.\n-   A test client for simulating HTTP requests during testing without\n    requiring running a server.\n\nWerkzeug doesn't enforce any dependencies. It is up to the developer to\nchoose a template engine, database adapter, and even how to handle\nrequests. It can be used to build all sorts of end user applications\nsuch as blogs, wikis, or bulletin boards.\n\n[Flask][] wraps Werkzeug, using it to handle the details of WSGI while\nproviding more structure and patterns for defining powerful\napplications.\n\n[WSGI]: https://wsgi.readthedocs.io/en/latest/\n[Flask]: https://www.palletsprojects.com/p/flask/\n\n\n## A Simple Example\n\n```python\n# save this as app.py\nfrom werkzeug.wrappers import Request, Response\n\n@Request.application\ndef application(request: Request) -> Response:\n    return Response(\"Hello, World!\")\n\nif __name__ == \"__main__\":\n    from werkzeug.serving import run_simple\n    run_simple(\"127.0.0.1\", 5000, application)\n```\n\n```\n$ python -m app\n  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)\n```\n\n\n## Donate\n\nThe Pallets organization develops and supports Werkzeug and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n[please donate today][].\n\n[please donate today]: https://palletsprojects.com/donate",
+      "release_date": "2024-11-08T15:52:16",
+      "parties": [
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": null,
+          "email": "Pallets <contact@palletsprojects.com>",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Environment :: Web Environment",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+        "Topic :: Internet :: WWW/HTTP :: WSGI",
+        "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
+        "Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware",
+        "Topic :: Software Development :: Libraries :: Application Frameworks",
+        "Typing :: Typed"
+      ],
+      "homepage_url": null,
+      "download_url": "https://files.pythonhosted.org/packages/52/24/ab44c871b0f07f491e5d2ad12c9bd7358e527510618cb1b803a88e986db1/werkzeug-3.1.3-py3-none-any.whl",
+      "size": 224498,
+      "sha1": null,
+      "md5": "ff3a2b0d0953eadee90c945d879c5aac",
+      "sha256": "54b78bf3716d19a65be4fceccc0d1d7b89e608834989dfae50ea87564639213e",
+      "sha512": null,
+      "bug_tracking_url": "https://github.com/pallets/werkzeug/issues/",
+      "code_view_url": "https://github.com/pallets/werkzeug/",
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": {
+        "classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ]
+      },
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/werkzeug/3.1.3/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/werkzeug@3.1.3"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "werkzeug",
+      "version": "3.1.3",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "The comprehensive WSGI web application library.\n# Werkzeug\n\n*werkzeug* German noun: \"tool\". Etymology: *werk* (\"work\"), *zeug* (\"stuff\")\n\nWerkzeug is a comprehensive [WSGI][] web application library. It began as\na simple collection of various utilities for WSGI applications and has\nbecome one of the most advanced WSGI utility libraries.\n\nIt includes:\n\n-   An interactive debugger that allows inspecting stack traces and\n    source code in the browser with an interactive interpreter for any\n    frame in the stack.\n-   A full-featured request object with objects to interact with\n    headers, query args, form data, files, and cookies.\n-   A response object that can wrap other WSGI applications and handle\n    streaming data.\n-   A routing system for matching URLs to endpoints and generating URLs\n    for endpoints, with an extensible system for capturing variables\n    from URLs.\n-   HTTP utilities to handle entity tags, cache control, dates, user\n    agents, cookies, files, and more.\n-   A threaded WSGI server for use while developing applications\n    locally.\n-   A test client for simulating HTTP requests during testing without\n    requiring running a server.\n\nWerkzeug doesn't enforce any dependencies. It is up to the developer to\nchoose a template engine, database adapter, and even how to handle\nrequests. It can be used to build all sorts of end user applications\nsuch as blogs, wikis, or bulletin boards.\n\n[Flask][] wraps Werkzeug, using it to handle the details of WSGI while\nproviding more structure and patterns for defining powerful\napplications.\n\n[WSGI]: https://wsgi.readthedocs.io/en/latest/\n[Flask]: https://www.palletsprojects.com/p/flask/\n\n\n## A Simple Example\n\n```python\n# save this as app.py\nfrom werkzeug.wrappers import Request, Response\n\n@Request.application\ndef application(request: Request) -> Response:\n    return Response(\"Hello, World!\")\n\nif __name__ == \"__main__\":\n    from werkzeug.serving import run_simple\n    run_simple(\"127.0.0.1\", 5000, application)\n```\n\n```\n$ python -m app\n  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)\n```\n\n\n## Donate\n\nThe Pallets organization develops and supports Werkzeug and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n[please donate today][].\n\n[please donate today]: https://palletsprojects.com/donate",
+      "release_date": "2024-11-08T15:52:18",
+      "parties": [
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": null,
+          "email": "Pallets <contact@palletsprojects.com>",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Environment :: Web Environment",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+        "Topic :: Internet :: WWW/HTTP :: WSGI",
+        "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
+        "Topic :: Internet :: WWW/HTTP :: WSGI :: Middleware",
+        "Topic :: Software Development :: Libraries :: Application Frameworks",
+        "Typing :: Typed"
+      ],
+      "homepage_url": null,
+      "download_url": "https://files.pythonhosted.org/packages/9f/69/83029f1f6300c5fb2471d621ab06f6ec6b3324685a2ce0f9777fd4a8b71e/werkzeug-3.1.3.tar.gz",
+      "size": 806925,
+      "sha1": null,
+      "md5": "b6005d403d01d08b9fe2330a0cfea05a",
+      "sha256": "60723ce945c19328679790e3282cc758aa4a6040e4bb330f53d30fa546d44746",
+      "sha512": null,
+      "bug_tracking_url": "https://github.com/pallets/werkzeug/issues/",
+      "code_view_url": "https://github.com/pallets/werkzeug/",
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": {
+        "classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ]
+      },
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/werkzeug/3.1.3/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/werkzeug@3.1.3"
+    }
+  ],
+  "resolution": [
+    {
+      "package": "pkg:pypi/click@8.1.8",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/flask@2.1.2",
+      "dependencies": [
+        "pkg:pypi/click@8.1.8",
+        "pkg:pypi/itsdangerous@2.2.0",
+        "pkg:pypi/jinja2@3.1.6",
+        "pkg:pypi/werkzeug@3.1.3"
+      ]
+    },
+    {
+      "package": "pkg:pypi/itsdangerous@2.2.0",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/jinja2@3.1.6",
+      "dependencies": [
+        "pkg:pypi/markupsafe@3.0.2"
+      ]
+    },
+    {
+      "package": "pkg:pypi/markupsafe@3.0.2",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/werkzeug@3.1.3",
+      "dependencies": [
+        "pkg:pypi/markupsafe@3.0.2"
+      ]
+    }
+  ]
+}

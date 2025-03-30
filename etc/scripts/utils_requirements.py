@@ -7,7 +7,6 @@
 # See https://github.com/aboutcode-org/skeleton for support or download.
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
-
 import os
 import re
 import subprocess

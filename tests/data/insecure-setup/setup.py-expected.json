@@ -1,0 +1,446 @@
+{
+  "headers": {
+    "tool_name": "python-inspector",
+    "tool_homepageurl": "https://github.com/aboutcode-org/python-inspector",
+    "tool_version": "0.13.0",
+    "options": [
+      "--analyze-setup-py-insecurely",
+      "--json <file>",
+      "--operating-system linux",
+      "--python-version 27",
+      "--setup-py tests/data/insecure-setup/setup.py"
+    ],
+    "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/aboutcode-org/python-inspector/ for support and download.",
+    "warnings": [],
+    "errors": []
+  },
+  "files": [
+    {
+      "type": "file",
+      "path": "tests/data/insecure-setup/setup.py",
+      "package_data": [
+        {
+          "type": "pypi",
+          "namespace": null,
+          "name": "rdflib",
+          "version": "5.0.0",
+          "qualifiers": {},
+          "subpath": null,
+          "primary_language": "Python",
+          "description": "RDFLib is a Python library for working with RDF, a simple yet powerful language for representing information.",
+          "release_date": null,
+          "parties": [
+            {
+              "type": "person",
+              "role": "author",
+              "name": "Daniel 'eikeon' Krech",
+              "email": "eikeon@eikeon.com",
+              "url": null
+            },
+            {
+              "type": "person",
+              "role": "maintainer",
+              "name": "RDFLib Team",
+              "email": "rdflib-dev@google.com",
+              "url": null
+            }
+          ],
+          "keywords": [
+            "Programming Language :: Python",
+            "Programming Language :: Python :: 2",
+            "Programming Language :: Python :: 3",
+            "Programming Language :: Python :: 2.7",
+            "Programming Language :: Python :: 3.4",
+            "Programming Language :: Python :: 3.5",
+            "Programming Language :: Python :: 3.6",
+            "Programming Language :: Python :: 3.7",
+            "Topic :: Software Development :: Libraries :: Python Modules",
+            "Operating System :: OS Independent",
+            "Natural Language :: English"
+          ],
+          "homepage_url": "https://github.com/RDFLib/rdflib",
+          "download_url": null,
+          "size": null,
+          "sha1": null,
+          "md5": null,
+          "sha256": null,
+          "sha512": null,
+          "bug_tracking_url": null,
+          "code_view_url": null,
+          "vcs_url": null,
+          "copyright": null,
+          "license_expression": null,
+          "declared_license": {
+            "license": "BSD-3-Clause",
+            "classifiers": [
+              "License :: OSI Approved :: BSD License"
+            ]
+          },
+          "notice_text": null,
+          "source_packages": [],
+          "file_references": [],
+          "extra_data": {},
+          "dependencies": [
+            {
+              "purl": "pkg:pypi/isodate",
+              "extracted_requirement": "isodate",
+              "scope": "install",
+              "is_runtime": false,
+              "is_optional": false,
+              "is_resolved": false,
+              "resolved_package": {},
+              "extra_data": {}
+            },
+            {
+              "purl": "pkg:pypi/pyparsing",
+              "extracted_requirement": "pyparsing",
+              "scope": "install",
+              "is_runtime": false,
+              "is_optional": false,
+              "is_resolved": false,
+              "resolved_package": {},
+              "extra_data": {}
+            },
+            {
+              "purl": "pkg:pypi/six",
+              "extracted_requirement": "six",
+              "scope": "install",
+              "is_runtime": false,
+              "is_optional": false,
+              "is_resolved": false,
+              "resolved_package": {},
+              "extra_data": {}
+            }
+          ],
+          "repository_homepage_url": "https://pypi.org/project/rdflib",
+          "repository_download_url": "https://pypi.org/packages/source/r/rdflib/rdflib-5.0.0.tar.gz",
+          "api_data_url": "https://pypi.org/pypi/rdflib/5.0.0/json",
+          "datasource_id": "pypi_setup_py",
+          "purl": "pkg:pypi/rdflib@5.0.0"
+        }
+      ]
+    }
+  ],
+  "packages": [
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "isodate",
+      "version": "0.7.0",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "An ISO 8601 date/time/duration parser and formatter\nISO 8601 date/time parser\n=========================\n\n.. image:: https://travis-ci.org/gweis/isodate.svg?branch=master\n    :target: https://travis-ci.org/gweis/isodate\n    :alt: Travis-CI\n.. image:: https://coveralls.io/repos/gweis/isodate/badge.svg?branch=master\n    :target: https://coveralls.io/r/gweis/isodate?branch=master\n    :alt: Coveralls\n.. image:: https://img.shields.io/pypi/v/isodate.svg\n    :target: https://pypi.python.org/pypi/isodate/\n    :alt: Latest Version\n.. image:: https://img.shields.io/pypi/l/isodate.svg\n    :target: https://pypi.python.org/pypi/isodate/\n    :alt: License\n\n\nThis module implements ISO 8601 date, time and duration parsing.\nThe implementation follows ISO8601:2004 standard, and implements only\ndate/time representations mentioned in the standard. If something is not\nmentioned there, then it is treated as non existent, and not as an allowed\noption.\n\nFor instance, ISO8601:2004 never mentions 2 digit years. So, it is not\nintended by this module to support 2 digit years. (while it may still\nbe valid as ISO date, because it is not explicitly forbidden.)\nAnother example is, when no time zone information is given for a time,\nthen it should be interpreted as local time, and not UTC.\n\nAs this module maps ISO 8601 dates/times to standard Python data types, like\n*date*, *time*, *datetime* and *timedelta*, it is not possible to convert\nall possible ISO 8601 dates/times. For instance, dates before 0001-01-01 are\nnot allowed by the Python *date* and *datetime* classes. Additionally\nfractional seconds are limited to microseconds. That means if the parser finds\nfor instance nanoseconds it will round it down to microseconds.\n\nDocumentation\n-------------\n\nThe following parsing methods are available.\n   * parse_time:\n        parses an ISO 8601 time string into a *time* object\n   * parse_date:\n        parses an ISO 8601 date string into a *date* object\n   * parse_datetime:\n        parses an ISO 8601 date-time string into a *datetime* object\n   * parse_duration:\n        parses an ISO 8601 duration string into a *timedelta* or *Duration*\n        object.\n   * parse_tzinfo:\n        parses the time zone info part of an ISO 8601 string into a\n        *tzinfo* object.\n\nAs ISO 8601 allows to define durations in years and months, and *timedelta*\ndoes not handle years and months, this module provides a *Duration* class,\nwhich can be used almost like a *timedelta* object (with some limitations).\nHowever, a *Duration* object can be converted into a *timedelta* object.\n\nThere are also ISO formatting methods for all supported data types. Each\n*xxx_isoformat* method accepts a format parameter. The default format is\nalways the ISO 8601 expanded format. This is the same format used by\n*datetime.isoformat*:\n\n    * time_isoformat:\n        Intended to create ISO time strings with default format\n        *hh:mm:ssZ*.\n    * date_isoformat:\n        Intended to create ISO date strings with default format\n        *yyyy-mm-dd*.\n    * datetime_isoformat:\n        Intended to create ISO date-time strings with default format\n        *yyyy-mm-ddThh:mm:ssZ*.\n    * duration_isoformat:\n        Intended to create ISO duration strings with default format\n        *PnnYnnMnnDTnnHnnMnnS*.\n    * tz_isoformat:\n        Intended to create ISO time zone strings with default format\n        *hh:mm*.\n    * strftime:\n        A re-implementation mostly compatible with Python's *strftime*, but\n        supports only those format strings, which can also be used for dates\n        prior 1900. This method also understands how to format *datetime* and\n        *Duration* instances.\n\nInstallation\n------------\n\nThis module can easily be installed with Python standard installation methods.\n\nUse *pip install isodate*.\n\nLimitations\n-----------\n\n   * The parser accepts several date/time representation which should be invalid\n     according to ISO 8601 standard.\n\n     1. for date and time together, this parser accepts a mixture of basic and extended format.\n        e.g. the date could be in basic format, while the time is accepted in extended format.\n        It also allows short dates and times in date-time strings.\n     2. For incomplete dates, the first day is chosen. e.g. 19th century results in a date of\n        1901-01-01.\n     3. negative *Duration* and *timedelta* value are not fully supported yet.\n\nFurther information\n-------------------\n\nThe doc strings and unit tests should provide rather detailed information about\nthe methods and their limitations.\n\nThe source release provides a *setup.py* script,\nwhich can be used to run the unit tests included.\n\nSource code is available at `<https://github.com/gweis/isodate>`_.\n\n\nCHANGES\n=======\n\n0.7.1 (unreleased)\n------------------\n\n- no changes yet\n\n\n0.7.0 (2024-10-08)\n------------------\n\n- drop end of life python versions\n- Don't match garbage characters at the end of parsed strings #16 (Gabriel de Perthuis)\n\n\nPotentially breaking changes:\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n- Fractional seconds are cut off to microseconds (always round down)\n- Allow control over return type of parse_duration #64 (Felix Claessen)\n\n\n0.6.1 (2021-12-13)\n------------------\n\n- support python 3.10 (Hugo van Kemenade)\n- last version to support py 2.7\n\n\n0.6.0 (2017-10-13)\n------------------\n\n- support incomplete month date (Fabien Loffredo)\n- rely on duck typing when doing duration maths\n- support ':' as separator in fractional time zones (usrenmae)\n\n\n0.5.4 (2015-08-06)\n------------------\n\n- Fix parsing of Periods (Fabien Bochu)\n- Make Duration objects hashable (Geoffrey Fairchild)\n- Add multiplication to duration (Reinoud Elhorst)\n\n\n0.5.1 (2014-11-07)\n------------------\n\n- fixed pickling of Duration objects\n- raise ISO8601Error when there is no 'T' separator in datetime strings (Adrian Coveney)\n\n\n0.5.0 (2014-02-23)\n------------------\n\n- ISO8601Error are subclasses of ValueError now (Michael Hrivnak)\n- improve compatibility across various python variants and versions\n- raise exceptions when using fractional years and months in date\n  maths with durations\n- renamed method todatetime on Duraction objects to totimedelta\n\n\n0.4.9 (2012-10-30)\n------------------\n\n- support pickling FixedOffset instances\n- make sure parsed fractional seconds are in microseconds\n- add leading zeros when formattig microseconds (Jarom Loveridge)\n\n\n0.4.8 (2012-05-04)\n------------------\n\n- fixed incompatibility of unittests with python 2.5 and 2.6 (runs fine on 2.7\n  and 3.2)\n\n\n0.4.7 (2012-01-26)\n------------------\n\n- fixed tzinfo formatting (never pass None into tzinfo.utcoffset())\n\n\n0.4.6 (2012-01-06)\n------------------\n\n- added Python 3 compatibility via 2to3\n\n0.4.5 (2012-01-06)\n------------------\n\n- made setuptools dependency optional\n\n0.4.4 (2011-04-16)\n------------------\n\n- Fixed formatting of microseconds for datetime objects\n\n0.4.3 (2010-10-29)\n------------------\n\n- Fixed problem with %P formatting and fractions (supplied by David Brooks)\n\n0.4.2 (2010-10-28)\n------------------\n\n- Implemented unary - for Duration (supplied by David Brooks)\n- Output fractional seconds with '%P' format. (partly supplied by David Brooks)\n\n0.4.1 (2010-10-13)\n------------------\n\n- fixed bug in comparison between timedelta and Duration.\n- fixed precision problem with microseconds (reported by Tommi Virtanen)\n\n0.4.0 (2009-02-09)\n------------------\n\n- added method to parse ISO 8601 time zone strings\n- added methods to create ISO 8601 conforming strings\n\n0.3.0 (2009-1-05)\n------------------\n\n- Initial release\n\n\nTODOs\n=====\n\nThis to do list contains some thoughts and ideas about missing features, and\nparts to think about, whether to implement them or not. This list is probably\nnot complete.\n\nMissing features:\n-----------------\n\n    * time formatting does not allow to create fractional representations.\n    * parser for ISO intervals.\n    * currently microseconds are always padded to a length of 6 characters.\n      trailing 0s should be optional\n\nDocumentation:\n--------------\n\n    * parse_datetime:\n       - complete documentation to show what this function allows, but ISO forbids.\n         and vice verse.\n       - support other separators between date and time than 'T'\n\n    * parse_date:\n       - yeardigits should be always greater than 4\n       - dates before 0001-01-01 are not supported\n\n    * parse_duration:\n       - alternative formats are not fully supported due to parse_date restrictions\n       - standard duration format is fully supported but not very restrictive.\n\n    * Duration:\n       - support fractional years and month in calculations\n       - implement w3c order relation? (`<http://www.w3.org/TR/xmlschema-2/#duration-order>`_)\n       - refactor to have duration mathematics only at one place.\n       - localize __str__ method (does timedelta do this?)\n       - when is a Duration negative?\n       - normalize Durations. months [00-12] and years ]-inf,+inf[",
+      "release_date": "2024-10-08T02:38:58",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Gerhard Weis",
+          "email": null,
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 4 - Beta",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: Implementation :: CPython",
+        "Programming Language :: Python :: Implementation :: PyPy",
+        "Topic :: Internet",
+        "Topic :: Software Development :: Libraries :: Python Modules"
+      ],
+      "homepage_url": null,
+      "download_url": "https://files.pythonhosted.org/packages/9b/40/32ce777053517be3032bb2ab3bb216959071ee0c16c761879e75c34a323e/isodate-0.7.0.tar.gz",
+      "size": 29597,
+      "sha1": null,
+      "md5": "06c2886cc00cdfc4ec1f36c1d590bc06",
+      "sha256": "c6332cf456314b85cc3b6ea2c45a6fa417cb1fddb361f6d2ed8f4f69e843c6d1",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": null,
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": {
+        "license": "Copyright (c) 2021, Hugo van Kemenade and contributors Copyright (c) 2009-2018, Gerhard Weis and contributors Copyright (c) 2009, Gerhard Weis All rights reserved.  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met: * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer. * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution. * Neither the name of the <organization> nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. ",
+        "classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ]
+      },
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/isodate/0.7.0/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/isodate@0.7.0"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "pyparsing",
+      "version": "2.4.7",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Python parsing module\nPyParsing -- A Python Parsing Module\n====================================\n\n|Build Status|\n\nIntroduction\n============\n\nThe pyparsing module is an alternative approach to creating and\nexecuting simple grammars, vs. the traditional lex/yacc approach, or the\nuse of regular expressions. The pyparsing module provides a library of\nclasses that client code uses to construct the grammar directly in\nPython code.\n\n*[Since first writing this description of pyparsing in late 2003, this\ntechnique for developing parsers has become more widespread, under the\nname Parsing Expression Grammars - PEGs. See more information on PEGs at*\nhttps://en.wikipedia.org/wiki/Parsing_expression_grammar *.]*\n\nHere is a program to parse ``\"Hello, World!\"`` (or any greeting of the form\n``\"salutation, addressee!\"``):\n\n.. code:: python\n\n    from pyparsing import Word, alphas\n    greet = Word(alphas) + \",\" + Word(alphas) + \"!\"\n    hello = \"Hello, World!\"\n    print(hello, \"->\", greet.parseString(hello))\n\nThe program outputs the following::\n\n    Hello, World! -> ['Hello', ',', 'World', '!']\n\nThe Python representation of the grammar is quite readable, owing to the\nself-explanatory class names, and the use of '+', '|' and '^' operator\ndefinitions.\n\nThe parsed results returned from ``parseString()`` can be accessed as a\nnested list, a dictionary, or an object with named attributes.\n\nThe pyparsing module handles some of the problems that are typically\nvexing when writing text parsers:\n\n- extra or missing whitespace (the above program will also handle ``\"Hello,World!\"``, ``\"Hello , World !\"``, etc.)\n- quoted strings\n- embedded comments\n\nThe examples directory includes a simple SQL parser, simple CORBA IDL\nparser, a config file parser, a chemical formula parser, and a four-\nfunction algebraic notation parser, among many others.\n\nDocumentation\n=============\n\nThere are many examples in the online docstrings of the classes\nand methods in pyparsing. You can find them compiled into online docs\nat https://pyparsing-docs.readthedocs.io/en/latest/. Additional\ndocumentation resources and project info are listed in the online\nGitHub wiki, at https://github.com/pyparsing/pyparsing/wiki. An\nentire directory of examples is at\nhttps://github.com/pyparsing/pyparsing/tree/master/examples.\n\nLicense\n=======\n\nMIT License. See header of pyparsing.py\n\nHistory\n=======\n\nSee CHANGES file.\n\n.. |Build Status| image:: https://travis-ci.org/pyparsing/pyparsing.svg?branch=master\n   :target: https://travis-ci.org/pyparsing/pyparsing",
+      "release_date": "2020-04-05T22:21:22",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Paul McGuire",
+          "email": "ptmcg@users.sourceforge.net",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Intended Audience :: Information Technology",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 2.6",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.3",
+        "Programming Language :: Python :: 3.4",
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8"
+      ],
+      "homepage_url": "https://github.com/pyparsing/pyparsing/",
+      "download_url": "https://files.pythonhosted.org/packages/8a/bb/488841f56197b13700afd5658fc279a2025a39e22449b7cf29864669b15d/pyparsing-2.4.7-py2.py3-none-any.whl",
+      "size": 67842,
+      "sha1": null,
+      "md5": "dbfd0a241aad2595f43377ec7f1836ea",
+      "sha256": "ef9d7589ef3c200abe66653d3f1ab1033c3c419ae9b9bdb1240a85b024efc88b",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": null,
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": {
+        "license": "MIT License",
+        "classifiers": [
+          "License :: OSI Approved :: MIT License"
+        ]
+      },
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/pyparsing/2.4.7/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/pyparsing@2.4.7"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "pyparsing",
+      "version": "2.4.7",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Python parsing module\nPyParsing -- A Python Parsing Module\n====================================\n\n|Build Status|\n\nIntroduction\n============\n\nThe pyparsing module is an alternative approach to creating and\nexecuting simple grammars, vs. the traditional lex/yacc approach, or the\nuse of regular expressions. The pyparsing module provides a library of\nclasses that client code uses to construct the grammar directly in\nPython code.\n\n*[Since first writing this description of pyparsing in late 2003, this\ntechnique for developing parsers has become more widespread, under the\nname Parsing Expression Grammars - PEGs. See more information on PEGs at*\nhttps://en.wikipedia.org/wiki/Parsing_expression_grammar *.]*\n\nHere is a program to parse ``\"Hello, World!\"`` (or any greeting of the form\n``\"salutation, addressee!\"``):\n\n.. code:: python\n\n    from pyparsing import Word, alphas\n    greet = Word(alphas) + \",\" + Word(alphas) + \"!\"\n    hello = \"Hello, World!\"\n    print(hello, \"->\", greet.parseString(hello))\n\nThe program outputs the following::\n\n    Hello, World! -> ['Hello', ',', 'World', '!']\n\nThe Python representation of the grammar is quite readable, owing to the\nself-explanatory class names, and the use of '+', '|' and '^' operator\ndefinitions.\n\nThe parsed results returned from ``parseString()`` can be accessed as a\nnested list, a dictionary, or an object with named attributes.\n\nThe pyparsing module handles some of the problems that are typically\nvexing when writing text parsers:\n\n- extra or missing whitespace (the above program will also handle ``\"Hello,World!\"``, ``\"Hello , World !\"``, etc.)\n- quoted strings\n- embedded comments\n\nThe examples directory includes a simple SQL parser, simple CORBA IDL\nparser, a config file parser, a chemical formula parser, and a four-\nfunction algebraic notation parser, among many others.\n\nDocumentation\n=============\n\nThere are many examples in the online docstrings of the classes\nand methods in pyparsing. You can find them compiled into online docs\nat https://pyparsing-docs.readthedocs.io/en/latest/. Additional\ndocumentation resources and project info are listed in the online\nGitHub wiki, at https://github.com/pyparsing/pyparsing/wiki. An\nentire directory of examples is at\nhttps://github.com/pyparsing/pyparsing/tree/master/examples.\n\nLicense\n=======\n\nMIT License. See header of pyparsing.py\n\nHistory\n=======\n\nSee CHANGES file.\n\n.. |Build Status| image:: https://travis-ci.org/pyparsing/pyparsing.svg?branch=master\n   :target: https://travis-ci.org/pyparsing/pyparsing",
+      "release_date": "2020-04-05T22:21:25",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Paul McGuire",
+          "email": "ptmcg@users.sourceforge.net",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Intended Audience :: Information Technology",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 2.6",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.3",
+        "Programming Language :: Python :: 3.4",
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8"
+      ],
+      "homepage_url": "https://github.com/pyparsing/pyparsing/",
+      "download_url": "https://files.pythonhosted.org/packages/c1/47/dfc9c342c9842bbe0036c7f763d2d6686bcf5eb1808ba3e170afdb282210/pyparsing-2.4.7.tar.gz",
+      "size": 649718,
+      "sha1": null,
+      "md5": "f0953e47a0112f7a65aec2305ffdf7b4",
+      "sha256": "c203ec8783bf771a155b207279b9bccb8dea02d8f0c9e5f8ead507bc3246ecc1",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": null,
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": {
+        "license": "MIT License",
+        "classifiers": [
+          "License :: OSI Approved :: MIT License"
+        ]
+      },
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/pyparsing/2.4.7/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/pyparsing@2.4.7"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "six",
+      "version": "1.17.0",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Python 2 and 3 compatibility utilities\n.. image:: https://img.shields.io/pypi/v/six.svg\n   :target: https://pypi.org/project/six/\n   :alt: six on PyPI\n\n.. image:: https://readthedocs.org/projects/six/badge/?version=latest\n   :target: https://six.readthedocs.io/\n   :alt: six's documentation on Read the Docs\n\n.. image:: https://img.shields.io/badge/license-MIT-green.svg\n   :target: https://github.com/benjaminp/six/blob/master/LICENSE\n   :alt: MIT License badge\n\nSix is a Python 2 and 3 compatibility library.  It provides utility functions\nfor smoothing over the differences between the Python versions with the goal of\nwriting Python code that is compatible on both Python versions.  See the\ndocumentation for more information on what is provided.\n\nSix supports Python 2.7 and 3.3+.  It is contained in only one Python\nfile, so it can be easily copied into your project. (The copyright and license\nnotice must be retained.)\n\nOnline documentation is at https://six.readthedocs.io/.\n\nBugs can be reported to https://github.com/benjaminp/six.  The code can also\nbe found there.",
+      "release_date": "2024-12-04T17:35:26",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Benjamin Peterson",
+          "email": "benjamin@python.org",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 3",
+        "Topic :: Software Development :: Libraries",
+        "Topic :: Utilities"
+      ],
+      "homepage_url": "https://github.com/benjaminp/six",
+      "download_url": "https://files.pythonhosted.org/packages/b7/ce/149a00dd41f10bc29e5921b496af8b574d8413afcd5e30dfa0ed46c2cc5e/six-1.17.0-py2.py3-none-any.whl",
+      "size": 11050,
+      "sha1": null,
+      "md5": "090bac7d568f9c1f64b671de641ccdee",
+      "sha256": "4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": null,
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": {
+        "license": "MIT",
+        "classifiers": [
+          "License :: OSI Approved :: MIT License"
+        ]
+      },
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/six/1.17.0/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/six@1.17.0"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "six",
+      "version": "1.17.0",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Python 2 and 3 compatibility utilities\n.. image:: https://img.shields.io/pypi/v/six.svg\n   :target: https://pypi.org/project/six/\n   :alt: six on PyPI\n\n.. image:: https://readthedocs.org/projects/six/badge/?version=latest\n   :target: https://six.readthedocs.io/\n   :alt: six's documentation on Read the Docs\n\n.. image:: https://img.shields.io/badge/license-MIT-green.svg\n   :target: https://github.com/benjaminp/six/blob/master/LICENSE\n   :alt: MIT License badge\n\nSix is a Python 2 and 3 compatibility library.  It provides utility functions\nfor smoothing over the differences between the Python versions with the goal of\nwriting Python code that is compatible on both Python versions.  See the\ndocumentation for more information on what is provided.\n\nSix supports Python 2.7 and 3.3+.  It is contained in only one Python\nfile, so it can be easily copied into your project. (The copyright and license\nnotice must be retained.)\n\nOnline documentation is at https://six.readthedocs.io/.\n\nBugs can be reported to https://github.com/benjaminp/six.  The code can also\nbe found there.",
+      "release_date": "2024-12-04T17:35:28",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Benjamin Peterson",
+          "email": "benjamin@python.org",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 3",
+        "Topic :: Software Development :: Libraries",
+        "Topic :: Utilities"
+      ],
+      "homepage_url": "https://github.com/benjaminp/six",
+      "download_url": "https://files.pythonhosted.org/packages/94/e7/b2c673351809dca68a0e064b6af791aa332cf192da575fd474ed7d6f16a2/six-1.17.0.tar.gz",
+      "size": 34031,
+      "sha1": null,
+      "md5": "a0387fe15662c71057b4fb2b7aa9056a",
+      "sha256": "ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": null,
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": {
+        "license": "MIT",
+        "classifiers": [
+          "License :: OSI Approved :: MIT License"
+        ]
+      },
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/six/1.17.0/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/six@1.17.0"
+    }
+  ],
+  "resolved_dependencies_graph": [
+    {
+      "package": "pkg:pypi/isodate@0.7.0",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/pyparsing@2.4.7",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/six@1.17.0",
+      "dependencies": []
+    }
+  ]
+}
