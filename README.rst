@@ -177,11 +177,3 @@ Communications Networks, Content and Technology under grant agreement No 1010929
     :target: https://nlnet.nl/discovery/
     :height: 40
     :alt: NGI Discovery logo
-
-
-
-
-
-
-
-

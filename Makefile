@@ -17,28 +17,24 @@ dev:
 	@echo "-> Configure the development envt."
 	./configure --dev
 
-isort:
-	@echo "-> Apply isort changes to ensure proper imports ordering"
-	${VENV}/bin/isort --sl -l 100 src tests setup.py --skip-glob "*/_packagedcode/*"
-
-black:
-	@echo "-> Apply black code formatter"
-	${VENV}/bin/black -l 100 src tests setup.py --exclude "_packagedcode/.*"
-
 doc8:
 	@echo "-> Run doc8 validation"
-	@${ACTIVATE} doc8 --max-line-length 100 --ignore-path docs/_build/ --quiet docs/
+	@${ACTIVATE} doc8 --max-line-length 100 --ignore-path docs/_build/ --quiet docs/ *.rst
 
-valid: isort black
+valid:
+	@echo "-> Run Ruff format"
+	@${ACTIVATE} ruff format
+	@echo "-> Run Ruff linter"
+	@${ACTIVATE} ruff check --fix
 
 check:
-	@echo "-> Run pycodestyle (PEP8) validation"
-	@${ACTIVATE} pycodestyle --max-line-length=110 \
-	   --exclude=.eggs,etc/scripts,src/_packagedcode,venv/,lib/,thirdparty/,docs/,.cache/ .
-	@echo "-> Run isort imports ordering validation"
-	@${ACTIVATE} isort --sl --check-only -l 100 setup.py src tests --skip-glob "*/_packagedcode/*"
-	@echo "-> Run black validation"
-	@${ACTIVATE} black --check -l 100 src tests setup.py --exclude "_packagedcode/.*"
+	@echo "-> Run Ruff linter validation (pycodestyle, bandit, isort, and more)"
+	@${ACTIVATE} ruff check
+	@echo "-> Run Ruff format validation"
+	@${ACTIVATE} ruff format --check
+	@$(MAKE) doc8
+	@echo "-> Run ABOUT files validation"
+	@${ACTIVATE} about check etc/
 
 clean:
 	@echo "-> Clean the Python env"
@@ -52,4 +48,4 @@ docs:
 	rm -rf docs/_build/
 	@${ACTIVATE} sphinx-build docs/ docs/_build/
 
-.PHONY:  conf dev check valid black isort clean test docs
+.PHONY: conf dev check valid clean test docs
