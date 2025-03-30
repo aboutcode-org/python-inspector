@@ -170,6 +170,8 @@ def is_valid_version(
 
 def get_python_version_from_env_tag(python_version: str) -> str:
     """
+    Return the python version extracted from an environment tag.
+
     >>> assert get_python_version_from_env_tag("310") == "3.10"
     >>> assert get_python_version_from_env_tag("39") == "3.9"
     """
