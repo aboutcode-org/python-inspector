@@ -348,9 +348,9 @@ def test_cli_with_insecure_option():
 @pytest.mark.skipif(
     sys.version_info[:2] >= (3, 12),
     reason="Skipping test for Python 3.12+ because of "
-        "https://github.com/aboutcode-org/python-inspector/issues/212"
-        "to avoid error AttributeError: module 'configparser' has no attribute "
-        "'SafeConfigParser'. Did you mean: 'RawConfigParser'?",
+    "https://github.com/aboutcode-org/python-inspector/issues/212"
+    "to avoid error AttributeError: module 'configparser' has no attribute "
+    "'SafeConfigParser'. Did you mean: 'RawConfigParser'?",
 )
 @pytest.mark.online
 def test_cli_with_insecure_option_testpkh():
