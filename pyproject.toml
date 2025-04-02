@@ -14,7 +14,6 @@ norecursedirs = [
    "dist",
    "build",
    "_build",
-   "dist",
    "etc",
    "local",
    "ci",
@@ -34,7 +33,9 @@ norecursedirs = [
    "thirdparty",
    "tmp",
    "venv",
+   ".venv",
    "tests/data",
+   "*/tests/test_data",
    ".eggs",
    "src/*/data",
    "tests/*/data"
@@ -65,6 +66,7 @@ include = [
   "docs/**/*.py",
   "*.py",
   "."
+
 ]
 # ignore test data and testfiles: they should never be linted nor formatted 
 exclude = [
@@ -77,10 +79,11 @@ exclude = [
 # vulnerablecode, fetchcode
   "**/tests/*/test_data/**/*",
   "**/tests/test_data/**/*",
+# django migrations
+  "**/migrations/**/*",
 # exclude vendored code from ScanCode
   "src/_packagedcode", 
 ]
-
 
 [tool.ruff.lint]
 # Rules: https://docs.astral.sh/ruff/rules/
