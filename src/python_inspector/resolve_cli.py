@@ -89,6 +89,7 @@ def print_version(ctx, param, value):
 @click.option(
     "--index-url",
     "index_urls",
+    envvar="PYINSP_INDEX_URL",
     type=str,
     metavar="INDEX",
     show_default=True,
@@ -120,6 +121,7 @@ def print_version(ctx, param, value):
     "--netrc",
     "netrc_file",
     type=click.Path(exists=True, readable=True, path_type=str, dir_okay=False),
+    envvar="PYINSP_NETRC_FILE",
     metavar="NETRC-FILE",
     hidden=True,
     required=False,
@@ -161,6 +163,7 @@ def print_version(ctx, param, value):
 )
 @click.option(
     "--verbose",
+    envvar="PYINSP_VERBOSE",
     is_flag=True,
     help="Enable verbose debug output.",
 )
