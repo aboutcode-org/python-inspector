@@ -1,0 +1,26 @@
+name: Run Pytest with Astral Uv
+
+on:
+  workflow_dispatch:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install uv and set up Python ${{ matrix.python-version }}
+        uses: astral-sh/setup-uv@22695119d769bdb6f7032ad67b9bca0ef8c4a174 # v5.4.0
+        with:
+          enable-cache: true
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          uv sync --group=test
+      - name: Run Pytest
+        run: |
+          uv run pytest -vvs

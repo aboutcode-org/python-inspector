@@ -6,7 +6,7 @@
     "options": [
       "--json-pdt <file>",
       "--operating-system linux",
-      "--python-version 38",
+      "--python-version 39",
       "--requirement tests/data/pdt-requirements.txt"
     ],
     "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/aboutcode-org/python-inspector/ for support and download.",
