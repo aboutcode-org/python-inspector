@@ -43,6 +43,7 @@ def test_api_with_specifier_pdt():
     )
     check_data_results(results=results.to_dict(generic_paths=True), expected_file=expected_file)
 
+
 @pytest.mark.online
 def test_api_with_requirement_file():
     expected_file = test_env.get_test_loc("test-api-with-requirement-file.json", must_exist=False)
