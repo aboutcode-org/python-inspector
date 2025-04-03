@@ -14,7 +14,9 @@ import os
 from typing import Dict
 from typing import List
 from typing import NamedTuple
+from typing import Optional
 
+import aiohttp
 import requests
 
 
@@ -67,11 +69,24 @@ class Candidate(NamedTuple):
 def get_response(url: str) -> Dict:
     """
     Return a mapping of the JSON response from fetching ``url``
-    or None if the ``url`` cannot be fetched..
+    or None if the ``url`` cannot be fetched.
     """
     resp = requests.get(url)
     if resp.status_code == 200:
         return resp.json()
+
+
+async def get_response_async(url: str) -> Optional[Dict]:
+    """
+    Return a mapping of the JSON response from fetching ``url``
+    or None if the ``url`` cannot be fetched.
+    """
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            if response.status == 200:
+                return await response.json()
+            else:
+                return None
 
 
 def remove_test_data_dir_variable_prefix(path, placeholder="<file>"):
