@@ -433,7 +433,6 @@ class Link(NamedTuple):
 
 @attr.attributes
 class Distribution(NameVer):
-
     """
     A Distribution is either either a Wheel or Sdist and is identified by and
     created from its filename as well as its name and version. A Distribution is
@@ -1005,7 +1004,6 @@ class Sdist(Distribution):
 
 @attr.attributes
 class Wheel(Distribution):
-
     """
     Represents a wheel file.
 

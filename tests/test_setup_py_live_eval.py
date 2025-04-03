@@ -8,6 +8,7 @@
 # file for more details.
 #
 """Tests for `requirements-builder` module."""
+
 from os.path import abspath
 from os.path import dirname
 from os.path import join

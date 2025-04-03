@@ -22,6 +22,7 @@ from python_inspector.resolution import fetch_and_extract_sdist
 from python_inspector.utils import get_netrc_auth
 from python_inspector.utils_pypi import PypiSimpleRepository
 from python_inspector.utils_pypi import valid_python_version
+import pytest
 
 test_env = FileDrivenTesting()
 test_env.test_data_dir = os.path.join(os.path.dirname(__file__), "data")
@@ -83,6 +84,7 @@ def test_parse_reqs():
     check_json_file_results(result_file, expected_file)
 
 
+@pytest.mark.online
 def test_get_sdist_file():
     sdist_file = fetch_and_extract_sdist(
         repos=tuple([PypiSimpleRepository()]),

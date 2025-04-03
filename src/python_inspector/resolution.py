@@ -83,8 +83,11 @@ def get_requirements_from_distribution(
     if not os.path.exists(location):
         return []
     reqs = []
-    for package_data in handler.parse(location):
-        dependencies = package_data.dependencies
+    try:
+        for package_data in handler.parse(location):
+            dependencies = package_data.dependencies
+    except Exception as e:
+        raise Exception(f"Failed to get_requirements_from_distribution for: {location!r}") from e
     reqs.extend(get_requirements_from_dependencies(dependencies=dependencies))
     return reqs
 
@@ -170,6 +173,8 @@ def is_valid_version(
 
 def get_python_version_from_env_tag(python_version: str) -> str:
     """
+    Return the python version extracted from an environment tag.
+
     >>> assert get_python_version_from_env_tag("310") == "3.10"
     >>> assert get_python_version_from_env_tag("39") == "3.9"
     """
