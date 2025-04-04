@@ -7,12 +7,9 @@
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
-from pydantic import ValidationError
-
-from python_inspector.settings import Settings
+from python_inspector import settings
 
 # Initialize global settings
-try:
-    settings = Settings()
-except ValidationError as e:
-    print(e)
+pyinspector_settings = settings.Settings()
+
+settings.create_cache_directory(pyinspector_settings.CACHE_THIRDPARTY_DIR)

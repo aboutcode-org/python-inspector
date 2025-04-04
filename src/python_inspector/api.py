@@ -27,7 +27,7 @@ from _packagedcode.pypi import PipRequirementsFileHandler
 from _packagedcode.pypi import PythonSetupPyHandler
 from _packagedcode.pypi import can_process_dependent_package
 from python_inspector import dependencies
-from python_inspector import settings
+from python_inspector import pyinspector_settings as settings
 from python_inspector import utils
 from python_inspector import utils_pypi
 from python_inspector.package_data import get_pypi_data_from_purl
@@ -64,8 +64,7 @@ class Resolution(NamedTuple):
             # clean file paths
             for file in files:
                 path = file["path"]
-                file["path"] = utils.remove_test_data_dir_variable_prefix(
-                    path=path)
+                file["path"] = utils.remove_test_data_dir_variable_prefix(path=path)
         return {
             "files": files,
             "packages": [package for package in self.packages],
@@ -102,11 +101,11 @@ def resolve_dependencies(
     linux OS.
 
     Download from the provided PyPI simple index_urls INDEX(s) URLs defaulting
-    to PyPI.org
+    to PyPI.org or a configured setting.
     """
 
     if not operating_system:
-        raise Exception("No operating system provided.")
+        raise Exception(f"No operating system provided.")
     if operating_system not in PLATFORMS_BY_OS:
         raise ValueError(
             f"Invalid operating system: {operating_system}. "
@@ -114,7 +113,7 @@ def resolve_dependencies(
         )
 
     if not python_version:
-        raise Exception("No python version provided.")
+        raise Exception(f"No python version provided.")
     if python_version not in valid_python_versions:
         raise ValueError(
             f"Invalid python version: {python_version}. "
@@ -149,22 +148,16 @@ def resolve_dependencies(
 
     # requirements
     for req_file in requirement_files:
-        deps = dependencies.get_dependencies_from_requirements(
-            requirements_file=req_file)
-        for extra_data in dependencies.get_extra_data_from_requirements(
-            requirements_file=req_file
-        ):
-            index_urls = (
-                *index_urls, *tuple(extra_data.get("extra_index_urls") or []))
-            index_urls = (
-                *index_urls, *tuple(extra_data.get("index_url") or []))
+        deps = dependencies.get_dependencies_from_requirements(requirements_file=req_file)
+        for extra_data in dependencies.get_extra_data_from_requirements(requirements_file=req_file):
+            index_urls = (*index_urls, *tuple(extra_data.get("extra_index_urls") or []))
+            index_urls = (*index_urls, *tuple(extra_data.get("index_url") or []))
         direct_dependencies.extend(deps)
         package_data = [
             pkg_data.to_dict() for pkg_data in PipRequirementsFileHandler.parse(location=req_file)
         ]
         if generic_paths:
-            req_file = utils.remove_test_data_dir_variable_prefix(
-                path=req_file)
+            req_file = utils.remove_test_data_dir_variable_prefix(path=req_file)
 
         files.append(
             dict(
@@ -217,15 +210,13 @@ def resolve_dependencies(
                     files=[setup_py_file],
                     analyze_setup_py_insecurely=analyze_setup_py_insecurely,
                 )
-                setup_py_file_deps = list(
-                    get_dependent_packages_from_reqs(reqs))
+                setup_py_file_deps = list(get_dependent_packages_from_reqs(reqs))
                 direct_dependencies.extend(setup_py_file_deps)
 
         package_data.dependencies = setup_py_file_deps
         file_package_data = [package_data.to_dict()]
         if generic_paths:
-            setup_py_file = utils.remove_test_data_dir_variable_prefix(
-                path=setup_py_file)
+            setup_py_file = utils.remove_test_data_dir_variable_prefix(path=setup_py_file)
         files.append(
             dict(
                 type="file",
@@ -254,29 +245,32 @@ def resolve_dependencies(
     if verbose:
         printer(f"environment: {environment}")
 
-    repos = []
+    repos_by_url = {}
     if not use_pypi_json_api:
         # Collect PyPI repos
+        use_only_confed = settings.USE_ONLY_CONFIGURED_INDEX_URLS
         for index_url in index_urls:
             index_url = index_url.strip("/")
-            if index_url in settings.INDEX_URL:
-                repos.append(PypiSimpleRepository(index_url))
-            else:
-                credentials = None
-                if parsed_netrc:
-                    login, password = utils.get_netrc_auth(
-                        index_url, parsed_netrc)
-                    credentials = (
-                        dict(login=login,
-                             password=password) if login and password else None
-                    )
-                repo = PypiSimpleRepository(
-                    index_url=index_url,
-                    use_cached_index=use_cached_index,
-                    credentials=credentials,
-                )
-                repos.append(repo)
+            if use_only_confed and index_url not in settings.INDEX_URL:
+                if verbose:
+                    printer(f"Skipping index URL unknown in settings: {index_url!r}")
+                continue
+            if index_url in repos_by_url:
+                continue
 
+            credentials = None
+            if parsed_netrc:
+                login, password = utils.get_netrc_auth(index_url, parsed_netrc)
+                if login and password:
+                    credentials = dict(login=login, password=password)
+            repo = utils_pypi.PypiSimpleRepository(
+                index_url=index_url,
+                use_cached_index=use_cached_index,
+                credentials=credentials,
+            )
+            repos_by_url[index_url] = repo
+
+    repos = repos_by_url.values()
     if verbose:
         printer("repos:")
         for repo in repos:
@@ -363,8 +357,8 @@ def resolve(
 
 def get_resolved_dependencies(
     requirements: List[Requirement],
-    environment: Environment,
-    repos: Sequence[PypiSimpleRepository] = tuple(),
+    environment: Environment = None,
+    repos: Sequence[utils_pypi.PypiSimpleRepository] = tuple(),
     as_tree: bool = False,
     max_rounds: int = 200000,
     pdt_output: bool = False,
@@ -379,7 +373,6 @@ def get_resolved_dependencies(
     Used the provided ``repos`` list of PypiSimpleRepository.
     If empty, use instead the PyPI.org JSON API exclusively instead
     """
-
     resolver = Resolver(
         provider=PythonInputProvider(
             environment=environment,
@@ -389,12 +382,8 @@ def get_resolved_dependencies(
         ),
         reporter=BaseReporter(),
     )
-
-    resolver_results = resolver.resolve(
-        requirements=requirements, max_rounds=max_rounds)
-
+    resolver_results = resolver.resolve(requirements=requirements, max_rounds=max_rounds)
     package_list = get_package_list(results=resolver_results)
-
     if pdt_output:
         return (format_pdt_tree(resolver_results), package_list)
     return (

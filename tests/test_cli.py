@@ -130,10 +130,12 @@ def test_cli_with_single_index_url_except_pypi_simple():
         "single-url-except-simple-expected.json", must_exist=False
     )
     # using flask since it's not present in thirdparty
-    specifier = "requests"
+    specifier = "flask"
     extra_options = [
         "--index-url",
         "https://thirdparty.aboutcode.org/pypi/simple/",
+        "--index-url",
+        "https://pypi.org/simple/",
     ]
     check_specs_resolution(
         specifier=specifier,
@@ -219,14 +221,14 @@ def test_cli_with_azure_devops_with_python_312():
 
 
 @pytest.mark.online
-def test_cli_with_azure_devops_with_python_39():
+def test_cli_with_azure_devops_with_python_38():
     requirements_file = test_env.get_test_loc("azure-devops.req.txt")
-    expected_file = test_env.get_test_loc("azure-devops.req-39-expected.json", must_exist=False)
+    expected_file = test_env.get_test_loc("azure-devops.req-38-expected.json", must_exist=False)
     extra_options = [
         "--operating-system",
         "linux",
         "--python-version",
-        "39",
+        "38",
     ]
     check_requirements_resolution(
         requirements_file=requirements_file,
@@ -399,7 +401,7 @@ def check_specs_resolution(
 
 def append_os_and_pyver_options(options):
     if "--python-version" not in options:
-        options.extend(["--python-version", "39"])
+        options.extend(["--python-version", "38"])
     if "--operating-system" not in options:
         options.extend(["--operating-system", "linux"])
     return options
@@ -439,12 +441,30 @@ def test_passing_of_no_json_output_flag():
 
 
 def test_passing_of_no_os():
-    options = ["--specifier", "foo", "--json", "-", "--python-version", "39"]
+    options = [
+        "--specifier",
+        "foo",
+        "--json",
+        "-",
+        "--python-version",
+        "38",
+        "--operating-system",
+        "",
+    ]
     run_cli(options=options, expected_rc=2, get_env=False)
 
 
 def test_passing_of_no_pyver():
-    options = ["--specifier", "foo", "--json", "-", "--operating-system", "linux"]
+    options = [
+        "--specifier",
+        "foo",
+        "--json",
+        "-",
+        "--operating-system",
+        "linux",
+        "--python-version",
+        "",
+    ]
     run_cli(options=options, expected_rc=2, get_env=False)
 
 

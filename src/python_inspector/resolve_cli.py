@@ -13,7 +13,7 @@ from typing import Dict
 
 import click
 
-from python_inspector import settings
+from python_inspector import pyinspector_settings as settings
 from python_inspector import utils_pypi
 from python_inspector.cli_utils import FileOptionType
 from python_inspector.utils import write_output_in_file
@@ -22,8 +22,7 @@ TRACE = False
 
 __version__ = "0.12.0"
 
-DEFAULT_PYTHON_VERSION = "38"
-PYPI_SIMPLE_URL = "https://pypi.org/simple"
+DEFAULT_PYTHON_VERSION = settings.DEFAULT_PYTHON_VERSION
 
 
 def print_version(ctx, param, value):
@@ -72,6 +71,7 @@ def print_version(ctx, param, value):
     "python_version",
     type=click.Choice(utils_pypi.valid_python_versions),
     metavar="PYVER",
+    default=settings.DEFAULT_PYTHON_VERSION,
     show_default=True,
     required=True,
     help="Python version to use for dependency resolution. One of "
@@ -83,19 +83,19 @@ def print_version(ctx, param, value):
     "operating_system",
     type=click.Choice(utils_pypi.PLATFORMS_BY_OS),
     metavar="OS",
+    default=settings.DEFAULT_OS,
     show_default=True,
     required=True,
-    help="OS to use for dependency resolution. One of " +
-    ", ".join(utils_pypi.PLATFORMS_BY_OS),
+    help="OS to use for dependency resolution. One of " + ", ".join(utils_pypi.PLATFORMS_BY_OS),
 )
 @click.option(
     "--index-url",
     "index_urls",
     type=str,
     metavar="INDEX",
-    show_default=False,
+    show_default=True,
+    default=tuple(settings.INDEX_URL),
     multiple=True,
-    required=False,
     help="PyPI simple index URL(s) to use in order of preference. "
     "This option can be used multiple times.",
 )
@@ -230,8 +230,7 @@ def resolve_dependencies(
     from python_inspector.api import resolve_dependencies as resolver_api
 
     if not (json_output or pdt_output):
-        click.secho(
-            "No output file specified. Use --json or --json-pdt.", err=True)
+        click.secho("No output file specified. Use --json or --json-pdt.", err=True)
         ctx.exit(1)
 
     if json_output and pdt_output:
@@ -255,9 +254,6 @@ def resolve_dependencies(
         warnings=[],
         errors=[],
     )
-
-    if index_urls:
-        settings.INDEX_URL = index_urls
 
     try:
         resolution_result: Dict = resolver_api(
@@ -343,8 +339,7 @@ def get_pretty_options(ctx, generic_paths=False):
             value = [value]
 
         for val in value:
-            val = get_pretty_value(param_type=param.type,
-                                   value=val, generic_paths=generic_paths)
+            val = get_pretty_value(param_type=param.type, value=val, generic_paths=generic_paths)
 
             if isinstance(param, click.Argument):
                 args.append(val)
