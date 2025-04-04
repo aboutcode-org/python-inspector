@@ -1,7 +1,7 @@
 Changelog
 =========
 
-v0.13.0
+v0.13.2
 -----------
 
 - Speed up downloads with asyncio
@@ -31,6 +31,15 @@ v0.13.0
 - Add support for the latest Python and OS versions.
 
 - Merge latest skeleton and adopt ruff for code formatting.
+
+
+v0.13.1
+-----------
+
+- Fix ResolutionImpossible for lief==0.15.1 #202
+- Add license expression data from pypi API #208
+- Add python 3.13 in python-inspector #196
+- Update homepage_url and fix CI and tests
 
 
 v0.12.1

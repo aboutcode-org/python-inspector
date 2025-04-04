@@ -20,7 +20,7 @@ from python_inspector.utils import write_output_in_file
 
 TRACE = False
 
-__version__ = "0.12.0"
+__version__ = "0.13.0"
 
 DEFAULT_PYTHON_VERSION = settings.DEFAULT_PYTHON_VERSION
 

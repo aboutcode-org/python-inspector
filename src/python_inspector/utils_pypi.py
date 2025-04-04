@@ -8,6 +8,7 @@
 # See https://github.com/nexB/skeleton for support or download.
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
+import asyncio
 import email
 import itertools
 import os
@@ -17,13 +18,18 @@ import shutil
 import tempfile
 import time
 from collections import defaultdict
+from typing import Dict
 from typing import List
 from typing import NamedTuple
+from typing import Tuple
+from typing import Union
 from urllib.parse import quote_plus
 from urllib.parse import unquote
 from urllib.parse import urlparse
 from urllib.parse import urlunparse
 
+import aiofiles
+import aiohttp
 import attr
 import packageurl
 import requests
@@ -102,7 +108,7 @@ TRACE_DEEP = False
 TRACE_ULTRA_DEEP = False
 
 # Supported environments
-PYTHON_VERSIONS = "27", "36", "37", "38", "39", "310", "311", "312"
+PYTHON_VERSIONS = "27", "36", "37", "38", "39", "310", "311", "312", "313"
 
 PYTHON_DOT_VERSIONS_BY_VER = {
     "27": "2.7",
@@ -113,6 +119,7 @@ PYTHON_DOT_VERSIONS_BY_VER = {
     "310": "3.10",
     "311": "3.11",
     "312": "3.12",
+    "313": "3.13",
 }
 
 valid_python_versions = list(PYTHON_DOT_VERSIONS_BY_VER.keys())
@@ -135,6 +142,7 @@ ABIS_BY_PYTHON_VERSION = {
     "310": ["cp310", "cp310m", "abi3"],
     "311": ["cp311", "cp311m", "abi3"],
     "312": ["cp312", "cp312m", "abi3"],
+    "313": ["cp313", "cp313m", "abi3"],
 }
 
 PLATFORMS_BY_OS = {
@@ -143,6 +151,9 @@ PLATFORMS_BY_OS = {
         "manylinux1_x86_64",
         "manylinux2010_x86_64",
         "manylinux2014_x86_64",
+        "manylinux2014_aarch6",
+        "musllinux_1_2_x86_64",
+        "manylinux_2_33_aarch64",
     ],
     "macos": [
         "macosx_10_6_intel",
@@ -204,7 +215,7 @@ class DistributionNotFound(Exception):
     pass
 
 
-def download_wheel(
+async def download_wheel(
     name,
     version,
     environment,
@@ -230,7 +241,7 @@ def download_wheel(
 
     fetched_wheel_filenames = []
     for repo in repos:
-        supported_and_valid_wheels = get_supported_and_valid_wheels(
+        supported_and_valid_wheels = await get_supported_and_valid_wheels(
             repo, name, version, environment, python_version
         )
         if not supported_and_valid_wheels:
@@ -240,7 +251,7 @@ def download_wheel(
                 )
             continue
         for wheel in supported_and_valid_wheels:
-            fetched_wheel_filename = wheel.download(
+            fetched_wheel_filename = await wheel.download(
                 dest_dir=dest_dir,
                 verbose=verbose,
                 echo_func=echo_func,
@@ -248,13 +259,13 @@ def download_wheel(
             fetched_wheel_filenames.append(fetched_wheel_filename)
 
         if fetched_wheel_filenames:
-            # do not futher fetch from other repos if we find in first, typically PyPI
+            # do not further fetch from other repos if we find in first, typically PyPI
             break
     return fetched_wheel_filenames
 
 
-def get_valid_sdist(repo, name, version, python_version=DEFAULT_PYTHON_VERSION):
-    package = repo.get_package_version(name=name, version=version)
+async def get_valid_sdist(repo, name, version, python_version=DEFAULT_PYTHON_VERSION):
+    package = await repo.get_package_version(name=name, version=version)
     if not package:
         if TRACE_DEEP:
             print(
@@ -271,19 +282,17 @@ def get_valid_sdist(repo, name, version, python_version=DEFAULT_PYTHON_VERSION):
     ):
         return
     if TRACE_DEEP:
-        print(
-            f"    get_valid_sdist: Getting sdist from index (or cache): {sdist.download_url(repo)}"
-        )
+        print(f"    get_valid_sdist: Getting sdist from index (or cache): {sdist.download_url}")
     return sdist
 
 
-def get_supported_and_valid_wheels(
+async def get_supported_and_valid_wheels(
     repo, name, version, environment, python_version=DEFAULT_PYTHON_VERSION
 ) -> List:
     """
     Return a list of wheels matching the ``environment`` Environment constraints.
     """
-    package = repo.get_package_version(name=name, version=version)
+    package = await repo.get_package_version(name=name, version=version)
     if not package:
         if TRACE_DEEP:
             print(
@@ -306,7 +315,7 @@ def get_supported_and_valid_wheels(
         if TRACE_DEEP:
             print(
                 f"""    get_supported_and_valid_wheels: Getting wheel from index (or cache):
-                {wheel.download_url(repo)}"""
+                {await wheel.download_url(repo)}"""
             )
         wheels.append(wheel)
     return wheels
@@ -321,7 +330,7 @@ def valid_python_version(python_version, python_requires):
     return python_version in SpecifierSet(python_requires)
 
 
-def download_sdist(
+async def download_sdist(
     name,
     version,
     dest_dir=CACHE_THIRDPARTY_DIR,
@@ -346,19 +355,19 @@ def download_sdist(
     fetched_sdist_filename = None
 
     for repo in repos:
-        sdist = get_valid_sdist(repo, name, version, python_version=python_version)
+        sdist = await get_valid_sdist(repo, name, version, python_version=python_version)
         if not sdist:
             if TRACE_DEEP:
                 print(f"    download_sdist: No valid sdist for {name}=={version}")
             continue
-        fetched_sdist_filename = sdist.download(
+        fetched_sdist_filename = await sdist.download(
             dest_dir=dest_dir,
             verbose=verbose,
             echo_func=echo_func,
         )
 
         if fetched_sdist_filename:
-            # do not futher fetch from other repos if we find in first, typically PyPI
+            # do not further fetch from other repos if we find in first, typically PyPI
             break
 
     return fetched_sdist_filename
@@ -596,12 +605,12 @@ class Distribution(NameVer):
             )
         )
 
-    def download_url(self, repo):
+    async def download_url(self, repo):
         if not repo:
             raise ValueError("download_url: missing repo")
-        return self.get_best_download_url(repos=(repo,))
+        return await self.get_best_download_url(repos=(repo,))
 
-    def get_best_download_url(self, repos=tuple()):
+    async def get_best_download_url(self, repos=tuple()):
         """
         Return the best download URL for this distribution where best means this
         is the first URL found for this distribution found in the list of
@@ -614,7 +623,7 @@ class Distribution(NameVer):
             raise ValueError("get_best_download_url: missing repos")
 
         for repo in repos:
-            package = repo.get_package_version(name=self.name, version=self.version)
+            package = await repo.get_package_version(name=self.name, version=self.version)
             if not package:
                 if TRACE:
                     print(
@@ -631,7 +640,7 @@ class Distribution(NameVer):
                         f"     get_best_download_url: {self.filename} not found in {repo.index_url}"
                     )
 
-    def download(
+    async def download(
         self,
         dest_dir=CACHE_THIRDPARTY_DIR,
         verbose=False,
@@ -649,7 +658,7 @@ class Distribution(NameVer):
             )
 
         # FIXME:
-        fetch_and_save(
+        await fetch_and_save(
             path_or_url=self.path_or_url,
             dest_dir=dest_dir,
             credentials=self.credentials,
@@ -1254,12 +1263,12 @@ class PypiPackage(NameVer):
         return package
 
     @classmethod
-    def packages_from_links(cls, links: List[Link]):
+    async def packages_from_links(cls, links: List[Link]):
         """
         Yield PypiPackages built from a list of paths or URLs.
         These are sorted by name and then by version from oldest to newest.
         """
-        dists = PypiPackage.dists_from_links(links)
+        dists = await PypiPackage.dists_from_links(links)
         if TRACE_ULTRA_DEEP:
             print("packages_from_many_paths_or_urls: dists:", dists)
 
@@ -1275,7 +1284,7 @@ class PypiPackage(NameVer):
             yield package
 
     @classmethod
-    def dists_from_links(cls, links: List[Link]):
+    async def dists_from_links(cls, links: List[Link]):
         """
         Return a list of Distribution given a list of
         ``paths_or_urls`` to wheels or source distributions.
@@ -1293,7 +1302,7 @@ class PypiPackage(NameVer):
         ...     Link(url="https://example.com/bar/bitarray-0.8.1.tar.gz",python_requires= ">=3.7"),
         ...     Link(url="bitarray-0.8.1.tar.gz.ABOUT",python_requires= ">=3.7"),
         ...     Link(url="bit.LICENSE", python_requires=">=3.7")]
-        >>> results = list(PypiPackage.dists_from_links(links))
+        >>> results = list(asyncio.run(PypiPackage.dists_from_links(links)))
         >>> for r in results:
         ...    print(r.__class__.__name__, r.name, r.version)
         ...    if isinstance(r, Wheel):
@@ -1488,7 +1497,7 @@ class PypiSimpleRepository:
 
     credentials = attr.ib(type=dict, default=None)
 
-    def _get_package_versions_map(
+    async def _get_package_versions_map(
         self,
         name,
         verbose=False,
@@ -1504,7 +1513,7 @@ class PypiSimpleRepository:
         if not versions and normalized_name not in self.fetched_package_normalized_names:
             self.fetched_package_normalized_names.add(normalized_name)
             try:
-                links = self.fetch_links(
+                links = await self.fetch_links(
                     normalized_name=normalized_name,
                     verbose=verbose,
                     echo_func=echo_func,
@@ -1512,7 +1521,7 @@ class PypiSimpleRepository:
                 # note that this is sorted so the mapping is also sorted
                 versions = {
                     package.version: package
-                    for package in PypiPackage.packages_from_links(links=links)
+                    async for package in PypiPackage.packages_from_links(links=links)
                 }
                 self.packages[normalized_name] = versions
             except RemoteNotFetchedException as e:
@@ -1524,26 +1533,26 @@ class PypiSimpleRepository:
 
         return versions
 
-    def get_package_versions(
+    async def get_package_versions(
         self,
         name,
         verbose=False,
         echo_func=None,
-    ):
+    ) -> Dict:
         """
         Return a mapping of all available PypiPackage version as{version:
         package} for this package name. The mapping may be empty but not None.
         It is sorted by version from oldest to newest.
         """
         return dict(
-            self._get_package_versions_map(
+            await self._get_package_versions_map(
                 name=name,
                 verbose=verbose,
                 echo_func=echo_func,
             )
         )
 
-    def get_package_version(
+    async def get_package_version(
         self,
         name,
         version=None,
@@ -1556,22 +1565,26 @@ class PypiSimpleRepository:
         """
         if not version:
             versions = list(
-                self._get_package_versions_map(
-                    name=name,
-                    verbose=verbose,
-                    echo_func=echo_func,
+                (
+                    await self._get_package_versions_map(
+                        name=name,
+                        verbose=verbose,
+                        echo_func=echo_func,
+                    )
                 ).values()
             )
             # return the latest version
             return versions and versions[-1]
         else:
-            return self._get_package_versions_map(
-                name=name,
-                verbose=verbose,
-                echo_func=echo_func,
+            return (
+                await self._get_package_versions_map(
+                    name=name,
+                    verbose=verbose,
+                    echo_func=echo_func,
+                )
             ).get(version)
 
-    def fetch_links(
+    async def fetch_links(
         self,
         normalized_name,
         verbose=False,
@@ -1582,7 +1595,7 @@ class PypiSimpleRepository:
         name using the `index_url` of this repository.
         """
         package_url = f"{self.index_url}/{normalized_name}"
-        text = CACHE.get(
+        text, _ = await CACHE.get(
             path_or_url=package_url,
             credentials=self.credentials,
             as_text=True,
@@ -1648,7 +1661,7 @@ class Cache:
     def __attrs_post_init__(self):
         os.makedirs(self.directory, exist_ok=True)
 
-    def get(
+    async def get(
         self,
         credentials,
         path_or_url,
@@ -1656,7 +1669,7 @@ class Cache:
         force=False,
         verbose=False,
         echo_func=None,
-    ):
+    ) -> Tuple[Union[str, bytes], str]:
         """
         Return the content fetched from a ``path_or_url`` through the cache.
         Raise an Exception on errors. Treats the content as text if as_text is
@@ -1669,7 +1682,7 @@ class Cache:
         if force or not os.path.exists(cached):
             if TRACE_DEEP:
                 print(f"        FILE CACHE MISS: {path_or_url}")
-            content = get_file_content(
+            content = await get_file_content(
                 path_or_url=path_or_url,
                 credentials=credentials,
                 as_text=as_text,
@@ -1677,19 +1690,19 @@ class Cache:
                 echo_func=echo_func,
             )
             wmode = "w" if as_text else "wb"
-            with open(cached, wmode) as fo:
-                fo.write(content)
-            return content
+            async with aiofiles.open(cached, mode=wmode) as fo:
+                await fo.write(content)
+            return content, cached
         else:
             if TRACE_DEEP:
                 print(f"        FILE CACHE HIT: {path_or_url}")
-            return get_local_file_content(path=cached, as_text=as_text)
+            return await get_local_file_content(path=cached, as_text=as_text), cached
 
 
 CACHE = Cache()
 
 
-def get_file_content(
+async def get_file_content(
     path_or_url,
     credentials,
     as_text=True,
@@ -1703,7 +1716,7 @@ def get_file_content(
     if path_or_url.startswith("https://"):
         if TRACE_DEEP:
             print(f"Fetching: {path_or_url}")
-        _headers, content = get_remote_file_content(
+        _headers, content = await get_remote_file_content(
             url=path_or_url,
             credentials=credentials,
             as_text=as_text,
@@ -1715,13 +1728,13 @@ def get_file_content(
     elif path_or_url.startswith("file://") or (
         path_or_url.startswith("/") and os.path.exists(path_or_url)
     ):
-        return get_local_file_content(path=path_or_url, as_text=as_text)
+        return await get_local_file_content(path=path_or_url, as_text=as_text)
 
     else:
         raise Exception(f"Unsupported URL scheme: {path_or_url}")
 
 
-def get_local_file_content(path, as_text=True):
+async def get_local_file_content(path: str, as_text=True) -> str:
     """
     Return the content at `url` as text. Return the content as bytes is
     `as_text` is False.
@@ -1730,15 +1743,15 @@ def get_local_file_content(path, as_text=True):
         path = path[7:]
 
     mode = "r" if as_text else "rb"
-    with open(path, mode) as fo:
-        return fo.read()
+    async with aiofiles.open(path, mode=mode) as fo:
+        return await fo.read()
 
 
 class RemoteNotFetchedException(Exception):
     pass
 
 
-def get_remote_file_content(
+async def get_remote_file_content(
     url,
     credentials,
     as_text=True,
@@ -1750,7 +1763,7 @@ def get_remote_file_content(
 ):
     """
     Fetch and return a tuple of (headers, content) at `url`. Return content as a
-    text string if `as_text` is True. Otherwise return the content as bytes.
+    text string if `as_text` is True. Otherwise, return the content as bytes.
 
     If `header_only` is True, return only (headers, None). Headers is a mapping
     of HTTP headers.
@@ -1759,7 +1772,7 @@ def get_remote_file_content(
     """
     time.sleep(_delay)
     headers = headers or {}
-    # using a GET with stream=True ensure we get the the final header from
+    # using a GET with stream=True ensure we get the final header from
     # several redirects and that we can ignore content there. A HEAD request may
     # not get us this last header
     if verbose and not echo_func:
@@ -1771,39 +1784,32 @@ def get_remote_file_content(
     if credentials:
         auth = (credentials.get("login"), credentials.get("password"))
 
-    stream = requests.get(
-        url,
-        allow_redirects=True,
-        stream=True,
-        headers=headers,
-        auth=auth,
-    )
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url, allow_redirects=True, headers=headers, auth=auth) as response:
+            status = response.status
+            if status != requests.codes.ok:  # NOQA
+                if status == 429 and _delay < 20:
+                    # too many requests: start some exponential delay
+                    increased_delay = (_delay * 2) or 1
 
-    with stream as response:
-        status = response.status_code
-        if status != requests.codes.ok:  # NOQA
-            if status == 429 and _delay < 20:
-                # too many requests: start some exponential delay
-                increased_delay = (_delay * 2) or 1
+                    return await get_remote_file_content(
+                        url,
+                        credentials=credentials,
+                        as_text=as_text,
+                        headers_only=headers_only,
+                        _delay=increased_delay,
+                    )
 
-                return get_remote_file_content(
-                    url,
-                    credentials=credentials,
-                    as_text=as_text,
-                    headers_only=headers_only,
-                    _delay=increased_delay,
-                )
+                else:
+                    raise RemoteNotFetchedException(f"Failed HTTP request from {url} with {status}")
 
-            else:
-                raise RemoteNotFetchedException(f"Failed HTTP request from {url} with {status}")
+            if headers_only:
+                return response.headers, None
 
-        if headers_only:
-            return response.headers, None
-
-        return response.headers, response.text if as_text else response.content
+            return response.headers, await response.text() if as_text else await response.read()
 
 
-def fetch_and_save(
+async def fetch_and_save(
     path_or_url,
     dest_dir,
     filename,
@@ -1814,21 +1820,23 @@ def fetch_and_save(
 ):
     """
     Fetch content at ``path_or_url`` URL or path and save this to
-    ``dest_dir/filername``. Return the fetched content. Raise an Exception on
+    ``dest_dir/filename``. Return the fetched content. Raise an Exception on
     errors. Treats the content as text if as_text is True otherwise as treat as
     binary.
     """
-    content = CACHE.get(
+    content, path = await CACHE.get(
         path_or_url=path_or_url,
         credentials=credentials,
         as_text=as_text,
         verbose=verbose,
         echo_func=echo_func,
     )
+
     output = os.path.join(dest_dir, filename)
-    wmode = "w" if as_text else "wb"
-    with open(output, wmode) as fo:
-        fo.write(content)
+    if os.path.exists(output):
+        os.remove(output)
+
+    os.symlink(os.path.abspath(path), output)
     return content
 
 
