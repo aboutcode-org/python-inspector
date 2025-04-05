@@ -1,0 +1,70 @@
+[
+  [
+    {
+      "package": "pkg:pypi/click@8.0.4",
+      "dependencies": [
+        "pkg:pypi/importlib-metadata@4.8.3"
+      ]
+    },
+    {
+      "package": "pkg:pypi/dataclasses@0.8",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/flask@2.0.3",
+      "dependencies": [
+        "pkg:pypi/click@8.0.4",
+        "pkg:pypi/itsdangerous@2.0.1",
+        "pkg:pypi/jinja2@3.0.3",
+        "pkg:pypi/werkzeug@2.0.3"
+      ]
+    },
+    {
+      "package": "pkg:pypi/importlib-metadata@4.8.3",
+      "dependencies": [
+        "pkg:pypi/typing-extensions@4.1.1",
+        "pkg:pypi/zipp@3.6.0"
+      ]
+    },
+    {
+      "package": "pkg:pypi/itsdangerous@2.0.1",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/jinja2@3.0.3",
+      "dependencies": [
+        "pkg:pypi/markupsafe@2.0.1"
+      ]
+    },
+    {
+      "package": "pkg:pypi/markupsafe@2.0.1",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/typing-extensions@4.1.1",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/werkzeug@2.0.3",
+      "dependencies": [
+        "pkg:pypi/dataclasses@0.8"
+      ]
+    },
+    {
+      "package": "pkg:pypi/zipp@3.6.0",
+      "dependencies": []
+    }
+  ],
+  [
+    "pkg:pypi/click@8.0.4",
+    "pkg:pypi/dataclasses@0.8",
+    "pkg:pypi/flask@2.0.3",
+    "pkg:pypi/importlib-metadata@4.8.3",
+    "pkg:pypi/itsdangerous@2.0.1",
+    "pkg:pypi/jinja2@3.0.3",
+    "pkg:pypi/markupsafe@2.0.1",
+    "pkg:pypi/typing-extensions@4.1.1",
+    "pkg:pypi/werkzeug@2.0.3",
+    "pkg:pypi/zipp@3.6.0"
+  ]
+]
