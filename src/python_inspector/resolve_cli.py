@@ -321,9 +321,6 @@ def get_pretty_options(ctx, generic_paths=False):
         if getattr(param, "hidden", False):
             continue
 
-        if value == param.default:
-            continue
-
         if value in (None, False):
             continue
 

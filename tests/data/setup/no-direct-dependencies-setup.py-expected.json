@@ -5,7 +5,9 @@
     "tool_version": "0.13.0",
     "options": [
       "--analyze-setup-py-insecurely",
+      "--index-url https://pypi.org/simple",
       "--json <file>",
+      "--operating-system linux",
       "--python-version 27",
       "--setup-py tests/data/setup/no-direct-dependencies-setup.py"
     ],

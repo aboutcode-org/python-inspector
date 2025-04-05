@@ -7,6 +7,7 @@
       "--index-url https://pypi.org/simple",
       "--index-url https://thirdparty.aboutcode.org/pypi/simple/",
       "--json <file>",
+      "--operating-system linux",
       "--python-version 38",
       "--specifier zipp~=3.8.0"
     ],

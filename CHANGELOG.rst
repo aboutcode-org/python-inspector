@@ -25,6 +25,10 @@ v0.13.2
 
   - python_inspector.utils_pypi.Distribution.download_url is now a method, not a property
 
+  - The command line has again a default OS and Python version set.
+
+  - Default option values are reported in the JSON results. They were skipped before.
+
 - Drop support for running on Python 3.8. You can still resolve dependencies for Python 3.8.
   The default command line tool Python version used for resolution is now 3.9.
 
