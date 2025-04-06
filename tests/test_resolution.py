@@ -16,6 +16,7 @@ import pytest
 from commoncode.system import on_mac
 from commoncode.testcase import FileDrivenTesting
 from packvers.requirements import Requirement
+from test_cli import check_data_results
 
 from _packagedcode import models
 from python_inspector.api import get_resolved_dependencies
@@ -25,166 +26,139 @@ from python_inspector.resolution import get_requirements_from_dependencies
 from python_inspector.resolution import get_requirements_from_python_manifest
 from python_inspector.resolution import is_valid_version
 from python_inspector.resolution import parse_reqs_from_setup_py_insecurely
-from python_inspector.utils_pypi import PYPI_PUBLIC_REPO
 from python_inspector.utils_pypi import Environment
 from python_inspector.utils_pypi import PypiSimpleRepository
+from python_inspector.utils_pypi import get_current_indexes
 
-setup_test_env = FileDrivenTesting()
-setup_test_env.test_data_dir = os.path.join(os.path.dirname(__file__), "data")
+# Used for tests to regenerate fixtures with regen=True
+REGEN_TEST_FIXTURES = os.getenv("PYINSP_REGEN_TEST_FIXTURES", False)
+
+test_env = FileDrivenTesting()
+test_env.test_data_dir = os.path.join(os.path.dirname(__file__), "data")
+
+
+def check_get_resolved_dependencies(
+    requirement: Requirement,
+    expected_file,
+    python_version,
+    operating_system,
+    repos=None,
+    as_tree=False,
+    regen=REGEN_TEST_FIXTURES,
+):
+    env = Environment(python_version=python_version, operating_system=operating_system)
+
+    results = list(
+        get_resolved_dependencies(
+            requirements=[requirement],
+            environment=env,
+            repos=repos or get_current_indexes(),
+            as_tree=as_tree,
+        )
+    )
+    check_data_results(results=results, expected_file=expected_file, regen=regen)
 
 
 @pytest.mark.online
 def test_get_resolved_dependencies_with_flask_and_python_310():
     req = Requirement("flask==2.1.2")
     req.is_requirement_resolved = True
-    _, plist = get_resolved_dependencies(
-        requirements=[req],
-        environment=Environment(
-            python_version="310",
-            operating_system="linux",
-        ),
-        repos=[PYPI_PUBLIC_REPO],
+
+    expected_file = test_env.get_test_loc("resolved_deps/flask-310-expected.json", must_exist=False)
+
+    check_get_resolved_dependencies(
+        req,
+        expected_file=expected_file,
+        python_version="310",
+        operating_system="linux",
         as_tree=False,
     )
-    assert plist == [
-        "pkg:pypi/click@8.1.8",
-        "pkg:pypi/flask@2.1.2",
-        "pkg:pypi/itsdangerous@2.2.0",
-        "pkg:pypi/jinja2@3.1.6",
-        "pkg:pypi/markupsafe@3.0.2",
-        "pkg:pypi/werkzeug@3.1.3",
-    ]
 
 
 @pytest.mark.online
 def test_get_resolved_dependencies_with_flask_and_python_310_windows():
     req = Requirement("flask==2.1.2")
     req.is_requirement_resolved = True
-    _, plist = get_resolved_dependencies(
-        requirements=[req],
-        environment=Environment(
-            python_version="310",
-            operating_system="windows",
-        ),
-        repos=[PYPI_PUBLIC_REPO],
+
+    expected_file = test_env.get_test_loc(
+        "resolved_deps/flask-310-win-expected.json", must_exist=False
+    )
+
+    check_get_resolved_dependencies(
+        req,
+        expected_file=expected_file,
+        python_version="310",
+        operating_system="windows",
         as_tree=False,
     )
-    assert plist == [
-        "pkg:pypi/click@8.1.8",
-        "pkg:pypi/colorama@0.4.6",
-        "pkg:pypi/flask@2.1.2",
-        "pkg:pypi/itsdangerous@2.2.0",
-        "pkg:pypi/jinja2@3.1.6",
-        "pkg:pypi/markupsafe@3.0.2",
-        "pkg:pypi/werkzeug@3.1.3",
-    ]
 
 
 @pytest.mark.online
 def test_get_resolved_dependencies_with_flask_and_python_36():
     req = Requirement("flask")
     req.is_requirement_resolved = False
-    _, plist = get_resolved_dependencies(
-        requirements=[req],
-        environment=Environment(
-            python_version="36",
-            operating_system="linux",
-        ),
-        repos=[PYPI_PUBLIC_REPO],
+
+    expected_file = test_env.get_test_loc("resolved_deps/flask-36-expected.json", must_exist=False)
+
+    check_get_resolved_dependencies(
+        req,
+        expected_file=expected_file,
+        python_version="36",
+        operating_system="linux",
         as_tree=False,
     )
-
-    assert plist == [
-        "pkg:pypi/click@8.0.4",
-        "pkg:pypi/dataclasses@0.8",
-        "pkg:pypi/flask@2.0.3",
-        "pkg:pypi/importlib-metadata@4.8.3",
-        "pkg:pypi/itsdangerous@2.0.1",
-        "pkg:pypi/jinja2@3.0.3",
-        "pkg:pypi/markupsafe@2.0.1",
-        "pkg:pypi/typing-extensions@4.1.1",
-        "pkg:pypi/werkzeug@2.0.3",
-        "pkg:pypi/zipp@3.6.0",
-    ]
 
 
 @pytest.mark.online
 def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
     req = Requirement("flask~=2.1.2")
     req.is_requirement_resolved = False
-    _, plist = get_resolved_dependencies(
-        requirements=[req],
+
+    expected_file = test_env.get_test_loc("resolved_deps/flask-39-expected.json", must_exist=False)
+
+    check_get_resolved_dependencies(
+        req,
+        expected_file=expected_file,
+        python_version="39",
+        operating_system="linux",
         as_tree=False,
-        environment=Environment(
-            python_version="38",
-            operating_system="linux",
-        ),
     )
-    assert plist == [
-        "pkg:pypi/click@8.1.8",
-        "pkg:pypi/flask@2.1.3",
-        "pkg:pypi/importlib-metadata@8.6.1",
-        "pkg:pypi/itsdangerous@2.2.0",
-        "pkg:pypi/jinja2@3.1.6",
-        "pkg:pypi/markupsafe@3.0.2",
-        "pkg:pypi/werkzeug@3.1.3",
-        "pkg:pypi/zipp@3.21.0",
-    ]
 
 
 @pytest.mark.online
 @pytest.mark.skipif(on_mac, reason="torch is only available for linux and windows.")
 def test_get_resolved_dependencies_for_version_containing_local_version_identifier():
-    req = Requirement("torch==2.0.0+cpu")
+    req = Requirement("torchcodec==0.2.0+cu124")
     req.is_requirement_resolved = True
-    _, plist = get_resolved_dependencies(
-        requirements=[req],
-        environment=Environment(
-            python_version="310",
-            operating_system="linux",
-        ),
-        repos=[
-            PypiSimpleRepository(index_url="https://download.pytorch.org/whl/cpu", credentials=None)
-        ],
+
+    repos = [PypiSimpleRepository(index_url="https://download.pytorch.org/whl")]
+    expected_file = test_env.get_test_loc("resolved_deps/torch-312-expected.json", must_exist=False)
+
+    check_get_resolved_dependencies(
+        req,
+        expected_file=expected_file,
+        python_version="312",
+        operating_system="linux",
+        repos=repos,
         as_tree=False,
     )
-
-    assert plist == [
-        "pkg:pypi/filelock@3.13.1",
-        "pkg:pypi/jinja2@3.1.4",
-        "pkg:pypi/markupsafe@2.1.5",
-        "pkg:pypi/mpmath@1.3.0",
-        "pkg:pypi/networkx@3.3",
-        "pkg:pypi/sympy@1.13.1",
-        "pkg:pypi/torch@2.0.0%2Bcpu",
-        "pkg:pypi/typing-extensions@4.12.2",
-    ]
 
 
 @pytest.mark.online
 def test_without_supported_wheels():
     req = Requirement("autobahn==22.3.2")
     req.is_requirement_resolved = True
-    _, plist = get_resolved_dependencies(
-        requirements=[req],
-        as_tree=False,
-        repos=[PYPI_PUBLIC_REPO],
-        environment=Environment(
-            python_version="38",
-            operating_system="linux",
-        ),
+    expected_file = test_env.get_test_loc(
+        "resolved_deps/autobahn-310-expected.json", must_exist=False
     )
 
-    assert plist == [
-        "pkg:pypi/autobahn@22.3.2",
-        "pkg:pypi/cffi@1.17.1",
-        "pkg:pypi/cryptography@44.0.2",
-        "pkg:pypi/hyperlink@21.0.0",
-        "pkg:pypi/idna@3.10",
-        "pkg:pypi/pycparser@2.22",
-        "pkg:pypi/setuptools@75.3.2",
-        "pkg:pypi/txaio@23.1.1",
-    ]
+    check_get_resolved_dependencies(
+        req,
+        expected_file=expected_file,
+        python_version="39",
+        operating_system="linux",
+        as_tree=False,
+    )
 
 
 def test_is_valid_version():
@@ -315,13 +289,13 @@ def test_get_requirements_from_python_manifest_securely():
 
 
 def test_setup_py_parsing_insecure():
-    setup_py_file = setup_test_env.get_test_loc("insecure-setup/setup.py")
+    setup_py_file = test_env.get_test_loc("insecure-setup/setup.py")
     reqs = [str(req) for req in list(parse_reqs_from_setup_py_insecurely(setup_py=setup_py_file))]
     assert reqs == ["isodate", "pyparsing", "six"]
 
 
 def test_setup_py_parsing_insecure_testpkh():
-    setup_py_file = setup_test_env.get_test_loc("insecure-setup-2/setup.py")
+    setup_py_file = test_env.get_test_loc("insecure-setup-2/setup.py")
     reqs = [str(req) for req in list(parse_reqs_from_setup_py_insecurely(setup_py=setup_py_file))]
     assert reqs == [
         "CairoSVG<2.0.0,>=1.0.20",
@@ -334,7 +308,8 @@ def test_setup_py_parsing_insecure_testpkh():
 
 @patch("python_inspector.resolution.PythonInputProvider.get_versions_for_package")
 def test_iter_matches(mock_versions):
+    repos = get_current_indexes()
     mock_versions.return_value = []
-    provider = PythonInputProvider()
+    provider = PythonInputProvider(repos=repos)
     with pytest.raises(NoVersionsFound):
         list(provider._iter_matches("foo-bar", {"foo-bar": []}, {"foo-bar": []}))

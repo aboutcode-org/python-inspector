@@ -134,6 +134,8 @@ def test_cli_with_single_index_url_except_pypi_simple():
     extra_options = [
         "--index-url",
         "https://thirdparty.aboutcode.org/pypi/simple/",
+        "--index-url",
+        "https://pypi.org/simple/",
     ]
     check_specs_resolution(
         specifier=specifier,
@@ -457,12 +459,30 @@ def test_passing_of_no_json_output_flag():
 
 
 def test_passing_of_no_os():
-    options = ["--specifier", "foo", "--json", "-", "--python-version", "38"]
+    options = [
+        "--specifier",
+        "foo",
+        "--json",
+        "-",
+        "--python-version",
+        "38",
+        "--operating-system",
+        "",
+    ]
     run_cli(options=options, expected_rc=2, get_env=False)
 
 
 def test_passing_of_no_pyver():
-    options = ["--specifier", "foo", "--json", "-", "--operating-system", "linux"]
+    options = [
+        "--specifier",
+        "foo",
+        "--json",
+        "-",
+        "--operating-system",
+        "linux",
+        "--python-version",
+        "",
+    ]
     run_cli(options=options, expected_rc=2, get_env=False)
 
 
