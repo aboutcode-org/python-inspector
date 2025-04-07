@@ -8,13 +8,14 @@
 # See https://aboutcode-orgnexB/python-inspector for support or download.
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
-
+import asyncio
 import os
 from netrc import netrc
 from typing import Dict
 from typing import List
 from typing import NamedTuple
 from typing import Sequence
+from typing import Tuple
 
 from packageurl import PackageURL
 from packvers.requirements import Requirement
@@ -26,7 +27,7 @@ from _packagedcode.models import PackageData
 from _packagedcode.pypi import PipRequirementsFileHandler
 from _packagedcode.pypi import PythonSetupPyHandler
 from _packagedcode.pypi import can_process_dependent_package
-from python_inspector import DEFAULT_PYTHON_VERSION
+from _packagedcode.pypi import get_resolved_purl
 from python_inspector import dependencies
 from python_inspector import utils
 from python_inspector import utils_pypi
@@ -39,6 +40,7 @@ from python_inspector.resolution import get_package_list
 from python_inspector.resolution import get_python_version_from_env_tag
 from python_inspector.resolution import get_reqs_insecurely
 from python_inspector.resolution import get_requirements_from_python_manifest
+from python_inspector.utils import Candidate
 from python_inspector.utils_pypi import PLATFORMS_BY_OS
 from python_inspector.utils_pypi import PYPI_SIMPLE_URL
 from python_inspector.utils_pypi import Environment
@@ -54,7 +56,7 @@ class Resolution(NamedTuple):
     ``files`` is a parsed list of input file data.
     """
 
-    resolution: Dict
+    resolution: List[Dict]
     packages: List[PackageData]
     files: List[Dict]
 
@@ -64,8 +66,7 @@ class Resolution(NamedTuple):
             # clean file paths
             for file in files:
                 path = file["path"]
-                file["path"] = utils.remove_test_data_dir_variable_prefix(
-                    path=path)
+                file["path"] = utils.remove_test_data_dir_variable_prefix(path=path)
         return {
             "files": files,
             "packages": [package for package in self.packages],
@@ -152,20 +153,16 @@ def resolve_dependencies(
 
     # requirements
     for req_file in requirement_files:
-        deps = dependencies.get_dependencies_from_requirements(
-            requirements_file=req_file)
+        deps = dependencies.get_dependencies_from_requirements(requirements_file=req_file)
         for extra_data in dependencies.get_extra_data_from_requirements(requirements_file=req_file):
-            index_urls = (
-                *index_urls, *tuple(extra_data.get("extra_index_urls") or []))
-            index_urls = (
-                *index_urls, *tuple(extra_data.get("index_url") or []))
+            index_urls = (*index_urls, *tuple(extra_data.get("extra_index_urls") or []))
+            index_urls = (*index_urls, *tuple(extra_data.get("index_url") or []))
         direct_dependencies.extend(deps)
         package_data = [
             pkg_data.to_dict() for pkg_data in PipRequirementsFileHandler.parse(location=req_file)
         ]
         if generic_paths:
-            req_file = utils.remove_test_data_dir_variable_prefix(
-                path=req_file)
+            req_file = utils.remove_test_data_dir_variable_prefix(path=req_file)
 
         files.append(
             dict(
@@ -218,15 +215,13 @@ def resolve_dependencies(
                     files=[setup_py_file],
                     analyze_setup_py_insecurely=analyze_setup_py_insecurely,
                 )
-                setup_py_file_deps = list(
-                    get_dependent_packages_from_reqs(reqs))
+                setup_py_file_deps = list(get_dependent_packages_from_reqs(reqs))
                 direct_dependencies.extend(setup_py_file_deps)
 
         package_data.dependencies = setup_py_file_deps
         file_package_data = [package_data.to_dict()]
         if generic_paths:
-            setup_py_file = utils.remove_test_data_dir_variable_prefix(
-                path=setup_py_file)
+            setup_py_file = utils.remove_test_data_dir_variable_prefix(path=setup_py_file)
         files.append(
             dict(
                 type="file",
@@ -267,11 +262,9 @@ def resolve_dependencies(
             else:
                 credentials = None
                 if parsed_netrc:
-                    login, password = utils.get_netrc_auth(
-                        index_url, parsed_netrc)
+                    login, password = utils.get_netrc_auth(index_url, parsed_netrc)
                     credentials = (
-                        dict(login=login,
-                             password=password) if login and password else None
+                        dict(login=login, password=password) if login and password else None
                     )
                 repo = utils_pypi.PypiSimpleRepository(
                     index_url=index_url,
@@ -295,21 +288,27 @@ def resolve_dependencies(
         pdt_output=pdt_output,
         analyze_setup_py_insecurely=analyze_setup_py_insecurely,
         ignore_errors=ignore_errors,
+        verbose=verbose,
+        printer=printer,
     )
 
-    packages = []
+    async def gather_pypi_data():
+        async def get_pypi_data(package):
+            data = await get_pypi_data_from_purl(
+                package, repos=repos, environment=environment, prefer_source=prefer_source
+            )
 
-    for package in purls:
-        packages.extend(
-            [
-                pkg.to_dict()
-                for pkg in list(
-                    get_pypi_data_from_purl(
-                        package, repos=repos, environment=environment, prefer_source=prefer_source
-                    )
-                )
-            ],
-        )
+            if verbose:
+                printer(f"  retrieved package '{package}'")
+
+            return data
+
+        if verbose:
+            printer(f"retrieve package data from pypi:")
+
+        return await asyncio.gather(*[get_pypi_data(package) for package in purls])
+
+    packages = [pkg.to_dict() for pkg in asyncio.run(gather_pypi_data()) if pkg is not None]
 
     if verbose:
         printer("done!")
@@ -325,14 +324,16 @@ resolver_api = resolve_dependencies
 
 
 def resolve(
-    direct_dependencies,
-    environment,
-    repos=tuple(),
-    as_tree=False,
-    max_rounds=200000,
-    pdt_output=False,
-    analyze_setup_py_insecurely=False,
-    ignore_errors=False,
+    direct_dependencies: List[DependentPackage],
+    environment: Environment,
+    repos: Sequence[utils_pypi.PypiSimpleRepository] = tuple(),
+    as_tree: bool = False,
+    max_rounds: int = 200000,
+    pdt_output: bool = False,
+    analyze_setup_py_insecurely: bool = False,
+    ignore_errors: bool = False,
+    verbose: bool = False,
+    printer=print,
 ):
     """
     Resolve dependencies given a ``direct_dependencies`` list of
@@ -359,6 +360,8 @@ def resolve(
         pdt_output=pdt_output,
         analyze_setup_py_insecurely=analyze_setup_py_insecurely,
         ignore_errors=ignore_errors,
+        verbose=verbose,
+        printer=printer,
     )
 
     return resolved_dependencies, packages
@@ -373,33 +376,77 @@ def get_resolved_dependencies(
     pdt_output: bool = False,
     analyze_setup_py_insecurely: bool = False,
     ignore_errors: bool = False,
-):
+    verbose: bool = False,
+    printer=print,
+) -> Tuple[List[Dict], List[str]]:
     """
     Return resolved dependencies of a ``requirements`` list of Requirement for
-    an ``enviroment`` Environment. The resolved dependencies are formatted as
+    an ``environment`` Environment. The resolved dependencies are formatted as
     parent/children or a nested tree if ``as_tree`` is True.
 
     Used the provided ``repos`` list of PypiSimpleRepository.
-    If empty, use instead the PyPI.org JSON API exclusively instead
+    If empty, use instead the PyPI.org JSON API exclusively instead.
     """
+    provider = PythonInputProvider(
+        environment=environment,
+        repos=repos,
+        analyze_setup_py_insecurely=analyze_setup_py_insecurely,
+        ignore_errors=ignore_errors,
+    )
+
+    # gather version data for all requirements concurrently in advance.
+
+    async def gather_version_data():
+        async def get_version_data(name: str):
+            versions = await provider.fill_versions_for_package(name)
+
+            if verbose:
+                printer(f"  retrieved versions for package '{name}'")
+
+            return versions
+
+        if verbose:
+            printer(f"versions:")
+
+        return await asyncio.gather(
+            *[get_version_data(requirement.name) for requirement in requirements]
+        )
+
+    asyncio.run(gather_version_data())
+
+    # gather dependencies for all pinned requirements concurrently in advance.
+
+    async def gather_dependencies():
+        async def get_dependencies(requirement: Requirement):
+            purl = PackageURL(type="pypi", name=requirement.name)
+            resolved_purl = get_resolved_purl(purl=purl, specifiers=requirement.specifier)
+
+            if resolved_purl:
+                purl = resolved_purl.purl
+                candidate = Candidate(requirement.name, purl.version, requirement.extras)
+                await provider.fill_requirements_for_package(purl, candidate)
+
+                if verbose:
+                    printer(f"  retrieved dependencies for requirement '{str(purl)}'")
+
+        if verbose:
+            printer(f"dependencies:")
+
+        return await asyncio.gather(
+            *[get_dependencies(requirement) for requirement in requirements]
+        )
+
+    asyncio.run(gather_dependencies())
+
     resolver = Resolver(
-        provider=PythonInputProvider(
-            environment=environment,
-            repos=repos,
-            analyze_setup_py_insecurely=analyze_setup_py_insecurely,
-            ignore_errors=ignore_errors,
-        ),
+        provider=provider,
         reporter=BaseReporter(),
     )
-    resolver_results = resolver.resolve(
-        requirements=requirements, max_rounds=max_rounds)
+    resolver_results = resolver.resolve(requirements=requirements, max_rounds=max_rounds)
     package_list = get_package_list(results=resolver_results)
     if pdt_output:
-        return (format_pdt_tree(resolver_results), package_list)
-    return (
-        format_resolution(resolver_results, as_tree=as_tree),
-        package_list,
-    )
+        return format_pdt_tree(resolver_results), package_list
+    return format_resolution(resolver_results, as_tree=as_tree), package_list
 
 
 def get_requirements_from_direct_dependencies(

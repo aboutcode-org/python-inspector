@@ -19,7 +19,7 @@ from python_inspector.utils import write_output_in_file
 
 TRACE = False
 
-__version__ = "0.12.0"
+__version__ = "0.13.0"
 
 DEFAULT_PYTHON_VERSION = "38"
 PYPI_SIMPLE_URL = "https://pypi.org/simple"
@@ -84,8 +84,7 @@ def print_version(ctx, param, value):
     metavar="OS",
     show_default=True,
     required=True,
-    help="OS to use for dependency resolution. One of " +
-    ", ".join(utils_pypi.PLATFORMS_BY_OS),
+    help="OS to use for dependency resolution. One of " + ", ".join(utils_pypi.PLATFORMS_BY_OS),
 )
 @click.option(
     "--index-url",
@@ -229,8 +228,7 @@ def resolve_dependencies(
     from python_inspector.api import resolve_dependencies as resolver_api
 
     if not (json_output or pdt_output):
-        click.secho(
-            "No output file specified. Use --json or --json-pdt.", err=True)
+        click.secho("No output file specified. Use --json or --json-pdt.", err=True)
         ctx.exit(1)
 
     if json_output and pdt_output:
@@ -339,8 +337,7 @@ def get_pretty_options(ctx, generic_paths=False):
             value = [value]
 
         for val in value:
-            val = get_pretty_value(param_type=param.type,
-                                   value=val, generic_paths=generic_paths)
+            val = get_pretty_value(param_type=param.type, value=val, generic_paths=generic_paths)
 
             if isinstance(param, click.Argument):
                 args.append(val)
