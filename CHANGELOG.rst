@@ -1,6 +1,42 @@
 Changelog
 =========
 
+v0.14.0
+-----------
+
+- Speed up downloads with asyncio
+
+- New settings featuring environment variables and .env file to store settings and defaults.
+
+  - This also changes the CACHE_THIRDPARTY_DIR environment variable: it used to default first
+    to ".cache/python_inspector" and if not writable, it would fallback to home
+    "~/.cache/python_inspector".  The new behavior is to only use the "~/.cache/python_inspector"
+    in the home directory. You can configure this directory to any other value.
+
+  - Another change is that pypi.org is no longer systematically added as an index URL for
+    resolution. Instead the list of configured index URLs is used, and only defaults to pypi.org
+    if not provided.
+
+  - Another change is that it is possible to only use the provided or configured index URLs
+    and skip other URLs from requirements that are not in these configured URLs.
+
+  - Calling utils_pypi.download_sdist or utils_pypi.download_wheel requires a non-empty list
+    of PypiSimpleRepository.
+
+  - python_inspector.utils_pypi.Distribution.download_url is now a method, not a property
+
+  - The command line has again a default OS and Python version set.
+
+  - Default option values are reported in the JSON results. They were skipped before.
+
+- Drop support for running on Python 3.8. You can still resolve dependencies for Python 3.8.
+  The default command line tool Python version used for resolution is now 3.9.
+
+- Add support for the latest Python and OS versions.
+
+- Merge latest skeleton and adopt ruff for code formatting.
+
+
 v0.13.1
 -----------
 
