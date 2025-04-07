@@ -149,6 +149,11 @@ def iter_requirements(level, extras, setup_file):
         # skip things we already know
         # FIXME be smarter about merging things
         pkg = Requirement(req)
+
+        # Skip in case the passed req was a Comment
+        if len(pkg.name) == 0:
+            continue
+
         # Evaluate environment markers skip if not applicable
         if hasattr(pkg, "marker") and pkg.marker is not None:
             if not pkg.marker.evaluate():
