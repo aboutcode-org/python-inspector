@@ -7,6 +7,7 @@ Welcome to  python-inspector's documentation!
 
    dependencies-design
    test-protocol
+   contribute/contrib_doc
 
 Indices and tables
 ==================

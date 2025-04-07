@@ -1,4 +1,5 @@
-"""Generate and work with PEP 425 Compatibility Tags.
+"""
+Generate and work with PEP 425 Compatibility Tags.
 
 copied from pip-20.3.1 pip/tests/unit/test_utils_compatibility_tags.py
 download_url: https://raw.githubusercontent.com/pypa/pip/20.3.1/tests/unit/test_utils_compatibility_tags.py
