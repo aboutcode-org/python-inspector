@@ -1174,12 +1174,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "typing-extensions",
-      "version": "4.13.1",
+      "version": "4.13.2",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Backported and Experimental Type Hints for Python 3.8+\n# Typing Extensions\n\n[![Chat at https://gitter.im/python/typing](https://badges.gitter.im/python/typing.svg)](https://gitter.im/python/typing)\n\n[Documentation](https://typing-extensions.readthedocs.io/en/latest/#) \u2013\n[PyPI](https://pypi.org/project/typing-extensions/)\n\n## Overview\n\nThe `typing_extensions` module serves two related purposes:\n\n- Enable use of new type system features on older Python versions. For example,\n  `typing.TypeGuard` is new in Python 3.10, but `typing_extensions` allows\n  users on previous Python versions to use it too.\n- Enable experimentation with new type system PEPs before they are accepted and\n  added to the `typing` module.\n\n`typing_extensions` is treated specially by static type checkers such as\nmypy and pyright. Objects defined in `typing_extensions` are treated the same\nway as equivalent forms in `typing`.\n\n`typing_extensions` uses\n[Semantic Versioning](https://semver.org/). The\nmajor version will be incremented only for backwards-incompatible changes.\nTherefore, it's safe to depend\non `typing_extensions` like this: `typing_extensions >=x.y, <(x+1)`,\nwhere `x.y` is the first version that includes all features you need.\n\n## Included items\n\nSee [the documentation](https://typing-extensions.readthedocs.io/en/latest/#) for a\ncomplete listing of module contents.\n\n## Contributing\n\nSee [CONTRIBUTING.md](https://github.com/python/typing_extensions/blob/main/CONTRIBUTING.md)\nfor how to contribute to `typing_extensions`.",
-      "release_date": "2025-04-03T16:11:19",
+      "release_date": "2025-04-10T14:19:03",
       "parties": [
         {
           "type": "person",
@@ -1217,11 +1217,11 @@
         "Topic :: Software Development"
       ],
       "homepage_url": null,
-      "download_url": "https://files.pythonhosted.org/packages/df/c5/e7a0b0f5ed69f94c8ab7379c599e6036886bffcde609969a5325f47f1332/typing_extensions-4.13.1-py3-none-any.whl",
-      "size": 45739,
+      "download_url": "https://files.pythonhosted.org/packages/8b/54/b1ae86c0973cc6f0210b53d508ca3641fb6d0c56823f288d108bc7ab3cc8/typing_extensions-4.13.2-py3-none-any.whl",
+      "size": 45806,
       "sha1": null,
-      "md5": "88648ecb0c5e2dfdb72097ec846b87c8",
-      "sha256": "4b6cf02909eb5495cfbc3f6e8fd49217e6cc7944e145cdda8caa3734777f9e69",
+      "md5": "0d9ada689b5a7c88163dd4c3417b8cc8",
+      "sha256": "a439e7c04b49fec3e5d3e2beaa21755cadbbdc391694e28ccdd36ca4a1408f8c",
       "sha512": null,
       "bug_tracking_url": "https://github.com/python/typing_extensions/issues",
       "code_view_url": null,
@@ -1236,9 +1236,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/typing-extensions/4.13.1/json",
+      "api_data_url": "https://pypi.org/pypi/typing-extensions/4.13.2/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/typing-extensions@4.13.1"
+      "purl": "pkg:pypi/typing-extensions@4.13.2"
     },
     {
       "type": "pypi",
@@ -1327,7 +1327,7 @@
       "dependencies": [
         "pkg:pypi/requests@2.32.3",
         "pkg:pypi/six@1.17.0",
-        "pkg:pypi/typing-extensions@4.13.1"
+        "pkg:pypi/typing-extensions@4.13.2"
       ]
     },
     {
@@ -1342,7 +1342,7 @@
         "pkg:pypi/azure-core@1.33.0",
         "pkg:pypi/cryptography@44.0.2",
         "pkg:pypi/isodate@0.7.2",
-        "pkg:pypi/typing-extensions@4.13.1"
+        "pkg:pypi/typing-extensions@4.13.2"
       ]
     },
     {
@@ -1416,7 +1416,7 @@
       "dependencies": []
     },
     {
-      "package": "pkg:pypi/typing-extensions@4.13.1",
+      "package": "pkg:pypi/typing-extensions@4.13.2",
       "dependencies": []
     },
     {
