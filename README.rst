@@ -1,4 +1,4 @@
-python-inspector - inspect Python packages dependencies and metadata
+python-inspector - inspect Python package dependencies and metadata
 =====================================================================
 
 
@@ -14,7 +14,7 @@ Homepage: https://github.com/aboutcode-org/python-inspector and https://www.abou
 - parse various requirements.txt files and setup.py files as input
   for resolving dependencies.
 
-- parse additionally various manifests and packages files such as
+- parse various manifests and packages files such as
   Pipfile, pyproject.toml, poetry.lock and setup.cfg and legacy and
   current metadata file formats for eggs, wheels and sdist. These
   have not been wired with the command line yet.
@@ -35,7 +35,7 @@ Testing
 
     pytest -vvs
 
-- These are live tests to regenrate the tests with updated data run::
+- There are live tests to regenerate the tests with updated data run::
 
       PYINSP_REGEN_TEST_FIXTURES=yes pytest -vvs
 
