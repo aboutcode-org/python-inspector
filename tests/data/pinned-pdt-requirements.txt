@@ -27,3 +27,4 @@ typing==3.6.6
 typing_extensions==4.1.1
 urllib3==1.26.9
 zipp==3.6.0
+boolean.py==4.0.0

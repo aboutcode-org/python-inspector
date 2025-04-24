@@ -19,16 +19,16 @@ the dependencies of each dependency.
 
 For each dependency, there can be a version "requirement" that can be an
 exact version, a version expression (aka. version specifier) as defined
-in `pep-0440 <https://www.python.org/dev/peps/pep-0440/>`__
+in `pep-0440 <https://peps.python.org/pep-0440/>`__
 with additional OS and environment tags and constraints as specified in
-`pep-0508 <https://www.python.org/dev/peps/pep-0508/>`__ .
+`pep-0508 <https://peps.python.org/pep-0508/>`__ .
 
 In particular the required Python version of a package (or version specifier)
 can be set for the whole package (with the``python_requires`` attribute) or as
 a marker for a given direct or indirect dependency. pip processes requirement
 specifiers and constraints from a "requirements" file and internally resolves
 dependency versions recursively by querying the PyPI Python package
-index repository at https://PyPI.org
+index repository at https://pypi.org/
 
 ***************
 Problem
