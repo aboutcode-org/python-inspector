@@ -44,6 +44,17 @@ def test_cli_with_default_urls():
 
 
 @pytest.mark.online
+def test_cli_with_specs_with_no_install_requires():
+    expected_file = test_env.get_test_loc("no-install-requires-expected.json", must_exist=False)
+    specifier = "crontab==1.0.4"
+    check_specs_resolution(
+        specifier=specifier,
+        expected_file=expected_file,
+        regen=REGEN_TEST_FIXTURES,
+    )
+
+
+@pytest.mark.online
 def test_cli_with_requirements_and_ignore_errors():
     requirements_file = test_env.get_test_loc("error-requirements.txt")
     expected_file = test_env.get_test_loc(
