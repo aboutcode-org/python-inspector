@@ -123,7 +123,7 @@ def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
     assert plist == [
         "pkg:pypi/click@8.1.8",
         "pkg:pypi/flask@2.1.3",
-        "pkg:pypi/importlib-metadata@8.6.1",
+        "pkg:pypi/importlib-metadata@8.7.0",
         "pkg:pypi/itsdangerous@2.2.0",
         "pkg:pypi/jinja2@3.1.6",
         "pkg:pypi/markupsafe@3.0.2",
@@ -155,7 +155,7 @@ def test_get_resolved_dependencies_for_version_containing_local_version_identifi
         "pkg:pypi/markupsafe@2.1.5",
         "pkg:pypi/mpmath@1.3.0",
         "pkg:pypi/networkx@3.3",
-        "pkg:pypi/sympy@1.13.1",
+        "pkg:pypi/sympy@1.13.3",
         "pkg:pypi/torch@2.0.0%2Bcpu",
         "pkg:pypi/typing-extensions@4.12.2",
     ]

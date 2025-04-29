@@ -879,12 +879,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "boolean-py",
-      "version": "4.0",
+      "version": "5.0",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Define boolean algebras, create and parse boolean expressions and create custom boolean DSL.\nThis library helps you deal with boolean expressions and algebra with variables\nand the boolean functions AND, OR, NOT.\n\nYou can parse expressions from strings and simplify and compare expressions.\nYou can also easily create your custom algreba and mini DSL and create custom\ntokenizers to handle custom expressions.\n\nFor extensive documentation look either into the docs directory or view it online, at\nhttps://booleanpy.readthedocs.org/en/latest/\n\nhttps://github.com/bastikr/boolean.py\n\nCopyright (c) 2009-2020 Sebastian Kraemer, basti.kr@gmail.com and others\nSPDX-License-Identifier: BSD-2-Clause",
-      "release_date": "2022-05-05T08:18:58",
+      "release_date": "2025-04-03T10:39:48",
       "parties": [
         {
           "type": "person",
@@ -910,11 +910,11 @@
         "Topic :: Utilities"
       ],
       "homepage_url": "https://github.com/bastikr/boolean.py",
-      "download_url": "https://files.pythonhosted.org/packages/3f/02/6389ef0529af6da0b913374dedb9bbde8eabfe45767ceec38cc37801b0bd/boolean.py-4.0-py3-none-any.whl",
-      "size": 25909,
+      "download_url": "https://files.pythonhosted.org/packages/e5/ca/78d423b324b8d77900030fa59c4aa9054261ef0925631cd2501dd015b7b7/boolean_py-5.0-py3-none-any.whl",
+      "size": 26577,
       "sha1": null,
-      "md5": "73208a6fc38d6904a1d7e793e8da1292",
-      "sha256": "2876f2051d7d6394a531d82dc6eb407faa0b01a0a0b3083817ccd7323b8d96bd",
+      "md5": "df9060a88bfb6ba3b9314783b16a0faa",
+      "sha256": "ef28a70bd43115208441b53a045d1549e2f0ec6e3d08a9d142cbc41c1938e8d9",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -931,9 +931,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/boolean-py/4.0/json",
+      "api_data_url": "https://pypi.org/pypi/boolean-py/5.0/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/boolean-py@4.0"
+      "purl": "pkg:pypi/boolean-py@5.0"
     },
     {
       "type": "pypi",
@@ -2820,7 +2820,7 @@
         {
           "key": "boolean-py",
           "package_name": "boolean-py",
-          "installed_version": "4.0",
+          "installed_version": "5.0",
           "dependencies": []
         },
         {
@@ -2856,7 +2856,7 @@
             {
               "key": "boolean-py",
               "package_name": "boolean-py",
-              "installed_version": "4.0",
+              "installed_version": "5.0",
               "dependencies": []
             }
           ]
