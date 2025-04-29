@@ -15,6 +15,7 @@ import pytest
 from commoncode.testcase import FileDrivenTesting
 from test_cli import check_data_results
 
+from python_inspector.api import get_index_urls
 from python_inspector.api import resolver_api
 
 test_env = FileDrivenTesting()
@@ -128,3 +129,31 @@ def test_api_with_partial_setup_py():
         analyze_setup_py_insecurely=True,
     )
     check_data_results(results=results.to_dict(generic_paths=True), expected_file=expected_file)
+
+
+def test_get_index_urls():
+
+    # pass as a tuple
+    index_urls = get_index_urls(
+        index_urls=("https://pypi.org/simple",),
+        extra_data={"extra_index_urls": ["https://pypi.org/simple", "https://example.com/simple"]},
+    )
+
+    expected = ["https://example.com/simple", "https://pypi.org/simple"]
+
+    assert sorted(list(index_urls)) == expected
+
+    # pass as a string
+    index_urls = get_index_urls(
+        index_urls=("https://pypi.org/simple"),
+        extra_data={"extra_index_urls": ["https://pypi.org/simple", "https://example.com/simple"]},
+    )
+
+    assert sorted(list(index_urls)) == expected
+
+    index_urls = get_index_urls(
+        index_urls=("https://pypi.org/simple",),
+        extra_data={"index_url": "https://pypi.org/simple"},
+    )
+
+    assert index_urls == ("https://pypi.org/simple",)
