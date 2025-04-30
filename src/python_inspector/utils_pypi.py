@@ -10,6 +10,7 @@
 #
 import asyncio
 import email
+import hashlib
 import itertools
 import os
 import pathlib
@@ -1678,6 +1679,9 @@ class Cache:
     def __attrs_post_init__(self):
         os.makedirs(self.directory, exist_ok=True)
 
+    def sha256_hash(self, text: str) -> str:
+        return hashlib.sha256(text.encode()).hexdigest()
+
     async def get(
         self,
         credentials,
@@ -1693,7 +1697,7 @@ class Cache:
         True otherwise as treat as binary. `path_or_url` can be a path or a URL
         to a file.
         """
-        cache_key = quote_plus(path_or_url.strip("/"))
+        cache_key = self.sha256_hash(quote_plus(path_or_url.strip("/")))
         cached = os.path.join(self.directory, cache_key)
 
         if force or not os.path.exists(cached):
