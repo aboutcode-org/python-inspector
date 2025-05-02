@@ -1,0 +1,92 @@
+{
+  "headers": {
+    "tool_name": "python-inspector",
+    "tool_homepageurl": "https://github.com/aboutcode-org/python-inspector",
+    "tool_version": "0.13.0",
+    "options": [
+      "--index-url https://pypi.org/simple",
+      "--json <file>",
+      "--operating-system linux",
+      "--python-version 38",
+      "--specifier crontab==1.0.4"
+    ],
+    "notice": "Dependency tree generated with python-inspector.\npython-inspector is a free software tool from nexB Inc. and others.\nVisit https://github.com/aboutcode-org/python-inspector/ for support and download.",
+    "warnings": [],
+    "errors": []
+  },
+  "files": [],
+  "packages": [
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "crontab",
+      "version": "1.0.4",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Parse and use crontab schedules in Python\nCopyright 2011-2021 Josiah Carlson\n\nReleased under the LGPL license version 2.1 and version 3 (you can choose\nwhich you'd like to be bound under).\n\nDescription\n===========\n\nThis package intends to offer a method of parsing crontab schedule entries and\ndetermining when an item should next be run. More specifically, it calculates\na delay in seconds from when the .next() method is called to when the item\nshould next be executed.\n\nComparing the below chart to http://en.wikipedia.org/wiki/Cron#CRON_expression\nyou will note that W and # symbols are not supported.\n\n============= =========== ================= ============== ===========================\nField Name    Mandatory   Allowed Values    Default Value  Allowed Special Characters\n============= =========== ================= ============== ===========================\nSeconds       No          0-59              0              \\* / , -\nMinutes       Yes         0-59              N/A            \\* / , -\nHours         Yes         0-23              N/A            \\* / , -\nDay of month  Yes         1-31              N/A            \\* / , - ? L\nMonth         Yes         1-12 or JAN-DEC   N/A            \\* / , -\nDay of week   Yes         0-6 or SUN-SAT    N/A            \\* / , - ? L\nYear          No          1970-2099         *              \\* / , -\n============= =========== ================= ============== ===========================\n\nIf your cron entry has 5 values, minutes-day of week are used, default seconds\nis and default year is appended. If your cron entry has 6 values, minutes-year\nare used, and default seconds are prepended.\n\nAs such, only 5-7 value crontab entries are accepted (and mangled to 7 values,\nas necessary).\n\n\nSample individual crontab fields\n================================\n\nExamples of supported entries are as follows::\n\n    *\n    */5\n    7/8\n    3-25/7\n    3,7,9\n    0-10,30-40/5\n\nFor month or day of week entries, 3 letter abbreviations of the month or day\ncan be used to the left of any optional / where a number could be used.\n\nFor days of the week::\n\n    mon-fri\n    sun-thu/2\n\nFor month::\n\n    apr-jul\n    mar-sep/3\n\nInstallation\n============\n\n::\n\n    pip install crontab\n\n\nExample uses\n============\n\n::\n\n    >>> from crontab import CronTab\n    >>> from datetime import datetime\n    >>> # define the crontab for 25 minutes past the hour every hour\n    ... entry = CronTab('25 * * * *')\n    >>> # find the delay from when this was run (around 11:13AM)\n    ... entry.next()\n    720.81637899999998\n    >>> # find the delay from when it was last scheduled\n    ... entry.next(datetime(2011, 7, 17, 11, 25))\n    3600.0\n\n\n\n\nNotes\n=====\n\nAt most one of 'day of week' or 'day of month' can be a value other than '?'\nor '*'. We violate spec here and allow '*' to be an alias for '?', in the case\nwhere one of those values is specified (seeing as some platforms don't support\n'?').\n\nThis module also supports the convenient aliases::\n\n    @yearly\n    @annually\n    @monthly\n    @weekly\n    @daily\n    @hourly\n\nExample full crontab entries and their meanings::\n\n    30 */2 * * * -> 30 minutes past the hour every 2 hours\n    15,45 23 * * * -> 11:15PM and 11:45PM every day\n    0 1 ? * SUN -> 1AM every Sunday\n    0 1 * * SUN -> 1AM every Sunday (same as above)\n    0 0 1 jan/2 * 2011-2013 ->\n        midnight on January 1, 2011 and the first of every odd month until\n        the end of 2013\n    24 7 L * * -> 7:24 AM on the last day of every month\n    24 7 * * L5 -> 7:24 AM on the last friday of every month\n    24 7 * * Lwed-fri ->\n        7:24 AM on the last wednesday, thursday, and friday of every month",
+      "release_date": "2025-04-09T18:23:59",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": "Josiah Carlson",
+          "email": "josiah.carlson@gmail.com",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
+        "Programming Language :: Python :: 3.2",
+        "Programming Language :: Python :: 3.4",
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9"
+      ],
+      "homepage_url": "https://github.com/josiahcarlson/parse-crontab",
+      "download_url": "https://files.pythonhosted.org/packages/1e/8b/3ea72ac8e26090b63779b4e0074af79b02bbbab7ddd01b36109bc0892d31/crontab-1.0.4.tar.gz",
+      "size": 21677,
+      "sha1": null,
+      "md5": "ad190b69ff4199c44a5170daf896e73f",
+      "sha256": "715b0e5e105bc62c9683cbb93c1cc5821e07a3e28d17404576d22dba7a896c92",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": null,
+      "vcs_url": null,
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": {
+        "license": "GNU LGPL v2.1",
+        "classifiers": [
+          "License :: OSI Approved :: GNU Lesser General Public License v2 (LGPLv2)",
+          "License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)",
+          "License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)"
+        ]
+      },
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {},
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/crontab/1.0.4/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/crontab@1.0.4"
+    }
+  ],
+  "resolved_dependencies_graph": [
+    {
+      "package": "pkg:pypi/crontab@1.0.4",
+      "dependencies": []
+    }
+  ]
+}

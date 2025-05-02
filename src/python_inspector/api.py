@@ -153,8 +153,7 @@ def resolve_dependencies(
     for req_file in requirement_files:
         deps = dependencies.get_dependencies_from_requirements(requirements_file=req_file)
         for extra_data in dependencies.get_extra_data_from_requirements(requirements_file=req_file):
-            index_urls = (*index_urls, *tuple(extra_data.get("extra_index_urls") or []))
-            index_urls = (*index_urls, *tuple(extra_data.get("index_url") or []))
+            index_urls = get_index_urls(index_urls, extra_data)
         direct_dependencies.extend(deps)
         package_data = [
             pkg_data.to_dict() for pkg_data in PipRequirementsFileHandler.parse(location=req_file)
@@ -319,6 +318,25 @@ def resolve_dependencies(
         resolution=resolution,
         files=files,
     )
+
+
+def get_index_urls(index_urls: Tuple, extra_data: Dict) -> Tuple:
+    """
+    Return a list of index URLs from the extra_data.
+    The extra_data is a dictionary that may contain
+    "extra_index_urls" and "index_url" keys.
+    """
+    if isinstance(index_urls, str):
+        index_urls = [index_urls]
+    if isinstance(index_urls, tuple):
+        index_urls = list(index_urls)
+    extra_index_urls = extra_data.get("extra_index_urls") or []
+    index_url = extra_data.get("index_url") or []
+    if isinstance(extra_index_urls, list):
+        index_urls = (*index_urls, *tuple(extra_index_urls))
+    if isinstance(index_url, str):
+        index_urls = (*index_urls, *tuple([index_url]))
+    return tuple(set(index_urls))
 
 
 resolver_api = resolve_dependencies

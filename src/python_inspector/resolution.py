@@ -320,10 +320,6 @@ def get_requirements_from_python_manifest(
                         and elem.value.func.id == "setup"
                     )
                 ]
-                if len(setup_fct) == 0:
-                    raise Exception(
-                        f"Unable to collect setup.py dependencies securely: {setup_py_location}"
-                    )
                 if len(setup_fct) > 1:
                     print(
                         f"Warning: identified multiple definitions of 'setup()' in {setup_py_location}, "
@@ -333,20 +329,17 @@ def get_requirements_from_python_manifest(
                 install_requires = [
                     k.value for k in setup_fct.value.keywords if k.arg == "install_requires"
                 ]
-                if len(install_requires) == 0:
-                    raise Exception(
-                        f"Unable to collect setup.py dependencies securely: {setup_py_location}"
-                    )
-                if len(install_requires) > 1:
-                    print(
-                        f"Warning: identified multiple definitions of 'install_requires' in "
-                        "{setup_py_location}, defaulting to the first occurrence"
-                    )
-                install_requires = install_requires[0].elts
-                if len(install_requires) != 0:
-                    raise Exception(
-                        f"Unable to collect setup.py dependencies securely: {setup_py_location}"
-                    )
+                if install_requires:
+                    if len(install_requires) > 1:
+                        print(
+                            f"Warning: identified multiple definitions of 'install_requires' in "
+                            "{setup_py_location}, defaulting to the first occurrence"
+                        )
+                    install_requires = install_requires[0].elts
+                    if len(install_requires) != 0:
+                        raise Exception(
+                            f"Unable to collect setup.py dependencies securely: {setup_py_location}"
+                        )
 
 
 DEFAULT_ENVIRONMENT = utils_pypi.Environment.from_pyver_and_os(
