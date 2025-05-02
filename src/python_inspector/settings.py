@@ -58,4 +58,4 @@ class Settings(BaseSettings):
 def create_cache_directory(cache_dir):
     cache_dir = Path(cache_dir).expanduser().resolve().absolute()
     if not cache_dir.exists():
-        cache_dir.mkdir(exist_ok=True)
+        cache_dir.mkdir(parents=True, exist_ok=True)
