@@ -175,6 +175,77 @@ def test_cli_with_multiple_index_url_and_tilde_req():
 
 
 @pytest.mark.online
+def test_cli_with_single_env_var_index_url_flag_override():
+    # Click default is to override env vars via flag as shown here
+    expected_file = test_env.get_test_loc("single-url-env-var-expected.json", must_exist=False)
+    specifier = "zipp==3.8.0"
+    os.environ["PYINSP_INDEX_URL"] = "https://thirdparty.aboutcode.org/pypi/simple/"
+    extra_options = [
+        "--index-url",
+        "https://pypi.org/simple",
+    ]
+    check_specs_resolution(
+        specifier=specifier,
+        expected_file=expected_file,
+        extra_options=extra_options,
+        regen=REGEN_TEST_FIXTURES,
+    )
+    os.unsetenv("PYINSP_INDEX_URL")
+
+
+@pytest.mark.online
+def test_cli_with_single_env_var_index_url_except_pypi_simple():
+    expected_file = test_env.get_test_loc(
+        "single-url-env-var-except-simple-expected.json", must_exist=False
+    )
+    # using flask since it's not present in thirdparty
+    specifier = "flask"
+    os.environ["PYINSP_INDEX_URL"] = "https://thirdparty.aboutcode.org/pypi/simple/"
+    try:
+        check_specs_resolution(
+            specifier=specifier,
+            expected_file=expected_file,
+            extra_options=[],
+            regen=REGEN_TEST_FIXTURES,
+        )
+    except Exception as e:
+        assert "python_inspector.error.NoVersionsFound: This package does not exist: flask" in str(
+            e
+        )
+    os.unsetenv("PYINSP_INDEX_URL")
+
+
+@pytest.mark.online
+def test_cli_with_multiple_env_var_index_url_and_tilde_req():
+    expected_file = test_env.get_test_loc("tilde_req-expected.json", must_exist=False)
+    specifier = "zipp~=3.8.0"
+    os.environ[
+        "PYINSP_INDEX_URL"
+    ] = "https://pypi.org/simple https://thirdparty.aboutcode.org/pypi/simple/"
+    check_specs_resolution(
+        specifier=specifier,
+        expected_file=expected_file,
+        extra_options=[],
+        regen=REGEN_TEST_FIXTURES,
+    )
+    os.unsetenv("PYINSP_INDEX_URL")
+
+
+@pytest.mark.online
+def test_cli_with_single_env_var_index_url():
+    expected_file = test_env.get_test_loc("single-url-env-var-expected.json", must_exist=False)
+    specifier = "zipp==3.8.0"
+    os.environ["PYINSP_INDEX_URL"] = "https://pypi.org/simple"
+    check_specs_resolution(
+        specifier=specifier,
+        expected_file=expected_file,
+        extra_options=[],
+        regen=REGEN_TEST_FIXTURES,
+    )
+    os.unsetenv("PYINSP_INDEX_URL")
+
+
+@pytest.mark.online
 def test_cli_with_environment_marker_and_complex_ranges():
     requirements_file = test_env.get_test_loc("environment-marker-test-requirements.txt")
     expected_file = test_env.get_test_loc(

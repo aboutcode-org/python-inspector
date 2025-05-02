@@ -252,6 +252,7 @@ async def download_wheel(
                 )
             continue
         for wheel in supported_and_valid_wheels:
+            wheel.credentials = repo.credentials
             fetched_wheel_filename = await wheel.download(
                 dest_dir=dest_dir,
                 verbose=verbose,
