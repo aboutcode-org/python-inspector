@@ -1,0 +1,11 @@
+[
+  [
+    {
+      "package": "pkg:pypi/torchcodec@0.3.0%2Bcu126",
+      "dependencies": []
+    }
+  ],
+  [
+    "pkg:pypi/torchcodec@0.3.0%2Bcu126"
+  ]
+]

@@ -1,0 +1,57 @@
+[
+  [
+    {
+      "package": "pkg:pypi/autobahn@22.3.2",
+      "dependencies": [
+        "pkg:pypi/cryptography@43.0.3",
+        "pkg:pypi/hyperlink@21.0.0",
+        "pkg:pypi/setuptools@80.1.0",
+        "pkg:pypi/txaio@23.1.1"
+      ]
+    },
+    {
+      "package": "pkg:pypi/cffi@1.17.1",
+      "dependencies": [
+        "pkg:pypi/pycparser@2.22"
+      ]
+    },
+    {
+      "package": "pkg:pypi/cryptography@43.0.3",
+      "dependencies": [
+        "pkg:pypi/cffi@1.17.1"
+      ]
+    },
+    {
+      "package": "pkg:pypi/hyperlink@21.0.0",
+      "dependencies": [
+        "pkg:pypi/idna@3.10"
+      ]
+    },
+    {
+      "package": "pkg:pypi/idna@3.10",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/pycparser@2.22",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/setuptools@80.1.0",
+      "dependencies": []
+    },
+    {
+      "package": "pkg:pypi/txaio@23.1.1",
+      "dependencies": []
+    }
+  ],
+  [
+    "pkg:pypi/autobahn@22.3.2",
+    "pkg:pypi/cffi@1.17.1",
+    "pkg:pypi/cryptography@43.0.3",
+    "pkg:pypi/hyperlink@21.0.0",
+    "pkg:pypi/idna@3.10",
+    "pkg:pypi/pycparser@2.22",
+    "pkg:pypi/setuptools@80.1.0",
+    "pkg:pypi/txaio@23.1.1"
+  ]
+]
