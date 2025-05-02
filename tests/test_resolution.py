@@ -13,7 +13,7 @@ from unittest.mock import patch
 
 import packvers
 import pytest
-from commoncode.system import on_mac
+from commoncode.system import on_linux
 from commoncode.testcase import FileDrivenTesting
 from packvers.requirements import Requirement
 from test_cli import check_data_results
@@ -131,10 +131,13 @@ def test_get_resolved_dependencies_with_tilde_requirement_using_json_api():
     )
 
 
+# fbgemm_gpu-1.2.0+cu118-cp312-cp312-manylinux_2_28_x86_64.whl
+
+
 @pytest.mark.online
-@pytest.mark.skipif(on_mac, reason="torch is only available for linux and windows.")
+@pytest.mark.skipif(not on_linux, reason="torch is only available for linux.")
 def test_get_resolved_dependencies_for_version_containing_local_version_identifier():
-    req = Requirement("torchcodec==0.2.0+cu124")
+    req = Requirement("torchcodec==0.3.0+cu126")
     req.is_requirement_resolved = True
 
     repos = [PypiSimpleRepository(index_url="https://download.pytorch.org/whl")]
