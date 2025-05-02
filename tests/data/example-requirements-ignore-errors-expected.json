@@ -5,6 +5,7 @@
     "tool_version": "0.13.0",
     "options": [
       "--ignore-errors",
+      "--index-url https://pypi.org/simple",
       "--json <file>",
       "--operating-system linux",
       "--python-version 310",

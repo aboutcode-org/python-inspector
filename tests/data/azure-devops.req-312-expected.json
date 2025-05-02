@@ -4,6 +4,7 @@
     "tool_homepageurl": "https://github.com/aboutcode-org/python-inspector",
     "tool_version": "0.13.0",
     "options": [
+      "--index-url https://pypi.org/simple",
       "--json <file>",
       "--operating-system linux",
       "--python-version 312",

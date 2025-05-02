@@ -39,6 +39,7 @@ from _packagedcode.pypi import PypiWheelHandler
 from _packagedcode.pypi import PythonSetupPyHandler
 from _packagedcode.pypi import SetupCfgHandler
 from _packagedcode.pypi import can_process_dependent_package
+from python_inspector import pyinspector_settings as settings
 from python_inspector import utils_pypi
 from python_inspector.error import NoVersionsFound
 from python_inspector.setup_py_live_eval import iter_requirements
@@ -107,7 +108,7 @@ def get_deps_from_distribution(
     deps = []
     for package_data in handler.parse(location):
         dependencies = package_data.dependencies
-        deps.extend(dependencies)
+        deps.extend(dependencies=dependencies)
     return deps
 
 
@@ -211,21 +212,21 @@ async def fetch_and_extract_sdist(
 def get_sdist_file_path_from_filename(sdist):
     if sdist.endswith(".tar.gz"):
         sdist_file = sdist.rstrip(".tar.gz")
-        with tarfile.open(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist)) as file:
+        with tarfile.open(os.path.join(settings.CACHE_THIRDPARTY_DIR, sdist)) as file:
             file.extractall(
-                os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file)
+                os.path.join(settings.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file)
             )
     elif sdist.endswith(".zip"):
         sdist_file = sdist.rstrip(".zip")
-        with ZipFile(os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, sdist)) as zip:
+        with ZipFile(os.path.join(settings.CACHE_THIRDPARTY_DIR, sdist)) as zip:
             zip.extractall(
-                os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file)
+                os.path.join(settings.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file)
             )
 
     else:
         raise Exception(f"Unable to extract sdist {sdist}")
 
-    return os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file, sdist_file)
+    return os.path.join(settings.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file, sdist_file)
 
 
 def get_requirements_from_dependencies(
@@ -444,7 +445,7 @@ class PythonInputProvider(AbstractProvider):
         api_url = f"https://pypi.org/pypi/{name}/json"
         resp = await get_response_async(api_url)
         if not resp:
-            self.versions_by_package[name] = []
+            return []
         releases = resp.get("releases") or {}
         return releases.keys() or []
 
@@ -497,7 +498,7 @@ class PythonInputProvider(AbstractProvider):
 
         if wheels:
             for wheel in wheels:
-                wheel_location = os.path.join(utils_pypi.CACHE_THIRDPARTY_DIR, wheel)
+                wheel_location = os.path.join(settings.CACHE_THIRDPARTY_DIR, wheel)
                 requirements = get_requirements_from_distribution(
                     handler=PypiWheelHandler,
                     location=wheel_location,
@@ -596,7 +597,8 @@ class PythonInputProvider(AbstractProvider):
         name = remove_extras(identifier=identifier)
         bad_versions = {c.version for c in incompatibilities[identifier]}
         extras = {e for r in requirements[identifier] for e in r.extras}
-        versions = self.get_versions_for_package(name)
+        versions = []
+        versions.extend(self.get_versions_for_package(name=name))
 
         if not versions:
             if self.ignore_errors:

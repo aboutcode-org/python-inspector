@@ -29,6 +29,7 @@ from _packagedcode.pypi import PythonSetupPyHandler
 from _packagedcode.pypi import can_process_dependent_package
 from _packagedcode.pypi import get_resolved_purl
 from python_inspector import dependencies
+from python_inspector import pyinspector_settings as settings
 from python_inspector import utils
 from python_inspector import utils_pypi
 from python_inspector.package_data import get_pypi_data_from_purl
@@ -42,8 +43,8 @@ from python_inspector.resolution import get_reqs_insecurely
 from python_inspector.resolution import get_requirements_from_python_manifest
 from python_inspector.utils import Candidate
 from python_inspector.utils_pypi import PLATFORMS_BY_OS
-from python_inspector.utils_pypi import PYPI_SIMPLE_URL
 from python_inspector.utils_pypi import Environment
+from python_inspector.utils_pypi import PypiSimpleRepository
 from python_inspector.utils_pypi import valid_python_versions
 
 
@@ -80,7 +81,7 @@ def resolve_dependencies(
     specifiers=tuple(),
     python_version=None,
     operating_system=None,
-    index_urls=tuple([PYPI_SIMPLE_URL]),
+    index_urls: tuple[str, ...] = settings.INDEX_URL,
     pdt_output=None,
     netrc_file=None,
     max_rounds=200000,
@@ -103,7 +104,7 @@ def resolve_dependencies(
     linux OS.
 
     Download from the provided PyPI simple index_urls INDEX(s) URLs defaulting
-    to PyPI.org
+    to PyPI.org or a configured setting.
     """
 
     if not operating_system:
@@ -147,9 +148,6 @@ def resolve_dependencies(
     direct_dependencies = []
 
     files = []
-
-    if PYPI_SIMPLE_URL not in index_urls:
-        index_urls = tuple([PYPI_SIMPLE_URL]) + tuple(index_urls)
 
     # requirements
     for req_file in requirement_files:
@@ -249,29 +247,32 @@ def resolve_dependencies(
     if verbose:
         printer(f"environment: {environment}")
 
-    repos = []
+    repos_by_url = {}
     if not use_pypi_json_api:
         # Collect PyPI repos
+        use_only_confed = settings.USE_ONLY_CONFIGURED_INDEX_URLS
         for index_url in index_urls:
             index_url = index_url.strip("/")
-            existing = utils_pypi.DEFAULT_PYPI_REPOS_BY_URL.get(index_url)
-            if existing:
-                existing.use_cached_index = use_cached_index
-                repos.append(existing)
-            else:
-                credentials = None
-                if parsed_netrc:
-                    login, password = utils.get_netrc_auth(index_url, parsed_netrc)
-                    credentials = (
-                        dict(login=login, password=password) if login and password else None
-                    )
-                repo = utils_pypi.PypiSimpleRepository(
-                    index_url=index_url,
-                    use_cached_index=use_cached_index,
-                    credentials=credentials,
-                )
-                repos.append(repo)
+            if use_only_confed and index_url not in settings.INDEX_URL:
+                if verbose:
+                    printer(f"Skipping index URL unknown in settings: {index_url!r}")
+                continue
+            if index_url in repos_by_url:
+                continue
 
+            credentials = None
+            if parsed_netrc:
+                login, password = utils.get_netrc_auth(index_url, parsed_netrc)
+                if login and password:
+                    credentials = dict(login=login, password=password)
+            repo = utils_pypi.PypiSimpleRepository(
+                index_url=index_url,
+                use_cached_index=use_cached_index,
+                credentials=credentials,
+            )
+            repos_by_url[index_url] = repo
+
+    repos = repos_by_url.values()
     if verbose:
         printer("repos:")
         for repo in repos:

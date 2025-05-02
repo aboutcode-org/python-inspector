@@ -168,7 +168,7 @@ async def get_wheel_download_urls(
             environment=environment,
             python_version=python_version,
         ):
-            download_urls.append(await wheel.download_url)
+            download_urls.append(await wheel.download_url(repo))
     return download_urls
 
 
@@ -186,4 +186,4 @@ async def get_sdist_download_url(
             python_version=python_version,
         )
         if sdist:
-            return await sdist.download_url
+            return await sdist.download_url(repo)

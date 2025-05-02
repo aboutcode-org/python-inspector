@@ -7,4 +7,9 @@
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
-DEFAULT_PYTHON_VERSION = "3.8"
+from python_inspector import settings
+
+# Initialize global settings
+pyinspector_settings = settings.Settings()
+
+settings.create_cache_directory(pyinspector_settings.CACHE_THIRDPARTY_DIR)

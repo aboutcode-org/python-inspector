@@ -41,7 +41,7 @@ from packvers import tags as packaging_tags
 from packvers import version as packaging_version
 from packvers.specifiers import SpecifierSet
 
-from python_inspector import DEFAULT_PYTHON_VERSION
+from python_inspector import pyinspector_settings as settings
 from python_inspector import utils_pip_compatibility_tags
 
 """
@@ -192,21 +192,9 @@ PLATFORMS_BY_OS = {
     ],
 }
 
-CACHE_THIRDPARTY_DIR = os.environ.get("PYTHON_INSPECTOR_CACHE_DIR")
-if not CACHE_THIRDPARTY_DIR:
-    CACHE_THIRDPARTY_DIR = ".cache/python_inspector"
-    try:
-        os.makedirs(CACHE_THIRDPARTY_DIR, exist_ok=True)
-    except Exception:
-        home = pathlib.Path.home()
-        CACHE_THIRDPARTY_DIR = str(home / ".cache/python_inspector")
-        os.makedirs(CACHE_THIRDPARTY_DIR, exist_ok=True)
+DEFAULT_PYTHON_VERSION = settings.DEFAULT_PYTHON_VERSION
+CACHE_THIRDPARTY_DIR = settings.CACHE_THIRDPARTY_DIR
 
-
-################################################################################
-
-PYPI_SIMPLE_URL = "https://pypi.org/simple"
-PYPI_INDEX_URLS = (PYPI_SIMPLE_URL,)
 
 ################################################################################
 
@@ -250,7 +238,7 @@ async def download_wheel(
         print(f"  download_wheel: {name}=={version} for envt: {environment}")
 
     if not repos:
-        repos = DEFAULT_PYPI_REPOS
+        raise ValueError("download_wheel: missing repos")
 
     fetched_wheel_filenames = []
     for repo in repos:
@@ -328,7 +316,7 @@ async def get_supported_and_valid_wheels(
         if TRACE_DEEP:
             print(
                 f"""    get_supported_and_valid_wheels: Getting wheel from index (or cache):
-                {wheel.download_url}"""
+                {await wheel.download_url(repo)}"""
             )
         wheels.append(wheel)
     return wheels
@@ -363,7 +351,7 @@ async def download_sdist(
         print(f"  download_sdist: {name}=={version}")
 
     if not repos:
-        repos = DEFAULT_PYPI_REPOS
+        raise ValueError("download_sdist: missing repos")
 
     fetched_sdist_filename = None
 
@@ -618,9 +606,10 @@ class Distribution(NameVer):
             )
         )
 
-    @property
-    async def download_url(self):
-        return await self.get_best_download_url()
+    async def download_url(self, repo):
+        if not repo:
+            raise ValueError("download_url: missing repo")
+        return await self.get_best_download_url(repos=(repo,))
 
     async def get_best_download_url(self, repos=tuple()):
         """
@@ -632,7 +621,7 @@ class Distribution(NameVer):
         """
 
         if not repos:
-            repos = DEFAULT_PYPI_REPOS
+            raise ValueError("get_best_download_url: missing repos")
 
         for repo in repos:
             package = await repo.get_package_version(name=self.name, version=self.version)
@@ -1340,9 +1329,6 @@ class PypiPackage(NameVer):
                         "     ===> dists_from_paths_or_urls:",
                         dist,
                         "\n     ",
-                        "with URL:",
-                        await dist.download_url,
-                        "\n     ",
                         "from URL:",
                         link.url,
                     )
@@ -1476,7 +1462,8 @@ class PypiSimpleRepository:
 
     index_url = attr.ib(
         type=str,
-        default=PYPI_SIMPLE_URL,
+        # We use first entry in INDEX_URL setting as default
+        default=settings.INDEX_URL[0],
         metadata=dict(help="Base PyPI simple URL for this index."),
     )
 
@@ -1655,10 +1642,6 @@ def resolve_relative_url(package_url, url):
         url = urlunparse(resolved_url_parts)
     return url
 
-
-PYPI_PUBLIC_REPO = PypiSimpleRepository(index_url=PYPI_SIMPLE_URL)
-DEFAULT_PYPI_REPOS = (PYPI_PUBLIC_REPO,)
-DEFAULT_PYPI_REPOS_BY_URL = {r.index_url: r for r in DEFAULT_PYPI_REPOS}
 
 ################################################################################
 #
@@ -1859,3 +1842,10 @@ async def fetch_and_save(
 
     os.symlink(os.path.abspath(path), output)
     return content
+
+
+def get_current_indexes() -> list[PypiSimpleRepository]:
+    """
+    Return a list of PypiSimpleRepository indexes configured in settings.
+    """
+    return [PypiSimpleRepository(index_url=url) for url in settings.INDEX_URL]

@@ -4,6 +4,7 @@
     "tool_homepageurl": "https://github.com/aboutcode-org/python-inspector",
     "tool_version": "0.13.0",
     "options": [
+      "--index-url https://pypi.org/simple/",
       "--index-url https://thirdparty.aboutcode.org/pypi/simple/",
       "--json <file>",
       "--operating-system linux",
@@ -352,63 +353,6 @@
       "api_data_url": "https://pypi.org/pypi/jinja2/3.1.6/json",
       "datasource_id": null,
       "purl": "pkg:pypi/jinja2@3.1.6"
-    },
-    {
-      "type": "pypi",
-      "namespace": null,
-      "name": "markupsafe",
-      "version": "2.1.5",
-      "qualifiers": {},
-      "subpath": null,
-      "primary_language": "Python",
-      "description": "Safely add untrusted strings to HTML/XML markup.\nMarkupSafe\n==========\n\nMarkupSafe implements a text object that escapes characters so it is\nsafe to use in HTML and XML. Characters that have special meanings are\nreplaced so that they display as the actual characters. This mitigates\ninjection attacks, meaning untrusted user input can safely be displayed\non a page.\n\n\nInstalling\n----------\n\nInstall and update using `pip`_:\n\n.. code-block:: text\n\n    pip install -U MarkupSafe\n\n.. _pip: https://pip.pypa.io/en/stable/getting-started/\n\n\nExamples\n--------\n\n.. code-block:: pycon\n\n    >>> from markupsafe import Markup, escape\n\n    >>> # escape replaces special characters and wraps in Markup\n    >>> escape(\"<script>alert(document.cookie);</script>\")\n    Markup('&lt;script&gt;alert(document.cookie);&lt;/script&gt;')\n\n    >>> # wrap in Markup to mark text \"safe\" and prevent escaping\n    >>> Markup(\"<strong>Hello</strong>\")\n    Markup('<strong>hello</strong>')\n\n    >>> escape(Markup(\"<strong>Hello</strong>\"))\n    Markup('<strong>hello</strong>')\n\n    >>> # Markup is a str subclass\n    >>> # methods and operators escape their arguments\n    >>> template = Markup(\"Hello <em>{name}</em>\")\n    >>> template.format(name='\"World\"')\n    Markup('Hello <em>&#34;World&#34;</em>')\n\n\nDonate\n------\n\nThe Pallets organization develops and supports MarkupSafe and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n`please donate today`_.\n\n.. _please donate today: https://palletsprojects.com/donate\n\n\nLinks\n-----\n\n-   Documentation: https://markupsafe.palletsprojects.com/\n-   Changes: https://markupsafe.palletsprojects.com/changes/\n-   PyPI Releases: https://pypi.org/project/MarkupSafe/\n-   Source Code: https://github.com/pallets/markupsafe/\n-   Issue Tracker: https://github.com/pallets/markupsafe/issues/\n-   Chat: https://discord.gg/pallets",
-      "release_date": "2024-02-02T16:31:01",
-      "parties": [
-        {
-          "type": "person",
-          "role": "maintainer",
-          "name": "Pallets",
-          "email": "contact@palletsprojects.com",
-          "url": null
-        }
-      ],
-      "keywords": [
-        "Development Status :: 5 - Production/Stable",
-        "Environment :: Web Environment",
-        "Intended Audience :: Developers",
-        "Operating System :: OS Independent",
-        "Programming Language :: Python",
-        "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
-        "Topic :: Text Processing :: Markup :: HTML"
-      ],
-      "homepage_url": "https://palletsprojects.com/p/markupsafe/",
-      "download_url": "https://files.pythonhosted.org/packages/c7/bd/50319665ce81bb10e90d1cf76f9e1aa269ea6f7fa30ab4521f14d122a3df/MarkupSafe-2.1.5-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
-      "size": 26106,
-      "sha1": null,
-      "md5": "4f97754a1154496e5bc9d3f21fb0315a",
-      "sha256": "fa9db3f79de01457b03d4f01b34cf91bc0048eb2c3846ff26f66687c2f6d16ab",
-      "sha512": null,
-      "bug_tracking_url": "https://github.com/pallets/markupsafe/issues/",
-      "code_view_url": "https://github.com/pallets/markupsafe/",
-      "vcs_url": null,
-      "copyright": null,
-      "license_expression": null,
-      "declared_license": {
-        "license": "BSD-3-Clause",
-        "classifiers": [
-          "License :: OSI Approved :: BSD License"
-        ]
-      },
-      "notice_text": null,
-      "source_packages": [],
-      "file_references": [],
-      "extra_data": {},
-      "dependencies": [],
-      "repository_homepage_url": null,
-      "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/markupsafe/2.1.5/json",
-      "datasource_id": null,
-      "purl": "pkg:pypi/markupsafe@2.1.5"
     },
     {
       "type": "pypi",

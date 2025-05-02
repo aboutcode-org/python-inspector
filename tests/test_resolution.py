@@ -26,9 +26,9 @@ from python_inspector.resolution import get_requirements_from_dependencies
 from python_inspector.resolution import get_requirements_from_python_manifest
 from python_inspector.resolution import is_valid_version
 from python_inspector.resolution import parse_reqs_from_setup_py_insecurely
-from python_inspector.utils_pypi import PYPI_PUBLIC_REPO
 from python_inspector.utils_pypi import Environment
 from python_inspector.utils_pypi import PypiSimpleRepository
+from python_inspector.utils_pypi import get_current_indexes
 
 # Used for tests to regenerate fixtures with regen=True
 REGEN_TEST_FIXTURES = os.getenv("PYINSP_REGEN_TEST_FIXTURES", False)
@@ -52,7 +52,7 @@ def check_get_resolved_dependencies(
         get_resolved_dependencies(
             requirements=[requirement],
             environment=env,
-            repos=repos or [PYPI_PUBLIC_REPO],
+            repos=repos or get_current_indexes(),
             as_tree=as_tree,
         )
     )
@@ -319,7 +319,8 @@ def test_setup_py_parsing_insecure_testpkh():
 
 @patch("python_inspector.resolution.PythonInputProvider.get_versions_for_package")
 def test_iter_matches(mock_versions):
+    repos = get_current_indexes()
     mock_versions.return_value = []
-    provider = PythonInputProvider()
+    provider = PythonInputProvider(repos=repos)
     with pytest.raises(NoVersionsFound):
         list(provider._iter_matches("foo-bar", {"foo-bar": []}, {"foo-bar": []}))

@@ -13,6 +13,7 @@ from typing import Dict
 
 import click
 
+from python_inspector import pyinspector_settings as settings
 from python_inspector import utils_pypi
 from python_inspector.cli_utils import FileOptionType
 from python_inspector.utils import write_output_in_file
@@ -21,8 +22,7 @@ TRACE = False
 
 __version__ = "0.13.0"
 
-DEFAULT_PYTHON_VERSION = "38"
-PYPI_SIMPLE_URL = "https://pypi.org/simple"
+DEFAULT_PYTHON_VERSION = settings.DEFAULT_PYTHON_VERSION
 
 
 def print_version(ctx, param, value):
@@ -71,6 +71,7 @@ def print_version(ctx, param, value):
     "python_version",
     type=click.Choice(utils_pypi.valid_python_versions),
     metavar="PYVER",
+    default=settings.DEFAULT_PYTHON_VERSION,
     show_default=True,
     required=True,
     help="Python version to use for dependency resolution. One of "
@@ -82,6 +83,7 @@ def print_version(ctx, param, value):
     "operating_system",
     type=click.Choice(utils_pypi.PLATFORMS_BY_OS),
     metavar="OS",
+    default=settings.DEFAULT_OS,
     show_default=True,
     required=True,
     help="OS to use for dependency resolution. One of " + ", ".join(utils_pypi.PLATFORMS_BY_OS),
@@ -92,7 +94,7 @@ def print_version(ctx, param, value):
     type=str,
     metavar="INDEX",
     show_default=True,
-    default=tuple([PYPI_SIMPLE_URL]),
+    default=tuple(settings.INDEX_URL),
     multiple=True,
     help="PyPI simple index URL(s) to use in order of preference. "
     "This option can be used multiple times.",
@@ -317,9 +319,6 @@ def get_pretty_options(ctx, generic_paths=False):
             continue
 
         if getattr(param, "hidden", False):
-            continue
-
-        if value == param.default:
             continue
 
         if value in (None, False):
