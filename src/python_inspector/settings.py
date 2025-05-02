@@ -18,13 +18,13 @@ class Settings(BaseSettings):
     """
     Reference: https://docs.pydantic.dev/latest/concepts/pydantic_settings/
     A settings object: use it with an .env file and/or environment variables all prefixed with
-    PYTHON_INSPECTOR_
+    PYINSP_
     """
 
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
-        env_prefix="PYTHON_INSPECTOR_",
+        env_prefix="PYINSP_",
         case_sensitive=True,
         extra="allow",
     )
