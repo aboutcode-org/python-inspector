@@ -13,7 +13,9 @@ from typing import NamedTuple
 
 import pytest
 
+from python_inspector import utils_pypi
 from python_inspector.utils_pypi import Distribution
+from python_inspector.utils_pypi import PypiPackage
 from python_inspector.utils_pypi import Sdist
 from python_inspector.utils_pypi import Wheel
 
@@ -138,6 +140,15 @@ sdist_tests = [
     ),
 ]
 
+linux_platforms = [
+    "linux_x86_64",
+    "manylinux1_x86_64",
+    "manylinux2010_x86_64",
+    "manylinux2014_x86_64",
+    "manylinux_2_27_x86_64",
+    "manylinux_2_28_x86_64",
+]
+
 
 @pytest.mark.parametrize("dist_test", sdist_tests + wheel_tests)
 def test_Distribution_from_filename(dist_test):
@@ -152,3 +163,14 @@ def test_Sdist_from_filename(dist_test):
 @pytest.mark.parametrize("dist_test", wheel_tests)
 def test_Wheel_from_filename(dist_test):
     dist_test.check(using=Wheel)
+
+
+@pytest.mark.parametrize("linux_platform", linux_platforms)
+def test_PypiPackage_get_supported_wheels(linux_platform):
+    whl = Wheel.from_filename(f"onnxruntime-1.19.2-cp311-cp311-{linux_platform}.whl")
+    pkg = PypiPackage.package_from_dists(dists=[whl])
+    env = utils_pypi.Environment.from_pyver_and_os(python_version="311", operating_system="linux")
+
+    supported_wheels = list(pkg.get_supported_wheels(environment=env))
+
+    assert supported_wheels == [whl]
