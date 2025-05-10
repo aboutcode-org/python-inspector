@@ -8,6 +8,7 @@
 #
 
 import logging
+from pathlib import Path
 from types import TracebackType
 from typing import Any, Optional, Tuple, Type, Union
 
@@ -75,7 +76,7 @@ class CustomLogger(logging.Logger):
     logging.Logger.deep = deep
 
 
-def setup_logger(level: str = "WARNING") -> None:
+def setup_logger(level: str = "WARNING", log_file: Optional[Path] = None) -> None:
     """
     Configures the logger for the 'python-inspector' application.
 
@@ -100,6 +101,11 @@ def setup_logger(level: str = "WARNING") -> None:
         formatter = logging.Formatter("[%(levelname)s] %(message)s")
         handler.setFormatter(formatter)
         _logger.addHandler(handler)
+
+        if log_file:
+            file_handler = logging.FileHandler(log_file, encoding="utf-8")
+            file_handler.setFormatter(formatter)
+            logger.addHandler(file_handler)
 
 
 # Logger as a singleton
