@@ -13,8 +13,8 @@ from typing import Dict
 
 import click
 
+from python_inspector import logging, utils_pypi
 from python_inspector import pyinspector_settings as settings
-from python_inspector import utils_pypi
 from python_inspector.cli_utils import FileOptionType
 from python_inspector.utils import write_output_in_file
 
@@ -162,9 +162,10 @@ def print_version(ctx, param, value):
     "distribution is available then binary distributions are used",
 )
 @click.option(
+    "-v",
     "--verbose",
-    is_flag=True,
-    help="Enable verbose debug output.",
+    count=True,
+    help="Increase verbosity: -v=INFO, -vv=DEBUG, -vvv=TRACE.",
 )
 @click.option(
     "-V",
@@ -198,11 +199,11 @@ def resolve_dependencies(
     pdt_output,
     netrc_file,
     max_rounds,
+    verbose,
     use_cached_index=False,
     use_pypi_json_api=False,
     analyze_setup_py_insecurely=False,
     prefer_source=False,
-    verbose=TRACE,
     generic_paths=False,
     ignore_errors=False,
 ):
@@ -237,6 +238,16 @@ def resolve_dependencies(
         click.secho("Only one of --json or --json-pdt can be used.", err=True)
         ctx.exit(1)
 
+    # Setup verbose level
+    if verbose >= 3:
+        logging.setup_logger("TRACE")
+    elif verbose == 2:
+        logging.setup_logger("DEBUG")
+    elif verbose == 1:
+        logging.setup_logger("INFO")
+    else:
+        logging.setup_logger()
+
     options = get_pretty_options(ctx, generic_paths=generic_paths)
 
     notice = (
@@ -268,7 +279,6 @@ def resolve_dependencies(
             max_rounds=max_rounds,
             use_cached_index=use_cached_index,
             use_pypi_json_api=use_pypi_json_api,
-            verbose=verbose,
             analyze_setup_py_insecurely=analyze_setup_py_insecurely,
             printer=click.secho,
             prefer_source=prefer_source,
