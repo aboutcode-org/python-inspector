@@ -8,6 +8,7 @@
 #
 
 import logging
+from pathlib import Path
 from types import TracebackType
 from typing import Any, Optional, Tuple, Type, Union
 
@@ -70,14 +71,13 @@ class CustomLogger(logging.Logger):
                 stacklevel=stacklevel,
             )
 
-
     logging.Logger.trace = trace
     logging.Logger.deep = deep
 
 
-def setup_logger(level: str = "WARNING") -> None:
+def setup_logger(level: str = "WARNING", log_file: Optional[Path] = None) -> None:
     """
-    Configures the logger for the 'python-inspector' application.
+    Configure the logger for the 'python-inspector' application.
 
     This function sets up a custom logging level, assigns a custom logger class,
     and configures the logger with the specified logging level. If no handlers are present,
@@ -85,6 +85,8 @@ def setup_logger(level: str = "WARNING") -> None:
 
     Args:
         level (str): The logging level to set for the logger (e.g., 'DEBUG', 'INFO', 'WARNING', "TRACE").
+        log_file (Optional[Path]): File name for persistent log
+
     """
     # Setup out trace level
     logging.addLevelName(TRACE_LEVEL, "TRACE")
@@ -100,6 +102,11 @@ def setup_logger(level: str = "WARNING") -> None:
         formatter = logging.Formatter("[%(levelname)s] %(message)s")
         handler.setFormatter(formatter)
         _logger.addHandler(handler)
+
+        if log_file:
+            file_handler = logging.FileHandler(log_file, encoding="utf-8")
+            file_handler.setFormatter(formatter)
+            logger.addHandler(file_handler)
 
 
 # Logger as a singleton

@@ -301,9 +301,9 @@ async def get_supported_and_valid_wheels(
         ):
             continue
         logger.trace(
-                f"""    get_supported_and_valid_wheels: Getting wheel from index (or cache):
-                {durl}"""
-            )
+            f"""    get_supported_and_valid_wheels: Getting wheel from index (or cache):
+                {await wheel.download_url(repo)}"""
+        )
         wheels.append(wheel)
     return wheels
 
@@ -606,17 +606,17 @@ class Distribution(NameVer):
             package = await repo.get_package_version(name=self.name, version=self.version)
             if not package:
                 logger.debug(
-                        f"     get_best_download_url: {self.name}=={self.version} "
-                        f"not found in {repo.index_url}"
-                    )
+                    f"     get_best_download_url: {self.name}=={self.version} "
+                    f"not found in {repo.index_url}"
+                )
                 continue
             pypi_url = package.get_url_for_filename(self.filename)
             if pypi_url:
                 return pypi_url
             else:
                 logger.debug(
-                        f"     get_best_download_url: {self.filename} not found in {repo.index_url}"
-                    )
+                    f"     get_best_download_url: {self.filename} not found in {repo.index_url}"
+                )
 
     async def download(
         self,
@@ -628,8 +628,8 @@ class Distribution(NameVer):
         """
         assert self.filename
         logger.trace(
-                f"Fetching distribution of {self.name}=={self.version}: {self.filename}",
-            )
+            f"Fetching distribution of {self.name}=={self.version}: {self.filename}",
+        )
 
         # FIXME:
         await fetch_and_save(
@@ -1202,16 +1202,16 @@ class PypiPackage(NameVer):
         for dist in dists:
             if dist.normalized_name != normalized_name:
                 logger.debug(
-                        f"  Skipping inconsistent dist name: expected {normalized_name} got {dist}"
-                    )
+                    f"  Skipping inconsistent dist name: expected {normalized_name} got {dist}"
+                )
                 continue
             elif dist.version != version:
                 dv = packaging_version.parse(dist.version)
                 v = packaging_version.parse(version)
                 if dv != v:
                     logger.debug(
-                            f"  Skipping inconsistent dist version: expected {version} got {dist}"
-                        )
+                        f"  Skipping inconsistent dist version: expected {version} got {dist}"
+                    )
                     continue
 
             if isinstance(dist, Sdist):

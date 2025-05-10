@@ -30,7 +30,7 @@ from python_inspector.logging import logger
 def minver_error(pkg_name):
     """Report error about missing minimum version constraint and exit."""
     logger.error(
-        'Specify minimal version of "{0}" using ' '">=" or "=="'.format(pkg_name),
+        'Specify minimal version of "{0}" using ">=" or "=="'.format(pkg_name),
         file=sys.stderr,
     )
     sys.exit(1)
@@ -165,7 +165,7 @@ def iter_requirements(level, extras, setup_file):
         specs = {s.operator: s.version for s in specs._specs}
         if ((">=" in specs) and (">" in specs)) or (("<=" in specs) and ("<" in specs)):
             logger.error(
-                "Do not specify such weird constraints! " '("{0}")'.format(pkg),
+                'Do not specify such weird constraints! ("{0}")'.format(pkg),
                 file=sys.stderr,
             )
             sys.exit(1)

@@ -39,9 +39,8 @@ def get_dependencies_from_requirements(
     )
     for dependent_package in dependent_packages:
         logger.debug(
-                "dependent_package.extracted_requirement: "
-                f"{dependent_package.extracted_requirement}",
-            )
+            f"dependent_package.extracted_requirement: {dependent_package.extracted_requirement}",
+        )
         yield dependent_package
 
 

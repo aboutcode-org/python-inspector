@@ -9,7 +9,8 @@
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
-from typing import Dict
+from pathlib import Path
+from typing import Dict, Optional
 
 import click
 
@@ -174,7 +175,12 @@ def print_version(ctx, param, value):
     callback=print_version,
     help="Show the version and exit.",
 )
-@click.option("--ignore-errors", is_flag=True, default=False, help="Ignore errors and continue execution.")
+@click.option(
+    "--ignore-errors",
+    is_flag=True,
+    default=False,
+    help="Ignore errors and continue execution.",
+)
 @click.help_option("-h", "--help")
 @click.option(
     "--generic-paths",
@@ -182,6 +188,11 @@ def print_version(ctx, param, value):
     hidden=True,
     help="Use generic or truncated paths in the JSON output header and files sections. "
     "Used only for testing to avoid absolute paths and paths changing at each run.",
+)
+@click.option(
+    "--log-file",
+    type=click.Path(path_type=Path),
+    help="Write logs to a file.",
 )
 def resolve_dependencies(
     ctx,
@@ -196,6 +207,7 @@ def resolve_dependencies(
     netrc_file,
     max_rounds,
     verbose,
+    log_file: Optional[Path],
     use_cached_index=False,
     use_pypi_json_api=False,
     analyze_setup_py_insecurely=False,
@@ -236,15 +248,15 @@ def resolve_dependencies(
 
     # Setup verbose level
     if verbose >= 4:
-        logging.setup_logger("DEEP")
+        logging.setup_logger("DEEP", log_file=log_file)
     elif verbose == 3:
-        logging.setup_logger("TRACE")
+        logging.setup_logger("TRACE", log_file=log_file)
     elif verbose == 2:
-        logging.setup_logger("DEBUG")
+        logging.setup_logger("DEBUG", log_file=log_file)
     elif verbose == 1:
-        logging.setup_logger("INFO")
+        logging.setup_logger("INFO", log_file=log_file)
     else:
-        logging.setup_logger()
+        logging.setup_logger(log_file=log_file)
 
     options = get_pretty_options(ctx, generic_paths=generic_paths)
 

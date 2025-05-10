@@ -13,4 +13,3 @@ from python_inspector import settings
 pyinspector_settings = settings.Settings()
 
 settings.create_cache_directory(pyinspector_settings.CACHE_THIRDPARTY_DIR)
-
