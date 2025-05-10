@@ -19,6 +19,8 @@ from _packagedcode.models import DependentPackage
 from _packagedcode.pypi import PipRequirementsFileHandler
 from _packagedcode.pypi import get_requirements_txt_dependencies
 
+from python_inspector.logging import logger
+
 """
 Utilities to resolve dependencies.
 """
@@ -36,10 +38,9 @@ def get_dependencies_from_requirements(
         location=requirements_file, include_nested=True
     )
     for dependent_package in dependent_packages:
-        if TRACE:
-            print(
-                "dependent_package.extracted_requirement:",
-                dependent_package.extracted_requirement,
+        logger.debug(
+                "dependent_package.extracted_requirement: "
+                f"{dependent_package.extracted_requirement}",
             )
         yield dependent_package
 

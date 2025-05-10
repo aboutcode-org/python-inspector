@@ -9,6 +9,7 @@
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 import asyncio
+import logging
 import os
 from netrc import netrc
 from typing import Dict
@@ -32,6 +33,7 @@ from python_inspector import dependencies
 from python_inspector import pyinspector_settings
 from python_inspector import utils
 from python_inspector import utils_pypi
+from python_inspector.logging import logger
 from python_inspector.package_data import get_pypi_data_from_purl
 from python_inspector.resolution import PythonInputProvider
 from python_inspector.resolution import format_pdt_tree
@@ -88,10 +90,8 @@ def resolve_dependencies(
     max_rounds=200000,
     use_cached_index=False,
     use_pypi_json_api=False,
-    verbose=False,
     analyze_setup_py_insecurely=False,
     prefer_source=False,
-    printer=print,
     generic_paths=False,
     ignore_errors=False,
 ):
@@ -124,8 +124,7 @@ def resolve_dependencies(
             f"Must be one of: {', '.join(valid_python_versions)}"
         )
 
-    if verbose:
-        printer("Resolving dependencies...")
+    logger.info("Resolving dependencies...")
 
     if netrc_file:
         if not os.path.exists(netrc_file):
@@ -139,8 +138,7 @@ def resolve_dependencies(
                 netrc_file = None
 
     if netrc_file:
-        if verbose:
-            printer(f"Using netrc file {netrc_file}")
+        logger.info(f"Using netrc file {netrc_file}")
         parsed_netrc = netrc(netrc_file)
     else:
         parsed_netrc = None
@@ -235,18 +233,17 @@ def resolve_dependencies(
             files=files,
         )
 
-    if verbose:
-        printer("direct_dependencies:")
+    logger.info("direct_dependencies:")
+    if logger.level <= logging.INFO:
         for dep in direct_dependencies:
-            printer(f" {dep}")
+            logging.info(f" {dep}")
 
     # create a resolution environments
     environment = utils_pypi.Environment.from_pyver_and_os(
         python_version=python_version, operating_system=operating_system
     )
 
-    if verbose:
-        printer(f"environment: {environment}")
+    logging.info(f"environment: {environment}")
 
     repos_by_url = {}
     if not use_pypi_json_api:
@@ -254,9 +251,10 @@ def resolve_dependencies(
         use_only_confed = pyinspector_settings.USE_ONLY_CONFIGURED_INDEX_URLS
         for index_url in index_urls:
             index_url = index_url.strip("/")
+
             if use_only_confed and index_url not in pyinspector_settings.INDEX_URL:
-                if verbose:
-                    printer(f"Skipping index URL unknown in settings: {index_url!r}")
+                logger.info(f"Skipping index URL unknown in settings: {index_url!r}")
+
                 continue
             if index_url in repos_by_url:
                 continue
@@ -274,10 +272,10 @@ def resolve_dependencies(
             repos_by_url[index_url] = repo
 
     repos = repos_by_url.values()
-    if verbose:
-        printer("repos:")
+    logger.info("repos:")
+    if logger.level <= logging.INFO:
         for repo in repos:
-            printer(f" {repo}")
+            logger.info(f" {repo}")
 
     # resolve dependencies proper
     resolution, purls = resolve(
@@ -289,8 +287,6 @@ def resolve_dependencies(
         pdt_output=pdt_output,
         analyze_setup_py_insecurely=analyze_setup_py_insecurely,
         ignore_errors=ignore_errors,
-        verbose=verbose,
-        printer=printer,
     )
 
     async def gather_pypi_data():
@@ -299,20 +295,17 @@ def resolve_dependencies(
                 package, repos=repos, environment=environment, prefer_source=prefer_source
             )
 
-            if verbose:
-                printer(f"  retrieved package '{package}'")
+            logger.info(f"  retrieved package '{package}'")
 
             return data
 
-        if verbose:
-            printer(f"retrieve package data from pypi:")
+        logger.info(f"retrieve package data from pypi:")
 
         return await asyncio.gather(*[get_pypi_data(package) for package in purls])
 
     packages = [pkg.to_dict() for pkg in asyncio.run(gather_pypi_data()) if pkg is not None]
 
-    if verbose:
-        printer("done!")
+    logger.info("done!")
 
     return Resolution(
         packages=packages,
@@ -352,8 +345,6 @@ def resolve(
     pdt_output: bool = False,
     analyze_setup_py_insecurely: bool = False,
     ignore_errors: bool = False,
-    verbose: bool = False,
-    printer=print,
 ):
     """
     Resolve dependencies given a ``direct_dependencies`` list of
@@ -380,8 +371,6 @@ def resolve(
         pdt_output=pdt_output,
         analyze_setup_py_insecurely=analyze_setup_py_insecurely,
         ignore_errors=ignore_errors,
-        verbose=verbose,
-        printer=printer,
     )
 
     return resolved_dependencies, packages
@@ -396,8 +385,6 @@ def get_resolved_dependencies(
     pdt_output: bool = False,
     analyze_setup_py_insecurely: bool = False,
     ignore_errors: bool = False,
-    verbose: bool = False,
-    printer=print,
 ) -> Tuple[List[Dict], List[str]]:
     """
     Return resolved dependencies of a ``requirements`` list of Requirement for
@@ -420,13 +407,11 @@ def get_resolved_dependencies(
         async def get_version_data(name: str):
             versions = await provider.fill_versions_for_package(name)
 
-            if verbose:
-                printer(f"  retrieved versions for package '{name}'")
+            logger.info(f"  retrieved versions for package '{name}'")
 
             return versions
 
-        if verbose:
-            printer(f"versions:")
+        logger.info(f"versions:")
 
         return await asyncio.gather(
             *[get_version_data(requirement.name) for requirement in requirements]
@@ -446,11 +431,9 @@ def get_resolved_dependencies(
                 candidate = Candidate(requirement.name, purl.version, requirement.extras)
                 await provider.fill_requirements_for_package(purl, candidate)
 
-                if verbose:
-                    printer(f"  retrieved dependencies for requirement '{str(purl)}'")
+                logger.info(f"  retrieved dependencies for requirement '{str(purl)}'")
 
-        if verbose:
-            printer(f"dependencies:")
+        logger.info(f"dependencies:")
 
         return await asyncio.gather(
             *[get_dependencies(requirement) for requirement in requirements]

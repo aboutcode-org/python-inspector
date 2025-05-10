@@ -235,7 +235,9 @@ def resolve_dependencies(
         ctx.exit(1)
 
     # Setup verbose level
-    if verbose >= 3:
+    if verbose >= 4:
+        logging.setup_logger("DEEP")
+    elif verbose == 3:
         logging.setup_logger("TRACE")
     elif verbose == 2:
         logging.setup_logger("DEBUG")
@@ -276,7 +278,6 @@ def resolve_dependencies(
             use_cached_index=use_cached_index,
             use_pypi_json_api=use_pypi_json_api,
             analyze_setup_py_insecurely=analyze_setup_py_insecurely,
-            printer=click.secho,
             prefer_source=prefer_source,
             ignore_errors=ignore_errors,
             generic_paths=generic_paths,
