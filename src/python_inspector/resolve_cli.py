@@ -13,6 +13,7 @@ from typing import Dict
 
 import click
 
+from python_inspector import logging
 from python_inspector import pyinspector_settings
 from python_inspector import settings
 from python_inspector import utils_pypi
@@ -44,8 +45,7 @@ def print_version(ctx, param, value):
     metavar="REQUIREMENT-FILE",
     multiple=True,
     required=False,
-    help="Path to pip requirements file listing thirdparty packages. "
-    "This option can be used multiple times.",
+    help="Path to pip requirements file listing thirdparty packages. This option can be used multiple times.",
 )
 @click.option(
     "-s",
@@ -96,8 +96,7 @@ def print_version(ctx, param, value):
     show_default=True,
     default=pyinspector_settings.INDEX_URL,
     multiple=True,
-    help="PyPI simple index URL(s) to use in order of preference. "
-    "This option can be used multiple times.",
+    help="PyPI simple index URL(s) to use in order of preference. This option can be used multiple times.",
 )
 @click.option(
     "--json",
@@ -140,8 +139,7 @@ def print_version(ctx, param, value):
     "--use-cached-index",
     is_flag=True,
     hidden=True,
-    help="Use cached on-disk PyPI simple package indexes "
-    "and do not refetch package index if cache is present.",
+    help="Use cached on-disk PyPI simple package indexes and do not refetch package index if cache is present.",
 )
 @click.option(
     "--use-pypi-json-api",
@@ -162,9 +160,10 @@ def print_version(ctx, param, value):
     "distribution is available then binary distributions are used",
 )
 @click.option(
+    "-v",
     "--verbose",
-    is_flag=True,
-    help="Enable verbose debug output.",
+    count=True,
+    help="Increase verbosity: -v=INFO, -vv=DEBUG, -vvv=TRACE.",
 )
 @click.option(
     "-V",
@@ -175,9 +174,7 @@ def print_version(ctx, param, value):
     callback=print_version,
     help="Show the version and exit.",
 )
-@click.option(
-    "--ignore-errors", is_flag=True, default=False, help="Ignore errors and continue execution."
-)
+@click.option("--ignore-errors", is_flag=True, default=False, help="Ignore errors and continue execution.")
 @click.help_option("-h", "--help")
 @click.option(
     "--generic-paths",
@@ -198,11 +195,11 @@ def resolve_dependencies(
     pdt_output,
     netrc_file,
     max_rounds,
+    verbose,
     use_cached_index=False,
     use_pypi_json_api=False,
     analyze_setup_py_insecurely=False,
     prefer_source=False,
-    verbose=TRACE,
     generic_paths=False,
     ignore_errors=False,
 ):
@@ -237,6 +234,16 @@ def resolve_dependencies(
         click.secho("Only one of --json or --json-pdt can be used.", err=True)
         ctx.exit(1)
 
+    # Setup verbose level
+    if verbose >= 3:
+        logging.setup_logger("TRACE")
+    elif verbose == 2:
+        logging.setup_logger("DEBUG")
+    elif verbose == 1:
+        logging.setup_logger("INFO")
+    else:
+        logging.setup_logger()
+
     options = get_pretty_options(ctx, generic_paths=generic_paths)
 
     notice = (
@@ -268,7 +275,6 @@ def resolve_dependencies(
             max_rounds=max_rounds,
             use_cached_index=use_cached_index,
             use_pypi_json_api=use_pypi_json_api,
-            verbose=verbose,
             analyze_setup_py_insecurely=analyze_setup_py_insecurely,
             printer=click.secho,
             prefer_source=prefer_source,
