@@ -5,12 +5,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "click",
-      "version": "8.1.8",
+      "version": "8.2.1",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "Composable command line interface toolkit\n# $ click_\n\nClick is a Python package for creating beautiful command line interfaces\nin a composable way with as little code as necessary. It's the \"Command\nLine Interface Creation Kit\". It's highly configurable but comes with\nsensible defaults out of the box.\n\nIt aims to make the process of writing command line tools quick and fun\nwhile also preventing any frustration caused by the inability to\nimplement an intended CLI API.\n\nClick in three points:\n\n-   Arbitrary nesting of commands\n-   Automatic help page generation\n-   Supports lazy loading of subcommands at runtime\n\n\n## A Simple Example\n\n```python\nimport click\n\n@click.command()\n@click.option(\"--count\", default=1, help=\"Number of greetings.\")\n@click.option(\"--name\", prompt=\"Your name\", help=\"The person to greet.\")\ndef hello(count, name):\n    \"\"\"Simple program that greets NAME for a total of COUNT times.\"\"\"\n    for _ in range(count):\n        click.echo(f\"Hello, {name}!\")\n\nif __name__ == '__main__':\n    hello()\n```\n\n```\n$ python hello.py --count=3\nYour name: Click\nHello, Click!\nHello, Click!\nHello, Click!\n```\n\n\n## Donate\n\nThe Pallets organization develops and supports Click and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, [please\ndonate today][].\n\n[please donate today]: https://palletsprojects.com/donate",
-      "release_date": "2024-12-21T18:38:41",
+      "description": "Composable command line interface toolkit\n# $ click_\n\nClick is a Python package for creating beautiful command line interfaces\nin a composable way with as little code as necessary. It's the \"Command\nLine Interface Creation Kit\". It's highly configurable but comes with\nsensible defaults out of the box.\n\nIt aims to make the process of writing command line tools quick and fun\nwhile also preventing any frustration caused by the inability to\nimplement an intended CLI API.\n\nClick in three points:\n\n-   Arbitrary nesting of commands\n-   Automatic help page generation\n-   Supports lazy loading of subcommands at runtime\n\n\n## A Simple Example\n\n```python\nimport click\n\n@click.command()\n@click.option(\"--count\", default=1, help=\"Number of greetings.\")\n@click.option(\"--name\", prompt=\"Your name\", help=\"The person to greet.\")\ndef hello(count, name):\n    \"\"\"Simple program that greets NAME for a total of COUNT times.\"\"\"\n    for _ in range(count):\n        click.echo(f\"Hello, {name}!\")\n\nif __name__ == '__main__':\n    hello()\n```\n\n```\n$ python hello.py --count=3\nYour name: Click\nHello, Click!\nHello, Click!\nHello, Click!\n```\n\n\n## Donate\n\nThe Pallets organization develops and supports Click and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, [please\ndonate today][].\n\n[please donate today]: https://palletsprojects.com/donate\n\n## Contributing\n\nSee our [detailed contributing documentation][contrib] for many ways to\ncontribute, including reporting issues, requesting features, asking or answering\nquestions, and making PRs.\n\n[contrib]: https://palletsprojects.com/contributing/",
+      "release_date": "2025-05-20T23:19:47",
       "parties": [
         {
           "type": "person",
@@ -28,22 +28,18 @@
         "Typing :: Typed"
       ],
       "homepage_url": null,
-      "download_url": "https://files.pythonhosted.org/packages/7e/d4/7ebdbd03970677812aac39c869717059dbb71a4cfc033ca6e5221787892c/click-8.1.8-py3-none-any.whl",
-      "size": 98188,
+      "download_url": "https://files.pythonhosted.org/packages/85/32/10bb5764d90a8eee674e9dc6f4db6a0ab47c8c4d0d83c27f7c39ac415a4d/click-8.2.1-py3-none-any.whl",
+      "size": 102215,
       "sha1": null,
-      "md5": "7dc0eee374f3bb75bcce4c9dd4222f5f",
-      "sha256": "63c132bbbed01578a06712a2d1f497bb62d9c1c0d329b7903a866228027263b2",
+      "md5": "aeead16d8bed93caa7107ac87b1e5ec8",
+      "sha256": "61a3265b914e850b85317d0b3109c7f8cd35a670f963866005d6ef1d5175a12b",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/pallets/click/",
       "vcs_url": null,
       "copyright": null,
-      "license_expression": null,
-      "declared_license": {
-        "classifiers": [
-          "License :: OSI Approved :: BSD License"
-        ]
-      },
+      "license_expression": "BSD-3-Clause",
+      "declared_license": {},
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
@@ -51,9 +47,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/click/8.1.8/json",
+      "api_data_url": "https://pypi.org/pypi/click/8.2.1/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/click@8.1.8"
+      "purl": "pkg:pypi/click@8.2.1"
     },
     {
       "type": "pypi",
@@ -361,7 +357,7 @@
         {
           "key": "click",
           "package_name": "click",
-          "installed_version": "8.1.8",
+          "installed_version": "8.2.1",
           "dependencies": []
         },
         {

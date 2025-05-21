@@ -524,12 +524,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "click",
-      "version": "8.1.8",
+      "version": "8.2.1",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "Composable command line interface toolkit\n# $ click_\n\nClick is a Python package for creating beautiful command line interfaces\nin a composable way with as little code as necessary. It's the \"Command\nLine Interface Creation Kit\". It's highly configurable but comes with\nsensible defaults out of the box.\n\nIt aims to make the process of writing command line tools quick and fun\nwhile also preventing any frustration caused by the inability to\nimplement an intended CLI API.\n\nClick in three points:\n\n-   Arbitrary nesting of commands\n-   Automatic help page generation\n-   Supports lazy loading of subcommands at runtime\n\n\n## A Simple Example\n\n```python\nimport click\n\n@click.command()\n@click.option(\"--count\", default=1, help=\"Number of greetings.\")\n@click.option(\"--name\", prompt=\"Your name\", help=\"The person to greet.\")\ndef hello(count, name):\n    \"\"\"Simple program that greets NAME for a total of COUNT times.\"\"\"\n    for _ in range(count):\n        click.echo(f\"Hello, {name}!\")\n\nif __name__ == '__main__':\n    hello()\n```\n\n```\n$ python hello.py --count=3\nYour name: Click\nHello, Click!\nHello, Click!\nHello, Click!\n```\n\n\n## Donate\n\nThe Pallets organization develops and supports Click and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, [please\ndonate today][].\n\n[please donate today]: https://palletsprojects.com/donate",
-      "release_date": "2024-12-21T18:38:41",
+      "description": "Composable command line interface toolkit\n# $ click_\n\nClick is a Python package for creating beautiful command line interfaces\nin a composable way with as little code as necessary. It's the \"Command\nLine Interface Creation Kit\". It's highly configurable but comes with\nsensible defaults out of the box.\n\nIt aims to make the process of writing command line tools quick and fun\nwhile also preventing any frustration caused by the inability to\nimplement an intended CLI API.\n\nClick in three points:\n\n-   Arbitrary nesting of commands\n-   Automatic help page generation\n-   Supports lazy loading of subcommands at runtime\n\n\n## A Simple Example\n\n```python\nimport click\n\n@click.command()\n@click.option(\"--count\", default=1, help=\"Number of greetings.\")\n@click.option(\"--name\", prompt=\"Your name\", help=\"The person to greet.\")\ndef hello(count, name):\n    \"\"\"Simple program that greets NAME for a total of COUNT times.\"\"\"\n    for _ in range(count):\n        click.echo(f\"Hello, {name}!\")\n\nif __name__ == '__main__':\n    hello()\n```\n\n```\n$ python hello.py --count=3\nYour name: Click\nHello, Click!\nHello, Click!\nHello, Click!\n```\n\n\n## Donate\n\nThe Pallets organization develops and supports Click and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, [please\ndonate today][].\n\n[please donate today]: https://palletsprojects.com/donate\n\n## Contributing\n\nSee our [detailed contributing documentation][contrib] for many ways to\ncontribute, including reporting issues, requesting features, asking or answering\nquestions, and making PRs.\n\n[contrib]: https://palletsprojects.com/contributing/",
+      "release_date": "2025-05-20T23:19:47",
       "parties": [
         {
           "type": "person",
@@ -547,22 +547,18 @@
         "Typing :: Typed"
       ],
       "homepage_url": null,
-      "download_url": "https://files.pythonhosted.org/packages/7e/d4/7ebdbd03970677812aac39c869717059dbb71a4cfc033ca6e5221787892c/click-8.1.8-py3-none-any.whl",
-      "size": 98188,
+      "download_url": "https://files.pythonhosted.org/packages/85/32/10bb5764d90a8eee674e9dc6f4db6a0ab47c8c4d0d83c27f7c39ac415a4d/click-8.2.1-py3-none-any.whl",
+      "size": 102215,
       "sha1": null,
-      "md5": "7dc0eee374f3bb75bcce4c9dd4222f5f",
-      "sha256": "63c132bbbed01578a06712a2d1f497bb62d9c1c0d329b7903a866228027263b2",
+      "md5": "aeead16d8bed93caa7107ac87b1e5ec8",
+      "sha256": "61a3265b914e850b85317d0b3109c7f8cd35a670f963866005d6ef1d5175a12b",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/pallets/click/",
       "vcs_url": null,
       "copyright": null,
-      "license_expression": null,
-      "declared_license": {
-        "classifiers": [
-          "License :: OSI Approved :: BSD License"
-        ]
-      },
+      "license_expression": "BSD-3-Clause",
+      "declared_license": {},
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
@@ -570,20 +566,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/click/8.1.8/json",
+      "api_data_url": "https://pypi.org/pypi/click/8.2.1/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/click@8.1.8"
+      "purl": "pkg:pypi/click@8.2.1"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "cryptography",
-      "version": "44.0.3",
+      "version": "45.0.2",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "cryptography is a package which provides cryptographic recipes and primitives to Python developers.\npyca/cryptography\n=================\n\n.. image:: https://img.shields.io/pypi/v/cryptography.svg\n    :target: https://pypi.org/project/cryptography/\n    :alt: Latest Version\n\n.. image:: https://readthedocs.org/projects/cryptography/badge/?version=latest\n    :target: https://cryptography.io\n    :alt: Latest Docs\n\n.. image:: https://github.com/pyca/cryptography/workflows/CI/badge.svg?branch=main\n    :target: https://github.com/pyca/cryptography/actions?query=workflow%3ACI+branch%3Amain\n\n\n``cryptography`` is a package which provides cryptographic recipes and\nprimitives to Python developers. Our goal is for it to be your \"cryptographic\nstandard library\". It supports Python 3.7+ and PyPy3 7.3.11+.\n\n``cryptography`` includes both high level recipes and low level interfaces to\ncommon cryptographic algorithms such as symmetric ciphers, message digests, and\nkey derivation functions. For example, to encrypt something with\n``cryptography``'s high level symmetric encryption recipe:\n\n.. code-block:: pycon\n\n    >>> from cryptography.fernet import Fernet\n    >>> # Put this somewhere safe!\n    >>> key = Fernet.generate_key()\n    >>> f = Fernet(key)\n    >>> token = f.encrypt(b\"A really secret message. Not for prying eyes.\")\n    >>> token\n    b'...'\n    >>> f.decrypt(token)\n    b'A really secret message. Not for prying eyes.'\n\nYou can find more information in the `documentation`_.\n\nYou can install ``cryptography`` with:\n\n.. code-block:: console\n\n    $ pip install cryptography\n\nFor full details see `the installation documentation`_.\n\nDiscussion\n~~~~~~~~~~\n\nIf you run into bugs, you can file them in our `issue tracker`_.\n\nWe maintain a `cryptography-dev`_ mailing list for development discussion.\n\nYou can also join ``#pyca`` on ``irc.libera.chat`` to ask questions or get\ninvolved.\n\nSecurity\n~~~~~~~~\n\nNeed to report a security issue? Please consult our `security reporting`_\ndocumentation.\n\n\n.. _`documentation`: https://cryptography.io/\n.. _`the installation documentation`: https://cryptography.io/en/latest/installation/\n.. _`issue tracker`: https://github.com/pyca/cryptography/issues\n.. _`cryptography-dev`: https://mail.python.org/mailman/listinfo/cryptography-dev\n.. _`security reporting`: https://cryptography.io/en/latest/security/",
-      "release_date": "2025-05-02T19:35:18",
+      "release_date": "2025-05-18T02:45:59",
       "parties": [
         {
           "type": "person",
@@ -617,11 +613,11 @@
         "Topic :: Security :: Cryptography"
       ],
       "homepage_url": null,
-      "download_url": "https://files.pythonhosted.org/packages/f7/c8/e5c5d0e1364d3346a5747cdcd7ecbb23ca87e6dea4f942a44e88be349f06/cryptography-44.0.3-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
-      "size": 4170876,
+      "download_url": "https://files.pythonhosted.org/packages/b9/d4/75d2375a20d80aa262a8adee77bf56950e9292929e394b9fae2481803f11/cryptography-45.0.2-cp37-abi3-musllinux_1_2_x86_64.whl",
+      "size": 4560535,
       "sha1": null,
-      "md5": "5b325fcc479d9d537df71ef8b41d3643",
-      "sha256": "192ed30fac1728f7587c6f4613c29c584abdc565d7417c13904708db10206645",
+      "md5": "947cb34eecccafe70b2313042598a793",
+      "sha256": "c0c000c1a09f069632d8a9eb3b610ac029fcc682f1d69b758e625d6ee713f4ed",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -629,11 +625,7 @@
       "copyright": null,
       "license_expression": null,
       "declared_license": {
-        "license": "Apache-2.0 OR BSD-3-Clause",
-        "classifiers": [
-          "License :: OSI Approved :: Apache Software License",
-          "License :: OSI Approved :: BSD License"
-        ]
+        "license": "Apache-2.0 OR BSD-3-Clause"
       },
       "notice_text": null,
       "source_packages": [],
@@ -642,9 +634,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/cryptography/44.0.3/json",
+      "api_data_url": "https://pypi.org/pypi/cryptography/45.0.2/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/cryptography@44.0.3"
+      "purl": "pkg:pypi/cryptography@45.0.2"
     },
     {
       "type": "pypi",
@@ -1335,7 +1327,7 @@
       "package": "pkg:pypi/azure-storage-blob@12.25.1",
       "dependencies": [
         "pkg:pypi/azure-core@1.34.0",
-        "pkg:pypi/cryptography@44.0.3",
+        "pkg:pypi/cryptography@45.0.2",
         "pkg:pypi/isodate@0.7.2",
         "pkg:pypi/typing-extensions@4.13.2"
       ]
@@ -1355,11 +1347,11 @@
       "dependencies": []
     },
     {
-      "package": "pkg:pypi/click@8.1.8",
+      "package": "pkg:pypi/click@8.2.1",
       "dependencies": []
     },
     {
-      "package": "pkg:pypi/cryptography@44.0.3",
+      "package": "pkg:pypi/cryptography@45.0.2",
       "dependencies": [
         "pkg:pypi/cffi@1.17.1"
       ]
