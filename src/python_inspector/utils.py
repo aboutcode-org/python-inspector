@@ -101,3 +101,20 @@ def remove_test_data_dir_variable_prefix(path, placeholder="<file>"):
         return cleaned.replace("\\", "/")
     else:
         return placeholder
+
+
+def unique(sequence):
+    """
+    Return a list of unique items found in sequence. Preserve the original sequence order.
+    Items must be hashable.
+    For example:
+    >>> unique([1, 5, 3, 5])
+    [1, 5, 3]
+    """
+    seen = set()
+    deduped = []
+    for item in sequence:
+        if item not in seen:
+            deduped.append(item)
+            seen.add(item)
+    return deduped

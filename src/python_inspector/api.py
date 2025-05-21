@@ -42,6 +42,7 @@ from python_inspector.resolution import get_python_version_from_env_tag
 from python_inspector.resolution import get_reqs_insecurely
 from python_inspector.resolution import get_requirements_from_python_manifest
 from python_inspector.utils import Candidate
+from python_inspector.utils import unique
 from python_inspector.utils_pypi import PLATFORMS_BY_OS
 from python_inspector.utils_pypi import Environment
 from python_inspector.utils_pypi import PypiSimpleRepository
@@ -336,7 +337,7 @@ def get_index_urls(index_urls: Tuple, extra_data: Dict) -> Tuple:
         index_urls = (*index_urls, *tuple(extra_index_urls))
     if isinstance(index_url, str):
         index_urls = (*index_urls, *tuple([index_url]))
-    return tuple(set(index_urls))
+    return tuple(unique(index_urls))
 
 
 resolver_api = resolve_dependencies
