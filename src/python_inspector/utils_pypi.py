@@ -41,6 +41,7 @@ from packvers import tags as packaging_tags
 from packvers import version as packaging_version
 from packvers.specifiers import SpecifierSet
 
+from python_inspector import lockfile
 from python_inspector import pyinspector_settings as settings
 from python_inspector import utils_pip_compatibility_tags
 
@@ -1650,6 +1651,8 @@ def resolve_relative_url(package_url, url):
 #
 ################################################################################
 
+PYINSP_CACHE_LOCK_TIMEOUT = 120  # in seconds
+
 
 @attr.attributes
 class Cache:
@@ -1681,6 +1684,7 @@ class Cache:
         True otherwise as treat as binary. `path_or_url` can be a path or a URL
         to a file.
         """
+        # the cache key is a hash of the normalized path
         cache_key = self.sha256_hash(quote_plus(path_or_url.strip("/")))
         cached = os.path.join(self.directory, cache_key)
 
@@ -1695,8 +1699,13 @@ class Cache:
                 echo_func=echo_func,
             )
             wmode = "w" if as_text else "wb"
-            async with aiofiles.open(cached, mode=wmode) as fo:
-                await fo.write(content)
+
+            # acquire lock and wait until timeout to get a lock or die
+            lock_file = os.path.join(self.directory, f"{cache_key}.lockfile")
+
+            with lockfile.FileLock(lock_file).locked(timeout=PYINSP_CACHE_LOCK_TIMEOUT):
+                async with aiofiles.open(cached, mode=wmode) as fo:
+                    await fo.write(content)
             return content, cached
         else:
             if TRACE_DEEP:

@@ -13,16 +13,17 @@ from typing import Dict
 
 import click
 
-from python_inspector import pyinspector_settings as settings
+from python_inspector import settings
 from python_inspector import utils_pypi
 from python_inspector.cli_utils import FileOptionType
 from python_inspector.utils import write_output_in_file
 
 TRACE = False
 
-__version__ = "0.13.0"
+__version__ = "0.14.0"
 
 DEFAULT_PYTHON_VERSION = settings.DEFAULT_PYTHON_VERSION
+PYPI_SIMPLE_URL = settings.PYPI_SIMPLE_URL
 
 
 def print_version(ctx, param, value):
@@ -71,7 +72,6 @@ def print_version(ctx, param, value):
     "python_version",
     type=click.Choice(utils_pypi.valid_python_versions),
     metavar="PYVER",
-    default=settings.DEFAULT_PYTHON_VERSION,
     show_default=True,
     required=True,
     help="Python version to use for dependency resolution. One of "
@@ -83,7 +83,6 @@ def print_version(ctx, param, value):
     "operating_system",
     type=click.Choice(utils_pypi.PLATFORMS_BY_OS),
     metavar="OS",
-    default=settings.DEFAULT_OS,
     show_default=True,
     required=True,
     help="OS to use for dependency resolution. One of " + ", ".join(utils_pypi.PLATFORMS_BY_OS),
@@ -91,11 +90,11 @@ def print_version(ctx, param, value):
 @click.option(
     "--index-url",
     "index_urls",
-    envvar="PYINSP_INDEX_URL",
     type=str,
     metavar="INDEX",
     show_default=True,
-    default=tuple(settings.INDEX_URL),
+    # since multiple is True, this is a sequence
+    default=[settings.PYPI_SIMPLE_URL],
     multiple=True,
     help="PyPI simple index URL(s) to use in order of preference. "
     "This option can be used multiple times.",
@@ -123,7 +122,6 @@ def print_version(ctx, param, value):
     "--netrc",
     "netrc_file",
     type=click.Path(exists=True, readable=True, path_type=str, dir_okay=False),
-    envvar="PYINSP_NETRC_FILE",
     metavar="NETRC-FILE",
     hidden=True,
     required=False,
@@ -165,7 +163,6 @@ def print_version(ctx, param, value):
 )
 @click.option(
     "--verbose",
-    envvar="PYINSP_VERBOSE",
     is_flag=True,
     help="Enable verbose debug output.",
 )
