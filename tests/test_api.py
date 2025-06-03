@@ -140,7 +140,6 @@ def test_api_with_partial_setup_py():
 
 
 def test_get_index_urls():
-
     # pass as a tuple
     index_urls = get_index_urls(
         index_urls=("https://pypi.org/simple",),
