@@ -28,6 +28,15 @@ setup_test_env = FileDrivenTesting()
 setup_test_env.test_data_dir = os.path.join(os.path.dirname(__file__), "data", "setup")
 
 
+def clear_environ():
+    for k, v in os.environ.items():
+        if k == "PYINSP_REGEN_TEST_FIXTURES":
+            continue
+        if "PYINSP" in k:
+            print(f"deleting: {k}: {v}")
+            os.unsetenv(k)
+
+
 @pytest.mark.online
 def test_cli_with_default_urls():
     expected_file = test_env.get_test_loc("default-url-expected.json", must_exist=False)

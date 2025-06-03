@@ -574,12 +574,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "cryptography",
-      "version": "45.0.2",
+      "version": "45.0.3",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "cryptography is a package which provides cryptographic recipes and primitives to Python developers.\npyca/cryptography\n=================\n\n.. image:: https://img.shields.io/pypi/v/cryptography.svg\n    :target: https://pypi.org/project/cryptography/\n    :alt: Latest Version\n\n.. image:: https://readthedocs.org/projects/cryptography/badge/?version=latest\n    :target: https://cryptography.io\n    :alt: Latest Docs\n\n.. image:: https://github.com/pyca/cryptography/workflows/CI/badge.svg?branch=main\n    :target: https://github.com/pyca/cryptography/actions?query=workflow%3ACI+branch%3Amain\n\n\n``cryptography`` is a package which provides cryptographic recipes and\nprimitives to Python developers. Our goal is for it to be your \"cryptographic\nstandard library\". It supports Python 3.7+ and PyPy3 7.3.11+.\n\n``cryptography`` includes both high level recipes and low level interfaces to\ncommon cryptographic algorithms such as symmetric ciphers, message digests, and\nkey derivation functions. For example, to encrypt something with\n``cryptography``'s high level symmetric encryption recipe:\n\n.. code-block:: pycon\n\n    >>> from cryptography.fernet import Fernet\n    >>> # Put this somewhere safe!\n    >>> key = Fernet.generate_key()\n    >>> f = Fernet(key)\n    >>> token = f.encrypt(b\"A really secret message. Not for prying eyes.\")\n    >>> token\n    b'...'\n    >>> f.decrypt(token)\n    b'A really secret message. Not for prying eyes.'\n\nYou can find more information in the `documentation`_.\n\nYou can install ``cryptography`` with:\n\n.. code-block:: console\n\n    $ pip install cryptography\n\nFor full details see `the installation documentation`_.\n\nDiscussion\n~~~~~~~~~~\n\nIf you run into bugs, you can file them in our `issue tracker`_.\n\nWe maintain a `cryptography-dev`_ mailing list for development discussion.\n\nYou can also join ``#pyca`` on ``irc.libera.chat`` to ask questions or get\ninvolved.\n\nSecurity\n~~~~~~~~\n\nNeed to report a security issue? Please consult our `security reporting`_\ndocumentation.\n\n\n.. _`documentation`: https://cryptography.io/\n.. _`the installation documentation`: https://cryptography.io/en/latest/installation/\n.. _`issue tracker`: https://github.com/pyca/cryptography/issues\n.. _`cryptography-dev`: https://mail.python.org/mailman/listinfo/cryptography-dev\n.. _`security reporting`: https://cryptography.io/en/latest/security/",
-      "release_date": "2025-05-18T02:45:59",
+      "release_date": "2025-05-25T14:16:51",
       "parties": [
         {
           "type": "person",
@@ -613,11 +613,11 @@
         "Topic :: Security :: Cryptography"
       ],
       "homepage_url": null,
-      "download_url": "https://files.pythonhosted.org/packages/b9/d4/75d2375a20d80aa262a8adee77bf56950e9292929e394b9fae2481803f11/cryptography-45.0.2-cp37-abi3-musllinux_1_2_x86_64.whl",
-      "size": 4560535,
+      "download_url": "https://files.pythonhosted.org/packages/f5/b4/51417d0cc01802304c1984d76e9592f15e4801abd44ef7ba657060520bf0/cryptography-45.0.3-cp37-abi3-musllinux_1_2_x86_64.whl",
+      "size": 4560038,
       "sha1": null,
-      "md5": "947cb34eecccafe70b2313042598a793",
-      "sha256": "c0c000c1a09f069632d8a9eb3b610ac029fcc682f1d69b758e625d6ee713f4ed",
+      "md5": "895f405f8548c6d156a23c615cb8e20f",
+      "sha256": "232954730c362638544758a8160c4ee1b832dc011d2c41a306ad8f7cccc5bb0b",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -634,9 +634,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/cryptography/45.0.2/json",
+      "api_data_url": "https://pypi.org/pypi/cryptography/45.0.3/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/cryptography@45.0.2"
+      "purl": "pkg:pypi/cryptography@45.0.3"
     },
     {
       "type": "pypi",
@@ -1166,12 +1166,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "typing-extensions",
-      "version": "4.13.2",
+      "version": "4.14.0",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "Backported and Experimental Type Hints for Python 3.8+\n# Typing Extensions\n\n[![Chat at https://gitter.im/python/typing](https://badges.gitter.im/python/typing.svg)](https://gitter.im/python/typing)\n\n[Documentation](https://typing-extensions.readthedocs.io/en/latest/#) \u2013\n[PyPI](https://pypi.org/project/typing-extensions/)\n\n## Overview\n\nThe `typing_extensions` module serves two related purposes:\n\n- Enable use of new type system features on older Python versions. For example,\n  `typing.TypeGuard` is new in Python 3.10, but `typing_extensions` allows\n  users on previous Python versions to use it too.\n- Enable experimentation with new type system PEPs before they are accepted and\n  added to the `typing` module.\n\n`typing_extensions` is treated specially by static type checkers such as\nmypy and pyright. Objects defined in `typing_extensions` are treated the same\nway as equivalent forms in `typing`.\n\n`typing_extensions` uses\n[Semantic Versioning](https://semver.org/). The\nmajor version will be incremented only for backwards-incompatible changes.\nTherefore, it's safe to depend\non `typing_extensions` like this: `typing_extensions >=x.y, <(x+1)`,\nwhere `x.y` is the first version that includes all features you need.\n\n## Included items\n\nSee [the documentation](https://typing-extensions.readthedocs.io/en/latest/#) for a\ncomplete listing of module contents.\n\n## Contributing\n\nSee [CONTRIBUTING.md](https://github.com/python/typing_extensions/blob/main/CONTRIBUTING.md)\nfor how to contribute to `typing_extensions`.",
-      "release_date": "2025-04-10T14:19:03",
+      "description": "Backported and Experimental Type Hints for Python 3.9+\n# Typing Extensions\n\n[![Chat at https://gitter.im/python/typing](https://badges.gitter.im/python/typing.svg)](https://gitter.im/python/typing)\n\n[Documentation](https://typing-extensions.readthedocs.io/en/latest/#) \u2013\n[PyPI](https://pypi.org/project/typing-extensions/)\n\n## Overview\n\nThe `typing_extensions` module serves two related purposes:\n\n- Enable use of new type system features on older Python versions. For example,\n  `typing.TypeGuard` is new in Python 3.10, but `typing_extensions` allows\n  users on previous Python versions to use it too.\n- Enable experimentation with new type system PEPs before they are accepted and\n  added to the `typing` module.\n\n`typing_extensions` is treated specially by static type checkers such as\nmypy and pyright. Objects defined in `typing_extensions` are treated the same\nway as equivalent forms in `typing`.\n\n`typing_extensions` uses\n[Semantic Versioning](https://semver.org/). The\nmajor version will be incremented only for backwards-incompatible changes.\nTherefore, it's safe to depend\non `typing_extensions` like this: `typing_extensions >=x.y, <(x+1)`,\nwhere `x.y` is the first version that includes all features you need.\n\n## Included items\n\nSee [the documentation](https://typing-extensions.readthedocs.io/en/latest/#) for a\ncomplete listing of module contents.\n\n## Contributing\n\nSee [CONTRIBUTING.md](https://github.com/python/typing_extensions/blob/main/CONTRIBUTING.md)\nfor how to contribute to `typing_extensions`.",
+      "release_date": "2025-06-02T14:52:10",
       "parties": [
         {
           "type": "person",
@@ -1204,16 +1204,16 @@
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: 3.13",
-        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.14",
         "Programming Language :: Python :: 3.9",
         "Topic :: Software Development"
       ],
       "homepage_url": null,
-      "download_url": "https://files.pythonhosted.org/packages/8b/54/b1ae86c0973cc6f0210b53d508ca3641fb6d0c56823f288d108bc7ab3cc8/typing_extensions-4.13.2-py3-none-any.whl",
-      "size": 45806,
+      "download_url": "https://files.pythonhosted.org/packages/69/e0/552843e0d356fbb5256d21449fa957fa4eff3bbc135a74a691ee70c7c5da/typing_extensions-4.14.0-py3-none-any.whl",
+      "size": 43839,
       "sha1": null,
-      "md5": "0d9ada689b5a7c88163dd4c3417b8cc8",
-      "sha256": "a439e7c04b49fec3e5d3e2beaa21755cadbbdc391694e28ccdd36ca4a1408f8c",
+      "md5": "d27a9ceff49d98145c50076842fca792",
+      "sha256": "a1514509136dd0b477638fc68d6a91497af5076466ad0fa6c338e44e359944af",
       "sha512": null,
       "bug_tracking_url": "https://github.com/python/typing_extensions/issues",
       "code_view_url": null,
@@ -1228,9 +1228,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/typing-extensions/4.13.2/json",
+      "api_data_url": "https://pypi.org/pypi/typing-extensions/4.14.0/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/typing-extensions@4.13.2"
+      "purl": "pkg:pypi/typing-extensions@4.14.0"
     },
     {
       "type": "pypi",
@@ -1314,7 +1314,7 @@
       "dependencies": [
         "pkg:pypi/requests@2.32.3",
         "pkg:pypi/six@1.17.0",
-        "pkg:pypi/typing-extensions@4.13.2"
+        "pkg:pypi/typing-extensions@4.14.0"
       ]
     },
     {
@@ -1327,9 +1327,9 @@
       "package": "pkg:pypi/azure-storage-blob@12.25.1",
       "dependencies": [
         "pkg:pypi/azure-core@1.34.0",
-        "pkg:pypi/cryptography@45.0.2",
+        "pkg:pypi/cryptography@45.0.3",
         "pkg:pypi/isodate@0.7.2",
-        "pkg:pypi/typing-extensions@4.13.2"
+        "pkg:pypi/typing-extensions@4.14.0"
       ]
     },
     {
@@ -1351,7 +1351,7 @@
       "dependencies": []
     },
     {
-      "package": "pkg:pypi/cryptography@45.0.2",
+      "package": "pkg:pypi/cryptography@45.0.3",
       "dependencies": [
         "pkg:pypi/cffi@1.17.1"
       ]
@@ -1403,7 +1403,7 @@
       "dependencies": []
     },
     {
-      "package": "pkg:pypi/typing-extensions@4.13.2",
+      "package": "pkg:pypi/typing-extensions@4.14.0",
       "dependencies": []
     },
     {
