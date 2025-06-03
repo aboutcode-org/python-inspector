@@ -29,7 +29,7 @@ from packvers.requirements import Requirement
 def minver_error(pkg_name):
     """Report error about missing minimum version constraint and exit."""
     print(
-        'ERROR: specify minimal version of "{0}" using ' '">=" or "=="'.format(pkg_name),
+        'ERROR: specify minimal version of "{0}" using ">=" or "=="'.format(pkg_name),
         file=sys.stderr,
     )
     sys.exit(1)
@@ -164,7 +164,7 @@ def iter_requirements(level, extras, setup_file):
         specs = {s.operator: s.version for s in specs._specs}
         if ((">=" in specs) and (">" in specs)) or (("<=" in specs) and ("<" in specs)):
             print(
-                "ERROR: Do not specify such weird constraints! " '("{0}")'.format(pkg),
+                'ERROR: Do not specify such weird constraints! ("{0}")'.format(pkg),
                 file=sys.stderr,
             )
             sys.exit(1)
