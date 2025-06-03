@@ -228,7 +228,7 @@ def test_cli_with_single_env_var_index_url_except_pypi_simple():
 
 @pytest.mark.online
 def test_cli_with_multiple_env_var_index_url_and_tilde_req():
-    expected_file = test_env.get_test_loc("tilde_req-expected.json", must_exist=False)
+    expected_file = test_env.get_test_loc("tilde_req-expected-env.json", must_exist=False)
     specifier = "zipp~=3.8.0"
     os.environ[
         "PYINSP_INDEX_URL"
@@ -702,9 +702,8 @@ def run_cli(
     if "--generic-paths" not in options:
         options.append("--generic-paths")
 
-    pyinsp_root_dir = dirname(dirname(__file__))
-
-    py_cmd = "python-inspector"
+    root_dir = dirname(dirname(__file__))
+    py_cmd = os.path.abspath(os.path.join(root_dir, "venv", "bin", "python-inspector"))
     rc, stdout, stderr = execute(
         cmd_loc=py_cmd,
         args=options,
@@ -716,7 +715,7 @@ def run_cli(
         time.sleep(1)
         if "--verbose" not in options:
             options.append("--verbose")
-        result = rc, stdout, stderr = execute(
+        rc, stdout, stderr = execute(
             cmd_loc=py_cmd,
             args=options,
             env=env,
@@ -742,41 +741,3 @@ stderr:
 def get_opts(options):
     opts = [o if isinstance(o, str) else repr(o) for o in options]
     return " ".join(opts)
-
-
-def run_click(
-    options,
-    cli=resolve_dependencies,
-    expected_rc=0,
-    env=None,
-    get_env=True,
-):
-    """
-    Run a command line resolution. Return a click.testing.Result object.
-    """
-
-    if not env:
-        env = dict(os.environ)
-
-    runner = CliRunner()
-    if get_env:
-        options = append_os_and_pyver_options(options)
-
-    if "--generic-paths" not in options:
-        options.append("--generic-paths")
-
-    result = runner.invoke(cli, options, catch_exceptions=False, env=env)
-
-    if result.exit_code != expected_rc:
-        output = result.output
-        opts = " ".join(options)
-        if result.exit_code != expected_rc:
-            error = f"""
-    Failure to run:
-    rc: {result.exit_code}
-    python-inspector {opts}
-    output:
-    {output}
-    """
-            assert result.exit_code == expected_rc, error
-    return result
