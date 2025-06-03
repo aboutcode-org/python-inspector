@@ -29,7 +29,7 @@ from _packagedcode.pypi import PythonSetupPyHandler
 from _packagedcode.pypi import can_process_dependent_package
 from _packagedcode.pypi import get_resolved_purl
 from python_inspector import dependencies
-from python_inspector import pyinspector_settings as settings
+from python_inspector import pyinspector_settings
 from python_inspector import utils
 from python_inspector import utils_pypi
 from python_inspector.package_data import get_pypi_data_from_purl
@@ -82,7 +82,7 @@ def resolve_dependencies(
     specifiers=tuple(),
     python_version=None,
     operating_system=None,
-    index_urls: tuple[str, ...] = settings.INDEX_URL,
+    index_urls: tuple[str, ...] = pyinspector_settings.INDEX_URL,
     pdt_output=None,
     netrc_file=None,
     max_rounds=200000,
@@ -251,10 +251,10 @@ def resolve_dependencies(
     repos_by_url = {}
     if not use_pypi_json_api:
         # Collect PyPI repos
-        use_only_confed = settings.USE_ONLY_CONFIGURED_INDEX_URLS
+        use_only_confed = pyinspector_settings.USE_ONLY_CONFIGURED_INDEX_URLS
         for index_url in index_urls:
             index_url = index_url.strip("/")
-            if use_only_confed and index_url not in settings.INDEX_URL:
+            if use_only_confed and index_url not in pyinspector_settings.INDEX_URL:
                 if verbose:
                     printer(f"Skipping index URL unknown in settings: {index_url!r}")
                 continue

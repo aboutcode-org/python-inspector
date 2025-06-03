@@ -12,6 +12,8 @@
 import json
 import os
 import sys
+import time
+from os.path import dirname
 
 import pytest
 from click.testing import CliRunner
@@ -524,8 +526,8 @@ def test_passing_of_json_pdt_and_json_flags():
 
 def test_version_option():
     options = ["--version"]
-    result = run_cli(options=options)
-    assert "0.13.0" in result.output
+    rc, stdout, stderr = run_cli(options=options)
+    assert "0.14.0" in stdout
 
 
 def test_passing_of_netrc_file_that_does_not_exist():
@@ -580,17 +582,15 @@ def test_passing_of_no_pyver():
 def test_passing_of_wrong_pyver():
     options = ["--specifier", "foo", "--json", "-", "--python-version", "foo"]
     message = "Invalid value for '-p' / '--python-version'"
-    result = run_cli(options=options, expected_rc=2, get_env=False)
-    if message:
-        assert message in result.output
+    rc, stdout, stderr = run_cli(options=options, expected_rc=2, get_env=False)
+    assert message in stderr
 
 
 def test_passing_of_unsupported_os():
     options = ["--specifier", "foo", "--json", "-", "--operating-system", "bar"]
     message = "Invalid value for '-o' / '--operating-system'"
-    result = run_cli(options=options, expected_rc=2, get_env=False)
-    if message:
-        assert message in result.output
+    rc, stdout, stderr = run_cli(options=options, expected_rc=2, get_env=False)
+    assert message in stderr
 
 
 def check_requirements_resolution(
@@ -625,9 +625,9 @@ def check_setup_py_resolution(
     else:
         options = ["--setup-py", setup_py, "--json", result_file]
     options.extend(extra_options)
-    result = run_cli(options=options, expected_rc=expected_rc)
+    rc, stdout, stderr = run_cli(options=options, expected_rc=expected_rc)
     if message:
-        assert message in result.output
+        assert message in stderr
     if expected_rc == 0:
         check_json_file_results(result_file=result_file, expected_file=expected_file, regen=regen)
 
@@ -654,6 +654,7 @@ def check_data_results(results, expected_file, regen=REGEN_TEST_FIXTURES):
     results from ``results_file``. This is convenient for updating tests
     expectations.
     """
+    results = clean_results(results)
     if regen:
         with open(expected_file, "w") as exo:
             json.dump(results, exo, indent=2, separators=(",", ": "))
@@ -661,10 +662,95 @@ def check_data_results(results, expected_file, regen=REGEN_TEST_FIXTURES):
     else:
         with open(expected_file) as reso:
             expected = json.load(reso)
+
+    expected = clean_results(expected)
+
     assert results == expected
 
 
-def run_cli(options, cli=resolve_dependencies, expected_rc=0, env=None, get_env=True):
+def clean_results(results):
+    """
+    Return cleaned data
+    """
+    if isinstance(results, dict) and "headers" in results:
+        headers = results.get("headers", {}) or {}
+        if "tool_version" in headers:
+            del headers["tool_version"]
+
+    return results
+
+
+def run_cli(
+    options,
+    expected_rc=0,
+    env=None,
+    get_env=True,
+    retry=True,
+):
+    """
+    Run a python-inspector command as a plain subprocess. Return results.
+    """
+
+    from commoncode.command import execute
+
+    if not env:
+        env = dict(os.environ)
+
+    if get_env:
+        options = append_os_and_pyver_options(options)
+
+    if "--generic-paths" not in options:
+        options.append("--generic-paths")
+
+    pyinsp_root_dir = dirname(dirname(__file__))
+
+    py_cmd = "python-inspector"
+    rc, stdout, stderr = execute(
+        cmd_loc=py_cmd,
+        args=options,
+        env=env,
+    )
+
+    if retry and rc != expected_rc:
+        # wait and rerun in verbose mode to get more in the output
+        time.sleep(1)
+        if "--verbose" not in options:
+            options.append("--verbose")
+        result = rc, stdout, stderr = execute(
+            cmd_loc=py_cmd,
+            args=options,
+            env=env,
+        )
+
+    if rc != expected_rc:
+        opts = get_opts(options)
+        error = f"""
+Failure to run:
+rc: {rc!r}
+command: python-inspector {opts}
+stdout:
+{stdout}
+
+stderr:
+{stderr}
+"""
+        assert rc == expected_rc, error
+
+    return rc, stdout, stderr
+
+
+def get_opts(options):
+    opts = [o if isinstance(o, str) else repr(o) for o in options]
+    return " ".join(opts)
+
+
+def run_click(
+    options,
+    cli=resolve_dependencies,
+    expected_rc=0,
+    env=None,
+    get_env=True,
+):
     """
     Run a command line resolution. Return a click.testing.Result object.
     """
@@ -684,12 +770,13 @@ def run_cli(options, cli=resolve_dependencies, expected_rc=0, env=None, get_env=
     if result.exit_code != expected_rc:
         output = result.output
         opts = " ".join(options)
-        error = f"""
-Failure to run:
-rc: {result.exit_code}
-python-inspector {opts}
-output:
-{output}
-"""
-        assert result.exit_code == expected_rc, error
+        if result.exit_code != expected_rc:
+            error = f"""
+    Failure to run:
+    rc: {result.exit_code}
+    python-inspector {opts}
+    output:
+    {output}
+    """
+            assert result.exit_code == expected_rc, error
     return result

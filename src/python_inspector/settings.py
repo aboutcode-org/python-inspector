@@ -13,6 +13,9 @@ from pydantic import field_validator
 from pydantic_settings import BaseSettings
 from pydantic_settings import SettingsConfigDict
 
+DEFAULT_PYTHON_VERSION = "39"
+PYPI_SIMPLE_URL = "https://pypi.org/simple"
+
 
 class Settings(BaseSettings):
     """
@@ -27,16 +30,18 @@ class Settings(BaseSettings):
         env_prefix="PYINSP_",
         case_sensitive=True,
         extra="allow",
+        # never treat data as JSON
+        enable_decoding=False,
     )
 
     # the default Python version to use if none is provided
-    DEFAULT_PYTHON_VERSION: str = "39"
+    DEFAULT_PYTHON_VERSION: str = DEFAULT_PYTHON_VERSION
 
     # the default OS to use if none is provided
     DEFAULT_OS: str = "linux"
 
-    # a list of PyPI simple index URLs. Use a JSON array to represent multiple URLs
-    INDEX_URL: tuple[str, ...] = ("https://pypi.org/simple",)
+    # a string with a tuple of PyPI simple index URLs, each separated by a space
+    INDEX_URL: tuple[str, ...] = (PYPI_SIMPLE_URL,)
 
     # If True, only uses configured INDEX_URLs listed above and ignore other URLs found in requirements
     USE_ONLY_CONFIGURED_INDEX_URLS: bool = False
@@ -44,11 +49,11 @@ class Settings(BaseSettings):
     # a path string where to store the cached downloads. Will be created if it does not exists.
     CACHE_THIRDPARTY_DIR: str = str(Path(Path.home() / ".cache/python_inspector"))
 
-    @field_validator("INDEX_URL")
+    @field_validator("INDEX_URL", mode="before")
     @classmethod
     def validate_index_url(cls, value):
         if isinstance(value, str):
-            return (value,)
+            return tuple(value.split())
         elif isinstance(value, (tuple, list)):
             return tuple(value)
         else:
