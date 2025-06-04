@@ -682,6 +682,9 @@ def clean_results(results):
         headers = results.get("headers", {}) or {}
         if "tool_version" in headers:
             del headers["tool_version"]
+        options = headers.get("options", []) or []
+        if "--verbose" in options:
+            options.remove("--verbose")
 
     return results
 
