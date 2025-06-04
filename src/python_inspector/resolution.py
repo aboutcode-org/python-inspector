@@ -12,6 +12,7 @@ import asyncio
 import operator
 import os
 import tarfile
+from traceback import format_exc
 from typing import Dict
 from typing import Generator
 from typing import Iterable
@@ -92,7 +93,10 @@ def get_requirements_from_distribution(
             dependencies = package_data.dependencies
             reqs.extend(get_requirements_from_dependencies(dependencies=dependencies))
     except Exception as e:
-        raise Exception(f"Failed to get_requirements_from_distribution for: {location!r}") from e
+        trace = format_exc()
+        raise Exception(
+            f"Failed to get_requirements_from_distribution for: {location!r}\n{trace}"
+        ) from e
     return reqs
 
 
