@@ -6,6 +6,9 @@ v0.14.0
 
 - Speed up downloads with asyncio
 
+- Introduce file-based locking when reading and writing
+  python package archives to avoid accessing partial zip and tarballs.
+
 - New settings featuring environment variables and .env file to store settings and defaults.
 
   - This also changes the CACHE_THIRDPARTY_DIR environment variable: it used to default first
@@ -35,6 +38,8 @@ v0.14.0
 - Add support for the latest Python and OS versions.
 
 - Merge latest skeleton and adopt ruff for code formatting.
+
+- Fix misc bugs.
 
 
 v0.13.1
