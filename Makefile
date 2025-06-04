@@ -24,7 +24,7 @@ dev:
 
 doc8:
 	@echo "-> Run doc8 validation"
-	@${ACTIVATE} doc8 --config pyproject.toml --max-line-length 100 docs/ *.rst
+	@${ACTIVATE} doc8 --config pyproject.toml --ignore-path docs/_build --max-line-length 100 docs/ *.rst
 
 valid:
 	@echo "-> Run Ruff format"
