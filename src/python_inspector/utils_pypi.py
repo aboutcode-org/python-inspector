@@ -196,7 +196,6 @@ PLATFORMS_BY_OS = {
 DEFAULT_PYTHON_VERSION = settings.DEFAULT_PYTHON_VERSION
 CACHE_THIRDPARTY_DIR = settings.CACHE_THIRDPARTY_DIR
 
-
 ################################################################################
 
 EXTENSIONS_SDIST = (
@@ -316,9 +315,10 @@ async def get_supported_and_valid_wheels(
         ):
             continue
         if TRACE_DEEP:
+            durl = await wheel.download_url(repo)
             print(
                 f"""    get_supported_and_valid_wheels: Getting wheel from index (or cache):
-                {await wheel.download_url(repo)}"""
+                {durl}"""
             )
         wheels.append(wheel)
     return wheels
@@ -1685,6 +1685,7 @@ class Cache:
         # the cache key is a hash of the normalized path
         cache_key = self.sha256_hash(quote_plus(path_or_url.strip("/")))
         cached = os.path.join(self.directory, cache_key)
+        lock_file = f"{cached}.lockfile"
 
         if force or not os.path.exists(cached):
             if TRACE_DEEP:
@@ -1699,8 +1700,6 @@ class Cache:
             wmode = "w" if as_text else "wb"
 
             # acquire lock and wait until timeout to get a lock or die
-            lock_file = os.path.join(self.directory, f"{cache_key}.lockfile")
-
             with lockfile.FileLock(lock_file).locked(timeout=PYINSP_CACHE_LOCK_TIMEOUT):
                 async with aiofiles.open(cached, mode=wmode) as fo:
                     await fo.write(content)
@@ -1708,7 +1707,9 @@ class Cache:
         else:
             if TRACE_DEEP:
                 print(f"        FILE CACHE HIT: {path_or_url}")
-            return await get_local_file_content(path=cached, as_text=as_text), cached
+            # also lock on read to avoid race conditions
+            with lockfile.FileLock(lock_file).locked(timeout=PYINSP_CACHE_LOCK_TIMEOUT):
+                return await get_local_file_content(path=cached, as_text=as_text), cached
 
 
 CACHE = Cache()
