@@ -1,10 +1,13 @@
 Changelog
 =========
 
-v0.13.2
+v0.14.0
 -----------
 
 - Speed up downloads with asyncio
+
+- Introduce file-based locking when reading and writing
+  python package archives to avoid accessing partial zip and tarballs.
 
 - New settings featuring environment variables and .env file to store settings and defaults.
 
@@ -35,6 +38,8 @@ v0.13.2
 - Add support for the latest Python and OS versions.
 
 - Merge latest skeleton and adopt ruff for code formatting.
+
+- Fix misc bugs.
 
 
 v0.13.1
@@ -100,7 +105,8 @@ v0.9.5
 v0.9.4
 ------
 
-- Create PyPI cache location in the home directory if a cache directory cannot be made at the project root.
+- Create PyPI cache location in the home directory if a cache directory cannot be made at the
+  project root.
 - Replace packaging with packvers.
 - Prevent duplicated package versions.
 

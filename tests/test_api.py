@@ -22,6 +22,7 @@ test_env = FileDrivenTesting()
 test_env.test_data_dir = os.path.join(os.path.dirname(__file__), "data")
 
 
+@pytest.mark.online
 def test_api_with_specifier():
     expected_file = test_env.get_test_loc("test-api-expected.json", must_exist=False)
     results = resolver_api(
@@ -32,6 +33,7 @@ def test_api_with_specifier():
     check_data_results(results=results.to_dict(generic_paths=True), expected_file=expected_file)
 
 
+@pytest.mark.online
 def test_api_with_specifier_pdt():
     expected_file = test_env.get_test_loc("test-api-pdt-expected.json", must_exist=False)
     results = resolver_api(
@@ -43,6 +45,7 @@ def test_api_with_specifier_pdt():
     check_data_results(results=results.to_dict(generic_paths=True), expected_file=expected_file)
 
 
+@pytest.mark.online
 def test_api_with_requirement_file():
     expected_file = test_env.get_test_loc("test-api-with-requirement-file.json", must_exist=False)
     results = resolver_api(
@@ -53,6 +56,7 @@ def test_api_with_requirement_file():
     check_data_results(results=results.to_dict(generic_paths=True), expected_file=expected_file)
 
 
+@pytest.mark.online
 def test_api_with_prefer_source():
     expected_file = test_env.get_test_loc("test-api-with-prefer-source.json", must_exist=False)
     results = resolver_api(
@@ -64,6 +68,7 @@ def test_api_with_prefer_source():
     check_data_results(results=results.to_dict(generic_paths=True), expected_file=expected_file)
 
 
+@pytest.mark.online
 def test_api_with_recursive_requirement_file():
     requirement_file = test_env.get_test_loc("recursive_requirements/r.txt")
     expected_file = test_env.get_test_loc(
@@ -97,6 +102,7 @@ def test_api_with_wrong_pyver():
         resolver_api(specifiers=["flask==2.1.2"], python_version="3.14", operating_system="linux")
 
 
+@pytest.mark.online
 def test_api_with_python_311():
     expected_file = test_env.get_test_loc("test-api-with-python-311.json", must_exist=False)
     results = resolver_api(
@@ -108,6 +114,7 @@ def test_api_with_python_311():
     check_data_results(results=results.to_dict(generic_paths=True), expected_file=expected_file)
 
 
+@pytest.mark.online
 def test_api_with_lief_python_312():
     expected_file = test_env.get_test_loc("test-api-with-lief-python-312.json", must_exist=False)
     results = resolver_api(
@@ -119,6 +126,7 @@ def test_api_with_lief_python_312():
     check_data_results(results=results.to_dict(generic_paths=True), expected_file=expected_file)
 
 
+@pytest.mark.online
 def test_api_with_partial_setup_py():
     expected_file = test_env.get_test_loc("test-api-with-partial-setup-py.json", must_exist=False)
     results = resolver_api(
@@ -132,7 +140,6 @@ def test_api_with_partial_setup_py():
 
 
 def test_get_index_urls():
-
     # pass as a tuple
     index_urls = get_index_urls(
         index_urls=("https://pypi.org/simple",),

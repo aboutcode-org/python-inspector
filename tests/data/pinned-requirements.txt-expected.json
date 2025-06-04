@@ -656,6 +656,27 @@
                 "is_name_at_url": false,
                 "is_local_path": null
               }
+            },
+            {
+              "purl": "pkg:pypi/boolean-py@4.0.0",
+              "extracted_requirement": "boolean.py==4.0.0",
+              "scope": "install",
+              "is_runtime": true,
+              "is_optional": false,
+              "is_resolved": true,
+              "resolved_package": {},
+              "extra_data": {
+                "is_editable": false,
+                "link": null,
+                "hash_options": [],
+                "is_constraint": false,
+                "is_archive": null,
+                "is_wheel": false,
+                "is_url": null,
+                "is_vcs_url": null,
+                "is_name_at_url": false,
+                "is_local_path": null
+              }
             }
           ],
           "repository_homepage_url": null,
@@ -879,12 +900,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "boolean-py",
-      "version": "5.0",
+      "version": "4.0",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Define boolean algebras, create and parse boolean expressions and create custom boolean DSL.\nThis library helps you deal with boolean expressions and algebra with variables\nand the boolean functions AND, OR, NOT.\n\nYou can parse expressions from strings and simplify and compare expressions.\nYou can also easily create your custom algreba and mini DSL and create custom\ntokenizers to handle custom expressions.\n\nFor extensive documentation look either into the docs directory or view it online, at\nhttps://booleanpy.readthedocs.org/en/latest/\n\nhttps://github.com/bastikr/boolean.py\n\nCopyright (c) 2009-2020 Sebastian Kraemer, basti.kr@gmail.com and others\nSPDX-License-Identifier: BSD-2-Clause",
-      "release_date": "2025-04-03T10:39:48",
+      "release_date": "2022-05-05T08:18:58",
       "parties": [
         {
           "type": "person",
@@ -910,11 +931,11 @@
         "Topic :: Utilities"
       ],
       "homepage_url": "https://github.com/bastikr/boolean.py",
-      "download_url": "https://files.pythonhosted.org/packages/e5/ca/78d423b324b8d77900030fa59c4aa9054261ef0925631cd2501dd015b7b7/boolean_py-5.0-py3-none-any.whl",
-      "size": 26577,
+      "download_url": "https://files.pythonhosted.org/packages/3f/02/6389ef0529af6da0b913374dedb9bbde8eabfe45767ceec38cc37801b0bd/boolean.py-4.0-py3-none-any.whl",
+      "size": 25909,
       "sha1": null,
-      "md5": "df9060a88bfb6ba3b9314783b16a0faa",
-      "sha256": "ef28a70bd43115208441b53a045d1549e2f0ec6e3d08a9d142cbc41c1938e8d9",
+      "md5": "73208a6fc38d6904a1d7e793e8da1292",
+      "sha256": "2876f2051d7d6394a531d82dc6eb407faa0b01a0a0b3083817ccd7323b8d96bd",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -931,9 +952,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/boolean-py/5.0/json",
+      "api_data_url": "https://pypi.org/pypi/boolean-py/4.0/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/boolean-py@5.0"
+      "purl": "pkg:pypi/boolean-py@4.0"
     },
     {
       "type": "pypi",
@@ -2810,7 +2831,7 @@
       "package": "pkg:pypi/aboutcode-toolkit@7.0.2",
       "dependencies": [
         "pkg:pypi/attrs@21.4.0",
-        "pkg:pypi/boolean-py@5.0",
+        "pkg:pypi/boolean-py@4.0",
         "pkg:pypi/certifi@2022.5.18.1",
         "pkg:pypi/click@8.0.4",
         "pkg:pypi/jinja2@3.1.6",
@@ -2831,7 +2852,7 @@
       ]
     },
     {
-      "package": "pkg:pypi/boolean-py@5.0",
+      "package": "pkg:pypi/boolean-py@4.0",
       "dependencies": []
     },
     {
@@ -2897,7 +2918,7 @@
     {
       "package": "pkg:pypi/license-expression@30.3.1",
       "dependencies": [
-        "pkg:pypi/boolean-py@5.0"
+        "pkg:pypi/boolean-py@4.0"
       ]
     },
     {

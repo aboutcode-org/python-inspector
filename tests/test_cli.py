@@ -230,9 +230,9 @@ def test_cli_with_single_env_var_index_url_except_pypi_simple():
 def test_cli_with_multiple_env_var_index_url_and_tilde_req():
     expected_file = test_env.get_test_loc("tilde_req-expected-env.json", must_exist=False)
     specifier = "zipp~=3.8.0"
-    os.environ[
-        "PYINSP_INDEX_URL"
-    ] = "https://pypi.org/simple https://thirdparty.aboutcode.org/pypi/simple/"
+    os.environ["PYINSP_INDEX_URL"] = (
+        "https://pypi.org/simple https://thirdparty.aboutcode.org/pypi/simple/"
+    )
     check_specs_resolution(
         specifier=specifier,
         expected_file=expected_file,
@@ -440,7 +440,13 @@ def test_cli_with_insecure_option():
     )
 
 
-@pytest.mark.skipif(sys.version_info[:2] == (3, 12), reason="Skipping test for Python 3.12")
+@pytest.mark.skipif(
+    sys.version_info[:2] >= (3, 12),
+    reason="Skipping test for Python 3.12+ because of "
+    "https://github.com/aboutcode-org/python-inspector/issues/212"
+    "to avoid error AttributeError: module 'configparser' has no attribute "
+    "'SafeConfigParser'. Did you mean: 'RawConfigParser'?",
+)
 @pytest.mark.online
 def test_cli_with_insecure_option_testpkh():
     setup_py_file = test_env.get_test_loc("insecure-setup-2/setup.py")
@@ -676,6 +682,9 @@ def clean_results(results):
         headers = results.get("headers", {}) or {}
         if "tool_version" in headers:
             del headers["tool_version"]
+        options = headers.get("options", []) or []
+        if "--verbose" in options:
+            options.remove("--verbose")
 
     return results
 

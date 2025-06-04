@@ -457,7 +457,7 @@ def parse_metadata(location, datasource_id, package_type):
         name=name,
         version=version,
         description=get_description(metainfo=meta, location=str(location)),
-        #TODO: https://github.com/aboutcode-org/scancode-toolkit/issues/3014
+        # TODO: https://github.com/aboutcode-org/scancode-toolkit/issues/3014
         declared_license=get_declared_license(meta),
         keywords=get_keywords(meta),
         parties=get_parties(meta),
@@ -521,19 +521,25 @@ class PypiWheelHandler(BasePypiHandler):
 
     @classmethod
     def parse(cls, location):
-        with zipfile.ZipFile(location) as zf:
-            for path in ZipPath(zf).iterdir():
-                if not path.name.endswith(META_DIR_SUFFIXES):
-                    continue
-                for metapath in path.iterdir():
-                    if not metapath.name.endswith('METADATA'):
-                        continue
 
-                    yield parse_metadata(
-                        location=metapath,
-                        datasource_id=cls.datasource_id,
-                        package_type=cls.default_package_type,
-                    )
+        from python_inspector import lockfile
+        from python_inspector.utils_pypi import PYINSP_CACHE_LOCK_TIMEOUT
+        lock_file = os.path.join(f"{location}.lockfile")
+        with lockfile.FileLock(lock_file).locked(timeout=PYINSP_CACHE_LOCK_TIMEOUT):
+
+            with zipfile.ZipFile(location) as zf:
+                for path in ZipPath(zf).iterdir():
+                    if not path.name.endswith(META_DIR_SUFFIXES):
+                        continue
+                    for metapath in path.iterdir():
+                        if not metapath.name.endswith('METADATA'):
+                            continue
+    
+                        yield parse_metadata(
+                            location=metapath,
+                            datasource_id=cls.datasource_id,
+                            package_type=cls.default_package_type,
+                        )
 
 
 class PypiEggHandler(BasePypiHandler):
@@ -547,20 +553,26 @@ class PypiEggHandler(BasePypiHandler):
 
     @classmethod
     def parse(cls, location):
-        with zipfile.ZipFile(location) as zf:
-            for path in ZipPath(zf).iterdir():
-                if not path.name.endswith(META_DIR_SUFFIXES):
-                    continue
 
-                for metapath in path.iterdir():
-                    if not metapath.name.endswith('PKG-INFO'):
+        from python_inspector import lockfile
+        from python_inspector.utils_pypi import PYINSP_CACHE_LOCK_TIMEOUT
+        lock_file = os.path.join(f"{location}.lockfile")
+        with lockfile.FileLock(lock_file).locked(timeout=PYINSP_CACHE_LOCK_TIMEOUT):
+
+            with zipfile.ZipFile(location) as zf:
+                for path in ZipPath(zf).iterdir():
+                    if not path.name.endswith(META_DIR_SUFFIXES):
                         continue
 
-                    yield parse_metadata(
-                        location=metapath,
-                        datasource_id=cls.datasource_id,
-                        package_type=cls.default_package_type,
-                    )
+                    for metapath in path.iterdir():
+                        if not metapath.name.endswith('PKG-INFO'):
+                            continue
+
+                        yield parse_metadata(
+                            location=metapath,
+                            datasource_id=cls.datasource_id,
+                            package_type=cls.default_package_type,
+                        )
 
 
 class PypiSdistArchiveHandler(BasePypiHandler):
@@ -765,7 +777,6 @@ class SetupCfgHandler(BaseExtractedPythonLayout):
                 )
             ]
 
-
         yield models.PackageData(
             datasource_id=cls.datasource_id,
             type=cls.default_package_type,
@@ -817,6 +828,7 @@ def get_resolved_purl(purl: PackageURL, specifiers: SpecifierSet):
         purl=purl,
         is_resolved=is_resolved,
     )
+
 
 class PipfileHandler(BaseDependencyFileHandler):
     datasource_id = 'pipfile'

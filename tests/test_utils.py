@@ -87,6 +87,7 @@ def test_parse_reqs():
     check_json_file_results(result_file, expected_file)
 
 
+@pytest.mark.online
 @pytest.mark.asyncio
 async def test_get_sdist_file():
     sdist_file = await fetch_and_extract_sdist(
