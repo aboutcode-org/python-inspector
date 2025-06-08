@@ -24,12 +24,13 @@ import mock
 import setuptools
 from commoncode.command import pushd
 from packvers.requirements import Requirement
+from python_inspector.logging import logger
 
 
 def minver_error(pkg_name):
     """Report error about missing minimum version constraint and exit."""
-    print(
-        'ERROR: specify minimal version of "{0}" using ">=" or "=="'.format(pkg_name),
+    logger.error(
+        'Specify minimal version of "{0}" using ' '">=" or "=="'.format(pkg_name),
         file=sys.stderr,
     )
     sys.exit(1)
@@ -98,16 +99,16 @@ def iter_requirements(level, extras, setup_file):
                     imports.append(name)
             setup_providers = [i for i in imports if i in ["distutils.core", "setuptools"]]
             if len(setup_providers) == 0:
-                print(
-                    f"Warning: unable to recognize setup provider in {setup_file}: "
+                logger.warning(
+                    f"Unable to recognize setup provider in {setup_file}: "
                     "defaulting to 'distutils.core'."
                 )
                 setup_provider = "distutils.core"
             elif len(setup_providers) == 1:
                 setup_provider = setup_providers[0]
             else:
-                print(
-                    f"Warning: ambiguous setup provider in {setup_file}: candidates are {setup_providers}"
+                logger.warning(
+                    f"Ambiguous setup provider in {setup_file}: candidates are {setup_providers}"
                     "defaulting to 'distutils.core'."
                 )
                 setup_provider = "distutils.core"
@@ -163,8 +164,8 @@ def iter_requirements(level, extras, setup_file):
         specs = pkg.specifier
         specs = {s.operator: s.version for s in specs._specs}
         if ((">=" in specs) and (">" in specs)) or (("<=" in specs) and ("<" in specs)):
-            print(
-                'ERROR: Do not specify such weird constraints! ("{0}")'.format(pkg),
+            logger.error(
+                "Do not specify such weird constraints! " '("{0}")'.format(pkg),
                 file=sys.stderr,
             )
             sys.exit(1)
