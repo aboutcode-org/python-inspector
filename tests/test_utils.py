@@ -82,6 +82,20 @@ def test_get_netrc_auth_with_with_subdomains():
     )
 
 
+def test_get_netrc_auth_with_default():
+    netrc_file = test_env.get_test_loc("test-default.netrc")
+    parsed_netrc = netrc(netrc_file)
+
+    assert get_netrc_auth(url="https://example.com/simple", netrc=parsed_netrc) == (
+        "test",
+        "test123",
+    )
+    assert get_netrc_auth(url="https://non-existing.org/simple", netrc=parsed_netrc) == (
+        "defaultuser",
+        "defaultpass",
+    )
+
+
 @pytest.mark.asyncio
 @pytest.mark.skipif(sys.version_info < (3, 8), reason="requires python3.8 or higher")
 @mock.patch("python_inspector.utils_pypi.CACHE.get")
