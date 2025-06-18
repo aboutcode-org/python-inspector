@@ -1797,7 +1797,10 @@ async def get_remote_file_content(
 
     auth = None
     if credentials:
-        auth = (credentials.get("login"), credentials.get("password"))
+        login = credentials.get("login")
+        password = credentials.get("password")
+        if login and password:
+            auth = aiohttp.BasicAuth(login, password)
 
     async with aiohttp.ClientSession() as session:
         async with session.get(url, allow_redirects=True, headers=headers, auth=auth) as response:
