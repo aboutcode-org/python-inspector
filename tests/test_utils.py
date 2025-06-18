@@ -35,6 +35,25 @@ def test_get_netrc_auth():
     netrc_file = test_env.get_test_loc("test.netrc")
     parsed_netrc = netrc(netrc_file)
     assert get_netrc_auth(url="https://pyp1.org/simple", netrc=parsed_netrc) == ("test", "test123")
+    assert get_netrc_auth(url="https://pyp1.org/different/path", netrc=parsed_netrc) == (
+        "test",
+        "test123",
+    )
+    assert get_netrc_auth(url="https://pyp1.org", netrc=parsed_netrc) == ("test", "test123")
+
+
+def test_get_netrc_auth_with_ports_and_schemes():
+    netrc_file = test_env.get_test_loc("test.netrc")
+    parsed_netrc = netrc(netrc_file)
+
+    assert get_netrc_auth(url="https://pyp1.org:443/path", netrc=parsed_netrc) == (
+        "test",
+        "test123",
+    )
+    assert get_netrc_auth(url="http://pyp1.org:80/simple", netrc=parsed_netrc) == (
+        "test",
+        "test123",
+    )
 
 
 def test_get_commented_netrc_auth():
@@ -47,6 +66,34 @@ def test_get_netrc_auth_with_no_matching_url():
     netrc_file = test_env.get_test_loc("test.netrc")
     parsed_netrc = netrc(netrc_file)
     assert get_netrc_auth(url="https://pypi2.org/simple", netrc=parsed_netrc) == (None, None)
+
+
+def test_get_netrc_auth_with_with_subdomains():
+    netrc_file = test_env.get_test_loc("test.netrc")
+    parsed_netrc = netrc(netrc_file)
+
+    assert get_netrc_auth(url="https://subdomain.example.com/simple", netrc=parsed_netrc) == (
+        "subdomain-user",
+        "subdomain-secret",
+    )
+    assert get_netrc_auth(url="https://another.example.com/simple", netrc=parsed_netrc) == (
+        None,
+        None,
+    )
+
+
+def test_get_netrc_auth_with_default():
+    netrc_file = test_env.get_test_loc("test-default.netrc")
+    parsed_netrc = netrc(netrc_file)
+
+    assert get_netrc_auth(url="https://example.com/simple", netrc=parsed_netrc) == (
+        "test",
+        "test123",
+    )
+    assert get_netrc_auth(url="https://non-existing.org/simple", netrc=parsed_netrc) == (
+        "defaultuser",
+        "defaultpass",
+    )
 
 
 @pytest.mark.asyncio

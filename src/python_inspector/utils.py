@@ -16,20 +16,28 @@ from typing import List
 from typing import NamedTuple
 from typing import Optional
 
+from urllib.parse import urlparse
+
 import aiohttp
 import requests
 
 
 def get_netrc_auth(url, netrc):
     """
-    Return login and password if url is in netrc
+    Return login and password if either the hostname is in netrc or a default is set in netrc
     else return login and password as None
     """
+    hostname = urlparse(url).hostname
     hosts = netrc.hosts
-    if url in hosts:
-        url_auth = hosts.get(url)
+    if hostname in hosts:
+        url_auth = hosts.get(hostname)
         # netrc returns a tuple of (login, account, password)
         return (url_auth[0], url_auth[2])
+
+    if "default" in hosts:
+        default_auth = hosts.get("default")
+        return (default_auth[0], default_auth[2])
+
     return (None, None)
 
 
