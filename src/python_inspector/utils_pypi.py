@@ -1598,6 +1598,10 @@ class PypiSimpleRepository:
         name using the `index_url` of this repository.
         """
         package_url = f"{self.index_url}/{normalized_name}"
+
+        if not package_url.endswith("/"):
+            package_url += "/"
+
         text, _ = await CACHE.get(
             path_or_url=package_url,
             credentials=self.credentials,
