@@ -2,10 +2,6 @@ python-inspector - inspect Python package dependencies and metadata
 =====================================================================
 
 
-Copyright (c) nexB Inc. and others.
-SPDX-License-Identifier: Apache-2.0
-Homepage: https://github.com/aboutcode-org/python-inspector and https://www.aboutcode.org/
-
 
 ``python-inspector`` is a collection of utilities to:
 
@@ -28,21 +24,21 @@ The goal of python-inspector is to be a comprehensive library
 that can handle every style of Python package layouts, manifests and lockfiles.
 
 
-Testing
---------
+SPDX-License-Identifier: Apache-2.0
 
-- Run the tests with::
+Copyright (c) AboutCode, nexB Inc. and others.
 
-    pytest -vvs
+Homepage: https://github.com/aboutcode-org/python-inspector and https://www.aboutcode.org/
 
-- There are live tests to regenerate the tests with updated data run::
-
-      PYINSP_REGEN_TEST_FIXTURES=yes pytest -vvs
 
 Usage
 --------
 
-- Install with pip::
+- Install the stable release with pip from PyPI::
+
+    pip install python-inspector
+
+- Or install the latest with pip::
 
     pip install git+https://github.com/aboutcode-org/python-inspector
 
@@ -51,8 +47,71 @@ Usage
     python-inspector --help
 
 
+Development
+--------------
 
-Its companion libraries are:
+Run::
+
+    git clone https://github.com/aboutcode-org/python-inspector
+
+Create a virtual environment and install deps locally::
+
+    make dev
+    source venv/bin/activate
+
+
+When in the virtual environment, run python-inspector from that clone::
+
+    python-inspector --help
+
+
+Run tests::
+
+    make test
+
+Run code checks::
+
+    make check
+
+Run code formatting::
+
+    make valie
+
+Check available make targets for further details
+
+
+
+More testing
+------------------
+
+- Run the tests with pytest::
+
+    pytest -vvs
+
+- Or run them faster using 12 cores ::
+
+    pytest -vvs --numprocesses=12
+
+
+Regenerate test files
+-----------------------------
+
+Some tests use live data from Pypi.org to run resolutions. When the package versions have
+changed, the resolution can change and some of the tests fail. We have an environment variable
+that regenerates the expected JSON result files when set.
+
+To regenerate expected test result files for the failed tests, use this command::
+
+    PYINSP_REGEN_TEST_FIXTURES=yes pytest -vvs --lf
+
+Then, carefully review the diff before committing the expected JSON test result files to validate
+that the changes are OK and mostly affect small changes in resolved package versions.
+
+
+Credits and dependencies
+---------------------------
+
+For info, python-inspector embeds or depends on these libraries:
 
 - ``pip-requirements-parser``, a mostly correct pip requirements parsing
   library extracted from pip.
@@ -71,6 +130,8 @@ Its companion libraries are:
   installed site-packages and their metadata formats.
 
 - ``packageurl-python`` to use Package URL to reference Python packages
+
+- ``scancode-toolkit`` for Python package manifest parsing.
 
 
 

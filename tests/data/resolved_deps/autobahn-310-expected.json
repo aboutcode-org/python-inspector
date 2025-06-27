@@ -6,7 +6,7 @@
         "pkg:pypi/cryptography@43.0.3",
         "pkg:pypi/hyperlink@21.0.0",
         "pkg:pypi/setuptools@80.9.0",
-        "pkg:pypi/txaio@23.1.1"
+        "pkg:pypi/txaio@23.6.1"
       ]
     },
     {
@@ -40,7 +40,7 @@
       "dependencies": []
     },
     {
-      "package": "pkg:pypi/txaio@23.1.1",
+      "package": "pkg:pypi/txaio@23.6.1",
       "dependencies": []
     }
   ],
@@ -52,6 +52,6 @@
     "pkg:pypi/idna@3.10",
     "pkg:pypi/pycparser@2.22",
     "pkg:pypi/setuptools@80.9.0",
-    "pkg:pypi/txaio@23.1.1"
+    "pkg:pypi/txaio@23.6.1"
   ]
 ]

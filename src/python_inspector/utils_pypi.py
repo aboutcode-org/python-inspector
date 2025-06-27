@@ -1598,6 +1598,10 @@ class PypiSimpleRepository:
         name using the `index_url` of this repository.
         """
         package_url = f"{self.index_url}/{normalized_name}"
+
+        if not package_url.endswith("/"):
+            package_url += "/"
+
         text, _ = await CACHE.get(
             path_or_url=package_url,
             credentials=self.credentials,
@@ -1797,7 +1801,10 @@ async def get_remote_file_content(
 
     auth = None
     if credentials:
-        auth = (credentials.get("login"), credentials.get("password"))
+        login = credentials.get("login")
+        password = credentials.get("password")
+        if login and password:
+            auth = aiohttp.BasicAuth(login, password)
 
     async with aiohttp.ClientSession() as session:
         async with session.get(url, allow_redirects=True, headers=headers, auth=auth) as response:
