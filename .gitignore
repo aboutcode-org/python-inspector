@@ -2,6 +2,7 @@ pip3 # Python compiled files
 *.py[cod]
 
 # virtualenv and other misc bits
+.venv
 /src/*.egg-info
 *.egg-info
 /dist
