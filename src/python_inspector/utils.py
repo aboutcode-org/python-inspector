@@ -89,7 +89,7 @@ async def get_response_async(url: str) -> Optional[Dict]:
     Return a mapping of the JSON response from fetching ``url``
     or None if the ``url`` cannot be fetched.
     """
-    async with aiohttp.ClientSession() as session:
+    async with aiohttp.ClientSession(trust_env=True) as session:
         async with session.get(url) as response:
             if response.status == 200:
                 return await response.json()
