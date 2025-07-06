@@ -1,6 +1,25 @@
 Changelog
 =========
 
+
+v0.14.3
+-----------
+
+- Update version number displayed in CLI, forgotten from previous releases.
+
+
+v0.14.2
+-----------
+
+- Respect the HTTP_PROXY environment variable.
+
+
+v0.14.1
+-----------
+
+- Improve netrc support with aiohttp. Also fix related bugs.
+
+
 v0.14.0
 -----------
 
