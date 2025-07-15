@@ -13,6 +13,7 @@ from typing import Dict
 
 import click
 
+from python_inspector import pyinspector_settings
 from python_inspector import settings
 from python_inspector import utils_pypi
 from python_inspector.cli_utils import FileOptionType
@@ -93,8 +94,7 @@ def print_version(ctx, param, value):
     type=str,
     metavar="INDEX",
     show_default=True,
-    # since multiple is True, this is a sequence
-    default=[settings.PYPI_SIMPLE_URL],
+    default=pyinspector_settings.INDEX_URL,
     multiple=True,
     help="PyPI simple index URL(s) to use in order of preference. "
     "This option can be used multiple times.",
