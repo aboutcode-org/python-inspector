@@ -3,7 +3,7 @@
     "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/aboutcode-org/python-inspector",
     "options": [
-      "--index-url https://pypi.org/simple",
+      "--index-url https://thirdparty.aboutcode.org/pypi/simple/",
       "--json <file>",
       "--operating-system linux",
       "--python-version 38",

@@ -231,7 +231,7 @@ def test_cli_with_multiple_env_var_index_url_and_tilde_req():
     expected_file = test_env.get_test_loc("tilde_req-expected-env.json", must_exist=False)
     specifier = "zipp~=3.8.0"
     os.environ["PYINSP_INDEX_URL"] = (
-        "https://pypi.org/simple https://thirdparty.aboutcode.org/pypi/simple/"
+        "https://pypi.org/simple https://thirdparty.aboutcode.org/pypi/simple"
     )
     check_specs_resolution(
         specifier=specifier,
