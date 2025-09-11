@@ -534,7 +534,7 @@ class PypiWheelHandler(BasePypiHandler):
                     for metapath in path.iterdir():
                         if not metapath.name.endswith('METADATA'):
                             continue
-    
+
                         yield parse_metadata(
                             location=metapath,
                             datasource_id=cls.datasource_id,
@@ -945,6 +945,8 @@ def get_requirements_txt_dependencies(location, include_nested=False):
 
         purl = purl and purl.to_string() or None
 
+        hash_options = req.hash_options or []
+        req.hash_options = []
         requirement = req.dumps()
 
         if location.endswith(
@@ -973,7 +975,7 @@ def get_requirements_txt_dependencies(location, include_nested=False):
                 extra_data=dict(
                     is_editable=req.is_editable,
                     link=req.link and req.link.url or None,
-                    hash_options=req.hash_options or [],
+                    hash_options=hash_options,
                     is_constraint=req.is_constraint,
                     is_archive=req.is_archive,
                     is_wheel=req.is_wheel,

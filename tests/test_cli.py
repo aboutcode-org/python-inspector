@@ -415,6 +415,17 @@ def test_cli_with_pinned_requirements_file():
 
 
 @pytest.mark.online
+def test_cli_with_hash_requirements():
+    requirements_file = test_env.get_test_loc("hash-requirements.txt")
+    expected_file = test_env.get_test_loc("hash-requirements.txt-expected.json", must_exist=False)
+    check_requirements_resolution(
+        requirements_file=requirements_file,
+        expected_file=expected_file,
+        regen=REGEN_TEST_FIXTURES,
+    )
+
+
+@pytest.mark.online
 def test_cli_with_setup_py_failure():
     setup_py_file = setup_test_env.get_test_loc("simple-setup.py")
     expected_file = setup_test_env.get_test_loc("simple-setup.py-expected.json", must_exist=False)
