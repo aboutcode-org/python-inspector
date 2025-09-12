@@ -430,12 +430,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "pytest",
-      "version": "8.4.1",
+      "version": "8.4.2",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "pytest: simple powerful testing with Python\n.. image:: https://github.com/pytest-dev/pytest/raw/main/doc/en/img/pytest_logo_curves.svg\n   :target: https://docs.pytest.org/en/stable/\n   :align: center\n   :height: 200\n   :alt: pytest\n\n\n------\n\n.. image:: https://img.shields.io/pypi/v/pytest.svg\n    :target: https://pypi.org/project/pytest/\n\n.. image:: https://img.shields.io/conda/vn/conda-forge/pytest.svg\n    :target: https://anaconda.org/conda-forge/pytest\n\n.. image:: https://img.shields.io/pypi/pyversions/pytest.svg\n    :target: https://pypi.org/project/pytest/\n\n.. image:: https://codecov.io/gh/pytest-dev/pytest/branch/main/graph/badge.svg\n    :target: https://codecov.io/gh/pytest-dev/pytest\n    :alt: Code coverage Status\n\n.. image:: https://github.com/pytest-dev/pytest/actions/workflows/test.yml/badge.svg\n    :target: https://github.com/pytest-dev/pytest/actions?query=workflow%3Atest\n\n.. image:: https://results.pre-commit.ci/badge/github/pytest-dev/pytest/main.svg\n   :target: https://results.pre-commit.ci/latest/github/pytest-dev/pytest/main\n   :alt: pre-commit.ci status\n\n.. image:: https://www.codetriage.com/pytest-dev/pytest/badges/users.svg\n    :target: https://www.codetriage.com/pytest-dev/pytest\n\n.. image:: https://readthedocs.org/projects/pytest/badge/?version=latest\n    :target: https://pytest.readthedocs.io/en/latest/?badge=latest\n    :alt: Documentation Status\n\n.. image:: https://img.shields.io/badge/Discord-pytest--dev-blue\n    :target: https://discord.com/invite/pytest-dev\n    :alt: Discord\n\n.. image:: https://img.shields.io/badge/Libera%20chat-%23pytest-orange\n    :target: https://web.libera.chat/#pytest\n    :alt: Libera chat\n\n\nThe ``pytest`` framework makes it easy to write small tests, yet\nscales to support complex functional testing for applications and libraries.\n\nAn example of a simple test:\n\n.. code-block:: python\n\n    # content of test_sample.py\n    def inc(x):\n        return x + 1\n\n\n    def test_answer():\n        assert inc(3) == 5\n\n\nTo execute it::\n\n    $ pytest\n    ============================= test session starts =============================\n    collected 1 items\n\n    test_sample.py F\n\n    ================================== FAILURES ===================================\n    _________________________________ test_answer _________________________________\n\n        def test_answer():\n    >       assert inc(3) == 5\n    E       assert 4 == 5\n    E        +  where 4 = inc(3)\n\n    test_sample.py:5: AssertionError\n    ========================== 1 failed in 0.04 seconds ===========================\n\n\nDue to ``pytest``'s detailed assertion introspection, only plain ``assert`` statements are used. See `getting-started <https://docs.pytest.org/en/stable/getting-started.html#our-first-test-run>`_ for more examples.\n\n\nFeatures\n--------\n\n- Detailed info on failing `assert statements <https://docs.pytest.org/en/stable/how-to/assert.html>`_ (no need to remember ``self.assert*`` names)\n\n- `Auto-discovery\n  <https://docs.pytest.org/en/stable/explanation/goodpractices.html#python-test-discovery>`_\n  of test modules and functions\n\n- `Modular fixtures <https://docs.pytest.org/en/stable/explanation/fixtures.html>`_ for\n  managing small or parametrized long-lived test resources\n\n- Can run `unittest <https://docs.pytest.org/en/stable/how-to/unittest.html>`_ (or trial)\n  test suites out of the box\n\n- Python 3.9+ or PyPy3\n\n- Rich plugin architecture, with over 1300+ `external plugins <https://docs.pytest.org/en/latest/reference/plugin_list.html>`_ and thriving community\n\n\nDocumentation\n-------------\n\nFor full documentation, including installation, tutorials and PDF documents, please see https://docs.pytest.org/en/stable/.\n\n\nBugs/Requests\n-------------\n\nPlease use the `GitHub issue tracker <https://github.com/pytest-dev/pytest/issues>`_ to submit bugs or request features.\n\n\nChangelog\n---------\n\nConsult the `Changelog <https://docs.pytest.org/en/stable/changelog.html>`__ page for fixes and enhancements of each version.\n\n\nSupport pytest\n--------------\n\n`Open Collective`_ is an online funding platform for open and transparent communities.\nIt provides tools to raise money and share your finances in full transparency.\n\nIt is the platform of choice for individuals and companies that want to make one-time or\nmonthly donations directly to the project.\n\nSee more details in the `pytest collective`_.\n\n.. _Open Collective: https://opencollective.com\n.. _pytest collective: https://opencollective.com/pytest\n\n\npytest for enterprise\n---------------------\n\nAvailable as part of the Tidelift Subscription.\n\nThe maintainers of pytest and thousands of other packages are working with Tidelift to deliver commercial support and\nmaintenance for the open source dependencies you use to build your applications.\nSave time, reduce risk, and improve code health, while paying the maintainers of the exact dependencies you use.\n\n`Learn more. <https://tidelift.com/subscription/pkg/pypi-pytest?utm_source=pypi-pytest&utm_medium=referral&utm_campaign=enterprise&utm_term=repo>`_\n\nSecurity\n^^^^^^^^\n\npytest has never been associated with a security vulnerability, but in any case, to report a\nsecurity vulnerability please use the `Tidelift security contact <https://tidelift.com/security>`_.\nTidelift will coordinate the fix and disclosure.\n\n\nLicense\n-------\n\nCopyright Holger Krekel and others, 2004.\n\nDistributed under the terms of the `MIT`_ license, pytest is free and open source software.\n\n.. _`MIT`: https://github.com/pytest-dev/pytest/blob/main/LICENSE",
-      "release_date": "2025-06-18T05:48:03",
+      "release_date": "2025-09-04T14:34:20",
       "parties": [
         {
           "type": "person",
@@ -466,11 +466,11 @@
         "Topic :: Utilities"
       ],
       "homepage_url": null,
-      "download_url": "https://files.pythonhosted.org/packages/29/16/c8a903f4c4dffe7a12843191437d7cd8e32751d5de349d45d3fe69544e87/pytest-8.4.1-py3-none-any.whl",
-      "size": 365474,
+      "download_url": "https://files.pythonhosted.org/packages/a8/a4/20da314d277121d6534b3a980b29035dcd51e6744bd79075a6ce8fa4eb8d/pytest-8.4.2-py3-none-any.whl",
+      "size": 365750,
       "sha1": null,
-      "md5": "6ad4ee79caee224776d07f155d91b7e7",
-      "sha256": "539c70ba6fcead8e78eebbf1115e8b589e7565830d7d006a8723f19ac8a0afb7",
+      "md5": "f2cf4b89fbd6145531a1606f96a89503",
+      "sha256": "872f880de3fc3a5bdc88a11b39c9710c3497a547cfa9320bc3c5e62fbf272e79",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pytest-dev/pytest/issues",
       "code_view_url": "https://github.com/pytest-dev/pytest",
@@ -490,9 +490,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/pytest/8.4.1/json",
+      "api_data_url": "https://pypi.org/pypi/pytest/8.4.2/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/pytest@8.4.1"
+      "purl": "pkg:pypi/pytest@8.4.2"
     },
     {
       "type": "pypi",
@@ -557,12 +557,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "typing-extensions",
-      "version": "4.14.1",
+      "version": "4.15.0",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "Backported and Experimental Type Hints for Python 3.9+\n# Typing Extensions\n\n[![Chat at https://gitter.im/python/typing](https://badges.gitter.im/python/typing.svg)](https://gitter.im/python/typing)\n\n[Documentation](https://typing-extensions.readthedocs.io/en/latest/#) \u2013\n[PyPI](https://pypi.org/project/typing-extensions/)\n\n## Overview\n\nThe `typing_extensions` module serves two related purposes:\n\n- Enable use of new type system features on older Python versions. For example,\n  `typing.TypeGuard` is new in Python 3.10, but `typing_extensions` allows\n  users on previous Python versions to use it too.\n- Enable experimentation with new type system PEPs before they are accepted and\n  added to the `typing` module.\n\n`typing_extensions` is treated specially by static type checkers such as\nmypy and pyright. Objects defined in `typing_extensions` are treated the same\nway as equivalent forms in `typing`.\n\n`typing_extensions` uses\n[Semantic Versioning](https://semver.org/). The\nmajor version will be incremented only for backwards-incompatible changes.\nTherefore, it's safe to depend\non `typing_extensions` like this: `typing_extensions >=x.y, <(x+1)`,\nwhere `x.y` is the first version that includes all features you need.\n\n## Included items\n\nSee [the documentation](https://typing-extensions.readthedocs.io/en/latest/#) for a\ncomplete listing of module contents.\n\n## Contributing\n\nSee [CONTRIBUTING.md](https://github.com/python/typing_extensions/blob/main/CONTRIBUTING.md)\nfor how to contribute to `typing_extensions`.",
-      "release_date": "2025-07-04T13:28:32",
+      "description": "Backported and Experimental Type Hints for Python 3.9+\n# Typing Extensions\n\n[![Chat at https://gitter.im/python/typing](https://badges.gitter.im/python/typing.svg)](https://gitter.im/python/typing)\n\n[Documentation](https://typing-extensions.readthedocs.io/en/latest/#) \u2013\n[PyPI](https://pypi.org/project/typing-extensions/)\n\n## Overview\n\nThe `typing_extensions` module serves two related purposes:\n\n- Enable use of new type system features on older Python versions. For example,\n  `typing.TypeGuard` is new in Python 3.10, but `typing_extensions` allows\n  users on previous Python versions to use it too.\n- Enable experimentation with new type system PEPs before they are accepted and\n  added to the `typing` module.\n\n`typing_extensions` is treated specially by static type checkers such as\nmypy and pyright. Objects defined in `typing_extensions` are treated the same\nway as equivalent forms in `typing`.\n\n`typing_extensions` uses\n[Semantic Versioning](https://semver.org/). The\nmajor version will be incremented only for backwards-incompatible changes.\nTherefore, it's safe to depend\non `typing_extensions` like this: `typing_extensions ~=x.y`,\nwhere `x.y` is the first version that includes all features you need.\n[This](https://packaging.python.org/en/latest/specifications/version-specifiers/#compatible-release)\nis equivalent to `typing_extensions >=x.y, <(x+1)`. Do not depend on `~= x.y.z`\nunless you really know what you're doing; that defeats the purpose of\nsemantic versioning.\n\n## Included items\n\nSee [the documentation](https://typing-extensions.readthedocs.io/en/latest/#) for a\ncomplete listing of module contents.\n\n## Contributing\n\nSee [CONTRIBUTING.md](https://github.com/python/typing_extensions/blob/main/CONTRIBUTING.md)\nfor how to contribute to `typing_extensions`.",
+      "release_date": "2025-08-25T13:49:24",
       "parties": [
         {
           "type": "person",
@@ -600,11 +600,11 @@
         "Topic :: Software Development"
       ],
       "homepage_url": null,
-      "download_url": "https://files.pythonhosted.org/packages/b5/00/d631e67a838026495268c2f6884f3711a15a9a2a96cd244fdaea53b823fb/typing_extensions-4.14.1-py3-none-any.whl",
-      "size": 43906,
+      "download_url": "https://files.pythonhosted.org/packages/18/67/36e9267722cc04a6b9f15c7f3441c2363321a3ea07da7ae0c0707beb2a9c/typing_extensions-4.15.0-py3-none-any.whl",
+      "size": 44614,
       "sha1": null,
-      "md5": "86905389dfed18c11e510c9e23147fcb",
-      "sha256": "d1e1e3b58374dc93031d6eda2420a48ea44a36c2b4766a4fdeb3710755731d76",
+      "md5": "1394f56d85d87540f7907680572797e1",
+      "sha256": "f0fa19c6845758ab08074a0cfa8b7aecb71c999ca73d62883bc25cc018c4e548",
       "sha512": null,
       "bug_tracking_url": "https://github.com/python/typing_extensions/issues",
       "code_view_url": null,
@@ -619,16 +619,16 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/typing-extensions/4.14.1/json",
+      "api_data_url": "https://pypi.org/pypi/typing-extensions/4.15.0/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/typing-extensions@4.14.1"
+      "purl": "pkg:pypi/typing-extensions@4.15.0"
     }
   ],
   "resolved_dependencies_graph": [
     {
       "package": "pkg:pypi/exceptiongroup@1.3.0",
       "dependencies": [
-        "pkg:pypi/typing-extensions@4.14.1"
+        "pkg:pypi/typing-extensions@4.15.0"
       ]
     },
     {
@@ -652,7 +652,7 @@
       "dependencies": []
     },
     {
-      "package": "pkg:pypi/pytest@8.4.1",
+      "package": "pkg:pypi/pytest@8.4.2",
       "dependencies": [
         "pkg:pypi/exceptiongroup@1.3.0",
         "pkg:pypi/iniconfig@2.1.0",
@@ -667,7 +667,7 @@
       "dependencies": []
     },
     {
-      "package": "pkg:pypi/typing-extensions@4.14.1",
+      "package": "pkg:pypi/typing-extensions@4.15.0",
       "dependencies": []
     }
   ]
