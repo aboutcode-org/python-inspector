@@ -155,6 +155,7 @@ PLATFORMS_BY_OS = {
         "manylinux2014_x86_64",
         "manylinux_2_27_x86_64",
         "manylinux_2_28_x86_64",
+        "manylinux_2_31_x86_64",
         "manylinux2014_aarch6",
         "musllinux_1_2_x86_64",
         "manylinux_2_33_aarch64",
