@@ -140,15 +140,6 @@ sdist_tests = [
     ),
 ]
 
-linux_platforms = [
-    "linux_x86_64",
-    "manylinux1_x86_64",
-    "manylinux2010_x86_64",
-    "manylinux2014_x86_64",
-    "manylinux_2_27_x86_64",
-    "manylinux_2_28_x86_64",
-]
-
 
 @pytest.mark.parametrize("dist_test", sdist_tests + wheel_tests)
 def test_Distribution_from_filename(dist_test):
@@ -165,7 +156,7 @@ def test_Wheel_from_filename(dist_test):
     dist_test.check(using=Wheel)
 
 
-@pytest.mark.parametrize("linux_platform", linux_platforms)
+@pytest.mark.parametrize("linux_platform", utils_pypi.PLATFORMS_BY_OS["linux"])
 def test_PypiPackage_get_supported_wheels(linux_platform):
     whl = Wheel.from_filename(f"onnxruntime-1.19.2-cp311-cp311-{linux_platform}.whl")
     pkg = PypiPackage.package_from_dists(dists=[whl])
