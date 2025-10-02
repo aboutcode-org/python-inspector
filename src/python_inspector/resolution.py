@@ -172,7 +172,9 @@ def is_valid_version(
     """
     if parsed_version in bad_versions:
         return False
-    if any(parsed_version not in r.specifier for r in requirements[identifier]):
+    if any(
+        not r.specifier.contains(parsed_version, prereleases=True) for r in requirements[identifier]
+    ):
         if all(not r.specifier for r in requirements[identifier]):
             return True
         return False
