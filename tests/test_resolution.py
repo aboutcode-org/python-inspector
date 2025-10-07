@@ -196,6 +196,14 @@ def test_is_valid_version_with_no_specifier_and_pre_release():
     assert is_valid_version(parsed_version, requirements, identifier, bad_versions)
 
 
+def test_is_valid_version_with_empty_and_non_empty_specifier_and_pre_release():
+    parsed_version = packvers.version.parse("1.0.0.dev1+01234abcd")
+    requirements = {"flask": [Requirement("flask"), Requirement("flask==1.0.0.dev1+01234abcd")]}
+    bad_versions = []
+    identifier = "flask"
+    assert is_valid_version(parsed_version, requirements, identifier, bad_versions)
+
+
 def test_get_requirements_from_dependencies():
     dependencies = [
         models.DependentPackage(
