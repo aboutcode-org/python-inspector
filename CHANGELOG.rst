@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v0.14.4
+-----------
+
+- Cleanup requirement string to avoid packvers parsing issues https://github.com/aboutcode-org/python-inspector/pull/244
+- Fix resolution issues for pre-release versions https://github.com/aboutcode-org/python-inspector/pull/248
 
 v0.14.3
 -----------
