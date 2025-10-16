@@ -121,6 +121,7 @@ def iter_requirements(level, extras, setup_file):
 
     mock_args, mock_kwargs = mock_setup.call_args
     install_requires = mock_kwargs.get("install_requires", install_requires)
+    install_requires = [req for req in install_requires if req]
 
     requires_extras = mock_kwargs.get("extras_require", requires_extras)
     test_requires = mock_kwargs.get("test_requires", test_requires)
