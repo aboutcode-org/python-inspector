@@ -160,12 +160,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "iniconfig",
-      "version": "2.1.0",
+      "version": "2.3.0",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "brain-dead simple config-ini parsing\niniconfig: brain-dead simple parsing of ini files\n=======================================================\n\niniconfig is a small and simple INI-file parser module\nhaving a unique set of features:\n\n* maintains order of sections and entries\n* supports multi-line values with or without line-continuations\n* supports \"#\" comments everywhere\n* raises errors with proper line-numbers\n* no bells and whistles like automatic substitutions\n* iniconfig raises an Error if two sections have the same name.\n\nIf you encounter issues or have feature wishes please report them to:\n\n    https://github.com/RonnyPfannschmidt/iniconfig/issues\n\nBasic Example\n===================================\n\nIf you have an ini file like this:\n\n.. code-block:: ini\n\n    # content of example.ini\n    [section1] # comment\n    name1=value1  # comment\n    name1b=value1,value2  # comment\n\n    [section2]\n    name2=\n        line1\n        line2\n\nthen you can do:\n\n.. code-block:: pycon\n\n    >>> import iniconfig\n    >>> ini = iniconfig.IniConfig(\"example.ini\")\n    >>> ini['section1']['name1'] # raises KeyError if not exists\n    'value1'\n    >>> ini.get('section1', 'name1b', [], lambda x: x.split(\",\"))\n    ['value1', 'value2']\n    >>> ini.get('section1', 'notexist', [], lambda x: x.split(\",\"))\n    []\n    >>> [x.name for x in list(ini)]\n    ['section1', 'section2']\n    >>> list(list(ini)[0].items())\n    [('name1', 'value1'), ('name1b', 'value1,value2')]\n    >>> 'section1' in ini\n    True\n    >>> 'inexistendsection' in ini\n    False",
-      "release_date": "2025-03-19T20:10:01",
+      "release_date": "2025-10-18T21:55:41",
       "parties": [
         {
           "type": "person",
@@ -181,34 +181,28 @@
         "Operating System :: MacOS :: MacOS X",
         "Operating System :: Microsoft :: Windows",
         "Operating System :: POSIX",
-        "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3 :: Only",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: 3.13",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.14",
         "Topic :: Software Development :: Libraries",
         "Topic :: Utilities"
       ],
       "homepage_url": null,
-      "download_url": "https://files.pythonhosted.org/packages/2c/e1/e6716421ea10d38022b952c159d5161ca1193197fb744506875fbb87ea7b/iniconfig-2.1.0-py3-none-any.whl",
-      "size": 6050,
+      "download_url": "https://files.pythonhosted.org/packages/cb/b1/3846dd7f199d53cb17f49cba7e651e9ce294d8497c8c150530ed11865bb8/iniconfig-2.3.0-py3-none-any.whl",
+      "size": 7484,
       "sha1": null,
-      "md5": "a3addcf2db108b0a2fd70a26e2504f22",
-      "sha256": "9deba5723312380e77435581c6bf4935c94cbfab9b1ed33ef8d238ea168eb760",
+      "md5": "d3e156a9abd59ac8b5eb0c2e8b1c5dad",
+      "sha256": "f631c04d2c48c52b84d0d0549c99ff3859c98df65b3101406327ecc7d53fbf12",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
       "vcs_url": null,
       "copyright": null,
       "license_expression": "MIT",
-      "declared_license": {
-        "classifiers": [
-          "License :: OSI Approved :: MIT License"
-        ]
-      },
+      "declared_license": {},
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
@@ -216,9 +210,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/iniconfig/2.1.0/json",
+      "api_data_url": "https://pypi.org/pypi/iniconfig/2.3.0/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/iniconfig@2.1.0"
+      "purl": "pkg:pypi/iniconfig@2.3.0"
     },
     {
       "type": "pypi",
@@ -498,12 +492,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "tomli",
-      "version": "2.2.1",
+      "version": "2.3.0",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "[![Build Status](https://github.com/hukkin/tomli/actions/workflows/tests.yaml/badge.svg?branch=master)](https://github.com/hukkin/tomli/actions?query=workflow%3ATests+branch%3Amaster+event%3Apush)\n[![codecov.io](https://codecov.io/gh/hukkin/tomli/branch/master/graph/badge.svg)](https://codecov.io/gh/hukkin/tomli)\n[![PyPI version](https://img.shields.io/pypi/v/tomli)](https://pypi.org/project/tomli)\n\n# Tomli\n\n> A lil' TOML parser\n\n**Table of Contents** *generated with [mdformat-toc](https://github.com/hukkin/mdformat-toc)*\n\n<!-- mdformat-toc start --slug=github --maxlevel=6 --minlevel=2 -->\n\n- [Intro](#intro)\n- [Installation](#installation)\n- [Usage](#usage)\n  - [Parse a TOML string](#parse-a-toml-string)\n  - [Parse a TOML file](#parse-a-toml-file)\n  - [Handle invalid TOML](#handle-invalid-toml)\n  - [Construct `decimal.Decimal`s from TOML floats](#construct-decimaldecimals-from-toml-floats)\n  - [Building a `tomli`/`tomllib` compatibility layer](#building-a-tomlitomllib-compatibility-layer)\n- [FAQ](#faq)\n  - [Why this parser?](#why-this-parser)\n  - [Is comment preserving round-trip parsing supported?](#is-comment-preserving-round-trip-parsing-supported)\n  - [Is there a `dumps`, `write` or `encode` function?](#is-there-a-dumps-write-or-encode-function)\n  - [How do TOML types map into Python types?](#how-do-toml-types-map-into-python-types)\n- [Performance](#performance)\n  - [Pure Python](#pure-python)\n  - [Mypyc generated wheel](#mypyc-generated-wheel)\n\n<!-- mdformat-toc end -->\n\n## Intro<a name=\"intro\"></a>\n\nTomli is a Python library for parsing [TOML](https://toml.io).\nIt is fully compatible with [TOML v1.0.0](https://toml.io/en/v1.0.0).\n\nA version of Tomli, the `tomllib` module,\nwas added to the standard library in Python 3.11\nvia [PEP 680](https://www.python.org/dev/peps/pep-0680/).\nTomli continues to provide a backport on PyPI for Python versions\nwhere the standard library module is not available\nand that have not yet reached their end-of-life.\n\nTomli uses [mypyc](https://github.com/mypyc/mypyc)\nto generate binary wheels for most of the widely used platforms,\nso Python 3.11+ users may prefer it over `tomllib` for improved performance.\nPure Python wheels are available on any platform and should perform the same as `tomllib`.\n\n## Installation<a name=\"installation\"></a>\n\n```bash\npip install tomli\n```\n\n## Usage<a name=\"usage\"></a>\n\n### Parse a TOML string<a name=\"parse-a-toml-string\"></a>\n\n```python\nimport tomli\n\ntoml_str = \"\"\"\n[[players]]\nname = \"Lehtinen\"\nnumber = 26\n\n[[players]]\nname = \"Numminen\"\nnumber = 27\n\"\"\"\n\ntoml_dict = tomli.loads(toml_str)\nassert toml_dict == {\n    \"players\": [{\"name\": \"Lehtinen\", \"number\": 26}, {\"name\": \"Numminen\", \"number\": 27}]\n}\n```\n\n### Parse a TOML file<a name=\"parse-a-toml-file\"></a>\n\n```python\nimport tomli\n\nwith open(\"path_to_file/conf.toml\", \"rb\") as f:\n    toml_dict = tomli.load(f)\n```\n\nThe file must be opened in binary mode (with the `\"rb\"` flag).\nBinary mode will enforce decoding the file as UTF-8 with universal newlines disabled,\nboth of which are required to correctly parse TOML.\n\n### Handle invalid TOML<a name=\"handle-invalid-toml\"></a>\n\n```python\nimport tomli\n\ntry:\n    toml_dict = tomli.loads(\"]] this is invalid TOML [[\")\nexcept tomli.TOMLDecodeError:\n    print(\"Yep, definitely not valid.\")\n```\n\nNote that error messages are considered informational only.\nThey should not be assumed to stay constant across Tomli versions.\n\n### Construct `decimal.Decimal`s from TOML floats<a name=\"construct-decimaldecimals-from-toml-floats\"></a>\n\n```python\nfrom decimal import Decimal\nimport tomli\n\ntoml_dict = tomli.loads(\"precision-matters = 0.982492\", parse_float=Decimal)\nassert isinstance(toml_dict[\"precision-matters\"], Decimal)\nassert toml_dict[\"precision-matters\"] == Decimal(\"0.982492\")\n```\n\nNote that `decimal.Decimal` can be replaced with another callable that converts a TOML float from string to a Python type.\nThe `decimal.Decimal` is, however, a practical choice for use cases where float inaccuracies can not be tolerated.\n\nIllegal types are `dict` and `list`, and their subtypes.\nA `ValueError` will be raised if `parse_float` produces illegal types.\n\n### Building a `tomli`/`tomllib` compatibility layer<a name=\"building-a-tomlitomllib-compatibility-layer\"></a>\n\nPython versions 3.11+ ship with a version of Tomli:\nthe `tomllib` standard library module.\nTo build code that uses the standard library if available,\nbut still works seamlessly with Python 3.6+,\ndo the following.\n\nInstead of a hard Tomli dependency, use the following\n[dependency specifier](https://packaging.python.org/en/latest/specifications/dependency-specifiers/)\nto only require Tomli when the standard library module is not available:\n\n```\ntomli >= 1.1.0 ; python_version < \"3.11\"\n```\n\nThen, in your code, import a TOML parser using the following fallback mechanism:\n\n```python\nimport sys\n\nif sys.version_info >= (3, 11):\n    import tomllib\nelse:\n    import tomli as tomllib\n\ntomllib.loads(\"['This parses fine with Python 3.6+']\")\n```\n\n## FAQ<a name=\"faq\"></a>\n\n### Why this parser?<a name=\"why-this-parser\"></a>\n\n- it's lil'\n- pure Python with zero dependencies\n- the fastest pure Python parser [\\*](#pure-python):\n  18x as fast as [tomlkit](https://pypi.org/project/tomlkit/),\n  2.1x as fast as [toml](https://pypi.org/project/toml/)\n- outputs [basic data types](#how-do-toml-types-map-into-python-types) only\n- 100% spec compliant: passes all tests in\n  [BurntSushi/toml-test](https://github.com/BurntSushi/toml-test)\n  test suite\n- thoroughly tested: 100% branch coverage\n\n### Is comment preserving round-trip parsing supported?<a name=\"is-comment-preserving-round-trip-parsing-supported\"></a>\n\nNo.\n\nThe `tomli.loads` function returns a plain `dict` that is populated with builtin types and types from the standard library only.\nPreserving comments requires a custom type to be returned so will not be supported,\nat least not by the `tomli.loads` and `tomli.load` functions.\n\nLook into [TOML Kit](https://github.com/sdispater/tomlkit) if preservation of style is what you need.\n\n### Is there a `dumps`, `write` or `encode` function?<a name=\"is-there-a-dumps-write-or-encode-function\"></a>\n\n[Tomli-W](https://github.com/hukkin/tomli-w) is the write-only counterpart of Tomli, providing `dump` and `dumps` functions.\n\nThe core library does not include write capability, as most TOML use cases are read-only, and Tomli intends to be minimal.\n\n### How do TOML types map into Python types?<a name=\"how-do-toml-types-map-into-python-types\"></a>\n\n| TOML type        | Python type         | Details                                                      |\n| ---------------- | ------------------- | ------------------------------------------------------------ |\n| Document Root    | `dict`              |                                                              |\n| Key              | `str`               |                                                              |\n| String           | `str`               |                                                              |\n| Integer          | `int`               |                                                              |\n| Float            | `float`             |                                                              |\n| Boolean          | `bool`              |                                                              |\n| Offset Date-Time | `datetime.datetime` | `tzinfo` attribute set to an instance of `datetime.timezone` |\n| Local Date-Time  | `datetime.datetime` | `tzinfo` attribute set to `None`                             |\n| Local Date       | `datetime.date`     |                                                              |\n| Local Time       | `datetime.time`     |                                                              |\n| Array            | `list`              |                                                              |\n| Table            | `dict`              |                                                              |\n| Inline Table     | `dict`              |                                                              |\n\n## Performance<a name=\"performance\"></a>\n\nThe `benchmark/` folder in this repository contains a performance benchmark for comparing the various Python TOML parsers.\n\nBelow are the results for commit [0724e2a](https://github.com/hukkin/tomli/tree/0724e2ab1858da7f5e05a9bffdb24c33589d951c).\n\n### Pure Python<a name=\"pure-python\"></a>\n\n```console\nfoo@bar:~/dev/tomli$ python --version\nPython 3.12.7\nfoo@bar:~/dev/tomli$ pip freeze\nattrs==21.4.0\nclick==8.1.7\npytomlpp==1.0.13\nqtoml==0.3.1\nrtoml==0.11.0\ntoml==0.10.2\ntomli @ file:///home/foo/dev/tomli\ntomlkit==0.13.2\nfoo@bar:~/dev/tomli$ python benchmark/run.py\nParsing data.toml 5000 times:\n------------------------------------------------------\n    parser |  exec time | performance (more is better)\n-----------+------------+-----------------------------\n     rtoml |    0.647 s | baseline (100%)\n  pytomlpp |    0.891 s | 72.62%\n     tomli |     3.14 s | 20.56%\n      toml |     6.69 s | 9.67%\n     qtoml |     8.27 s | 7.82%\n   tomlkit |     56.1 s | 1.15%\n```\n\n### Mypyc generated wheel<a name=\"mypyc-generated-wheel\"></a>\n\n```console\nfoo@bar:~/dev/tomli$ python benchmark/run.py\nParsing data.toml 5000 times:\n------------------------------------------------------\n    parser |  exec time | performance (more is better)\n-----------+------------+-----------------------------\n     rtoml |    0.668 s | baseline (100%)\n  pytomlpp |    0.893 s | 74.81%\n     tomli |     1.96 s | 34.18%\n      toml |     6.64 s | 10.07%\n     qtoml |     8.26 s | 8.09%\n   tomlkit |     52.9 s | 1.26%\n```",
-      "release_date": "2024-11-27T22:38:35",
+      "release_date": "2025-10-08T22:01:46",
       "parties": [
         {
           "type": "person",
@@ -525,23 +519,18 @@
         "Typing :: Typed"
       ],
       "homepage_url": null,
-      "download_url": "https://files.pythonhosted.org/packages/6e/c2/61d3e0f47e2b74ef40a68b9e6ad5984f6241a942f7cd3bbfbdbd03861ea9/tomli-2.2.1-py3-none-any.whl",
-      "size": 14257,
+      "download_url": "https://files.pythonhosted.org/packages/77/b8/0135fadc89e73be292b473cb820b4f5a08197779206b33191e801feeae40/tomli-2.3.0-py3-none-any.whl",
+      "size": 14408,
       "sha1": null,
-      "md5": "ad9518cf40b1e7f3d85677af6e85e6ea",
-      "sha256": "cb55c73c5f4408779d0cf3eef9f762b9c9f147a77de7b258bef0a5628adc85cc",
+      "md5": "5c4e5504870351aabfd5b86f84cec672",
+      "sha256": "e95b1af3c5b07d9e643909b5abbec77cd9f1217e6d0bca72b0234736b9fb1f1b",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
       "vcs_url": null,
       "copyright": null,
-      "license_expression": null,
-      "declared_license": {
-        "license": "MIT License  Copyright (c) 2021 Taneli Hukkinen  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.  THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. ",
-        "classifiers": [
-          "License :: OSI Approved :: MIT License"
-        ]
-      },
+      "license_expression": "MIT",
+      "declared_license": {},
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
@@ -549,9 +538,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/tomli/2.2.1/json",
+      "api_data_url": "https://pypi.org/pypi/tomli/2.3.0/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/tomli@2.2.1"
+      "purl": "pkg:pypi/tomli@2.3.0"
     },
     {
       "type": "pypi",
@@ -632,7 +621,7 @@
       ]
     },
     {
-      "package": "pkg:pypi/iniconfig@2.1.0",
+      "package": "pkg:pypi/iniconfig@2.3.0",
       "dependencies": []
     },
     {
@@ -655,15 +644,15 @@
       "package": "pkg:pypi/pytest@8.4.2",
       "dependencies": [
         "pkg:pypi/exceptiongroup@1.3.0",
-        "pkg:pypi/iniconfig@2.1.0",
+        "pkg:pypi/iniconfig@2.3.0",
         "pkg:pypi/packaging@25.0",
         "pkg:pypi/pluggy@1.6.0",
         "pkg:pypi/pygments@2.19.2",
-        "pkg:pypi/tomli@2.2.1"
+        "pkg:pypi/tomli@2.3.0"
       ]
     },
     {
-      "package": "pkg:pypi/tomli@2.2.1",
+      "package": "pkg:pypi/tomli@2.3.0",
       "dependencies": []
     },
     {
