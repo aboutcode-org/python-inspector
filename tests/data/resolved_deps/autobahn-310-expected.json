@@ -24,11 +24,11 @@
     {
       "package": "pkg:pypi/hyperlink@21.0.0",
       "dependencies": [
-        "pkg:pypi/idna@3.10"
+        "pkg:pypi/idna@3.11"
       ]
     },
     {
-      "package": "pkg:pypi/idna@3.10",
+      "package": "pkg:pypi/idna@3.11",
       "dependencies": []
     },
     {
@@ -49,7 +49,7 @@
     "pkg:pypi/cffi@2.0.0",
     "pkg:pypi/cryptography@43.0.3",
     "pkg:pypi/hyperlink@21.0.0",
-    "pkg:pypi/idna@3.10",
+    "pkg:pypi/idna@3.11",
     "pkg:pypi/pycparser@2.23",
     "pkg:pypi/setuptools@80.9.0",
     "pkg:pypi/txaio@23.6.1"
