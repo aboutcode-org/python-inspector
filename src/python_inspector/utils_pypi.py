@@ -44,6 +44,7 @@ from packvers.specifiers import SpecifierSet
 from python_inspector import lockfile
 from python_inspector import pyinspector_settings as settings
 from python_inspector import utils_pip_compatibility_tags
+from python_inspector.logging import logger
 
 """
 Utilities to manage Python thirparty libraries source, binaries and metadata in
@@ -104,10 +105,6 @@ Wheel downloader
 
 
 """
-
-TRACE = False
-TRACE_DEEP = False
-TRACE_ULTRA_DEEP = False
 
 # Supported environments
 PYTHON_VERSIONS = "27", "36", "37", "38", "39", "310", "311", "312", "313"
@@ -225,8 +222,6 @@ async def download_wheel(
     environment,
     dest_dir=CACHE_THIRDPARTY_DIR,
     repos=tuple(),
-    verbose=False,
-    echo_func=None,
     python_version=DEFAULT_PYTHON_VERSION,
 ):
     """
@@ -237,8 +232,7 @@ async def download_wheel(
 
     Use the first PyPI simple repository from a list of ``repos`` that contains this wheel.
     """
-    if TRACE_DEEP:
-        print(f"  download_wheel: {name}=={version} for envt: {environment}")
+    logger.trace(f"  download_wheel: {name}=={version} for envt: {environment}")
 
     if not repos:
         raise ValueError("download_wheel: missing repos")
@@ -249,17 +243,14 @@ async def download_wheel(
             repo, name, version, environment, python_version
         )
         if not supported_and_valid_wheels:
-            if TRACE_DEEP:
-                print(
-                    f"    download_wheel: No supported and valid wheel for {name}=={version}: {environment} "
-                )
+            logger.trace(
+                f"    download_wheel: No supported and valid wheel for {name}=={version}: {environment}"
+            )
             continue
         for wheel in supported_and_valid_wheels:
             wheel.credentials = repo.credentials
             fetched_wheel_filename = await wheel.download(
                 dest_dir=dest_dir,
-                verbose=verbose,
-                echo_func=echo_func,
             )
             fetched_wheel_filenames.append(fetched_wheel_filename)
 
@@ -272,22 +263,17 @@ async def download_wheel(
 async def get_valid_sdist(repo, name, version, python_version=DEFAULT_PYTHON_VERSION):
     package = await repo.get_package_version(name=name, version=version)
     if not package:
-        if TRACE_DEEP:
-            print(
-                print(f"    get_valid_sdist: No package in {repo.index_url} for {name}=={version}")
-            )
+        logger.trace(f"    get_valid_sdist: No package in {repo.index_url} for {name}=={version}")
         return
     sdist = package.sdist
     if not sdist:
-        if TRACE_DEEP:
-            print(f"    get_valid_sdist: No sdist for {name}=={version}")
+        logger.trace(f"    get_valid_sdist: No sdist for {name}=={version}")
         return
     if not valid_python_version(
         python_requires=sdist.python_requires, python_version=python_version
     ):
         return
-    if TRACE_DEEP:
-        print(f"    get_valid_sdist: Getting sdist from index (or cache): {sdist.download_url}")
+    logger.trace(f"    get_valid_sdist: Getting sdist from index (or cache): {sdist.download_url}")
     return sdist
 
 
@@ -299,17 +285,15 @@ async def get_supported_and_valid_wheels(
     """
     package = await repo.get_package_version(name=name, version=version)
     if not package:
-        if TRACE_DEEP:
-            print(
-                f"    get_supported_and_valid_wheels: No package in {repo.index_url} for {name}=={version}"
-            )
+        logger.trace(
+            f"    get_supported_and_valid_wheels: No package in {repo.index_url} for {name}=={version}"
+        )
         return []
     supported_wheels = list(package.get_supported_wheels(environment=environment))
     if not supported_wheels:
-        if TRACE_DEEP:
-            print(
-                f"    get_supported_and_valid_wheels: No supported wheel for {name}=={version}: {environment}"
-            )
+        logger.trace(
+            f"    get_supported_and_valid_wheels: No supported wheel for {name}=={version}: {environment}"
+        )
         return []
     wheels = []
     for wheel in supported_wheels:
@@ -317,12 +301,10 @@ async def get_supported_and_valid_wheels(
             python_requires=wheel.python_requires, python_version=python_version
         ):
             continue
-        if TRACE_DEEP:
-            durl = await wheel.download_url(repo)
-            print(
-                f"""    get_supported_and_valid_wheels: Getting wheel from index (or cache):
-                {durl}"""
-            )
+        logger.trace(
+            f"""    get_supported_and_valid_wheels: Getting wheel from index (or cache):
+                {await wheel.download_url(repo)}"""
+        )
         wheels.append(wheel)
     return wheels
 
@@ -341,8 +323,6 @@ async def download_sdist(
     version,
     dest_dir=CACHE_THIRDPARTY_DIR,
     repos=tuple(),
-    verbose=False,
-    echo_func=None,
     python_version=DEFAULT_PYTHON_VERSION,
 ):
     """
@@ -352,8 +332,7 @@ async def download_sdist(
     Use the first PyPI simple repository from a list of ``repos`` that contains
     this sdist.
     """
-    if TRACE:
-        print(f"  download_sdist: {name}=={version}")
+    logger.debug(f"  download_sdist: {name}=={version}")
 
     if not repos:
         raise ValueError("download_sdist: missing repos")
@@ -363,13 +342,10 @@ async def download_sdist(
     for repo in repos:
         sdist = await get_valid_sdist(repo, name, version, python_version=python_version)
         if not sdist:
-            if TRACE_DEEP:
-                print(f"    download_sdist: No valid sdist for {name}=={version}")
+            logger.trace(f"    download_sdist: No valid sdist for {name}=={version}")
             continue
         fetched_sdist_filename = await sdist.download(
             dest_dir=dest_dir,
-            verbose=verbose,
-            echo_func=echo_func,
         )
 
         if fetched_sdist_filename:
@@ -630,37 +606,31 @@ class Distribution(NameVer):
         for repo in repos:
             package = await repo.get_package_version(name=self.name, version=self.version)
             if not package:
-                if TRACE:
-                    print(
-                        f"     get_best_download_url: {self.name}=={self.version} "
-                        f"not found in {repo.index_url}"
-                    )
+                logger.debug(
+                    f"     get_best_download_url: {self.name}=={self.version} "
+                    f"not found in {repo.index_url}"
+                )
                 continue
             pypi_url = package.get_url_for_filename(self.filename)
             if pypi_url:
                 return pypi_url
             else:
-                if TRACE:
-                    print(
-                        f"     get_best_download_url: {self.filename} not found in {repo.index_url}"
-                    )
+                logger.debug(
+                    f"     get_best_download_url: {self.filename} not found in {repo.index_url}"
+                )
 
     async def download(
         self,
         dest_dir=CACHE_THIRDPARTY_DIR,
-        verbose=False,
-        echo_func=None,
     ):
         """
         Download this distribution into `dest_dir` directory.
         Return the fetched filename.
         """
         assert self.filename
-        if TRACE_DEEP:
-            print(
-                f"Fetching distribution of {self.name}=={self.version}:",
-                self.filename,
-            )
+        logger.trace(
+            f"Fetching distribution of {self.name}=={self.version}: {self.filename}",
+        )
 
         # FIXME:
         await fetch_and_save(
@@ -669,8 +639,6 @@ class Distribution(NameVer):
             credentials=self.credentials,
             filename=self.filename,
             as_text=False,
-            verbose=verbose,
-            echo_func=echo_func,
         )
         return self.filename
 
@@ -783,7 +751,7 @@ class Distribution(NameVer):
         """
         pkginfo_text = self.extract_pkginfo(dest_dir=dest_dir)
         if not pkginfo_text:
-            print(f"!!!!PKG-INFO/METADATA not found in {self.filename}")
+            logger.warning(f"PKG-INFO/METADATA not found in {self.filename}")
             return
         raw_data = email.message_from_string(pkginfo_text)
 
@@ -835,7 +803,7 @@ class Distribution(NameVer):
             purl_from_data = packageurl.PackageURL.from_string(package_url)
             purl_from_self = packageurl.PackageURL.from_string(self.package_url)
             if purl_from_data != purl_from_self:
-                print(
+                logger.warning(
                     f"Invalid dist update attempt, no same same purl with dist: "
                     f"{self} using data {data}."
                 )
@@ -1119,10 +1087,9 @@ class Wheel(Distribution):
         """
         Return True is this wheel is compatible with one of a list of PEP 425 tags.
         """
-        if TRACE_DEEP:
-            print()
-            print("is_supported_by_tags: tags:", tags)
-            print("self.tags:", self.tags)
+        logger.deep("")
+        logger.deep(f"is_supported_by_tags: {tags}")
+        logger.deep(f"self.tags: {self.tags}")
         return not self.tags.isdisjoint(tags)
 
     def to_filename(self):
@@ -1191,14 +1158,13 @@ class PypiPackage(NameVer):
         metadata=dict(help="List of Wheel for this package"),
     )
 
-    def get_supported_wheels(self, environment, verbose=TRACE_ULTRA_DEEP):
+    def get_supported_wheels(self, environment):
         """
         Yield all the Wheel of this package supported and compatible with the
         Environment `environment`.
         """
         envt_tags = environment.tags()
-        if verbose:
-            print("get_supported_wheels: envt_tags:", envt_tags)
+        logger.deep(f"get_supported_wheels: envt_tags: {envt_tags}")
         for wheel in self.wheels:
             if wheel.is_supported_by_tags(envt_tags):
                 yield wheel
@@ -1224,8 +1190,7 @@ class PypiPackage(NameVer):
         >>> assert package.wheels == [w1, w2]
         """
         dists = list(dists)
-        if TRACE_DEEP:
-            print(f"package_from_dists: {dists}")
+        logger.deep(f"package_from_dists: {dists}")
         if not dists:
             return
 
@@ -1237,19 +1202,17 @@ class PypiPackage(NameVer):
 
         for dist in dists:
             if dist.normalized_name != normalized_name:
-                if TRACE:
-                    print(
-                        f"  Skipping inconsistent dist name: expected {normalized_name} got {dist}"
-                    )
+                logger.debug(
+                    f"  Skipping inconsistent dist name: expected {normalized_name} got {dist}"
+                )
                 continue
             elif dist.version != version:
                 dv = packaging_version.parse(dist.version)
                 v = packaging_version.parse(version)
                 if dv != v:
-                    if TRACE:
-                        print(
-                            f"  Skipping inconsistent dist version: expected {version} got {dist}"
-                        )
+                    logger.debug(
+                        f"  Skipping inconsistent dist version: expected {version} got {dist}"
+                    )
                     continue
 
             if isinstance(dist, Sdist):
@@ -1261,8 +1224,7 @@ class PypiPackage(NameVer):
             else:
                 raise Exception(f"Unknown distribution type: {dist}")
 
-        if TRACE_DEEP:
-            print(f"package_from_dists: {package}")
+        logger.trace(f"package_from_dists: {package}")
 
         return package
 
@@ -1273,8 +1235,7 @@ class PypiPackage(NameVer):
         These are sorted by name and then by version from oldest to newest.
         """
         dists = await PypiPackage.dists_from_links(links)
-        if TRACE_ULTRA_DEEP:
-            print("packages_from_many_paths_or_urls: dists:", dists)
+        logger.deep(f"packages_from_many_paths_or_urls: dists: {dists}")
 
         dists = NameVer.sorted(dists)
 
@@ -1283,8 +1244,7 @@ class PypiPackage(NameVer):
             key=NameVer.sortable_name_version,
         ):
             package = PypiPackage.package_from_dists(dists_of_package)
-            if TRACE_ULTRA_DEEP:
-                print("packages_from_many_paths_or_urls", package)
+            logger.trace(f"packages_from_many_paths_or_urls: {package}")
             yield package
 
     @classmethod
@@ -1320,24 +1280,16 @@ class PypiPackage(NameVer):
         Sdist bitarray 0.8.1
         """
         dists = []
-        if TRACE_ULTRA_DEEP:
-            print("     ###paths_or_urls:", links)
+        logger.deep(f"     ###paths_or_urls: {links}")
         installable: List[Link] = [link for link in links if link.url.endswith(EXTENSIONS)]
         for link in installable:
             try:
                 dist = Distribution.from_link(link=link)
                 dists.append(dist)
-                if TRACE_DEEP:
-                    print(
-                        "     ===> dists_from_paths_or_urls:",
-                        dist,
-                        "\n     ",
-                        "from URL:",
-                        link.url,
-                    )
+                logger.trace(f"     ===> dists_from_paths_or_urls: {dist}")
+                logger.trace(f"          from URL: {link.url}")
             except InvalidDistributionFilename:
-                if TRACE_DEEP:
-                    print(f"     Skipping invalid distribution from: {link.url}")
+                logger.trace(f"     Skipping invalid distribution from: {link.url}")
                 continue
         return dists
 
@@ -1504,8 +1456,6 @@ class PypiSimpleRepository:
     async def _get_package_versions_map(
         self,
         name,
-        verbose=False,
-        echo_func=None,
     ):
         """
         Return a mapping of all available PypiPackage version for this package name.
@@ -1519,8 +1469,6 @@ class PypiSimpleRepository:
             try:
                 links = await self.fetch_links(
                     normalized_name=normalized_name,
-                    verbose=verbose,
-                    echo_func=echo_func,
                 )
                 # note that this is sorted so the mapping is also sorted
                 versions = {
@@ -1529,19 +1477,16 @@ class PypiSimpleRepository:
                 }
                 self.packages[normalized_name] = versions
             except RemoteNotFetchedException as e:
-                if TRACE:
-                    print(f"failed to fetch package name: {name} from: {self.index_url}:\n{e}")
+                logger.trace(f"failed to fetch package name: {name} from: {self.index_url}:\n{e}")
 
-        if not versions and TRACE:
-            print(f"WARNING: package {name} not found in repo: {self.index_url}")
+        if not versions:
+            logger.debug(f"Package {name} not found in repo: {self.index_url}")
 
         return versions
 
     async def get_package_versions(
         self,
         name,
-        verbose=False,
-        echo_func=None,
     ) -> Dict:
         """
         Return a mapping of all available PypiPackage version as{version:
@@ -1551,8 +1496,6 @@ class PypiSimpleRepository:
         return dict(
             await self._get_package_versions_map(
                 name=name,
-                verbose=verbose,
-                echo_func=echo_func,
             )
         )
 
@@ -1560,8 +1503,6 @@ class PypiSimpleRepository:
         self,
         name,
         version=None,
-        verbose=False,
-        echo_func=None,
     ):
         """
         Return the PypiPackage with name and version or None.
@@ -1572,8 +1513,6 @@ class PypiSimpleRepository:
                 (
                     await self._get_package_versions_map(
                         name=name,
-                        verbose=verbose,
-                        echo_func=echo_func,
                     )
                 ).values()
             )
@@ -1583,16 +1522,12 @@ class PypiSimpleRepository:
             return (
                 await self._get_package_versions_map(
                     name=name,
-                    verbose=verbose,
-                    echo_func=echo_func,
                 )
             ).get(version)
 
     async def fetch_links(
         self,
         normalized_name,
-        verbose=False,
-        echo_func=None,
     ):
         """
         Return a list of download link URLs found in a PyPI simple index for package
@@ -1608,8 +1543,6 @@ class PypiSimpleRepository:
             credentials=self.credentials,
             as_text=True,
             force=not self.use_cached_index,
-            verbose=verbose,
-            echo_func=echo_func,
         )
         soup = BeautifulSoup(text, features="html.parser")
         anchor_tags = soup.find_all("a")
@@ -1680,8 +1613,6 @@ class Cache:
         path_or_url,
         as_text=True,
         force=False,
-        verbose=False,
-        echo_func=None,
     ) -> Tuple[Union[str, bytes], str]:
         """
         Return the content fetched from a ``path_or_url`` through the cache.
@@ -1695,14 +1626,11 @@ class Cache:
         lock_file = f"{cached}.lockfile"
 
         if force or not os.path.exists(cached):
-            if TRACE_DEEP:
-                print(f"        FILE CACHE MISS: {path_or_url}")
+            logger.trace(f"        FILE CACHE MISS: {path_or_url}")
             content = await get_file_content(
                 path_or_url=path_or_url,
                 credentials=credentials,
                 as_text=as_text,
-                verbose=verbose,
-                echo_func=echo_func,
             )
             wmode = "w" if as_text else "wb"
 
@@ -1712,8 +1640,7 @@ class Cache:
                     await fo.write(content)
             return content, cached
         else:
-            if TRACE_DEEP:
-                print(f"        FILE CACHE HIT: {path_or_url}")
+            logger.trace(f"        FILE CACHE HIT: {path_or_url}")
             # also lock on read to avoid race conditions
             with lockfile.FileLock(lock_file).locked(timeout=PYINSP_CACHE_LOCK_TIMEOUT):
                 return await get_local_file_content(path=cached, as_text=as_text), cached
@@ -1726,22 +1653,17 @@ async def get_file_content(
     path_or_url,
     credentials,
     as_text=True,
-    verbose=False,
-    echo_func=None,
 ):
     """
     Fetch and return the content at `path_or_url` from either a local path or a
     remote URL. Return the content as bytes is `as_text` is False.
     """
     if path_or_url.startswith("https://"):
-        if TRACE_DEEP:
-            print(f"Fetching: {path_or_url}")
+        logger.trace(f"Fetching: {path_or_url}")
         _headers, content = await get_remote_file_content(
             url=path_or_url,
             credentials=credentials,
             as_text=as_text,
-            verbose=verbose,
-            echo_func=echo_func,
         )
         return content
 
@@ -1778,8 +1700,6 @@ async def get_remote_file_content(
     headers_only=False,
     headers=None,
     _delay=0,
-    verbose=False,
-    echo_func=None,
 ):
     """
     Fetch and return a tuple of (headers, content) at `url`. Return content as a
@@ -1795,10 +1715,7 @@ async def get_remote_file_content(
     # using a GET with stream=True ensure we get the final header from
     # several redirects and that we can ignore content there. A HEAD request may
     # not get us this last header
-    if verbose and not echo_func:
-        echo_func = print
-    if verbose:
-        echo_func(f"DOWNLOADING: {url}")
+    logger.info(f"DOWNLOADING: {url}")
 
     auth = None
     if credentials:
@@ -1838,8 +1755,6 @@ async def fetch_and_save(
     filename,
     credentials,
     as_text=True,
-    verbose=False,
-    echo_func=None,
 ):
     """
     Fetch content at ``path_or_url`` URL or path and save this to
@@ -1851,8 +1766,6 @@ async def fetch_and_save(
         path_or_url=path_or_url,
         credentials=credentials,
         as_text=as_text,
-        verbose=verbose,
-        echo_func=echo_func,
     )
 
     output = os.path.join(dest_dir, filename)

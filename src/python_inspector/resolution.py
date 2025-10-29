@@ -43,6 +43,7 @@ from _packagedcode.pypi import can_process_dependent_package
 from python_inspector import pyinspector_settings as settings
 from python_inspector import utils_pypi
 from python_inspector.error import NoVersionsFound
+from python_inspector.logging import logger
 from python_inspector.setup_py_live_eval import iter_requirements
 from python_inspector.utils import Candidate
 from python_inspector.utils import contain_string
@@ -332,8 +333,8 @@ def get_requirements_from_python_manifest(
                     )
                 ]
                 if len(setup_fct) > 1:
-                    print(
-                        f"Warning: identified multiple definitions of 'setup()' in {setup_py_location}, "
+                    logger.warning(
+                        f"Identified multiple definitions of 'setup()' in {setup_py_location}, "
                         "defaulting to the first occurrence"
                     )
                 setup_fct = setup_fct[0]
@@ -342,8 +343,8 @@ def get_requirements_from_python_manifest(
                 ]
                 if install_requires:
                     if len(install_requires) > 1:
-                        print(
-                            f"Warning: identified multiple definitions of 'install_requires' in "
+                        logger.warning(
+                            f"Identified multiple definitions of 'install_requires' in "
                             "{setup_py_location}, defaulting to the first occurrence"
                         )
                     install_requires = install_requires[0].elts
