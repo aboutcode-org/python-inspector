@@ -1694,7 +1694,14 @@ class Cache:
         cached = os.path.join(self.directory, cache_key)
         lock_file = f"{cached}.lockfile"
 
-        if force or not os.path.exists(cached):
+        cache_valid = os.path.exists(cached) and os.path.getsize(cached) > 0
+
+        if force or not cache_valid:
+            if not cache_valid and os.path.exists(cached):
+                if TRACE_DEEP:
+                    print(f"        FILE CACHE INVALID (empty file): {path_or_url}")
+                os.remove(cached)
+
             if TRACE_DEEP:
                 print(f"        FILE CACHE MISS: {path_or_url}")
             content = await get_file_content(
