@@ -9,7 +9,7 @@ dparse2==0.7.0
 fasteners==0.17.3
 idna==3.3
 importlib-metadata==4.12.0
-intbitset==3.1.0
+intbitset==4.0.0
 packageurl-python==0.10.0
 packaging==24.2
 packvers==21.5

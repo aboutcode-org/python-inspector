@@ -313,8 +313,9 @@ def test_cli_with_azure_devops_with_python_312():
         regen=REGEN_TEST_FIXTURES,
     )
 
+
 @pytest.mark.online
-def test_cli_with_azure_devops_with_python_313():
+def test_cli_with_azure_devops_with_python_314():
     requirements_file = test_env.get_test_loc("azure-devops.req.txt")
     expected_file = test_env.get_test_loc("azure-devops.req-314-expected.json", must_exist=False)
     extra_options = [

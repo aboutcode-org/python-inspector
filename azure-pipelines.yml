@@ -57,14 +57,6 @@ jobs:
 
     - template: etc/ci/azure-posix.yml
       parameters:
-          job_name: macos13_cpython
-          image_name: macOS-13
-          python_versions: ['3.10', '3.11', '3.12', '3.13', '3.14']
-          test_suites:
-              all: venv/bin/pytest -n 2 -vvs -m "not online"
-
-    - template: etc/ci/azure-posix.yml
-      parameters:
           job_name: macos14_cpython
           image_name: macOS-14
           python_versions: ['3.10', '3.11', '3.12', '3.13', '3.14']
