@@ -67,7 +67,7 @@ Solution
 
 One approach to resolve this issue is to attempt to resolve the
 dependencies using all the current Python versions (e.g., from 3.6 to
-3.10) and stop when one resolution is completed. This can work in
+3.14) and stop when one resolution is completed. This can work in
 practice, but it results in a complex setup typically using multiple
 Docker images for each of the supported Python versions. It would also
 fail to build native dependencies unless the required toolchain is also
@@ -80,7 +80,7 @@ invoking pip as a subprocess. This will eventually request resolution of
 dependencies for a base Python version that is not the current Python
 version. For example, it will be possible to resolve dependencies for
 Python 3.8, even though the current Python version running the tool may
-be 3.9. The actual Python version running the tool may be different from
+be 3.10. The actual Python version running the tool may be different from
 the version used to support the dependency resolution.
 
 The designed solution will be a new Python package and command line tool

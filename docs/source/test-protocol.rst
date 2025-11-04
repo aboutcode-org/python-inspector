@@ -13,7 +13,7 @@ You need to:
 
 - have access to some Python codebase to use as a test bed.
 - have a working installation of python-inspector
-- have a working installation of scancode-toolkit v31.x (inlucing RCs) or higher
+- have a working installation of scancode-toolkit v32.x (inlucing RCs) or higher
 
 
 Test protocol
@@ -77,9 +77,9 @@ In this step, you will resolve the dependencies using python-inspector python-in
 command for each of the requirements files identified in Step 1 using the
 Python version identified in Step 2. Run this command for each requirements
 file, using each time a different output file name. We assume here Python
-version 3.8 (note the absence of dot when passed as a command line option::
+version 3.10 (note the absence of dot when passed as a command line option::
 
-    python-inspector --python-version 38 --requirement <path/to/requirements.txt> \
+    python-inspector --python-version 310 --requirement <path/to/requirements.txt> \
       --json <path/to/resolved-requirements.txt.json> \
       --netrc <path/to/.netrc>
 
@@ -150,7 +150,7 @@ Setup
 
 
 We use this repo https://github.com/tjcsl/ion as a sample codebase.
-And the reference Python version is 3.8::
+And the reference Python version is 3.10::
 
     mkdir -p ~/tmp/pyinsp-example/
     cd ~/tmp/pyinsp-example/
@@ -159,24 +159,24 @@ And the reference Python version is 3.8::
 
 Another example could be https://github.com/digitalocean/sample-django
 
-We use the latest main branch from python-inspector and scancode-toolkit 31.0.0rc2
-installed on Linux with Python 3.8 using the release tarball from:
-https://github.com/aboutcode-org/scancode-toolkit/releases/tag/v31.0.0rc2
+We use the latest main branch from python-inspector and scancode-toolkit 32.4.1
+installed on Linux with Python 3.10 using the release tarball from:
+https://github.com/aboutcode-org/scancode-toolkit/releases/tag/v32.4.1
 
 ScanCode setup::
 
     mkdir -p ~/tmp/pyinsp-example/tools
     cd ~/tmp/pyinsp-example/tools
-    wget https://github.com/aboutcode-org/scancode-toolkit/releases/download/v31.0.0rc2/scancode-toolkit-31.0.0rc2_py38-linux.tar.xz
-    tar -xf scancode-toolkit-31.0.0rc2_py38-linux.tar.xz
-    cd scancode-toolkit-31.0.0rc2/
+    wget https://github.com/aboutcode-org/scancode-toolkit/releases/download/v32.4.1/scancode-toolkit-32.4.1_py38-linux.tar.xz
+    tar -xf scancode-toolkit-32.4.1_py38-linux.tar.xz
+    cd scancode-toolkit-32.4.1/
     ./scancode --help
 
 python-inspector setup::
 
     cd ~/tmp/pyinsp-example/tools
     git clone https://github.com/aboutcode-org/python-inspector
-    python3.8 -m venv venv
+    python3.10 -m venv venv
     source venv/bin/activate
     pip install --upgrade pip setuptools wheel
     cd python-inspector
@@ -207,7 +207,7 @@ Step 2: Build your code
 We perform a simple "editable" build in place::
 
     cd ~/tmp/pyinsp-example/codebase/ion
-    python3.8 -m venv venv
+    python3.10 -m venv venv
     source venv/bin/activate
     pip install --upgrade pip setuptools wheel
     pip install --editable .
@@ -219,7 +219,7 @@ Step 3: Collect built code details
 
 We extract in place::
 
-    cd ~/tmp/pyinsp-example/tools/scancode-toolkit-31.0.0rc2/
+    cd ~/tmp/pyinsp-example/tools/scancode-toolkit-32.4.1/
     ./extractcode --shallow ~/tmp/pyinsp-example/codebase/ion
 
 And collect built details::
