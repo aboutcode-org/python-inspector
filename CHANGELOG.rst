@@ -1,6 +1,13 @@
 Changelog
 =========
 
+v0.15.0
+-----------
+
+- Drop support for python3.9 and add support for python3.14
+- Ensure that cached file is not empty before use https://github.com/aboutcode-org/python-inspector/pull/251
+- Filter out empty values from install_requires https://github.com/aboutcode-org/python-inspector/pull/250
+
 v0.14.4
 -----------
 
