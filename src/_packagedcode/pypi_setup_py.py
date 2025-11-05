@@ -123,10 +123,10 @@ def node_to_value(node, body):
         if isinstance(node, ast.Constant):
             return node.value
 
-    if isinstance(node, ast.Str):
+    if isinstance(node, ast.Constant) and isinstance(node.value, str):
         return node.s
 
-    if isinstance(node, ast.Num):
+    if isinstance(node, ast.Constant) and isinstance(node.value, int):
         return node.n
 
     if isinstance(node, (ast.List, ast.Tuple, ast.Set,)):

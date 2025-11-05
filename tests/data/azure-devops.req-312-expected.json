@@ -1287,8 +1287,7 @@
     {
       "package": "pkg:pypi/cryptography@46.0.3",
       "dependencies": [
-        "pkg:pypi/cffi@2.0.0",
-        "pkg:pypi/typing-extensions@4.15.0"
+        "pkg:pypi/cffi@2.0.0"
       ]
     },
     {
