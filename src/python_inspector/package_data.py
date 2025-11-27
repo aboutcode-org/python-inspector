@@ -122,6 +122,8 @@ async def get_pypi_data_from_purl(
 
 
 def choose_single_wheel(wheel_urls: List[str]) -> Optional[str]:
+    # fix Issue 240 - TypeError: '<' not supported between instances of 'str' and 'NoneType'
+    wheel_urls = [url for url in wheel_urls if url is not None]
     """
     Sort wheel urls descendingly and return the first one
     """
