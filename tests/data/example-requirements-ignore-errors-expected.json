@@ -106,12 +106,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "exceptiongroup",
-      "version": "1.3.0",
+      "version": "1.3.1",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Backport of PEP 654 (exception groups)\n.. image:: https://github.com/agronholm/exceptiongroup/actions/workflows/test.yml/badge.svg\n  :target: https://github.com/agronholm/exceptiongroup/actions/workflows/test.yml\n  :alt: Build Status\n.. image:: https://coveralls.io/repos/github/agronholm/exceptiongroup/badge.svg?branch=main\n  :target: https://coveralls.io/github/agronholm/exceptiongroup?branch=main\n  :alt: Code Coverage\n\nThis is a backport of the ``BaseExceptionGroup`` and ``ExceptionGroup`` classes from\nPython 3.11.\n\nIt contains the following:\n\n* The  ``exceptiongroup.BaseExceptionGroup`` and ``exceptiongroup.ExceptionGroup``\n  classes\n* A utility function (``exceptiongroup.catch()``) for catching exceptions possibly\n  nested in an exception group\n* Patches to the ``TracebackException`` class that properly formats exception groups\n  (installed on import)\n* An exception hook that handles formatting of exception groups through\n  ``TracebackException`` (installed on import)\n* Special versions of some of the functions from the ``traceback`` module, modified to\n  correctly handle exception groups even when monkey patching is disabled, or blocked by\n  another custom exception hook:\n\n  * ``traceback.format_exception()``\n  * ``traceback.format_exception_only()``\n  * ``traceback.print_exception()``\n  * ``traceback.print_exc()``\n* A backported version of ``contextlib.suppress()`` from Python 3.12.1 which also\n  handles suppressing exceptions inside exception groups\n\nIf this package is imported on Python 3.11 or later, the built-in implementations of the\nexception group classes are used instead, ``TracebackException`` is not monkey patched\nand the exception hook won't be installed.\n\nSee the `standard library documentation`_ for more information on exception groups.\n\n.. _standard library documentation: https://docs.python.org/3/library/exceptions.html\n\nCatching exceptions\n===================\n\nDue to the lack of the ``except*`` syntax introduced by `PEP 654`_ in earlier Python\nversions, you need to use ``exceptiongroup.catch()`` to catch exceptions that are\npotentially nested inside an exception group. This function returns a context manager\nthat calls the given handler for any exceptions matching the sole argument.\n\nThe argument to ``catch()`` must be a dict (or any ``Mapping``) where each key is either\nan exception class or an iterable of exception classes. Each value must be a callable\nthat takes a single positional argument. The handler will be called at most once, with\nan exception group as an argument which will contain all the exceptions that are any\nof the given types, or their subclasses. The exception group may contain nested groups\ncontaining more matching exceptions.\n\nThus, the following Python 3.11+ code:\n\n.. code-block:: python\n\n    try:\n        ...\n    except* (ValueError, KeyError) as excgroup:\n        for exc in excgroup.exceptions:\n            print('Caught exception:', type(exc))\n    except* RuntimeError:\n        print('Caught runtime error')\n\nwould be written with this backport like this:\n\n.. code-block:: python\n\n    from exceptiongroup import BaseExceptionGroup, catch\n\n    def value_key_err_handler(excgroup: BaseExceptionGroup) -> None:\n        for exc in excgroup.exceptions:\n            print('Caught exception:', type(exc))\n\n    def runtime_err_handler(exc: BaseExceptionGroup) -> None:\n        print('Caught runtime error')\n\n    with catch({\n        (ValueError, KeyError): value_key_err_handler,\n        RuntimeError: runtime_err_handler\n    }):\n        ...\n\n**NOTE**: Just like with ``except*``, you cannot handle ``BaseExceptionGroup`` or\n``ExceptionGroup`` with ``catch()``.\n\nSuppressing exceptions\n======================\n\nThis library contains a backport of the ``contextlib.suppress()`` context manager from\nPython 3.12.1. It allows you to selectively ignore certain exceptions, even when they're\ninside exception groups:\n\n.. code-block:: python\n\n    from exceptiongroup import suppress\n\n    with suppress(RuntimeError):\n        raise ExceptionGroup(\"\", [RuntimeError(\"boo\")])\n\nNotes on monkey patching\n========================\n\nTo make exception groups render properly when an unhandled exception group is being\nprinted out, this package does two things when it is imported on any Python version\nearlier than 3.11:\n\n#. The  ``traceback.TracebackException`` class is monkey patched to store extra\n   information about exception groups (in ``__init__()``) and properly format them (in\n   ``format()``)\n#. An exception hook is installed at ``sys.excepthook``, provided that no other hook is\n   already present. This hook causes the exception to be formatted using\n   ``traceback.TracebackException`` rather than the built-in rendered.\n\nIf ``sys.exceptionhook`` is found to be set to something else than the default when\n``exceptiongroup`` is imported, no monkeypatching is done at all.\n\nTo prevent the exception hook and patches from being installed, set the environment\nvariable ``EXCEPTIONGROUP_NO_PATCH`` to ``1``.\n\nFormatting exception groups\n---------------------------\n\nNormally, the monkey patching applied by this library on import will cause exception\ngroups to be printed properly in tracebacks. But in cases when the monkey patching is\nblocked by a third party exception hook, or monkey patching is explicitly disabled,\nyou can still manually format exceptions using the special versions of the ``traceback``\nfunctions, like ``format_exception()``, listed at the top of this page. They work just\nlike their counterparts in the ``traceback`` module, except that they use a separately\npatched subclass of ``TracebackException`` to perform the rendering.\n\nParticularly in cases where a library installs its own exception hook, it is recommended\nto use these special versions to do the actual formatting of exceptions/tracebacks.\n\n.. _PEP 654: https://www.python.org/dev/peps/pep-0654/",
-      "release_date": "2025-05-10T17:42:49",
+      "release_date": "2025-11-21T23:01:53",
       "parties": [
         {
           "type": "person",
@@ -129,11 +129,11 @@
         "Typing :: Typed"
       ],
       "homepage_url": null,
-      "download_url": "https://files.pythonhosted.org/packages/36/f4/c6e662dade71f56cd2f3735141b265c3c79293c109549c1e6933b0651ffc/exceptiongroup-1.3.0-py3-none-any.whl",
-      "size": 16674,
+      "download_url": "https://files.pythonhosted.org/packages/8a/0e/97c33bf5009bdbac74fd2beace167cab3f978feb69cc36f1ef79360d6c4e/exceptiongroup-1.3.1-py3-none-any.whl",
+      "size": 16740,
       "sha1": null,
-      "md5": "23ce45ace6329e74ea58448cb6fc4a5b",
-      "sha256": "4d111e6e0c13d0644cad6ddaa7ed0261a0b36971f6d23e7ec9b4b9097da78a10",
+      "md5": "ae266455b7797174f2d91304ccaf1275",
+      "sha256": "a7a39a3bd276781e98394987d3a5701d0c4edffb633bb7a5144577f82c773598",
       "sha512": null,
       "bug_tracking_url": "https://github.com/agronholm/exceptiongroup/issues",
       "code_view_url": null,
@@ -152,9 +152,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/exceptiongroup/1.3.0/json",
+      "api_data_url": "https://pypi.org/pypi/exceptiongroup/1.3.1/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/exceptiongroup@1.3.0"
+      "purl": "pkg:pypi/exceptiongroup@1.3.1"
     },
     {
       "type": "pypi",
@@ -218,12 +218,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "packaging",
-      "version": "25.0",
+      "version": "26.0",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "Core utilities for Python packages\npackaging\n=========\n\n.. start-intro\n\nReusable core utilities for various Python Packaging\n`interoperability specifications <https://packaging.python.org/specifications/>`_.\n\nThis library provides utilities that implement the interoperability\nspecifications which have clearly one correct behaviour (eg: :pep:`440`)\nor benefit greatly from having a single shared implementation (eg: :pep:`425`).\n\n.. end-intro\n\nThe ``packaging`` project includes the following: version handling, specifiers,\nmarkers, requirements, tags, utilities.\n\nDocumentation\n-------------\n\nThe `documentation`_ provides information and the API for the following:\n\n- Version Handling\n- Specifiers\n- Markers\n- Requirements\n- Tags\n- Utilities\n\nInstallation\n------------\n\nUse ``pip`` to install these utilities::\n\n    pip install packaging\n\nThe ``packaging`` library uses calendar-based versioning (``YY.N``).\n\nDiscussion\n----------\n\nIf you run into bugs, you can file them in our `issue tracker`_.\n\nYou can also join ``#pypa`` on Freenode to ask questions or get involved.\n\n\n.. _`documentation`: https://packaging.pypa.io/\n.. _`issue tracker`: https://github.com/pypa/packaging/issues\n\n\nCode of Conduct\n---------------\n\nEveryone interacting in the packaging project's codebases, issue trackers, chat\nrooms, and mailing lists is expected to follow the `PSF Code of Conduct`_.\n\n.. _PSF Code of Conduct: https://github.com/pypa/.github/blob/main/CODE_OF_CONDUCT.md\n\nContributing\n------------\n\nThe ``CONTRIBUTING.rst`` file outlines how to contribute to this project as\nwell as how to report a potential security issue. The documentation for this\nproject also covers information about `project development`_ and `security`_.\n\n.. _`project development`: https://packaging.pypa.io/en/latest/development/\n.. _`security`: https://packaging.pypa.io/en/latest/security/\n\nProject History\n---------------\n\nPlease review the ``CHANGELOG.rst`` file or the `Changelog documentation`_ for\nrecent changes and project history.\n\n.. _`Changelog documentation`: https://packaging.pypa.io/en/latest/changelog/",
-      "release_date": "2025-04-19T11:48:57",
+      "description": "Core utilities for Python packages\npackaging\n=========\n\n.. start-intro\n\nReusable core utilities for various Python Packaging\n`interoperability specifications <https://packaging.python.org/specifications/>`_.\n\nThis library provides utilities that implement the interoperability\nspecifications which have clearly one correct behaviour (eg: :pep:`440`)\nor benefit greatly from having a single shared implementation (eg: :pep:`425`).\n\n.. end-intro\n\nThe ``packaging`` project includes the following: version handling, specifiers,\nmarkers, requirements, tags, metadata, lockfiles, utilities.\n\nDocumentation\n-------------\n\nThe `documentation`_ provides information and the API for the following:\n\n- Version Handling\n- Specifiers\n- Markers\n- Requirements\n- Tags\n- Metadata\n- Lockfiles\n- Utilities\n\nInstallation\n------------\n\nUse ``pip`` to install these utilities::\n\n    pip install packaging\n\nThe ``packaging`` library uses calendar-based versioning (``YY.N``).\n\nDiscussion\n----------\n\nIf you run into bugs, you can file them in our `issue tracker`_.\n\nYou can also join ``#pypa`` on Freenode to ask questions or get involved.\n\n\n.. _`documentation`: https://packaging.pypa.io/\n.. _`issue tracker`: https://github.com/pypa/packaging/issues\n\n\nCode of Conduct\n---------------\n\nEveryone interacting in the packaging project's codebases, issue trackers, chat\nrooms, and mailing lists is expected to follow the `PSF Code of Conduct`_.\n\n.. _PSF Code of Conduct: https://github.com/pypa/.github/blob/main/CODE_OF_CONDUCT.md\n\nContributing\n------------\n\nThe ``CONTRIBUTING.rst`` file outlines how to contribute to this project as\nwell as how to report a potential security issue. The documentation for this\nproject also covers information about `project development`_ and `security`_.\n\n.. _`project development`: https://packaging.pypa.io/en/latest/development/\n.. _`security`: https://packaging.pypa.io/en/latest/security/\n\nProject History\n---------------\n\nPlease review the ``CHANGELOG.rst`` file or the `Changelog documentation`_ for\nrecent changes and project history.\n\n.. _`Changelog documentation`: https://packaging.pypa.io/en/latest/changelog/",
+      "release_date": "2026-01-21T20:50:37",
       "parties": [
         {
           "type": "person",
@@ -243,6 +243,7 @@
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: 3.13",
+        "Programming Language :: Python :: 3.14",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: Implementation :: CPython",
@@ -250,23 +251,18 @@
         "Typing :: Typed"
       ],
       "homepage_url": null,
-      "download_url": "https://files.pythonhosted.org/packages/20/12/38679034af332785aac8774540895e234f4d07f7545804097de4b666afd8/packaging-25.0-py3-none-any.whl",
-      "size": 66469,
+      "download_url": "https://files.pythonhosted.org/packages/b7/b9/c538f279a4e237a006a2c98387d081e9eb060d203d8ed34467cc0f0b9b53/packaging-26.0-py3-none-any.whl",
+      "size": 74366,
       "sha1": null,
-      "md5": "5fa4842e2eb0d7883b4b0e7c42d6229e",
-      "sha256": "29572ef2b1f17581046b3a2227d5c611fb25ec70ca1ba8554b24b0e69331a484",
+      "md5": "6612a2b4cddb48af24b6de0de620e353",
+      "sha256": "b36f1fef9334a5588b4166f8bcd26a14e521f2b55e6b9de3aaa80d3ff7a37529",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/pypa/packaging",
       "vcs_url": null,
       "copyright": null,
-      "license_expression": null,
-      "declared_license": {
-        "classifiers": [
-          "License :: OSI Approved :: Apache Software License",
-          "License :: OSI Approved :: BSD License"
-        ]
-      },
+      "license_expression": "Apache-2.0 OR BSD-2-Clause",
+      "declared_license": {},
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
@@ -274,9 +270,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/packaging/25.0/json",
+      "api_data_url": "https://pypi.org/pypi/packaging/26.0/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/packaging@25.0"
+      "purl": "pkg:pypi/packaging@26.0"
     },
     {
       "type": "pypi",
@@ -424,12 +420,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "pytest",
-      "version": "8.4.2",
+      "version": "9.0.2",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "pytest: simple powerful testing with Python\n.. image:: https://github.com/pytest-dev/pytest/raw/main/doc/en/img/pytest_logo_curves.svg\n   :target: https://docs.pytest.org/en/stable/\n   :align: center\n   :height: 200\n   :alt: pytest\n\n\n------\n\n.. image:: https://img.shields.io/pypi/v/pytest.svg\n    :target: https://pypi.org/project/pytest/\n\n.. image:: https://img.shields.io/conda/vn/conda-forge/pytest.svg\n    :target: https://anaconda.org/conda-forge/pytest\n\n.. image:: https://img.shields.io/pypi/pyversions/pytest.svg\n    :target: https://pypi.org/project/pytest/\n\n.. image:: https://codecov.io/gh/pytest-dev/pytest/branch/main/graph/badge.svg\n    :target: https://codecov.io/gh/pytest-dev/pytest\n    :alt: Code coverage Status\n\n.. image:: https://github.com/pytest-dev/pytest/actions/workflows/test.yml/badge.svg\n    :target: https://github.com/pytest-dev/pytest/actions?query=workflow%3Atest\n\n.. image:: https://results.pre-commit.ci/badge/github/pytest-dev/pytest/main.svg\n   :target: https://results.pre-commit.ci/latest/github/pytest-dev/pytest/main\n   :alt: pre-commit.ci status\n\n.. image:: https://www.codetriage.com/pytest-dev/pytest/badges/users.svg\n    :target: https://www.codetriage.com/pytest-dev/pytest\n\n.. image:: https://readthedocs.org/projects/pytest/badge/?version=latest\n    :target: https://pytest.readthedocs.io/en/latest/?badge=latest\n    :alt: Documentation Status\n\n.. image:: https://img.shields.io/badge/Discord-pytest--dev-blue\n    :target: https://discord.com/invite/pytest-dev\n    :alt: Discord\n\n.. image:: https://img.shields.io/badge/Libera%20chat-%23pytest-orange\n    :target: https://web.libera.chat/#pytest\n    :alt: Libera chat\n\n\nThe ``pytest`` framework makes it easy to write small tests, yet\nscales to support complex functional testing for applications and libraries.\n\nAn example of a simple test:\n\n.. code-block:: python\n\n    # content of test_sample.py\n    def inc(x):\n        return x + 1\n\n\n    def test_answer():\n        assert inc(3) == 5\n\n\nTo execute it::\n\n    $ pytest\n    ============================= test session starts =============================\n    collected 1 items\n\n    test_sample.py F\n\n    ================================== FAILURES ===================================\n    _________________________________ test_answer _________________________________\n\n        def test_answer():\n    >       assert inc(3) == 5\n    E       assert 4 == 5\n    E        +  where 4 = inc(3)\n\n    test_sample.py:5: AssertionError\n    ========================== 1 failed in 0.04 seconds ===========================\n\n\nDue to ``pytest``'s detailed assertion introspection, only plain ``assert`` statements are used. See `getting-started <https://docs.pytest.org/en/stable/getting-started.html#our-first-test-run>`_ for more examples.\n\n\nFeatures\n--------\n\n- Detailed info on failing `assert statements <https://docs.pytest.org/en/stable/how-to/assert.html>`_ (no need to remember ``self.assert*`` names)\n\n- `Auto-discovery\n  <https://docs.pytest.org/en/stable/explanation/goodpractices.html#python-test-discovery>`_\n  of test modules and functions\n\n- `Modular fixtures <https://docs.pytest.org/en/stable/explanation/fixtures.html>`_ for\n  managing small or parametrized long-lived test resources\n\n- Can run `unittest <https://docs.pytest.org/en/stable/how-to/unittest.html>`_ (or trial)\n  test suites out of the box\n\n- Python 3.9+ or PyPy3\n\n- Rich plugin architecture, with over 1300+ `external plugins <https://docs.pytest.org/en/latest/reference/plugin_list.html>`_ and thriving community\n\n\nDocumentation\n-------------\n\nFor full documentation, including installation, tutorials and PDF documents, please see https://docs.pytest.org/en/stable/.\n\n\nBugs/Requests\n-------------\n\nPlease use the `GitHub issue tracker <https://github.com/pytest-dev/pytest/issues>`_ to submit bugs or request features.\n\n\nChangelog\n---------\n\nConsult the `Changelog <https://docs.pytest.org/en/stable/changelog.html>`__ page for fixes and enhancements of each version.\n\n\nSupport pytest\n--------------\n\n`Open Collective`_ is an online funding platform for open and transparent communities.\nIt provides tools to raise money and share your finances in full transparency.\n\nIt is the platform of choice for individuals and companies that want to make one-time or\nmonthly donations directly to the project.\n\nSee more details in the `pytest collective`_.\n\n.. _Open Collective: https://opencollective.com\n.. _pytest collective: https://opencollective.com/pytest\n\n\npytest for enterprise\n---------------------\n\nAvailable as part of the Tidelift Subscription.\n\nThe maintainers of pytest and thousands of other packages are working with Tidelift to deliver commercial support and\nmaintenance for the open source dependencies you use to build your applications.\nSave time, reduce risk, and improve code health, while paying the maintainers of the exact dependencies you use.\n\n`Learn more. <https://tidelift.com/subscription/pkg/pypi-pytest?utm_source=pypi-pytest&utm_medium=referral&utm_campaign=enterprise&utm_term=repo>`_\n\nSecurity\n^^^^^^^^\n\npytest has never been associated with a security vulnerability, but in any case, to report a\nsecurity vulnerability please use the `Tidelift security contact <https://tidelift.com/security>`_.\nTidelift will coordinate the fix and disclosure.\n\n\nLicense\n-------\n\nCopyright Holger Krekel and others, 2004.\n\nDistributed under the terms of the `MIT`_ license, pytest is free and open source software.\n\n.. _`MIT`: https://github.com/pytest-dev/pytest/blob/main/LICENSE",
-      "release_date": "2025-09-04T14:34:20",
+      "description": "pytest: simple powerful testing with Python\n.. image:: https://github.com/pytest-dev/pytest/raw/main/doc/en/img/pytest_logo_curves.svg\n   :target: https://docs.pytest.org/en/stable/\n   :align: center\n   :height: 200\n   :alt: pytest\n\n\n------\n\n.. image:: https://img.shields.io/pypi/v/pytest.svg\n    :target: https://pypi.org/project/pytest/\n\n.. image:: https://img.shields.io/conda/vn/conda-forge/pytest.svg\n    :target: https://anaconda.org/conda-forge/pytest\n\n.. image:: https://img.shields.io/pypi/pyversions/pytest.svg\n    :target: https://pypi.org/project/pytest/\n\n.. image:: https://codecov.io/gh/pytest-dev/pytest/branch/main/graph/badge.svg\n    :target: https://codecov.io/gh/pytest-dev/pytest\n    :alt: Code coverage Status\n\n.. image:: https://github.com/pytest-dev/pytest/actions/workflows/test.yml/badge.svg\n    :target: https://github.com/pytest-dev/pytest/actions?query=workflow%3Atest\n\n.. image:: https://results.pre-commit.ci/badge/github/pytest-dev/pytest/main.svg\n   :target: https://results.pre-commit.ci/latest/github/pytest-dev/pytest/main\n   :alt: pre-commit.ci status\n\n.. image:: https://www.codetriage.com/pytest-dev/pytest/badges/users.svg\n    :target: https://www.codetriage.com/pytest-dev/pytest\n\n.. image:: https://readthedocs.org/projects/pytest/badge/?version=latest\n    :target: https://pytest.readthedocs.io/en/latest/?badge=latest\n    :alt: Documentation Status\n\n.. image:: https://img.shields.io/badge/Discord-pytest--dev-blue\n    :target: https://discord.com/invite/pytest-dev\n    :alt: Discord\n\n.. image:: https://img.shields.io/badge/Libera%20chat-%23pytest-orange\n    :target: https://web.libera.chat/#pytest\n    :alt: Libera chat\n\n\nThe ``pytest`` framework makes it easy to write small tests, yet\nscales to support complex functional testing for applications and libraries.\n\nAn example of a simple test:\n\n.. code-block:: python\n\n    # content of test_sample.py\n    def inc(x):\n        return x + 1\n\n\n    def test_answer():\n        assert inc(3) == 5\n\n\nTo execute it::\n\n    $ pytest\n    ============================= test session starts =============================\n    collected 1 items\n\n    test_sample.py F\n\n    ================================== FAILURES ===================================\n    _________________________________ test_answer _________________________________\n\n        def test_answer():\n    >       assert inc(3) == 5\n    E       assert 4 == 5\n    E        +  where 4 = inc(3)\n\n    test_sample.py:5: AssertionError\n    ========================== 1 failed in 0.04 seconds ===========================\n\n\nThanks to ``pytest``'s detailed assertion introspection, you can simply use plain ``assert`` statements. See `getting-started <https://docs.pytest.org/en/stable/getting-started.html#our-first-test-run>`_ for more examples.\n\n\nFeatures\n--------\n\n- Detailed info on failing `assert statements <https://docs.pytest.org/en/stable/how-to/assert.html>`_ (no need to remember ``self.assert*`` names)\n\n- `Auto-discovery\n  <https://docs.pytest.org/en/stable/explanation/goodpractices.html#python-test-discovery>`_\n  of test modules and functions\n\n- `Modular fixtures <https://docs.pytest.org/en/stable/explanation/fixtures.html>`_ for\n  managing small or parametrized long-lived test resources\n\n- Can run `unittest <https://docs.pytest.org/en/stable/how-to/unittest.html>`_ (or trial)\n  test suites out of the box\n\n- Python 3.10+ or PyPy3\n\n- Rich plugin architecture, with over 1300+ `external plugins <https://docs.pytest.org/en/latest/reference/plugin_list.html>`_ and thriving community\n\n\nDocumentation\n-------------\n\nFor full documentation, including installation, tutorials and PDF documents, please see https://docs.pytest.org/en/stable/.\n\n\nBugs/Requests\n-------------\n\nPlease use the `GitHub issue tracker <https://github.com/pytest-dev/pytest/issues>`_ to submit bugs or request features.\n\n\nChangelog\n---------\n\nConsult the `Changelog <https://docs.pytest.org/en/stable/changelog.html>`__ page for fixes and enhancements of each version.\n\n\nSupport pytest\n--------------\n\n`Open Collective`_ is an online funding platform for open and transparent communities.\nIt provides tools to raise money and share your finances in full transparency.\n\nIt is the platform of choice for individuals and companies that want to make one-time or\nmonthly donations directly to the project.\n\nSee more details in the `pytest collective`_.\n\n.. _Open Collective: https://opencollective.com\n.. _pytest collective: https://opencollective.com/pytest\n\n\npytest for enterprise\n---------------------\n\nAvailable as part of the Tidelift Subscription.\n\nThe maintainers of pytest and thousands of other packages are working with Tidelift to deliver commercial support and\nmaintenance for the open source dependencies you use to build your applications.\nSave time, reduce risk, and improve code health, while paying the maintainers of the exact dependencies you use.\n\n`Learn more. <https://tidelift.com/subscription/pkg/pypi-pytest?utm_source=pypi-pytest&utm_medium=referral&utm_campaign=enterprise&utm_term=repo>`_\n\nSecurity\n^^^^^^^^\n\npytest has never been associated with a security vulnerability, but in any case, to report a\nsecurity vulnerability please use the `Tidelift security contact <https://tidelift.com/security>`_.\nTidelift will coordinate the fix and disclosure.\n\n\nLicense\n-------\n\nCopyright Holger Krekel and others, 2004.\n\nDistributed under the terms of the `MIT`_ license, pytest is free and open source software.\n\n.. _`MIT`: https://github.com/pytest-dev/pytest/blob/main/LICENSE",
+      "release_date": "2025-12-06T21:30:49",
       "parties": [
         {
           "type": "person",
@@ -454,29 +450,23 @@
         "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: 3.13",
         "Programming Language :: Python :: 3.14",
-        "Programming Language :: Python :: 3.9",
         "Topic :: Software Development :: Libraries",
         "Topic :: Software Development :: Testing",
         "Topic :: Utilities"
       ],
       "homepage_url": null,
-      "download_url": "https://files.pythonhosted.org/packages/a8/a4/20da314d277121d6534b3a980b29035dcd51e6744bd79075a6ce8fa4eb8d/pytest-8.4.2-py3-none-any.whl",
-      "size": 365750,
+      "download_url": "https://files.pythonhosted.org/packages/3b/ab/b3226f0bd7cdcf710fbede2b3548584366da3b19b5021e74f5bde2a8fa3f/pytest-9.0.2-py3-none-any.whl",
+      "size": 374801,
       "sha1": null,
-      "md5": "f2cf4b89fbd6145531a1606f96a89503",
-      "sha256": "872f880de3fc3a5bdc88a11b39c9710c3497a547cfa9320bc3c5e62fbf272e79",
+      "md5": "600448842054deb501e95a70d7be737a",
+      "sha256": "711ffd45bf766d5264d487b917733b453d917afd2b0ad65223959f59089f875b",
       "sha512": null,
       "bug_tracking_url": "https://github.com/pytest-dev/pytest/issues",
       "code_view_url": "https://github.com/pytest-dev/pytest",
       "vcs_url": null,
       "copyright": null,
-      "license_expression": null,
-      "declared_license": {
-        "license": "MIT",
-        "classifiers": [
-          "License :: OSI Approved :: MIT License"
-        ]
-      },
+      "license_expression": "MIT",
+      "declared_license": {},
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
@@ -484,20 +474,20 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/pytest/8.4.2/json",
+      "api_data_url": "https://pypi.org/pypi/pytest/9.0.2/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/pytest@8.4.2"
+      "purl": "pkg:pypi/pytest@9.0.2"
     },
     {
       "type": "pypi",
       "namespace": null,
       "name": "tomli",
-      "version": "2.3.0",
+      "version": "2.4.0",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "[![Build Status](https://github.com/hukkin/tomli/actions/workflows/tests.yaml/badge.svg?branch=master)](https://github.com/hukkin/tomli/actions?query=workflow%3ATests+branch%3Amaster+event%3Apush)\n[![codecov.io](https://codecov.io/gh/hukkin/tomli/branch/master/graph/badge.svg)](https://codecov.io/gh/hukkin/tomli)\n[![PyPI version](https://img.shields.io/pypi/v/tomli)](https://pypi.org/project/tomli)\n\n# Tomli\n\n> A lil' TOML parser\n\n**Table of Contents** *generated with [mdformat-toc](https://github.com/hukkin/mdformat-toc)*\n\n<!-- mdformat-toc start --slug=github --maxlevel=6 --minlevel=2 -->\n\n- [Intro](#intro)\n- [Installation](#installation)\n- [Usage](#usage)\n  - [Parse a TOML string](#parse-a-toml-string)\n  - [Parse a TOML file](#parse-a-toml-file)\n  - [Handle invalid TOML](#handle-invalid-toml)\n  - [Construct `decimal.Decimal`s from TOML floats](#construct-decimaldecimals-from-toml-floats)\n  - [Building a `tomli`/`tomllib` compatibility layer](#building-a-tomlitomllib-compatibility-layer)\n- [FAQ](#faq)\n  - [Why this parser?](#why-this-parser)\n  - [Is comment preserving round-trip parsing supported?](#is-comment-preserving-round-trip-parsing-supported)\n  - [Is there a `dumps`, `write` or `encode` function?](#is-there-a-dumps-write-or-encode-function)\n  - [How do TOML types map into Python types?](#how-do-toml-types-map-into-python-types)\n- [Performance](#performance)\n  - [Pure Python](#pure-python)\n  - [Mypyc generated wheel](#mypyc-generated-wheel)\n\n<!-- mdformat-toc end -->\n\n## Intro<a name=\"intro\"></a>\n\nTomli is a Python library for parsing [TOML](https://toml.io).\nIt is fully compatible with [TOML v1.0.0](https://toml.io/en/v1.0.0).\n\nA version of Tomli, the `tomllib` module,\nwas added to the standard library in Python 3.11\nvia [PEP 680](https://www.python.org/dev/peps/pep-0680/).\nTomli continues to provide a backport on PyPI for Python versions\nwhere the standard library module is not available\nand that have not yet reached their end-of-life.\n\nTomli uses [mypyc](https://github.com/mypyc/mypyc)\nto generate binary wheels for most of the widely used platforms,\nso Python 3.11+ users may prefer it over `tomllib` for improved performance.\nPure Python wheels are available on any platform and should perform the same as `tomllib`.\n\n## Installation<a name=\"installation\"></a>\n\n```bash\npip install tomli\n```\n\n## Usage<a name=\"usage\"></a>\n\n### Parse a TOML string<a name=\"parse-a-toml-string\"></a>\n\n```python\nimport tomli\n\ntoml_str = \"\"\"\n[[players]]\nname = \"Lehtinen\"\nnumber = 26\n\n[[players]]\nname = \"Numminen\"\nnumber = 27\n\"\"\"\n\ntoml_dict = tomli.loads(toml_str)\nassert toml_dict == {\n    \"players\": [{\"name\": \"Lehtinen\", \"number\": 26}, {\"name\": \"Numminen\", \"number\": 27}]\n}\n```\n\n### Parse a TOML file<a name=\"parse-a-toml-file\"></a>\n\n```python\nimport tomli\n\nwith open(\"path_to_file/conf.toml\", \"rb\") as f:\n    toml_dict = tomli.load(f)\n```\n\nThe file must be opened in binary mode (with the `\"rb\"` flag).\nBinary mode will enforce decoding the file as UTF-8 with universal newlines disabled,\nboth of which are required to correctly parse TOML.\n\n### Handle invalid TOML<a name=\"handle-invalid-toml\"></a>\n\n```python\nimport tomli\n\ntry:\n    toml_dict = tomli.loads(\"]] this is invalid TOML [[\")\nexcept tomli.TOMLDecodeError:\n    print(\"Yep, definitely not valid.\")\n```\n\nNote that error messages are considered informational only.\nThey should not be assumed to stay constant across Tomli versions.\n\n### Construct `decimal.Decimal`s from TOML floats<a name=\"construct-decimaldecimals-from-toml-floats\"></a>\n\n```python\nfrom decimal import Decimal\nimport tomli\n\ntoml_dict = tomli.loads(\"precision-matters = 0.982492\", parse_float=Decimal)\nassert isinstance(toml_dict[\"precision-matters\"], Decimal)\nassert toml_dict[\"precision-matters\"] == Decimal(\"0.982492\")\n```\n\nNote that `decimal.Decimal` can be replaced with another callable that converts a TOML float from string to a Python type.\nThe `decimal.Decimal` is, however, a practical choice for use cases where float inaccuracies can not be tolerated.\n\nIllegal types are `dict` and `list`, and their subtypes.\nA `ValueError` will be raised if `parse_float` produces illegal types.\n\n### Building a `tomli`/`tomllib` compatibility layer<a name=\"building-a-tomlitomllib-compatibility-layer\"></a>\n\nPython versions 3.11+ ship with a version of Tomli:\nthe `tomllib` standard library module.\nTo build code that uses the standard library if available,\nbut still works seamlessly with Python 3.6+,\ndo the following.\n\nInstead of a hard Tomli dependency, use the following\n[dependency specifier](https://packaging.python.org/en/latest/specifications/dependency-specifiers/)\nto only require Tomli when the standard library module is not available:\n\n```\ntomli >= 1.1.0 ; python_version < \"3.11\"\n```\n\nThen, in your code, import a TOML parser using the following fallback mechanism:\n\n```python\nimport sys\n\nif sys.version_info >= (3, 11):\n    import tomllib\nelse:\n    import tomli as tomllib\n\ntomllib.loads(\"['This parses fine with Python 3.6+']\")\n```\n\n## FAQ<a name=\"faq\"></a>\n\n### Why this parser?<a name=\"why-this-parser\"></a>\n\n- it's lil'\n- pure Python with zero dependencies\n- the fastest pure Python parser [\\*](#pure-python):\n  18x as fast as [tomlkit](https://pypi.org/project/tomlkit/),\n  2.1x as fast as [toml](https://pypi.org/project/toml/)\n- outputs [basic data types](#how-do-toml-types-map-into-python-types) only\n- 100% spec compliant: passes all tests in\n  [BurntSushi/toml-test](https://github.com/BurntSushi/toml-test)\n  test suite\n- thoroughly tested: 100% branch coverage\n\n### Is comment preserving round-trip parsing supported?<a name=\"is-comment-preserving-round-trip-parsing-supported\"></a>\n\nNo.\n\nThe `tomli.loads` function returns a plain `dict` that is populated with builtin types and types from the standard library only.\nPreserving comments requires a custom type to be returned so will not be supported,\nat least not by the `tomli.loads` and `tomli.load` functions.\n\nLook into [TOML Kit](https://github.com/sdispater/tomlkit) if preservation of style is what you need.\n\n### Is there a `dumps`, `write` or `encode` function?<a name=\"is-there-a-dumps-write-or-encode-function\"></a>\n\n[Tomli-W](https://github.com/hukkin/tomli-w) is the write-only counterpart of Tomli, providing `dump` and `dumps` functions.\n\nThe core library does not include write capability, as most TOML use cases are read-only, and Tomli intends to be minimal.\n\n### How do TOML types map into Python types?<a name=\"how-do-toml-types-map-into-python-types\"></a>\n\n| TOML type        | Python type         | Details                                                      |\n| ---------------- | ------------------- | ------------------------------------------------------------ |\n| Document Root    | `dict`              |                                                              |\n| Key              | `str`               |                                                              |\n| String           | `str`               |                                                              |\n| Integer          | `int`               |                                                              |\n| Float            | `float`             |                                                              |\n| Boolean          | `bool`              |                                                              |\n| Offset Date-Time | `datetime.datetime` | `tzinfo` attribute set to an instance of `datetime.timezone` |\n| Local Date-Time  | `datetime.datetime` | `tzinfo` attribute set to `None`                             |\n| Local Date       | `datetime.date`     |                                                              |\n| Local Time       | `datetime.time`     |                                                              |\n| Array            | `list`              |                                                              |\n| Table            | `dict`              |                                                              |\n| Inline Table     | `dict`              |                                                              |\n\n## Performance<a name=\"performance\"></a>\n\nThe `benchmark/` folder in this repository contains a performance benchmark for comparing the various Python TOML parsers.\n\nBelow are the results for commit [0724e2a](https://github.com/hukkin/tomli/tree/0724e2ab1858da7f5e05a9bffdb24c33589d951c).\n\n### Pure Python<a name=\"pure-python\"></a>\n\n```console\nfoo@bar:~/dev/tomli$ python --version\nPython 3.12.7\nfoo@bar:~/dev/tomli$ pip freeze\nattrs==21.4.0\nclick==8.1.7\npytomlpp==1.0.13\nqtoml==0.3.1\nrtoml==0.11.0\ntoml==0.10.2\ntomli @ file:///home/foo/dev/tomli\ntomlkit==0.13.2\nfoo@bar:~/dev/tomli$ python benchmark/run.py\nParsing data.toml 5000 times:\n------------------------------------------------------\n    parser |  exec time | performance (more is better)\n-----------+------------+-----------------------------\n     rtoml |    0.647 s | baseline (100%)\n  pytomlpp |    0.891 s | 72.62%\n     tomli |     3.14 s | 20.56%\n      toml |     6.69 s | 9.67%\n     qtoml |     8.27 s | 7.82%\n   tomlkit |     56.1 s | 1.15%\n```\n\n### Mypyc generated wheel<a name=\"mypyc-generated-wheel\"></a>\n\n```console\nfoo@bar:~/dev/tomli$ python benchmark/run.py\nParsing data.toml 5000 times:\n------------------------------------------------------\n    parser |  exec time | performance (more is better)\n-----------+------------+-----------------------------\n     rtoml |    0.668 s | baseline (100%)\n  pytomlpp |    0.893 s | 74.81%\n     tomli |     1.96 s | 34.18%\n      toml |     6.64 s | 10.07%\n     qtoml |     8.26 s | 8.09%\n   tomlkit |     52.9 s | 1.26%\n```",
-      "release_date": "2025-10-08T22:01:46",
+      "description": "[![Build Status](https://github.com/hukkin/tomli/actions/workflows/tests.yaml/badge.svg?branch=master)](https://github.com/hukkin/tomli/actions?query=workflow%3ATests+branch%3Amaster+event%3Apush)\n[![codecov.io](https://codecov.io/gh/hukkin/tomli/branch/master/graph/badge.svg)](https://codecov.io/gh/hukkin/tomli)\n[![PyPI version](https://img.shields.io/pypi/v/tomli)](https://pypi.org/project/tomli)\n\n# Tomli\n\n> A lil' TOML parser\n\n**Table of Contents** *generated with [mdformat-toc](https://github.com/hukkin/mdformat-toc)*\n\n<!-- mdformat-toc start --slug=github --maxlevel=6 --minlevel=2 -->\n\n- [Intro](#intro)\n- [Installation](#installation)\n- [Usage](#usage)\n  - [Parse a TOML string](#parse-a-toml-string)\n  - [Parse a TOML file](#parse-a-toml-file)\n  - [Handle invalid TOML](#handle-invalid-toml)\n  - [Construct `decimal.Decimal`s from TOML floats](#construct-decimaldecimals-from-toml-floats)\n  - [Building a `tomli`/`tomllib` compatibility layer](#building-a-tomlitomllib-compatibility-layer)\n- [FAQ](#faq)\n  - [Why this parser?](#why-this-parser)\n  - [Is comment preserving round-trip parsing supported?](#is-comment-preserving-round-trip-parsing-supported)\n  - [Is there a `dumps`, `write` or `encode` function?](#is-there-a-dumps-write-or-encode-function)\n  - [How do TOML types map into Python types?](#how-do-toml-types-map-into-python-types)\n- [Performance](#performance)\n  - [Pure Python](#pure-python)\n  - [Mypyc generated wheel](#mypyc-generated-wheel)\n\n<!-- mdformat-toc end -->\n\n## Intro<a name=\"intro\"></a>\n\nTomli is a Python library for parsing [TOML](https://toml.io).\nVersion 2.4.0 and later are compatible with [TOML v1.1.0](https://toml.io/en/v1.1.0).\nOlder versions are [TOML v1.0.0](https://toml.io/en/v1.0.0) compatible.\n\nA version of Tomli, the `tomllib` module,\nwas added to the standard library in Python 3.11\nvia [PEP 680](https://www.python.org/dev/peps/pep-0680/).\nTomli continues to provide a backport on PyPI for Python versions\nwhere the standard library module is not available\nand that have not yet reached their end-of-life.\n\nTomli uses [mypyc](https://github.com/mypyc/mypyc)\nto generate binary wheels for most of the widely used platforms,\nso Python 3.11+ users may prefer it over `tomllib` for improved performance.\nPure Python wheels are available on any platform and should perform the same as `tomllib`.\n\n## Installation<a name=\"installation\"></a>\n\n```bash\npip install tomli\n```\n\n## Usage<a name=\"usage\"></a>\n\n### Parse a TOML string<a name=\"parse-a-toml-string\"></a>\n\n```python\nimport tomli\n\ntoml_str = \"\"\"\n[[players]]\nname = \"Lehtinen\"\nnumber = 26\n\n[[players]]\nname = \"Numminen\"\nnumber = 27\n\"\"\"\n\ntoml_dict = tomli.loads(toml_str)\nassert toml_dict == {\n    \"players\": [{\"name\": \"Lehtinen\", \"number\": 26}, {\"name\": \"Numminen\", \"number\": 27}]\n}\n```\n\n### Parse a TOML file<a name=\"parse-a-toml-file\"></a>\n\n```python\nimport tomli\n\nwith open(\"path_to_file/conf.toml\", \"rb\") as f:\n    toml_dict = tomli.load(f)\n```\n\nThe file must be opened in binary mode (with the `\"rb\"` flag).\nBinary mode will enforce decoding the file as UTF-8 with universal newlines disabled,\nboth of which are required to correctly parse TOML.\n\n### Handle invalid TOML<a name=\"handle-invalid-toml\"></a>\n\n```python\nimport tomli\n\ntry:\n    toml_dict = tomli.loads(\"]] this is invalid TOML [[\")\nexcept tomli.TOMLDecodeError:\n    print(\"Yep, definitely not valid.\")\n```\n\nNote that error messages are considered informational only.\nThey should not be assumed to stay constant across Tomli versions.\n\n### Construct `decimal.Decimal`s from TOML floats<a name=\"construct-decimaldecimals-from-toml-floats\"></a>\n\n```python\nfrom decimal import Decimal\nimport tomli\n\ntoml_dict = tomli.loads(\"precision-matters = 0.982492\", parse_float=Decimal)\nassert isinstance(toml_dict[\"precision-matters\"], Decimal)\nassert toml_dict[\"precision-matters\"] == Decimal(\"0.982492\")\n```\n\nNote that `decimal.Decimal` can be replaced with another callable that converts a TOML float from string to a Python type.\nThe `decimal.Decimal` is, however, a practical choice for use cases where float inaccuracies can not be tolerated.\n\nIllegal types are `dict` and `list`, and their subtypes.\nA `ValueError` will be raised if `parse_float` produces illegal types.\n\n### Building a `tomli`/`tomllib` compatibility layer<a name=\"building-a-tomlitomllib-compatibility-layer\"></a>\n\nPython versions 3.11+ ship with a version of Tomli:\nthe `tomllib` standard library module.\nTo build code that uses the standard library if available,\nbut still works seamlessly with Python 3.6+,\ndo the following.\n\nInstead of a hard Tomli dependency, use the following\n[dependency specifier](https://packaging.python.org/en/latest/specifications/dependency-specifiers/)\nto only require Tomli when the standard library module is not available:\n\n```\ntomli >= 1.1.0 ; python_version < \"3.11\"\n```\n\nThen, in your code, import a TOML parser using the following fallback mechanism:\n\n```python\nimport sys\n\nif sys.version_info >= (3, 11):\n    import tomllib\nelse:\n    import tomli as tomllib\n\ntomllib.loads(\"['This parses fine with Python 3.6+']\")\n```\n\n## FAQ<a name=\"faq\"></a>\n\n### Why this parser?<a name=\"why-this-parser\"></a>\n\n- it's lil'\n- pure Python with zero dependencies\n- the fastest pure Python parser [\\*](#pure-python):\n  18x as fast as [tomlkit](https://pypi.org/project/tomlkit/),\n  2.1x as fast as [toml](https://pypi.org/project/toml/)\n- outputs [basic data types](#how-do-toml-types-map-into-python-types) only\n- 100% spec compliant: passes all tests in\n  [toml-lang/toml-test](https://github.com/toml-lang/toml-test)\n  test suite\n- thoroughly tested: 100% branch coverage\n\n### Is comment preserving round-trip parsing supported?<a name=\"is-comment-preserving-round-trip-parsing-supported\"></a>\n\nNo.\n\nThe `tomli.loads` function returns a plain `dict` that is populated with builtin types and types from the standard library only.\nPreserving comments requires a custom type to be returned so will not be supported,\nat least not by the `tomli.loads` and `tomli.load` functions.\n\nLook into [TOML Kit](https://github.com/sdispater/tomlkit) if preservation of style is what you need.\n\n### Is there a `dumps`, `write` or `encode` function?<a name=\"is-there-a-dumps-write-or-encode-function\"></a>\n\n[Tomli-W](https://github.com/hukkin/tomli-w) is the write-only counterpart of Tomli, providing `dump` and `dumps` functions.\n\nThe core library does not include write capability, as most TOML use cases are read-only, and Tomli intends to be minimal.\n\n### How do TOML types map into Python types?<a name=\"how-do-toml-types-map-into-python-types\"></a>\n\n| TOML type        | Python type         | Details                                                      |\n| ---------------- | ------------------- | ------------------------------------------------------------ |\n| Document Root    | `dict`              |                                                              |\n| Key              | `str`               |                                                              |\n| String           | `str`               |                                                              |\n| Integer          | `int`               |                                                              |\n| Float            | `float`             |                                                              |\n| Boolean          | `bool`              |                                                              |\n| Offset Date-Time | `datetime.datetime` | `tzinfo` attribute set to an instance of `datetime.timezone` |\n| Local Date-Time  | `datetime.datetime` | `tzinfo` attribute set to `None`                             |\n| Local Date       | `datetime.date`     |                                                              |\n| Local Time       | `datetime.time`     |                                                              |\n| Array            | `list`              |                                                              |\n| Table            | `dict`              |                                                              |\n| Inline Table     | `dict`              |                                                              |\n\n## Performance<a name=\"performance\"></a>\n\nThe `benchmark/` folder in this repository contains a performance benchmark for comparing the various Python TOML parsers.\n\nBelow are the results for commit [0724e2a](https://github.com/hukkin/tomli/tree/0724e2ab1858da7f5e05a9bffdb24c33589d951c).\n\n### Pure Python<a name=\"pure-python\"></a>\n\n```console\nfoo@bar:~/dev/tomli$ python --version\nPython 3.12.7\nfoo@bar:~/dev/tomli$ pip freeze\nattrs==21.4.0\nclick==8.1.7\npytomlpp==1.0.13\nqtoml==0.3.1\nrtoml==0.11.0\ntoml==0.10.2\ntomli @ file:///home/foo/dev/tomli\ntomlkit==0.13.2\nfoo@bar:~/dev/tomli$ python benchmark/run.py\nParsing data.toml 5000 times:\n------------------------------------------------------\n    parser |  exec time | performance (more is better)\n-----------+------------+-----------------------------\n     rtoml |    0.647 s | baseline (100%)\n  pytomlpp |    0.891 s | 72.62%\n     tomli |     3.14 s | 20.56%\n      toml |     6.69 s | 9.67%\n     qtoml |     8.27 s | 7.82%\n   tomlkit |     56.1 s | 1.15%\n```\n\n### Mypyc generated wheel<a name=\"mypyc-generated-wheel\"></a>\n\n```console\nfoo@bar:~/dev/tomli$ python benchmark/run.py\nParsing data.toml 5000 times:\n------------------------------------------------------\n    parser |  exec time | performance (more is better)\n-----------+------------+-----------------------------\n     rtoml |    0.668 s | baseline (100%)\n  pytomlpp |    0.893 s | 74.81%\n     tomli |     1.96 s | 34.18%\n      toml |     6.64 s | 10.07%\n     qtoml |     8.26 s | 8.09%\n   tomlkit |     52.9 s | 1.26%\n```",
+      "release_date": "2026-01-11T11:22:37",
       "parties": [
         {
           "type": "person",
@@ -519,11 +509,11 @@
         "Typing :: Typed"
       ],
       "homepage_url": null,
-      "download_url": "https://files.pythonhosted.org/packages/77/b8/0135fadc89e73be292b473cb820b4f5a08197779206b33191e801feeae40/tomli-2.3.0-py3-none-any.whl",
-      "size": 14408,
+      "download_url": "https://files.pythonhosted.org/packages/23/d1/136eb2cb77520a31e1f64cbae9d33ec6df0d78bdf4160398e86eec8a8754/tomli-2.4.0-py3-none-any.whl",
+      "size": 14477,
       "sha1": null,
-      "md5": "5c4e5504870351aabfd5b86f84cec672",
-      "sha256": "e95b1af3c5b07d9e643909b5abbec77cd9f1217e6d0bca72b0234736b9fb1f1b",
+      "md5": "d3ae6c5b7835d03146e761342a28e65a",
+      "sha256": "1f776e7d669ebceb01dee46484485f43a4048746235e683bcdffacdf1fb4785a",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": null,
@@ -538,9 +528,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/tomli/2.3.0/json",
+      "api_data_url": "https://pypi.org/pypi/tomli/2.4.0/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/tomli@2.3.0"
+      "purl": "pkg:pypi/tomli@2.4.0"
     },
     {
       "type": "pypi",
@@ -615,7 +605,7 @@
   ],
   "resolved_dependencies_graph": [
     {
-      "package": "pkg:pypi/exceptiongroup@1.3.0",
+      "package": "pkg:pypi/exceptiongroup@1.3.1",
       "dependencies": [
         "pkg:pypi/typing-extensions@4.15.0"
       ]
@@ -629,7 +619,7 @@
       "dependencies": []
     },
     {
-      "package": "pkg:pypi/packaging@25.0",
+      "package": "pkg:pypi/packaging@26.0",
       "dependencies": []
     },
     {
@@ -641,18 +631,18 @@
       "dependencies": []
     },
     {
-      "package": "pkg:pypi/pytest@8.4.2",
+      "package": "pkg:pypi/pytest@9.0.2",
       "dependencies": [
-        "pkg:pypi/exceptiongroup@1.3.0",
+        "pkg:pypi/exceptiongroup@1.3.1",
         "pkg:pypi/iniconfig@2.3.0",
-        "pkg:pypi/packaging@25.0",
+        "pkg:pypi/packaging@26.0",
         "pkg:pypi/pluggy@1.6.0",
         "pkg:pypi/pygments@2.19.2",
-        "pkg:pypi/tomli@2.3.0"
+        "pkg:pypi/tomli@2.4.0"
       ]
     },
     {
-      "package": "pkg:pypi/tomli@2.3.0",
+      "package": "pkg:pypi/tomli@2.4.0",
       "dependencies": []
     },
     {
