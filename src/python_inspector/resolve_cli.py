@@ -21,7 +21,7 @@ from python_inspector.utils import write_output_in_file
 
 TRACE = False
 
-__version__ = "0.14.4"
+__version__ = "0.15.1"
 
 DEFAULT_PYTHON_VERSION = settings.DEFAULT_PYTHON_VERSION
 PYPI_SIMPLE_URL = settings.PYPI_SIMPLE_URL
