@@ -218,12 +218,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "packaging",
-      "version": "25.0",
+      "version": "26.0",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "Core utilities for Python packages\npackaging\n=========\n\n.. start-intro\n\nReusable core utilities for various Python Packaging\n`interoperability specifications <https://packaging.python.org/specifications/>`_.\n\nThis library provides utilities that implement the interoperability\nspecifications which have clearly one correct behaviour (eg: :pep:`440`)\nor benefit greatly from having a single shared implementation (eg: :pep:`425`).\n\n.. end-intro\n\nThe ``packaging`` project includes the following: version handling, specifiers,\nmarkers, requirements, tags, utilities.\n\nDocumentation\n-------------\n\nThe `documentation`_ provides information and the API for the following:\n\n- Version Handling\n- Specifiers\n- Markers\n- Requirements\n- Tags\n- Utilities\n\nInstallation\n------------\n\nUse ``pip`` to install these utilities::\n\n    pip install packaging\n\nThe ``packaging`` library uses calendar-based versioning (``YY.N``).\n\nDiscussion\n----------\n\nIf you run into bugs, you can file them in our `issue tracker`_.\n\nYou can also join ``#pypa`` on Freenode to ask questions or get involved.\n\n\n.. _`documentation`: https://packaging.pypa.io/\n.. _`issue tracker`: https://github.com/pypa/packaging/issues\n\n\nCode of Conduct\n---------------\n\nEveryone interacting in the packaging project's codebases, issue trackers, chat\nrooms, and mailing lists is expected to follow the `PSF Code of Conduct`_.\n\n.. _PSF Code of Conduct: https://github.com/pypa/.github/blob/main/CODE_OF_CONDUCT.md\n\nContributing\n------------\n\nThe ``CONTRIBUTING.rst`` file outlines how to contribute to this project as\nwell as how to report a potential security issue. The documentation for this\nproject also covers information about `project development`_ and `security`_.\n\n.. _`project development`: https://packaging.pypa.io/en/latest/development/\n.. _`security`: https://packaging.pypa.io/en/latest/security/\n\nProject History\n---------------\n\nPlease review the ``CHANGELOG.rst`` file or the `Changelog documentation`_ for\nrecent changes and project history.\n\n.. _`Changelog documentation`: https://packaging.pypa.io/en/latest/changelog/",
-      "release_date": "2025-04-19T11:48:57",
+      "description": "Core utilities for Python packages\npackaging\n=========\n\n.. start-intro\n\nReusable core utilities for various Python Packaging\n`interoperability specifications <https://packaging.python.org/specifications/>`_.\n\nThis library provides utilities that implement the interoperability\nspecifications which have clearly one correct behaviour (eg: :pep:`440`)\nor benefit greatly from having a single shared implementation (eg: :pep:`425`).\n\n.. end-intro\n\nThe ``packaging`` project includes the following: version handling, specifiers,\nmarkers, requirements, tags, metadata, lockfiles, utilities.\n\nDocumentation\n-------------\n\nThe `documentation`_ provides information and the API for the following:\n\n- Version Handling\n- Specifiers\n- Markers\n- Requirements\n- Tags\n- Metadata\n- Lockfiles\n- Utilities\n\nInstallation\n------------\n\nUse ``pip`` to install these utilities::\n\n    pip install packaging\n\nThe ``packaging`` library uses calendar-based versioning (``YY.N``).\n\nDiscussion\n----------\n\nIf you run into bugs, you can file them in our `issue tracker`_.\n\nYou can also join ``#pypa`` on Freenode to ask questions or get involved.\n\n\n.. _`documentation`: https://packaging.pypa.io/\n.. _`issue tracker`: https://github.com/pypa/packaging/issues\n\n\nCode of Conduct\n---------------\n\nEveryone interacting in the packaging project's codebases, issue trackers, chat\nrooms, and mailing lists is expected to follow the `PSF Code of Conduct`_.\n\n.. _PSF Code of Conduct: https://github.com/pypa/.github/blob/main/CODE_OF_CONDUCT.md\n\nContributing\n------------\n\nThe ``CONTRIBUTING.rst`` file outlines how to contribute to this project as\nwell as how to report a potential security issue. The documentation for this\nproject also covers information about `project development`_ and `security`_.\n\n.. _`project development`: https://packaging.pypa.io/en/latest/development/\n.. _`security`: https://packaging.pypa.io/en/latest/security/\n\nProject History\n---------------\n\nPlease review the ``CHANGELOG.rst`` file or the `Changelog documentation`_ for\nrecent changes and project history.\n\n.. _`Changelog documentation`: https://packaging.pypa.io/en/latest/changelog/",
+      "release_date": "2026-01-21T20:50:37",
       "parties": [
         {
           "type": "person",
@@ -243,6 +243,7 @@
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: 3.13",
+        "Programming Language :: Python :: 3.14",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: Implementation :: CPython",
@@ -250,23 +251,18 @@
         "Typing :: Typed"
       ],
       "homepage_url": null,
-      "download_url": "https://files.pythonhosted.org/packages/20/12/38679034af332785aac8774540895e234f4d07f7545804097de4b666afd8/packaging-25.0-py3-none-any.whl",
-      "size": 66469,
+      "download_url": "https://files.pythonhosted.org/packages/b7/b9/c538f279a4e237a006a2c98387d081e9eb060d203d8ed34467cc0f0b9b53/packaging-26.0-py3-none-any.whl",
+      "size": 74366,
       "sha1": null,
-      "md5": "5fa4842e2eb0d7883b4b0e7c42d6229e",
-      "sha256": "29572ef2b1f17581046b3a2227d5c611fb25ec70ca1ba8554b24b0e69331a484",
+      "md5": "6612a2b4cddb48af24b6de0de620e353",
+      "sha256": "b36f1fef9334a5588b4166f8bcd26a14e521f2b55e6b9de3aaa80d3ff7a37529",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/pypa/packaging",
       "vcs_url": null,
       "copyright": null,
-      "license_expression": null,
-      "declared_license": {
-        "classifiers": [
-          "License :: OSI Approved :: Apache Software License",
-          "License :: OSI Approved :: BSD License"
-        ]
-      },
+      "license_expression": "Apache-2.0 OR BSD-2-Clause",
+      "declared_license": {},
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
@@ -274,9 +270,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/packaging/25.0/json",
+      "api_data_url": "https://pypi.org/pypi/packaging/26.0/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/packaging@25.0"
+      "purl": "pkg:pypi/packaging@26.0"
     },
     {
       "type": "pypi",
@@ -623,7 +619,7 @@
       "dependencies": []
     },
     {
-      "package": "pkg:pypi/packaging@25.0",
+      "package": "pkg:pypi/packaging@26.0",
       "dependencies": []
     },
     {
@@ -639,7 +635,7 @@
       "dependencies": [
         "pkg:pypi/exceptiongroup@1.3.1",
         "pkg:pypi/iniconfig@2.3.0",
-        "pkg:pypi/packaging@25.0",
+        "pkg:pypi/packaging@26.0",
         "pkg:pypi/pluggy@1.6.0",
         "pkg:pypi/pygments@2.19.2",
         "pkg:pypi/tomli@2.4.0"
