@@ -34,6 +34,7 @@ import aiohttp
 import attr
 import packageurl
 import requests
+import zipfile
 from bs4 import BeautifulSoup
 from commoncode import fileutils
 from commoncode.hash import multi_checksums
@@ -1697,6 +1698,21 @@ class Cache:
         lock_file = f"{cached}.lockfile"
 
         cache_valid = os.path.exists(cached) and os.path.getsize(cached) > 0
+
+        # Validate cached wheel/egg files.
+        if cache_valid and not as_text:
+            if path_or_url.endswith((".whl", ".egg", ".zip")):
+                try:
+                    cached_resolved = os.path.realpath(cached)
+                    if not zipfile.is_zipfile(cached_resolved):
+                        if TRACE_DEEP:
+                            print(f"        FILE CACHE INVALID (corrupted zip): {path_or_url}")
+                        cache_valid = False
+                except (FileNotFoundError, OSError):
+                    # File was deleted/modified by another task - treat as cache miss
+                    if TRACE_DEEP:
+                        print(f"        FILE CACHE VANISHED during validation: {path_or_url}")
+                    cache_valid = False
 
         if force or not cache_valid:
             if not cache_valid and os.path.exists(cached):
