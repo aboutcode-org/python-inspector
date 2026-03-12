@@ -1,6 +1,12 @@
 Changelog
 =========
 
+v0.15.1
+-----------
+
+- Support custom Artifactory repositories for package metadata by trying each
+  repo's JSON API endpoint before falling back to PyPI.org
+
 v0.15.0
 -----------
 

@@ -9,9 +9,11 @@
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
+import posixpath
 from typing import Dict
 from typing import List
 from typing import Optional
+from urllib.parse import urlparse
 
 from packageurl import PackageURL
 
@@ -43,12 +45,26 @@ async def get_pypi_data_from_purl(
     version = parsed_purl.version
     if not version:
         raise Exception("Version is not specified in the purl")
-    base_path = "https://pypi.org/pypi"
-    api_url = f"{base_path}/{name}/{version}/json"
+
+    # Build list of JSON API URLs to try: each repo's /pypi endpoint, then PyPI.org as fallback.
+    # For Artifactory, the /simple endpoint has a corresponding /pypi JSON API endpoint.
+    api_urls = []
+    for repo in repos:
+        base_path = repo.index_url.replace("/simple", "/pypi")
+        api_urls.append(f"{base_path}/{name}/{version}/json")
+    api_urls.append(f"https://pypi.org/pypi/{name}/{version}/json")
 
     from python_inspector.utils import get_response_async
 
-    response = await get_response_async(api_url)
+    # Try each API URL until one succeeds
+    response = None
+    api_url = None
+    for url in api_urls:
+        response = await get_response_async(url)
+        if response:
+            api_url = url
+            break
+
     if not response:
         return None
 
@@ -83,14 +99,22 @@ async def get_pypi_data_from_purl(
         if wheel_url:
             valid_distribution_urls.insert(0, wheel_url)
 
-    urls = {url.get("url"): url for url in response.get("urls") or []}
+    # Index by filename for matching since distribution URLs from /simple may have
+    # different paths than URLs from /pypi JSON API (especially with Artifactory)
+    urls_by_filename = {}
+    for url_entry in response.get("urls") or []:
+        entry_url = url_entry.get("url")
+        if entry_url:
+            filename = posixpath.basename(urlparse(entry_url).path)
+            urls_by_filename[filename] = url_entry
+
     # iterate over the valid distribution urls and return the first
     # one that is matching.
     for dist_url in valid_distribution_urls:
-        if dist_url not in urls:
+        filename = posixpath.basename(urlparse(dist_url).path)
+        url_data = urls_by_filename.get(filename)
+        if not url_data:
             continue
-
-        url_data = urls.get(dist_url)
         digests = url_data.get("digests") or {}
 
         return PackageData(
