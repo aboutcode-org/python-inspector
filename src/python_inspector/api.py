@@ -296,7 +296,11 @@ def resolve_dependencies(
     async def gather_pypi_data():
         async def get_pypi_data(package):
             data = await get_pypi_data_from_purl(
-                package, repos=repos, environment=environment, prefer_source=prefer_source
+                package,
+                repos=repos,
+                environment=environment,
+                prefer_source=prefer_source,
+                index_urls=list(repos_by_url.keys()),
             )
 
             if verbose:
