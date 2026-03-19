@@ -27,7 +27,11 @@ from python_inspector.utils_pypi import PypiSimpleRepository
 
 
 async def get_pypi_data_from_purl(
-    purl: str, environment: Environment, repos: List[PypiSimpleRepository], prefer_source: bool
+    purl: str,
+    environment: Environment,
+    repos: List[PypiSimpleRepository],
+    prefer_source: bool,
+    index_urls: List[str],
 ) -> Optional[PackageData]:
     """
     Generate `Package` object from the `purl` string of pypi type
@@ -43,7 +47,22 @@ async def get_pypi_data_from_purl(
     version = parsed_purl.version
     if not version:
         raise Exception("Version is not specified in the purl")
-    base_path = "https://pypi.org/pypi"
+
+    # Todo: address the case where several index URLs are passed
+    if index_urls:
+        # Backward compatibility: If pypi.org is passed as index url, always resolve against it.
+        # When multiple index URLs are supported and the todo above is fixed, then this hack can be removed.
+        if "https://pypi.org/simple" in index_urls:
+            index_url = None
+        else:
+            index_url = index_urls[0]
+    else:
+        index_url = None
+
+    base_path = (
+        index_url.removesuffix("/simple") + "/pypi" if index_url else "https://pypi.org/pypi"
+    )
+
     api_url = f"{base_path}/{name}/{version}/json"
 
     from python_inspector.utils import get_response_async
