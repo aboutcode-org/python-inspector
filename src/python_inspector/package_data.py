@@ -134,6 +134,10 @@ async def get_pypi_data_from_purl(
     for url in urls:
         value = urls.get(url)
 
+        # remove the URL anchor fragment
+        url_parsed = urlparse(url)
+        url = urlunparse(url_parsed._replace(fragment=""))
+
         if url.startswith("https"):
             url_sanitized = canonicalize_url(url)
         else:
