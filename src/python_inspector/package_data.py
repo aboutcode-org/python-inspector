@@ -98,6 +98,22 @@ async def get_pypi_data_from_purl(
             valid_distribution_urls.insert(0, wheel_url)
 
     urls = {url.get("url"): url for url in response.get("urls") or []}
+
+    def remove_credentials_from_url(url: str):
+        # Parse the URL into its components
+        parsed = urlparse(url)
+
+        new_netloc = parsed.hostname
+        if parsed.port:
+            new_netloc += f":{parsed.port}"
+
+        # Create a new parsed result object, replacing the old netloc
+        # with our new one that has no credentials.
+        parsed = parsed._replace(netloc=new_netloc)
+        url_without_credentials = urlunparse(parsed)
+
+        return url_without_credentials
+
     # iterate over the valid distribution urls and return the first
     # one that is matching.
     for dist_url in valid_distribution_urls:
@@ -111,12 +127,12 @@ async def get_pypi_data_from_purl(
             primary_language="Python",
             description=get_description(info),
             homepage_url=homepage_url,
-            api_data_url=api_url,
+            api_data_url=remove_credentials_from_url(api_url),
             bug_tracking_url=bug_tracking_url,
             code_view_url=code_view_url,
             license_expression=info.get("license_expression"),
             declared_license=get_declared_license(info),
-            download_url=dist_url,
+            download_url=remove_credentials_from_url(dist_url),
             size=url_data.get("size"),
             md5=digests.get("md5") or url_data.get("md5_digest"),
             sha256=digests.get("sha256"),
