@@ -16,7 +16,7 @@
         "pkg:pypi/click@8.3.1",
         "pkg:pypi/itsdangerous@2.2.0",
         "pkg:pypi/jinja2@3.1.6",
-        "pkg:pypi/werkzeug@3.1.5"
+        "pkg:pypi/werkzeug@3.1.6"
       ]
     },
     {
@@ -34,7 +34,7 @@
       "dependencies": []
     },
     {
-      "package": "pkg:pypi/werkzeug@3.1.5",
+      "package": "pkg:pypi/werkzeug@3.1.6",
       "dependencies": [
         "pkg:pypi/markupsafe@3.0.3"
       ]
@@ -47,6 +47,6 @@
     "pkg:pypi/itsdangerous@2.2.0",
     "pkg:pypi/jinja2@3.1.6",
     "pkg:pypi/markupsafe@3.0.3",
-    "pkg:pypi/werkzeug@3.1.5"
+    "pkg:pypi/werkzeug@3.1.6"
   ]
 ]
