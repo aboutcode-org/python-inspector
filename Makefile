@@ -24,6 +24,7 @@ dev:
 
 doc8:
 	@echo "-> Run doc8 validation"
+	@${ACTIVATE} pip install doc8 pbr setuptools
 	@${ACTIVATE} doc8 --config pyproject.toml --ignore-path docs/_build --max-line-length 100 docs/ *.rst
 
 valid:
