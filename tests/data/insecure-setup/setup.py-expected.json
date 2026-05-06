@@ -2,7 +2,6 @@
   "headers": {
     "tool_name": "python-inspector",
     "tool_homepageurl": "https://github.com/aboutcode-org/python-inspector",
-    "tool_version": "0.13.0",
     "options": [
       "--analyze-setup-py-insecurely",
       "--index-url https://pypi.org/simple",
