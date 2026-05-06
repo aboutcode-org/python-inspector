@@ -278,7 +278,7 @@ def test_cli_with_environment_marker_and_complex_ranges():
     )
 
 
-@pytest.mark.online
+# @pytest.mark.online
 def test_cli_with_azure_devops_with_python_310():
     requirements_file = test_env.get_test_loc("azure-devops.req.txt")
     expected_file = test_env.get_test_loc("azure-devops.req-310-expected.json", must_exist=False)
@@ -296,7 +296,7 @@ def test_cli_with_azure_devops_with_python_310():
     )
 
 
-@pytest.mark.online
+# @pytest.mark.online
 def test_cli_with_azure_devops_with_python_312():
     requirements_file = test_env.get_test_loc("azure-devops.req.txt")
     expected_file = test_env.get_test_loc("azure-devops.req-312-expected.json", must_exist=False)
@@ -314,7 +314,7 @@ def test_cli_with_azure_devops_with_python_312():
     )
 
 
-@pytest.mark.online
+# @pytest.mark.online
 def test_cli_with_azure_devops_with_python_314():
     requirements_file = test_env.get_test_loc("azure-devops.req.txt")
     expected_file = test_env.get_test_loc("azure-devops.req-314-expected.json", must_exist=False)
@@ -332,7 +332,7 @@ def test_cli_with_azure_devops_with_python_314():
     )
 
 
-@pytest.mark.online
+# @pytest.mark.online
 def test_cli_with_azure_devops_with_python_313():
     requirements_file = test_env.get_test_loc("azure-devops.req.txt")
     expected_file = test_env.get_test_loc("azure-devops.req-313-expected.json", must_exist=False)
@@ -350,7 +350,7 @@ def test_cli_with_azure_devops_with_python_313():
     )
 
 
-@pytest.mark.online
+# @pytest.mark.online
 def test_cli_with_azure_devops_with_python_38():
     requirements_file = test_env.get_test_loc("azure-devops.req.txt")
     expected_file = test_env.get_test_loc("azure-devops.req-38-expected.json", must_exist=False)
