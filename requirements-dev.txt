@@ -5,7 +5,7 @@ boolean.py==4.0
 cffi==1.15.0
 cryptography==37.0.2
 dataclasses==0.8
-docutils==0.18.1
+docutils>=0.20,<0.22
 et-xmlfile==1.1.0
 execnet==2.1.1
 importlib-resources==5.4.0
@@ -25,7 +25,7 @@ pluggy==1.6.0
 py==1.11.0
 pycodestyle==2.8.0
 pycparser==2.21
-pygments==2.13.0
+pygments==2.17.0
 pytest==8.4.0
 pytest-xdist==3.7.0
 pytest-forked==1.6.0
