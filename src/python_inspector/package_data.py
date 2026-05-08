@@ -9,6 +9,9 @@
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
+import os
+from urllib.parse import urlparse, urlunparse
+
 from typing import Dict
 from typing import List
 from typing import Optional
@@ -27,7 +30,11 @@ from python_inspector.utils_pypi import PypiSimpleRepository
 
 
 async def get_pypi_data_from_purl(
-    purl: str, environment: Environment, repos: List[PypiSimpleRepository], prefer_source: bool
+    purl: str,
+    environment: Environment,
+    repos: List[PypiSimpleRepository],
+    prefer_source: bool,
+    index_urls: List[str],
 ) -> Optional[PackageData]:
     """
     Generate `Package` object from the `purl` string of pypi type
@@ -43,7 +50,22 @@ async def get_pypi_data_from_purl(
     version = parsed_purl.version
     if not version:
         raise Exception("Version is not specified in the purl")
-    base_path = "https://pypi.org/pypi"
+
+    # Todo: address the case where several index URLs are passed
+    if index_urls:
+        # Backward compatibility: If pypi.org is passed as index url, always resolve against it.
+        # When multiple index URLs are supported and the todo above is fixed, then this hack can be removed.
+        if "https://pypi.org/simple" in index_urls:
+            index_url = None
+        else:
+            index_url = index_urls[0]
+    else:
+        index_url = None
+
+    base_path = (
+        index_url.removesuffix("/simple") + "/pypi" if index_url else "https://pypi.org/pypi"
+    )
+
     api_url = f"{base_path}/{name}/{version}/json"
 
     from python_inspector.utils import get_response_async
@@ -62,10 +84,32 @@ async def get_pypi_data_from_purl(
     sdist_url = await get_sdist_download_url(
         purl=parsed_purl, repos=repos, python_version=python_version
     )
+
+    def canonicalize_url(url: str):
+        # Parse the URL into its components
+        parsed = urlparse(url)
+
+        # Canonicalize the path component to resolve ".."
+        # os.path.normpath will handle segments like '.' and '..'
+        canonical_path = os.path.normpath(parsed.path)
+
+        # On Windows, normpath uses backslashes ('\\').
+        # We must replace them with forward slashes ('/') for a valid URL path.
+        if os.path.sep == "\\":
+            canonical_path = canonical_path.replace("\\", "/")
+
+        # Rebuild the URL with the canonicalized path
+        # We replace the original path with the new one
+        parsed = parsed._replace(path=canonical_path)
+        canonical_url = urlunparse(parsed)
+
+        return canonical_url
+
     if sdist_url:
         valid_distribution_urls.append(sdist_url)
 
     valid_distribution_urls = [url for url in valid_distribution_urls if url]
+    valid_distribution_urls = list(map(canonicalize_url, valid_distribution_urls))
 
     # if prefer_source is True then only source distribution is used
     # in case of no source distribution available then wheel is used
@@ -81,28 +125,60 @@ async def get_pypi_data_from_purl(
         ]
         wheel_url = choose_single_wheel(wheel_urls)
         if wheel_url:
-            valid_distribution_urls.insert(0, wheel_url)
+            valid_distribution_urls.insert(0, canonicalize_url(wheel_url))
 
     urls = {url.get("url"): url for url in response.get("urls") or []}
+
+    # Sanitize all URLs that are relative and canonicalize them
+    urls_sanitized = {}
+    for url in urls:
+        value = urls.get(url)
+
+        # remove the URL anchor fragment
+        url_parsed = urlparse(url)
+        url = urlunparse(url_parsed._replace(fragment=""))
+
+        if url.startswith("https"):
+            url_sanitized = canonicalize_url(url)
+        else:
+            url_sanitized = canonicalize_url(base_path + url)
+
+        urls_sanitized[url_sanitized] = value
+
+    def remove_credentials_from_url(url: str):
+        # Parse the URL into its components
+        parsed = urlparse(url)
+
+        new_netloc = parsed.hostname
+        if parsed.port:
+            new_netloc += f":{parsed.port}"
+
+        # Create a new parsed result object, replacing the old netloc
+        # with our new one that has no credentials.
+        parsed = parsed._replace(netloc=new_netloc)
+        url_without_credentials = urlunparse(parsed)
+
+        return url_without_credentials
+
     # iterate over the valid distribution urls and return the first
     # one that is matching.
     for dist_url in valid_distribution_urls:
-        if dist_url not in urls:
+        if dist_url not in urls_sanitized:
             continue
 
-        url_data = urls.get(dist_url)
+        url_data = urls_sanitized.get(dist_url)
         digests = url_data.get("digests") or {}
 
         return PackageData(
             primary_language="Python",
             description=get_description(info),
             homepage_url=homepage_url,
-            api_data_url=api_url,
+            api_data_url=remove_credentials_from_url(api_url),
             bug_tracking_url=bug_tracking_url,
             code_view_url=code_view_url,
             license_expression=info.get("license_expression"),
             declared_license=get_declared_license(info),
-            download_url=dist_url,
+            download_url=remove_credentials_from_url(dist_url),
             size=url_data.get("size"),
             md5=digests.get("md5") or url_data.get("md5_digest"),
             sha256=digests.get("sha256"),
