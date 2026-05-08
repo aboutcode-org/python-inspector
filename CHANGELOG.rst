@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v0.15.1
+-----------
+
+- Fetch package metadata from private artifactory if specified https://github.com/aboutcode-org/python-inspector/pull/261
+
 v0.15.0
 -----------
 
