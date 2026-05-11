@@ -645,12 +645,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "idna",
-      "version": "3.13",
+      "version": "3.14",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Internationalized Domain Names in Applications (IDNA)\n=====================================================\n\nSupport for `Internationalized Domain Names in\nApplications (IDNA) <https://tools.ietf.org/html/rfc5891>`_\nand `Unicode IDNA Compatibility Processing\n<https://unicode.org/reports/tr46/>`_.\n\nThe latest versions of these standards supplied here provide\nmore comprehensive language coverage and reduce the potential of\nallowing domains with known security vulnerabilities. This library\nis a suitable replacement for the \u201cencodings.idna\u201d\nmodule that comes with the Python standard library, but which\nonly supports an older superseded IDNA specification from 2003.\n\nBasic functions are simply executed:\n\n.. code-block:: pycon\n\n    >>> import idna\n    >>> idna.encode('\u30c9\u30e1\u30a4\u30f3.\u30c6\u30b9\u30c8')\n    b'xn--eckwd4c7c.xn--zckzah'\n    >>> print(idna.decode('xn--eckwd4c7c.xn--zckzah'))\n    \u30c9\u30e1\u30a4\u30f3.\u30c6\u30b9\u30c8\n\n\nInstallation\n------------\n\nThis package is available for installation from PyPI via the\ntypical mechanisms, such as:\n\n.. code-block:: bash\n\n    $ python3 -m pip install idna\n\n\nUsage\n-----\n\nFor typical usage, the ``encode`` and ``decode`` functions will take a\ndomain name argument and perform a conversion to ASCII-compatible encoding\n(known as A-labels), or to Unicode strings (known as U-labels)\nrespectively.\n\n.. code-block:: pycon\n\n    >>> import idna\n    >>> idna.encode('\u30c9\u30e1\u30a4\u30f3.\u30c6\u30b9\u30c8')\n    b'xn--eckwd4c7c.xn--zckzah'\n    >>> print(idna.decode('xn--eckwd4c7c.xn--zckzah'))\n    \u30c9\u30e1\u30a4\u30f3.\u30c6\u30b9\u30c8\n\nConversions can be applied at a per-label basis using the ``ulabel`` or\n``alabel`` functions if necessary:\n\n.. code-block:: pycon\n\n    >>> idna.alabel('\u6d4b\u8bd5')\n    b'xn--0zwm56d'\n\n\nCompatibility Mapping (UTS #46)\n+++++++++++++++++++++++++++++++\n\nThis library provides support for `Unicode IDNA Compatibility\nProcessing <https://unicode.org/reports/tr46/>`_ which normalizes input from\ndifferent potential ways a user may input a domain prior to performing the IDNA\nconversion operations. This functionality, known as a \n`mapping <https://tools.ietf.org/html/rfc5895>`_, is considered by the\nspecification to be a local user-interface issue distinct from IDNA\nconversion functionality.\n\nFor example, \u201cK\u00f6nigsg\u00e4\u00dfchen\u201d is not a permissible label as *LATIN\nCAPITAL LETTER K* is not allowed (nor are capital letters in general).\nUTS 46 will convert this into lower case prior to applying the IDNA\nconversion.\n\n.. code-block:: pycon\n\n    >>> import idna\n    >>> idna.encode('K\u00f6nigsg\u00e4\u00dfchen')\n    ...\n    idna.core.InvalidCodepoint: Codepoint U+004B at position 1 of 'K\u00f6nigsg\u00e4\u00dfchen' not allowed\n    >>> idna.encode('K\u00f6nigsg\u00e4\u00dfchen', uts46=True)\n    b'xn--knigsgchen-b4a3dun'\n    >>> print(idna.decode('xn--knigsgchen-b4a3dun'))\n    k\u00f6nigsg\u00e4\u00dfchen\n\n\nExceptions\n----------\n\nAll errors raised during the conversion following the specification\nshould raise an exception derived from the ``idna.IDNAError`` base\nclass.\n\nMore specific exceptions that may be generated as ``idna.IDNABidiError``\nwhen the error reflects an illegal combination of left-to-right and\nright-to-left characters in a label; ``idna.InvalidCodepoint`` when\na specific codepoint is an illegal character in an IDN label (i.e.\nINVALID); and ``idna.InvalidCodepointContext`` when the codepoint is\nillegal based on its position in the string (i.e. it is CONTEXTO or CONTEXTJ\nbut the contextual requirements are not satisfied.)\n\nBuilding and Diagnostics\n------------------------\n\nThe IDNA and UTS 46 functionality relies upon pre-calculated lookup\ntables for performance. These tables are derived from computing against\neligibility criteria in the respective standards using the command-line\nscript ``tools/idna-data``.\n\nThis tool will fetch relevant codepoint data from the Unicode repository\nand perform the required calculations to identify eligibility. There are\nthree main modes:\n\n* ``idna-data make-libdata``. Generates ``idnadata.py`` and\n  ``uts46data.py``, the pre-calculated lookup tables used for IDNA and\n  UTS 46 conversions. Implementers who wish to track this library against\n  a different Unicode version may use this tool to manually generate a\n  different version of the ``idnadata.py`` and ``uts46data.py`` files.\n\n* ``idna-data make-table``. Generate a table of the IDNA disposition\n  (e.g. PVALID, CONTEXTJ, CONTEXTO) in the format found in Appendix\n  B.1 of RFC 5892 and the pre-computed tables published by `IANA\n  <https://www.iana.org/>`_.\n\n* ``idna-data U+0061``. Prints debugging output on the various\n  properties associated with an individual Unicode codepoint (in this\n  case, U+0061), that are used to assess the IDNA and UTS 46 status of a\n  codepoint. This is helpful in debugging or analysis.\n\nThe tool accepts a number of arguments, described using ``idna-data -h``.\nMost notably, the ``--version`` argument allows the specification\nof the version of Unicode to be used in computing the table data. For\nexample, ``idna-data --version 9.0.0 make-libdata`` will generate\nlibrary data against Unicode 9.0.0.\n\n\nAdditional Notes\n----------------\n\n* **Packages**. The latest tagged release version is published in the\n  `Python Package Index <https://pypi.org/project/idna/>`_.\n\n* **Version support**. This library supports Python 3.8 and higher.\n  As this library serves as a low-level toolkit for a variety of\n  applications, many of which strive for broad compatibility with older\n  Python versions, there is no rush to remove older interpreter support.\n  Support for older versions are likely to be removed from new releases\n  as automated tests can no longer easily be run, i.e. once the Python\n  version is officially end-of-life.\n\n* **Testing**. The library has a test suite based on each rule of the\n  IDNA specification, as well as tests that are provided as part of the\n  Unicode Technical Standard 46, `Unicode IDNA Compatibility Processing\n  <https://unicode.org/reports/tr46/>`_.\n\n* **Emoji**. It is an occasional request to support emoji domains in\n  this library. Encoding of symbols like emoji is expressly prohibited by\n  the IDNA technical standard, and emoji domains are broadly phased\n  out across the domain industry due to associated security risks.\n\n* **Transitional processing**. Unicode 16.0.0 removed transitional\n  processing so the `transitional` argument for the encode() method\n  no longer has any effect and will be removed at a later date.",
-      "release_date": "2026-04-22T16:42:40",
+      "release_date": "2026-05-10T20:32:14",
       "parties": [
         {
           "type": "person",
@@ -682,11 +682,11 @@
         "Topic :: Utilities"
       ],
       "homepage_url": null,
-      "download_url": "https://files.pythonhosted.org/packages/5d/13/ad7d7ca3808a898b4612b6fe93cde56b53f3034dcde235acb1f0e1df24c6/idna-3.13-py3-none-any.whl",
-      "size": 68629,
+      "download_url": "https://files.pythonhosted.org/packages/6c/3c/3f62dee257eb3d6b2c1ef2a09d36d9793c7111156a73b5654d2c2305e5ce/idna-3.14-py3-none-any.whl",
+      "size": 72184,
       "sha1": null,
-      "md5": "db0b432c21e17ff483f27649f06ec497",
-      "sha256": "892ea0cde124a99ce773decba204c5552b69c3c67ffd5f232eb7696135bc8bb3",
+      "md5": "fb4f35a0df1f304a4913a5346816c4d3",
+      "sha256": "e677eaf072e290f7b725f9acf0b3a2bd55f9fd6f7c70abe5f0e34823d0accf69",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/kjd/idna",
@@ -701,9 +701,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/idna/3.13/json",
+      "api_data_url": "https://pypi.org/pypi/idna/3.14/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/idna@3.13"
+      "purl": "pkg:pypi/idna@3.14"
     },
     {
       "type": "pypi",
@@ -1359,7 +1359,7 @@
       ]
     },
     {
-      "package": "pkg:pypi/idna@3.13",
+      "package": "pkg:pypi/idna@3.14",
       "dependencies": []
     },
     {
@@ -1396,7 +1396,7 @@
       "dependencies": [
         "pkg:pypi/certifi@2026.4.22",
         "pkg:pypi/charset-normalizer@3.4.7",
-        "pkg:pypi/idna@3.13",
+        "pkg:pypi/idna@3.14",
         "pkg:pypi/urllib3@2.2.3"
       ]
     },
