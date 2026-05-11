@@ -5,6 +5,8 @@ v0.15.1
 -----------
 
 - Fetch package metadata from private artifactory if specified https://github.com/aboutcode-org/python-inspector/pull/261
+- Add zip file cache validation https://github.com/aboutcode-org/python-inspector/pull/256
+
 
 v0.15.0
 -----------
