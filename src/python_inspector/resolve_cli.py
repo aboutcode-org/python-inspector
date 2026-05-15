@@ -9,6 +9,7 @@
 # See https://aboutcode.org for more information about nexB OSS projects.
 #
 
+from importlib.metadata import version
 from typing import Dict
 
 import click
@@ -21,7 +22,7 @@ from python_inspector.utils import write_output_in_file
 
 TRACE = False
 
-__version__ = "0.14.4"
+__version__ = version("python-inspector")
 
 DEFAULT_PYTHON_VERSION = settings.DEFAULT_PYTHON_VERSION
 PYPI_SIMPLE_URL = settings.PYPI_SIMPLE_URL
