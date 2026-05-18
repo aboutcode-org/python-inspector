@@ -5,12 +5,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "click",
-      "version": "8.3.3",
+      "version": "8.4.0",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Composable command line interface toolkit\n<div align=\"center\"><img src=\"https://raw.githubusercontent.com/pallets/click/refs/heads/stable/docs/_static/click-name.svg\" alt=\"\" height=\"150\"></div>\n\n# Click\n\nClick is a Python package for creating beautiful command line interfaces\nin a composable way with as little code as necessary. It's the \"Command\nLine Interface Creation Kit\". It's highly configurable but comes with\nsensible defaults out of the box.\n\nIt aims to make the process of writing command line tools quick and fun\nwhile also preventing any frustration caused by the inability to\nimplement an intended CLI API.\n\nClick in three points:\n\n-   Arbitrary nesting of commands\n-   Automatic help page generation\n-   Supports lazy loading of subcommands at runtime\n\n\n## A Simple Example\n\n```python\nimport click\n\n@click.command()\n@click.option(\"--count\", default=1, help=\"Number of greetings.\")\n@click.option(\"--name\", prompt=\"Your name\", help=\"The person to greet.\")\ndef hello(count, name):\n    \"\"\"Simple program that greets NAME for a total of COUNT times.\"\"\"\n    for _ in range(count):\n        click.echo(f\"Hello, {name}!\")\n\nif __name__ == '__main__':\n    hello()\n```\n\n```\n$ python hello.py --count=3\nYour name: Click\nHello, Click!\nHello, Click!\nHello, Click!\n```\n\n\n## Donate\n\nThe Pallets organization develops and supports Click and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, [please\ndonate today][].\n\n[please donate today]: https://palletsprojects.com/donate\n\n## Contributing\n\nSee our [detailed contributing documentation][contrib] for many ways to\ncontribute, including reporting issues, requesting features, asking or answering\nquestions, and making PRs.\n\n[contrib]: https://palletsprojects.com/contributing/",
-      "release_date": "2026-04-22T15:11:25",
+      "release_date": "2026-05-17T00:47:56",
       "parties": [
         {
           "type": "person",
@@ -28,11 +28,11 @@
         "Typing :: Typed"
       ],
       "homepage_url": null,
-      "download_url": "https://files.pythonhosted.org/packages/ae/44/c1221527f6a71a01ec6fbad7fa78f1d50dfa02217385cf0fa3eec7087d59/click-8.3.3-py3-none-any.whl",
-      "size": 110502,
+      "download_url": "https://files.pythonhosted.org/packages/ee/ae/8e92f8058baf87f6c7d86ee7e457668690195cc77efedb8d3797a06e3940/click-8.4.0-py3-none-any.whl",
+      "size": 116147,
       "sha1": null,
-      "md5": "4d2eb43884f6cda349ea7b374a958d0a",
-      "sha256": "a2bf429bb3033c89fa4936ffb35d5cb471e3719e1f3c8a7c3fff0b8314305613",
+      "md5": "7279fa28796316315ed206d95cfe0e3b",
+      "sha256": "40c50b7c6c6adac2823d411041ec84f3f103f1b280d5e9ce0d7f998995832f81",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/pallets/click/",
@@ -47,9 +47,9 @@
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/click/8.3.3/json",
+      "api_data_url": "https://pypi.org/pypi/click/8.4.0/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/click@8.3.3"
+      "purl": "pkg:pypi/click@8.4.0"
     },
     {
       "type": "pypi",
@@ -341,13 +341,13 @@
   ],
   "resolution": [
     {
-      "package": "pkg:pypi/click@8.3.3",
+      "package": "pkg:pypi/click@8.4.0",
       "dependencies": []
     },
     {
       "package": "pkg:pypi/flask@2.1.2",
       "dependencies": [
-        "pkg:pypi/click@8.3.3",
+        "pkg:pypi/click@8.4.0",
         "pkg:pypi/itsdangerous@2.2.0",
         "pkg:pypi/jinja2@3.1.6",
         "pkg:pypi/werkzeug@3.1.8"
