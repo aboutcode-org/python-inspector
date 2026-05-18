@@ -1,6 +1,10 @@
 Changelog
 =========
 
+v0.15.2
+-----------
+- Correct the version number in the CLI and setup.cfg.
+
 v0.15.1
 -----------
 
