@@ -170,7 +170,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/a6/f3/b416179e408990df5db0d516283022dde0f5d0111d98c1a848e41853e81c/azure_core-1.41.0.tar.gz",
+          "sha256": "f46ff5dfcd230f25cf1c19e8a34b8dc08a337b2503e268bb600a16c00db8ad5a",
+          "md5": "da75feda644e8f991bf8498bdbfb86a2",
+          "size": 381042,
+          "filename": "azure_core-1.41.0.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -238,7 +246,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/e1/f9/495982345252dc7a15ac632e038be1f975ca0d2f25abfe8f8d908569141d/azure-devops-7.1.0b4.tar.gz",
+          "sha256": "f04ba939112579f3d530cfecc044a74ef9e9339ba23c9ee1ece248241f07ff85",
+          "md5": "bf401acf6533d4a2dcfd2106ffcbc86a",
+          "size": 1336261,
+          "filename": "azure-devops-7.1.0b4.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -300,7 +316,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/59/25/fdcf1e381922dbab8ba23d6fd78d397fe6cbac6b480310218834b7bc91fe/azure_storage_blob-12.29.0.tar.gz",
+          "sha256": "2824ddd7ebc9056034ebc76b17971a38e9aa5835abb0d565b9700493f2a6c657",
+          "md5": "4d2c63e895c8478d135044e86bb3b676",
+          "size": 611359,
+          "filename": "azure_storage_blob-12.29.0.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -312,12 +336,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "certifi",
-      "version": "2026.4.22",
+      "version": "2026.5.20",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Python package for providing Mozilla's CA Bundle.\nCertifi: Python SSL Certificates\n================================\n\nCertifi provides Mozilla's carefully curated collection of Root Certificates for\nvalidating the trustworthiness of SSL certificates while verifying the identity\nof TLS hosts. It has been extracted from the `Requests`_ project.\n\nInstallation\n------------\n\n``certifi`` is available on PyPI. Simply install it with ``pip``::\n\n    $ pip install certifi\n\nUsage\n-----\n\nTo reference the installed certificate authority (CA) bundle, you can use the\nbuilt-in function::\n\n    >>> import certifi\n\n    >>> certifi.where()\n    '/usr/local/lib/python3.7/site-packages/certifi/cacert.pem'\n\nOr from the command line::\n\n    $ python -m certifi\n    /usr/local/lib/python3.7/site-packages/certifi/cacert.pem\n\nEnjoy!\n\n.. _`Requests`: https://requests.readthedocs.io/en/master/\n\nAddition/Removal of Certificates\n--------------------------------\n\nCertifi does not support any addition/removal or other modification of the\nCA trust store content. This project is intended to provide a reliable and\nhighly portable root of trust to python deployments. Look to upstream projects\nfor methods to use alternate trust.",
-      "release_date": "2026-04-22T11:26:09",
+      "release_date": "2026-05-20T11:46:48",
       "parties": [
         {
           "type": "person",
@@ -344,15 +368,15 @@
         "Programming Language :: Python :: 3.9"
       ],
       "homepage_url": "https://github.com/certifi/python-certifi",
-      "download_url": "https://files.pythonhosted.org/packages/22/30/7cd8fdcdfbc5b869528b079bfb76dcdf6056b1a2097a662e5e8c04f42965/certifi-2026.4.22-py3-none-any.whl",
-      "size": 135707,
+      "download_url": "https://files.pythonhosted.org/packages/59/8c/57e832b7af6d7c5abe66eb3fbe3a3a32f4d11ea23a1aa7131371035be991/certifi-2026.5.20-py3-none-any.whl",
+      "size": 134134,
       "sha1": null,
-      "md5": "a524df3261ff972bbe811eb7307a79ed",
-      "sha256": "3cb2210c8f88ba2318d29b0388d1023c8492ff72ecdde4ebdaddbb13a31b1c4a",
+      "md5": "09ac8b5eddc520f3f2d5e6f7ee949553",
+      "sha256": "3c52e209ba0a4ad7aebe60436a4ab349c39e1e602e8c134221e546902ad25897",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/certifi/python-certifi",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/certifi/python-certifi.git",
       "copyright": null,
       "license_expression": null,
       "declared_license": {
@@ -364,13 +388,21 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/f3/ce/ee2ecad540810a79593028e88299baeae54d346cc7a0d94b6199988b89b1/certifi-2026.5.20.tar.gz",
+          "sha256": "69dea482ab64caa7b9f6aba1c6bf48bb6a5448d1c0f1b17ab42ad8c763a5344d",
+          "md5": "5bd96239568bc44f001858c99bf6352e",
+          "size": 135422,
+          "filename": "certifi-2026.5.20.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/certifi/2026.4.22/json",
+      "api_data_url": "https://pypi.org/pypi/certifi/2026.5.20/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/certifi@2026.4.22"
+      "purl": "pkg:pypi/certifi@2026.5.20"
     },
     {
       "type": "pypi",
@@ -419,14 +451,22 @@
       "sha512": null,
       "bug_tracking_url": "https://github.com/python-cffi/cffi/issues",
       "code_view_url": "https://github.com/python-cffi/cffi",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/python-cffi/cffi.git",
       "copyright": null,
       "license_expression": "MIT",
       "declared_license": {},
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/eb/56/b1ba7935a17738ae8453301356628e8147c79dbb825bcbc73dc7401f9846/cffi-2.0.0.tar.gz",
+          "sha256": "44d1b5909021139fe36001ae048dbdde8214afa20200eda0f64c068cac5d5529",
+          "md5": "5e897f6251e614f6bd128a73e81801a4",
+          "size": 523588,
+          "filename": "cffi-2.0.0.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -499,7 +539,7 @@
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/jawah/charset_normalizer",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/jawah/charset_normalizer.git",
       "copyright": null,
       "license_expression": null,
       "declared_license": {
@@ -508,7 +548,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/e7/a1/67fe25fac3c7642725500a3f6cfe5821ad557c3abb11c9d20d12c7008d3e/charset_normalizer-3.4.7.tar.gz",
+          "sha256": "ae89db9e5f98a11a4bf50407d4363e7b09b31e55bc117b4f7d80aab97ba009e5",
+          "md5": "68805886064d248d2e5205fd11112d85",
+          "size": 144271,
+          "filename": "charset_normalizer-3.4.7.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -520,12 +568,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "click",
-      "version": "8.4.0",
+      "version": "8.4.1",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Composable command line interface toolkit\n<div align=\"center\"><img src=\"https://raw.githubusercontent.com/pallets/click/refs/heads/stable/docs/_static/click-name.svg\" alt=\"\" height=\"150\"></div>\n\n# Click\n\nClick is a Python package for creating beautiful command line interfaces\nin a composable way with as little code as necessary. It's the \"Command\nLine Interface Creation Kit\". It's highly configurable but comes with\nsensible defaults out of the box.\n\nIt aims to make the process of writing command line tools quick and fun\nwhile also preventing any frustration caused by the inability to\nimplement an intended CLI API.\n\nClick in three points:\n\n-   Arbitrary nesting of commands\n-   Automatic help page generation\n-   Supports lazy loading of subcommands at runtime\n\n\n## A Simple Example\n\n```python\nimport click\n\n@click.command()\n@click.option(\"--count\", default=1, help=\"Number of greetings.\")\n@click.option(\"--name\", prompt=\"Your name\", help=\"The person to greet.\")\ndef hello(count, name):\n    \"\"\"Simple program that greets NAME for a total of COUNT times.\"\"\"\n    for _ in range(count):\n        click.echo(f\"Hello, {name}!\")\n\nif __name__ == '__main__':\n    hello()\n```\n\n```\n$ python hello.py --count=3\nYour name: Click\nHello, Click!\nHello, Click!\nHello, Click!\n```\n\n\n## Donate\n\nThe Pallets organization develops and supports Click and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, [please\ndonate today][].\n\n[please donate today]: https://palletsprojects.com/donate\n\n## Contributing\n\nSee our [detailed contributing documentation][contrib] for many ways to\ncontribute, including reporting issues, requesting features, asking or answering\nquestions, and making PRs.\n\n[contrib]: https://palletsprojects.com/contributing/",
-      "release_date": "2026-05-17T00:47:56",
+      "release_date": "2026-05-22T04:08:35",
       "parties": [
         {
           "type": "person",
@@ -543,28 +591,36 @@
         "Typing :: Typed"
       ],
       "homepage_url": null,
-      "download_url": "https://files.pythonhosted.org/packages/ee/ae/8e92f8058baf87f6c7d86ee7e457668690195cc77efedb8d3797a06e3940/click-8.4.0-py3-none-any.whl",
-      "size": 116147,
+      "download_url": "https://files.pythonhosted.org/packages/c7/0d/67e5b4109ea4a837e80daa87c2c696711955e40449a97e8926672534def2/click-8.4.1-py3-none-any.whl",
+      "size": 116639,
       "sha1": null,
-      "md5": "7279fa28796316315ed206d95cfe0e3b",
-      "sha256": "40c50b7c6c6adac2823d411041ec84f3f103f1b280d5e9ce0d7f998995832f81",
+      "md5": "11fc29e641c2af86277efe03ff135fd1",
+      "sha256": "482be17c6991b8c19c5429a1e995d9b0efdbb63172824c41f99965dc0ade8ec2",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/pallets/click/",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/pallets/click.git",
       "copyright": null,
       "license_expression": "BSD-3-Clause",
       "declared_license": {},
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/9b/98/518d8e5081007684232226f475082b30087d0f585e8457db087298259f49/click-8.4.1.tar.gz",
+          "sha256": "918b5633eddf6b41c32d4f454bf0de810065c74e3f7dbf8ee5452f8be88d3e96",
+          "md5": "28bc070cf89b06d88bf74b2d3c4debc7",
+          "size": 353007,
+          "filename": "click-8.4.1.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/click/8.4.0/json",
+      "api_data_url": "https://pypi.org/pypi/click/8.4.1/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/click@8.4.0"
+      "purl": "pkg:pypi/click@8.4.1"
     },
     {
       "type": "pypi",
@@ -624,7 +680,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/9f/a9/db8f313fdcd85d767d4973515e1db101f9c71f95fced83233de224673757/cryptography-48.0.0.tar.gz",
+          "sha256": "5c3932f4436d1cccb036cb0eaef46e6e2db91035166f1ad6505c3c9d5a635920",
+          "md5": "9121d585e5990ab79d2779ce36d03779",
+          "size": 832984,
+          "filename": "cryptography-48.0.0.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -636,12 +700,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "idna",
-      "version": "3.15",
+      "version": "3.16",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
-      "description": "# Internationalized Domain Names in Applications (IDNA)\n\nSupport for [Internationalized Domain Names in\nApplications (IDNA)](https://tools.ietf.org/html/rfc5891)\nand [Unicode IDNA Compatibility Processing](https://unicode.org/reports/tr46/).\n\nThe latest versions of these standards supplied here provide\nmore comprehensive language coverage and reduce the potential of\nallowing domains with known security vulnerabilities. This library\nis a suitable replacement for the \"encodings.idna\"\nmodule that comes with the Python standard library, but which\nonly supports an older superseded IDNA specification from 2003.\n\nBasic functions are simply executed:\n\n```pycon\n>>> import idna\n>>> idna.encode('\u30c9\u30e1\u30a4\u30f3.\u30c6\u30b9\u30c8')\nb'xn--eckwd4c7c.xn--zckzah'\n>>> print(idna.decode('xn--eckwd4c7c.xn--zckzah'))\n\u30c9\u30e1\u30a4\u30f3.\u30c6\u30b9\u30c8\n```\n\n\n## Installation\n\nThis package is available for installation from PyPI via the\ntypical mechanisms, such as:\n\n```bash\n$ python3 -m pip install idna\n```\n\n\n## Usage\n\nFor typical usage, the `encode` and `decode` functions will take a\ndomain name argument and perform a conversion to ASCII-compatible encoding\n(known as A-labels), or to Unicode strings (known as U-labels)\nrespectively.\n\n```pycon\n>>> import idna\n>>> idna.encode('\u30c9\u30e1\u30a4\u30f3.\u30c6\u30b9\u30c8')\nb'xn--eckwd4c7c.xn--zckzah'\n>>> print(idna.decode('xn--eckwd4c7c.xn--zckzah'))\n\u30c9\u30e1\u30a4\u30f3.\u30c6\u30b9\u30c8\n```\n\nConversions can be applied at a per-label basis using the `ulabel` or\n`alabel` functions if necessary:\n\n```pycon\n>>> idna.alabel('\u6d4b\u8bd5')\nb'xn--0zwm56d'\n```\n\n\n### Compatibility Mapping (UTS #46)\n\nThis library provides support for [Unicode IDNA Compatibility\nProcessing](https://unicode.org/reports/tr46/) which normalizes input from\ndifferent potential ways a user may input a domain prior to performing the IDNA\nconversion operations. This functionality, known as a\n[mapping](https://tools.ietf.org/html/rfc5895), is considered by the\nspecification to be a local user-interface issue distinct from IDNA\nconversion functionality.\n\nFor example, \"K\u00f6nigsg\u00e4\u00dfchen\" is not a permissible label as *LATIN\nCAPITAL LETTER K* is not allowed (nor are capital letters in general).\nUTS 46 will convert this into lower case prior to applying the IDNA\nconversion.\n\n```pycon\n>>> import idna\n>>> idna.encode('K\u00f6nigsg\u00e4\u00dfchen')\n...\nidna.core.InvalidCodepoint: Codepoint U+004B at position 1 of 'K\u00f6nigsg\u00e4\u00dfchen' not allowed\n>>> idna.encode('K\u00f6nigsg\u00e4\u00dfchen', uts46=True)\nb'xn--knigsgchen-b4a3dun'\n>>> print(idna.decode('xn--knigsgchen-b4a3dun'))\nk\u00f6nigsg\u00e4\u00dfchen\n```\n\n\n## Exceptions\n\nAll errors raised during the conversion following the specification\nshould raise an exception derived from the `idna.IDNAError` base\nclass.\n\nMore specific exceptions that may be generated as `idna.IDNABidiError`\nwhen the error reflects an illegal combination of left-to-right and\nright-to-left characters in a label; `idna.InvalidCodepoint` when\na specific codepoint is an illegal character in an IDN label (i.e.\nINVALID); and `idna.InvalidCodepointContext` when the codepoint is\nillegal based on its position in the string (i.e. it is CONTEXTO or CONTEXTJ\nbut the contextual requirements are not satisfied.)\n\n## Building and Diagnostics\n\nThe IDNA and UTS 46 functionality relies upon pre-calculated lookup\ntables for performance. These tables are derived from computing against\neligibility criteria in the respective standards using the command-line\nscript `tools/idna-data`.\n\nThis tool will fetch relevant codepoint data from the Unicode repository\nand perform the required calculations to identify eligibility. There are\nthree main modes:\n\n* `idna-data make-libdata`. Generates `idnadata.py` and\n  `uts46data.py`, the pre-calculated lookup tables used for IDNA and\n  UTS 46 conversions. Implementers who wish to track this library against\n  a different Unicode version may use this tool to manually generate a\n  different version of the `idnadata.py` and `uts46data.py` files.\n\n* `idna-data make-table`. Generate a table of the IDNA disposition\n  (e.g. PVALID, CONTEXTJ, CONTEXTO) in the format found in Appendix\n  B.1 of RFC 5892 and the pre-computed tables published by [IANA](https://www.iana.org/).\n\n* `idna-data U+0061`. Prints debugging output on the various\n  properties associated with an individual Unicode codepoint (in this\n  case, U+0061), that are used to assess the IDNA and UTS 46 status of a\n  codepoint. This is helpful in debugging or analysis.\n\nThe tool accepts a number of arguments, described using `idna-data -h`.\nMost notably, the `--version` argument allows the specification\nof the version of Unicode to be used in computing the table data. For\nexample, `idna-data --version 9.0.0 make-libdata` will generate\nlibrary data against Unicode 9.0.0.\n\n\n## Additional Notes\n\n* **Packages**. The latest tagged release version is published in the\n  [Python Package Index](https://pypi.org/project/idna/).\n\n* **Version support**. This library supports Python 3.8 and higher.\n  As this library serves as a low-level toolkit for a variety of\n  applications, many of which strive for broad compatibility with older\n  Python versions, there is no rush to remove older interpreter support.\n  Support for older versions are likely to be removed from new releases\n  as automated tests can no longer easily be run, i.e. once the Python\n  version is officially end-of-life.\n\n* **Testing**. The library has a test suite based on each rule of the\n  IDNA specification, as well as tests that are provided as part of the\n  Unicode Technical Standard 46, [Unicode IDNA Compatibility Processing](https://unicode.org/reports/tr46/).\n\n* **Emoji**. It is an occasional request to support emoji domains in\n  this library. Encoding of symbols like emoji is expressly prohibited by\n  the IDNA technical standard, and emoji domains are broadly phased\n  out across the domain industry due to associated security risks.\n\n* **Transitional processing**. Unicode 16.0.0 removed transitional\n  processing so the `transitional` argument for the encode() method\n  no longer has any effect and will be removed at a later date.",
-      "release_date": "2026-05-12T22:45:55",
+      "description": "# Internationalized Domain Names in Applications (IDNA)\n\nSupport for [Internationalized Domain Names in Applications\n(IDNA)](https://tools.ietf.org/html/rfc5891) and [Unicode IDNA\nCompatibility Processing](https://unicode.org/reports/tr46/). It\nsupersedes the standard library's `encodings.idna`, which only\nimplements the 2003 specification, offering broader script coverage and\nlimiting domains with known security vulnerabilities.\n\n## Usage\n\nPackage may be installed from [PyPI](https://pypi.org/project/idna/) via\nthe typical methods (e.g. `python3 -m pip install idna`)\n\nFor typical usage, the `encode` and `decode` functions will take a\ndomain name argument and perform a conversion to ASCII-compatible encoding\n(known as A-labels), or to Unicode strings (known as U-labels)\nrespectively.\n\n```pycon\n>>> import idna\n>>> idna.encode('\u30c9\u30e1\u30a4\u30f3.\u30c6\u30b9\u30c8')\nb'xn--eckwd4c7c.xn--zckzah'\n>>> print(idna.decode('xn--eckwd4c7c.xn--zckzah'))\n\u30c9\u30e1\u30a4\u30f3.\u30c6\u30b9\u30c8\n```\n\nConversions can be applied at a per-label basis using the `ulabel` or\n`alabel` functions for specialized use cases.\n\n\n### Compatibility Mapping (UTS #46)\n\nThis library provides support for [Unicode IDNA Compatibility\nProcessing](https://unicode.org/reports/tr46/) which normalizes input from\ndifferent potential ways a user may input a domain prior to performing the IDNA\nconversion operations. This functionality, known as a\n[mapping](https://tools.ietf.org/html/rfc5895), is considered by the\nspecification to be a local user-interface issue distinct from IDNA\nconversion functionality.\n\nFor example, \"K\u00f6nigsg\u00e4\u00dfchen\" is not a permissible label as capital letters\nare not allowed. UTS 46 will convert this into lower case prior to applying\nthe IDNA conversion.\n\n```pycon\n>>> import idna\n>>> idna.encode('K\u00f6nigsg\u00e4\u00dfchen')\n...\nidna.core.InvalidCodepoint: Codepoint U+004B at position 1 of 'K\u00f6nigsg\u00e4\u00dfchen' not allowed\n>>> idna.encode('K\u00f6nigsg\u00e4\u00dfchen', uts46=True)\nb'xn--knigsgchen-b4a3dun'\n>>> idna.decode('xn--knigsgchen-b4a3dun')\n'k\u00f6nigsg\u00e4\u00dfchen'\n```\n\n\n## Exceptions\n\nAll errors raised during conversion derive from the `idna.IDNAError`\nbase class. The more specific exceptions are:\n\n* `idna.IDNABidiError` \u2014 raised when a label contains an illegal\n  combination of left-to-right and right-to-left characters.\n* `idna.InvalidCodepoint` \u2014 raised when a label contains a codepoint\n  that is INVALID for IDNA.\n* `idna.InvalidCodepointContext` \u2014 raised when a CONTEXTO or CONTEXTJ\n  codepoint appears in a position whose contextual requirements are\n  not satisfied.\n\n\n## Command-line tool\n\nThe package supports command-line usage to convert domain names\nbetween their Unicode and ASCII-compatible forms. It can be run either\nas a module (`python3 -m idna`) or, once installed (such as with `uv\ntool` or `pipx`), via the `idna` script:\n\n```bash\n$ uv tool install idna\n$ idna xn--e1afmkfd.xn--p1ai\n\u043f\u0440\u0438\u043c\u0435\u0440.\u0440\u0444\n$ idna \u043f\u0440\u0438\u043c\u0435\u0440.\u0440\u0444\nxn--e1afmkfd.xn--p1ai\n```\n\nWith no mode flag the direction is chosen automatically: inputs\ncontaining an `xn--` label are decoded, anything else is encoded. Pass\n`-e`/`--encode` or `-d`/`--decode` to force a specific direction.\n\nMultiple domains may be supplied at once, either as positional arguments\nor by piping one domain per line on standard input. When more than\none domain is supplied without explicitly asking to encode or decode,\nthe direction is picked from the first input and that mode is applied\nto every remaining input. Use `-e`/`--encode` or `-d`/`--decode` to\noverride the heuristic if the first input is ambiguous.\n\nUTS #46 mapping is applied by default, which lets the tool accept\ninputs that aren't strictly valid IDNA 2008 by normalising them first:\n\n```bash\n$ idna \u03a0\u0391\u03a1\u0386\u0394\u0395\u0399\u0393\u039c\u0391.\u0395\u039b\nxn--hxajbheg2az3al.xn--qxam\n```\n\nPass `--strict` to disable UTS #46 and apply IDNA 2008 rules verbatim;\nthe same input will then be rejected.\n\nConversion failures are reported on stderr together with the\noffending input; processing continues with the remaining domains and\nthe tool exits with a non-zero status if any conversion failed.\n\n\n## Additional Notes\n\n* **Version support**. This library supports Python 3.9 and higher.\n  As this library serves as a low-level toolkit for a variety of\n  applications, we strive to support all versions of Python that are\n  not beyond end-of-life.\n\n* **Emoji**. It is an occasional request to support emoji domains in\n  this library. Encoding of symbols like emoji is expressly prohibited by\n  the IDNA technical standard, and emoji domains are broadly phased\n  out across the domain industry due to associated security risks.\n\n* **Regenerating lookup tables**. The IDNA and UTS 46 functionality\n  relies upon pre-calculated lookup tables, generated using the\n  `idna-data` script in [`tools/`](tools/README.md).",
+      "release_date": "2026-05-22T00:16:16",
       "parties": [
         {
           "type": "person",
@@ -664,7 +728,6 @@
         "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: 3.13",
         "Programming Language :: Python :: 3.14",
-        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: Implementation :: CPython",
         "Programming Language :: Python :: Implementation :: PyPy",
@@ -673,28 +736,36 @@
         "Topic :: Utilities"
       ],
       "homepage_url": null,
-      "download_url": "https://files.pythonhosted.org/packages/d2/23/408243171aa9aaba178d3e2559159c24c1171a641aa83b67bdd3394ead8e/idna-3.15-py3-none-any.whl",
-      "size": 72340,
+      "download_url": "https://files.pythonhosted.org/packages/94/16/70255075a9859a0e3adb789b68ceb0e210dec03934245fd98d248226572f/idna-3.16-py3-none-any.whl",
+      "size": 74165,
       "sha1": null,
-      "md5": "a1e6be4b7c837089c035bd5aec4feeca",
-      "sha256": "048adeaf8c2d788c40fee287673ccaa74c24ffd8dcf09ffa555a2fbb59f10ac8",
+      "md5": "6866dc1362986ffa0c4eee4c16a059cd",
+      "sha256": "cc246e3a3f89580c3a951b5ad298ca4638078b2cdd4f115654332b5c26daded5",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/kjd/idna",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/kjd/idna.git",
       "copyright": null,
       "license_expression": "BSD-3-Clause",
       "declared_license": {},
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/1a/88/bcf9709822fe69d02c2a6a77956c98ce6ea8ca8767a9aadcedc7eb6a2390/idna-3.16.tar.gz",
+          "sha256": "d7a6da03db833450fca25d2358ac9ff06cd624577a4aea3a596d5c0f77b8e03d",
+          "md5": "7dfcadedaaa152963f6e6ab0fcbe5aab",
+          "size": 203770,
+          "filename": "idna-3.16.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/idna/3.15/json",
+      "api_data_url": "https://pypi.org/pypi/idna/3.16/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/idna@3.15"
+      "purl": "pkg:pypi/idna@3.16"
     },
     {
       "type": "pypi",
@@ -754,7 +825,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/54/4d/e940025e2ce31a8ce1202635910747e5a87cc3a6a6bb2d00973375014749/isodate-0.7.2.tar.gz",
+          "sha256": "4cd1aa0f43ca76f4a6c6c0292a85f40b35ec2e43e315b59f06e6d32171a953e6",
+          "md5": "5ce182fd7f6152cda19ec605b6740687",
+          "size": 29705,
+          "filename": "isodate-0.7.2.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -814,7 +893,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/68/77/8397c8fb8fc257d8ea0fa66f8068e073278c65f05acb17dcb22a02bfdc42/msrest-0.7.1.zip",
+          "sha256": "6e7661f46f3afd88b75667b7187a92829924446c7ea1d169be8c4bb7eeb788b9",
+          "md5": "3079617446a011d4fc0098687609671e",
+          "size": 175332,
+          "filename": "msrest-0.7.1.zip"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -887,7 +974,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/0b/5f/19930f824ffeb0ad4372da4812c50edbd1434f678c90c2733e1188edfc63/oauthlib-3.3.1.tar.gz",
+          "sha256": "0f0f8aa759826a193cf66c12ea1af1637f87b9b4622d46e866952bb022e538c9",
+          "md5": "856bc51662afb26ac58b1d7742606b2e",
+          "size": 185918,
+          "filename": "oauthlib-3.3.1.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -946,7 +1041,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/1b/7d/92392ff7815c21062bea51aa7b87d45576f649f16458d78b7cf94b9ab2e6/pycparser-3.0.tar.gz",
+          "sha256": "600f49d217304a5902ac3c37e1281c9fe94e4d0489de643a9504c5cdfdfc6b29",
+          "md5": "56f3a0a82595b0cb04976cc0d3271a27",
+          "size": 103492,
+          "filename": "pycparser-3.0.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -1012,7 +1115,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/42/f2/05f29bc3913aea15eb670be136045bf5c5bbf4b99ecb839da9b422bb2c85/requests-oauthlib-2.0.0.tar.gz",
+          "sha256": "b3dffaebd884d8cd778494369603a9e7b58d29111bf6b41bdc2dcd87203af4e9",
+          "md5": "713dc7856f9ff625d75335c10d332a1b",
+          "size": 55650,
+          "filename": "requests-oauthlib-2.0.0.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -1076,7 +1187,7 @@
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/psf/requests",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/psf/requests.git",
       "copyright": null,
       "license_expression": null,
       "declared_license": {
@@ -1088,7 +1199,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/ac/c3/e2a2b89f2d3e2179abd6d00ebd70bff6273f37fb3e0cc209f48b39d00cbf/requests-2.34.2.tar.gz",
+          "sha256": "f288924cae4e29463698d6d60bc6a4da69c89185ad1e0bcc4104f584e960b9ed",
+          "md5": "611e438d0803e962500225f9807a475e",
+          "size": 142856,
+          "filename": "requests-2.34.2.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -1158,7 +1277,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/72/94/1a15dd82efb362ac84269196e94cf00f187f7ed21c242792a923cdb1c61f/typing_extensions-4.15.0.tar.gz",
+          "sha256": "0cea48d173cc12fa28ecabc3b837ea3cf6f38c6d1136f85cbaaf598984861466",
+          "md5": "079e529d0b271647f3ec2720aee8fc65",
+          "size": 109391,
+          "filename": "typing_extensions-4.15.0.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -1227,14 +1354,22 @@
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/urllib3/urllib3",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/urllib3/urllib3.git",
       "copyright": null,
       "license_expression": "MIT",
       "declared_license": {},
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/53/0c/06f8b233b8fd13b9e5ee11424ef85419ba0d8ba0b3138bf360be2ff56953/urllib3-2.7.0.tar.gz",
+          "sha256": "231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c",
+          "md5": "e79707b798a66c8165c9c441440f4e80",
+          "size": 433602,
+          "filename": "urllib3-2.7.0.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -1267,7 +1402,7 @@
       ]
     },
     {
-      "package": "pkg:pypi/certifi@2026.4.22",
+      "package": "pkg:pypi/certifi@2026.5.20",
       "dependencies": []
     },
     {
@@ -1281,7 +1416,7 @@
       "dependencies": []
     },
     {
-      "package": "pkg:pypi/click@8.4.0",
+      "package": "pkg:pypi/click@8.4.1",
       "dependencies": []
     },
     {
@@ -1291,7 +1426,7 @@
       ]
     },
     {
-      "package": "pkg:pypi/idna@3.15",
+      "package": "pkg:pypi/idna@3.16",
       "dependencies": []
     },
     {
@@ -1302,7 +1437,7 @@
       "package": "pkg:pypi/msrest@0.7.1",
       "dependencies": [
         "pkg:pypi/azure-core@1.41.0",
-        "pkg:pypi/certifi@2026.4.22",
+        "pkg:pypi/certifi@2026.5.20",
         "pkg:pypi/isodate@0.7.2",
         "pkg:pypi/requests-oauthlib@2.0.0",
         "pkg:pypi/requests@2.34.2"
@@ -1326,9 +1461,9 @@
     {
       "package": "pkg:pypi/requests@2.34.2",
       "dependencies": [
-        "pkg:pypi/certifi@2026.4.22",
+        "pkg:pypi/certifi@2026.5.20",
         "pkg:pypi/charset-normalizer@3.4.7",
-        "pkg:pypi/idna@3.15",
+        "pkg:pypi/idna@3.16",
         "pkg:pypi/urllib3@2.7.0"
       ]
     },

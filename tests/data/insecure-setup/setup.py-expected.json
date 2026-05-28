@@ -178,7 +178,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/9b/40/32ce777053517be3032bb2ab3bb216959071ee0c16c761879e75c34a323e/isodate-0.7.0.tar.gz",
+          "sha256": "c6332cf456314b85cc3b6ea2c45a6fa417cb1fddb361f6d2ed8f4f69e843c6d1",
+          "md5": "06c2886cc00cdfc4ec1f36c1d590bc06",
+          "size": 29597,
+          "filename": "isodate-0.7.0.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -243,7 +251,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/c1/47/dfc9c342c9842bbe0036c7f763d2d6686bcf5eb1808ba3e170afdb282210/pyparsing-2.4.7.tar.gz",
+          "sha256": "c203ec8783bf771a155b207279b9bccb8dea02d8f0c9e5f8ead507bc3246ecc1",
+          "md5": "f0953e47a0112f7a65aec2305ffdf7b4",
+          "size": 649718,
+          "filename": "pyparsing-2.4.7.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -299,7 +315,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/94/e7/b2c673351809dca68a0e064b6af791aa332cf192da575fd474ed7d6f16a2/six-1.17.0.tar.gz",
+          "sha256": "ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81",
+          "md5": "a0387fe15662c71057b4fb2b7aa9056a",
+          "size": 34031,
+          "filename": "six-1.17.0.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,

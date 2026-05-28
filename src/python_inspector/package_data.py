@@ -10,6 +10,7 @@
 #
 
 import os
+import posixpath
 from urllib.parse import urlparse, urlunparse
 
 from typing import Dict
@@ -27,6 +28,20 @@ from python_inspector import utils_pypi
 from python_inspector.resolution import get_python_version_from_env_tag
 from python_inspector.utils_pypi import Environment
 from python_inspector.utils_pypi import PypiSimpleRepository
+
+
+def get_sdist_from_urls(urls: list) -> Optional[dict]:
+    """Extract source distribution info from PyPI urls array."""
+    for entry in urls or []:
+        if entry.get("packagetype") == "sdist":
+            return {
+                "url": entry.get("url", ""),
+                "sha256": entry.get("digests", {}).get("sha256", ""),
+                "md5": entry.get("digests", {}).get("md5") or entry.get("md5_digest", ""),
+                "size": entry.get("size"),
+                "filename": entry.get("filename", ""),
+            }
+    return None
 
 
 async def get_pypi_data_from_purl(
@@ -51,33 +66,51 @@ async def get_pypi_data_from_purl(
     if not version:
         raise Exception("Version is not specified in the purl")
 
-    # Todo: address the case where several index URLs are passed
-    if index_urls:
-        # Backward compatibility: If pypi.org is passed as index url, always resolve against it.
-        # When multiple index URLs are supported and the todo above is fixed, then this hack can be removed.
-        if "https://pypi.org/simple" in index_urls:
-            index_url = None
-        else:
-            index_url = index_urls[0]
-    else:
-        index_url = None
-
-    base_path = (
-        index_url.removesuffix("/simple") + "/pypi" if index_url else "https://pypi.org/pypi"
-    )
-
-    api_url = f"{base_path}/{name}/{version}/json"
+    api_urls = []
+    pypi_org_url = f"https://pypi.org/pypi/{name}/{version}/json"
+    for index_url in index_urls or []:
+        if index_url == "https://pypi.org/simple":
+            continue
+        base_path = index_url.removesuffix("/simple") + "/pypi"
+        api_urls.append((base_path, f"{base_path}/{name}/{version}/json"))
+    api_urls.append(("https://pypi.org/pypi", pypi_org_url))
 
     from python_inspector.utils import get_response_async
 
-    response = await get_response_async(api_url)
+    response = None
+    api_url = None
+    base_path = None
+    info = {}
+    for bp, url in api_urls:
+        repo_response = await get_response_async(url)
+        if not repo_response:
+            continue
+
+        if not response:
+            response = repo_response
+            api_url = url
+            base_path = bp
+            info = response.get("info") or {}
+
+        if not info.get("project_urls"):
+            repo_info = repo_response.get("info") or {}
+            info["project_urls"] = repo_info.get("project_urls")
+
+        if info.get("project_urls"):
+            break
+
     if not response:
         return None
 
-    info = response.get("info") or {}
+    sdist_info = get_sdist_from_urls(response.get("urls", []))
     homepage_url = info.get("home_page")
     project_urls = info.get("project_urls") or {}
     code_view_url = get_pypi_codeview_url(project_urls)
+    vcs_url = None
+    if code_view_url:
+        vcs_url = code_view_url.rstrip("/")
+        if not vcs_url.endswith(".git"):
+            vcs_url = vcs_url + ".git"
     bug_tracking_url = get_pypi_bugtracker_url(project_urls)
     python_version = get_python_version_from_env_tag(python_version=environment.python_version)
     valid_distribution_urls = []
@@ -145,6 +178,12 @@ async def get_pypi_data_from_purl(
 
         urls_sanitized[url_sanitized] = value
 
+    urls_by_filename = {
+        posixpath.basename(urlparse(e.get("url")).path): e
+        for e in response.get("urls") or []
+        if e.get("url")
+    }
+
     def remove_credentials_from_url(url: str):
         # Parse the URL into its components
         parsed = urlparse(url)
@@ -163,10 +202,12 @@ async def get_pypi_data_from_purl(
     # iterate over the valid distribution urls and return the first
     # one that is matching.
     for dist_url in valid_distribution_urls:
-        if dist_url not in urls_sanitized:
-            continue
-
         url_data = urls_sanitized.get(dist_url)
+        if not url_data:
+            filename = posixpath.basename(urlparse(dist_url).path)
+            url_data = urls_by_filename.get(filename)
+        if not url_data:
+            continue
         digests = url_data.get("digests") or {}
 
         return PackageData(
@@ -176,6 +217,8 @@ async def get_pypi_data_from_purl(
             api_data_url=remove_credentials_from_url(api_url),
             bug_tracking_url=bug_tracking_url,
             code_view_url=code_view_url,
+            extra_data={"source_artifact": sdist_info} if sdist_info else {},
+            vcs_url=vcs_url,
             license_expression=info.get("license_expression"),
             declared_license=get_declared_license(info),
             download_url=remove_credentials_from_url(dist_url),

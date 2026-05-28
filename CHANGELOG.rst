@@ -10,6 +10,9 @@ v0.15.1
 
 - Fetch package metadata from private artifactory if specified https://github.com/aboutcode-org/python-inspector/pull/261
 - Add zip file cache validation https://github.com/aboutcode-org/python-inspector/pull/256
+- Support custom Artifactory repositories with filename-based URL matching,
+  VCS URL extraction from project_urls, source artifact metadata extraction,
+  and metadata enrichment from PyPI.org fallback https://github.com/aboutcode-org/python-inspector/pull/258
 
 
 v0.15.0

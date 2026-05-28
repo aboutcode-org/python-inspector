@@ -228,7 +228,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/95/d9/c3336b6b5711c3ab9d1d3a80f1a3e2afeb9d8c02a7166462f6cc96570897/click-6.7.tar.gz",
+          "sha256": "f15516df478d5a56180fbf80e68f206010e6d160fc39fa508b65e035fd75130b",
+          "md5": "fc4cc00c4863833230d3af92af48abd4",
+          "size": 279019,
+          "filename": "click-6.7.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -289,7 +297,7 @@
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/pallets/flask",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/pallets/flask.git",
       "copyright": null,
       "license_expression": null,
       "declared_license": {
@@ -301,7 +309,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/99/ab/eedb921f26adf7057ade1291f9c1bfa35a506d64894f58546457ef658772/Flask-1.0.tar.gz",
+          "sha256": "7fab1062d11dd0038434e790d18c5b9133fd9e6b7257d707c4578ccc1e38b67c",
+          "md5": "7140df3116386c7af0f389800a91817b",
+          "size": 643442,
+          "filename": "Flask-1.0.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -352,7 +368,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/dc/b4/a60bcdba945c00f6d608d8975131ab3f25b22f2bcfe1dab221165194b2d4/itsdangerous-0.24.tar.gz",
+          "sha256": "cbb3fcf8d3e33df861709ecaf89d9e6629cff0a217bc2848f1b41cd30d360519",
+          "md5": "a3d55aa79369aef5345c036a8a26307f",
+          "size": 46541,
+          "filename": "itsdangerous-0.24.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -414,7 +438,7 @@
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/pallets/jinja",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/pallets/jinja.git",
       "copyright": null,
       "license_expression": null,
       "declared_license": {
@@ -426,7 +450,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/4f/e7/65300e6b32e69768ded990494809106f87da1d436418d5f1367ed3966fd7/Jinja2-2.11.3.tar.gz",
+          "sha256": "a6d58433de0ae800347cab1fa3043cebbabe8baa9d29e668f1c768cb87a333c6",
+          "md5": "231dc00d34afb2672c497713fa9cdaaa",
+          "size": 257589,
+          "filename": "Jinja2-2.11.3.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -485,7 +517,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/4d/de/32d741db316d8fdb7680822dd37001ef7a448255de9699ab4bfcbdf4172b/MarkupSafe-1.0.tar.gz",
+          "sha256": "a6be69091dac236ea9c6bc7d012beab42010fa914c459791d627dad4910eb665",
+          "md5": "2fcedc9284d50e577b5192e8e3578355",
+          "size": 14356,
+          "filename": "MarkupSafe-1.0.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -550,7 +590,7 @@
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/pallets/werkzeug",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/pallets/werkzeug.git",
       "copyright": null,
       "license_expression": null,
       "declared_license": {
@@ -562,7 +602,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/9c/6d/854f2aa124dcfeb901815492b7fa7f026d114a18784c1c679fbdea36c809/Werkzeug-0.15.3.tar.gz",
+          "sha256": "cfd1281b1748288e59762c0e174d64d8bcb2b70e7c57bc4a1203c8825af24ac3",
+          "md5": "2da857b57e7e4c5b6403369a9d1c15a9",
+          "size": 925615,
+          "filename": "Werkzeug-0.15.3.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,

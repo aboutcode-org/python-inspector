@@ -5,12 +5,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "click",
-      "version": "8.4.0",
+      "version": "8.4.1",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Composable command line interface toolkit\n<div align=\"center\"><img src=\"https://raw.githubusercontent.com/pallets/click/refs/heads/stable/docs/_static/click-name.svg\" alt=\"\" height=\"150\"></div>\n\n# Click\n\nClick is a Python package for creating beautiful command line interfaces\nin a composable way with as little code as necessary. It's the \"Command\nLine Interface Creation Kit\". It's highly configurable but comes with\nsensible defaults out of the box.\n\nIt aims to make the process of writing command line tools quick and fun\nwhile also preventing any frustration caused by the inability to\nimplement an intended CLI API.\n\nClick in three points:\n\n-   Arbitrary nesting of commands\n-   Automatic help page generation\n-   Supports lazy loading of subcommands at runtime\n\n\n## A Simple Example\n\n```python\nimport click\n\n@click.command()\n@click.option(\"--count\", default=1, help=\"Number of greetings.\")\n@click.option(\"--name\", prompt=\"Your name\", help=\"The person to greet.\")\ndef hello(count, name):\n    \"\"\"Simple program that greets NAME for a total of COUNT times.\"\"\"\n    for _ in range(count):\n        click.echo(f\"Hello, {name}!\")\n\nif __name__ == '__main__':\n    hello()\n```\n\n```\n$ python hello.py --count=3\nYour name: Click\nHello, Click!\nHello, Click!\nHello, Click!\n```\n\n\n## Donate\n\nThe Pallets organization develops and supports Click and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, [please\ndonate today][].\n\n[please donate today]: https://palletsprojects.com/donate\n\n## Contributing\n\nSee our [detailed contributing documentation][contrib] for many ways to\ncontribute, including reporting issues, requesting features, asking or answering\nquestions, and making PRs.\n\n[contrib]: https://palletsprojects.com/contributing/",
-      "release_date": "2026-05-17T00:47:56",
+      "release_date": "2026-05-22T04:08:35",
       "parties": [
         {
           "type": "person",
@@ -28,28 +28,36 @@
         "Typing :: Typed"
       ],
       "homepage_url": null,
-      "download_url": "https://files.pythonhosted.org/packages/ee/ae/8e92f8058baf87f6c7d86ee7e457668690195cc77efedb8d3797a06e3940/click-8.4.0-py3-none-any.whl",
-      "size": 116147,
+      "download_url": "https://files.pythonhosted.org/packages/c7/0d/67e5b4109ea4a837e80daa87c2c696711955e40449a97e8926672534def2/click-8.4.1-py3-none-any.whl",
+      "size": 116639,
       "sha1": null,
-      "md5": "7279fa28796316315ed206d95cfe0e3b",
-      "sha256": "40c50b7c6c6adac2823d411041ec84f3f103f1b280d5e9ce0d7f998995832f81",
+      "md5": "11fc29e641c2af86277efe03ff135fd1",
+      "sha256": "482be17c6991b8c19c5429a1e995d9b0efdbb63172824c41f99965dc0ade8ec2",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/pallets/click/",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/pallets/click.git",
       "copyright": null,
       "license_expression": "BSD-3-Clause",
       "declared_license": {},
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/9b/98/518d8e5081007684232226f475082b30087d0f585e8457db087298259f49/click-8.4.1.tar.gz",
+          "sha256": "918b5633eddf6b41c32d4f454bf0de810065c74e3f7dbf8ee5452f8be88d3e96",
+          "md5": "28bc070cf89b06d88bf74b2d3c4debc7",
+          "size": 353007,
+          "filename": "click-8.4.1.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/click/8.4.0/json",
+      "api_data_url": "https://pypi.org/pypi/click/8.4.1/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/click@8.4.0"
+      "purl": "pkg:pypi/click@8.4.1"
     },
     {
       "type": "pypi",
@@ -98,7 +106,7 @@
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets/flask/issues/",
       "code_view_url": "https://github.com/pallets/flask/",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/pallets/flask.git",
       "copyright": null,
       "license_expression": null,
       "declared_license": {
@@ -110,7 +118,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/d3/3c/94f38d4db919a9326a706ad56f05a7e6f0c8f7b7d93e2997cca54d3bc14b/Flask-2.1.2.tar.gz",
+          "sha256": "315ded2ddf8a6281567edb27393010fe3406188bafbfe65a3339d5787d89e477",
+          "md5": "93f1832e5be704ef6ff2a4124579cd85",
+          "size": 631846,
+          "filename": "Flask-2.1.2.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -153,7 +169,7 @@
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/pallets/itsdangerous/",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/pallets/itsdangerous.git",
       "copyright": null,
       "license_expression": null,
       "declared_license": {
@@ -164,7 +180,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/9c/cb/8ac0172223afbccb63986cc25049b154ecfb5e85932587206f42317be31d/itsdangerous-2.2.0.tar.gz",
+          "sha256": "e0050c0b7da1eea53ffaf149c0cfbb5c6e2e2b69c4bef22c81fa6eb73e5f6173",
+          "md5": "a901babde35694c3577f7655010cd380",
+          "size": 54410,
+          "filename": "itsdangerous-2.2.0.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -210,7 +234,7 @@
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/pallets/jinja/",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/pallets/jinja.git",
       "copyright": null,
       "license_expression": null,
       "declared_license": {
@@ -221,7 +245,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/df/bf/f7da0350254c0ed7c72f3e33cef02e048281fec7ecec5f032d4aac52226b/jinja2-3.1.6.tar.gz",
+          "sha256": "0137fb05990d35f1275a587e9aee6d56da821fc83491a0fb838183be43f66d6d",
+          "md5": "66d4c25ff43d1deaf9637ccda523dec8",
+          "size": 245115,
+          "filename": "jinja2-3.1.6.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -267,14 +299,22 @@
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/pallets/markupsafe/",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/pallets/markupsafe.git",
       "copyright": null,
       "license_expression": "BSD-3-Clause",
       "declared_license": {},
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/7e/99/7690b6d4034fffd95959cbe0c02de8deb3098cc577c67bb6a24fe5d7caa7/markupsafe-3.0.3.tar.gz",
+          "sha256": "722695808f4b6457b320fdc131280796bdceb04ab50fe1795cd540799ebe1698",
+          "md5": "13a73126d25afa72a1ff0daed072f5fe",
+          "size": 80313,
+          "filename": "markupsafe-3.0.3.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -323,14 +363,22 @@
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/pallets/werkzeug/",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/pallets/werkzeug.git",
       "copyright": null,
       "license_expression": "BSD-3-Clause",
       "declared_license": {},
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/dd/b2/381be8cfdee792dd117872481b6e378f85c957dd7c5bca38897b08f765fd/werkzeug-3.1.8.tar.gz",
+          "sha256": "9bad61a4268dac112f1c5cd4630a56ede601b6ed420300677a869083d70a4c44",
+          "md5": "5b3063a0bfc95d46cb35258b03b9f30e",
+          "size": 875852,
+          "filename": "werkzeug-3.1.8.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -348,7 +396,7 @@
         {
           "key": "click",
           "package_name": "click",
-          "installed_version": "8.4.0",
+          "installed_version": "8.4.1",
           "dependencies": []
         },
         {
