@@ -52,30 +52,42 @@ async def get_pypi_data_from_purl(
     if not version:
         raise Exception("Version is not specified in the purl")
 
-    # Todo: address the case where several index URLs are passed
-    if index_urls:
-        # Backward compatibility: If pypi.org is passed as index url, always resolve against it.
-        # When multiple index URLs are supported and the todo above is fixed, then this hack can be removed.
-        if "https://pypi.org/simple" in index_urls:
-            index_url = None
-        else:
-            index_url = index_urls[0]
-    else:
-        index_url = None
-
-    base_path = (
-        index_url.removesuffix("/simple") + "/pypi" if index_url else "https://pypi.org/pypi"
-    )
-
-    api_url = f"{base_path}/{name}/{version}/json"
+    api_urls = []
+    pypi_org_url = f"https://pypi.org/pypi/{name}/{version}/json"
+    for index_url in index_urls or []:
+        if index_url == "https://pypi.org/simple":
+            continue
+        base_path = index_url.removesuffix("/simple") + "/pypi"
+        api_urls.append((base_path, f"{base_path}/{name}/{version}/json"))
+    api_urls.append(("https://pypi.org/pypi", pypi_org_url))
 
     from python_inspector.utils import get_response_async
 
-    response = await get_response_async(api_url)
+    response = None
+    api_url = None
+    base_path = None
+    info = {}
+    for bp, url in api_urls:
+        repo_response = await get_response_async(url)
+        if not repo_response:
+            continue
+
+        if not response:
+            response = repo_response
+            api_url = url
+            base_path = bp
+            info = response.get("info") or {}
+
+        if not info.get("project_urls"):
+            repo_info = repo_response.get("info") or {}
+            info["project_urls"] = repo_info.get("project_urls")
+
+        if info.get("project_urls"):
+            break
+
     if not response:
         return None
 
-    info = response.get("info") or {}
     homepage_url = info.get("home_page")
     project_urls = info.get("project_urls") or {}
     code_view_url = get_pypi_codeview_url(project_urls)
