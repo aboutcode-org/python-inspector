@@ -10,6 +10,7 @@
 #
 
 import os
+import posixpath
 from urllib.parse import urlparse, urlunparse
 
 from typing import Dict
@@ -145,6 +146,12 @@ async def get_pypi_data_from_purl(
 
         urls_sanitized[url_sanitized] = value
 
+    urls_by_filename = {
+        posixpath.basename(urlparse(e.get("url")).path): e
+        for e in response.get("urls") or []
+        if e.get("url")
+    }
+
     def remove_credentials_from_url(url: str):
         # Parse the URL into its components
         parsed = urlparse(url)
@@ -163,10 +170,12 @@ async def get_pypi_data_from_purl(
     # iterate over the valid distribution urls and return the first
     # one that is matching.
     for dist_url in valid_distribution_urls:
-        if dist_url not in urls_sanitized:
-            continue
-
         url_data = urls_sanitized.get(dist_url)
+        if not url_data:
+            filename = posixpath.basename(urlparse(dist_url).path)
+            url_data = urls_by_filename.get(filename)
+        if not url_data:
+            continue
         digests = url_data.get("digests") or {}
 
         return PackageData(
