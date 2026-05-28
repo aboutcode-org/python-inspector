@@ -30,6 +30,20 @@ from python_inspector.utils_pypi import Environment
 from python_inspector.utils_pypi import PypiSimpleRepository
 
 
+def get_sdist_from_urls(urls: list) -> Optional[dict]:
+    """Extract source distribution info from PyPI urls array."""
+    for entry in urls or []:
+        if entry.get("packagetype") == "sdist":
+            return {
+                "url": entry.get("url", ""),
+                "sha256": entry.get("digests", {}).get("sha256", ""),
+                "md5": entry.get("digests", {}).get("md5") or entry.get("md5_digest", ""),
+                "size": entry.get("size"),
+                "filename": entry.get("filename", ""),
+            }
+    return None
+
+
 async def get_pypi_data_from_purl(
     purl: str,
     environment: Environment,
@@ -88,6 +102,7 @@ async def get_pypi_data_from_purl(
     if not response:
         return None
 
+    sdist_info = get_sdist_from_urls(response.get("urls", []))
     homepage_url = info.get("home_page")
     project_urls = info.get("project_urls") or {}
     code_view_url = get_pypi_codeview_url(project_urls)
@@ -202,6 +217,7 @@ async def get_pypi_data_from_purl(
             api_data_url=remove_credentials_from_url(api_url),
             bug_tracking_url=bug_tracking_url,
             code_view_url=code_view_url,
+            extra_data={"source_artifact": sdist_info} if sdist_info else {},
             vcs_url=vcs_url,
             license_expression=info.get("license_expression"),
             declared_license=get_declared_license(info),
