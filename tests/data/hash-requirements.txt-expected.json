@@ -157,7 +157,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/85/ef/fd7649da8af11d93979831e8f1f8097e85e82d5bfeabc8c68b39175d8e75/addict-2.4.0.tar.gz",
+          "sha256": "b3b2210e0e067a281f5646c8c5db92e99b7231ea8b0eb5f74dbdf9e259d4e494",
+          "md5": "b9354606535ea6a8a0a7a2d1798b3774",
+          "size": 9186,
+          "filename": "addict-2.4.0.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -169,12 +177,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "certifi",
-      "version": "2026.4.22",
+      "version": "2026.5.20",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Python package for providing Mozilla's CA Bundle.\nCertifi: Python SSL Certificates\n================================\n\nCertifi provides Mozilla's carefully curated collection of Root Certificates for\nvalidating the trustworthiness of SSL certificates while verifying the identity\nof TLS hosts. It has been extracted from the `Requests`_ project.\n\nInstallation\n------------\n\n``certifi`` is available on PyPI. Simply install it with ``pip``::\n\n    $ pip install certifi\n\nUsage\n-----\n\nTo reference the installed certificate authority (CA) bundle, you can use the\nbuilt-in function::\n\n    >>> import certifi\n\n    >>> certifi.where()\n    '/usr/local/lib/python3.7/site-packages/certifi/cacert.pem'\n\nOr from the command line::\n\n    $ python -m certifi\n    /usr/local/lib/python3.7/site-packages/certifi/cacert.pem\n\nEnjoy!\n\n.. _`Requests`: https://requests.readthedocs.io/en/master/\n\nAddition/Removal of Certificates\n--------------------------------\n\nCertifi does not support any addition/removal or other modification of the\nCA trust store content. This project is intended to provide a reliable and\nhighly portable root of trust to python deployments. Look to upstream projects\nfor methods to use alternate trust.",
-      "release_date": "2026-04-22T11:26:09",
+      "release_date": "2026-05-20T11:46:48",
       "parties": [
         {
           "type": "person",
@@ -201,15 +209,15 @@
         "Programming Language :: Python :: 3.9"
       ],
       "homepage_url": "https://github.com/certifi/python-certifi",
-      "download_url": "https://files.pythonhosted.org/packages/22/30/7cd8fdcdfbc5b869528b079bfb76dcdf6056b1a2097a662e5e8c04f42965/certifi-2026.4.22-py3-none-any.whl",
-      "size": 135707,
+      "download_url": "https://files.pythonhosted.org/packages/59/8c/57e832b7af6d7c5abe66eb3fbe3a3a32f4d11ea23a1aa7131371035be991/certifi-2026.5.20-py3-none-any.whl",
+      "size": 134134,
       "sha1": null,
-      "md5": "a524df3261ff972bbe811eb7307a79ed",
-      "sha256": "3cb2210c8f88ba2318d29b0388d1023c8492ff72ecdde4ebdaddbb13a31b1c4a",
+      "md5": "09ac8b5eddc520f3f2d5e6f7ee949553",
+      "sha256": "3c52e209ba0a4ad7aebe60436a4ab349c39e1e602e8c134221e546902ad25897",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/certifi/python-certifi",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/certifi/python-certifi.git",
       "copyright": null,
       "license_expression": null,
       "declared_license": {
@@ -221,13 +229,21 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/f3/ce/ee2ecad540810a79593028e88299baeae54d346cc7a0d94b6199988b89b1/certifi-2026.5.20.tar.gz",
+          "sha256": "69dea482ab64caa7b9f6aba1c6bf48bb6a5448d1c0f1b17ab42ad8c763a5344d",
+          "md5": "5bd96239568bc44f001858c99bf6352e",
+          "size": 135422,
+          "filename": "certifi-2026.5.20.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/certifi/2026.4.22/json",
+      "api_data_url": "https://pypi.org/pypi/certifi/2026.5.20/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/certifi@2026.4.22"
+      "purl": "pkg:pypi/certifi@2026.5.20"
     },
     {
       "type": "pypi",
@@ -297,7 +313,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/ee/2d/9cdc2b527e127b4c9db64b86647d567985940ac3698eeabc7ffaccb4ea61/chardet-4.0.0.tar.gz",
+          "sha256": "0d6f53a15db4120f2b08c94f11e7d93d2c911ee118b6b30a04ec3ee8310179fa",
+          "md5": "bc9a5603d8d0994b2d4cbf255f99e654",
+          "size": 1907771,
+          "filename": "chardet-4.0.0.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -365,7 +389,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/ea/b7/e0e3c1c467636186c39925827be42f16fee389dc404ac29e930e9136be70/idna-2.10.tar.gz",
+          "sha256": "b307872f855b18632ce0c21c5e45be78c0ea7ae4c15c828c20788b26921eb3f6",
+          "md5": "7a910c706db30d758f377db2762c0f9a",
+          "size": 175616,
+          "filename": "idna-2.10.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -417,7 +449,7 @@
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/psf/requests",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/psf/requests.git",
       "copyright": null,
       "license_expression": null,
       "declared_license": {
@@ -429,7 +461,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/6b/47/c14abc08432ab22dc18b9892252efaf005ab44066de871e72a38d6af464b/requests-2.25.1.tar.gz",
+          "sha256": "27973dd4a904a4f13b263a19c866c13b92a39ed1c964655f025f3f8d3d75b804",
+          "md5": "514d6f7eba77ada0b8c98ec7818828db",
+          "size": 102161,
+          "filename": "requests-2.25.1.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -487,7 +527,7 @@
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/urllib3/urllib3",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/urllib3/urllib3.git",
       "copyright": null,
       "license_expression": null,
       "declared_license": {
@@ -499,7 +539,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/e4/e8/6ff5e6bc22095cfc59b6ea711b687e2b7ed4bdb373f7eeec370a97d7392f/urllib3-1.26.20.tar.gz",
+          "sha256": "40c2dc0c681e47eb8f90e7e27bf6ff7df2e677421fd46756da1161c39ca70d32",
+          "md5": "a2720182586f0ccb1ac34df9f24b0aee",
+          "size": 307380,
+          "filename": "urllib3-1.26.20.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -514,7 +562,7 @@
       "dependencies": []
     },
     {
-      "package": "pkg:pypi/certifi@2026.4.22",
+      "package": "pkg:pypi/certifi@2026.5.20",
       "dependencies": []
     },
     {
@@ -528,7 +576,7 @@
     {
       "package": "pkg:pypi/requests@2.25.1",
       "dependencies": [
-        "pkg:pypi/certifi@2026.4.22",
+        "pkg:pypi/certifi@2026.5.20",
         "pkg:pypi/chardet@4.0.0",
         "pkg:pypi/idna@2.10",
         "pkg:pypi/urllib3@1.26.20"

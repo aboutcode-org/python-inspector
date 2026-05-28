@@ -73,7 +73,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/1e/8b/3ea72ac8e26090b63779b4e0074af79b02bbbab7ddd01b36109bc0892d31/crontab-1.0.4.tar.gz",
+          "sha256": "715b0e5e105bc62c9683cbb93c1cc5821e07a3e28d17404576d22dba7a896c92",
+          "md5": "ad190b69ff4199c44a5170daf896e73f",
+          "size": 21677,
+          "filename": "crontab-1.0.4.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,

@@ -176,7 +176,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/75/aa/7c9db8edd626f1a7d99d09ef7926f6f4fb34d5f9fa00dc394afdfe8e2a80/azure_core-1.33.0.tar.gz",
+          "sha256": "f367aa07b5e3005fec2c1e184b882b0b039910733907d001c20fb08ebb8c0eb9",
+          "md5": "4d727311bd4e0f2d64eb1254502acb99",
+          "size": 295633,
+          "filename": "azure_core-1.33.0.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -244,7 +252,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/e1/f9/495982345252dc7a15ac632e038be1f975ca0d2f25abfe8f8d908569141d/azure-devops-7.1.0b4.tar.gz",
+          "sha256": "f04ba939112579f3d530cfecc044a74ef9e9339ba23c9ee1ece248241f07ff85",
+          "md5": "bf401acf6533d4a2dcfd2106ffcbc86a",
+          "size": 1336261,
+          "filename": "azure-devops-7.1.0b4.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -305,7 +321,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/96/95/3e3414491ce45025a1cde107b6ae72bf72049e6021597c201cd6a3029b9a/azure_storage_blob-12.26.0.tar.gz",
+          "sha256": "5dd7d7824224f7de00bfeb032753601c982655173061e242f13be6e26d78d71f",
+          "md5": "78fd3866b0a62f8799e62fdcce0d2fe4",
+          "size": 583332,
+          "filename": "azure_storage_blob-12.26.0.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -317,12 +341,12 @@
       "type": "pypi",
       "namespace": null,
       "name": "certifi",
-      "version": "2026.4.22",
+      "version": "2026.5.20",
       "qualifiers": {},
       "subpath": null,
       "primary_language": "Python",
       "description": "Python package for providing Mozilla's CA Bundle.\nCertifi: Python SSL Certificates\n================================\n\nCertifi provides Mozilla's carefully curated collection of Root Certificates for\nvalidating the trustworthiness of SSL certificates while verifying the identity\nof TLS hosts. It has been extracted from the `Requests`_ project.\n\nInstallation\n------------\n\n``certifi`` is available on PyPI. Simply install it with ``pip``::\n\n    $ pip install certifi\n\nUsage\n-----\n\nTo reference the installed certificate authority (CA) bundle, you can use the\nbuilt-in function::\n\n    >>> import certifi\n\n    >>> certifi.where()\n    '/usr/local/lib/python3.7/site-packages/certifi/cacert.pem'\n\nOr from the command line::\n\n    $ python -m certifi\n    /usr/local/lib/python3.7/site-packages/certifi/cacert.pem\n\nEnjoy!\n\n.. _`Requests`: https://requests.readthedocs.io/en/master/\n\nAddition/Removal of Certificates\n--------------------------------\n\nCertifi does not support any addition/removal or other modification of the\nCA trust store content. This project is intended to provide a reliable and\nhighly portable root of trust to python deployments. Look to upstream projects\nfor methods to use alternate trust.",
-      "release_date": "2026-04-22T11:26:09",
+      "release_date": "2026-05-20T11:46:48",
       "parties": [
         {
           "type": "person",
@@ -349,15 +373,15 @@
         "Programming Language :: Python :: 3.9"
       ],
       "homepage_url": "https://github.com/certifi/python-certifi",
-      "download_url": "https://files.pythonhosted.org/packages/22/30/7cd8fdcdfbc5b869528b079bfb76dcdf6056b1a2097a662e5e8c04f42965/certifi-2026.4.22-py3-none-any.whl",
-      "size": 135707,
+      "download_url": "https://files.pythonhosted.org/packages/59/8c/57e832b7af6d7c5abe66eb3fbe3a3a32f4d11ea23a1aa7131371035be991/certifi-2026.5.20-py3-none-any.whl",
+      "size": 134134,
       "sha1": null,
-      "md5": "a524df3261ff972bbe811eb7307a79ed",
-      "sha256": "3cb2210c8f88ba2318d29b0388d1023c8492ff72ecdde4ebdaddbb13a31b1c4a",
+      "md5": "09ac8b5eddc520f3f2d5e6f7ee949553",
+      "sha256": "3c52e209ba0a4ad7aebe60436a4ab349c39e1e602e8c134221e546902ad25897",
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/certifi/python-certifi",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/certifi/python-certifi.git",
       "copyright": null,
       "license_expression": null,
       "declared_license": {
@@ -369,13 +393,21 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/f3/ce/ee2ecad540810a79593028e88299baeae54d346cc7a0d94b6199988b89b1/certifi-2026.5.20.tar.gz",
+          "sha256": "69dea482ab64caa7b9f6aba1c6bf48bb6a5448d1c0f1b17ab42ad8c763a5344d",
+          "md5": "5bd96239568bc44f001858c99bf6352e",
+          "size": 135422,
+          "filename": "certifi-2026.5.20.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
-      "api_data_url": "https://pypi.org/pypi/certifi/2026.4.22/json",
+      "api_data_url": "https://pypi.org/pypi/certifi/2026.5.20/json",
       "datasource_id": null,
-      "purl": "pkg:pypi/certifi@2026.4.22"
+      "purl": "pkg:pypi/certifi@2026.5.20"
     },
     {
       "type": "pypi",
@@ -417,7 +449,7 @@
       "sha512": null,
       "bug_tracking_url": "https://github.com/python-cffi/cffi/issues",
       "code_view_url": "https://github.com/python-cffi/cffi",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/python-cffi/cffi.git",
       "copyright": null,
       "license_expression": null,
       "declared_license": {
@@ -429,7 +461,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/fc/97/c783634659c2920c3fc70419e3af40972dbaf758daa229a7d6ea6135c90d/cffi-1.17.1.tar.gz",
+          "sha256": "1c39c6016c32bc48dd54561950ebd6836e1670f2ae46128f67cf49e789c52824",
+          "md5": "4336ca58b2df0cc3b163884d5fa2e5e2",
+          "size": 516621,
+          "filename": "cffi-1.17.1.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -502,7 +542,7 @@
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/jawah/charset_normalizer",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/jawah/charset_normalizer.git",
       "copyright": null,
       "license_expression": null,
       "declared_license": {
@@ -511,7 +551,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/e7/a1/67fe25fac3c7642725500a3f6cfe5821ad557c3abb11c9d20d12c7008d3e/charset_normalizer-3.4.7.tar.gz",
+          "sha256": "ae89db9e5f98a11a4bf50407d4363e7b09b31e55bc117b4f7d80aab97ba009e5",
+          "md5": "68805886064d248d2e5205fd11112d85",
+          "size": 144271,
+          "filename": "charset_normalizer-3.4.7.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -554,7 +602,7 @@
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/pallets/click/",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/pallets/click.git",
       "copyright": null,
       "license_expression": null,
       "declared_license": {
@@ -565,7 +613,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/b9/2e/0090cbf739cee7d23781ad4b89a9894a41538e4fcf4c31dcdd705b78eb8b/click-8.1.8.tar.gz",
+          "sha256": "ed53c9d8990d83c2a27deae68e4ee337473f6330c040a31d4225c9574d16096a",
+          "md5": "b52ee8e6c33d88a2b4626e6a6002245d",
+          "size": 226593,
+          "filename": "click-8.1.8.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -633,7 +689,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/a7/35/c495bffc2056f2dadb32434f1feedd79abde2a7f8363e1974afa9c33c7e2/cryptography-45.0.7.tar.gz",
+          "sha256": "4b1654dfc64ea479c242508eb8c724044f1e964a47d1d1cacc5132292d851971",
+          "md5": "c7c51e216abd722be0e8120e220c2473",
+          "size": 744980,
+          "filename": "cryptography-45.0.7.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -690,14 +754,22 @@
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/kjd/idna",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/kjd/idna.git",
       "copyright": null,
       "license_expression": "BSD-3-Clause",
       "declared_license": {},
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/82/77/7b3966d0b9d1d31a36ddf1746926a11dface89a83409bf1483f0237aa758/idna-3.15.tar.gz",
+          "sha256": "ca962446ea538f7092a95e057da437618e886f4d349216d2b1e294abfdb65fdc",
+          "md5": "d524f820dc616bbfd4130920ce826b94",
+          "size": 199245,
+          "filename": "idna-3.15.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -763,7 +835,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/54/4d/e940025e2ce31a8ce1202635910747e5a87cc3a6a6bb2d00973375014749/isodate-0.7.2.tar.gz",
+          "sha256": "4cd1aa0f43ca76f4a6c6c0292a85f40b35ec2e43e315b59f06e6d32171a953e6",
+          "md5": "5ce182fd7f6152cda19ec605b6740687",
+          "size": 29705,
+          "filename": "isodate-0.7.2.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -823,7 +903,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/68/77/8397c8fb8fc257d8ea0fa66f8068e073278c65f05acb17dcb22a02bfdc42/msrest-0.7.1.zip",
+          "sha256": "6e7661f46f3afd88b75667b7187a92829924446c7ea1d169be8c4bb7eeb788b9",
+          "md5": "3079617446a011d4fc0098687609671e",
+          "size": 175332,
+          "filename": "msrest-0.7.1.zip"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -896,7 +984,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/0b/5f/19930f824ffeb0ad4372da4812c50edbd1434f678c90c2733e1188edfc63/oauthlib-3.3.1.tar.gz",
+          "sha256": "0f0f8aa759826a193cf66c12ea1af1637f87b9b4622d46e866952bb022e538c9",
+          "md5": "856bc51662afb26ac58b1d7742606b2e",
+          "size": 185918,
+          "filename": "oauthlib-3.3.1.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -961,7 +1057,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/fe/cf/d2d3b9f5699fb1e4615c8e32ff220203e43b248e1dfcc6736ad9057731ca/pycparser-2.23.tar.gz",
+          "sha256": "78816d4f24add8f10a06d6f05b4d424ad9e96cfebf68a4ddc99c65c0720d00c2",
+          "md5": "bb4946a7b0d83569f5d29f566a55180a",
+          "size": 173734,
+          "filename": "pycparser-2.23.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -1027,7 +1131,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/42/f2/05f29bc3913aea15eb670be136045bf5c5bbf4b99ecb839da9b422bb2c85/requests-oauthlib-2.0.0.tar.gz",
+          "sha256": "b3dffaebd884d8cd778494369603a9e7b58d29111bf6b41bdc2dcd87203af4e9",
+          "md5": "713dc7856f9ff625d75335c10d332a1b",
+          "size": 55650,
+          "filename": "requests-oauthlib-2.0.0.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -1083,7 +1195,7 @@
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/psf/requests",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/psf/requests.git",
       "copyright": null,
       "license_expression": null,
       "declared_license": {
@@ -1095,7 +1207,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/e1/0a/929373653770d8a0d7ea76c37de6e41f11eb07559b103b1c02cafb3f7cf8/requests-2.32.4.tar.gz",
+          "sha256": "27d0316682c8a29834d3264820024b62a36942083d52caf2f14c0591336d3422",
+          "md5": "4a380c14fe0f4465c9dbf79ffacefd8f",
+          "size": 135258,
+          "filename": "requests-2.32.4.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -1151,7 +1271,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/94/e7/b2c673351809dca68a0e064b6af791aa332cf192da575fd474ed7d6f16a2/six-1.17.0.tar.gz",
+          "sha256": "ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81",
+          "md5": "a0387fe15662c71057b4fb2b7aa9056a",
+          "size": 34031,
+          "filename": "six-1.17.0.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -1221,7 +1349,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/f6/37/23083fcd6e35492953e8d2aaaa68b860eb422b34627b13f2ce3eb6106061/typing_extensions-4.13.2.tar.gz",
+          "sha256": "e6c81219bd689f51865d9e372991c540bda33a0379d5573cddb9a3a23f7caaef",
+          "md5": "58226788d248cee8d6283ee616543975",
+          "size": 106967,
+          "filename": "typing_extensions-4.13.2.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -1290,7 +1426,7 @@
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/urllib3/urllib3",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/urllib3/urllib3.git",
       "copyright": null,
       "license_expression": null,
       "declared_license": {
@@ -1301,7 +1437,15 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/ed/63/22ba4ebfe7430b76388e7cd448d5478814d3032121827c12a2cc287e2260/urllib3-2.2.3.tar.gz",
+          "sha256": "e7d814a81dad81e6caf2ec9fdedb284ecc9c73076b62654547cc64ccdcae26e9",
+          "md5": "d65de4f0effae2b52669246f0aab0a91",
+          "size": 300677,
+          "filename": "urllib3-2.2.3.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
@@ -1335,7 +1479,7 @@
       ]
     },
     {
-      "package": "pkg:pypi/certifi@2026.4.22",
+      "package": "pkg:pypi/certifi@2026.5.20",
       "dependencies": []
     },
     {
@@ -1370,7 +1514,7 @@
       "package": "pkg:pypi/msrest@0.7.1",
       "dependencies": [
         "pkg:pypi/azure-core@1.33.0",
-        "pkg:pypi/certifi@2026.4.22",
+        "pkg:pypi/certifi@2026.5.20",
         "pkg:pypi/isodate@0.7.2",
         "pkg:pypi/requests-oauthlib@2.0.0",
         "pkg:pypi/requests@2.32.4"
@@ -1394,7 +1538,7 @@
     {
       "package": "pkg:pypi/requests@2.32.4",
       "dependencies": [
-        "pkg:pypi/certifi@2026.4.22",
+        "pkg:pypi/certifi@2026.5.20",
         "pkg:pypi/charset-normalizer@3.4.7",
         "pkg:pypi/idna@3.15",
         "pkg:pypi/urllib3@2.2.3"

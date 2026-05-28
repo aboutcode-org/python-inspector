@@ -56,7 +56,7 @@
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/pallets-eco/blinker/",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/pallets-eco/blinker.git",
       "copyright": null,
       "license_expression": null,
       "declared_license": {
@@ -67,13 +67,79 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/1e/57/a6a1721eff09598fb01f3c7cda070c1b6a0f12d63c83236edf79a440abcc/blinker-1.8.2.tar.gz",
+          "sha256": "8f77b09d3bf7c795e969e9486f39c2c5e9c39d4ee07424be2bc594ece9642d83",
+          "md5": "ce2f9fb3bc0c0000db11f012f5f5afda",
+          "size": 23161,
+          "filename": "blinker-1.8.2.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
       "api_data_url": "https://pypi.org/pypi/blinker/1.8.2/json",
       "datasource_id": null,
       "purl": "pkg:pypi/blinker@1.8.2"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "click",
+      "version": "8.3.1",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Composable command line interface toolkit\n<div align=\"center\"><img src=\"https://raw.githubusercontent.com/pallets/click/refs/heads/stable/docs/_static/click-name.svg\" alt=\"\" height=\"150\"></div>\n\n# Click\n\nClick is a Python package for creating beautiful command line interfaces\nin a composable way with as little code as necessary. It's the \"Command\nLine Interface Creation Kit\". It's highly configurable but comes with\nsensible defaults out of the box.\n\nIt aims to make the process of writing command line tools quick and fun\nwhile also preventing any frustration caused by the inability to\nimplement an intended CLI API.\n\nClick in three points:\n\n-   Arbitrary nesting of commands\n-   Automatic help page generation\n-   Supports lazy loading of subcommands at runtime\n\n\n## A Simple Example\n\n```python\nimport click\n\n@click.command()\n@click.option(\"--count\", default=1, help=\"Number of greetings.\")\n@click.option(\"--name\", prompt=\"Your name\", help=\"The person to greet.\")\ndef hello(count, name):\n    \"\"\"Simple program that greets NAME for a total of COUNT times.\"\"\"\n    for _ in range(count):\n        click.echo(f\"Hello, {name}!\")\n\nif __name__ == '__main__':\n    hello()\n```\n\n```\n$ python hello.py --count=3\nYour name: Click\nHello, Click!\nHello, Click!\nHello, Click!\n```\n\n\n## Donate\n\nThe Pallets organization develops and supports Click and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, [please\ndonate today][].\n\n[please donate today]: https://palletsprojects.com/donate\n\n## Contributing\n\nSee our [detailed contributing documentation][contrib] for many ways to\ncontribute, including reporting issues, requesting features, asking or answering\nquestions, and making PRs.\n\n[contrib]: https://palletsprojects.com/contributing/",
+      "release_date": "2025-11-15T20:45:41",
+      "parties": [
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": null,
+          "email": "Pallets <contact@palletsprojects.com>",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Typing :: Typed"
+      ],
+      "homepage_url": null,
+      "download_url": "https://thirdparty.aboutcode.org/pypi/click-8.3.1-py3-none-any.whl",
+      "size": 108274,
+      "sha1": null,
+      "md5": "f032502934a5979330da77e3f09d889c",
+      "sha256": "981153a64e25f12d547d3426c367a4857371575ee7ad18df2a6183ab0545b2a6",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": "https://github.com/pallets/click/",
+      "vcs_url": "https://github.com/pallets/click.git",
+      "copyright": null,
+      "license_expression": "BSD-3-Clause",
+      "declared_license": {},
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/3d/fa/656b739db8587d7b5dfa22e22ed02566950fbfbcdc20311993483657a5c0/click-8.3.1.tar.gz",
+          "sha256": "12ff4785d337a1bb490bb7e9c2b1ee5da3112e94a8622f26a6c77f5d2fc6842a",
+          "md5": "5f89d725a424b101607ec40927f78773",
+          "size": 295065,
+          "filename": "click-8.3.1.tar.gz"
+        }
+      },
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/click/8.3.1/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/click@8.3.1"
     },
     {
       "type": "pypi",
@@ -116,7 +182,7 @@
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/pallets/flask/",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/pallets/flask.git",
       "copyright": null,
       "license_expression": null,
       "declared_license": {
@@ -127,13 +193,78 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/41/e1/d104c83026f8d35dfd2c261df7d64738341067526406b40190bc063e829a/flask-3.0.3.tar.gz",
+          "sha256": "ceb27b0af3823ea2737928a4d99d125a06175b8512c445cbd9a9ce200ef76842",
+          "md5": "4658b022a07f6d8df51ef24c717fe162",
+          "size": 676315,
+          "filename": "flask-3.0.3.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
       "api_data_url": "https://pypi.org/pypi/flask/3.0.3/json",
       "datasource_id": null,
       "purl": "pkg:pypi/flask@3.0.3"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "importlib-metadata",
+      "version": "8.7.1",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Read metadata from Python packages\n.. image:: https://img.shields.io/pypi/v/importlib_metadata.svg\n   :target: https://pypi.org/project/importlib_metadata\n\n.. image:: https://img.shields.io/pypi/pyversions/importlib_metadata.svg\n\n.. image:: https://github.com/python/importlib_metadata/actions/workflows/main.yml/badge.svg\n   :target: https://github.com/python/importlib_metadata/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json\n    :target: https://github.com/astral-sh/ruff\n    :alt: Ruff\n\n.. image:: https://readthedocs.org/projects/importlib-metadata/badge/?version=latest\n   :target: https://importlib-metadata.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2025-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/importlib-metadata\n   :target: https://tidelift.com/subscription/pkg/pypi-importlib-metadata?utm_source=pypi-importlib-metadata&utm_medium=readme\n\nLibrary to access the metadata for a Python package.\n\nThis package supplies third-party access to the functionality of\n`importlib.metadata <https://docs.python.org/3/library/importlib.metadata.html>`_\nincluding improvements added to subsequent Python versions.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - importlib_metadata\n     - stdlib\n   * - 7.0\n     - 3.13\n   * - 6.5\n     - 3.12\n   * - 4.13\n     - 3.11\n   * - 4.6\n     - 3.10\n   * - 1.4\n     - 3.8\n\n\nUsage\n=====\n\nSee the `online documentation <https://importlib-metadata.readthedocs.io/>`_\nfor usage details.\n\n`Finder authors\n<https://docs.python.org/3/reference/import.html#finders-and-loaders>`_ can\nalso add support for custom package installers.  See the above documentation\nfor details.\n\n\nCaveats\n=======\n\nThis project primarily supports third-party packages installed by PyPA\ntools (or other conforming packages). It does not support:\n\n- Packages in the stdlib.\n- Packages installed without metadata.\n\nProject details\n===============\n\n * Project home: https://github.com/python/importlib_metadata\n * Report bugs at: https://github.com/python/importlib_metadata/issues\n * Code hosting: https://github.com/python/importlib_metadata\n * Documentation: https://importlib-metadata.readthedocs.io/\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-importlib-metadata?utm_source=pypi-importlib-metadata&utm_medium=referral&utm_campaign=github>`_.",
+      "release_date": "2025-12-21T10:00:18",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": null,
+          "email": "\"Jason R. Coombs\" <jaraco@jaraco.com>",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3 :: Only"
+      ],
+      "homepage_url": null,
+      "download_url": "https://thirdparty.aboutcode.org/pypi/importlib_metadata-8.7.1-py3-none-any.whl",
+      "size": 27865,
+      "sha1": null,
+      "md5": "17518a8b7a8a452aa0fc16b98333a468",
+      "sha256": "5a1f80bf1daa489495071efbb095d75a634cf28a8bc299581244063b53176151",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": "https://github.com/python/importlib_metadata",
+      "vcs_url": "https://github.com/python/importlib_metadata.git",
+      "copyright": null,
+      "license_expression": "Apache-2.0",
+      "declared_license": {},
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/f3/49/3b30cad09e7771a4982d9975a8cbf64f00d4a1ececb53297f1d9a7be1b10/importlib_metadata-8.7.1.tar.gz",
+          "sha256": "49fef1ae6440c182052f407c8d34a68f72efc36db9ca90dc0113398f2fdde8bb",
+          "md5": "4edb62e77e945bf4b898ea6427dcc7bd",
+          "size": 57107,
+          "filename": "importlib_metadata-8.7.1.tar.gz"
+        }
+      },
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/importlib-metadata/8.7.1/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/importlib-metadata@8.7.1"
     },
     {
       "type": "pypi",
@@ -170,7 +301,7 @@
       "sha512": null,
       "bug_tracking_url": null,
       "code_view_url": "https://github.com/pallets/itsdangerous/",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/pallets/itsdangerous.git",
       "copyright": null,
       "license_expression": null,
       "declared_license": {
@@ -181,13 +312,147 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/9c/cb/8ac0172223afbccb63986cc25049b154ecfb5e85932587206f42317be31d/itsdangerous-2.2.0.tar.gz",
+          "sha256": "e0050c0b7da1eea53ffaf149c0cfbb5c6e2e2b69c4bef22c81fa6eb73e5f6173",
+          "md5": "a901babde35694c3577f7655010cd380",
+          "size": 54410,
+          "filename": "itsdangerous-2.2.0.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
       "api_data_url": "https://pypi.org/pypi/itsdangerous/2.2.0/json",
       "datasource_id": null,
       "purl": "pkg:pypi/itsdangerous@2.2.0"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "jinja2",
+      "version": "3.1.6",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "A very fast and expressive template engine.\n# Jinja\n\nJinja is a fast, expressive, extensible templating engine. Special\nplaceholders in the template allow writing code similar to Python\nsyntax. Then the template is passed data to render the final document.\n\nIt includes:\n\n-   Template inheritance and inclusion.\n-   Define and import macros within templates.\n-   HTML templates can use autoescaping to prevent XSS from untrusted\n    user input.\n-   A sandboxed environment can safely render untrusted templates.\n-   AsyncIO support for generating templates and calling async\n    functions.\n-   I18N support with Babel.\n-   Templates are compiled to optimized Python code just-in-time and\n    cached, or can be compiled ahead-of-time.\n-   Exceptions point to the correct line in templates to make debugging\n    easier.\n-   Extensible filters, tests, functions, and even syntax.\n\nJinja's philosophy is that while application logic belongs in Python if\npossible, it shouldn't make the template designer's job difficult by\nrestricting functionality too much.\n\n\n## In A Nutshell\n\n```jinja\n{% extends \"base.html\" %}\n{% block title %}Members{% endblock %}\n{% block content %}\n  <ul>\n  {% for user in users %}\n    <li><a href=\"{{ user.url }}\">{{ user.username }}</a></li>\n  {% endfor %}\n  </ul>\n{% endblock %}\n```\n\n## Donate\n\nThe Pallets organization develops and supports Jinja and other popular\npackages. In order to grow the community of contributors and users, and\nallow the maintainers to devote more time to the projects, [please\ndonate today][].\n\n[please donate today]: https://palletsprojects.com/donate\n\n## Contributing\n\nSee our [detailed contributing documentation][contrib] for many ways to\ncontribute, including reporting issues, requesting features, asking or answering\nquestions, and making PRs.\n\n[contrib]: https://palletsprojects.com/contributing/",
+      "release_date": "2025-03-05T20:05:00",
+      "parties": [
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": null,
+          "email": "Pallets <contact@palletsprojects.com>",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Environment :: Web Environment",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+        "Topic :: Text Processing :: Markup :: HTML",
+        "Typing :: Typed"
+      ],
+      "homepage_url": null,
+      "download_url": "https://thirdparty.aboutcode.org/pypi/jinja2-3.1.6-py3-none-any.whl",
+      "size": 134899,
+      "sha1": null,
+      "md5": "845b37cea56edd0f4dbd949244e9d798",
+      "sha256": "85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": "https://github.com/pallets/jinja/",
+      "vcs_url": "https://github.com/pallets/jinja.git",
+      "copyright": null,
+      "license_expression": null,
+      "declared_license": {
+        "classifiers": [
+          "License :: OSI Approved :: BSD License"
+        ]
+      },
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/df/bf/f7da0350254c0ed7c72f3e33cef02e048281fec7ecec5f032d4aac52226b/jinja2-3.1.6.tar.gz",
+          "sha256": "0137fb05990d35f1275a587e9aee6d56da821fc83491a0fb838183be43f66d6d",
+          "md5": "66d4c25ff43d1deaf9637ccda523dec8",
+          "size": 245115,
+          "filename": "jinja2-3.1.6.tar.gz"
+        }
+      },
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/jinja2/3.1.6/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/jinja2@3.1.6"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "markupsafe",
+      "version": "3.0.3",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Safely add untrusted strings to HTML/XML markup.\n<div align=\"center\"><img src=\"https://raw.githubusercontent.com/pallets/markupsafe/refs/heads/stable/docs/_static/markupsafe-name.svg\" alt=\"\" height=\"150\"></div>\n\n# MarkupSafe\n\nMarkupSafe implements a text object that escapes characters so it is\nsafe to use in HTML and XML. Characters that have special meanings are\nreplaced so that they display as the actual characters. This mitigates\ninjection attacks, meaning untrusted user input can safely be displayed\non a page.\n\n\n## Examples\n\n```pycon\n>>> from markupsafe import Markup, escape\n\n>>> # escape replaces special characters and wraps in Markup\n>>> escape(\"<script>alert(document.cookie);</script>\")\nMarkup('&lt;script&gt;alert(document.cookie);&lt;/script&gt;')\n\n>>> # wrap in Markup to mark text \"safe\" and prevent escaping\n>>> Markup(\"<strong>Hello</strong>\")\nMarkup('<strong>hello</strong>')\n\n>>> escape(Markup(\"<strong>Hello</strong>\"))\nMarkup('<strong>hello</strong>')\n\n>>> # Markup is a str subclass\n>>> # methods and operators escape their arguments\n>>> template = Markup(\"Hello <em>{name}</em>\")\n>>> template.format(name='\"World\"')\nMarkup('Hello <em>&#34;World&#34;</em>')\n```\n\n## Donate\n\nThe Pallets organization develops and supports MarkupSafe and other\npopular packages. In order to grow the community of contributors and\nusers, and allow the maintainers to devote more time to the projects,\n[please donate today][].\n\n[please donate today]: https://palletsprojects.com/donate\n\n## Contributing\n\nSee our [detailed contributing documentation][contrib] for many ways to\ncontribute, including reporting issues, requesting features, asking or answering\nquestions, and making PRs.\n\n[contrib]: https://palletsprojects.com/contributing/",
+      "release_date": "2025-09-27T18:37:40",
+      "parties": [
+        {
+          "type": "person",
+          "role": "maintainer",
+          "name": null,
+          "email": "Pallets <contact@palletsprojects.com>",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Environment :: Web Environment",
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+        "Topic :: Text Processing :: Markup :: HTML",
+        "Typing :: Typed"
+      ],
+      "homepage_url": null,
+      "download_url": "https://thirdparty.aboutcode.org/pypi/markupsafe-3.0.3.tar.gz",
+      "size": 80313,
+      "sha1": null,
+      "md5": "13a73126d25afa72a1ff0daed072f5fe",
+      "sha256": "722695808f4b6457b320fdc131280796bdceb04ab50fe1795cd540799ebe1698",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": "https://github.com/pallets/markupsafe/",
+      "vcs_url": "https://github.com/pallets/markupsafe.git",
+      "copyright": null,
+      "license_expression": "BSD-3-Clause",
+      "declared_license": {},
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/7e/99/7690b6d4034fffd95959cbe0c02de8deb3098cc577c67bb6a24fe5d7caa7/markupsafe-3.0.3.tar.gz",
+          "sha256": "722695808f4b6457b320fdc131280796bdceb04ab50fe1795cd540799ebe1698",
+          "md5": "13a73126d25afa72a1ff0daed072f5fe",
+          "size": 80313,
+          "filename": "markupsafe-3.0.3.tar.gz"
+        }
+      },
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/markupsafe/3.0.3/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/markupsafe@3.0.3"
     },
     {
       "type": "pypi",
@@ -230,7 +495,7 @@
       "sha512": null,
       "bug_tracking_url": "https://github.com/pallets/werkzeug/issues/",
       "code_view_url": "https://github.com/pallets/werkzeug/",
-      "vcs_url": null,
+      "vcs_url": "https://github.com/pallets/werkzeug.git",
       "copyright": null,
       "license_expression": null,
       "declared_license": {
@@ -241,13 +506,78 @@
       "notice_text": null,
       "source_packages": [],
       "file_references": [],
-      "extra_data": {},
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/d4/f9/0ba83eaa0df9b9e9d1efeb2ea351d0677c37d41ee5d0f91e98423c7281c9/werkzeug-3.0.6.tar.gz",
+          "sha256": "a8dd59d4de28ca70471a34cba79bed5f7ef2e036a76b3ab0835474246eb41f8d",
+          "md5": "0d13f3dbe9b08aecdebe3d9b61cc58aa",
+          "size": 805170,
+          "filename": "werkzeug-3.0.6.tar.gz"
+        }
+      },
       "dependencies": [],
       "repository_homepage_url": null,
       "repository_download_url": null,
       "api_data_url": "https://pypi.org/pypi/werkzeug/3.0.6/json",
       "datasource_id": null,
       "purl": "pkg:pypi/werkzeug@3.0.6"
+    },
+    {
+      "type": "pypi",
+      "namespace": null,
+      "name": "zipp",
+      "version": "3.23.0",
+      "qualifiers": {},
+      "subpath": null,
+      "primary_language": "Python",
+      "description": "Backport of pathlib-compatible object wrapper for zip files\n.. image:: https://img.shields.io/pypi/v/zipp.svg\n   :target: https://pypi.org/project/zipp\n\n.. image:: https://img.shields.io/pypi/pyversions/zipp.svg\n\n.. image:: https://github.com/jaraco/zipp/actions/workflows/main.yml/badge.svg\n   :target: https://github.com/jaraco/zipp/actions?query=workflow%3A%22tests%22\n   :alt: tests\n\n.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json\n    :target: https://github.com/astral-sh/ruff\n    :alt: Ruff\n\n.. image:: https://readthedocs.org/projects/zipp/badge/?version=latest\n..    :target: https://zipp.readthedocs.io/en/latest/?badge=latest\n\n.. image:: https://img.shields.io/badge/skeleton-2025-informational\n   :target: https://blog.jaraco.com/skeleton\n\n.. image:: https://tidelift.com/badges/package/pypi/zipp\n   :target: https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=readme\n\n\nA pathlib-compatible Zipfile object wrapper. Official backport of the standard library\n`Path object <https://docs.python.org/3.8/library/zipfile.html#path-objects>`_.\n\n\nCompatibility\n=============\n\nNew features are introduced in this third-party library and later merged\ninto CPython. The following table indicates which versions of this library\nwere contributed to different versions in the standard library:\n\n.. list-table::\n   :header-rows: 1\n\n   * - zipp\n     - stdlib\n   * - 3.18\n     - 3.13\n   * - 3.16\n     - 3.12\n   * - 3.5\n     - 3.11\n   * - 3.2\n     - 3.10\n   * - 3.3 ??\n     - 3.9\n   * - 1.0\n     - 3.8\n\n\nUsage\n=====\n\nUse ``zipp.Path`` in place of ``zipfile.Path`` on any Python.\n\nFor Enterprise\n==============\n\nAvailable as part of the Tidelift Subscription.\n\nThis project and the maintainers of thousands of other packages are working with Tidelift to deliver one enterprise subscription that covers all of the open source you use.\n\n`Learn more <https://tidelift.com/subscription/pkg/pypi-zipp?utm_source=pypi-zipp&utm_medium=referral&utm_campaign=github>`_.",
+      "release_date": "2025-06-08T17:06:38",
+      "parties": [
+        {
+          "type": "person",
+          "role": "author",
+          "name": null,
+          "email": "\"Jason R. Coombs\" <jaraco@jaraco.com>",
+          "url": null
+        }
+      ],
+      "keywords": [
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3 :: Only"
+      ],
+      "homepage_url": null,
+      "download_url": "https://thirdparty.aboutcode.org/pypi/zipp-3.23.0-py3-none-any.whl",
+      "size": 10276,
+      "sha1": null,
+      "md5": "517d3915cf2576739abd556828f45cc4",
+      "sha256": "071652d6115ed432f5ce1d34c336c0adfd6a884660d1e9712a256d3d3bd4b14e",
+      "sha512": null,
+      "bug_tracking_url": null,
+      "code_view_url": "https://github.com/jaraco/zipp",
+      "vcs_url": "https://github.com/jaraco/zipp.git",
+      "copyright": null,
+      "license_expression": "MIT",
+      "declared_license": {},
+      "notice_text": null,
+      "source_packages": [],
+      "file_references": [],
+      "extra_data": {
+        "source_artifact": {
+          "url": "https://files.pythonhosted.org/packages/e3/02/0f2892c661036d50ede074e376733dca2ae7c6eb617489437771209d4180/zipp-3.23.0.tar.gz",
+          "sha256": "a07157588a12518c9d4034df3fbbee09c814741a33ff63c05fa29d26a2404166",
+          "md5": "7565b42f396db31df7e4b3eceff223ad",
+          "size": 25547,
+          "filename": "zipp-3.23.0.tar.gz"
+        }
+      },
+      "dependencies": [],
+      "repository_homepage_url": null,
+      "repository_download_url": null,
+      "api_data_url": "https://pypi.org/pypi/zipp/3.23.0/json",
+      "datasource_id": null,
+      "purl": "pkg:pypi/zipp@3.23.0"
     }
   ],
   "resolved_dependencies_graph": [
