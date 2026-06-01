@@ -23,6 +23,7 @@ from _packagedcode.pypi import SetupCfgHandler
 from python_inspector.resolution import fetch_and_extract_sdist
 from python_inspector.utils import get_netrc_auth
 from python_inspector.utils_pypi import PypiSimpleRepository
+from python_inspector.utils_pypi import resolve_relative_url
 from python_inspector.utils_pypi import valid_python_version
 
 test_env = FileDrivenTesting()
@@ -164,3 +165,28 @@ def test_parse_reqs_with_setup_requires_and_python_requires():
 def test_valid_python_version():
     assert valid_python_version("3.8", ">3.1")
     assert not valid_python_version("3.8.1", ">3.9")
+
+
+def test_resolve_relative_url_multi_level():
+    base = "https://example.com/api/pypi/repo/simple/pkg/"
+    rel = "../../packages/packages/d9/0b/hash/file-1.0-cp310-linux.whl"
+    result = resolve_relative_url(base, rel)
+    assert (
+        result
+        == "https://example.com/api/pypi/repo/packages/packages/d9/0b/hash/file-1.0-cp310-linux.whl"
+    )
+    assert "/../" not in result
+
+
+def test_resolve_relative_url_single_level():
+    base = "https://example.com/simple/pkg/"
+    rel = "../other/file.whl"
+    result = resolve_relative_url(base, rel)
+    assert result == "https://example.com/simple/other/file.whl"
+
+
+def test_resolve_relative_url_absolute():
+    base = "https://example.com/simple/pkg/"
+    rel = "https://files.pythonhosted.org/packages/file.whl"
+    result = resolve_relative_url(base, rel)
+    assert result == "https://files.pythonhosted.org/packages/file.whl"

@@ -26,6 +26,7 @@ from typing import Tuple
 from typing import Union
 from urllib.parse import quote_plus
 from urllib.parse import unquote
+from urllib.parse import urljoin
 from urllib.parse import urlparse
 from urllib.parse import urlunparse
 
@@ -1631,25 +1632,27 @@ class PypiSimpleRepository:
 
 def resolve_relative_url(package_url, url):
     """
-    Return the resolved `url` URLstring given a `package_url` base URL string
+    Return the resolved `url` URL string given a `package_url` base URL string
     of a package.
 
     For example:
     >>> resolve_relative_url("https://example.com/package", "../path/file.txt")
     'https://example.com/path/file.txt'
+    >>> resolve_relative_url("https://example.com/simple/pkg/", "../../packages/file.whl")
+    'https://example.com/packages/file.whl'
     """
     if not url.startswith(("http://", "https://")):
         base_url_parts = urlparse(package_url)
         url_parts = urlparse(url)
-        # If the relative URL starts with '..', remove the last directory from the base URL
+        # If the relative URL starts with '..', use urljoin to handle multi-level '../'
         if url_parts.path.startswith(".."):
-            path = base_url_parts.path.rstrip("/").rsplit("/", 1)[0] + url_parts.path[2:]
+            url = urljoin(package_url, url)
         else:
             path = urlunparse(
                 ("", "", url_parts.path, url_parts.params, url_parts.query, url_parts.fragment)
             )
-        resolved_url_parts = base_url_parts._replace(path=path)
-        url = urlunparse(resolved_url_parts)
+            resolved_url_parts = base_url_parts._replace(path=path)
+            url = urlunparse(resolved_url_parts)
     return url
 
 
