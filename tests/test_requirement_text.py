@@ -6,6 +6,7 @@ import pytest
 
 from python_inspector.dependencies import get_dependency
 
+
 @pytest.mark.parametrize(
     "text",
     ['Demo==1.2; sys_platform == "Windows Server"', "Demo @ https://example.org/Release/Demo.whl"],
