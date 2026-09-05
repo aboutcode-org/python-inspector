@@ -65,7 +65,7 @@ def get_dependency(specifier) -> DependentPackage:
     >>> dep = get_dependency("foo==1.2.3")
     >>> assert dep.purl == "pkg:pypi/foo@1.2.3"
     """
-    specifier = specifier and "".join(specifier.lower().split())
+    specifier = specifier and specifier.strip()
     assert specifier, f"specifier is required but empty:{specifier!r}"
 
     requirement = Requirement(requirement_string=specifier)
