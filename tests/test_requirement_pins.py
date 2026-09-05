@@ -8,6 +8,7 @@ from packvers.requirements import Requirement
 from python_inspector.dependencies import get_dependency
 from python_inspector.dependencies import is_requirement_pinned
 
+
 @pytest.mark.parametrize(
     "text,expected",
     [
