@@ -222,13 +222,13 @@ async def fetch_and_extract_sdist(
 
 def get_sdist_file_path_from_filename(sdist):
     if sdist.endswith(".tar.gz"):
-        sdist_file = sdist.rstrip(".tar.gz")
+        sdist_file = sdist.removesuffix(".tar.gz")
         with tarfile.open(os.path.join(settings.CACHE_THIRDPARTY_DIR, sdist)) as file:
             file.extractall(
                 os.path.join(settings.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file)
             )
     elif sdist.endswith(".zip"):
-        sdist_file = sdist.rstrip(".zip")
+        sdist_file = sdist.removesuffix(".zip")
         with ZipFile(os.path.join(settings.CACHE_THIRDPARTY_DIR, sdist)) as zip:
             zip.extractall(
                 os.path.join(settings.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file)
