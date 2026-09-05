@@ -11,6 +11,7 @@ import pytest
 
 from python_inspector import resolution
 
+
 @pytest.mark.parametrize("stem,extension", [("demo-1.0a", ".tar.gz"), ("demo-1.0+zip", ".zip")])
 def test_sdist_extracted_directory_name(tmp_path, monkeypatch, stem, extension):
     monkeypatch.setattr(resolution.settings, "CACHE_THIRDPARTY_DIR", str(tmp_path))
