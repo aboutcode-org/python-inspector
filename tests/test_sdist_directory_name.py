@@ -1,3 +1,7 @@
+# Copyright (c) nexB Inc. and others. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+# See https://github.com/aboutcode-org/python-inspector for support or download.
+
 import io
 import tarfile
 import zipfile
