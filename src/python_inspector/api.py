@@ -107,6 +107,7 @@ def resolve_dependencies(
     Download from the provided PyPI simple index_urls INDEX(s) URLs defaulting
     to PyPI.org or a configured setting.
     """
+    printer = utils.get_password_masking_printer(printer)
 
     if not operating_system:
         raise Exception(f"No operating system provided.")

@@ -13,6 +13,7 @@ import json
 import os
 import sys
 import time
+from configparser import ConfigParser
 from os.path import dirname
 
 import pytest
@@ -20,7 +21,6 @@ from click.testing import CliRunner
 from commoncode.testcase import FileDrivenTesting
 
 from python_inspector.resolve_cli import resolve_dependencies
-from python_inspector.resolve_cli import __version__
 
 # Used for tests to regenerate fixtures with regen=True
 REGEN_TEST_FIXTURES = os.getenv("PYINSP_REGEN_TEST_FIXTURES", False)
@@ -563,7 +563,11 @@ def test_passing_of_json_pdt_and_json_flags():
 def test_version_option():
     options = ["--version"]
     rc, stdout, stderr = run_cli(options=options)
-    assert __version__ in stdout
+    parser = ConfigParser()
+    parser.read(os.path.join(dirname(dirname(__file__)), "setup.cfg"))
+    expected_version = parser.get("metadata", "version")
+    assert expected_version in stdout
+    assert f"Python-inspector version: {expected_version}" in stdout
 
 
 def test_passing_of_netrc_file_that_does_not_exist():
