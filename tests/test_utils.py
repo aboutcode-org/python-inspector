@@ -22,6 +22,8 @@ from test_cli import check_json_file_results
 from _packagedcode.pypi import SetupCfgHandler
 from python_inspector.resolution import fetch_and_extract_sdist
 from python_inspector.utils import get_netrc_auth
+from python_inspector.utils import get_password_masking_printer
+from python_inspector.utils import mask_passwords
 from python_inspector.utils_pypi import PypiSimpleRepository
 from python_inspector.utils_pypi import valid_python_version
 
@@ -164,3 +166,24 @@ def test_parse_reqs_with_setup_requires_and_python_requires():
 def test_valid_python_version():
     assert valid_python_version("3.8", ">3.1")
     assert not valid_python_version("3.8.1", ">3.9")
+
+
+def test_mask_passwords_in_credentials_mapping():
+    message = "PypiSimpleRepository(index_url='https://pypi.org/simple', credentials={'login': 'alice', 'password': 's3cret-value'})"
+    masked = mask_passwords(message)
+    assert "s3cret-value" not in masked
+    assert "'password': '********'" in masked
+    assert "'login': 'alice'" in masked
+
+
+def test_password_masking_printer_masks_repo_credentials():
+    repo = PypiSimpleRepository(
+        index_url="https://pypi.org/simple",
+        credentials={"login": "alice", "password": "s3cret-value"},
+    )
+    lines = []
+    printer = get_password_masking_printer(lines.append)
+    printer(f" {repo}")
+    output = "\n".join(lines)
+    assert "s3cret-value" not in output
+    assert "********" in output

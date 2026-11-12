@@ -11,6 +11,7 @@
 
 import json
 import os
+import re
 from typing import Dict
 from typing import List
 from typing import NamedTuple
@@ -109,6 +110,42 @@ def remove_test_data_dir_variable_prefix(path, placeholder="<file>"):
         return cleaned.replace("\\", "/")
     else:
         return placeholder
+
+
+# Match quoted mapping values such as {'password': 'secret'} or {"password": "secret"}.
+_PASSWORD_VALUE_RE = re.compile(
+    r"""(?P<prefix>(['\"])password\2\s*:\s*(['\"]))(?P<secret>.*?)(?P<suffix>\3)""",
+    re.IGNORECASE,
+)
+
+MASKED_PASSWORD = "********"
+
+
+def mask_passwords(message, replacement=MASKED_PASSWORD):
+    """
+    Return ``message`` with password values replaced by ``replacement``.
+
+    This is used to avoid leaking credentials from verbose log output, for
+    example when printing a repository that includes a credentials mapping.
+    """
+    if message is None:
+        return message
+    return _PASSWORD_VALUE_RE.sub(
+        rf"\g<prefix>{replacement}\g<suffix>",
+        str(message),
+    )
+
+
+def get_password_masking_printer(printer=print):
+    """
+    Return a printer callable that masks passwords in log messages before
+    forwarding them to ``printer``.
+    """
+
+    def password_masking_printer(message, *args, **kwargs):
+        return printer(mask_passwords(message), *args, **kwargs)
+
+    return password_masking_printer
 
 
 def unique(sequence):
