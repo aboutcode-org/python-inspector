@@ -49,6 +49,16 @@ def print_version(ctx, param, value):
     "This option can be used multiple times.",
 )
 @click.option(
+    "--pylock",
+    "pylock_files",
+    type=click.Path(exists=True, readable=True, path_type=str, dir_okay=False),
+    metavar="PYLOCK-FILE",
+    multiple=True,
+    required=False,
+    help="Path to a PEP 751 pylock.toml lock file listing locked thirdparty packages. "
+    "This option can be used multiple times.",
+)
+@click.option(
     "-s",
     "--setup-py",
     "setup_py_file",
@@ -190,6 +200,7 @@ def print_version(ctx, param, value):
 def resolve_dependencies(
     ctx,
     requirement_files,
+    pylock_files,
     setup_py_file,
     specifiers,
     python_version,
@@ -209,8 +220,9 @@ def resolve_dependencies(
 ):
     """
     Resolve the dependencies for the package requirements listed in one or
-    more REQUIREMENT-FILE file, one or more SPECIFIER and one setuptools
-    SETUP-PY-FILE file and save the results as JSON to FILE.
+    more REQUIREMENT-FILE file, one or more PYLOCK-FILE file, one or more
+    SPECIFIER and one setuptools SETUP-PY-FILE file and save the results as
+    JSON to FILE.
 
     Resolve the dependencies for the requested ``--python-version`` PYVER and
     ``--operating_system`` OS combination.
@@ -259,6 +271,7 @@ def resolve_dependencies(
     try:
         resolution_result: Dict = resolver_api(
             requirement_files=requirement_files,
+            pylock_files=pylock_files,
             setup_py_file=setup_py_file,
             specifiers=specifiers,
             python_version=python_version,

@@ -30,6 +30,7 @@ from _packagedcode.pypi import can_process_dependent_package
 from _packagedcode.pypi import get_resolved_purl
 from python_inspector import dependencies
 from python_inspector import pyinspector_settings
+from python_inspector import pylock_toml
 from python_inspector import utils
 from python_inspector import utils_pypi
 from python_inspector.package_data import get_pypi_data_from_purl
@@ -78,6 +79,7 @@ class Resolution(NamedTuple):
 
 def resolve_dependencies(
     requirement_files=tuple(),
+    pylock_files=tuple(),
     setup_py_file=None,
     specifiers=tuple(),
     python_version=None,
@@ -97,8 +99,8 @@ def resolve_dependencies(
 ):
     """
     Resolve the dependencies for the package requirements listed in one or
-    more ``requirement_files``, one or more ``specifiers`` and one setuptools
-    ``setup_py_file`` file.
+    more ``requirement_files``, one or more PEP 751 ``pylock_files``, one or
+    more ``specifiers`` and one setuptools ``setup_py_file`` file.
 
     Resolve the dependencies for the requested ``python_version`` PYVER and
     ``operating_system`` OS combination defaulting Python version 3.8 and
@@ -168,6 +170,27 @@ def resolve_dependencies(
                 type="file",
                 path=req_file,
                 package_data=package_data,
+            )
+        )
+
+    # pylock.toml
+    for pylock_file in pylock_files:
+        package_data = pylock_toml.parse_pylock_toml(location=pylock_file)
+        pylock_toml.validate_pylock_for_environment(
+            extra_data=package_data.extra_data,
+            python_version=python_version,
+            operating_system=operating_system,
+        )
+        index_urls = get_index_urls(index_urls, package_data.extra_data)
+        direct_dependencies.extend(package_data.dependencies)
+        pylock_path = pylock_file
+        if generic_paths:
+            pylock_path = utils.remove_test_data_dir_variable_prefix(path=pylock_file)
+        files.append(
+            dict(
+                type="file",
+                path=pylock_path,
+                package_data=[package_data.to_dict()],
             )
         )
 

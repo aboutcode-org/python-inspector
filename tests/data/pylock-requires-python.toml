@@ -1,0 +1,7 @@
+lock-version = "1.0"
+created-by = "python-inspector-tests"
+requires-python = ">=3.12"
+
+[[packages]]
+name = "zipp"
+version = "3.8.0"
