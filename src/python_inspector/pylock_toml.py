@@ -21,6 +21,8 @@ from python_inspector.resolution import get_python_version_from_env_tag
 from python_inspector.utils_pypi import Environment
 from python_inspector.utils_pypi import valid_python_version
 
+# PEP 751 pylock.toml major version this parser implements.
+# 1.x files are accepted; a higher major version is a breaking format change.
 SUPPORTED_LOCK_VERSION_MAJOR = 1
 
 
