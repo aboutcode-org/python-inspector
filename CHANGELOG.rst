@@ -1,6 +1,10 @@
 Changelog
 =========
 
+v0.15.3
+-----------
+- Add support for PEP 751 pylock.toml lock files as input.
+
 v0.15.2
 -----------
 - Correct the version number in the CLI and setup.cfg.

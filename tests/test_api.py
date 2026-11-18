@@ -52,6 +52,20 @@ def test_api_with_specifier_pdt(regen=REGEN_TEST_FIXTURES):
 
 
 @pytest.mark.online
+def test_api_with_pylock_file(regen=REGEN_TEST_FIXTURES):
+    expected_file = test_env.get_test_loc("test-api-with-pylock-file.json", must_exist=False)
+    results = resolver_api(
+        python_version="38",
+        operating_system="linux",
+        pylock_files=[test_env.get_test_loc("pylock.toml")],
+        use_pypi_json_api=True,
+    )
+    check_data_results(
+        results=results.to_dict(generic_paths=True), expected_file=expected_file, regen=regen
+    )
+
+
+@pytest.mark.online
 def test_api_with_requirement_file(regen=REGEN_TEST_FIXTURES):
     expected_file = test_env.get_test_loc("test-api-with-requirement-file.json", must_exist=False)
     results = resolver_api(

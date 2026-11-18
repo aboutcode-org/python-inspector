@@ -633,6 +633,31 @@ def test_passing_of_unsupported_os():
     assert message in stderr
 
 
+def test_passing_of_missing_pylock_file():
+    options = ["--pylock", "missing-pylock.toml", "--json", "-"]
+    rc, stdout, stderr = run_cli(options=options, expected_rc=2, get_env=False)
+    assert "Invalid value for '--pylock'" in stderr
+
+
+@pytest.mark.online
+def test_cli_with_pylock_toml(regen=REGEN_TEST_FIXTURES):
+    pylock_file = test_env.get_test_loc("pylock.toml")
+    expected_file = test_env.get_test_loc("pylock.toml-expected.json", must_exist=False)
+    extra_options = [
+        "--use-pypi-json-api",
+        "--operating-system",
+        "linux",
+        "--python-version",
+        "38",
+    ]
+    check_pylock_resolution(
+        pylock_file=pylock_file,
+        expected_file=expected_file,
+        extra_options=extra_options,
+        regen=regen,
+    )
+
+
 def check_requirements_resolution(
     requirements_file,
     expected_file,
@@ -645,6 +670,19 @@ def check_requirements_resolution(
         options = ["--requirement", requirements_file, "--json-pdt", result_file]
     else:
         options = ["--requirement", requirements_file, "--json", result_file]
+    options.extend(extra_options)
+    run_cli(options=options)
+    check_json_file_results(result_file=result_file, expected_file=expected_file, regen=regen)
+
+
+def check_pylock_resolution(
+    pylock_file,
+    expected_file,
+    extra_options=tuple(),
+    regen=REGEN_TEST_FIXTURES,
+):
+    result_file = test_env.get_temp_file("json")
+    options = ["--pylock", pylock_file, "--json", result_file]
     options.extend(extra_options)
     run_cli(options=options)
     check_json_file_results(result_file=result_file, expected_file=expected_file, regen=regen)

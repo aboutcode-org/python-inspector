@@ -1,0 +1,25 @@
+lock-version = "1.0"
+created-by = "python-inspector-tests"
+requires-python = ">=3.8"
+environments = [
+    "sys_platform == 'linux'",
+    "sys_platform == 'windows'",
+    "sys_platform == 'macos'",
+]
+
+[[packages]]
+name = "zipp"
+version = "3.8.0"
+index = "https://pypi.org/simple"
+wheels = [
+    {name = "zipp-3.8.0-py3-none-any.whl", url = "https://files.pythonhosted.org/packages/3b/39/874eea436a67c793ee70723cf5bb80b0dd36610c21748316ece6e885edc0/zipp-3.8.0-py3-none-any.whl", hashes = {sha256 = "56c5515d303a88fe4615cfe1e30145c483f9dc5a79747d59e28348d63902e795"}},
+]
+
+[[packages]]
+name = "windows-only"
+version = "1.0.0"
+marker = "sys_platform == 'win32'"
+
+[[packages]]
+name = "local-src"
+directory = {path = "./vendor/local-src"}

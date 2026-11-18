@@ -7,8 +7,8 @@ python-inspector - inspect Python package dependencies and metadata
 
 - resolve PyPI packages dependencies
 
-- parse various requirements.txt files and setup.py files as input
-  for resolving dependencies.
+- parse various requirements.txt files, setup.py files and PEP 751
+  pylock.toml lock files as input for resolving dependencies.
 
 - parse various manifests and packages files such as
   Pipfile, pyproject.toml, poetry.lock and setup.cfg and legacy and
