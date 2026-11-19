@@ -1459,6 +1459,23 @@ class Environment:
 ################################################################################
 
 
+def _repr_credentials(credentials):
+    if credentials is None:
+        return repr(None)
+
+    masked_credentials = credentials.copy()
+    password = masked_credentials.get("password")
+
+    if password is not None:
+        masked_credentials["password"] = (
+            "***"
+            if len(password) < 12
+            else f"{password[:3]}***{password[-3:]}"
+        )
+
+    return repr(masked_credentials)
+
+
 @attr.attributes
 class PypiSimpleRepository:
     """
@@ -1502,7 +1519,7 @@ class PypiSimpleRepository:
         repr=False,
     )
 
-    credentials = attr.ib(type=dict, default=None)
+    credentials = attr.ib(type=dict, default=None, repr=_repr_credentials)
 
     async def _get_package_versions_map(
         self,
