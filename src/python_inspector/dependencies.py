@@ -54,7 +54,12 @@ def get_extra_data_from_requirements(requirements_file="requirements.txt") -> It
 
 def is_requirement_pinned(requirement: Requirement) -> bool:
     specifiers = requirement.specifier
-    return specifiers and len(specifiers) == 1 and next(iter(specifiers)).operator in {"==", "==="}
+    if len(specifiers) != 1:
+        return False
+    specifier = next(iter(specifiers))
+    return specifier.operator == "===" or (
+        specifier.operator == "==" and not specifier.version.endswith(".*")
+    )
 
 
 def get_dependency(specifier) -> DependentPackage:
