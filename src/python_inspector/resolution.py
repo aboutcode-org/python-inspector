@@ -642,7 +642,7 @@ class PythonInputProvider(AbstractProvider):
 
     def is_satisfied_by(self, requirement: Requirement, candidate: Candidate) -> bool:
         """Whether the given requirement can be satisfied by a candidate. Overridden."""
-        if candidate.version in requirement.specifier:
+        if requirement.specifier.contains(candidate.version, prereleases=True):
             return True
         elif not requirement.specifier:
             return True
