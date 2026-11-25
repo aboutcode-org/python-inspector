@@ -332,3 +332,15 @@ def test_iter_matches(mock_versions):
     provider = PythonInputProvider(repos=repos)
     with pytest.raises(NoVersionsFound):
         list(provider._iter_matches("foo-bar", {"foo-bar": []}, {"foo-bar": []}))
+
+
+def test_is_satisfied_by_with_prerelease():
+    from packvers.requirements import Requirement
+    from packvers.version import parse as parse_version
+    from python_inspector.resolution import Candidate
+
+    provider = PythonInputProvider(repos=[])
+    candidate = Candidate(name="greenlet", version=parse_version("3.0.0rc3"), extras=set())
+    assert provider.is_satisfied_by(Requirement("greenlet==3.0.0rc3"), candidate)
+    assert provider.is_satisfied_by(Requirement("greenlet>=2.0.0"), candidate)
+    assert not provider.is_satisfied_by(Requirement("greenlet>=3.1.0"), candidate)
