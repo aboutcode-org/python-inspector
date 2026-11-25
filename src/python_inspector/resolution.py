@@ -9,6 +9,7 @@
 
 import ast
 import asyncio
+import inspect
 import operator
 import os
 import tarfile
@@ -220,24 +221,237 @@ async def fetch_and_extract_sdist(
     return get_sdist_file_path_from_filename(sdist)
 
 
+def _is_absolute_archive_name(name):
+    """
+    Return True if ``name`` is an absolute archive member or link target.
+    """
+    if os.path.isabs(name):
+        return True
+    if name.replace("\\", "/").startswith("/"):
+        return True
+    drive, _tail = os.path.splitdrive(name)
+    return bool(drive)
+
+
+def _is_within_directory(directory, candidate):
+    """
+    Return True if the resolved ``candidate`` path stays inside ``directory``.
+    """
+    directory = os.path.realpath(directory)
+    try:
+        candidate = os.path.realpath(candidate)
+        return os.path.commonpath([directory, candidate]) == directory
+    except ValueError:
+        return False
+
+
+def _member_destination(directory, name):
+    """
+    Return the path extraction would write for archive member ``name``.
+
+    Absolute names are not rewritten into ``directory``. ``os.path.join`` drops
+    the destination when the member name is absolute, which is the path a
+    default tar extraction writes.
+    """
+    if _is_absolute_archive_name(name):
+        return os.path.realpath(name)
+    return os.path.realpath(os.path.join(directory, name))
+
+
+def _require_destination_within(directory, name):
+    """
+    Raise ValueError if member ``name`` resolves outside ``directory``.
+    """
+    normalized = name.replace("\\", "/").rstrip("/")
+    if not name or "\x00" in name or normalized in ("", "."):
+        raise ValueError(f"Refusing to extract archive member {name!r}")
+    destination = _member_destination(directory, name)
+    if not _is_within_directory(directory, destination):
+        raise ValueError(f"Refusing to extract {name!r} outside the extraction directory")
+    return destination
+
+
+def _tarfile_extract_supports_filter():
+    """
+    Return True if ``TarFile.extract`` accepts an explicit extraction filter.
+    """
+    try:
+        parameters = inspect.signature(tarfile.TarFile.extract).parameters
+    except (TypeError, ValueError):
+        return False
+    return "filter" in parameters
+
+
+def _restrictive_tar_filter(member, dest_path):
+    """
+    Return ``member`` when it is safe to extract into ``dest_path``.
+
+    Reject absolute paths and other members whose resolved destination leaves
+    ``dest_path`` instead of rewriting them into the destination. Also reject
+    symbolic and hard links that point outside ``dest_path``, and special files.
+    This filter is applied on every supported interpreter. TarFile's default
+    policy still extracts absolute names, and its data filter keeps those
+    members by stripping the leading slash.
+    """
+    destination = _require_destination_within(dest_path, member.name)
+    if member.issym() or member.islnk():
+        linkname = member.linkname or ""
+        if not linkname or "\x00" in linkname or _is_absolute_archive_name(linkname):
+            raise ValueError(f"Refusing to extract unsafe link {member.name!r}")
+        if member.issym():
+            link_target = os.path.realpath(os.path.join(os.path.dirname(destination), linkname))
+        else:
+            link_target = _member_destination(dest_path, linkname)
+        if not _is_within_directory(dest_path, link_target):
+            raise ValueError(f"Refusing to extract unsafe link {member.name!r}")
+    elif not (member.isreg() or member.isdir()):
+        raise ValueError(f"Refusing to extract special file {member.name!r}")
+    return member
+
+
+def _extract_tar_archive(tar, dest_path):
+    """
+    Extract ``tar`` into ``dest_path`` using the restrictive tar filter.
+    """
+    dest_path = os.path.realpath(dest_path)
+    members = list(tar.getmembers())
+    for member in members:
+        _restrictive_tar_filter(member, dest_path)
+
+    extract_kwargs = {}
+    if _tarfile_extract_supports_filter():
+        extract_kwargs["filter"] = _restrictive_tar_filter
+    for member in members:
+        filtered = _restrictive_tar_filter(member, dest_path)
+        tar.extract(filtered, path=dest_path, **extract_kwargs)
+
+
+def _extract_zip_archive(zip_file, dest_path):
+    """
+    Extract ``zip_file`` into ``dest_path``, rejecting members that leave it.
+    """
+    dest_path = os.path.realpath(dest_path)
+    members = zip_file.infolist()
+    for member in members:
+        _require_destination_within(dest_path, member.filename)
+    for member in members:
+        _require_destination_within(dest_path, member.filename)
+        zip_file.extract(member, path=dest_path)
+
+
+def _remove_path_without_following_links(path):
+    """
+    Remove ``path`` without following a symbolic link at any level.
+    """
+    if not os.path.lexists(path):
+        return
+    if os.path.islink(path) or not os.path.isdir(path):
+        os.unlink(path)
+        return
+    for entry in os.scandir(path):
+        _remove_path_without_following_links(entry.path)
+    os.rmdir(path)
+
+
+def _fresh_extraction_directory(sdist_file):
+    """
+    Return a new real directory for sdist ``sdist_file`` inside the cache.
+
+    Replace any existing path, including a symbolic link, without following it.
+    """
+    if (
+        not sdist_file
+        or sdist_file in (".", "..")
+        or _is_absolute_archive_name(sdist_file)
+        or os.path.basename(sdist_file) != sdist_file
+    ):
+        raise ValueError(
+            f"Refusing to extract sdist {sdist_file!r} outside the extraction directory"
+        )
+
+    cache_dir = os.path.realpath(settings.CACHE_THIRDPARTY_DIR)
+    extracted_root = os.path.join(cache_dir, "extracted_sdists")
+    if os.path.islink(extracted_root):
+        raise ValueError("Sdist extraction root is a symbolic link")
+    os.makedirs(extracted_root, exist_ok=True)
+    if os.path.islink(extracted_root) or not os.path.isdir(extracted_root):
+        raise ValueError("Sdist extraction root is not a real directory")
+    extracted_real = os.path.realpath(extracted_root)
+    if not _is_within_directory(cache_dir, extracted_real):
+        raise ValueError("Sdist extraction root resolves outside the cache")
+
+    destination = os.path.join(extracted_real, sdist_file)
+    _remove_path_without_following_links(destination)
+    os.mkdir(destination)
+    if os.path.islink(destination) or not os.path.isdir(destination):
+        raise ValueError("Sdist extraction directory is not a real directory")
+    destination_real = os.path.realpath(destination)
+    if not _is_within_directory(extracted_real, destination_real):
+        raise ValueError("Sdist extraction directory resolves outside the extraction root")
+    return destination_real
+
+
+def _validate_extracted_package_directory(package_dir, extraction_dir):
+    """
+    Raise ValueError if ``package_dir`` is not a real directory inside ``extraction_dir``.
+
+    A missing package directory is left for the manifest readers to report.
+    """
+    if os.path.islink(extraction_dir) or not os.path.isdir(extraction_dir):
+        raise ValueError("Sdist extraction directory is not a real directory")
+    extraction_real = os.path.realpath(extraction_dir)
+    if not _is_within_directory(extraction_real, package_dir):
+        raise ValueError("Sdist package directory resolves outside the extraction directory")
+    if not os.path.lexists(package_dir):
+        return
+    if os.path.islink(package_dir) or not os.path.isdir(package_dir):
+        raise ValueError(
+            "Sdist package directory is not a real directory inside the extraction directory"
+        )
+
+
+def _reject_manifest_outside_package(sdist_location, manifest_path):
+    """
+    Raise ValueError if ``manifest_path`` resolves outside ``sdist_location``.
+    """
+    if not sdist_location or not manifest_path:
+        return
+    if os.path.islink(sdist_location):
+        raise ValueError(f"Extracted sdist directory {sdist_location} is a symbolic link")
+    if not os.path.isdir(sdist_location):
+        return
+    if not _is_within_directory(sdist_location, manifest_path):
+        raise ValueError(f"Sdist manifest {manifest_path} resolves outside {sdist_location}")
+
+
 def get_sdist_file_path_from_filename(sdist):
+    """
+    Extract sdist ``sdist`` from the cache and return its package directory.
+
+    Tar members are extracted with an explicit restrictive filter. Members whose
+    resolved destination leaves the extraction directory, and unsafe symbolic or
+    hard links, are rejected. The extraction directory is created fresh and the
+    package directory is validated before callers read manifests from it.
+    """
     if sdist.endswith(".tar.gz"):
         sdist_file = sdist.rstrip(".tar.gz")
-        with tarfile.open(os.path.join(settings.CACHE_THIRDPARTY_DIR, sdist)) as file:
-            file.extractall(
-                os.path.join(settings.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file)
-            )
     elif sdist.endswith(".zip"):
         sdist_file = sdist.rstrip(".zip")
-        with ZipFile(os.path.join(settings.CACHE_THIRDPARTY_DIR, sdist)) as zip:
-            zip.extractall(
-                os.path.join(settings.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file)
-            )
-
     else:
         raise Exception(f"Unable to extract sdist {sdist}")
 
-    return os.path.join(settings.CACHE_THIRDPARTY_DIR, "extracted_sdists", sdist_file, sdist_file)
+    archive_path = os.path.join(settings.CACHE_THIRDPARTY_DIR, sdist)
+    extraction_dir = _fresh_extraction_directory(sdist_file)
+    if sdist.endswith(".tar.gz"):
+        with tarfile.open(archive_path) as archive:
+            _extract_tar_archive(archive, extraction_dir)
+    else:
+        with ZipFile(archive_path) as archive:
+            _extract_zip_archive(archive, extraction_dir)
+
+    package_dir = os.path.join(extraction_dir, sdist_file)
+    _validate_extracted_package_directory(package_dir, extraction_dir)
+    return package_dir
 
 
 def get_requirements_from_dependencies(
@@ -274,11 +488,11 @@ def get_reqs_from_requirements_file_in_sdist(sdist_location: str, files: List) -
     """
     Return a list of parsed requirements from the ``sdist_location`` sdist location
     """
+    for manifest_path in files or []:
+        _reject_manifest_outside_package(sdist_location, manifest_path)
+    requirement_location = os.path.join(sdist_location, "requirements.txt")
+    _reject_manifest_outside_package(sdist_location, requirement_location)
     if contain_string(string="requirements.txt", files=files):
-        requirement_location = os.path.join(
-            sdist_location,
-            "requirements.txt",
-        )
         yield from get_requirements_from_distribution(
             handler=PipRequirementsFileHandler,
             location=requirement_location,
@@ -298,6 +512,11 @@ def get_requirements_from_python_manifest(
     """
     Return a list of parsed requirements from the ``sdist_location`` sdist location
     """
+    manifest_paths = [setup_py_location, os.path.join(sdist_location, "requirements.txt")]
+    manifest_paths.extend(files or [])
+    for manifest_path in manifest_paths:
+        _reject_manifest_outside_package(sdist_location, manifest_path)
+
     # Look in requirements file if and only if they are referred in setup.py or setup.cfg
     # And no deps have been yielded by requirements file.
     requirements = list(
@@ -530,6 +749,11 @@ class PythonInputProvider(AbstractProvider):
             setup_cfg_location = os.path.join(
                 sdist_location,
                 "setup.cfg",
+            )
+            _reject_manifest_outside_package(sdist_location, setup_py_location)
+            _reject_manifest_outside_package(sdist_location, setup_cfg_location)
+            _reject_manifest_outside_package(
+                sdist_location, os.path.join(sdist_location, "requirements.txt")
             )
 
             if self.analyze_setup_py_insecurely:
@@ -816,6 +1040,8 @@ def get_setup_requirements(sdist_location: str, setup_py_location: str, setup_cf
     Perform an insecure live evaluation of the Python code if needed and if
     ``analyze_setup_py_insecurely`` is True.
     """
+    _reject_manifest_outside_package(sdist_location, setup_py_location)
+    _reject_manifest_outside_package(sdist_location, setup_cfg_location)
 
     if not os.path.exists(setup_py_location) and not os.path.exists(setup_cfg_location):
         raise Exception(f"No setup.py or setup.cfg found in pypi sdist {sdist_location}")
