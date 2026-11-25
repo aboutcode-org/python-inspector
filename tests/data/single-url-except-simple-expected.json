@@ -256,14 +256,14 @@
       "dependencies": []
     },
     {
-      "package": "pkg:pypi/click@8.3.1",
+      "package": "pkg:pypi/click@8.5.1",
       "dependencies": []
     },
     {
       "package": "pkg:pypi/flask@3.0.3",
       "dependencies": [
         "pkg:pypi/blinker@1.8.2",
-        "pkg:pypi/click@8.3.1",
+        "pkg:pypi/click@8.5.1",
         "pkg:pypi/importlib-metadata@8.7.1",
         "pkg:pypi/itsdangerous@2.2.0",
         "pkg:pypi/jinja2@3.1.6",

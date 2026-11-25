@@ -4,6 +4,16 @@ Changelog
 v0.15.3
 -----------
 - Add support for PEP 751 pylock.toml lock files as input.
+- Stop sdist extraction from writing outside the cache.
+  ``tarfile.extractall()`` was called with no filter. On Python 3.13 the default
+  tar policy still extracts a member whose name is an absolute path, so a
+  crafted sdist could change a file outside the cache while resolution
+  succeeded. The stdlib ``data`` filter keeps that member by stripping the
+  leading slash. Extraction now uses one restrictive filter on every supported
+  interpreter. A member is rejected when its resolved destination leaves a
+  fresh extraction directory, and so are symbolic and hard links that point
+  outside that directory. The package directory is checked again before
+  ``setup.py``, ``setup.cfg``, or ``requirements.txt`` are read.
 
 v0.15.2
 -----------
