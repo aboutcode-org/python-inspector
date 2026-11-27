@@ -165,3 +165,16 @@ def test_PypiPackage_get_supported_wheels(linux_platform):
     supported_wheels = list(pkg.get_supported_wheels(environment=env))
 
     assert supported_wheels == [whl]
+
+
+def test_PypiPackage_get_supported_wheels_linux_aarch64():
+    whl = Wheel.from_filename("onnxruntime-1.19.2-cp311-cp311-manylinux2014_aarch64.whl")
+    pkg = PypiPackage.package_from_dists(dists=[whl])
+    env = utils_pypi.Environment.from_pyver_and_os(
+        python_version="311",
+        operating_system="linux",
+    )
+
+    supported_wheels = list(pkg.get_supported_wheels(environment=env))
+
+    assert supported_wheels == [whl]
